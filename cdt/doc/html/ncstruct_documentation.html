@@ -1,0 +1,219 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ncstruct documentation</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-25"><meta name="DC.source" content="ncstruct_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>ncstruct</tt> documentation</h1><!--introduction--><p>The <tt>ncstruct</tt> function provides an easy syntax to read one or more variables from a netCDF file, either in their entirety or smaller hyperslabs.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Reading variables from a single file</a></li><li><a href="#5">Example 2: Subsetting dimensions</a></li><li><a href="#6">Example 3: Reading from multiple files</a></li><li><a href="#8">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>Data = ncstruct(file)
+Data = ncstruct(file, var1, var2, ...)
+Data = ncstruct(file, Scs, ...)</pre><h2 id="2">Description</h2><p><tt>Data = ncstruct(file)</tt> reads all variable data from the indicated netCDF file into a structure <tt>Data</tt>; the field names of <tt>Data</tt> correspond to the variable names from the file.</p><p><tt>Data = ncstruct(file, var1, var2, ...)</tt> reads only the specified variable data.  The special string 'dimensions' indicates that all dimension variables should be read in; a dimension variable is any variable whose name and size corresponds to one of the file dimensions.</p><p><tt>Data = ncstruct(file, Scs, ...)</tt> reads data using the dimension hyperslabs in the structure <tt>Scs</tt>.  The field names in <tt>Scs</tt> should match the dimension names in the file, and each field holds a 1 x 3 array of <tt>[start count stride]</tt>, indicating that data should be read along the specified dimension starting at index <tt>start</tt>, reading <tt>count</tt> elements, with inter-element spacing <tt>stride</tt>.</p><h2 id="3">Example 1: Reading variables from a single file</h2><p>A small simple file can be read in in its entirety:</p><pre class="codeinput">A = ncstruct(<span class="string">'example.nc'</span>)
+</pre><pre class="codeoutput">
+A = 
+
+  struct with fields:
+
+    avagadros_number: 6.0221e+23
+         temperature: [50&times;1 double]
+               peaks: [50&times;50 int16]
+
+</pre><p>For a larger file, you probably don't want or need to read in all the variables.  Here, we read in only wind speed variables, along with the dimension variables:</p><pre class="codeinput">B = ncstruct(<span class="string">'ERA_Interim_2017.nc'</span>, <span class="string">'u10'</span>, <span class="string">'v10'</span>, <span class="string">'dimensions'</span>)
+</pre><pre class="codeoutput">
+B = 
+
+  struct with fields:
+
+     latitude: [241&times;1 single]
+    longitude: [480&times;1 single]
+         time: [12&times;1 int32]
+          u10: [480&times;241&times;12 double]
+          v10: [480&times;241&times;12 double]
+
+</pre><h2 id="5">Example 2: Subsetting dimensions</h2><p>The <tt>ncread</tt> function allows you to read hyperslabs of variables; however, its syntax requires you to provide start, count, and stride parameters for all dimensions of that variable in the proper order; determining the dimension names and order of dimensions for each variable you want to read can become tedious.  The <tt>ncstruct</tt> function simplfies things by determining which variables include a particular dimension, and in what order, for you.</p><p>Returning to the ERA Interim 2017 dataset, we can read data from all variables but only at a single location, and every other time:</p><pre class="codeinput">Scs = struct(<span class="string">'latitude'</span>, [1 1 1], <span class="string">'longitude'</span>, [1 1 1], <span class="string">'time'</span>, [1 Inf 2]);
+C = ncstruct(<span class="string">'ERA_Interim_2017.nc'</span>, Scs)
+</pre><pre class="codeoutput">
+C = 
+
+  struct with fields:
+
+    longitude: 0
+     latitude: 90
+         time: [6&times;1 int32]
+           sp: [1&times;1&times;6 double]
+          u10: [1&times;1&times;6 double]
+          v10: [1&times;1&times;6 double]
+          t2m: [1&times;1&times;6 double]
+           tp: [1&times;1&times;6 double]
+
+</pre><h2 id="6">Example 3: Reading from multiple files</h2><p>Multi-file datasets are common in climate model output or other long-running datasets, where data is split into separate files for each day/month/year/etc. to keep file sizes manageable and to allow the dataset to grow as time passes without needing to edit existing files. The following set of files hold one time slice each from the ERA Interim dataset used in the previous examples:</p><pre class="codeinput">files = {<span class="keyword">...</span>
+    <span class="string">'ERA_Interim_2017a.nc'</span>
+    <span class="string">'ERA_Interim_2017b.nc'</span>
+    <span class="string">'ERA_Interim_2017c.nc'</span>};
+</pre><p>We can read data from this set of files using the same syntax as with a single file.  Variables that are repeated across the files, such as the dimension variables, will only be read once, while the variables that include the time dimension will be read from each file and concatenated.</p><pre class="codeinput">D = ncstruct(files, <span class="string">'u10'</span>, <span class="string">'v10'</span>, <span class="string">'dimensions'</span>)
+</pre><pre class="codeoutput">
+D = 
+
+  struct with fields:
+
+     latitude: [241&times;1 single]
+    longitude: [480&times;1 single]
+         time: [3&times;1 int32]
+          u10: [480&times;241&times;3 double]
+          v10: [480&times;241&times;3 double]
+
+</pre><h2 id="8">Author Info</h2><p>This function and supporting documentation was written by Kelly Kearney for the Climate Data Toolbox for Matlab, 2019.  It is available as part of this toolbox, and can also be downloaded individually from <a href="https://github.com/kakearney/ncreads-pkg">GitHub</a>.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |ncstruct| documentation 
+% The |ncstruct| function provides an easy syntax to read one or more
+% variables from a netCDF file, either in their entirety or smaller
+% hyperslabs.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%
+%% Syntax
+%
+%  Data = ncstruct(file)
+%  Data = ncstruct(file, var1, var2, ...)
+%  Data = ncstruct(file, Scs, ...)
+%
+%% Description
+%
+% |Data = ncstruct(file)| reads all variable data from the indicated netCDF
+% file into a structure |Data|; the field names of |Data| correspond to the
+% variable names from the file.
+%
+% |Data = ncstruct(file, var1, var2, ...)| reads only the specified variable
+% data.  The special string 'dimensions' indicates that all dimension
+% variables should be read in; a dimension variable is any variable whose
+% name and size corresponds to one of the file dimensions.
+%
+% |Data = ncstruct(file, Scs, ...)| reads data using the dimension
+% hyperslabs in the structure |Scs|.  The field names in |Scs| should match
+% the dimension names in the file, and each field holds a 1 x 3 array of
+% |[start count stride]|, indicating that data should be read along the
+% specified dimension starting at index |start|, reading |count| elements,
+% with inter-element spacing |stride|.
+
+%% Example 1: Reading variables from a single file
+%
+% A small simple file can be read in in its entirety:
+
+A = ncstruct('example.nc')
+
+%%
+% For a larger file, you probably don't want or need to read in all the
+% variables.  Here, we read in only wind speed variables, along with the
+% dimension variables:
+
+B = ncstruct('ERA_Interim_2017.nc', 'u10', 'v10', 'dimensions')
+
+%% Example 2: Subsetting dimensions
+%
+% The |ncread| function allows you to read hyperslabs of variables;
+% however, its syntax requires you to provide start, count, and stride
+% parameters for all dimensions of that variable in the proper order;
+% determining the dimension names and order of dimensions for each variable
+% you want to read can become tedious.  The |ncstruct| function simplfies
+% things by determining which variables include a particular dimension, and
+% in what order, for you.
+%
+% Returning to the ERA Interim 2017 dataset, we can read data from all
+% variables but only at a single location, and every other time:
+
+Scs = struct('latitude', [1 1 1], 'longitude', [1 1 1], 'time', [1 Inf 2]);
+C = ncstruct('ERA_Interim_2017.nc', Scs)
+
+%% Example 3: Reading from multiple files
+%
+% Multi-file datasets are common in climate model output or other
+% long-running datasets, where data is split into separate files for each
+% day/month/year/etc. to keep file sizes manageable and to allow the
+% dataset to grow as time passes without needing to edit existing files.
+% The following set of files hold one time slice each from the ERA Interim
+% dataset used in the previous examples:
+
+files = {...
+    'ERA_Interim_2017a.nc'
+    'ERA_Interim_2017b.nc'
+    'ERA_Interim_2017c.nc'};
+
+%%
+% We can read data from this set of files using the same syntax as with
+% a single file.  Variables that are repeated across the files, such as the
+% dimension variables, will only be read once, while the variables that
+% include the time dimension will be read from each file and concatenated.
+
+D = ncstruct(files, 'u10', 'v10', 'dimensions')
+
+%% Author Info
+%
+% This function and supporting documentation was written by Kelly Kearney
+% for the Climate Data Toolbox for Matlab, 2019.  It is available as part
+% of this toolbox, and can also be downloaded individually from
+% <https://github.com/kakearney/ncreads-pkg GitHub>.
+
+
+
+##### SOURCE END #####
+--></body></html>

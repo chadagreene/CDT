@@ -1,0 +1,217 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>reof documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-10"><meta name="DC.source" content="reof_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>reof</tt> documentation</h1><!--introduction--><p>reof reconstructs a time series of eof anomalies from specified EOF modes.</p><p>See also: <a href="eof_documentation.html"><tt>eof</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#10">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>A = reof(eof_maps,pc,modes)</pre><h2 id="2">Description</h2><p><tt>A = reof(eof_maps,pc,modes)</tt> reconstructs a gridded time series of the specified modes, from eigenmode maps <tt>eof_maps</tt> and principal component time series <tt>pc</tt>, which are both outputs of the <a href="eof_documentation.html"><tt>eof</tt></a> function.</p><h2 id="3">Example</h2><p>Let's say we have some big gridded dataset, and the modes associated with the first 75% of variance are desirable, but all the higher-order modes that make up the last 25% percent of variance we assume (for this exampe) are just noise. We want to filter out all that noise, and we can do such filtering with <tt>reof</tt>.</p><p>Start by very quickly running through the steps of EOF analysis which are described in excruciating detail in the <a href="eof_documenation.html"><tt>eof</tt></a> documentation:</p><pre class="codeinput">load <span class="string">pacific_sst</span>
+
+sst = deseason(detrend3(sst,t),t);
+
+[eof_maps,pc,expv] = eof(sst);
+</pre><p>We said we want to keep the first modes, because they're the most significant, but how many modes does it take to explain 75% of the variance of the dataset? For that, we'll have to plot the cumulative variance explained, as a function of mode number:</p><pre class="codeinput">figure
+plot(cumsum(expv))
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+xlabel <span class="string">mode</span>
+ylabel <span class="string">'cumulative variance explained (%)'</span>
+</pre><img vspace="5" hspace="5" src="reof_documentation_01.png" alt=""> <p>As you can see, it only takes a few of the 802 modes to explain 75% of the sst dataset, and we'll assume that means all the other modes are just noise. Zooming in, it looks like only takes 11 modes to explain 75% of the variance:</p><pre class="codeinput">xlim([0 20])
+hline(75) <span class="comment">% 75% variance explained</span>
+vline(11) <span class="comment">% corresponds to about mode 11</span>
+</pre><img vspace="5" hspace="5" src="reof_documentation_02.png" alt=""> <p>Let's check. The sum of the variance explained by the first 11 modes is</p><pre class="codeinput">sum(expv(1:11))
+</pre><pre class="codeoutput">ans =
+   75.3165
+</pre><p>Perfect, 75%. So let's "filter out" that last 25% of noisy variance with <tt>reof</tt>. Just give it the <tt>eof_maps</tt> and <tt>pc</tt> array we calculated earlier:, and specify modes 1:11, like this:</p><pre class="codeinput">sst_f = reof(eof_maps,pc,1:11);
+</pre><p>Now we can make a side-by-side animation, showing the original (<a href="detrend3_documentation.html">detrended</a> and <a href="deseason_documentation.html">deseasoned</a>) time series, next to our filtered one. Start by plotting the first frame, save it with the <a href="gif_documentation.html"><tt>gif</tt></a> function, and then loop through the remaining frames, updating the data and saving each frame with <tt>gif</tt>.</p><p>To keep the filesize small, I'm just plotting frames 200 to 300, which correspond to 1966 to 1974, and we'll only plot every other month.</p><pre>figure
+subplot(1,2,1)
+h = imagescn(lon,lat,sst(:,:,200));
+caxis([-3 3])
+cmocean bal
+title 'all modes'
+axis image off</pre><pre>subplot(1,2,2)
+h_f = imagescn(lon,lat,sst_f(:,:,200));
+caxis([-3 3])
+cmocean bal
+title 'modes 1-11'
+axis image off</pre><pre>% Save the first frame:
+gif('eof_filtering.gif','frame',gcf,'nodither')</pre><pre>for k = 202:2:300
+   h.CData = sst(:,:,k);     % updates raw data
+   h_f.CData = sst_f(:,:,k); % updates filtered data
+   gif                       % saves this frame
+end</pre><p><img vspace="5" hspace="5" src="eof_filtering.gif" alt=""> </p><p>And you can see, in the animation above, that keeping only first 11 modes preserves the large-scale, large-magnitude variability, but eliminates the smaller-scale noisiness.</p><h2 id="10">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |reof| documentation 
+% reof reconstructs a time series of eof anomalies from specified EOF modes. 
+%  
+% See also: <eof_documentation.html |eof|>.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  A = reof(eof_maps,pc,modes)
+% 
+%% Description
+% 
+% |A = reof(eof_maps,pc,modes)| reconstructs a gridded time series of the 
+% specified modes, from eigenmode maps |eof_maps| and principal component
+% time series |pc|, which are both outputs of the <eof_documentation.html |eof|> function. 
+% 
+%% Example
+% Let's say we have some big gridded dataset, and the modes associated with 
+% the first 75% of variance are desirable, but all the higher-order modes 
+% that make up the last 25% percent of variance we assume (for this exampe) 
+% are just noise. We want to filter out all that noise, and we can do such 
+% filtering with |reof|. 
+% 
+% Start by very quickly running through the steps of EOF analysis which 
+% are described in excruciating detail in the <eof_documenation.html |eof|>
+% documentation: 
+
+load pacific_sst
+
+sst = deseason(detrend3(sst,t),t); 
+
+[eof_maps,pc,expv] = eof(sst); 
+
+%% 
+% We said we want to keep the first modes, because they're the most significant, 
+% but how many modes does it take to explain 75% of the variance of the dataset? 
+% For that, we'll have to plot the cumulative variance explained, as a function 
+% of mode number: 
+
+figure
+plot(cumsum(expv))
+axis tight
+box off
+xlabel mode
+ylabel 'cumulative variance explained (%)'
+
+%%
+% As you can see, it only takes a few of the 802 modes to explain 75% of the 
+% sst dataset, and we'll assume that means all the other modes are just noise. 
+% Zooming in, it looks like only takes 11 modes to explain 75% of the variance:
+
+xlim([0 20])
+hline(75) % 75% variance explained
+vline(11) % corresponds to about mode 11
+
+%% 
+% Let's check. The sum of the variance explained by the first 11 modes is 
+
+sum(expv(1:11))
+
+%% 
+% Perfect, 75%. So let's "filter out" that last 25% of noisy variance with
+% |reof|. Just give it the |eof_maps| and |pc| array we calculated earlier:, 
+% and specify modes 1:11, like this: 
+
+sst_f = reof(eof_maps,pc,1:11); 
+
+%%
+% Now we can make a side-by-side animation, showing the original (<detrend3_documentation.html detrended>
+% and <deseason_documentation.html deseasoned>) time series, next to our filtered
+% one. Start by plotting the first frame, save it with the <gif_documentation.html |gif|> 
+% function, and then loop through the remaining frames, updating the data 
+% and saving each frame with |gif|. 
+% 
+% To keep the filesize small, I'm just plotting frames 200 to 300, which 
+% correspond to 1966 to 1974, and we'll only plot every other month. 
+% 
+%  figure
+%  subplot(1,2,1) 
+%  h = imagescn(lon,lat,sst(:,:,200)); 
+%  caxis([-3 3])
+%  cmocean bal
+%  title 'all modes'
+%  axis image off 
+%  
+%  subplot(1,2,2) 
+%  h_f = imagescn(lon,lat,sst_f(:,:,200)); 
+%  caxis([-3 3])
+%  cmocean bal
+%  title 'modes 1-11'
+%  axis image off 
+%  
+%  % Save the first frame: 
+%  gif('eof_filtering.gif','frame',gcf,'nodither')
+%  
+%  for k = 202:2:300
+%     h.CData = sst(:,:,k);     % updates raw data
+%     h_f.CData = sst_f(:,:,k); % updates filtered data
+%     gif                       % saves this frame
+%  end
+% 
+% <<eof_filtering.gif>>
+%% 
+% And you can see, in the animation above, that keeping only first 11 modes 
+% preserves the large-scale, large-magnitude variability, but eliminates 
+% the smaller-scale noisiness. 
+% 
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

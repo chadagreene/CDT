@@ -1,0 +1,130 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>cdtarea documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-16"><meta name="DC.source" content="cdtarea_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>cdtarea</tt> documentation</h1><!--introduction--><p>The <tt>cdtarea</tt> function gives the approximate area of each cell in a lat,lon grid assuming and ellipsoidal Earth. This function was designed to enable easy area-averaged weighting of large gridded climate datasets. This function is similar to <a href="cdtdim_documentation.html"><tt>cdtdim</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#7">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>A = cdtarea(lat,lon)
+A = cdtarea(lat,lon,'km2')</pre><h2 id="2">Description</h2><p><tt>A = cdtarea(lat,lon)</tt> gives an approximate area of each grid cell given by <tt>lat,lon</tt>. Inputs <tt>lat</tt> and <tt>lon</tt> must have matching dimensions, as if they were created by <tt>meshgrid</tt>.</p><p><tt>A = cdtarea(lat,lon,'km2')</tt> gives grid cell area in square kilometers.</p><h2 id="3">Example</h2><p>Given a 10 degree global grid made by <a href="cdtgrid_documentation.html"><tt>cdtgrid</tt></a>.</p><pre class="codeinput">[lat,lon] = cdtgrid(10);
+</pre><p>Each grid cell has these dimensions:</p><pre class="codeinput">A = cdtarea(lat,lon,<span class="string">'km^2'</span>);
+</pre><p>Plot the grid cell area:</p><pre class="codeinput">p = pcolor(lon,lat,A);
+axis <span class="string">image</span>
+ylabel(<span class="string">'latitude'</span>)
+xlabel(<span class="string">'longitude'</span>)
+cb = colorbar;
+ylabel(cb,<span class="string">'grid cell area (km^2)'</span>)
+</pre><img vspace="5" hspace="5" src="cdtarea_documentation_01.png" alt=""> <p>Just as we expect, grid cells are bigger close to the equator, and smaller near the poles. If you look closely at the map above, you may notice that the values at the top of the world do not appear to match the values at the bottom of the world.  That's due to an unfortunate behavior of <tt>pcolor</tt>, which discards a row and a column of data.  That behavior can be fixed by using interpolated shading or by using <tt>imagesc</tt> instead of <tt>pcolor</tt>, but I used <tt>pcolor</tt> above because it's an easy way to include grid lines.</p><h2 id="7">Author Info</h2><p>The <tt>cdtarea</tt> function was written by Chad A. Greene of the University of Texas Institute for Geophysics (UTIG).</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |cdtarea| documentation 
+% The |cdtarea| function gives the approximate area of each cell in a lat,lon grid assuming 
+% and ellipsoidal Earth. This function was designed to enable easy area-averaged
+% weighting of large gridded climate datasets. This function is similar to
+% <cdtdim_documentation.html |cdtdim|>. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax 
+% 
+%  A = cdtarea(lat,lon)
+%  A = cdtarea(lat,lon,'km2')
+% 
+%% Description
+% 
+% |A = cdtarea(lat,lon)| gives an approximate area of each grid cell given by |lat,lon|. Inputs
+% |lat| and |lon| must have matching dimensions, as if they were created by |meshgrid|. 
+%
+% |A = cdtarea(lat,lon,'km2')| gives grid cell area in square kilometers. 
+%
+%% Example 
+% Given a 10 degree global grid made by <cdtgrid_documentation.html |cdtgrid|>. 
+
+[lat,lon] = cdtgrid(10); 
+
+%% 
+% Each grid cell has these dimensions: 
+
+A = cdtarea(lat,lon,'km^2'); 
+
+%% 
+% Plot the grid cell area:
+
+p = pcolor(lon,lat,A); 
+axis image
+ylabel('latitude') 
+xlabel('longitude') 
+cb = colorbar; 
+ylabel(cb,'grid cell area (km^2)')
+
+%% 
+% Just as we expect, grid cells are bigger close to the equator, and smaller near the poles. 
+% If you look closely at the map above, you may notice that the values at the top of the world do not appear to 
+% match the values at the bottom of the world.  That's due to an unfortunate behavior of |pcolor|, which discards
+% a row and a column of data.  That behavior can be fixed by using interpolated shading or by using |imagesc| instead
+% of |pcolor|, but I used |pcolor| above because it's an easy way to include grid lines. 
+
+%% Author Info
+% The |cdtarea| function was written by Chad A. Greene of the University of Texas 
+% Institute for Geophysics (UTIG). 
+##### SOURCE END #####
+--></body></html>

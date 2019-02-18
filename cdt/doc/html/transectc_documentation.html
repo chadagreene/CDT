@@ -1,0 +1,354 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>transectc documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-07"><meta name="DC.source" content="transectc_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>transectc</tt> documentation</h1><!--introduction--><p><tt>transectc</tt> produces a contour plot oceanographic data from CTD profiles collected at different locations and/or times.</p><p>See also: <a href="transect_documentation.html"><tt>transect</tt></a> for help converting data to cell arrays.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Methods</a></li><li><a href="#4">Examples</a></li><li><a href="#6">Example 1: Simplest form</a></li><li><a href="#7">Example 2: Specify contour levels with different line styles</a></li><li><a href="#11">Example 3: Use in conjunction with <tt>transect</tt></a></li><li><a href="#18">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>transectc(x,d,v)
+transectc(...,levels)
+transectc(...,LineSpec)
+transectc(...,'Name',Value)
+transectc(...,'extrap')
+transectc(...,'interp','InterpMethod)
+transectc(...,'di',di)
+transectc(...,'xi',xi)
+[C,h] = transectc(...)</pre><h2 id="2">Description</h2><p><tt>transectc(x,d,v)</tt> creates a contour plot diagram of the variable <tt>v</tt> at the horizontal locations (or times) <tt>x</tt> and depths <tt>d</tt>. <tt>x</tt> must be a numeric array of values indicating the locations or times of each CTD profile. Inputs <tt>d</tt> and <tt>v</tt> must each be cell arrays containing depths and measurements at each CTD location.</p><p><tt>transectc(...,levels)</tt> specifies the values of <tt>v</tt> to draw as contour lines. If <tt>levels</tt> is a scalar value, then <tt>transectc</tt> draws that number of contour lines. If <tt>levels</tt> is an array, a contour line is plotted for each value in <tt>levels</tt>. To draw the contours at one value (k), specify levels as a two-element row vector [k k].</p><p><tt>transectc(...,LineSpec)</tt> specifies the style and color of the contour lines.</p><p><tt>transectc(...,'Name',Value)</tt> specifies additional options for the contour plot using one or more name-value pair arguments. Specify the options after all other input arguments. For a list of properties, see Contour Properties.</p><p><tt>transectc(...,'extrap')</tt> turns on the option to extrapolate beyond the extents of data. By default, <tt>transectc</tt> does not extrapolate, but the option is available to fill in gaps, such as between lowest datapoint and the seabed.</p><p><tt>transectc(...,'interp','InterpMethod)</tt> specifies an interpolation method used for the contouring. Default is <tt>'linear'</tt>.</p><p><tt>transectc(...,'di',di)</tt> specifies interpolation depths <tt>di</tt>. By default, <tt>transectc</tt> creates a grid by interpolating to 1000 equally-spaced depths between the shallowest and deepest measurement.</p><p><tt>transectc(...,'xi',xi)</tt> specifies interpolation locations (or times) <tt>xi</tt>. By default, <tt>transectc</tt> interpolates to 2000 equally-spaced points <tt>xi</tt> between the minimum and maximum values of <tt>x</tt>.</p><p><tt>[C,h] = transectc(...)</tt> returns the contour matrix <tt>C</tt> and the handle <tt>h</tt> of the plotted objects.</p><h2 id="3">Methods</h2><p>This function grids unevenly spaced data by the method described in the documentation for the <a href="transect_documentation.html"><tt>transect</tt></a> function, then plots the gridded data with Matlab's built-in <tt>contour</tt> function.</p><h2 id="4">Examples</h2><p>The examples below use some Argo data that you can load like this:</p><pre class="codeinput">load <span class="string">example_ctd</span>
+
+whos <span class="comment">% displays the names and sizes of each variable</span>
+</pre><pre class="codeoutput">  Name      Size            Bytes  Class     Attributes
+
+  P         1x95            25152  cell                
+  S         1x95            25152  cell                
+  T         1x95            25152  cell                
+  bed       1x95              760  double              
+  x         1x95              760  double              
+
+</pre><p>The Argo data contain 95 profiles taken as the float drifted along. Each profile was taken at a location in <tt>x</tt>, the corresponding bed depths are given by <tt>bed</tt> and the temperatures <tt>T</tt> and salinities <tt>S</tt> are in cell arrays at the corresponding pressures <tt>P</tt>. See <a href="transect_documentation.html"><tt>transect</tt></a> for help converting data into cell arrays.</p><h2 id="6">Example 1: Simplest form</h2><p>Here's a simple transect of temperature data T taken at locations x and depths P:</p><pre class="codeinput">transectc(x,P,T)
+
+colorbar
+xlabel <span class="string">'distance along transect (km)'</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+</pre><img vspace="5" hspace="5" src="transectc_documentation_01.png" alt=""> <h2 id="7">Example 2: Specify contour levels with different line styles</h2><p>Like above, but now only plot negative values, with lines every 0.1 degrees:</p><pre class="codeinput">vals = -2:0.1:0;
+
+figure
+transectc(x,P,T,vals)
+
+colorbar
+xlabel <span class="string">'distance along transect (km)'</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+</pre><img vspace="5" hspace="5" src="transectc_documentation_02.png" alt=""> <p>Now only plot negative values and make them black dashed lines:</p><pre class="codeinput">figure
+
+transectc(x,P,T,vals,<span class="string">'k--'</span>)
+
+xlabel <span class="string">'distance along transect (km)'</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+</pre><img vspace="5" hspace="5" src="transectc_documentation_03.png" alt=""> <p>and positive values have dotted lines:</p><pre class="codeinput">hold <span class="string">on</span>
+transectc(x,P,T,0:0.1:2,<span class="string">'k:'</span>)
+</pre><img vspace="5" hspace="5" src="transectc_documentation_04.png" alt=""> <p>and the zero contour is thicker:</p><pre class="codeinput">transectc(x,P,T,[0 0],<span class="string">'color'</span>,rgb(<span class="string">'deep green'</span>),<span class="string">'linewidth'</span>,3)
+</pre><img vspace="5" hspace="5" src="transectc_documentation_05.png" alt=""> <h2 id="11">Example 3: Use in conjunction with <tt>transect</tt></h2><p>A contour plot can be difficult to interpret on its own. When used in conjunction with the <tt>transect</tt> function, it can illustrate important changes in properties. See documentation for <a href="transect_documentation.html"><tt>transect</tt></a> for an explanation of the options.</p><pre class="codeinput">figure
+transect(x,P,T,<span class="keyword">...</span>
+   <span class="string">'bed'</span>,bed,<span class="keyword">...</span><span class="comment">        % add bedrock data</span>
+   <span class="string">'bed'</span>,bed,<span class="string">'bedcolor'</span>,rgb(<span class="string">'brown'</span>),<span class="keyword">...</span><span class="comment"> % colour the bedrock brown</span>
+   <span class="string">'marker'</span>,<span class="string">'none'</span>,<span class="keyword">...</span><span class="comment">      % turn off markers</span>
+   <span class="string">'extrap'</span>)
+
+caxis([-1.9 0.9])          <span class="comment">% sets color axis limits</span>
+
+xlabel <span class="string">'distance along transect (km)'</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+cmocean <span class="string">thermal</span>            <span class="comment">% sets the colormap</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'temperature \circC'</span>)
+</pre><img vspace="5" hspace="5" src="transectc_documentation_06.png" alt=""> <p>Now add contours, making sure to suppress the output from printing to screen:</p><pre class="codeinput">hold <span class="string">on</span>
+[C,h] = transectc(x,P,T,-2:0.1:0);
+</pre><img vspace="5" hspace="5" src="transectc_documentation_07.png" alt=""> <p>Note that they're not visible, as they've taken the same colour map as the <tt>transect</tt> plot below. To make them visible, we'll need to give them a constant colour. Add positive contours as dotted lines and dashed lines as negative contours, with the zero temperature contour being a thick white line:</p><pre class="codeinput">delete(h) <span class="comment">% deletes contours from above</span>
+
+transectc(x,P,T,-2:0.25:0,<span class="string">'k--'</span>)
+</pre><img vspace="5" hspace="5" src="transectc_documentation_08.png" alt=""> <p>and positive values have dotted lines:</p><pre class="codeinput">transectc(x,P,T,0:0.25:2,<span class="string">'k:'</span>)
+</pre><img vspace="5" hspace="5" src="transectc_documentation_09.png" alt=""> <p>and the zero contour is thicker:</p><pre class="codeinput">transectc(x,P,T,[0 0],<span class="string">'w'</span>,<span class="string">'linewidth'</span>,3)
+</pre><img vspace="5" hspace="5" src="transectc_documentation_10.png" alt=""> <p>Do the same again, but this time add text labels to each contour.</p><pre class="codeinput">figure
+transect(x,P,T,<span class="keyword">...</span>
+   <span class="string">'bed'</span>,bed,<span class="keyword">...</span><span class="comment">        % add bedrock data</span>
+   <span class="string">'bed'</span>,bed,<span class="string">'bedcolor'</span>,rgb(<span class="string">'brown'</span>),<span class="keyword">...</span><span class="comment"> % colour the bedrock brown</span>
+   <span class="string">'marker'</span>,<span class="string">'none'</span>,<span class="keyword">...</span><span class="comment">      % turn off markers</span>
+   <span class="string">'extrap'</span>)
+
+caxis([-1.9 0.9])          <span class="comment">% sets color axis limits</span>
+
+xlabel <span class="string">'distance along transect (km)'</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'temperature \circC'</span>)
+cmocean <span class="string">thermal</span> <span class="comment">% sets colormap</span>
+</pre><img vspace="5" hspace="5" src="transectc_documentation_11.png" alt=""> <p>Now add text labels by setting the <tt>'ShowText'</tt> option, with appropriate spacing between labels:</p><pre class="codeinput">hold <span class="string">on</span>
+transectc(x,P,T,-2:.25:2,<span class="string">'k-'</span>,<span class="keyword">...</span>
+    <span class="string">'ShowText'</span>,<span class="string">'on'</span>,<span class="keyword">...</span>
+    <span class="string">'LabelSpacing'</span>,1000);
+</pre><img vspace="5" hspace="5" src="transectc_documentation_12.png" alt=""> <h2 id="18">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by David E. Gwyther of University of Tasmania, and Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |transectc| documentation 
+% |transectc| produces a contour plot oceanographic data from CTD profiles 
+% collected at different locations and/or times.  
+% 
+% See also: <transect_documentation.html |transect|> for help converting data to cell arrays.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax 
+% 
+%  transectc(x,d,v)
+%  transectc(...,levels)
+%  transectc(...,LineSpec)
+%  transectc(...,'Name',Value)
+%  transectc(...,'extrap')
+%  transectc(...,'interp','InterpMethod)
+%  transectc(...,'di',di)
+%  transectc(...,'xi',xi)
+%  [C,h] = transectc(...)
+% 
+%% Description 
+% 
+% |transectc(x,d,v)| creates a contour plot diagram of the variable |v|
+% at the horizontal locations (or times) |x| and depths |d|. |x| must be a numeric
+% array of values indicating the locations or times of each CTD profile. Inputs
+% |d| and |v| must each be cell arrays containing depths and measurements at each
+% CTD location. 
+%
+% |transectc(...,levels)| specifies the values of |v| to draw as contour lines. 
+% If |levels| is a scalar value, then |transectc| draws that number of contour 
+% lines. If |levels| is an array, a contour line is plotted for each value in 
+% |levels|. To draw the contours at one value (k), specify levels as a two-element
+% row vector [k k].
+%
+% |transectc(...,LineSpec)| specifies the style and color of the contour lines.
+% 
+% |transectc(...,'Name',Value)| specifies additional options for the contour plot
+% using one or more name-value pair arguments. Specify the options after all other 
+% input arguments. For a list of properties, see Contour Properties.
+% 
+% |transectc(...,'extrap')| turns on the option to extrapolate beyond the extents
+% of data. By default, |transectc| does not extrapolate, but the option is available
+% to fill in gaps, such as between lowest datapoint and the seabed. 
+% 
+% |transectc(...,'interp','InterpMethod)| specifies an interpolation method 
+% used for the contouring. Default is |'linear'|.
+% 
+% |transectc(...,'di',di)| specifies interpolation depths |di|. By default, |transectc|
+% creates a grid by interpolating to 1000 equally-spaced depths between the 
+% shallowest and deepest measurement. 
+% 
+% |transectc(...,'xi',xi)| specifies interpolation locations (or times) |xi|. By 
+% default, |transectc| interpolates to 2000 equally-spaced points |xi| between the 
+% minimum and maximum values of |x|.  
+% 
+% |[C,h] = transectc(...)| returns the contour matrix |C| and the handle |h|
+% of the plotted objects.
+% 
+%% Methods
+% This function grids unevenly spaced data by the method described in the 
+% documentation for the <transect_documentation.html |transect|> function, 
+% then plots the gridded data with Matlab's built-in |contour| function. 
+% 
+%% Examples
+% The examples below use some Argo data that you can load like this: 
+
+load example_ctd
+
+whos % displays the names and sizes of each variable
+
+%% 
+% The Argo data contain 95 profiles taken as the float drifted along. 
+% Each profile was taken at a location in |x|, the corresponding bed depths
+% are given by |bed| and the temperatures |T| and salinities |S| are in 
+% cell arrays at the corresponding pressures |P|. See 
+% <transect_documentation.html |transect|> for help converting data into cell
+% arrays.
+
+%% Example 1: Simplest form
+% Here's a simple transect of temperature data T taken at locations x
+% and depths P: 
+
+transectc(x,P,T)
+
+colorbar
+xlabel 'distance along transect (km)' 
+ylabel 'pressure (dbar)'
+
+%% Example 2: Specify contour levels with different line styles
+% Like above, but now only plot negative values, with lines every 0.1 
+% degrees:
+
+vals = -2:0.1:0; 
+
+figure
+transectc(x,P,T,vals)
+
+colorbar
+xlabel 'distance along transect (km)' 
+ylabel 'pressure (dbar)'
+
+%%
+% Now only plot negative values and make them black dashed lines:
+
+figure
+
+transectc(x,P,T,vals,'kREPLACE_WITH_DASH_DASH')
+
+xlabel 'distance along transect (km)' 
+ylabel 'pressure (dbar)'
+
+%%
+% and positive values have dotted lines:
+
+hold on
+transectc(x,P,T,0:0.1:2,'k:')
+
+%%
+% and the zero contour is thicker:
+
+transectc(x,P,T,[0 0],'color',rgb('deep green'),'linewidth',3)
+
+%% Example 3: Use in conjunction with |transect|
+% A contour plot can be difficult to interpret on its own. When used in
+% conjunction with the |transect| function, it can illustrate important
+% changes in properties. See documentation for <transect_documentation.html |transect|> for an
+% explanation of the options.
+
+figure
+transect(x,P,T,...
+   'bed',bed,...        % add bedrock data
+   'bed',bed,'bedcolor',rgb('brown'),... % colour the bedrock brown
+   'marker','none',...      % turn off markers
+   'extrap')
+
+caxis([-1.9 0.9])          % sets color axis limits
+
+xlabel 'distance along transect (km)' 
+ylabel 'pressure (dbar)'
+cmocean thermal            % sets the colormap
+cb = colorbar;
+ylabel(cb,'temperature \circC') 
+
+%%
+% Now add contours, making sure to suppress the output from printing to 
+% screen:
+
+hold on
+[C,h] = transectc(x,P,T,-2:0.1:0);
+
+%%
+% Note that they're not visible, as they've taken the same colour map as
+% the |transect| plot below. To make them visible, we'll need to give them 
+% a constant colour. Add positive contours as dotted lines and dashed lines
+% as negative contours, with the zero temperature contour being a thick 
+% white line:
+
+delete(h) % deletes contours from above
+
+transectc(x,P,T,-2:0.25:0,'kREPLACE_WITH_DASH_DASH')
+
+%%
+% and positive values have dotted lines:
+
+transectc(x,P,T,0:0.25:2,'k:')
+
+%%
+% and the zero contour is thicker:
+
+transectc(x,P,T,[0 0],'w','linewidth',3)
+
+%%
+% Do the same again, but this time add text labels to each contour.
+
+figure
+transect(x,P,T,...
+   'bed',bed,...        % add bedrock data
+   'bed',bed,'bedcolor',rgb('brown'),... % colour the bedrock brown
+   'marker','none',...      % turn off markers
+   'extrap')
+
+caxis([-1.9 0.9])          % sets color axis limits
+
+xlabel 'distance along transect (km)' 
+ylabel 'pressure (dbar)'
+cb = colorbar;
+ylabel(cb,'temperature \circC') 
+cmocean thermal % sets colormap
+
+%%
+% Now add text labels by setting the |'ShowText'| option, with appropriate 
+% spacing between labels:
+
+hold on
+transectc(x,P,T,-2:.25:2,'k-',...
+    'ShowText','on',...
+    'LabelSpacing',1000);
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by David E. Gwyther 
+% of University of Tasmania, and Chad A. Greene of the University of Texas at Austin. 
+
+##### SOURCE END #####
+--></body></html>

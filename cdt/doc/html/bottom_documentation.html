@@ -1,0 +1,229 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>bottom documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-08"><meta name="DC.source" content="bottom_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>bottom</tt> documentation</h1><!--introduction--><p><tt>bottom</tt> returns the lowermost finite values in a 3D matrix. This function is useful for getting the seafloor temperature or atmospheric surface temperature in the presence of topography.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example: Drake Passage</a></li><li><a href="#8">How the sodb_example data were acquired</a></li><li><a href="#9">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>Zb = bottom(Z)
+[Zb,ind] = bottom(Z)</pre><h2 id="2">Description</h2><p><tt>Zb = bottom(Z)</tt> returns a 2D matrix containing the lowermost finite values in the 3D matrix <tt>Z</tt>.</p><p><tt>[Zb,ind] = bottom(Z)</tt> also returns 2D matrix ind which contains the indices along the third dimension of <tt>Z</tt> corresponding to the lowermost finite values in <tt>Z</tt>.</p><h2 id="3">Example: Drake Passage</h2><p>This example uses some gridded ocean temperature data from the Southern Ocean Database (described below). Begin by loading the example data:</p><pre class="codeinput">load <span class="string">sodb_example</span>
+
+whos <span class="comment">% displays the names and sizes of variables</span>
+</pre><pre class="codeoutput">  Name         Size                 Bytes  Class     Attributes
+
+  d           44x1                    352  double              
+  lat          1x61                   488  double              
+  lon          1x91                   728  double              
+  ptm         61x91x44            1953952  double              
+  readme       1x79                   158  char                
+
+</pre><p>The 61x91x44 matrix <tt>ptm</tt> contains potential temperatures at latitudes <tt>lat</tt>, longitudes <tt>lon</tt>, and depths <tt>d</tt>. Here's the potential temperature at the deepest depth, <tt>d(44)</tt></p><pre class="codeinput">imagescn(lon,lat,ptm(:,:,44))
+
+cmocean <span class="string">thermal</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'potential temperature (\circC)'</span>)
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+</pre><img vspace="5" hspace="5" src="bottom_documentation_01.png" alt=""> <p>That's not much information! That's because throughout most of the domain the seafloor is shallower than <tt>d(44)</tt> = 5500 m deep, so we just get NaN values wherever the the 5500 m layer is deeper than the bathymetry.</p><p>So instead, plot the lowermost finite values with the <tt>bottom</tt> function:</p><pre class="codeinput">figure
+imagescn(lon,lat,bottom(ptm))
+
+cmocean <span class="string">thermal</span>
+caxis([-2 12])
+cb = colorbar;
+ylabel(cb,<span class="string">'bottom temperature (\circC)'</span>)
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+</pre><img vspace="5" hspace="5" src="bottom_documentation_02.png" alt=""> <p>Since we have a depth array <tt>d</tt> and indices <tt>ind</tt> corresponding to the deepest finite values at each grid cell, we can get a 2D grid of bottom depths simply from d(ind). Add them to the map as contours:</p><pre class="codeinput"><span class="comment">% Get bottom temperature and corresponding indices:</span>
+[T_bot,ind] = bottom(ptm);
+
+<span class="comment">% Make a 2D bottom depth matrix:</span>
+D = d(ind);
+
+<span class="comment">% Overlay bathymetry contours:</span>
+hold <span class="string">on</span>
+contour(lon,lat,D,0:1000:5500,<span class="string">'k'</span>)
+
+<span class="comment">% Underlay a silly-looking earth image:</span>
+h = earthimage;
+uistack(h,<span class="string">'bottom'</span>);
+</pre><img vspace="5" hspace="5" src="bottom_documentation_03.png" alt=""> <p>On a mildly interesting note, the bottom temperature seems to have some relationship to the bottom depth. Compare the two in profile like this:</p><pre class="codeinput">figure
+plot(T_bot(:),D(:),<span class="string">'.'</span>)
+axis <span class="string">tight</span> <span class="string">ij</span> <span class="comment">% flips y direction</span>
+box <span class="string">off</span>
+xlabel <span class="string">'bottom temperature \circC'</span>
+ylabel <span class="string">'bottom depth (m)'</span>
+</pre><img vspace="5" hspace="5" src="bottom_documentation_04.png" alt=""> <h2 id="8">How the sodb_example data were acquired</h2><p>The sodb_example.mat data come from the Southern Ocean Database and were saved using <a href="https://www.mathworks.com/matlabcentral/fileexchange/52347">Antarctic Mapping Tools for Matlab</a> (Greene et al., 2017) via the following code:</p><pre>lon = -180:2:0;
+lat = -75:0.5:-45;
+[Lon,Lat] = meshgrid(lon,lat);
+[ptm,d] = sodb_interp('ptm',Lat,Lon);
+readme = 'potential temperature data from the Southern Ocean Database (Orsi and Whitorth)';
+save('sodb_example.mat','lat','lon','ptm','d','readme');</pre><h2 id="9">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |bottom| documentation
+% |bottom| returns the lowermost finite values in a 3D matrix. This function is
+% useful for getting the seafloor temperature or atmospheric surface temperature
+% in the presence of topography. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax 
+% 
+%  Zb = bottom(Z)
+%  [Zb,ind] = bottom(Z)
+% 
+%% Description 
+% 
+% |Zb = bottom(Z)| returns a 2D matrix containing the lowermost finite values
+% in the 3D matrix |Z|. 
+% 
+% |[Zb,ind] = bottom(Z)| also returns 2D matrix ind which contains the indices 
+% along the third dimension of |Z| corresponding to the lowermost finite values 
+% in |Z|. 
+% 
+%% Example: Drake Passage
+% This example uses some gridded ocean temperature data from the Southern 
+% Ocean Database (described below). Begin by loading the example data: 
+
+load sodb_example 
+
+whos % displays the names and sizes of variables
+
+%% 
+% The 61x91x44 matrix |ptm| contains potential temperatures at latitudes
+% |lat|, longitudes |lon|, and depths |d|. Here's the potential 
+% temperature at the deepest depth, |d(44)| 
+
+imagescn(lon,lat,ptm(:,:,44))
+
+cmocean thermal
+cb = colorbar; 
+ylabel(cb,'potential temperature (\circC)') 
+xlabel 'longitude'
+ylabel 'latitude'
+
+%% 
+% That's not much information! That's because throughout most of the domain
+% the seafloor is shallower than |d(44)| = 5500 m deep, so we just get NaN
+% values wherever the the 5500 m layer is deeper than the bathymetry. 
+% 
+% So instead, plot the lowermost finite values with the |bottom| function:
+
+figure
+imagescn(lon,lat,bottom(ptm))
+
+cmocean thermal
+caxis([-2 12])
+cb = colorbar; 
+ylabel(cb,'bottom temperature (\circC)') 
+xlabel 'longitude'
+ylabel 'latitude'
+
+%%
+% Since we have a depth array |d| and indices |ind| corresponding to the deepest
+% finite values at each grid cell, we can get a 2D grid of bottom depths 
+% simply from d(ind). Add them to the map as contours: 
+
+% Get bottom temperature and corresponding indices: 
+[T_bot,ind] = bottom(ptm); 
+
+% Make a 2D bottom depth matrix: 
+D = d(ind); 
+
+% Overlay bathymetry contours: 
+hold on
+contour(lon,lat,D,0:1000:5500,'k')
+
+% Underlay a silly-looking earth image: 
+h = earthimage; 
+uistack(h,'bottom'); 
+
+%% 
+% On a mildly interesting note, the bottom temperature seems to have some relationship
+% to the bottom depth. Compare the two in profile like this: 
+
+figure
+plot(T_bot(:),D(:),'.')
+axis tight ij % flips y direction 
+box off
+xlabel 'bottom temperature \circC'
+ylabel 'bottom depth (m)'
+
+%% How the sodb_example data were acquired
+% The sodb_example.mat data come from the Southern Ocean Database 
+% and were saved using <https://www.mathworks.com/matlabcentral/fileexchange/52347 
+% Antarctic Mapping Tools for Matlab> (Greene et al., 2017)
+% via the following code: 
+% 
+% 
+%  lon = -180:2:0; 
+%  lat = -75:0.5:-45;
+%  [Lon,Lat] = meshgrid(lon,lat); 
+%  [ptm,d] = sodb_interp('ptm',Lat,Lon); 
+%  readme = 'potential temperature data from the Southern Ocean Database (Orsi and Whitorth)'; 
+%  save('sodb_example.mat','lat','lon','ptm','d','readme'); 
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

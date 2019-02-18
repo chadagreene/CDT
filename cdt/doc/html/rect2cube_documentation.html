@@ -1,0 +1,223 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>rect2cube documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-19"><meta name="DC.source" content="rect2cube_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>rect2cube</tt> documentation</h1><!--introduction--><p>The <tt>rect2cube</tt> function reshapes and permutes a 2D matrix into a 3D cube. <tt>rect2cube</tt> is the complement of <a href="cube2rect_documentation.html"><tt>cube2rect</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Why does this function exist?</a></li><li><a href="#4">Example 1: Simplest case</a></li><li><a href="#8">Example 2: Masking</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>A3 = rect2cube(A2,gridsize)
+A3 = rect2cube(A2,mask)</pre><h2 id="2">Description</h2><p><tt>A3 = rect2cube(A2,gridsize)</tt> reshapes 2D matrix <tt>A2</tt> into a 3D matrix whose first two dimensions are spatial (e.g., lat x lon or lon x lat) and whose third dimension is time or perhaps ocean depth or some variable along which operations are performed. The final dimensions of <tt>A3</tt> are specified by <tt>gridsize</tt>, which may be a complete 3 element array describing <tt>A3</tt>, or gridsize may be just a 2 element array containing the first two dimensions of <tt>A3</tt>.</p><p><tt>A3 = rect2cube(A2,mask)</tt> reshapes the elements of <tt>A2</tt> into the <tt>true</tt> grid cells in a 2D matrix <tt>mask</tt>.</p><h2 id="3">Why does this function exist?</h2><p>Good question! The short answer is it enables fast and easy vectorization, meaning no more nested loops. A more nuanced explanation with lots of examples can be found in this <a href="tutorial_3D_analysis.html">Tutorial on 3D data analysis</a>.</p><h2 id="4">Example 1: Simplest case</h2><p>This example starts with a random 4x3x2 matrix, meaning it is a grid that has spatial dimensions 4x3 and there are two measurements--two "time" slices-- for each point in the grid:</p><pre class="codeinput"><span class="comment">% A random 4x3x2 matrix:</span>
+A3 = randi(50,[4 3 2])
+</pre><pre class="codeoutput">A3(:,:,1) =
+    33    45    15
+    42    36    14
+    16    13     1
+    21    38    19
+A3(:,:,2) =
+    22    47    29
+    16    44    25
+    15    20    14
+    13    24    50
+</pre><p>Convert <tt>A3</tt> into a 2D matrix via <a href="cube2rect_documentation.html"><tt>cube2rect</tt></a>:</p><pre class="codeinput">A2 = cube2rect(A3)
+</pre><pre class="codeoutput">A2 =
+    33    42    16    21    45    36    13    38    15    14     1    19
+    22    16    15    13    47    44    20    24    29    25    14    50
+</pre><p>Above we see that the top row of <tt>A2</tt> contains the values of each grid cell in the first "time slice" of <tt>A3</tt>, and the second row of <tt>A2</tt> corresponds to the second time slice.</p><p>To get A3 back into its original 3D arrangement, use <tt>rect2cube</tt> and specify the dimensions you'll want <tt>A3</tt> to be:</p><pre class="codeinput">A3 = rect2cube(A2,[4 3 2])
+</pre><pre class="codeoutput">A3(:,:,1) =
+    33    45    15
+    42    36    14
+    16    13     1
+    21    38    19
+A3(:,:,2) =
+    22    47    29
+    16    44    25
+    15    20    14
+    13    24    50
+</pre><p>And that brings us back to where we started.</p><p>Note: You don't actually have to specify the third dimension of <tt>A3</tt> when you use the syntax above. You can just specify the first two dimensions and <tt>rect2cube</tt> will figure out the third one, like this:</p><pre class="codeinput">A3 = rect2cube(A2,[4 3]);
+</pre><h2 id="8">Example 2: Masking</h2><p>If you're working with very large grids of climate data, you might find it more computationally efficient to remove regions that aren't of interest before performing calculations. To accomplish this, create a mask containing <tt>true</tt> values for any grid cells you want to keep.</p><p>In this example, we'll also use a mask with 7 <tt>true</tt> values indicating grid cells we want to analyze and 5 <tt>false</tt> values that we don't want to include in our analysis:</p><pre class="codeinput"><span class="comment">% Create a mask:</span>
+mask = true([4 3]);
+mask([3 4 6 10 11]) = false
+</pre><pre class="codeoutput">mask =
+  4&times;3 logical array
+   1   1   1
+   1   0   0
+   0   1   0
+   0   1   1
+</pre><p>Convert <tt>A3</tt> into a 2D matrix via <a href="cube2rect_documentation.html"><tt>cube2rect</tt></a>:</p><pre class="codeinput">A2 = cube2rect(A3,mask)
+</pre><pre class="codeoutput">A2 =
+    33    42    45    13    38    15    19
+    22    16    47    20    24    29    50
+</pre><p>Above we see that every <tt>true</tt> grid cell in the <tt>mask</tt> gets a column in <tt>A2</tt>, and the rows of <tt>A2</tt> correspond to the time slices of <tt>A3</tt>.</p><p>Now if we want to get <tt>A2</tt> back into a 3D grid, use the same mask:</p><pre class="codeinput">A3b = rect2cube(A2,mask)
+</pre><pre class="codeoutput">A3b(:,:,1) =
+    33    45    15
+    42   NaN   NaN
+   NaN    13   NaN
+   NaN    38    19
+A3b(:,:,2) =
+    22    47    29
+    16   NaN   NaN
+   NaN    20   NaN
+   NaN    24    50
+</pre><p>Above, you'll notice that <tt>A3b</tt> does not exactly match the <tt>A3</tt> matrix we started with, because we threw away all the information in the grid cells that corresponded to <tt>0</tt> in the <tt>mask</tt>, and then later we had to fill them in with <tt>NaN</tt> values. This is a lossy way of doing analysis, but if those grid cells were not relevant to the analysis anyway, then was anything really lost?</p><h2 id="12">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |rect2cube| documentation 
+% The |rect2cube| function reshapes and permutes a 2D matrix into a 3D cube. 
+% |rect2cube| is the complement of <cube2rect_documentation.html |cube2rect|>. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax
+% 
+%  A3 = rect2cube(A2,gridsize)
+%  A3 = rect2cube(A2,mask)
+% 
+%% Description
+% 
+% |A3 = rect2cube(A2,gridsize)| reshapes 2D matrix |A2| into a 3D matrix whose first
+% two dimensions are spatial (e.g., lat x lon or lon x lat) and whose third 
+% dimension is time or perhaps ocean depth or some variable along which operations
+% are performed. The final dimensions of |A3| are specified by |gridsize|, which 
+% may be a complete 3 element array describing |A3|, or gridsize may be just a 2 
+% element array containing the first two dimensions of |A3|. 
+% 
+% |A3 = rect2cube(A2,mask)| reshapes the elements of |A2| into the |true| grid
+% cells in a 2D matrix |mask|. 
+%
+%% Why does this function exist? 
+% Good question! The short answer is it enables fast and easy vectorization, 
+% meaning no more nested loops. A more nuanced explanation with lots of examples
+% can be found in this <tutorial_3D_analysis.html Tutorial on 3D data analysis>.
+
+%% Example 1: Simplest case 
+% This example starts with a random 4x3x2 matrix, meaning it is a grid that
+% has spatial dimensions 4x3 and there are two measurementsREPLACE_WITH_DASH_DASHtwo "time" slicesREPLACE_WITH_DASH_DASH
+% for each point in the grid: 
+
+% A random 4x3x2 matrix:
+A3 = randi(50,[4 3 2])
+
+%% 
+% Convert |A3| into a 2D matrix via <cube2rect_documentation.html |cube2rect|>: 
+
+A2 = cube2rect(A3)
+
+%% 
+% Above we see that the top row of |A2| contains the values of each grid cell
+% in the first "time slice" of |A3|, and the second row of |A2| corresponds 
+% to the second time slice. 
+% 
+% To get A3 back into its original 3D arrangement, use |rect2cube| and specify
+% the dimensions you'll want |A3| to be: 
+
+A3 = rect2cube(A2,[4 3 2]) 
+
+%% 
+% And that brings us back to where we started. 
+% 
+% Note: You don't actually have to specify the third dimension of |A3| when you
+% use the syntax above. You can just specify the first two dimensions and 
+% |rect2cube| will figure out the third one, like this: 
+
+A3 = rect2cube(A2,[4 3]); 
+
+%% Example 2: Masking
+% If you're working with very large grids of climate data, you might 
+% find it more computationally efficient to remove regions that aren't 
+% of interest before performing calculations. To accomplish this, create
+% a mask containing |true| values for any grid cells you want to keep. 
+% 
+% In this example, we'll also use a mask with 7 |true| values 
+% indicating grid cells we want to analyze and 5 |false| values that
+% we don't want to include in our analysis: 
+
+% Create a mask:
+mask = true([4 3]); 
+mask([3 4 6 10 11]) = false
+
+%% 
+% Convert |A3| into a 2D matrix via <cube2rect_documentation.html |cube2rect|>: 
+
+A2 = cube2rect(A3,mask)
+
+%% 
+% Above we see that every |true| grid cell in the |mask| gets a column
+% in |A2|, and the rows of |A2| correspond to the time slices of |A3|. 
+% 
+% Now if we want to get |A2| back into a 3D grid, use the same mask:  
+
+A3b = rect2cube(A2,mask)
+
+%% 
+% Above, you'll notice that |A3b| does not exactly match the |A3| matrix 
+% we started with, because we threw away all the information in the grid 
+% cells that corresponded to |0| in the |mask|, and then later we had to 
+% fill them in with |NaN| values. This is a lossy way of doing
+% analysis, but if those grid cells were not relevant to the analysis anyway, 
+% then was anything really lost? 
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

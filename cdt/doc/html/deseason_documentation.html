@@ -1,0 +1,262 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>deseason documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-20"><meta name="DC.source" content="deseason_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>deseason</tt> documentation</h1><!--introduction--><p><tt>deseason</tt> removes the seasonal (aka annual) cycle of variability from a time series.</p><p>See also:  <a href="season_documentation.html"><tt>season</tt></a>, <a href="climatology_documentation.html"><tt>climatology</tt></a>, <a href="sinefit_documentation.html"><tt>sinefit</tt></a>, <a href="sineval_documentation.html"><tt>sineval</tt></a>, and <a href="sinefit_bootstrap_documentation.html"><tt>sinefit_bootstrap</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example: Sea ice extent</a></li><li><a href="#9">How this function works</a></li><li><a href="#10">Seasons vs Climatology</a></li><li><a href="#12">Other ways to define seasonality</a></li><li><a href="#13">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>Ads = deseason(A,t)
+Ads = deseason(...,'daily')
+Ads = deseason(...,'monthly')
+Ads = deseason(...,'detrend',DetrendOption)
+Ads = deseason(...,'dim',dimension)</pre><h2 id="2">Description</h2><p><tt>Ads = deseason(A,t)</tt> removes the typical seasonal (aka annual) cycle from the time series <tt>A</tt> corresponding to times <tt>t</tt> in datenum format. If <tt>t</tt> is daily, outputs <tt>ts</tt> is 1 to 366 and <tt>As</tt> will contain average values for each of the 366 days of the year. If inputs are monthly, <tt>ts</tt> is 1:12 and <tt>As</tt> will contain average values for each of the 12 months of the year.</p><p><tt>Ads = deseason(...,'daily')</tt> specifies directly that inputs are daily resolution. The deseason function will typically figure this out automatically, but if you have large missing gaps in your data you may wish to ensure correct results by specifying daily.</p><p><tt>Ads = deseason(...,'monthly')</tt> as above, but forces monthly solution.</p><p><tt>Ads = deseason(...,'detrend',DetrendOption)</tt> specifies a baseline relative to which seasonal anomalies are determined. Options are <tt>'linear'</tt>, <tt>'quadratic'</tt>, or <tt>'none'</tt>. By default, anomalies are calculated after removing the linear least squares trend, but if, for example, warming is strongly nonlinear, you may prefer the <tt>'quadratic'</tt> option.  <b>NOTE:</b> The deseason function does NOT return detrended data. Rather, detrending is only performed to determine the seasonal cycle. Default is <tt>'linear'</tt>.</p><p><tt>Ads = deseason(...,'dim',dimension)</tt> specifies a dimension along which to assess seasons. By default, if <tt>A</tt> is 1D, seasonal cycle is returned along the nonsingleton dimension; if <tt>A</tt> is 2D, deseason is performed along dimension 1 (time marches down the rows); if <tt>A</tt> is 3D, deseason is performed along dimension 3.</p><h2 id="3">Example: Sea ice extent</h2><p>Consider this sample sea ice extent data:</p><pre class="codeinput">load <span class="string">seaice_extent</span>
+
+figure
+plot(t,extent_N,<span class="string">'b'</span>)
+hold <span class="string">on</span>
+plot(t,extent_S,<span class="string">'r'</span>)
+
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+legend(<span class="string">'northern hemisphere'</span>,<span class="string">'southern hemisphere'</span>,<span class="string">'location'</span>,<span class="string">'northwest'</span>)
+ylabel <span class="string">' sea ice extent (10^6 km^2) '</span>
+</pre><img vspace="5" hspace="5" src="deseason_documentation_01.png" alt=""> <p>As you can see, sea ice extent variability is overwhelmingly dominated by seasonal cycles. Let's deseason each time series to get a better idea of what's happening interannually:</p><pre class="codeinput">north_ds = deseason(extent_N,t);
+south_ds = deseason(extent_S,t);
+
+plot(t,north_ds,<span class="string">'b'</span>)
+plot(t,south_ds,<span class="string">'r'</span>)
+</pre><img vspace="5" hspace="5" src="deseason_documentation_02.png" alt=""> <p>Let's make a new figure with just the detrended data, and use <a href="polyplot_documentation.html"><tt>polyplot</tt></a> to add trendlines:</p><pre class="codeinput">figure
+plot(t,north_ds,<span class="string">'b'</span>)
+hold <span class="string">on</span>
+plot(t,south_ds,<span class="string">'r'</span>)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+legend(<span class="string">'northern hemisphere'</span>,<span class="string">'southern hemisphere'</span>,<span class="string">'location'</span>,<span class="string">'northwest'</span>)
+ylabel <span class="string">' sea ice extent (10^6 km^2) '</span>
+
+<span class="comment">% Overlay a trend line:</span>
+polyplot(t,north_ds,1,<span class="string">'b'</span>)
+polyplot(t,south_ds,1,<span class="string">'r'</span>)
+</pre><img vspace="5" hspace="5" src="deseason_documentation_03.png" alt=""> <p>The plot above shows that throughout the satellite epoch, northern hemisphere sea ice extent has declined while southern hemisphere sea ice extent has increased. But it might be tough to see which hemisphere is winning. An easy way to see what's happening globally is to simply add northern and southern hemisphere sea ice extents:</p><pre class="codeinput">figure
+plot(t,north_ds+south_ds,<span class="string">'k'</span>)
+hold <span class="string">on</span>
+polyplot(t,north_ds+south_ds,1,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+ylabel <span class="string">' global sea ice extent (10^6 km^2) '</span>
+</pre><img vspace="5" hspace="5" src="deseason_documentation_04.png" alt=""> <p>The plot above makes it clear that Antarctic sea ice gains are not keeping up with Arctic sea ice losses.</p><p>We can quantify the global sea ice trend with the <a href="trend_documentation.html"><tt>trend</tt></a> function. The <tt>trend</tt> function calculates the linear trend relative to the units you give it, and we're working with <tt>datenum</tt> units which are days, so we'll multiply by <tt>365.25*10</tt> to get the sea ice trend in "per decade" units, and multiply by <tt>1e6</tt> to get units in km^2:</p><pre class="codeinput">trend(extent_S+extent_N,datenum(t))*365.25*10*1e6
+</pre><pre class="codeoutput">ans =
+  -4.5833e+05
+</pre><p>That tells us over the satellite record, we've been losing almost half a million square kilometers of sea ice per decade, globally.</p><h2 id="9">How this function works</h2><p>The <tt>deseason</tt> function simply works like this:</p><pre>Ads = A - season(A,t);</pre><p>You will find a description of how the <tt>season</tt> function calculates the seasonal signal <a href="season_documentation.html">here</a>.</p><h2 id="10">Seasons vs Climatology</h2><p>CDT has a function called <tt>season</tt> and another function called <a href="climatology_documentation.html"><tt>climatology</tt></a>. The only difference is that the output of <tt>climatology</tt> includes the mean of the variable, whereas the output of <tt>season</tt> will always have a 0 mean value. Accordingly, the <a href="deseason_documentation.html"><tt>deseason</tt></a> function removes the seasonal component of variability while preserving the overall mean and trends.</p><p>In general, CDT assumes that a multi-year record of a variable sampled at subannual resolution can described by</p><pre>y = y_0 + y_tr + y_season + y_var + y_noise</pre><p>where</p><div><ul><li><tt>y_0</tt> is the long-term <tt>mean</tt>,</li><li><tt>y_trend</tt> is the long-term <a href="trend_documentation.html"><tt>trend</tt></a>,</li><li><tt>y_season</tt> is the typical seasonal anomaly, which the <tt>season</tt> function obtains after detrending and removing the mean,</li><li><tt>y_var</tt> represents interannual variability, and</li><li><tt>y_noise</tt> is everything else</li></ul></div><p>In this model,</p><pre>y_climatology = y_0 + y_season</pre><h2 id="12">Other ways to define seasonality</h2><p>For yet another way to define seasonality, see <a href="sinefit_documentation.html"><tt>sinefit</tt></a>, <a href="sineval_documentation.html"><tt>sineval</tt></a>, and <a href="sinefit_bootstrap_documentation.html"><tt>sinefit_bootstrap</tt></a>.</p><h2 id="13">Author Info</h2><p>This function was written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas Institute for Geophysics (UTIG), July 2017.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |deseason| documentation 
+% |deseason| removes the seasonal (aka annual) cycle of variability from a time series. 
+%
+% See also:  <season_documentation.html |season|>, <climatology_documentation.html |climatology|>, <sinefit_documentation.html |sinefit|>, 
+% <sineval_documentation.html |sineval|>, and <sinefit_bootstrap_documentation.html |sinefit_bootstrap|>. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax 
+% 
+%  Ads = deseason(A,t) 
+%  Ads = deseason(...,'daily')  
+%  Ads = deseason(...,'monthly') 
+%  Ads = deseason(...,'detrend',DetrendOption) 
+%  Ads = deseason(...,'dim',dimension) 
+% 
+%% Description 
+% 
+% |Ads = deseason(A,t)| removes the typical seasonal (aka annual) cycle from the time series |A| corresponding
+% to times |t| in datenum format. If |t| is daily, outputs |ts| is 1 to 366 and |As| will contain average values
+% for each of the 366 days of the year. If inputs are monthly, |ts| is 1:12 and |As| will contain average values
+% for each of the 12 months of the year. 
+%
+% |Ads = deseason(...,'daily')| specifies directly that inputs are daily resolution. The deseason function
+% will typically figure this out automatically, but if you have large missing gaps in your data you may wish
+% to ensure correct results by specifying daily. 
+% 
+% |Ads = deseason(...,'monthly')| as above, but forces monthly solution. 
+%
+% |Ads = deseason(...,'detrend',DetrendOption)| specifies a baseline relative to which seasonal anomalies are 
+% determined. Options are |'linear'|, |'quadratic'|, or |'none'|. By default, anomalies are calculated after 
+% removing the linear least squares trend, but if, for example, warming is strongly nonlinear, you may prefer
+% the |'quadratic'| option.  *NOTE:* The deseason function does NOT return detrended data. Rather, detrending is 
+% only performed to determine the seasonal cycle. Default is |'linear'|. 
+%
+% |Ads = deseason(...,'dim',dimension)| specifies a dimension along which to assess seasons. By default, 
+% if |A| is 1D, seasonal cycle is returned along the nonsingleton dimension; if |A| is 2D, deseason is performed
+% along dimension 1 (time marches down the rows); if |A| is 3D, deseason is performed along dimension 3. 
+% 
+%% Example: Sea ice extent 
+% Consider this sample sea ice extent data: 
+
+load seaice_extent
+
+figure
+plot(t,extent_N,'b')
+hold on
+plot(t,extent_S,'r')
+
+axis tight
+box off
+legend('northern hemisphere','southern hemisphere','location','northwest') 
+ylabel ' sea ice extent (10^6 km^2) '
+
+%% 
+% As you can see, sea ice extent variability is overwhelmingly dominated by seasonal cycles.
+% Let's deseason each time series to get a better idea of what's happening interannually:  
+
+north_ds = deseason(extent_N,t); 
+south_ds = deseason(extent_S,t); 
+
+plot(t,north_ds,'b')
+plot(t,south_ds,'r')
+
+%% 
+% Let's make a new figure with just the detrended data, and use <polyplot_documentation.html |polyplot|> 
+% to add trendlines: 
+
+figure
+plot(t,north_ds,'b')
+hold on
+plot(t,south_ds,'r')
+axis tight
+box off
+legend('northern hemisphere','southern hemisphere','location','northwest') 
+ylabel ' sea ice extent (10^6 km^2) '
+
+% Overlay a trend line:  
+polyplot(t,north_ds,1,'b')
+polyplot(t,south_ds,1,'r')
+
+%% 
+% The plot above shows that throughout the satellite epoch, northern hemisphere sea ice extent
+% has declined while southern hemisphere sea ice extent has increased. But it might be tough
+% to see which hemisphere is winning. An easy way to see what's happening globally is to simply
+% add northern and southern hemisphere sea ice extents: 
+
+figure
+plot(t,north_ds+south_ds,'k')
+hold on
+polyplot(t,north_ds+south_ds,1,'k','linewidth',2)
+axis tight
+box off
+ylabel ' global sea ice extent (10^6 km^2) '
+
+%% 
+% The plot above makes it clear that Antarctic sea ice gains are not keeping up with Arctic
+% sea ice losses. 
+% 
+% We can quantify the global sea ice trend with the <trend_documentation.html |trend|> 
+% function. The |trend| function calculates the linear trend relative to the units you 
+% give it, and we're working with |datenum| units which are days, so we'll multiply 
+% by |365.25*10| to get the sea ice trend in "per decade" units, and multiply by |1e6|
+% to get units in km^2: 
+
+trend(extent_S+extent_N,datenum(t))*365.25*10*1e6
+
+%%
+% That tells us over the satellite record, we've been losing almost half a million square 
+% kilometers of sea ice per decade, globally. 
+
+%% How this function works
+% The |deseason| function simply works like this: 
+% 
+%  Ads = A - season(A,t); 
+% 
+% You will find a description of how the |season| function calculates the seasonal 
+% signal <season_documentation.html here>. 
+%% Seasons vs Climatology
+% CDT has a function called |season| and another function called <climatology_documentation.html |climatology|>. 
+% The only difference is that the output of |climatology| includes the mean of the variable, 
+% whereas the output of |season| will always have a 0 mean value. Accordingly, the <deseason_documentation.html |deseason|>
+% function removes the seasonal component of variability while preserving the overall mean
+% and trends. 
+% 
+% In general, CDT assumes that a multi-year record of a variable sampled at 
+% subannual resolution can described by 
+% 
+%  y = y_0 + y_tr + y_season + y_var + y_noise
+% 
+%% 
+% where 
+% 
+% * |y_0| is the long-term |mean|, 
+% * |y_trend| is the long-term <trend_documentation.html |trend|>, 
+% * |y_season| is the typical seasonal anomaly, which the |season| function obtains after detrending and removing the mean, 
+% * |y_var| represents interannual variability, and 
+% * |y_noise| is everything else 
+% 
+% In this model, 
+% 
+%  y_climatology = y_0 + y_season
+% 
+%% Other ways to define seasonality 
+% For yet another way to define seasonality, see <sinefit_documentation.html |sinefit|>, 
+% <sineval_documentation.html |sineval|>, and <sinefit_bootstrap_documentation.html |sinefit_bootstrap|>. 
+%% Author Info
+% This function was written by <http://www.chadagreene.com Chad A. Greene> of the University of Texas Institute
+% for Geophysics (UTIG), July 2017. 
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,506 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Working with NetCDF data</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-16"><meta name="DC.source" content="tutorial_netcdf.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Working with NetCDF data</h1><!--introduction--><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><p><a href="https://en.wikipedia.org/wiki/NetCDF">NetCDF</a> is one of the most common data formats in climate science, and it's a pretty easy format to work with in Matlab, but it helps to know a few tricks. Here's a step-by-step guide to reading and analyzing NetCDF data into Matlab.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Download the data</a></li><li><a href="#2">Check the contents of the NetCDF file</a></li><li><a href="#4">Read the data</a></li><li><a href="#5">Read the time array</a></li><li><a href="#6">Plot the data:</a></li><li><a href="#7">Rotate and flip the grid</a></li><li><a href="#9">Getting coordinates for each grid cell</a></li><li><a href="#11">Recenter the grid</a></li><li><a href="#12">(Advanced) Save memory: Read only the data you need</a></li><li><a href="#15">Multiple variables or multiple files</a></li><li><a href="#18">HDF5</a></li><li><a href="#19">Acknowledgements</a></li></ul></div><h2 id="1">Download the data</h2><p>The example data used in this tutorial is provided as part of CDT, so you don't need to download anything. But acquiring data is often the first step, so for posterity's sake here's how I downloaded the sample data:</p><div><ol><li>Login to the <a href="https://apps.ecmwf.int/datasets/data/interim-full-mnth/levtype=sfc/">ECMWF website</a> and found ERA-Interim Synoptic Monthly Means.</li><li>Select times 00:00:00, 12 step, and the fields 2 m temperature, 10 m U and V wind components, surface pressure, and total precipitation.</li><li>Select NetCDF data format and download at the default 0.75x0.75 degree resolution.</li><li>Wait about 15 minutes for the data to be ready and download it.</li><li>The default filenames for data downloaded from ECMWF are often long and cryptic, so for this tutorial I renamed it ERA_Interim_2017.nc.</li></ol></div><p>After downloading the data, put it either in your current folder or somewhere else Matlab can find it. Consider creating a folder just for data, and add that folder to Matlab's search path via <a href="https://www.mathworks.com/help/matlab/ref/addpath.html"><tt>addpath</tt></a>.</p><h2 id="2">Check the contents of the NetCDF file</h2><p>The first step in loading NetCDF data is figuring out what variable names are in the file. To do that, use <tt>ncdisp</tt> like this:</p><pre class="codeinput">ncdisp <span class="string">'ERA_Interim_2017.nc'</span>
+</pre><pre class="codeoutput">Source:
+           /home/chad/Documents/MATLAB/github/cdt/cdt_data/ERA_Interim_2017.nc
+Format:
+           64bit
+Global Attributes:
+           Conventions = 'CF-1.6'
+           history     = '2018-12-06 18:53:30 GMT by grib_to_netcdf-2.9.2: grib_to_netcdf /data/data01/scratch/78/bb/_mars-atls17-98f536083ae965b31b0d04811be6f4c6-L3jQQq.grib -o /data/data03/scratch/77/57/_grib2netcdf-atls19-98f536083ae965b31b0d04811be6f4c6-5zbphu.nc -utime'
+Dimensions:
+           longitude = 480
+           latitude  = 241
+           time      = 12    (UNLIMITED)
+Variables:
+    longitude
+           Size:       480x1
+           Dimensions: longitude
+           Datatype:   single
+           Attributes:
+                       units     = 'degrees_east'
+                       long_name = 'longitude'
+    latitude 
+           Size:       241x1
+           Dimensions: latitude
+           Datatype:   single
+           Attributes:
+                       units     = 'degrees_north'
+                       long_name = 'latitude'
+    time     
+           Size:       12x1
+           Dimensions: time
+           Datatype:   int32
+           Attributes:
+                       units     = 'hours since 1900-01-01 00:00:00.0'
+                       long_name = 'time'
+                       calendar  = 'gregorian'
+    sp       
+           Size:       480x241x12
+           Dimensions: longitude,latitude,time
+           Datatype:   int16
+           Attributes:
+                       scale_factor  = 0.79238
+                       add_offset    = 77621.389
+                       _FillValue    = -32767
+                       missing_value = -32767
+                       units         = 'Pa'
+                       long_name     = 'Surface pressure'
+                       standard_name = 'surface_air_pressure'
+    u10      
+           Size:       480x241x12
+           Dimensions: longitude,latitude,time
+           Datatype:   int16
+           Attributes:
+                       scale_factor  = 0.00041182
+                       add_offset    = -0.58524
+                       _FillValue    = -32767
+                       missing_value = -32767
+                       units         = 'm s**-1'
+                       long_name     = '10 metre U wind component'
+    v10      
+           Size:       480x241x12
+           Dimensions: longitude,latitude,time
+           Datatype:   int16
+           Attributes:
+                       scale_factor  = 0.00041589
+                       add_offset    = 1.7302
+                       _FillValue    = -32767
+                       missing_value = -32767
+                       units         = 'm s**-1'
+                       long_name     = '10 metre V wind component'
+    t2m      
+           Size:       480x241x12
+           Dimensions: longitude,latitude,time
+           Datatype:   int16
+           Attributes:
+                       scale_factor  = 0.0017972
+                       add_offset    = 263.9411
+                       _FillValue    = -32767
+                       missing_value = -32767
+                       units         = 'K'
+                       long_name     = '2 metre temperature'
+    tp       
+           Size:       480x241x12
+           Dimensions: longitude,latitude,time
+           Datatype:   int16
+           Attributes:
+                       scale_factor  = 6.832e-07
+                       add_offset    = 0.022386
+                       _FillValue    = -32767
+                       missing_value = -32767
+                       units         = 'm'
+                       long_name     = 'Total precipitation'
+</pre><p>The output of <tt>ncdisp</tt> tells us everything we need to know. Most imporantly, it tells us the names of the variable in the NetCDF file, and also includes notes about the units of each variable.</p><p>Notice the <tt>Size</tt> of each variable. That's usually a first clue into how the data matrices are organized. The longitude variable is 480x1, latitude is 241x1, and time is 12x1. And it's no coincidence that the other variables are 480x241x12: these dimensions correspond to longitude, latitude, and time.</p><p>Some variables include a <tt>scale_factor</tt>, <tt>add_offset</tt>, and <tt>_FillValue</tt>. We don't need to pay attention to those values because Matlab's <tt>ncread</tt> function automatically does the scaling and offsetting, but in case you're curious, those values are what the algorithm uses to pack (and unpack) the data efficiently into NetCDF format.</p><h2 id="4">Read the data</h2><p>Now that we know the names of the variables in ERA_Interim_2017.nc, we can load the ones that interest us. Let's look at the air temperature taken at 2 m (<tt>'t2m'</tt>), and get its corresponding geographic coordinates:</p><pre class="codeinput">lat = ncread(<span class="string">'ERA_Interim_2017.nc'</span>,<span class="string">'latitude'</span>);
+lon = ncread(<span class="string">'ERA_Interim_2017.nc'</span>,<span class="string">'longitude'</span>);
+T = ncread(<span class="string">'ERA_Interim_2017.nc'</span>,<span class="string">'t2m'</span>);
+</pre><h2 id="5">Read the time array</h2><p>The easiest way to read time arrays from NetCDF files is to use the CDT function <a href="ncdateread_documentation.html"><tt>ncdateread</tt></a>. It works just like <tt>ncread</tt>, but automatically converts time arrays to datetime format (read more about time formats <a href="tutorial_dates_and_times.html">here</a>). Here's how to load time with <tt>ncdateread</tt>:</p><pre class="codeinput">t = ncdateread(<span class="string">'ERA_Interim_2017.nc'</span>,<span class="string">'time'</span>);
+</pre><h2 id="6">Plot the data:</h2><p><a href="tutorial_mapping.html">This tutorial</a> describes several tricks for making fancy maps, but right now let's just use the <tt>imagesc</tt> function to check out the grid orientation. That means we'll let <tt>lon</tt> be the x variable and let <tt>lat</tt> be the y variable.</p><p>For the <tt>T</tt> variable we know the third dimension corresponds to time, so take the mean of <tt>T</tt> along the third dimension to get a map of mean temperature for 2017:</p><pre class="codeinput"><span class="comment">% Calculate mean temperature of 2017:</span>
+Tm = mean(T,3);
+
+<span class="comment">% Plot mean temperature:</span>
+imagesc(lon,lat,Tm)
+</pre><img vspace="5" hspace="5" src="tutorial_netcdf_01.png" alt=""> <h2 id="7">Rotate and flip the grid</h2><p>The grid in the plot above is rotated! That's not uncommon when importing NetCDF and other data formats, which often use the first dimension as the "x" dimension and the second dimension as the "y" dimension. One way to deal with this is to rotate the matrix with <tt>rot90</tt> and then flip it vertically with <tt>flipud</tt>:</p><pre class="codeinput"><span class="comment">% Rotate and flip T:</span>
+T = flipud(rot90(T));
+
+<span class="comment">% Recalculate Tm using the rotated, flipped data matrix:</span>
+Tm = mean(T,3);
+
+<span class="comment">% Re-plot the mean temperature:</span>
+imagesc(lon,lat,Tm);
+</pre><img vspace="5" hspace="5" src="tutorial_netcdf_02.png" alt=""> <p>Now it's rotated, but it's still upside down. So why'd we flip it? Because of an idiosyncrasy of <tt>imagesc</tt>, which needs to be followed with the <tt>axis xy</tt> command whenever you specify x,y coordinates:</p><pre class="codeinput">axis <span class="string">xy</span>
+</pre><img vspace="5" hspace="5" src="tutorial_netcdf_03.png" alt=""> <h2 id="9">Getting coordinates for each grid cell</h2><p>So far we've been using <tt>lat</tt> and <tt>lon</tt> as vectors, with the simple assumption that each value in <tt>lat</tt> corresponds to a row of <tt>T</tt>, and each value in <tt>lon</tt> corresponds to a column of <tt>T</tt>. But sometimes you need <tt>lat</tt> and <tt>lon</tt> to be full grids. For that, use <tt>meshgrid</tt>.</p><pre class="codeinput">[Lon,Lat] = meshgrid(lon,lat);
+</pre><p>Note the order of <tt>lat</tt> and <tt>lon</tt> when using <tt>meshgrid</tt>. If we had not rotated the dimensions of the grid earlier, we would use <tt>[Lat,Lon] = meshgrid(lat,lon)</tt> instead.</p><p>With full grids for coordinates instead of 1D arrays, use <tt>pcolor</tt> instead of <tt>imagesc</tt>. Also, <tt>pcolor</tt> is picky and wants the coordinates to be in double precision, so convert as you see here:</p><pre class="codeinput">pcolor(double(Lon),double(Lat),Tm)
+shading <span class="string">interp</span> <span class="comment">% eliminates black lines between grid cells</span>
+cmocean <span class="string">thermal</span> <span class="comment">% cold-to-hot colormap</span>
+xlabel <span class="string">longitude</span>
+ylabel <span class="string">latitude</span>
+</pre><img vspace="5" hspace="5" src="tutorial_netcdf_04.png" alt=""> <h2 id="11">Recenter the grid</h2><p>You may have also noticed that the longitudes go from 0 to 360, which puts the Pacific Ocean in the middle of the map. Use <a href="recenter_documentation.html"><tt>recenter</tt></a> to shift the grid such that the prime meridian is in the middle.</p><pre class="codeinput">[Lat,Lon,T,Tm] = recenter(Lat,Lon,T,Tm);
+
+
+pcolor(double(Lon),double(Lat),Tm)
+shading <span class="string">interp</span> <span class="comment">% eliminates black lines between grid cells</span>
+hold <span class="string">on</span>
+borders(<span class="string">'countries'</span>,<span class="string">'color'</span>,rgb(<span class="string">'dark gray'</span>))
+cmocean <span class="string">thermal</span> <span class="comment">% cold-to-hot colormap</span>
+xlabel <span class="string">longitude</span>
+ylabel <span class="string">latitude</span>
+</pre><img vspace="5" hspace="5" src="tutorial_netcdf_05.png" alt=""> <h2 id="12">(Advanced) Save memory: Read only the data you need</h2><p>Sometimes NetCDF datasets are really big--much larger than you need for your research. Maybe it's a dense global grid and your research focuses on the Mediterranean, or maybe it's a long time series and you only need one timestep. If you only need part of a large dataset, you'll need to figure out the indices corresponding to your data of interest.</p><p>The Mediterranean Sea lies within longitudes 5 E to 45 E, and latitudes from 28 N to 45 N. The <tt>lat</tt> and <tt>lon</tt> arrays are much smaller than the full data grids, so load them in full to figure out which indices correspond to the geographical range of interest:</p><pre class="codeinput"><span class="comment">% Load longitude array:</span>
+lon = double(ncread(<span class="string">'ERA_Interim_2017.nc'</span>,<span class="string">'longitude'</span>));
+
+<span class="comment">% determine which indices correspond to dimension 1:</span>
+ind1 = find(lon&gt;=5 &amp; lon&lt;=45);
+
+<span class="comment">% Do the same for lat:</span>
+lat = double(ncread(<span class="string">'ERA_Interim_2017.nc'</span>,<span class="string">'latitude'</span>));
+ind2 = find(lat&gt;=28 &amp; lat&lt;=45);
+
+<span class="comment">% Clip lat and lon to their specified range:</span>
+lat = lat(ind2);
+lon = lon(ind1);
+
+<span class="comment">% Make a grid:</span>
+[Lat,Lon] = meshgrid(lat,lon);
+</pre><p>The <tt>ncread</tt> function lets us specify which indices of data to load, and the format it wants is <tt>start</tt> and <tt>stride</tt>, meaning the starting indices of each dimension, and how many rows or columns of data to load starting at the <tt>start</tt> indices.</p><p>The gridded datasets are 3 dimensional (longitude x latitude x time), so the <tt>start</tt> and <tt>stride</tt> arrays will each have three values. Let's only look at June data, so for the time dimension the start index will be 6 and the stride will be 1.</p><pre class="codeinput">start = [ind1(1) ind2(1) 6];
+stride = [length(ind1) length(ind2) 1];
+
+<span class="comment">% Load June surface pressure for Mediterranean:</span>
+sp = ncread(<span class="string">'ERA_Interim_2017.nc'</span>,<span class="string">'sp'</span>,start,stride);
+
+<span class="comment">% Also load temperature and wind:</span>
+T = ncread(<span class="string">'ERA_Interim_2017.nc'</span>,<span class="string">'t2m'</span>,start,stride);
+u10 = ncread(<span class="string">'ERA_Interim_2017.nc'</span>,<span class="string">'u10'</span>,start,stride);
+v10 = ncread(<span class="string">'ERA_Interim_2017.nc'</span>,<span class="string">'v10'</span>,start,stride);
+</pre><p>If the variables in ERA_Interim_2017.nc were much larger, loading the full datasets might take a long time and they'd put a strain on your computer's memory, but specifying the stride and length is much more efficient.</p><p>Here's the Mediterranean data we just loaded:</p><pre class="codeinput">figure
+pcolor(Lon,Lat,T-273.15) <span class="comment">% temperature in deg C</span>
+shading <span class="string">interp</span>
+cmocean <span class="string">thermal</span>
+caxis([17 44]) <span class="comment">% color axis limits</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'temperature \circC'</span>)
+hold <span class="string">on</span>
+
+borders(<span class="string">'countries'</span>,<span class="string">'color'</span>,rgb(<span class="string">'dark gray'</span>))
+contour(Lon,Lat,sp,<span class="string">'k'</span>) <span class="comment">% pressure contours</span>
+quiversc(Lon,Lat,u10,v10) <span class="comment">% wind vectors</span>
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+</pre><img vspace="5" hspace="5" src="tutorial_netcdf_06.png" alt=""> <h2 id="15">Multiple variables or multiple files</h2><p>This tutorial started out by calling <tt>ncread</tt> multiple times--once for each variable we wanted to read. However, that approach can get a bit clunky when you want to read multiple variables from a NetCDF file. To address this, CDT offers the <a href="ncstruct_documentation.html"><tt>ncstruct</tt></a> function, which lets you read multiple variables from a NetCDF file and place the results into a Matlab structure. Here's how:</p><pre class="codeinput">S = ncstruct(<span class="string">'ERA_Interim_2017.nc'</span>)
+</pre><pre class="codeoutput">S = 
+  struct with fields:
+
+    longitude: [480&times;1 single]
+     latitude: [241&times;1 single]
+         time: [12&times;1 int32]
+           sp: [480&times;241&times;12 double]
+          u10: [480&times;241&times;12 double]
+          v10: [480&times;241&times;12 double]
+          t2m: [480&times;241&times;12 double]
+           tp: [480&times;241&times;12 double]
+</pre><p>Don't want to read <i>all</i> the variables from the .nc file? Specify which ones you do want to read like this:</p><pre class="codeinput">S = ncstruct(<span class="string">'ERA_Interim_2017.nc'</span>,<span class="string">'longitude'</span>,<span class="string">'latitude'</span>,<span class="string">'t2m'</span>)
+</pre><pre class="codeoutput">S = 
+  struct with fields:
+
+    longitude: [480&times;1 single]
+     latitude: [241&times;1 single]
+          t2m: [480&times;241&times;12 double]
+</pre><p>See the <a href="ncstruct_documentation.html"><tt>ncstruct</tt> documentation</a> for more options and further explanation.</p><h2 id="18">HDF5</h2><p>Most of the principles described above also apply to the HDF5, which is a hierarchical data format that is quite similar to NetCDF. The syntax of working with HDF5 may be slightly different from NetCDF, but the general idea is typically the same. Instead of <tt>ncdisp</tt> to display the contents of a file, use <tt>h5disp</tt>. Instead of <tt>ncread</tt>, use <tt>h5read</tt>. And instead of the CDT function <a href="ncstruct_documentation.html"><tt>ncstruct</tt></a> to read data into a structure forma, use the CDT function  <a href="h5struct_documentation.html"><tt>h5struct</tt></a>.</p><h2 id="19">Acknowledgements</h2><p>This tutorial was written by Chad A. Greene, December 2018.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Working with NetCDF data 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+% 
+% <https://en.wikipedia.org/wiki/NetCDF NetCDF> is one of the most
+% common data formats in climate science, and it's a pretty easy format to 
+% work with in Matlab, but it helps to know a few tricks. Here's a step-by-step 
+% guide to reading and analyzing NetCDF data into Matlab. 
+
+%% Download the data
+% The example data used in this tutorial is provided 
+% as part of CDT, so you don't need to download anything. But acquiring data
+% is often the first step, so for posterity's sake here's how I downloaded
+% the sample data: 
+% 
+% # Login to the <https://apps.ecmwf.int/datasets/data/interim-full-mnth/levtype=sfc/ ECMWF website>
+% and found ERA-Interim Synoptic Monthly Means. 
+% # Select times 00:00:00, 12 step, and the fields 2 m temperature, 10 m U and V 
+% wind components, surface pressure, and total precipitation. 
+% # Select NetCDF data format and download at the default 0.75x0.75 degree
+% resolution. 
+% # Wait about 15 minutes for the data to be ready and download it. 
+% # The default filenames for data downloaded from ECMWF are often long and 
+% cryptic, so for this tutorial I renamed it ERA_Interim_2017.nc. 
+% 
+% After downloading the data, put it either in your current folder or somewhere
+% else Matlab can find it. Consider creating a folder just for data, and add
+% that folder to Matlab's search path via <https://www.mathworks.com/help/matlab/ref/addpath.html 
+% |addpath|>. 
+
+%% Check the contents of the NetCDF file 
+% The first step in loading NetCDF data is figuring out what variable
+% names are in the file. To do that, use |ncdisp| like this: 
+
+ncdisp 'ERA_Interim_2017.nc'
+
+%% 
+% The output of |ncdisp| tells us everything we need to know. Most imporantly, 
+% it tells us the names of the variable in the NetCDF file, and also includes
+% notes about the units of each variable. 
+% 
+% Notice the |Size| of each variable. That's usually a first clue into
+% how the data matrices are organized. The longitude variable is 480x1, latitude
+% is 241x1, and time is 12x1. And it's no coincidence that the other variables are 
+% 480x241x12: these dimensions correspond to longitude, latitude, and time. 
+% 
+% Some variables include a |scale_factor|, |add_offset|, and 
+% |_FillValue|. We don't need to pay attention to those values because
+% Matlab's |ncread| function automatically does the scaling and offsetting, 
+% but in case you're curious, those values are what the algorithm uses to 
+% pack (and unpack) the data efficiently into NetCDF format. 
+
+%% Read the data
+% Now that we know the names of the variables in ERA_Interim_2017.nc, 
+% we can load the ones that interest us. Let's look at the air temperature
+% taken at 2 m (|'t2m'|), and get its corresponding geographic coordinates: 
+
+lat = ncread('ERA_Interim_2017.nc','latitude');
+lon = ncread('ERA_Interim_2017.nc','longitude');
+T = ncread('ERA_Interim_2017.nc','t2m');
+
+%% Read the time array
+% The easiest way to read time arrays from NetCDF files is to use the CDT 
+% function <ncdateread_documentation.html |ncdateread|>. It works just like
+% |ncread|, but automatically converts time arrays to datetime format (read more
+% about time formats <tutorial_dates_and_times.html here>). Here's how to load time with |ncdateread|: 
+
+t = ncdateread('ERA_Interim_2017.nc','time'); 
+
+%% Plot the data: 
+% <tutorial_mapping.html This tutorial> describes several tricks for making
+% fancy maps, but right now let's just use the |imagesc| function to check 
+% out the grid orientation. That means we'll let |lon| be the x variable and 
+% let |lat| be the y variable. 
+% 
+% For the |T| variable we know the third dimension corresponds to time, so 
+% take the mean of |T| along the third dimension to get a map of mean temperature
+% for 2017: 
+
+% Calculate mean temperature of 2017:
+Tm = mean(T,3); 
+
+% Plot mean temperature:
+imagesc(lon,lat,Tm)
+
+%% Rotate and flip the grid
+% The grid in the plot above is rotated! That's not uncommon when importing NetCDF and 
+% other data formats, which often use the first dimension as the "x" dimension
+% and the second dimension as the "y" dimension. One way to deal with this is to 
+% rotate the matrix with |rot90| and then flip it vertically with |flipud|: 
+
+% Rotate and flip T:
+T = flipud(rot90(T)); 
+
+% Recalculate Tm using the rotated, flipped data matrix: 
+Tm = mean(T,3); 
+
+% Re-plot the mean temperature: 
+imagesc(lon,lat,Tm); 
+
+%% 
+% Now it's rotated, but it's still upside down. So why'd we flip it? 
+% Because of an idiosyncrasy of |imagesc|, which needs to be followed
+% with the |axis xy| command whenever you specify x,y coordinates: 
+
+axis xy 
+
+%% Getting coordinates for each grid cell
+% So far we've been using |lat| and |lon| as vectors, with the simple 
+% assumption that each value in |lat| corresponds to a row of |T|, and 
+% each value in |lon| corresponds to a column of |T|. But sometimes you 
+% need |lat| and |lon| to be full grids. For that, use |meshgrid|. 
+
+[Lon,Lat] = meshgrid(lon,lat); 
+
+%% 
+% Note the order of |lat| and |lon| when using |meshgrid|. If we had 
+% not rotated the dimensions of the grid earlier, we would use 
+% |[Lat,Lon] = meshgrid(lat,lon)| instead. 
+% 
+% With full grids for coordinates instead of 1D arrays, use |pcolor| instead
+% of |imagesc|. Also, |pcolor| is picky and wants the coordinates to be in 
+% double precision, so convert as you see here: 
+
+pcolor(double(Lon),double(Lat),Tm) 
+shading interp % eliminates black lines between grid cells
+cmocean thermal % cold-to-hot colormap
+xlabel longitude
+ylabel latitude
+
+%% Recenter the grid
+% You may have also noticed that the longitudes go from 0 to 360, which 
+% puts the Pacific Ocean in the middle of the map. Use <recenter_documentation.html 
+% |recenter|> to shift the grid such that the prime meridian is in the middle. 
+
+[Lat,Lon,T,Tm] = recenter(Lat,Lon,T,Tm); 
+
+
+pcolor(double(Lon),double(Lat),Tm) 
+shading interp % eliminates black lines between grid cells
+hold on
+borders('countries','color',rgb('dark gray'))
+cmocean thermal % cold-to-hot colormap
+xlabel longitude
+ylabel latitude
+
+%% (Advanced) Save memory: Read only the data you need
+% Sometimes NetCDF datasets are really bigREPLACE_WITH_DASH_DASHmuch larger than you need for 
+% your research. Maybe it's a dense global grid and your research focuses 
+% on the Mediterranean, or maybe it's a long time series and you only need
+% one timestep. If you only need part of a large dataset, you'll need to 
+% figure out the indices corresponding to your data of interest. 
+% 
+% The Mediterranean Sea lies within longitudes 5 E to 45 E, and latitudes
+% from 28 N to 45 N. The |lat| and |lon| arrays are much smaller than the full
+% data grids, so load them in full to figure out which indices correspond to
+% the geographical range of interest:  
+
+% Load longitude array: 
+lon = double(ncread('ERA_Interim_2017.nc','longitude'));
+
+% determine which indices correspond to dimension 1:
+ind1 = find(lon>=5 & lon<=45); 
+
+% Do the same for lat: 
+lat = double(ncread('ERA_Interim_2017.nc','latitude'));
+ind2 = find(lat>=28 & lat<=45); 
+
+% Clip lat and lon to their specified range: 
+lat = lat(ind2); 
+lon = lon(ind1); 
+
+% Make a grid: 
+[Lat,Lon] = meshgrid(lat,lon); 
+
+%%
+% The |ncread| function lets us specify which indices of data to load, 
+% and the format it wants is |start| and |stride|, meaning the starting 
+% indices of each dimension, and how many rows or columns of data to load
+% starting at the |start| indices. 
+% 
+% The gridded datasets are 3 dimensional (longitude x latitude x time), 
+% so the |start| and |stride| arrays will each have three values. Let's only
+% look at June data, so for the time dimension the start index will be 6 and 
+% the stride will be 1. 
+
+start = [ind1(1) ind2(1) 6]; 
+stride = [length(ind1) length(ind2) 1]; 
+
+% Load June surface pressure for Mediterranean: 
+sp = ncread('ERA_Interim_2017.nc','sp',start,stride); 
+
+% Also load temperature and wind: 
+T = ncread('ERA_Interim_2017.nc','t2m',start,stride); 
+u10 = ncread('ERA_Interim_2017.nc','u10',start,stride); 
+v10 = ncread('ERA_Interim_2017.nc','v10',start,stride); 
+
+%%
+% If the variables in ERA_Interim_2017.nc were much larger, loading the 
+% full datasets might take a long time and they'd put a strain on your computer's
+% memory, but specifying the stride and length is much more efficient. 
+% 
+% Here's the Mediterranean data we just loaded: 
+
+figure
+pcolor(Lon,Lat,T-273.15) % temperature in deg C
+shading interp 
+cmocean thermal 
+caxis([17 44]) % color axis limits 
+cb = colorbar;
+ylabel(cb,'temperature \circC') 
+hold on
+
+borders('countries','color',rgb('dark gray'))
+contour(Lon,Lat,sp,'k') % pressure contours
+quiversc(Lon,Lat,u10,v10) % wind vectors
+xlabel 'longitude'
+ylabel 'latitude'
+
+%% Multiple variables or multiple files
+% This tutorial started out by calling |ncread| multiple timesREPLACE_WITH_DASH_DASHonce for
+% each variable we wanted to read. However, that approach can get a bit
+% clunky when you want to read multiple variables from a NetCDF file. 
+% To address this, CDT offers the <ncstruct_documentation.html |ncstruct|>
+% function, which lets you read multiple variables from a NetCDF file and
+% place the results into a Matlab structure. Here's how: 
+
+S = ncstruct('ERA_Interim_2017.nc')
+
+%% 
+% Don't want to read _all_ the variables from the .nc file? Specify which
+% ones you do want to read like this: 
+
+S = ncstruct('ERA_Interim_2017.nc','longitude','latitude','t2m')
+
+%%
+% See the <ncstruct_documentation.html |ncstruct| documentation> for
+% more options and further explanation. 
+
+%% HDF5
+% Most of the principles described above also apply to the HDF5, which is a hierarchical 
+% data format that is quite similar to NetCDF. The syntax of working with
+% HDF5 may be slightly different from NetCDF, but the general idea is
+% typically the same. Instead of |ncdisp| to display the contents of a
+% file, use |h5disp|. Instead of |ncread|, use |h5read|. And instead of the
+% CDT function <ncstruct_documentation.html |ncstruct|> to read data into a
+% structure forma, use the CDT function  <h5struct_documentation.html
+% |h5struct|>. 
+
+%% Acknowledgements 
+% This tutorial was written by Chad A. Greene, December 2018. 
+##### SOURCE END #####
+--></body></html>

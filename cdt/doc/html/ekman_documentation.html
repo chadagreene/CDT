@@ -1,0 +1,267 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ekman documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-06"><meta name="DC.source" content="ekman_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>ekman</tt> documentation</h1><!--introduction--><p>The <tt>ekman</tt> function estimates the classical <a href="https://en.wikipedia.org/wiki/Ekman_transport">Ekman transport</a> and upwelling/downwelling from 10 m winds.</p><p>See also: <a href="windstress_documentation"><tt>windstress</tt></a> and <a href="cdtcurl_documentation.html"><tt>cdtcurl</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#6">Coastal upwelling off California</a></li><li><a href="#9">Mimicking Kessler</a></li><li><a href="#11">References</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[UE,VE,wE] = ekman(lat,lon,u10,v10)
+[UE,VE,wE] = ekman(...,'Cd',Cd)
+[UE,VE,wE] = ekman(...,'rho',waterDensity)
+[UE,VE,wE,dE] = ekman(...)</pre><h2 id="2">Description</h2><p><tt>[UE,VE,wE] = ekman(lat,lon,u10,v10)</tt> estimates the zonal (<tt>UE</tt>, m^2/s) and meridional (<tt>VE</tt>, m^2/s) Ekman layer transports along with vertical velocities (<tt>wE</tt>, m/s) associated with Ekman pumping. Positive values of <tt>wE</tt> indicate upwelling. Inputs <tt>lat</tt> and <tt>lon</tt> must be 2D grids whose dimensions zonal (<tt>u10</tt>, m/s) and meridional (<tt>v10</tt>, m/s) wind speeds taken 10 m above the surface. Wind speeds are automatically converted to wind stress via <a href="windstress_documentation.html"><tt>windstress</tt></a> before performing the Ekman transport calculations. Inputs <tt>u10</tt> and <tt>v10</tt> can be 2D grids the same size as <tt>lat</tt> and <tt>lon</tt>, or they can be 3D matrices whose first two dimensions correspond to <tt>lat</tt> and <tt>lon</tt>, with a third dimension corresponding to time.</p><p><tt>[UE,VE,wE] = ekman(...,'Cd',Cd)</tt> specifies a drag coefficient for wind stress calculation. <tt>Cd</tt> can be a scalar or a matrix whose dimensions match <tt>u10</tt> and <tt>v10</tt>. Default <tt>Cd</tt> is <tt>1.25e-3</tt>.</p><p><tt>[UE,VE,wE] = ekman(...,'rho',waterDensity)</tt> specifies water density. Default is <tt>1025</tt> kg/m3.</p><p><tt>[UE,VE,wE,dE] = ekman(...)</tt> also gives an approximate Ekman layer depth <tt>dE</tt>.</p><h2 id="3">Example</h2><p>Here's some wind and sea surface temperature data.  Load and plot the sea surface temperatures and wind. Below I'm using <a href="imagescn_documentation.html"><tt>imagescn</tt></a> to make <tt>NaN</tt> values transparent, but you can use plain old <tt>imagesc</tt> if you prefer. The colormap is set by the <a href="cmocean_documentation.html"><tt>cmocean</tt></a> function (<a href="http://dx.doi.org/10.5670/oceanog.2016.66">Thyng et al., 2016</a>). To get the RGB values of dark gray I'm using <a href="rgb_documentation.html"><tt>rgb</tt></a>.</p><pre class="codeinput">load <span class="string">pacific_wind.mat</span>
+
+figure
+imagescn(lon,lat,sst)
+axis <span class="string">image</span>      <span class="comment">% (trims away extra whitespace &amp; sets aspect ratio to 1:1)</span>
+cmocean <span class="string">thermal</span> <span class="comment">% sets the colormap</span>
+cb = colorbar;
+ylabel(cb,<span class="string">' sea surface temperature ({\circ}C) '</span>)
+
+hold <span class="string">on</span>
+quiversc(lon,lat,u10,v10,<span class="string">'color'</span>,rgb(<span class="string">'dark gray'</span>))
+</pre><img vspace="5" hspace="5" src="ekman_documentation_01.png" alt=""> <p>To prevent any possible mixups of dimensions, the <tt>ekman</tt> function does not accept lats and lons as vectors, so we have to convert <tt>lat</tt> and <tt>lon</tt> to 2D grids with <tt>meshgrid</tt> before calculating Ekman transport.</p><pre class="codeinput">[Lon,Lat] = meshgrid(lon,lat);
+[UE,VE,wE] = ekman(Lat,Lon,u10,v10);
+</pre><pre class="codeoutput">Warning: You have included some data points within 10 degrees of the equator.
+Some folks say Ekman is invalid within 10 degrees of the equator, others say
+Ekman's formulas work as close as two or three degrees from the equator. There
+is no clearly defined cutoff latitude, but the issue is that Ekman divides by
+the Coriolis frequency, which approaches zero at the equator. 
+</pre><p>(Note the warning that appears when latitudes are within 10 degrees of the equator.)</p><p>Plot vertical velocities <tt>wE</tt> after masking-out land values. Conveniently, our <tt>sst</tt> dataset is already <tt>NaN</tt> wherever there's land, so we can use <tt>sst</tt> to make a mask. (If the dataset didn't contain a clear way to distinguish between land and ocean, we could just use <a href="island_documentation"><tt>island</tt></a> instead.)</p><pre class="codeinput"><span class="comment">% Mask-out land values:</span>
+wE(isnan(sst)) = nan;
+
+figure
+imagescn(lon,lat,wE*1e7);
+axis <span class="string">image</span>
+caxis([-1 1]*40)
+cmocean <span class="string">-delta</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'Ekman velocity m x 10^{-7}/s'</span>)
+</pre><img vspace="5" hspace="5" src="ekman_documentation_02.png" alt=""> <h2 id="6">Coastal upwelling off California</h2><p>Upwelling near the California coast is an important process for climate and biology. Let's take a closer look:</p><pre class="codeinput">axis([-140 -107 22 45])
+</pre><img vspace="5" hspace="5" src="ekman_documentation_03.png" alt=""> <p>The blue areas correspond to upwelling and are the result of divergent transport of surface water.  Let's plot the wind vectors in dark gray as before, but now we'll also plot the Ekman transport as red vectors:</p><pre class="codeinput">hold <span class="string">on</span>
+
+<span class="comment">% Plot wind vectors:</span>
+quiversc(lon,lat,u10,v10,<span class="string">'color'</span>,rgb(<span class="string">'dark gray'</span>));
+
+<span class="comment">% Plot Ekman transport vectors:</span>
+quiversc(lon,lat,UE,VE,<span class="string">'color'</span>,rgb(<span class="string">'bright red'</span>));
+</pre><img vspace="5" hspace="5" src="ekman_documentation_04.png" alt=""> <p>Just as we expect, the surface layer transport is 90 degrees to the right of wind direction in the northern hemisphere, and that's what drives Ekman upwelling.</p><h2 id="9">Mimicking Kessler</h2><p>Similarly, let's take a look at the region analyzed by <a href="https://doi.org/10.1175/1520-0485-32.9.2457">Kessler 2002</a>. We'll recreate Kessler's Figure 6b, which plots upwelling in units of meters per month.  There are 2629800 seconds in a month, so we have to multiply <tt>wE</tt> by that number before contouring. Also, Kessler's color axis is nonlinear, so we'll use their contour values, but I'm not going to worry about stetching and compressing the colorbar to match Kessler.</p><pre class="codeinput">cvals = [-40 -20 -10 -5 -2.5 -1 - 2.5 5 10 20 40];
+
+figure
+contourf(lon,lat,wE*2629800,cvals);
+axis <span class="string">xy</span> <span class="string">image</span>
+caxis([-1 1]*40)
+cb = colorbar;
+ylabel(cb,<span class="string">'Ekman velocity m/month'</span>)
+axis([-110 -80 8 23])
+
+<span class="comment">% Set the colormap:</span>
+colormap(rgb(<span class="string">'yellow'</span>,<span class="string">'orange'</span>,<span class="string">'red'</span>,<span class="string">'pink'</span>,<span class="string">'light pink'</span>,<span class="string">'white'</span>,<span class="keyword">...</span>
+   <span class="string">'pale blue'</span>,<span class="string">'light blue'</span>,<span class="string">'blue'</span>,<span class="string">'cyan'</span>,<span class="string">'light cyan'</span>));
+
+borders(<span class="string">'countries'</span>,<span class="string">'facecolor'</span>,rgb(<span class="string">'gray'</span>))
+</pre><img vspace="5" hspace="5" src="ekman_documentation_05.png" alt=""> <p>Note: Because upwelling and downwelling are two sides of the same coin, it would be best to use a truly divergent, perceptually uniform colormap, such as those provided by the <a href="cmocean_documentation.html"><tt>cmocean</tt></a> function. Nonetheless, we're trying to mimic the published plot, so defining the colors with <a href="rgb_documentation.html"><tt>rgb</tt></a> is the easiest solution.</p><h2 id="11">References</h2><p>Kessler, William S. "Mean three-dimensional circulation in the northeast tropical Pacific." Journal of Physical Oceanography 32.9 (2002): 2457-2471. <a href="https://doi.org/10.1175/1520-0485-32.9.2457">doi:10.1175/1520-0485-32.9.2457</a>.</p><p>Thyng, K.M., C.A. Greene, R.D. Hetland, H.M. Zimmerle, and S.F. DiMarco. 2016. True colors of oceanography: Guidelines for effective and accurate colormap selection. Oceanography 29(3):9-13, <a href="http://dx.doi.org/10.5670/oceanog.2016.66">doi:10.5670/oceanog.2016.66</a>.</p><h2 id="12">Author Info</h2><p>The <tt>ekman</tt> function and supporting documentation were written by <a href="http://www.chadagreene">Chad A. Greene</a> of the University of Texas at Austin (UTIG), February 2017.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |ekman| documentation
+% The |ekman| function estimates the classical <https://en.wikipedia.org/wiki/Ekman_transport Ekman transport> and upwelling/downwelling from 10 m winds. 
+% 
+% See also: <windstress_documentation |windstress|> and <cdtcurl_documentation.html |cdtcurl|>. 
+%
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax
+% 
+%  [UE,VE,wE] = ekman(lat,lon,u10,v10)
+%  [UE,VE,wE] = ekman(...,'Cd',Cd)
+%  [UE,VE,wE] = ekman(...,'rho',waterDensity)
+%  [UE,VE,wE,dE] = ekman(...)
+% 
+%% Description 
+% 
+% |[UE,VE,wE] = ekman(lat,lon,u10,v10)| estimates the zonal (|UE|, m^2/s) and meridional (|VE|, m^2/s)  
+% Ekman layer transports along with vertical velocities (|wE|, m/s) associated with Ekman pumping. 
+% Positive values of |wE| indicate upwelling. Inputs |lat| and |lon| must be 2D grids whose dimensions 
+% zonal (|u10|, m/s) and meridional (|v10|, m/s) wind speeds taken 10 m above the surface. Wind speeds
+% are automatically converted to wind stress via <windstress_documentation.html |windstress|> before performing the Ekman transport calculations. 
+% Inputs |u10| and |v10| can be 2D grids the same size as |lat| and |lon|, or they can be 3D matrices whose
+% first two dimensions correspond to |lat| and |lon|, with a third dimension corresponding to time.  
+% 
+% |[UE,VE,wE] = ekman(...,'Cd',Cd)| specifies a drag coefficient for wind stress calculation. |Cd| can 
+% be a scalar or a matrix whose dimensions match |u10| and |v10|. Default |Cd| is |1.25e-3|. 
+% 
+% |[UE,VE,wE] = ekman(...,'rho',waterDensity)| specifies water density. Default is |1025| kg/m3. 
+% 
+% |[UE,VE,wE,dE] = ekman(...)| also gives an approximate Ekman layer depth |dE|. 
+% 
+%% Example
+% Here's some wind and sea surface temperature data.  Load and plot the sea surface temperatures and wind.  
+% Below I'm using <imagescn_documentation.html |imagescn|> to make |NaN| values transparent, but you can
+% use plain old |imagesc| if you prefer. The colormap is set by the <cmocean_documentation.html
+% |cmocean|> function (<http://dx.doi.org/10.5670/oceanog.2016.66 Thyng et al., 2016>). To get the RGB 
+% values of dark gray I'm using <rgb_documentation.html |rgb|>.
+
+load pacific_wind.mat
+
+figure
+imagescn(lon,lat,sst)
+axis image      % (trims away extra whitespace & sets aspect ratio to 1:1)
+cmocean thermal % sets the colormap
+cb = colorbar; 
+ylabel(cb,' sea surface temperature ({\circ}C) ')
+
+hold on
+quiversc(lon,lat,u10,v10,'color',rgb('dark gray'))
+
+%%
+% To prevent any possible mixups of dimensions, the |ekman| function does not accept lats and lons as 
+% vectors, so we have to convert |lat| and |lon| to 2D grids with |meshgrid| before calculating 
+% Ekman transport. 
+
+[Lon,Lat] = meshgrid(lon,lat); 
+[UE,VE,wE] = ekman(Lat,Lon,u10,v10); 
+
+%% 
+% (Note the warning that appears when latitudes are within 10 degrees of the equator.)
+% 
+% Plot vertical velocities |wE| after masking-out land values. Conveniently, our |sst| dataset is 
+% already |NaN| wherever there's land, so we can use |sst| to make a mask. (If the 
+% dataset didn't contain a clear way to distinguish between land and ocean, we could just 
+% use <island_documentation |island|> instead.)
+
+% Mask-out land values: 
+wE(isnan(sst)) = nan; 
+
+figure
+imagescn(lon,lat,wE*1e7); 
+axis image 
+caxis([-1 1]*40)
+cmocean -delta
+cb = colorbar; 
+ylabel(cb,'Ekman velocity m x 10^{-7}/s')
+
+%% Coastal upwelling off California
+% Upwelling near the California coast is an important process for climate and biology. Let's take a 
+% closer look: 
+
+axis([-140 -107 22 45])
+
+%%
+% The blue areas correspond to upwelling and are the result of divergent transport of surface 
+% water.  Let's plot the wind vectors in dark gray as before, but now we'll also plot the Ekman
+% transport as red vectors: 
+
+hold on
+
+% Plot wind vectors: 
+quiversc(lon,lat,u10,v10,'color',rgb('dark gray'));
+
+% Plot Ekman transport vectors:
+quiversc(lon,lat,UE,VE,'color',rgb('bright red'));
+
+%% 
+% Just as we expect, the surface layer transport is 90 degrees to the right of wind direction 
+% in the northern hemisphere, and that's what drives Ekman upwelling. 
+
+%% Mimicking Kessler
+% Similarly, let's take a look at the region analyzed by <https://doi.org/10.1175/1520-0485-32.9.2457 Kessler 2002>. 
+% We'll recreate Kessler's Figure 6b, which plots upwelling in units of meters per month.  There are 
+% 2629800 seconds in a month, so we have to multiply |wE| by that number before contouring. Also, Kessler's 
+% color axis is nonlinear, so we'll use their contour values, but I'm not going to worry about stetching
+% and compressing the colorbar to match Kessler.
+
+cvals = [-40 -20 -10 -5 -2.5 -1 - 2.5 5 10 20 40]; 
+
+figure
+contourf(lon,lat,wE*2629800,cvals); 
+axis xy image 
+caxis([-1 1]*40)
+cb = colorbar; 
+ylabel(cb,'Ekman velocity m/month')
+axis([-110 -80 8 23])
+
+% Set the colormap: 
+colormap(rgb('yellow','orange','red','pink','light pink','white',...
+   'pale blue','light blue','blue','cyan','light cyan')); 
+
+borders('countries','facecolor',rgb('gray'))
+
+%%
+% Note: Because upwelling and downwelling are two sides of the same coin, it would
+% be best to use a truly divergent, perceptually uniform colormap, such as those
+% provided by the <cmocean_documentation.html |cmocean|> function. Nonetheless, we're 
+% trying to mimic the published plot, so defining the colors with <rgb_documentation.html |rgb|> 
+% is the easiest solution. 
+
+%% References 
+% 
+% Kessler, William S. "Mean three-dimensional circulation in the northeast tropical Pacific." Journal of Physical Oceanography
+% 32.9 (2002): 2457-2471. <https://doi.org/10.1175/1520-0485-32.9.2457  doi:10.1175/1520-0485-32.9.2457>.
+% 
+% Thyng, K.M., C.A. Greene, R.D. Hetland, H.M. Zimmerle, and S.F. DiMarco. 2016. True colors of oceanography: Guidelines for
+% effective and accurate colormap selection. Oceanography 29(3):9-13, <http://dx.doi.org/10.5670/oceanog.2016.66 doi:10.5670/oceanog.2016.66>.
+% 
+%% Author Info
+% The |ekman| function and supporting documentation were written by <http://www.chadagreene Chad A. Greene> of the University
+% of Texas at Austin (UTIG), February 2017.  
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,171 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>rgb documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-20"><meta name="DC.source" content="rgb_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>rgb</tt> documentation</h1><!--introduction--><p>From the <a href="http://blog.xkcd.com/2010/05/03/color-survey-results">results of an impressively thorough survey</a> by Randall Munroe of <a href="http://xkcd.com">XKCD</a>, this function returns the RGB color triplets for just about any color name you can think of. In keeping with Matlab syntax, RGB values are scaled from 0 to 1. If you mispell a color or the color you want is not in the database, <tt>rgb</tt> will offer suggestions for other similarly-spelled colors.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Color reference chart</a></li><li><a href="#4">Example 1: single color</a></li><li><a href="#5">Example 2: multiple colors</a></li><li><a href="#9">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>RGB = rgb('Color Name')
+RGB = rgb('Color Name 1','Color Name 2',...,'Color Name N')
+RGB = rgb({'Color Name 1','Color Name 2',...,'Color Name N'})</pre><h2 id="2">Description</h2><p><tt>RGB = rgb('Color Name')</tt> returns the RGB triplet for a color described by <tt>'Color Name'</tt>.</p><p><tt>RGB = rgb('Color Name 1','Color Name 2',...,'Color Name N')</tt> returns an <i>N</i> by 3 matrix containing RGB triplets for each color name.</p><p><tt>RGB = rgb({'Color Name 1','Color Name 2',...,'Color Name N'})</tt> accepts  list of color names as a character array.</p><h2 id="3">Color reference chart</h2><p>To see the color options before plotting, you can reference the RGB chart <a href="http://xkcd.com/color/rgb/">here</a>, but if you're thinking of a specific color, try the <tt>rgb</tt> function and it will probably have the RGB values you seek.</p><h2 id="4">Example 1: single color</h2><p>Get the RGB triplet for chartreuse:</p><pre class="codeinput">rgb(<span class="string">'chartreuse'</span>)
+</pre><pre class="codeoutput">ans =
+    0.7569    0.9725    0.0392
+</pre><h2 id="5">Example 2: multiple colors</h2><p>Get RGB triplets for multiple colors:</p><pre class="codeinput">rgb(<span class="string">'wintergreen'</span>,<span class="string">'sunflower yellow'</span>,<span class="string">'sapphire'</span>)
+</pre><pre class="codeoutput">ans =
+    0.1255    0.9765    0.5255
+    1.0000    0.8549    0.0118
+    0.1294    0.2196    0.6706
+</pre><p>The way colors are perceived on a computer monitor is not necessarily the way that colors are <a href="http://en.wikipedia.org/wiki/Web_colors">somewhat officially defined</a>.  If we perceived RGB values of [1 0 0] as "red", [0 1 0] as "green", and [0 0 1] as blue, <tt>rgb('red','green','blue')</tt> would look like an identity matrix instead we have this:</p><pre class="codeinput">rgb(<span class="string">'red'</span>,<span class="string">'green'</span>,<span class="string">'blue'</span>)
+</pre><pre class="codeoutput">ans =
+    0.8980         0         0
+    0.0824    0.6902    0.1020
+    0.0118    0.2627    0.8745
+</pre><p>You can also enter color names as a cell array:</p><pre class="codeinput">myColors = {<span class="string">'leather'</span>,<span class="string">'swamp'</span>,<span class="string">'light bluish green'</span>,<span class="string">'butterscotch'</span>,<span class="string">'cinnamon'</span>,<span class="string">'radioactive green'</span>};
+rgb_vals = rgb(myColors)
+</pre><pre class="codeoutput">rgb_vals =
+    0.6745    0.4549    0.2039
+    0.4118    0.5137    0.2235
+    0.4627    0.9922    0.6588
+    0.9922    0.6941    0.2784
+    0.6745    0.3098    0.0235
+    0.1725    0.9804    0.1216
+</pre><p>and we can easily plot our <tt>rgb_vals</tt>:</p><pre class="codeinput">x = 1:length(myColors);
+y = -x;
+scatter(x,y,1e3,rgb_vals,<span class="string">'filled'</span>)
+text(x,y,myColors,<span class="string">'horizontalalignment'</span>,<span class="string">'center'</span>)
+axis([min(x)-1 max(x)+1 min(y)-1 max(y)+1])
+</pre><img vspace="5" hspace="5" src="rgb_documentation_01.png" alt=""> <h2 id="9">Author Info</h2><p>This function was written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the Institute for Geophysics at the University of Texas at Austin. I do not claim any responsibility for the color data; kudos for the analysis and design of the survey by Randall Munroe.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |rgb| documentation 
+% From the <http://blog.xkcd.com/2010/05/03/color-survey-results results of an impressively thorough survey>
+% by Randall Munroe of <http://xkcd.com XKCD>, this function returns the
+% RGB color triplets for just about any color name you can think of. In
+% keeping with Matlab syntax, RGB values are scaled from 0 to 1. If you
+% mispell a color or the color you want is not in the database,
+% |rgb| will offer suggestions for other similarly-spelled colors. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax
+% 
+%  RGB = rgb('Color Name') 
+%  RGB = rgb('Color Name 1','Color Name 2',...,'Color Name N')
+%  RGB = rgb({'Color Name 1','Color Name 2',...,'Color Name N'})
+% 
+%% Description 
+% 
+% |RGB = rgb('Color Name')| returns the RGB triplet for a color described
+% by |'Color Name'|.  
+% 
+% |RGB = rgb('Color Name 1','Color Name 2',...,'Color Name N')| returns an
+% _N_ by 3 matrix containing RGB triplets for each color name. 
+% 
+% |RGB = rgb({'Color Name 1','Color Name 2',...,'Color Name N'})| accepts
+%  list of color names as a character array. 
+% 
+%% Color reference chart
+%
+% To see the color options before plotting, you can reference the RGB chart
+% <http://xkcd.com/color/rgb/ here>, but if you're thinking of a specific 
+% color, try the |rgb| function and it will probably have the RGB values you seek.
+
+%% Example 1: single color
+% Get the RGB triplet for chartreuse: 
+
+rgb('chartreuse')
+
+%% Example 2: multiple colors
+% Get RGB triplets for multiple colors: 
+
+rgb('wintergreen','sunflower yellow','sapphire')
+
+%% 
+% The way colors are perceived on a computer monitor is not necessarily
+% the way that colors are <http://en.wikipedia.org/wiki/Web_colors somewhat officially 
+% defined>.  If we perceived RGB values of [1 0 0] as "red", [0 1 0] as
+% "green", and [0 0 1] as blue, |rgb('red','green','blue')| would look like
+% an identity matrix instead we have this: 
+
+rgb('red','green','blue')
+
+%% 
+% You can also enter color names as a cell array: 
+
+myColors = {'leather','swamp','light bluish green','butterscotch','cinnamon','radioactive green'}; 
+rgb_vals = rgb(myColors)
+
+%% 
+% and we can easily plot our |rgb_vals|: 
+
+x = 1:length(myColors); 
+y = -x; 
+scatter(x,y,1e3,rgb_vals,'filled')
+text(x,y,myColors,'horizontalalignment','center')
+axis([min(x)-1 max(x)+1 min(y)-1 max(y)+1])
+
+%% Author Info
+% This function was written by <http://www.chadagreene.com Chad A. Greene> of the Institute for
+% Geophysics at the University of Texas at Austin. I do not claim any responsibility
+% for the color data; kudos for the analysis and design of the survey by Randall Munroe. 
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,129 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>labelborders documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-09"><meta name="DC.source" content="labelborders_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>labelborders</tt> documentation</h1><!--introduction--><p>The <tt>labelborders</tt> function labels borders of nations or US states on an unprojected map, and does <b>not</b> require Matlab's Mapping Toolbox</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1</a></li><li><a href="#4">Example 2:</a></li><li><a href="#5">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>labelborders(place)
+labelborders(...,TextProperty,TextValue)
+h = labelborders(...)</pre><h2 id="2">Description</h2><p><tt>labelborders(place)</tt> labels the borders of a place, which can be any country or US state.  place may also be 'countries' to plot all national borders, 'states' to label all US state borders, or 'Continental US' to plot only the continental United States (sorry Guam).  Note: to plot the nation of Georgia, use 'Georgia'. To plot the US state of Georgia, specify 'Georgia.' with a period.</p><p><tt>labelborders(...,TextProperty,TextValue)</tt> specifies text formatting.</p><p><tt>h = labelborders(...)</tt> returns a handle <tt>h</tt> of plotted text object(s).</p><h2 id="3">Example 1</h2><p>Here are some borders plotted with the <a href="borders_documentation.html"><tt>borders</tt></a> function. Label Russia with simple black text and label Canada with silly big green text with a yellow background:</p><pre class="codeinput">borders
+labelborders <span class="string">'Russia'</span>
+
+labelborders(<span class="string">'Canada'</span>,<span class="string">'fontsize'</span>,30,<span class="keyword">...</span>
+   <span class="string">'color'</span>,rgb(<span class="string">'green'</span>),<span class="string">'backgroundcolor'</span>,rgb(<span class="string">'yellow'</span>))
+</pre><img vspace="5" hspace="5" src="labelborders_documentation_01.png" alt=""> <h2 id="4">Example 2:</h2><p>Plot an <a href="earthimage_documentation.html"><tt>earthimage</tt></a>, zoom in on Europe, and place gray italic text labels on the map:</p><pre class="codeinput">figure
+earthimage
+axis([-10 30 35 60]) <span class="comment">% zooms in on Europe</span>
+labelborders(<span class="string">'countries'</span>,<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>),<span class="string">'fontangle'</span>,<span class="string">'italic'</span>)
+</pre><img vspace="5" hspace="5" src="labelborders_documentation_02.png" alt=""> <h2 id="5">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |labelborders| documentation 
+% The |labelborders| function labels borders of nations or US states on an 
+% unprojected map, and does *not* require Matlab's Mapping Toolbox
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax 
+% 
+%  labelborders(place)
+%  labelborders(...,TextProperty,TextValue)
+%  h = labelborders(...)
+% 
+%% Description 
+% 
+% |labelborders(place)| labels the borders of a place, which can be any country or US state.  place may also be 
+% 'countries' to plot all national borders, 'states' to label all US state borders, or 'Continental US' to 
+% plot only the continental United States (sorry Guam).  Note: to plot the nation of Georgia, use 'Georgia'.
+% To plot the US state of Georgia, specify 'Georgia.' with a period. 
+%
+% |labelborders(...,TextProperty,TextValue)| specifies text formatting.
+%
+% |h = labelborders(...)| returns a handle |h| of plotted text object(s).  
+%
+%% Example 1
+% Here are some borders plotted with the <borders_documentation.html |borders|> 
+% function. Label Russia with simple black text and label Canada with silly
+% big green text with a yellow background:
+
+borders
+labelborders 'Russia' 
+
+labelborders('Canada','fontsize',30,...
+   'color',rgb('green'),'backgroundcolor',rgb('yellow'))
+
+%% Example 2: 
+% Plot an <earthimage_documentation.html |earthimage|>, zoom in on Europe, 
+% and place gray italic text labels on the map:  
+
+figure
+earthimage
+axis([-10 30 35 60]) % zooms in on Europe
+labelborders('countries','color',rgb('gray'),'fontangle','italic')
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

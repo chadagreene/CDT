@@ -1,0 +1,255 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>climatology documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-20"><meta name="DC.source" content="climatology_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>climatology</tt> documentation</h1><!--introduction--><p>The <tt>climatology</tt> function gives typical values of a variable as it varies throughout the year. The output of this function includes the overall mean (whereas the output of the season function does not.)</p><p>See also:  <a href="season_documentation.html"><tt>season</tt></a>, <a href="deseason_documentation.html"><tt>deseason</tt></a>, <a href="sinefit_documentation.html"><tt>sinefit</tt></a>, <a href="sineval_documentation.html"><tt>sineval</tt></a>, and <a href="sinefit_bootstrap_documentation.html"><tt>sinefit_bootstrap</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Daily sea ice extent</a></li><li><a href="#6">Example 2: Gridded data</a></li><li><a href="#9">Seasons vs Climatology</a></li><li><a href="#11">Other ways to define seasonality</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[Ac,tc] = climatology(A,t)
+[Ac,tc] = climatology(...,'daily')
+[Ac,tc] = climatology(...,'monthly')
+[Ac,tc] = climatology(...,'detrend',DetrendOption)
+[Ac,tc] = climatology(...,'dim',dimension)
+Ac = climatology(...,'full')</pre><h2 id="2">Description</h2><p>[Ac,tc] = climatology(A,t) gives the typical values of variable A as it changes throughout the year. Times times t are in datenum or datetime format. If t is daily, output tc is 1 to 366 and Ac will contain average values for each of the 366 days of the year. If inputs are monthly, tc is 1:12 and Ac will contain average values for each of the 12 months of the year.</p><p>[Ac,tc] = climatology(...,'daily') specifies directly that inputs are daily resolution. The climatology function will typically figure this out automatically, but if you have large missing gaps in your data you may wish to ensure correct results by specifying daily.</p><p>[Ac,tc] = climatology(...,'monthly') as above, but forces monthly solution.</p><p>[Ac,tc] = climatology(...,'detrend',DetrendOption) specifies a baseline relative to which seasonal anomalies are determined. Options are 'linear', 'quadratic', or 'none'. By default, anomalies are calculated after removing the linear least squares trend, but if, for example, warming is strongly nonlinear, you may prefer the 'quadratic' option. Default is 'linear'.</p><p>[Ac,tc] = climatology(...,'dim',dimension) specifies a dimension along which to assess seasons. By default, if A is 1D, seasonal cycle is returned along the nonsingleton dimension; if A is 2D, climatology is performed along dimension 1 (time marches down the rows); if A is 3D, climatology is performed along dimension 3.</p><p>Ac = climatology(...,'full') returns Ac for the entire time series A. This is a convenient option for looking at the components of a long time series separately.</p><h2 id="3">Example 1: Daily sea ice extent</h2><p>Here's some sea ice data that is <i>mostly</i> daily. Before 1988 there is only data for every other day, but that's fine--the <tt>climatology</tt> function will figure it out. Start by loading and plotting the data. Also add a least-squares trend line with <a href="polyplot_documentation.html"><tt>polyplot</tt></a>.</p><pre class="codeinput">load <span class="string">seaice_extent</span>
+
+plot(t,extent_N)
+box <span class="string">off</span>
+ylabel <span class="string">'sea ice extent (\times10^6 km^2)'</span>
+
+hold <span class="string">on</span>
+polyplot(t,extent_N)
+</pre><img vspace="5" hspace="5" src="climatology_documentation_01.png" alt=""> <p>The climatology is then:</p><pre class="codeinput">extent_N_clim = climatology(extent_N,t,<span class="string">'full'</span>);
+
+plot(t,extent_N_clim)
+</pre><img vspace="5" hspace="5" src="climatology_documentation_02.png" alt=""> <p>In the plot above, you'll notice that the climatology has the same mean value as the original sea ice extent time series, but it does not have any trend through time. Its only variablity is that with the seasons.</p><p>Removing the climatology from the original signal produces the same result as removing the mean and the seasonal cycle--the only parts left would be the long-term trends, interannual variability, and noise.</p><h2 id="6">Example 2: Gridded data</h2><p>For this example, load the pacific_sst example dataset, which contains gridded data for 802 months of gridded sea surface temperatures. Use these 66.8 years of data to get a sense of how SSTs tend to vary throughout the year, like this:</p><pre class="codeinput">load <span class="string">pacific_sst</span>
+
+sst_c = climatology(sst,t);
+</pre><p>Now, <tt>sst_c</tt> is a 60x55x12 grid of sea surface temperatures. That third dimension indicates sea surface temperatures for each month of the typical year. Animate them and make a <a href="gif_documentation.html"><tt>gif</tt></a> like this, starting by plotting the first frame:</p><pre>figure
+h = imagescn(lon,lat,sst_c(:,:,1));
+cb = colorbar;
+ylabel(cb,'sea surface temperature (\circC)')
+cmocean thermal % sets the colormap
+title(datestr(datenum(0,1,1),'mmmm')) % converts "1" to "January"
+caxis([2 29])</pre><pre>% Add a silly earth image:
+hold on
+he = earthimage;
+uistack(he,'bottom') % puts the earth image below SST data</pre><pre>% Write the first frame:
+gif('pacific_sst_climatology.gif','frame',gcf,'delaytime',1/12,'nodither')</pre><pre>% Write frames for all the other months:
+for k = 2:12
+   h.CData = sst_c(:,:,k);               % updates monthly values
+   title(datestr(datenum(0,k,1),'mmmm')) % updates title
+   gif                                   % adds this frame to the gif
+end</pre><p>...and that produces this nice animation:</p><p><img vspace="5" hspace="5" src="pacific_sst_climatology.gif" alt=""> </p><h2 id="9">Seasons vs Climatology</h2><p>CDT has a function called <tt>climatology</tt> and another function called <a href="season_documentation.html"><tt>season</tt></a>. The only difference is that the output of <tt>climatology</tt> includes the mean of the variable, whereas the output of <tt>season</tt> will always have a 0 mean value. Accordingly, the <a href="deseason_documentation.html"><tt>deseason</tt></a> function removes the seasonal component of variability while preserving the overall mean and trends.</p><p>In general, CDT assumes that a multi-year record of a variable sampled at subannual resolution can described by</p><pre>y = y_0 + y_tr + y_season + y_var + y_noise</pre><p>where</p><div><ul><li><tt>y_0</tt> is the long-term <tt>mean</tt>,</li><li><tt>y_trend</tt> is the long-term <a href="trend_documentation.html"><tt>trend</tt></a>,</li><li><tt>y_season</tt> is the typical seasonal anomaly, which the <tt>season</tt> function obtains after detrending and removing the mean,</li><li><tt>y_var</tt> represents interannual variability, and</li><li><tt>y_noise</tt> is everything else</li></ul></div><p>In this model,</p><pre>y_climatology = y_0 + y_season</pre><h2 id="11">Other ways to define seasonality</h2><p>For yet another way to define seasonality, see <a href="sinefit_documentation.html"><tt>sinefit</tt></a>, <a href="sineval_documentation.html"><tt>sineval</tt></a>, and <a href="sinefit_bootstrap_documentation.html"><tt>sinefit_bootstrap</tt></a>.</p><h2 id="12">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |climatology| documentation 
+% The |climatology| function gives typical values of a variable as it varies 
+% throughout the year. The output of this function includes the overall mean 
+% (whereas the output of the season function does not.)
+% 
+% See also:  <season_documentation.html |season|>, <deseason_documentation.html |deseason|>, <sinefit_documentation.html |sinefit|>, 
+% <sineval_documentation.html |sineval|>, and <sinefit_bootstrap_documentation.html |sinefit_bootstrap|>. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax 
+% 
+%  [Ac,tc] = climatology(A,t) 
+%  [Ac,tc] = climatology(...,'daily')  
+%  [Ac,tc] = climatology(...,'monthly') 
+%  [Ac,tc] = climatology(...,'detrend',DetrendOption) 
+%  [Ac,tc] = climatology(...,'dim',dimension) 
+%  Ac = climatology(...,'full') 
+% 
+%% Description 
+% 
+% [Ac,tc] = climatology(A,t) gives the typical values of variable A as it changes throughout the year.
+% Times times t are in datenum or datetime format. If t is daily, output tc is 1 to 366 and Ac will contain average values
+% for each of the 366 days of the year. If inputs are monthly, tc is 1:12 and Ac will contain average values
+% for each of the 12 months of the year. 
+%
+% [Ac,tc] = climatology(...,'daily') specifies directly that inputs are daily resolution. The climatology function
+% will typically figure this out automatically, but if you have large missing gaps in your data you may wish
+% to ensure correct results by specifying daily. 
+% 
+% [Ac,tc] = climatology(...,'monthly') as above, but forces monthly solution. 
+%
+% [Ac,tc] = climatology(...,'detrend',DetrendOption) specifies a baseline relative to which seasonal anomalies are 
+% determined. Options are 'linear', 'quadratic', or 'none'. By default, anomalies are calculated after 
+% removing the linear least squares trend, but if, for example, warming is strongly nonlinear, you may prefer
+% the 'quadratic' option. Default is 'linear'. 
+%
+% [Ac,tc] = climatology(...,'dim',dimension) specifies a dimension along which to assess seasons. By default, 
+% if A is 1D, seasonal cycle is returned along the nonsingleton dimension; if A is 2D, climatology is performed
+% along dimension 1 (time marches down the rows); if A is 3D, climatology is performed along dimension 3. 
+% 
+% Ac = climatology(...,'full') returns Ac for the entire time series A. This is a convenient option for looking
+% at the components of a long time series separately. 
+%
+%% Example 1: Daily sea ice extent
+% Here's some sea ice data that is _mostly_ daily. Before 1988 there is only data for every other
+% day, but that's fineREPLACE_WITH_DASH_DASHthe |climatology| function will figure it out. Start by loading and plotting
+% the data. Also add a least-squares trend line with <polyplot_documentation.html |polyplot|>.
+
+load seaice_extent
+
+plot(t,extent_N)
+box off
+ylabel 'sea ice extent (\times10^6 km^2)'
+
+hold on
+polyplot(t,extent_N)
+
+%%
+% The climatology is then: 
+
+extent_N_clim = climatology(extent_N,t,'full'); 
+
+plot(t,extent_N_clim)
+
+%% 
+% In the plot above, you'll notice that the climatology has the same mean
+% value as the original sea ice extent time series, but it does not have any trend
+% through time. Its only variablity is that with the seasons. 
+% 
+% Removing the climatology from the original signal produces the same result
+% as removing the mean and the seasonal cycleREPLACE_WITH_DASH_DASHthe only parts left would be the 
+% long-term trends, interannual variability, and noise. 
+
+%% Example 2: Gridded data
+% For this example, load the pacific_sst example dataset, which contains
+% gridded data for 802 months of gridded sea surface temperatures. Use these
+% 66.8 years of data to get a sense of how SSTs tend to vary throughout the
+% year, like this: 
+
+load pacific_sst
+
+sst_c = climatology(sst,t); 
+
+%% 
+% Now, |sst_c| is a 60x55x12 grid of sea surface temperatures. That third 
+% dimension indicates sea surface temperatures for each month of the typical
+% year. Animate them and make a <gif_documentation.html |gif|> like this, 
+% starting by plotting the first frame: 
+% 
+%  figure
+%  h = imagescn(lon,lat,sst_c(:,:,1)); 
+%  cb = colorbar; 
+%  ylabel(cb,'sea surface temperature (\circC)')
+%  cmocean thermal % sets the colormap
+%  title(datestr(datenum(0,1,1),'mmmm')) % converts "1" to "January"
+%  caxis([2 29])
+%  
+%  % Add a silly earth image: 
+%  hold on
+%  he = earthimage; 
+%  uistack(he,'bottom') % puts the earth image below SST data
+%  
+%  % Write the first frame: 
+%  gif('pacific_sst_climatology.gif','frame',gcf,'delaytime',1/12,'nodither')
+%  
+%  % Write frames for all the other months: 
+%  for k = 2:12
+%     h.CData = sst_c(:,:,k);               % updates monthly values
+%     title(datestr(datenum(0,k,1),'mmmm')) % updates title
+%     gif                                   % adds this frame to the gif                         
+%  end
+% 
+%% 
+% ...and that produces this nice animation: 
+% 
+% <<pacific_sst_climatology.gif>>
+% 
+%% Seasons vs Climatology
+% CDT has a function called |climatology| and another function called <season_documentation.html |season|>. 
+% The only difference is that the output of |climatology| includes the mean of the variable, 
+% whereas the output of |season| will always have a 0 mean value. Accordingly, the <deseason_documentation.html |deseason|>
+% function removes the seasonal component of variability while preserving the overall mean
+% and trends. 
+% 
+% In general, CDT assumes that a multi-year record of a variable sampled at 
+% subannual resolution can described by 
+% 
+%  y = y_0 + y_tr + y_season + y_var + y_noise
+% 
+%% 
+% where 
+% 
+% * |y_0| is the long-term |mean|, 
+% * |y_trend| is the long-term <trend_documentation.html |trend|>, 
+% * |y_season| is the typical seasonal anomaly, which the |season| function obtains after detrending and removing the mean, 
+% * |y_var| represents interannual variability, and 
+% * |y_noise| is everything else 
+% 
+% In this model, 
+% 
+%  y_climatology = y_0 + y_season
+% 
+%% Other ways to define seasonality 
+% For yet another way to define seasonality, see <sinefit_documentation.html |sinefit|>, 
+% <sineval_documentation.html |sineval|>, and <sinefit_bootstrap_documentation.html |sinefit_bootstrap|>. 
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,202 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>scatstat1 documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-02"><meta name="DC.source" content="scatstat1_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>scatstat1</tt> documentation</h1><!--introduction--><p>The <tt>scatstat1</tt> function returns statistical values of all points within a given 1D radius of each value. This is similar to taking a moving mean, but points do not have to be equally spaced, nor do x values need to be monotonically increasing.</p><p>See also <a href="scatstat2_documentation.html"><tt>scatstat2</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1</a></li><li><a href="#6">Example 2: Sea ice data</a></li><li><a href="#10">Author info:</a></li></ul></div><h2 id="1">Syntax</h2><pre>ybar = scatstat1(x,y,radius)
+ybar = scatstat1(x,y,radius,fun)
+ybar = scatstat1(...,options)</pre><h2 id="2">Description</h2><p><tt>ybar = scatstat1(x,y,radius)</tt> returns the mean of all <tt>y</tt> values within specified <tt>radius</tt> at each point <tt>x</tt>.</p><p><tt>ybar = scatstat1(x,y,radius,fun)</tt> applies any function <tt>fun</tt> to <tt>y</tt> values, default <tt>fun</tt> is <tt>@mean</tt>, but could be <tt>@median</tt>, <tt>@nanstd</tt>, etc.</p><p><tt>ybar = scatstat1(...,options)</tt> allows any options that the function accepts. For example, <tt>'omitnan'</tt>.</p><h2 id="3">Example 1</h2><p>Get the local median of all points within 10 units of each x point. Start by creating some random non-sorted data with N = 10,000 points:</p><pre class="codeinput">N = 10000;
+x = randi(300,N,1) + 20+3*randn(N,1) ;
+y = 3*sind(x) + randn(size(x)) + 3;
+plot(x,y,<span class="string">'k.'</span>)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="scatstat1_documentation_01.png" alt=""> <p>Now get the moving median of all points within 15 x units of each value:</p><pre class="codeinput">yb = scatstat1(x,y,15,@median,<span class="string">'omitnan'</span>);
+
+hold <span class="string">on</span>
+plot(x,yb,<span class="string">'bo'</span>)
+</pre><img vspace="5" hspace="5" src="scatstat1_documentation_02.png" alt=""> <p>Note, this function does not interpolate or enforce any equal spacing.  Final values correspond to each x point, which need not be equally spaced or sorted. Here's a zoom-in so you can see that the x values are not equally spaced:</p><pre class="codeinput">axis([167 173 1 6])
+</pre><img vspace="5" hspace="5" src="scatstat1_documentation_03.png" alt=""> <h2 id="6">Example 2: Sea ice data</h2><p>From 1978 to 1988 the NSIDC sea ice time series contains about one measurement about every two days. After 1988, it's a daily time series. What if you want a 2 year moving average of sea ice time series, on this dataset which does not have constant temporal resolution?</p><p>Here's the situation:</p><pre class="codeinput">load <span class="string">seaice_extent.mat</span> <span class="comment">% loads the sample data</span>
+
+figure
+plot(t,extent_N)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+ylabel <span class="string">'northern hemisphere sea ice extent 1\times10^6 km)'</span>
+</pre><img vspace="5" hspace="5" src="scatstat1_documentation_04.png" alt=""> <p>Before 1988, the data is available every other day, and then there's a gap in the data, and then it's daily data. Plot the time between measurements (in days) as the gradient of the <tt>datenum</tt> values:</p><pre class="codeinput">figure
+plot(t,gradient(datenum(t)))
+ntitle <span class="string">'days between measurements'</span>
+box <span class="string">off</span>
+</pre><img vspace="5" hspace="5" src="scatstat1_documentation_05.png" alt=""> <p>You see, there's a gap.</p><p>For a two-year moving average (a radius of 1 year), convert the datetime format <tt>t</tt> to <tt>datenum</tt> format, and use <tt>scatstat1</tt> with a radius of 365.25 days:</p><pre class="codeinput">extent_N_2yr = scatstat1(datenum(t),extent_N,365.25);
+
+figure(1) <span class="comment">% goes back to the sea ice time series figure</span>
+
+hold <span class="string">on</span>
+plot(t,extent_N_2yr,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2)
+</pre><img vspace="5" hspace="5" src="scatstat1_documentation_06.png" alt=""> <p>And of course, you probably don't want to trust anything within 1 radius (1 year for the 2 year moving average) of the ends, which is why the strange wiggles appear on at the start and end of the time series.</p><h2 id="10">Author info:</h2><p>This function was written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas at Austin's Institute for Geophysics (UTIG), June 2016.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |scatstat1| documentation 
+% The |scatstat1| function returns statistical values of all points within a given 
+% 1D radius of each value. This is similar to taking a moving mean, but points do not
+% have to be equally spaced, nor do x values need to be monotonically increasing. 
+% 
+% See also <scatstat2_documentation.html |scatstat2|>. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax 
+% 
+%  ybar = scatstat1(x,y,radius)
+%  ybar = scatstat1(x,y,radius,fun) 
+%  ybar = scatstat1(...,options) 
+% 
+%% Description 
+% 
+% |ybar = scatstat1(x,y,radius)| returns the mean of all |y| values 
+% within specified |radius| at each point |x|.  
+% 
+% |ybar = scatstat1(x,y,radius,fun)| applies any function |fun| to |y|
+% values, default |fun| is |@mean|, but could be |@median|, |@nanstd|, etc. 
+% 
+% |ybar = scatstat1(...,options)| allows any options that the function
+% accepts. For example, |'omitnan'|.
+% 
+%% Example 1
+% Get the local median of all points within 10 units of each x point. Start by
+% creating some random non-sorted data with N = 10,000 points: 
+
+N = 10000; 
+x = randi(300,N,1) + 20+3*randn(N,1) ; 
+y = 3*sind(x) + randn(size(x)) + 3;  
+plot(x,y,'k.') 
+axis tight
+box off
+
+%% 
+% Now get the moving median of all points within 15 x units of each
+% value: 
+
+yb = scatstat1(x,y,15,@median,'omitnan'); 
+
+hold on
+plot(x,yb,'bo')
+
+%% 
+% Note, this function does not interpolate or enforce any equal spacing.  Final
+% values correspond to each x point, which need not be equally spaced or sorted. 
+% Here's a zoom-in so you can see that the x values are not equally spaced:
+
+axis([167 173 1 6])
+
+%% Example 2: Sea ice data
+% From 1978 to 1988 the NSIDC sea ice time series contains about one measurement 
+% about every two days. After 1988, it's a daily time series. What if you want 
+% a 2 year moving average of sea ice time series, on this dataset which does 
+% not have constant temporal resolution? 
+% 
+% Here's the situation: 
+
+load seaice_extent.mat % loads the sample data 
+
+figure
+plot(t,extent_N)
+axis tight
+box off
+ylabel 'northern hemisphere sea ice extent 1\times10^6 km)'
+
+%% 
+% Before 1988, the data is available every other day, and then there's a 
+% gap in the data, and then it's daily data. Plot the time between measurements 
+% (in days) as the gradient of the |datenum| values:
+
+figure
+plot(t,gradient(datenum(t)))
+ntitle 'days between measurements' 
+box off
+
+%% 
+% You see, there's a gap. 
+% 
+% For a two-year moving average (a radius of 1 year), convert the datetime
+% format |t| to |datenum| format, and use |scatstat1| with a radius of 
+% 365.25 days: 
+
+extent_N_2yr = scatstat1(datenum(t),extent_N,365.25); 
+
+figure(1) % goes back to the sea ice time series figure
+
+hold on
+plot(t,extent_N_2yr,'k','linewidth',2)
+
+%% 
+% And of course, you probably don't want to trust anything within 1 radius
+% (1 year for the 2 year moving average) of the ends, which is why the strange
+% wiggles appear on at the start and end of the time series. 
+
+%% Author info: 
+% This function was written by <http://www.chadagreene.com Chad A. Greene> of the University 
+% of Texas at Austin's Institute for Geophysics (UTIG), June 2016. 
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,335 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>trend documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-07"><meta name="DC.source" content="trend_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>trend</tt> documentation</h1><!--introduction--><p><tt>trend</tt> calculates the linear trend of a data series by least squares. Data do not need to be equally spaced in time.</p><p>See also <a href="detrend3_documentation.html"><tt>detrend3</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: 1D Array</a></li><li><a href="#8">Example 2: 2D data</a></li><li><a href="#13">Example 3: A 3D dataset</a></li><li><a href="#16">Example 4: Sea surface temperatures</a></li><li><a href="#19">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>tr = trend(y)
+tr = trend(y,Fs)
+tr = trend(y,t)
+tr = trend(...,'dim',dim)
+[tr,p] = trend(...)
+[tr,p] = trend(...,corrOptions)</pre><h2 id="2">Description</h2><p><tt>tr = trend(y)</tt> calculates the linear trend per sample of <tt>y</tt>.</p><p><tt>tr = trend(y,Fs)</tt> specifies a sampling rate <tt>Fs</tt>. For example, to obtain a trend per year from data collected at monthly resolution, set <tt>Fs</tt> equal to 12. This syntax assumes all values in y are equally spaced in time.</p><p><tt>tr = trend(y,t)</tt> specifies a vector <tt>t</tt> relative to which the trend is calculated. Each element of t corresponds to a measurement in <tt>y</tt>, and when this syntax is used, times do <b>not</b> need to be equally spaced. Units of the trend are (units y)/units(t) so if the units of <tt>t</tt> are in days (such as <tt>datenum</tt>), multiply by 365.25 to obtain the trend per year.</p><p><tt>tr = trend(...,'dim',dim)</tt> specifies the dimension along which the trend is calculated. By default, if <tt>y</tt> is a 1D array, the trend is calculated along the first nonsingleton dimension of y; if y is a 2D matrix, the trend is calcaulated down the rows (dimension 1) of <tt>y</tt>; if <tt>y</tt> is a 3D matrix, the trend is calculated down dimension 3.</p><p><tt>[tr,p] = trend(...)</tt> returns the p-value of statistical significance of the trend. (Requires the Statistics Toolbox)</p><p><tt>[tr,p] = trend(...,corrOptions)</tt> specifies any optional Name-Value pair arguments accpted by the corr function. For example, <tt>'Type','Kendall'</tt> specifies computing Kendall's tau correlation coefficient.</p><h2 id="3">Example 1: 1D Array</h2><p>Here's a time series sampled at 12 times per year:</p><pre class="codeinput">Fs = 12;                   <span class="comment">% sampling rate (12 samples per year)</span>
+t = (2000:1/Fs:2007)';     <span class="comment">% time vector sampled at Fs per unit time</span>
+y = 40*t + 123*rand(size(t)) - 8e4; <span class="comment">% forced trend of 40 units y per second</span>
+
+plot(t,y)
+xlabel <span class="string">'time'</span>
+ylabel <span class="string">'some variable'</span>
+</pre><img vspace="5" hspace="5" src="trend_documentation_01.png" alt=""> <p>It's easy to overlay a trendline on that plot with <a href="polyplot_documentation.html"><tt>polyplot</tt></a> like this:</p><pre class="codeinput">hold <span class="string">on</span>
+polyplot(t,y,1)
+</pre><img vspace="5" hspace="5" src="trend_documentation_02.png" alt=""> <p>...but what's the numerical value of that trend? In other words, how steep is the slope? When we defined <tt>y</tt>, we specified that it should be 40*t (plus some random noise and an offset), so the trend should be about 40:</p><pre class="codeinput">trend(y)
+</pre><pre class="codeoutput">ans =
+    3.4192
+</pre><p>That trend isn't even close to 40! That's because if we don't specify a sampling frequency or a time vector, the <tt>trend</tt> function gives the trend in <tt>y</tt> per sample. Specify the sampling rate of 12 samples per year like this:</p><pre class="codeinput">trend(y,Fs)
+</pre><pre class="codeoutput">ans =
+   41.0304
+</pre><p>...and that's the value close to 40 that we were expecting. It's not exactly 40 because we intentionally added noise, but it's about 40, as expected.</p><p>You may have noticed by now that the trend can be calculated any of three ways, and each will give the same answer. You can multiply the trend by the sampling rate, or you can specify the sampling rate in the <tt>trend</tt> function, or you can specify the corresponding time vector <tt>t</tt>, and they'll all give the same answer:</p><pre class="codeinput">[trend(y)*Fs trend(y,Fs) trend(y,t)]
+</pre><pre class="codeoutput">ans =
+   41.0304   41.0304   41.0304
+</pre><h2 id="8">Example 2: 2D data</h2><p>If you have a bunch of measurements that all line up to the same times, the <tt>trend</tt> function can calculate all the trends at once, in a computationally efficient manner. Consider these four time series built from the <tt>y</tt> array we defined in example 1:</p><pre class="codeinput"><span class="comment">%   [y    y+400        very noisy y           only noise     ];</span>
+A = [y    y+400     y+200*randn(size(y))    100*rand(size(y))];
+
+figure
+plot(t,A)
+legend(<span class="string">'column 1'</span>,<span class="string">'column 2'</span>,<span class="string">'column 3'</span>,<span class="string">'column 4'</span>,<span class="keyword">...</span>
+   <span class="string">'location'</span>,<span class="string">'northwest'</span>)
+xlabel <span class="string">'time'</span>
+ylabel <span class="string">'some variable'</span>
+axis <span class="string">tight</span>
+box <span class="string">off</span>       <span class="comment">% removes ugly frame from axes</span>
+legend <span class="string">boxoff</span> <span class="comment">% removes ugly frame from legend</span>
+</pre><img vspace="5" hspace="5" src="trend_documentation_03.png" alt=""> <p>The trends of each column can be computed like this:</p><pre class="codeinput">trend(A,t)
+</pre><pre class="codeoutput">ans =
+   41.0304   41.0304   39.7128    1.2342
+</pre><p>That's what we expected: About 40 units/year for columns 1 and 2, which are the same data aside from the offset; somewhat of a trend for column 3, and not much of a trend for the noise-only column 4.</p><p><b>Are any of these trends statistically significant?</b> Use the optional second function output to see:</p><pre class="codeinput">[tr,p] = trend(A,t)
+</pre><pre class="codeoutput">tr =
+   41.0304   41.0304   39.7128    1.2342
+p =
+    0.0000    0.0000    0.0003    0.4006
+</pre><p>The p values for the first three columns indicate statistical significance, but the fourth column tells us that any trend measured there is probably junk.</p><p>What if your data go across columns through time instead of down rows? Just specify the dimension:</p><pre class="codeinput">[tr,p] = trend(A',t,<span class="string">'dim'</span>,2)
+</pre><pre class="codeoutput">tr =
+   41.0304
+   41.0304
+   39.7128
+    1.2342
+p =
+    0.0000
+    0.0000
+    0.0003
+    0.4006
+</pre><h2 id="13">Example 3: A 3D dataset</h2><p>Here's a sample dataset that goes down at a rate of -pi per time slice. Use <a href="expand3_documentation.html"><tt>expand3</tt></a> to create the sample dataset, and then add a bunch of noise to keep things interesting:</p><pre class="codeinput"><span class="comment">% 60x80 grid that goes down -pi in each frame:</span>
+Y = expand3(ones(60,80),-pi*(1:100));
+
+<span class="comment">% Add a bunch of noise and an offset:</span>
+Y = Y + 10*randn(size(Y)) + 900;
+</pre><p>Here's the trend in <tt>Y</tt>:</p><pre class="codeinput">imagesc(trend(Y))
+colorbar
+</pre><img vspace="5" hspace="5" src="trend_documentation_04.png" alt=""> <p>Might look like noise at first, but that's just the noise we intentionally put in there. Note the colorbar scale--all of the values center around negative pi, exactly as expected.</p><h2 id="16">Example 4: Sea surface temperatures</h2><p>Load the sample pacific_sst.mat dataset, which contains monthly gridded sea surface temperature data, and calculate trends.</p><pre class="codeinput">load <span class="string">pacific_sst</span>
+
+[tr,p] = trend(sst,12);
+
+figure
+imagescn(lon,lat,tr)
+cb = colorbar;
+ylabel(cb,<span class="string">'SST trend \circC yr^{-1}'</span>)
+cmocean(<span class="string">'balance'</span>,<span class="string">'pivot'</span>) <span class="comment">% sets the colormap with zero in the middle</span>
+</pre><img vspace="5" hspace="5" src="trend_documentation_05.png" alt=""> <p>Mark regions of statistical significance with stippling. First, that means defining statistical significance. Let's say everything with a p-value less than 0.01 is statistically significant:</p><pre class="codeinput">StatisticallySignificant = p&lt;0.01;
+</pre><p>Identify significant regions with the <a href="stipple_documentation.html"><tt>stipple</tt></a> function. One small catch is <tt>stipple</tt> insists on gridded inputs, so we'll have to turn those <tt>lat</tt> and <tt>lon</tt> arrays into grids with <tt>meshgrid</tt>:</p><pre class="codeinput">[Lon,Lat] = meshgrid(lon,lat);
+
+hold <span class="string">on</span>
+stipple(Lon,Lat,StatisticallySignificant)
+</pre><img vspace="5" hspace="5" src="trend_documentation_06.png" alt=""> <h2 id="19">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |trend| documentation
+% |trend| calculates the linear trend of a data series by least squares. Data
+% do not need to be equally spaced in time. 
+% 
+% See also <detrend3_documentation.html |detrend3|>.
+%
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  tr = trend(y) 
+%  tr = trend(y,Fs) 
+%  tr = trend(y,t) 
+%  tr = trend(...,'dim',dim)
+%  [tr,p] = trend(...)
+%  [tr,p] = trend(...,corrOptions)
+% 
+%% Description
+% 
+% |tr = trend(y)| calculates the linear trend per sample of |y|. 
+% 
+% |tr = trend(y,Fs)| specifies a sampling rate |Fs|. For example, to obtain a trend
+% per year from data collected at monthly resolution, set |Fs| equal to 12. This
+% syntax assumes all values in y are equally spaced in time. 
+% 
+% |tr = trend(y,t)| specifies a vector |t| relative to which the trend is calculated. 
+% Each element of t corresponds to a measurement in |y|, and when this syntax is used, 
+% times do *not* need to be equally spaced. Units of the trend are (units y)/units(t)
+% so if the units of |t| are in days (such as |datenum|), multiply by 365.25 to obtain
+% the trend per year. 
+% 
+% |tr = trend(...,'dim',dim)| specifies the dimension along which the trend is 
+% calculated. By default, if |y| is a 1D array, the trend is calculated along 
+% the first nonsingleton dimension of y; if y is a 2D matrix, the trend is 
+% calcaulated down the rows (dimension 1) of |y|; if |y| is a 3D matrix, the 
+% trend is calculated down dimension 3. 
+% 
+% |[tr,p] = trend(...)| returns the p-value of statistical significance of 
+% the trend. (Requires the Statistics Toolbox)
+% 
+% |[tr,p] = trend(...,corrOptions)| specifies any optional Name-Value pair arguments
+% accpted by the corr function. For example, |'Type','Kendall'| specifies computing 
+% Kendall's tau correlation coefficient.
+% 
+%% Example 1: 1D Array
+% Here's a time series sampled at 12 times per year: 
+
+Fs = 12;                   % sampling rate (12 samples per year) 
+t = (2000:1/Fs:2007)';     % time vector sampled at Fs per unit time
+y = 40*t + 123*rand(size(t)) - 8e4; % forced trend of 40 units y per second
+
+plot(t,y)
+xlabel 'time'
+ylabel 'some variable'
+
+%% 
+% It's easy to overlay a trendline on that plot with <polyplot_documentation.html 
+% |polyplot|> like this: 
+
+hold on
+polyplot(t,y,1)
+
+%% 
+% ...but what's the numerical value of that trend? In other words, how steep
+% is the slope? When we defined |y|, we specified that it should be 40*t (plus
+% some random noise and an offset), so the trend should be about 40: 
+
+trend(y)
+
+%% 
+% That trend isn't even close to 40! That's because if we don't specify a sampling 
+% frequency or a time vector, the |trend| function gives the trend in |y| per
+% sample. Specify the sampling rate of 12 samples per year like this: 
+
+trend(y,Fs) 
+
+%% 
+% ...and that's the value close to 40 that we were expecting. It's not exactly
+% 40 because we intentionally added noise, but it's about 40, as expected. 
+% 
+% You may have noticed by now that the trend can be calculated any of three 
+% ways, and each will give the same answer. You can multiply the trend by 
+% the sampling rate, or you can specify the sampling rate in the |trend| function, 
+% or you can specify the corresponding time vector |t|, and they'll all give 
+% the same answer: 
+
+[trend(y)*Fs trend(y,Fs) trend(y,t)]
+
+%% Example 2: 2D data
+% If you have a bunch of measurements that all line up to the same times, 
+% the |trend| function can calculate all the trends at once, in a computationally
+% efficient manner. Consider these four time series built from the |y| array
+% we defined in example 1: 
+
+%   [y    y+400        very noisy y           only noise     ];
+A = [y    y+400     y+200*randn(size(y))    100*rand(size(y))];
+
+figure
+plot(t,A)
+legend('column 1','column 2','column 3','column 4',...
+   'location','northwest') 
+xlabel 'time'
+ylabel 'some variable'
+axis tight
+box off       % removes ugly frame from axes
+legend boxoff % removes ugly frame from legend
+
+%%
+% The trends of each column can be computed like this: 
+
+trend(A,t)
+
+%%
+% That's what we expected: About 40 units/year for columns 1 and 2, which are
+% the same data aside from the offset; somewhat of a trend for column 3, and 
+% not much of a trend for the noise-only column 4. 
+% 
+% *Are any of these trends statistically significant?* Use the optional 
+% second function output to see: 
+
+[tr,p] = trend(A,t) 
+
+%%
+% The p values for the first three columns indicate statistical significance, 
+% but the fourth column tells us that any trend measured there is probably junk. 
+% 
+%%
+% What if your data go across columns through time instead of down rows? 
+% Just specify the dimension: 
+
+[tr,p] = trend(A',t,'dim',2)
+
+%% Example 3: A 3D dataset 
+% Here's a sample dataset that goes down at a rate of -pi per time slice.
+% Use <expand3_documentation.html |expand3|> to create the sample dataset, 
+% and then add a bunch of noise to keep things interesting: 
+
+% 60x80 grid that goes down -pi in each frame: 
+Y = expand3(ones(60,80),-pi*(1:100)); 
+
+% Add a bunch of noise and an offset: 
+Y = Y + 10*randn(size(Y)) + 900; 
+
+%% 
+% Here's the trend in |Y|: 
+
+imagesc(trend(Y))
+colorbar
+
+%% 
+% Might look like noise at first, but that's just the noise we intentionally 
+% put in there. Note the colorbar scaleREPLACE_WITH_DASH_DASHall of the values center around 
+% negative pi, exactly as expected. 
+
+%% Example 4: Sea surface temperatures 
+% Load the sample pacific_sst.mat dataset, which contains monthly gridded sea surface
+% temperature data, and calculate trends. 
+
+load pacific_sst
+
+[tr,p] = trend(sst,12); 
+
+figure
+imagescn(lon,lat,tr) 
+cb = colorbar; 
+ylabel(cb,'SST trend \circC yr^{-1}') 
+cmocean('balance','pivot') % sets the colormap with zero in the middle
+
+%% 
+% Mark regions of statistical significance with stippling. First, that means
+% defining statistical significance. Let's say everything with a p-value 
+% less than 0.01 is statistically significant: 
+
+StatisticallySignificant = p<0.01; 
+
+%% 
+% Identify significant regions with the <stipple_documentation.html |stipple|> 
+% function. One small catch is |stipple| insists on gridded inputs, so we'll have
+% to turn those |lat| and |lon| arrays into grids with |meshgrid|: 
+
+[Lon,Lat] = meshgrid(lon,lat);
+
+hold on
+stipple(Lon,Lat,StatisticallySignificant)
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

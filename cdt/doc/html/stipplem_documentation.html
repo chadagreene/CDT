@@ -1,0 +1,142 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>stipplem documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-15"><meta name="DC.source" content="stipplem_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>stipplem</tt> documentation</h1><!--introduction--><p><tt>stipplem</tt> creates a hatch filling or stippling in map coordinates. This function is designed primarily to show regions of statistical significance in spatial maps.</p><p><b>This function requires Matlab's Mapping Toolbox.</b> For a versions that do not require the mapping toolbox, see <a href="stipple_documentation.html"><tt>stipple</tt></a> or <a href="globestipple_documentation.html"><tt>globestipple</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Examples</a></li><li><a href="#6">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>stipplem(lat,lon,mask)
+stipplem(...,MarkerProperty,MarkerValue,...)
+stipplem(...,'density',DensityValue)
+stipplem(...,'resize',false)
+h = stipplem(...)</pre><h2 id="2">Description</h2><p><tt>stipplem(lat,lon,mask)</tt> plots black dots in <tt>x,y</tt> locations wherever a <tt>mask</tt> contains <tt>true</tt> values. Dimensions of <tt>x, y,</tt> and <tt>mask</tt> must all match.</p><p><tt>stipplem(...,MarkerProperty,MarkerValue,...)</tt> specifies any marker properties that are accepted by the plot function (e.g., <tt>'color'</tt>, <tt>'marker'</tt>, <tt>'markersize'</tt>, etc).</p><p><tt>stipplem(...,'density',DensityValue)</tt> specifies density of stippling markers. Default density is <tt>100</tt>, but if your plot is too crowded you may specify a lower density value (and/or adjust the markersize).</p><p><tt>stipplem(...,'resize',false)</tt> overrides the <tt>'density'</tt> option and plots stippling at the exact resolution of the input grid. By default, the grids are resized because any grid larger than about 100x100 would produce so many stippling dots it would black out anything under them.</p><p><tt>h = stipplem(...)</tt> returns a handle of the plotted stippling objects.</p><h2 id="3">Examples</h2><p>On a world map, fill in all the land areas with stippling. To determine land areas, make a grid with <a href="cdtgrid_documentation.html"><tt>cdtgrid</tt></a> and determine the corresponding land grid cells with <a href="island_documentation.html"><tt>island</tt></a>.</p><pre class="codeinput">[lat,lon] = cdtgrid(0.25);
+land = island(lat,lon);
+</pre><p>Now initialize a map with <a href="bordersm_documentation.html"><tt>bordersm</tt></a> and put default stippling wherever there's land:</p><pre class="codeinput">bordersm
+stipplem(lat,lon,land)
+</pre><img vspace="5" hspace="5" src="stipplem_documentation_01.png" alt=""> <p>Now fill the ocean with a dense grid of tiny green triangle hatches:</p><pre class="codeinput">stipplem(lat,lon,~land,<span class="string">'color'</span>,rgb(<span class="string">'green'</span>),<span class="keyword">...</span>
+   <span class="string">'marker'</span>,<span class="string">'^'</span>,<span class="string">'markersize'</span>,2,<span class="string">'density'</span>,150)
+</pre><img vspace="5" hspace="5" src="stipplem_documentation_02.png" alt=""> <h2 id="6">Author Info</h2><p>This function and supporting documentation were written by Chad A. Greene, August 2018.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |stipplem| documentation
+% |stipplem| creates a hatch filling or stippling in map coordinates. This
+% function is designed primarily to show regions of statistical 
+% significance in spatial maps. 
+% 
+% *This function requires Matlab's Mapping Toolbox.* For a versions that do 
+% not require the mapping toolbox, see <stipple_documentation.html |stipple|> 
+% or <globestipple_documentation.html |globestipple|>.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  stipplem(lat,lon,mask) 
+%  stipplem(...,MarkerProperty,MarkerValue,...)
+%  stipplem(...,'density',DensityValue) 
+%  stipplem(...,'resize',false) 
+%  h = stipplem(...)
+% 
+%% Description
+% 
+% |stipplem(lat,lon,mask)| plots black dots in |x,y| locations wherever a |mask| contains
+% |true| values. Dimensions of |x, y,| and |mask| must all match. 
+% 
+% |stipplem(...,MarkerProperty,MarkerValue,...)| specifies any marker properties
+% that are accepted by the plot function (e.g., |'color'|, |'marker'|, |'markersize'|, etc). 
+%  
+% |stipplem(...,'density',DensityValue)| specifies density of stippling markers. 
+% Default density is |100|, but if your plot is too crowded you may specify a 
+% lower density value (and/or adjust the markersize). 
+% 
+% |stipplem(...,'resize',false)| overrides the |'density'| option and plots stippling 
+% at the exact resolution of the input grid. By default, the grids are resized
+% because any grid larger than about 100x100 would produce so many stippling
+% dots it would black out anything under them. 
+% 
+% |h = stipplem(...)| returns a handle of the plotted stippling objects. 
+% 
+%% Examples
+% On a world map, fill in all the land areas with stippling. To determine 
+% land areas, make a grid with <cdtgrid_documentation.html |cdtgrid|> and 
+% determine the corresponding land grid cells with <island_documentation.html |island|>. 
+
+[lat,lon] = cdtgrid(0.25); 
+land = island(lat,lon); 
+
+%% 
+% Now initialize a map with <bordersm_documentation.html |bordersm|> and 
+% put default stippling wherever there's land: 
+
+bordersm
+stipplem(lat,lon,land)
+
+%% 
+% Now fill the ocean with a dense grid of tiny green triangle hatches: 
+
+stipplem(lat,lon,~land,'color',rgb('green'),...
+   'marker','^','markersize',2,'density',150)
+
+%% Author Info
+% This function and supporting documentation were written by Chad A. Greene, August 2018. 
+##### SOURCE END #####
+--></body></html>

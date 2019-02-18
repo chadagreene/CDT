@@ -1,0 +1,187 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>expand3 documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-27"><meta name="DC.source" content="expand3_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>expand3</tt> documentation</h1><!--introduction--><p>The <tt>expand3</tt> function creates a 3D matrix from the product of a 2D grid and a 1D vector.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Examples</a></li><li><a href="#9">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>Z3 = expand3(Z,y)</pre><h2 id="2">Description</h2><p><tt>Z3 = expand3(Z,y)</tt> creates a 3D matrix <tt>Z3</tt> through elementwise multiplication of the 2D grid <tt>Z</tt> and the 1D array <tt>y</tt>.</p><h2 id="3">Examples</h2><p>Imagine you have a 50x50 grid like this:</p><pre class="codeinput">Z = peaks(50);
+
+pcolor(Z);
+title <span class="string">'Z grid'</span>
+</pre><img vspace="5" hspace="5" src="expand3_documentation_01.png" alt=""> <p>And you know that whole grid varies sinusoidally through time like this:</p><pre class="codeinput"><span class="comment">% A sinusoid at 100 equally spaced intervals:</span>
+y = sin(linspace(0,2*pi,100));
+
+plot(y)
+title <span class="string">'y array'</span>
+</pre><img vspace="5" hspace="5" src="expand3_documentation_02.png" alt=""> <p>These are the dimensions of <tt>Z</tt> and <tt>y</tt>:</p><pre class="codeinput">whos <span class="string">Z</span> <span class="string">y</span>
+</pre><pre class="codeoutput">  Name       Size             Bytes  Class     Attributes
+
+  Z         50x50             20000  double              
+  y          1x100              800  double              
+
+</pre><p>We want to turn that 50x50 <tt>Z</tt> grid and the 1x100 <tt>y</tt> array into a 50x50x100 matrix where the first 50x50 slice of <tt>Z3</tt> is equivalent to <tt>Z*y(1)</tt>, the second slice is <tt>Z*y(2)</tt>, etc. Here's how:</p><pre class="codeinput">Z3 = expand3(Z,y);
+
+whos <span class="string">Z3</span>
+</pre><pre class="codeoutput">  Name       Size                  Bytes  Class     Attributes
+
+  Z3        50x50x100            2000000  double              
+
+</pre><p>That's it.</p><p>You can then animate the plot and save it as a <a href="gif.documentation.html"><tt>gif</tt></a> like this:</p><pre>% Plot the first frame:
+h = surf(Z(:,:,1));
+shading interp
+axis([-3 3 -3 3 -9 9])</pre><pre>% Make it fancy:
+camlight
+set(gca,'color','k')
+set(gcf,'color','k')
+caxis([min(Z(:)) max(Z(:))])</pre><pre>% Write the first frame:
+gif('myfile.gif')</pre><pre>% Loop through each remaining frame:
+for k = 2:100
+   set(h,'Zdata',Z(:,:,k))
+   gif % saves this frame
+end</pre><p>And that's it. Here's what the final product looks like:</p><p><img vspace="5" hspace="5" src="myfile.gif" alt=""> </p><h2 id="9">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |expand3| documentation
+% The |expand3| function creates a 3D matrix from the product of a 2D grid and a 1D
+% vector.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  Z3 = expand3(Z,y)
+% 
+%% Description
+% 
+% |Z3 = expand3(Z,y)| creates a 3D matrix |Z3| through elementwise
+% multiplication of the 2D grid |Z| and the 1D array |y|. 
+% 
+%% Examples
+% Imagine you have a 50x50 grid like this: 
+
+Z = peaks(50); 
+
+pcolor(Z); 
+title 'Z grid'
+
+%% 
+% And you know that whole grid varies sinusoidally through time like this: 
+
+% A sinusoid at 100 equally spaced intervals: 
+y = sin(linspace(0,2*pi,100)); 
+
+plot(y)
+title 'y array'
+
+%% 
+% These are the dimensions of |Z| and |y|: 
+
+whos Z y
+
+%%
+% We want to turn that 50x50 |Z| grid and the 1x100 |y| array into a
+% 50x50x100 matrix where the first 50x50 slice of |Z3| is equivalent to
+% |Z*y(1)|, the second slice is |Z*y(2)|, etc. Here's how: 
+
+Z3 = expand3(Z,y); 
+
+whos Z3
+
+%%
+% That's it. 
+% 
+% You can then animate the plot and save it as a <gif.documentation.html
+% |gif|> like this: 
+% 
+%  % Plot the first frame: 
+%  h = surf(Z(:,:,1)); 
+%  shading interp
+%  axis([-3 3 -3 3 -9 9])  
+%  
+%  % Make it fancy: 
+%  camlight
+%  set(gca,'color','k') 
+%  set(gcf,'color','k') 
+%  caxis([min(Z(:)) max(Z(:))])
+% 
+%  % Write the first frame: 
+%  gif('myfile.gif') 
+%  
+%  % Loop through each remaining frame: 
+%  for k = 2:100
+%     set(h,'Zdata',Z(:,:,k))
+%     gif % saves this frame
+%  end
+% 
+%% 
+% And that's it. Here's what the final product looks like: 
+% 
+% <<myfile.gif>>
+% 
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+
+##### SOURCE END #####
+--></body></html>

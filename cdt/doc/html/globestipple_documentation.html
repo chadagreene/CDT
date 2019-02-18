@@ -1,0 +1,210 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>globestipple documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-14"><meta name="DC.source" content="globestipple_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>globestipple</tt> documentation</h1><!--introduction--><p>The <tt>globestipple</tt> function creates a hatch filling or stippling over a region of a globe. This function is designed primarily to show regions of statistical significance in spatial maps.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1</a></li><li><a href="#4">Example 2</a></li><li><a href="#7">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>globestipple(lat,lon,mask)
+globestipple(...,MarkerProperty,MarkerValue,...)
+globestipple(...,'radius',GlobeRadius)
+globestipple(...,'density',DensityValue)
+globestipple(...,'resize',false)
+h = globestipple(...)</pre><h2 id="2">Description</h2><p><tt>globestipple(lat,lon,mask)</tt> plots black dots on a globe at locations defined by <tt>lat</tt> and <tt>lon</tt> wherever <tt>mask</tt> contains true values. The globe has radius of 6371, where 6371 corresponds to the average radius of the Earth in kilometers. Dimensions of <tt>lat</tt>, <tt>lon</tt>, and <tt>mask</tt> must all match.</p><p><tt>globestipple(...,MarkerProperty,MarkerValue,...)</tt> specifies any marker properties that are accepted by the plot function (e.g., <tt>'Color'</tt>, <tt>'Marker'</tt>, <tt>'MarkerSize'</tt>, etc).</p><p><tt>globestipple(...,'radius',GlobeRadius)</tt> specifies the radius of the globe as <tt>GlobeRadius</tt>.</p><p><tt>globestipple(...,'density',DensityValue)</tt> specifies density of stippling markers. Default density is 100, but if your plot is too crowded you may specify a lower density value (and/or adjust the <tt>'MarkerSize'</tt>).</p><p><tt>globestipple(...,'resize',false)</tt> overrides the <tt>'density'</tt> option and plots stippling at the exact resolution of the input grid. By default, the grids are resized because any grid larger than about 100x100 would produce so many stippling dots it would black out anything under them.</p><p><tt>h = globestipple(...)</tt> returns a handle of the plotted stippling objects.</p><h2 id="3">Example 1</h2><p>Plot high-density stippling where topography is above sea level. To do this, we'll use <a href="cdtgrid_documentation.html"><tt>cdtgrid</tt></a> to create a 1-degree global grid, and <a href="island_documentation.html"><tt>island</tt></a> to determine which of those grid cells corresponds to land:</p><pre class="codeinput">[lat,lon] = cdtgrid;
+mask = island(lat,lon);
+
+figure
+globestipple(lat,lon,mask,<span class="string">'density'</span>,300)
+axis <span class="string">tight</span>
+
+<span class="comment">% Set the globe color to azure:</span>
+globefill(<span class="string">'color'</span>,rgb(<span class="string">'azure'</span>))
+</pre><img vspace="5" hspace="5" src="globestipple_documentation_01.png" alt=""> <h2 id="4">Example 2</h2><p>Most places on Earth tend to change temperature between February and August. Load the example monthly gridded global temperature data from 2017, and we'll figure out where those temperature trends are significant.</p><pre class="codeinput">filename = <span class="string">'ERA_Interim_2017.nc'</span>;
+T = ncread(filename,<span class="string">'t2m'</span>);
+lat = double(ncread(filename,<span class="string">'latitude'</span>));
+lon = double(ncread(filename,<span class="string">'longitude'</span>));
+
+<span class="comment">% Grid the lat,lon arrays:</span>
+[Lat,Lon] = meshgrid(lat,lon);
+
+<span class="comment">% Calculate February-to-August temperature trend:</span>
+[tr,p] = trend(T(:,:,2:8));
+</pre><p>First, plot the temperature trend with <a href="globepcolor_documentation.html"><tt>globepcolor</tt></a> and set the colormap with <a href="cmocean_documentation.html"><tt>cmocean</tt></a>:</p><pre class="codeinput">figure
+globepcolor(Lat,Lon,tr)
+axis <span class="string">tight</span>
+cmocean(<span class="string">'balance'</span>,<span class="string">'pivot'</span>)
+cb = colorbar;
+ylabel(cb,<span class="string">'temperature trend (\circC/month)'</span>)
+globeborders(<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>)) <span class="comment">% plots political boundaries</span>
+view(55,10) <span class="comment">% sets viewing angle</span>
+</pre><img vspace="5" hspace="5" src="globestipple_documentation_02.png" alt=""> <p>Unsurprisingly, the northern hemisphere tends to heat up from February to August, while the southern hemisphere does the opposite. But where is the trend significant?</p><p>Add stippling stippling wherever the trend is significant to p&lt;0.001</p><pre class="codeinput">globestipple(Lat,Lon,p&lt;0.001,<span class="keyword">...</span>
+   <span class="string">'density'</span>,250,<span class="keyword">...</span>
+   <span class="string">'color'</span>,rgb(<span class="string">'dark green'</span>),<span class="keyword">...</span>
+   <span class="string">'markersize'</span>,2)
+</pre><img vspace="5" hspace="5" src="globestipple_documentation_03.png" alt=""> <h2 id="7">Author Info</h2><p>This function and supporting documentation were written by Natalie S. Wolfenbarger and Chad A. Greene for the Climate Data Toolbox for Matlab, 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |globestipple| documentation 
+% The |globestipple| function creates a hatch filling or stippling over a
+% region of a globe. This function is designed primarily to show regions of
+% statistical significance in spatial maps.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  globestipple(lat,lon,mask) 
+%  globestipple(...,MarkerProperty,MarkerValue,...)
+%  globestipple(...,'radius',GlobeRadius)
+%  globestipple(...,'density',DensityValue) 
+%  globestipple(...,'resize',false) 
+%  h = globestipple(...)
+% 
+%% Description
+% 
+% |globestipple(lat,lon,mask)| plots black dots on a globe at locations
+% defined by |lat| and |lon| wherever |mask| contains true values. The
+% globe has radius of 6371, where 6371 corresponds to the average radius of
+% the Earth in kilometers. Dimensions of |lat|, |lon|, and |mask| must all
+% match.
+% 
+% |globestipple(...,MarkerProperty,MarkerValue,...)| specifies any marker
+% properties that are accepted by the plot function (e.g., |'Color'|,
+% |'Marker'|, |'MarkerSize'|, etc).
+%  
+% |globestipple(...,'radius',GlobeRadius)| specifies the radius of the
+% globe as |GlobeRadius|.
+%
+% |globestipple(...,'density',DensityValue)| specifies density of stippling
+% markers. Default density is 100, but if your plot is too crowded you may
+% specify a lower density value (and/or adjust the |'MarkerSize'|).
+% 
+% |globestipple(...,'resize',false)| overrides the |'density'| option and
+% plots stippling at the exact resolution of the input grid. By default,
+% the grids are resized because any grid larger than about 100x100 would
+% produce so many stippling dots it would black out anything under them.
+% 
+% |h = globestipple(...)| returns a handle of the plotted stippling
+% objects.
+% 
+%% Example 1
+% Plot high-density stippling where topography is above sea level. To do this, 
+% we'll use <cdtgrid_documentation.html |cdtgrid|> to create a 1-degree global 
+% grid, and <island_documentation.html |island|> to determine which of those 
+% grid cells corresponds to land: 
+
+[lat,lon] = cdtgrid; 
+mask = island(lat,lon); 
+
+figure
+globestipple(lat,lon,mask,'density',300) 
+axis tight
+
+% Set the globe color to azure:
+globefill('color',rgb('azure'))
+
+%% Example 2
+% Most places on Earth tend to change temperature between February and August. 
+% Load the example monthly gridded global temperature data from 2017, and 
+% we'll figure out where those temperature trends are significant. 
+
+filename = 'ERA_Interim_2017.nc'; 
+T = ncread(filename,'t2m'); 
+lat = double(ncread(filename,'latitude')); 
+lon = double(ncread(filename,'longitude')); 
+
+% Grid the lat,lon arrays: 
+[Lat,Lon] = meshgrid(lat,lon); 
+
+% Calculate February-to-August temperature trend:
+[tr,p] = trend(T(:,:,2:8)); 
+
+%% 
+% First, plot the temperature trend with <globepcolor_documentation.html |globepcolor|>
+% and set the colormap with <cmocean_documentation.html |cmocean|>: 
+
+figure
+globepcolor(Lat,Lon,tr)
+axis tight
+cmocean('balance','pivot') 
+cb = colorbar;
+ylabel(cb,'temperature trend (\circC/month)')
+globeborders('color',rgb('gray')) % plots political boundaries
+view(55,10) % sets viewing angle
+
+%% 
+% Unsurprisingly, the northern hemisphere tends to heat up from February
+% to August, while the southern hemisphere does the opposite. But where is 
+% the trend significant? 
+% 
+% Add stippling stippling wherever the trend is significant to p<0.001
+
+globestipple(Lat,Lon,p<0.001,...
+   'density',250,...
+   'color',rgb('dark green'),...
+   'markersize',2)
+
+ %% Author Info
+% This function and supporting documentation were written by Natalie S.
+% Wolfenbarger and Chad A. Greene for the Climate Data Toolbox for Matlab, 2019. 
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,314 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>monthly documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-08"><meta name="DC.source" content="monthly_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>monthly</tt> documentation</h1><!--introduction--><p>The <tt>monthly</tt> function calculates statistics of a variable for specified months of the year.</p><p>See also: <a href="season_documentation.html"><tt>season</tt></a>, <a href="climatology_documentation.html"><tt>climatology</tt></a>, <a href="sinefit_documentation.html"><tt>sinefit</tt></a>, <a href="sineval_documentation.html"><tt>sineval</tt></a>, and <a href="sinefit_bootstrap_documentation.html"><tt>sinefit_bootstrap</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Spring sea ice extent</a></li><li><a href="#8">Example 2: Precipitation totals:</a></li><li><a href="#11">Example 3: Interannual variability</a></li><li><a href="#13">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>Xm = monthly(X,t,months)
+Xm = monthly(...,'dim',dimension)
+Xm = monthly(...,@fn)
+Xm = monthly(...,'omitnan')
+Xm = monthly(...,options)</pre><h2 id="2">Description</h2><p><tt>Xm = monthly(X,t,months)</tt> returns the mean of <tt>X</tt> for all months specified by the numbers 1 through 12. For example, if months is specified as 1, <tt>Xm</tt> will be the mean of all X values for January. If <tt>months</tt> is <tt>[12 1 2]</tt>, <tt>Xm</tt> will be the mean of all DJF. Times <tt>t</tt> correspond to <tt>X</tt> and can be in datenum, datetime, or datestr format.</p><p><tt>Xm = monthly(...,'dim',dimension)</tt> specifies a dimension of operation. By default, if <tt>X</tt> is a 1D array, the <tt>t</tt> is assumed to correspond to the first nonsingleton dimension of <tt>X</tt>; if <tt>X</tt> is a 2D matrix, the <tt>t</tt> is assumed to correspond to the rows of <tt>X</tt>; and if <tt>X</tt> is a 3D matrix, time is assumed to be dimenion 3 of <tt>X</tt>.</p><p><tt>Xm = monthly(...,@fn)</tt> specifies any function such as @max, @std, or your own anonymous function to apply to X. The default function is @mean.</p><p><tt>Xm = monthly(...,'omitnan')</tt> ignores <tt>NaN</tt> values in the calculation.</p><p><tt>Xm = monthly(...,options)</tt> specifies any optional inputs, which will depend on the <tt>@fn</tt> applied to the data.</p><h2 id="3">Example 1: Spring sea ice extent</h2><p>What's the average springtime Antarctic sea ice extent? Let's load the example time series and plot it to get a sense of the question we're asking:</p><pre class="codeinput"><span class="comment">% Load the sample data:</span>
+load <span class="string">seaice_extent</span>
+
+<span class="comment">% Plot sea ice extent as a function of day of year:</span>
+plot(doy(t),extent_S,<span class="string">'.'</span>)
+
+hold <span class="string">on</span>    <span class="comment">% allows adding to the plot</span>
+box <span class="string">off</span>    <span class="comment">% removes frame</span>
+axis <span class="string">tight</span> <span class="comment">% removes extra space</span>
+xlabel <span class="string">'day of year'</span>
+ylabel <span class="string">'sea ice extent (10^6 km^2)'</span>
+ntitle <span class="string">'Antarctic sea ice'</span>
+
+<span class="comment">% Highlight the SON months:</span>
+vfill(doy(<span class="string">'sept 1'</span>),doy(<span class="string">'nov 30'</span>),<span class="string">'b'</span>,<span class="string">'facealpha'</span>,0.1)
+</pre><img vspace="5" hspace="5" src="monthly_documentation_01.png" alt=""> <p>Above, the daily sea ice extent from 1978 to present is plotted as a function of day of year. The <a href="doy_documentation.html"><tt>doy</tt></a> function converts dates to day of year, <a href="ntitle_documentation.html"><tt>ntitle</tt></a> creates the title that's tucked nicely inside the axes, and <a href="hfill_documentation.html"><tt>hfill</tt></a> creates the shaded region from Sept 1 to Nov 30.</p><p>In the plot above, we've implicitly defined spring as September through November (SON) by shading that region. Now we can get the mean sea ice extent for those months using the <tt>monthly</tt> function, specifying months 9, 10, and 11 as our months of interest:</p><pre class="codeinput">monthly(extent_S,t,[9 10 11])
+</pre><pre class="codeoutput">ans =
+         17.53
+</pre><p>The mean spring Antarctic sea ice extent is about 17.5 million square kilometers. We can plot that if you'd like:</p><pre class="codeinput">plot([doy(<span class="string">'sept 1'</span>) doy(<span class="string">'nov 30'</span>)],[17.5 17.5],<span class="string">'r'</span>)
+
+text(doy(<span class="string">'sept 1'</span>),17.5,<span class="string">' SON mean'</span>,<span class="string">'color'</span>,<span class="string">'r'</span>,<span class="string">'vert'</span>,<span class="string">'top'</span>)
+</pre><img vspace="5" hspace="5" src="monthly_documentation_02.png" alt=""> <p>It's worth noting here that there's another way we could have arrived at a similar answer. We could have used <a href="climatology_documentation.html"><tt>climatology</tt></a> to get the daily climatology for the sea ice time series, like this:</p><pre class="codeinput">[extent_S_clim,t_clim] = climatology(extent_S,t);
+
+<span class="comment">% Plot the daily climatology as a black line:</span>
+plot(t_clim,extent_S_clim,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2)
+</pre><img vspace="5" hspace="5" src="monthly_documentation_03.png" alt=""> <p>Then the mean SON value can be obtained as the mean of all daily climatology values from <tt>doy('sept 1')</tt> to <tt>doy('nov 30')</tt>:</p><pre class="codeinput">mean(extent_S_clim(doy(<span class="string">'sept 1'</span>):doy(<span class="string">'nov 30'</span>)))
+</pre><pre class="codeoutput">ans =
+         17.56
+</pre><h2 id="8">Example 2: Precipitation totals:</h2><p>For this example, load some ERA-Interim reanalysis data that contains monthly precipitation totals for 2017:</p><pre class="codeinput">filename = <span class="string">'ERA_Interim_2017.nc'</span>;
+lat = ncread(filename,<span class="string">'latitude'</span>);
+lon = ncread(filename,<span class="string">'longitude'</span>);
+t = datenum(1900,1,1,double(ncread(filename,<span class="string">'time'</span>)),0,0);
+tp = ncread(filename,<span class="string">'tp'</span>);
+</pre><p>What was the total amount of precipitation that fell in March through May of 2017?</p><pre class="codeinput">MAM_sum = monthly(tp,t,3:5,@sum);
+
+figure
+pcolor(lon,lat,MAM_sum'*100)
+shading <span class="string">interp</span>
+cmocean <span class="string">rain</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'total precip (cm)'</span>)
+caxis([0 3])
+</pre><img vspace="5" hspace="5" src="monthly_documentation_04.png" alt=""> <p>Since the 2017 dataset contains only 1 year of data, taking the March-May sum is exactly the same as if we had added those monthly grids together manually:</p><pre class="codeinput"><span class="comment">% Compare monthly solution to manually adding things up:</span>
+isequal(MAM_sum, tp(:,:,3)+tp(:,:,4)+tp(:,:,5))
+</pre><pre class="codeoutput">ans =
+  logical
+   1
+</pre><h2 id="11">Example 3: Interannual variability</h2><p>How predictable are Marches in the Pacific? By that I mean, will the sea surface temperature in March of next year be about the same as it was in March of last year, or is there a tremendous amount of variability between Marches?</p><p>To answer this question, apply the <tt>monthly</tt> function to the sample pacific_sst dataset, which contains 67 years of data:</p><pre class="codeinput">load <span class="string">pacific_sst</span>
+
+mar_var = monthly(sst,t,3,@var);
+
+figure
+imagescn(lon,lat,mar_var)
+caxis([0.05 2])
+cmocean <span class="string">amp</span>
+</pre><img vspace="5" hspace="5" src="monthly_documentation_05.png" alt=""> <p>What we see in the plot above is that along coasts, there is some variance in March sea surface temperature as it can change significantly from year to year, but in the southeastern Pacific, March SST variance is quite low, meaning Marches are more predictable there from climatology.</p><p>Let's put the mean March SST together on a map with the variance of March SST:</p><pre class="codeinput"><span class="comment">% Calculate mean SST for all Marches:</span>
+mar_mean = monthly(sst,t,3);
+
+figure
+imagescn(lon,lat,monthly(sst,t,3))
+cmocean <span class="string">thermal</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'mean March SST (\circC)'</span>)
+
+<span class="comment">% plot variance as contours:</span>
+hold <span class="string">on</span>
+contour(lon,lat,mar_var,0.5:0.1:8,<span class="string">'k'</span>)
+</pre><img vspace="5" hspace="5" src="monthly_documentation_06.png" alt=""> <h2 id="13">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |monthly| documentation 
+% The |monthly| function calculates statistics of a variable for specified 
+% months of the year. 
+% 
+% See also: <season_documentation.html |season|>, <climatology_documentation.html |climatology|>, <sinefit_documentation.html |sinefit|>, 
+% <sineval_documentation.html |sineval|>, and <sinefit_bootstrap_documentation.html |sinefit_bootstrap|>. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  Xm = monthly(X,t,months)
+%  Xm = monthly(...,'dim',dimension)
+%  Xm = monthly(...,@fn)
+%  Xm = monthly(...,'omitnan') 
+%  Xm = monthly(...,options) 
+% 
+%% Description
+% 
+% |Xm = monthly(X,t,months)| returns the mean of |X| for all months specified by
+% the numbers 1 through 12. For example, if months is specified as 1, |Xm| will
+% be the mean of all X values for January. If |months| is |[12 1 2]|, |Xm| will be 
+% the mean of all DJF. Times |t| correspond to |X| and can be in datenum, datetime, 
+% or datestr format. 
+%
+% |Xm = monthly(...,'dim',dimension)| specifies a dimension of operation. By default, 
+% if |X| is a 1D array, the |t| is assumed to correspond to the first nonsingleton 
+% dimension of |X|; if |X| is a 2D matrix, the |t| is assumed to correspond to the 
+% rows of |X|; and if |X| is a 3D matrix, time is assumed to be dimenion 3 of |X|. 
+%
+% |Xm = monthly(...,@fn)| specifies any function such as @max, @std, or your own
+% anonymous function to apply to X. The default function is @mean. 
+% 
+% |Xm = monthly(...,'omitnan')| ignores |NaN| values in the calculation. 
+% 
+% |Xm = monthly(...,options)| specifies any optional inputs, which will depend
+% on the |@fn| applied to the data. 
+% 
+%% Example 1: Spring sea ice extent 
+% What's the average springtime Antarctic sea ice extent? Let's load 
+% the example time series and plot it to get a sense of the question 
+% we're asking: 
+
+% Load the sample data: 
+load seaice_extent
+
+% Plot sea ice extent as a function of day of year:
+plot(doy(t),extent_S,'.')
+
+hold on    % allows adding to the plot
+box off    % removes frame
+axis tight % removes extra space
+xlabel 'day of year'
+ylabel 'sea ice extent (10^6 km^2)'
+ntitle 'Antarctic sea ice'
+
+% Highlight the SON months: 
+vfill(doy('sept 1'),doy('nov 30'),'b','facealpha',0.1)
+
+%% 
+% Above, the daily sea ice extent from 1978 to present is plotted as a function
+% of day of year. The <doy_documentation.html |doy|> function converts dates to
+% day of year, <ntitle_documentation.html |ntitle|> creates the title that's tucked
+% nicely inside the axes, and <hfill_documentation.html |hfill|> creates the shaded
+% region from Sept 1 to Nov 30. 
+% 
+% In the plot above, we've implicitly defined spring as September through 
+% November (SON) by shading that region. Now we can get the mean sea ice extent for 
+% those months using the |monthly| function, specifying months 9, 10, and 11 
+% as our months of interest: 
+
+monthly(extent_S,t,[9 10 11])
+
+%% 
+% The mean spring Antarctic sea ice extent is about 17.5 million square kilometers.
+% We can plot that if you'd like: 
+
+plot([doy('sept 1') doy('nov 30')],[17.5 17.5],'r')
+
+text(doy('sept 1'),17.5,' SON mean','color','r','vert','top')
+
+%% 
+% It's worth noting here that there's another way we could have arrived at a similar
+% answer. We could have used <climatology_documentation.html |climatology|> to get the 
+% daily climatology for the sea ice time series, like this: 
+
+[extent_S_clim,t_clim] = climatology(extent_S,t);
+
+% Plot the daily climatology as a black line: 
+plot(t_clim,extent_S_clim,'k','linewidth',2)
+
+%% 
+% Then the mean SON value can be obtained as the mean of all daily climatology
+% values from |doy('sept 1')| to |doy('nov 30')|: 
+
+mean(extent_S_clim(doy('sept 1'):doy('nov 30')))
+
+%% Example 2: Precipitation totals: 
+% For this example, load some ERA-Interim reanalysis data that contains
+% monthly precipitation totals for 2017: 
+
+filename = 'ERA_Interim_2017.nc'; 
+lat = ncread(filename,'latitude'); 
+lon = ncread(filename,'longitude'); 
+t = datenum(1900,1,1,double(ncread(filename,'time')),0,0); 
+tp = ncread(filename,'tp'); 
+
+%% 
+% What was the total amount of precipitation that fell in March through May
+% of 2017? 
+
+MAM_sum = monthly(tp,t,3:5,@sum); 
+
+figure
+pcolor(lon,lat,MAM_sum'*100)
+shading interp
+cmocean rain
+cb = colorbar; 
+ylabel(cb,'total precip (cm)')
+caxis([0 3])
+
+%%
+% Since the 2017 dataset contains only 1 year of data, taking the March-May
+% sum is exactly the same as if we had added those monthly grids together
+% manually: 
+
+% Compare monthly solution to manually adding things up:
+isequal(MAM_sum, tp(:,:,3)+tp(:,:,4)+tp(:,:,5))
+
+%% Example 3: Interannual variability
+% How predictable are Marches in the Pacific? By that I mean, will the sea
+% surface temperature in March of next year be about the same as it was in March
+% of last year, or is there a tremendous amount of variability between Marches? 
+% 
+% To answer this question, apply the |monthly| function to the sample pacific_sst
+% dataset, which contains 67 years of data: 
+
+load pacific_sst
+
+mar_var = monthly(sst,t,3,@var); 
+
+figure
+imagescn(lon,lat,mar_var) 
+caxis([0.05 2])
+cmocean amp
+
+%%
+% What we see in the plot above is that along coasts, there is some variance
+% in March sea surface temperature as it can change significantly from year to
+% year, but in the southeastern Pacific, March SST variance is quite low, meaning
+% Marches are more predictable there from climatology. 
+% 
+% Let's put the mean March SST together on a map with the variance of March 
+% SST: 
+
+% Calculate mean SST for all Marches:
+mar_mean = monthly(sst,t,3); 
+
+figure
+imagescn(lon,lat,monthly(sst,t,3))
+cmocean thermal
+cb = colorbar; 
+ylabel(cb,'mean March SST (\circC)')
+
+% plot variance as contours: 
+hold on
+contour(lon,lat,mar_var,0.5:0.1:8,'k')
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,182 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>doy documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-02"><meta name="DC.source" content="doy_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>doy</tt> documentation</h1><!--introduction--><p>The <tt>doy</tt> function returns the Julian day of year.</p><p>See also <a href="https://www.mathworks.com/help/matlab/ref/datetime.day.html"><tt>day</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: <tt>datestr</tt> format</a></li><li><a href="#5">Example 2: <tt>datenum</tt> format</a></li><li><a href="#8">Example 3: <tt>datetime</tt> format</a></li><li><a href="#11">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>n = doy(t)
+n = doy(t,'decimalyear')
+n = doy(t,'remdecimalyear')</pre><h2 id="2">Description</h2><p>n = doy(t) gives the day of year (from 1 to 366.999) corresponding to the date(s) given by t. Input dates can be datenum, datetime, or string format.</p><p>n = doy(t,'decimalyear') gives the year in decimal form of input date t. It accounts for leap years, so the decimal value for a given date will depend on whether it's a leap year. For example, July 4th of 2016 (a leap year) is 2016.5082 whereas July 4th of 2017 (not a leap year) is 2017.5068.</p><p>n = doy(t,'remdecimalyear') returns only the remainder of the decimal year, and is always in the range 0 to 1.</p><h2 id="3">Example 1: <tt>datestr</tt> format</h2><p>What's the Julian day of the year for Valentine's Day?</p><pre class="codeinput">doy(<span class="string">'february 14'</span>)
+</pre><pre class="codeoutput">ans =
+         45.00
+</pre><p>45. That's because there are 31 days in January, and Valentine's Day is on the 14th of February.</p><h2 id="5">Example 2: <tt>datenum</tt> format</h2><p>As I write this example file, it is</p><pre>&gt;&gt;now
+ans =
+     737427.95</pre><p>which means it has been 737427 days since January first of the year zero. So what day of the year is it right now?</p><pre class="codeinput">doy(737427.95)
+</pre><pre class="codeoutput">ans =
+          2.95
+</pre><p>As you can see, it is late at night on January 2nd. Only 5% of the day remains.</p><h2 id="8">Example 3: <tt>datetime</tt> format</h2><p>Consider this sea ice extent data:</p><pre class="codeinput">load <span class="string">seaice_extent.mat</span>
+
+whos <span class="string">extent_N</span> <span class="string">t</span> <span class="comment">% displays sizes of these variables</span>
+</pre><pre class="codeoutput">  Name              Size             Bytes  Class       Attributes
+
+  extent_N      12854x1             102832  double                
+  t             12854x1             205665  datetime              
+
+</pre><p>The variable <tt>t</tt> is in <tt>datetime</tt> format, and it contains one date just about every from 1978 to 2018. Here's the time series:</p><pre class="codeinput">plot(t,extent_N)
+ylabel <span class="string">'sea ice extent (10^6 km^2)'</span>
+box <span class="string">off</span> <span class="comment">% removes the ugly frame</span>
+</pre><img vspace="5" hspace="5" src="doy_documentation_01.png" alt=""> <p>Plot the data as a function of Julian day like this</p><pre class="codeinput">jday = doy(t);
+
+scatter(jday,extent_N,10,datenum(t),<span class="string">'filled'</span>)
+cb = cbdate(<span class="string">'yyyy'</span>);     <span class="comment">% formats the colorbar as dates</span>
+set(cb,<span class="string">'ydir'</span>,<span class="string">'reverse'</span>) <span class="comment">% flips the colorbar axis</span>
+axis <span class="string">tight</span>
+ylabel <span class="string">'northern hemisphere sea ice extent (10^6 km^2)'</span>
+xlabel <span class="string">'day of year'</span>
+</pre><img vspace="5" hspace="5" src="doy_documentation_02.png" alt=""> <h2 id="11">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |doy| documentation 
+% The |doy| function returns the Julian day of year. 
+% 
+% See also <https://www.mathworks.com/help/matlab/ref/datetime.day.html |day|>.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  n = doy(t) 
+%  n = doy(t,'decimalyear') 
+%  n = doy(t,'remdecimalyear') 
+% 
+%% Description 
+% 
+% n = doy(t) gives the day of year (from 1 to 366.999) corresponding to the date(s) 
+% given by t. Input dates can be datenum, datetime, or string format. 
+% 
+% n = doy(t,'decimalyear') gives the year in decimal form of input date t. It accounts 
+% for leap years, so the decimal value for a given date will depend on whether it's a leap
+% year. For example, July 4th of 2016 (a leap year) is 2016.5082 whereas July 4th of 2017
+% (not a leap year) is 2017.5068. 
+% 
+% n = doy(t,'remdecimalyear') returns only the remainder of the decimal year, and is always
+% in the range 0 to 1. 
+% 
+%% Example 1: |datestr| format
+% What's the Julian day of the year for Valentine's Day? 
+
+doy('february 14') 
+
+%% 
+% 45. That's because there are 31 days in January, and Valentine's Day is on 
+% the 14th of February. 
+
+%% Example 2: |datenum| format
+% As I write this example file, it is 
+% 
+%  >>now
+%  ans =
+%       737427.95
+% 
+%% 
+% which means it has been 737427 days since January first of the year zero. 
+% So what day of the year is it right now? 
+
+doy(737427.95)
+
+%% 
+% As you can see, it is late at night on January 2nd. Only 5% of the day remains. 
+
+%% Example 3: |datetime| format
+% Consider this sea ice extent data: 
+
+load seaice_extent.mat 
+
+whos extent_N t % displays sizes of these variables
+
+%% 
+% The variable |t| is in |datetime| format, and it contains one date just 
+% about every from 1978 to 2018. Here's the time series: 
+
+plot(t,extent_N)
+ylabel 'sea ice extent (10^6 km^2)'
+box off % removes the ugly frame
+
+%% 
+% Plot the data as a function of Julian day like this
+
+jday = doy(t); 
+
+scatter(jday,extent_N,10,datenum(t),'filled')
+cb = cbdate('yyyy');     % formats the colorbar as dates
+set(cb,'ydir','reverse') % flips the colorbar axis
+axis tight
+ylabel 'northern hemisphere sea ice extent (10^6 km^2)'
+xlabel 'day of year'
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

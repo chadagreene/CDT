@@ -1,0 +1,537 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>local documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-18"><meta name="DC.source" content="local_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>local</tt> documentation</h1><!--introduction--><p>The <tt>local</tt> function returns a 1D array of values calculated from a region of interest in a 3D matrix. For example, if you have a big global 3D sea surface temperature dataset, this function makes it easy to obtain a time series of the average sst within a region of interest.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Examples</a></li><li><a href="#4">Define a mask</a></li><li><a href="#6">Area averaged mean</a></li><li><a href="#8">Beyond average</a></li><li><a href="#9">More examples</a></li><li><a href="#12">Area-weighted mean</a></li><li><a href="#14">Define your own anonymous function</a></li><li><a href="#16">Oceanographic profile</a></li><li><a href="#18">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>y = local(A)
+y = local(A,mask)
+y = local(A,mask,'weight',weight)
+y = local(A,mask,@function)
+y = local(...,FunctionInputs,...)
+y = local(...,'omitnan')</pre><h2 id="2">Description</h2><p><tt>y = local(A)</tt> produces a time series or profile from the mean values of each 2D slice along dimension 3 of the 3D matrix <tt>A</tt>.</p><p><tt>y = local(A,mask)</tt> gives a time series values within a region of interest defined by <tt>mask</tt> inside a a big gridded time series matrix <tt>A</tt>. For matrix <tt>A</tt> of dimensions MxNxP, the dimensions of <tt>mask</tt> must be MxN and the dimensions of output <tt>y</tt> are Px1.</p><p><tt>y = local(...,'weight',weight)</tt> weights averages by any given weighting grid such as that produced by <a href="cdtarea_documentation.html"><tt>cdtarea</tt></a> if you want an area-weighted mean.</p><p><tt>y = local(A,mask,@function)</tt> applies any function to the data values which make up each element of <tt>y</tt>. The default function is <tt>@mean</tt>, but you may use <tt>@max</tt>, <tt>@std</tt>, or just about any other function you can think of. You can even define your own <a href="https://www.mathworks.com/help/matlab/matlab_prog/anonymous-functions.html">anonymous function</a>.</p><p><tt>y = local(...,FunctionInputs,...)</tt> allows extra inputs to the specified function. For example, the <tt>std</tt> function allows the standard deviation weighting scheme to be either <tt>0</tt> or <tt>1</tt>; to specify the former, use <tt>y = local(A,mask,@std,0)</tt>.</p><p><tt>y = local(...,'omitnan')</tt> ignores <tt>NaN</tt> values.</p><h2 id="3">Examples</h2><p>Load this sample data and for context, plot the mean sea surface temperature:</p><pre class="codeinput">load <span class="string">pacific_sst.mat</span>
+
+imagescn(lon,lat,mean(sst,3))
+axis <span class="string">xy</span> <span class="string">image</span>
+cmocean <span class="string">thermal</span>
+
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+</pre><img vspace="5" hspace="5" src="local_documentation_01.png" alt=""> <h2 id="4">Define a mask</h2><p>Some folks characterize ENSO by the mean sea surface temperature within the Nino 3.4 box, defined by the region between 5 N to 5 S latitude and 170 W to 120 W longitude. Let's get a time series of average sea surface temperatures within that box. Start by creating a mask corresponding to the Nino 3.4 box:</p><pre class="codeinput"><span class="comment">% Turn lat and lon into grids:</span>
+[Lon,Lat] = meshgrid(lon,lat);
+
+<span class="comment">% Make a mask of ones inside the polygon:</span>
+mask = geomask(Lat,Lon,[-5 5],[-170 -120]);
+
+figure
+imagescn(lon,lat,mask)
+axis <span class="string">xy</span> <span class="string">tight</span>
+
+title <span class="string">'Nino 3.4 mask'</span>
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+
+ax = axis;
+borders(<span class="string">'countries'</span>)
+axis(ax)
+</pre><img vspace="5" hspace="5" src="local_documentation_02.png" alt=""> <p>That yellow rectangle contains the grid cells over which we'll calculate the mean SST time series. To get a time series of mean SST within the Nino 3.4 box, just give the <tt>local</tt> function, the <tt>sst</tt> dataset and the <tt>mask</tt>:</p><pre class="codeinput">y = local(sst,mask);
+
+figure
+plot(t,y)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+ylabel(<span class="string">' sea surface temperature (\circC) '</span>)
+</pre><img vspace="5" hspace="5" src="local_documentation_03.png" alt=""> <h2 id="6">Area averaged mean</h2><p>Assuming you are not in the Flat Earth Society, we'll have to deal with the inconvenient truth that the grid cells of latitude and longitude are not equal in area. If you want an area-weighted mean, use the <a href="cdtarea_documentation.html"><tt>cdtarea</tt></a> function to get the area of the grid cells and use those areas as weights when calling <tt>local</tt>:</p><pre class="codeinput">Area = cdtarea(Lat,Lon);
+
+yw = local(sst,mask,<span class="string">'weight'</span>,Area);
+
+hold <span class="string">on</span>
+plot(t,yw)
+</pre><img vspace="5" hspace="5" src="local_documentation_04.png" alt=""> <p>Now you might have noticed, the area-averaged values are <b>very</b> close to the unweighted means. That's because the Nino 3.4 box is close to the equator, where all the grid cells are about the same size. The largest and smallest grid cells within the Nino 3.4 box only differ by about 0.2% in area, so calculating the area-weighted mean here is probably unnecessary.</p><p>Want to see for yourself? Try the example above using the full <tt>sst</tt> dataset, letting <tt>mask = isfinite(mean(sst,3));</tt>. Then you will see there's a big difference between averages when the dimensions of the grid cells are taken into account.</p><h2 id="8">Beyond average</h2><p>Maybe you don't want the average value within the Nino 3.4 box--maybe instead you need the maximum and minimum values. Let's calculate the maximum and minimum values within the Nino 3.4 box as a function of time. Also get the standard deviation and plot with <a href="boundedline_documentation.html"><tt>boundedline</tt></a>:</p><pre class="codeinput"><span class="comment">% Calculate max and min values within the Nino 3.4 box:</span>
+ymax = local(sst,mask,@max);
+ymin = local(sst,mask,@min);
+ystd = local(sst,mask,@std);
+
+figure
+boundedline(t,y,ystd);
+
+hold <span class="string">on</span>
+plot(t,ymin,<span class="string">':'</span>,<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>))
+plot(t,ymax,<span class="string">':'</span>,<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>))
+
+<span class="comment">% Zoom in to see what's going on:</span>
+ylim([22 31])
+xlim([datenum(<span class="string">'jan 1, 1990'</span>) datenum(<span class="string">'jan 1, 2000'</span>)])
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+
+legend(<span class="string">'\pm 1\sigma'</span>,<span class="string">'mean sst'</span>,<span class="string">'max &amp; min'</span>,<span class="keyword">...</span>
+   <span class="string">'location'</span>,<span class="string">'southwest'</span>)
+</pre><img vspace="5" hspace="5" src="local_documentation_05.png" alt=""> <h2 id="9">More examples</h2><pre class="codeinput"><span class="comment">% Ocean mask:</span>
+ocean = all(isfinite(sst),3);
+
+<span class="comment">% Make masks of northern and southern hemispheres:</span>
+north = ocean &amp; Lat&gt;0;
+south = ocean &amp; Lat&lt;0;
+</pre><p>Here's what those masks look like; yellow is <tt>true</tt> and blue is <tt>false</tt>:</p><pre class="codeinput">figure
+subplot(1,3,1)
+imagesc(ocean)
+axis <span class="string">image</span> <span class="string">off</span>
+title <span class="string">'ocean'</span>
+
+subplot(1,3,2)
+imagesc(north)
+axis <span class="string">image</span> <span class="string">off</span>
+title <span class="string">'northern hemisphere'</span>
+
+subplot(1,3,3)
+imagesc(south)
+axis <span class="string">image</span> <span class="string">off</span>
+title <span class="string">'southern hemisphere'</span>
+</pre><img vspace="5" hspace="5" src="local_documentation_06.png" alt=""> <p>With masks defined it's easy to compare sea surface temperatures in the northern and southern hemispheres:</p><pre class="codeinput"><span class="comment">% Calculate time series of SSTs:</span>
+ynorth = local(sst,north);
+ysouth = local(sst,south);
+
+<span class="comment">% Plot time series:</span>
+figure
+plot(t,ynorth,<span class="string">'b'</span>)
+hold <span class="string">on</span>
+plot(t,ysouth,<span class="string">'r'</span>)
+ylabel(<span class="string">' mean sst (\circC) '</span>)
+legend(<span class="string">'northern hemisphere'</span>,<span class="string">'southern hemisphere'</span>)
+
+<span class="comment">% Zoom in on a 3 year period:</span>
+xlim([datenum(<span class="string">'jan 1, 1990'</span>) datenum(<span class="string">'jan 1, 1993'</span>)])
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+</pre><img vspace="5" hspace="5" src="local_documentation_07.png" alt=""> <h2 id="12">Area-weighted mean</h2><p>The time series above indicates that sea surface temperatures in the northern and southern hemispheres tend to be out of phase with each other due to seasonality. But in the plot above, every grid cell was given equal weight in the calculation of the means, even though poleward (colder) grid cells are smaller in area than equatorward (warmer) grid cells.  Unweighted means bias global averages toward values found near the poles rather than representing a true spatial average.  For a better measure of average sea surface temperatures, use the <tt>'areaweighted'</tt> option:</p><pre class="codeinput"><span class="comment">% Calculate time series of SSTs:</span>
+ynorthw = local(sst,north,<span class="string">'weight'</span>,Area);
+ysouthw = local(sst,south,<span class="string">'weight'</span>,Area);
+
+<span class="comment">% Plot time series:</span>
+plot(t,ynorthw,<span class="string">'b'</span>,<span class="string">'linewidth'</span>,2)
+plot(t,ysouthw,<span class="string">'r'</span>,<span class="string">'linewidth'</span>,2)
+legend(<span class="string">'unweighted northern hemisphere'</span>,<span class="string">'unweighted southern hemisphere'</span>,<span class="keyword">...</span>
+  <span class="string">'area-weighted northern hemisphere'</span>,<span class="string">'area-weighted southern hemisphere'</span>)
+
+<span class="comment">% Zoom in on a 3 year period:</span>
+xlim([datenum(<span class="string">'jan 1, 1990'</span>) datenum(<span class="string">'jan 1, 1993'</span>)])
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+</pre><img vspace="5" hspace="5" src="local_documentation_08.png" alt=""> <p>Area-weighted sea surface temperatures are higher than unweighted means because warm grid cells near the equator are much larger than cold, small grid cells near the poles, so they should contribute more to the true spatial average.  An offset of several degrees still remains between the northern and southern hemispheres, but that does not mean the northern hemisphere is several degrees warmer than the southern hemisphere.  Rather the bias more likely a result of Canada and the United States getting in the way of the ocean and thus reducing the overall contribution of the northernmost grid cells.  Here's a look at how many grid cells are contributing to averages, by latitude:</p><pre class="codeinput">figure
+histogram(Lat(ocean),-55:10:55)
+xlabel(<span class="string">'latitude'</span>)
+ylabel(<span class="string">'number of contributing cells'</span>)
+xlim([-60 60])
+</pre><img vspace="5" hspace="5" src="local_documentation_09.png" alt=""> <h2 id="14">Define your own anonymous function</h2><p>Perhaps you feel too limited by Matlab's offerings of simple functions like <tt>@mean</tt>, <tt>@max</tt>, <tt>@min</tt>, etc. If you need to get more complicated measures of what's going on inside a region of interest, simply define a function of your own.</p><p>Say you want the total temperature range in a region of interest in degrees Fahrenheit.  For any arbitrary set of temperature values <tt>x</tt>, we want the <tt>max(x)</tt> minus <tt>min(x)</tt>, and then convert to Fahrenheit by multiplying by 9/5 and add 32:</p><pre class="codeinput"><span class="comment">% Define temperature span in degrees F:</span>
+fn = @(x) (max(x) - min(x))*9/5+32;
+
+<span class="comment">% Calculate</span>
+sst_range_F = local(sst,north,fn);
+
+figure
+plot(t,sst_range_F)
+
+<span class="comment">% Zoom in on a 3 year period:</span>
+xlim([datenum(<span class="string">'jan 1, 1990'</span>) datenum(<span class="string">'jan 1, 1993'</span>)])
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+ylabel(<span class="string">' Range of SSTs in northern hemisphere, (\circF) '</span>)
+</pre><img vspace="5" hspace="5" src="local_documentation_10.png" alt=""> <p>The plot above implies that in the winter, there's about a 90 degree difference in temperature between the north pole and the equator.  In the summer, the Arctic warms up, while the equator stays about the same temperature, so the difference in temperature drops to about 72 degrees.</p><h2 id="16">Oceanographic profile</h2><p>The <tt>local</tt> function isn't just for time series data! Any 3D grids such as atmoshperic or oceanographic variables are easy to obtain with <tt>local</tt>. Do you want the mean salinity profile of the Mediterranean Sea? Just define the extents of your region of interest and get that profile you always dreamed of. Here's an example of SODB data from the Drake Passage. Plot the surface temperature (layer 1 of <tt>ptm</tt>) and</p><pre class="codeinput">load <span class="string">sodb_example</span>
+
+figure
+imagescn(lon,lat,ptm(:,:,1))
+cmocean <span class="string">thermal</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'surface temperature \circC'</span>)
+xlabel <span class="string">longitude</span>
+ylabel <span class="string">latitude</span>
+
+<span class="comment">% Weddell Sea coordinates:</span>
+wlon = [-23   -42   -36   -20    -4    -3   -23];
+wlat = [-62   -64   -71   -71   -67   -60   -62];
+
+<span class="comment">% Outline the Weddell in yellow:</span>
+hold <span class="string">on</span>
+plot(wlon,wlat,<span class="string">'y'</span>)
+</pre><img vspace="5" hspace="5" src="local_documentation_11.png" alt=""> <p>To get a temperature profile for the Weddell Sea, grid up the <tt>lat,lon</tt> arrays, turn the Weddell Sea coordinates into a corresponding mask with <a href="geomask_documentation.html"><tt>geomask</tt></a>, and use <tt>local</tt> to get the mean temperature profile for the Weddell sea:</p><pre class="codeinput"><span class="comment">% Turn arrays into grids:</span>
+[Lon,Lat] = meshgrid(lon,lat);
+
+<span class="comment">% Create a Weddell Sea mask:</span>
+mask = geomask(Lat,Lon,wlat,wlon);
+
+<span class="comment">% Get temperature profile:</span>
+ptm1 = local(ptm,mask,<span class="string">'omitnan'</span>);
+
+figure
+plot(ptm1,d)
+
+axis <span class="string">ij</span> <span class="string">tight</span> <span class="comment">% flips y axis and eliminates empty space</span>
+box <span class="string">off</span>
+xlabel <span class="string">'potential temperature (\circC)'</span>
+ylabel <span class="string">'depth (m)'</span>
+</pre><img vspace="5" hspace="5" src="local_documentation_12.png" alt=""> <h2 id="18">Author Info</h2><p>The <tt>local</tt> function and supporting documentation were written by Chad A. Greene of the University of Texas Institute for Geophysics (UTIG), February 2017.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |local| documentation 
+% The |local| function returns a 1D array of values calculated from a region of interest in a 3D matrix. 
+% For example, if you have a big global 3D sea surface temperature dataset, this function
+% makes it easy to obtain a time series of the average sst within a region of interest. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax 
+% 
+%  y = local(A)
+%  y = local(A,mask)
+%  y = local(A,mask,'weight',weight)
+%  y = local(A,mask,@function) 
+%  y = local(...,FunctionInputs,...)
+%  y = local(...,'omitnan')
+% 
+%% Description 
+% 
+% |y = local(A)| produces a time series or profile from the mean values of each 2D 
+% slice along dimension 3 of the 3D matrix |A|. 
+% 
+% |y = local(A,mask)| gives a time series values within a region of interest defined by |mask| inside a 
+% a big gridded time series matrix |A|. For matrix |A| of dimensions MxNxP, the dimensions of
+% |mask| must be MxN and the dimensions of output |y| are Px1.
+%  
+% |y = local(...,'weight',weight)| weights averages by any given weighting grid such as that produced by <cdtarea_documentation.html |cdtarea|>
+% if you want an area-weighted mean. 
+% 
+% |y = local(A,mask,@function)| applies any function to the data values which make up each element
+% of |y|. The default function is |@mean|, but you may use |@max|, |@std|, or just about
+% any other function you can think of. You can even define your own <https://www.mathworks.com/help/matlab/matlab_prog/anonymous-functions.html 
+% anonymous function>. 
+%  
+% |y = local(...,FunctionInputs,...)| allows extra inputs to the specified function. For 
+% example, the |std| function allows the standard deviation weighting scheme to be 
+% either |0| or |1|; to specify the former, use |y = local(A,mask,@std,0)|. 
+% 
+% |y = local(...,'omitnan')| ignores |NaN| values.  
+%  
+%% Examples
+% Load this sample data and for context, plot the mean sea surface temperature: 
+ 
+load pacific_sst.mat
+
+imagescn(lon,lat,mean(sst,3))
+axis xy image
+cmocean thermal 
+
+xlabel 'longitude'
+ylabel 'latitude'
+
+%% Define a mask
+% Some folks characterize ENSO by the mean sea surface temperature within
+% the Nino 3.4 box, defined by the region between 5 N to 5 S latitude and 170 W to
+% 120 W longitude. Let's get a time series of average sea surface
+% temperatures within that box. Start by creating a mask corresponding to
+% the Nino 3.4 box: 
+
+% Turn lat and lon into grids: 
+[Lon,Lat] = meshgrid(lon,lat); 
+
+% Make a mask of ones inside the polygon: 
+mask = geomask(Lat,Lon,[-5 5],[-170 -120]); 
+
+figure
+imagescn(lon,lat,mask)
+axis xy tight
+
+title 'Nino 3.4 mask'
+xlabel 'longitude'
+ylabel 'latitude'
+
+ax = axis;
+borders('countries')
+axis(ax)
+
+%% 
+% That yellow rectangle contains the grid cells over which we'll calculate
+% the mean SST time series. To get a time series of mean SST within the Nino
+% 3.4 box, just give the |local| function, the |sst| dataset and the |mask|: 
+
+y = local(sst,mask); 
+
+figure
+plot(t,y) 
+axis tight
+box off
+datetick('x','keeplimits') 
+ylabel(' sea surface temperature (\circC) ')
+
+%% Area averaged mean 
+% Assuming you are not in the Flat Earth Society, we'll have to deal with
+% the inconvenient truth that the grid cells of latitude and longitude are
+% not equal in area. If you want an area-weighted mean, use the
+% <cdtarea_documentation.html |cdtarea|> function to get the area of the
+% grid cells and use those areas as weights when calling |local|: 
+
+Area = cdtarea(Lat,Lon); 
+
+yw = local(sst,mask,'weight',Area); 
+
+hold on
+plot(t,yw)
+
+%% 
+% Now you might have noticed, the area-averaged values are *very* close to
+% the unweighted means. That's because the Nino 3.4 box is close to the
+% equator, where all the grid cells are about the same size. The largest 
+% and smallest grid cells within the Nino 3.4 box only differ by about 0.2%
+% in area, so calculating the area-weighted mean here is probably
+% unnecessary. 
+% 
+% Want to see for yourself? Try the example above using the full |sst| dataset, 
+% letting |mask = isfinite(mean(sst,3));|. Then you will see there's a big 
+% difference between averages when the dimensions of the grid cells are taken
+% into account. 
+
+%% Beyond average 
+% Maybe you don't want the average value within the Nino 3.4 boxREPLACE_WITH_DASH_DASHmaybe instead you need the maximum and minimum values. 
+% Let's calculate the maximum and minimum values within the Nino 3.4 box as a function of time. Also get 
+% the standard deviation and plot with <boundedline_documentation.html |boundedline|>: 
+
+% Calculate max and min values within the Nino 3.4 box: 
+ymax = local(sst,mask,@max); 
+ymin = local(sst,mask,@min); 
+ystd = local(sst,mask,@std); 
+
+figure
+boundedline(t,y,ystd); 
+
+hold on
+plot(t,ymin,':','color',rgb('gray'))
+plot(t,ymax,':','color',rgb('gray'))
+
+% Zoom in to see what's going on: 
+ylim([22 31]) 
+xlim([datenum('jan 1, 1990') datenum('jan 1, 2000')]) 
+datetick('x','keeplimits') 
+
+legend('\pm 1\sigma','mean sst','max & min',...
+   'location','southwest')
+
+%% More examples 
+
+% Ocean mask: 
+ocean = all(isfinite(sst),3); 
+
+% Make masks of northern and southern hemispheres: 
+north = ocean & Lat>0; 
+south = ocean & Lat<0; 
+
+%% 
+% Here's what those masks look like; yellow is |true| and blue is |false|: 
+
+figure
+subplot(1,3,1) 
+imagesc(ocean) 
+axis image off
+title 'ocean'
+
+subplot(1,3,2) 
+imagesc(north) 
+axis image off
+title 'northern hemisphere'
+
+subplot(1,3,3) 
+imagesc(south) 
+axis image off
+title 'southern hemisphere'
+
+%% 
+% With masks defined it's easy to compare sea surface temperatures in the northern and southern hemispheres: 
+
+% Calculate time series of SSTs: 
+ynorth = local(sst,north); 
+ysouth = local(sst,south); 
+
+% Plot time series: 
+figure
+plot(t,ynorth,'b') 
+hold on
+plot(t,ysouth,'r') 
+ylabel(' mean sst (\circC) ')
+legend('northern hemisphere','southern hemisphere') 
+
+% Zoom in on a 3 year period: 
+xlim([datenum('jan 1, 1990') datenum('jan 1, 1993')]) 
+datetick('x','keeplimits') 
+
+%% Area-weighted mean
+% The time series above indicates that sea surface temperatures in the northern and southern hemispheres tend
+% to be out of phase with each other due to seasonality. But in the plot above, every grid cell was given equal
+% weight in the calculation of the means, even though poleward (colder) grid cells are smaller in area than 
+% equatorward (warmer) grid cells.  Unweighted means bias global averages toward values found near the 
+% poles rather than representing a true spatial average.  For a better measure of average sea surface temperatures, 
+% use the |'areaweighted'| option:  
+
+% Calculate time series of SSTs: 
+ynorthw = local(sst,north,'weight',Area); 
+ysouthw = local(sst,south,'weight',Area); 
+
+% Plot time series: 
+plot(t,ynorthw,'b','linewidth',2) 
+plot(t,ysouthw,'r','linewidth',2) 
+legend('unweighted northern hemisphere','unweighted southern hemisphere',...
+  'area-weighted northern hemisphere','area-weighted southern hemisphere') 
+
+% Zoom in on a 3 year period: 
+xlim([datenum('jan 1, 1990') datenum('jan 1, 1993')]) 
+datetick('x','keeplimits') 
+
+%% 
+% Area-weighted sea surface temperatures are higher than unweighted means because warm grid cells near the
+% equator are much larger than cold, small grid cells near the poles, so they should contribute more to the true 
+% spatial average.  An offset of several degrees still remains between the northern and southern hemispheres, 
+% but that does not mean the northern hemisphere is several degrees warmer than the southern hemisphere.  Rather
+% the bias more likely a result of Canada and the United States getting in the way of the ocean and thus reducing
+% the overall contribution of the northernmost grid cells.  Here's a look at how many grid cells are contributing
+% to averages, by latitude: 
+
+figure
+histogram(Lat(ocean),-55:10:55)
+xlabel('latitude')
+ylabel('number of contributing cells') 
+xlim([-60 60])
+
+%% Define your own anonymous function
+% Perhaps you feel too limited by Matlab's offerings of simple functions like |@mean|, |@max|, |@min|, etc. If you
+% need to get more complicated measures of what's going on inside a region of interest, simply define a function
+% of your own. 
+% 
+% Say you want the total temperature range in a region of interest in degrees Fahrenheit.  For any arbitrary set of temperature
+% values |x|, we want the |max(x)| minus |min(x)|, and then convert to Fahrenheit by multiplying by 9/5 and add 32: 
+
+% Define temperature span in degrees F: 
+fn = @(x) (max(x) - min(x))*9/5+32;
+
+% Calculate
+sst_range_F = local(sst,north,fn); 
+
+figure
+plot(t,sst_range_F) 
+
+% Zoom in on a 3 year period: 
+xlim([datenum('jan 1, 1990') datenum('jan 1, 1993')]) 
+datetick('x','keeplimits') 
+ylabel(' Range of SSTs in northern hemisphere, (\circF) ')
+
+%% 
+% The plot above implies that in the winter, there's about a 90 degree difference in temperature between the north
+% pole and the equator.  In the summer, the Arctic warms up, while the equator stays about the same temperature, 
+% so the difference in temperature drops to about 72 degrees. 
+
+%% Oceanographic profile
+% The |local| function isn't just for time series data! Any 3D grids such as atmoshperic or 
+% oceanographic variables are easy to obtain with |local|. Do you want the mean salinity profile
+% of the Mediterranean Sea? Just define the extents of your region of interest
+% and get that profile you always dreamed of. Here's an example of SODB data 
+% from the Drake Passage. Plot the surface temperature (layer 1 of |ptm|) and
+
+load sodb_example
+
+figure
+imagescn(lon,lat,ptm(:,:,1))
+cmocean thermal
+cb = colorbar; 
+ylabel(cb,'surface temperature \circC')
+xlabel longitude
+ylabel latitude
+
+% Weddell Sea coordinates: 
+wlon = [-23   -42   -36   -20    -4    -3   -23]; 
+wlat = [-62   -64   -71   -71   -67   -60   -62]; 
+
+% Outline the Weddell in yellow: 
+hold on
+plot(wlon,wlat,'y')
+
+%% 
+% To get a temperature profile for the Weddell Sea, grid up the |lat,lon| arrays, 
+% turn the Weddell Sea coordinates into a corresponding mask with <geomask_documentation.html |geomask|>, 
+% and use |local| to get the mean temperature profile for the Weddell sea: 
+
+% Turn arrays into grids: 
+[Lon,Lat] = meshgrid(lon,lat); 
+
+% Create a Weddell Sea mask: 
+mask = geomask(Lat,Lon,wlat,wlon); 
+
+% Get temperature profile: 
+ptm1 = local(ptm,mask,'omitnan'); 
+
+figure
+plot(ptm1,d)
+
+axis ij tight % flips y axis and eliminates empty space
+box off
+xlabel 'potential temperature (\circC)'
+ylabel 'depth (m)'
+
+%% Author Info 
+% The |local| function and supporting documentation were written by Chad A. Greene of the University of Texas
+% Institute for Geophysics (UTIG), February 2017. 
+##### SOURCE END #####
+--></body></html>

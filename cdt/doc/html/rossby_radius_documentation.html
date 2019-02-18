@@ -1,0 +1,160 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>rossby_radius documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-06"><meta name="DC.source" content="rossby_radius_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>rossby_radius</tt> documentation</h1><!--introduction--><p><tt>rossby_radius</tt> computes the Rossby radius of deformation for a barotropic ocean,</p><p><img src="rossby_radius_documentation_eq08534325243796768765.png" alt="$$ L_R = \frac{\sqrt{gD}}{|f|} $$"></p><p>where <img src="rossby_radius_documentation_eq15975157615973957518.png" alt="$L_R$"> is the Rossby radius of deformation, <img src="rossby_radius_documentation_eq07585311203459331132.png" alt="$g$"> is gravitational acceleration, <img src="rossby_radius_documentation_eq16171345478199012472.png" alt="$D$"> is the water depth, and <img src="rossby_radius_documentation_eq18096895394918367257.png" alt="$f$"> is the Coriolis parameter given by <a href="coriolisf_documentation.html"><tt>coriolisf</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example: Global ocean</a></li><li><a href="#5">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>Lr = rossby_radius(lat,lon)
+Lr = rossby_radius(lat,'depth',D)
+Lr = rossby_radius(...,'rot',rot)
+Lr = rossby_radius(...,'g',gravity)</pre><h2 id="2">Description</h2><p><tt>Lr = rossby_radius(lat,lon)</tt> computes the barotropic Rossby radius of deformation in the ocean at the geo coordinates <tt>lat,lon</tt>. The Rossby radius calculation depends on ocean depth, which is automatically determined via the <a href="topo_interp_documentation"><tt>topo_interp</tt></a> function.</p><p><tt>Lr = rossby_radius(lat,'depth',D)</tt> overrides automatic calculation of ocean depth by entering depths <tt>D</tt>, which can be scalar or the same size as <tt>lat</tt>. Depths should be positive.</p><p><tt>Lr = rossby_radius(...,'rot',rot)</tt> specifies a rate of rotation. By default, <tt>rot</tt> is Earth's present-day rate of rotation 7.2921 x 10^-5 rad/s, but a different rate may be specified to model Earth at a different time, other celestial bodies.</p><p><tt>Lr = rossby_radius(...,'g',gravity)</tt> specifies the gravitational rate of acceleration. Default is value is <tt>9.81</tt>.</p><h2 id="3">Example: Global ocean</h2><p>Get the Barotropic Rossby radius everywhere in Earth's oceans. Start by making a quarter-degree grid that covers the world with <a href="cdtgrid_documentation.html"><tt>cdtgrid</tt></a>, then calculate the Rossby radius for each grid point:</p><pre class="codeinput">[lat,lon] = cdtgrid(0.25);
+
+r = rossby_radius(lat,lon);
+
+<span class="comment">% Plot it up:</span>
+imagescn(lon,lat,r)
+
+<span class="comment">% Set color axis properties:</span>
+set(gca,<span class="string">'colorscale'</span>,<span class="string">'log'</span>)
+<span class="comment">%caxis([1e5 1e7]) % sets color axis limits</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'Rossby radius (m)'</span>)
+</pre><img vspace="5" hspace="5" src="rossby_radius_documentation_01.png" alt=""> <p>What we see is the Rossby radius is small near the poles and in shallow waters anywhere. In the deep equatorial waters, the Rossby radius is quite large!</p><p>Make it strange by changing the colormap to the <a href="cmocean_documentation.html"><tt>cmocean</tt></a> <i>tempo</i> colormap and underlay with an <a href="earthimage_documentation.html"><tt>earthimage</tt></a>:</p><pre class="codeinput">cmocean <span class="string">tempo</span>
+
+hold <span class="string">on</span>
+h = earthimage;
+uistack(h,<span class="string">'bottom'</span>) <span class="comment">% puts Earth image underneath Rossby radius</span>
+</pre><img vspace="5" hspace="5" src="rossby_radius_documentation_02.png" alt=""> <h2 id="5">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |rossby_radius| documentation
+% |rossby_radius| computes the Rossby radius of deformation for a barotropic ocean, 
+% 
+% $$ L_R = \frac{\sqrt{gD}}{|f|} $$
+% 
+% where $L_R$ is the Rossby radius of deformation, $g$ is gravitational acceleration, 
+% $D$ is the water depth, and $f$ is the Coriolis parameter given by <coriolisf_documentation.html |coriolisf|>.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  Lr = rossby_radius(lat,lon)
+%  Lr = rossby_radius(lat,'depth',D)
+%  Lr = rossby_radius(...,'rot',rot)
+%  Lr = rossby_radius(...,'g',gravity)
+% 
+%% Description
+% 
+% |Lr = rossby_radius(lat,lon)| computes the barotropic Rossby radius of deformation in the ocean at the 
+% geo coordinates |lat,lon|. The Rossby radius calculation depends on ocean depth, which is 
+% automatically determined via the <topo_interp_documentation |topo_interp|> function. 
+% 
+% |Lr = rossby_radius(lat,'depth',D)| overrides automatic calculation of ocean depth by
+% entering depths |D|, which can be scalar or the same size as |lat|. Depths should be
+% positive. 
+% 
+% |Lr = rossby_radius(...,'rot',rot)| specifies a rate of rotation. By default, |rot| is Earth's 
+% present-day rate of rotation 7.2921 x 10^-5 rad/s, but a different rate may be specified 
+% to model Earth at a different time, other celestial bodies.
+% 
+% |Lr = rossby_radius(...,'g',gravity)| specifies the gravitational rate of acceleration.
+% Default is value is |9.81|. 
+% 
+%% Example: Global ocean
+% Get the Barotropic Rossby radius everywhere in Earth's oceans. Start by making a quarter-degree
+% grid that covers the world with <cdtgrid_documentation.html |cdtgrid|>, then calculate
+% the Rossby radius for each grid point: 
+
+[lat,lon] = cdtgrid(0.25); 
+
+r = rossby_radius(lat,lon); 
+
+% Plot it up: 
+imagescn(lon,lat,r)
+
+% Set color axis properties: 
+set(gca,'colorscale','log')
+%caxis([1e5 1e7]) % sets color axis limits
+cb = colorbar;
+ylabel(cb,'Rossby radius (m)') 
+
+%% 
+% What we see is the Rossby radius is small near the poles and in shallow waters anywhere.
+% In the deep equatorial waters, the Rossby radius is quite large!
+% 
+% Make it strange by changing the colormap to the <cmocean_documentation.html |cmocean|>
+% _tempo_ colormap and underlay with an <earthimage_documentation.html |earthimage|>: 
+
+cmocean tempo
+
+hold on 
+h = earthimage; 
+uistack(h,'bottom') % puts Earth image underneath Rossby radius
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

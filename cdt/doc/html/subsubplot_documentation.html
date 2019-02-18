@@ -1,0 +1,438 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>subsubplot documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-31"><meta name="DC.source" content="subsubplot_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>subsubplot</tt> documentation</h1><!--introduction--><p><tt>subsubplot</tt> creates sub-axes in tiled positions.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Two subsubplots</a></li><li><a href="#4">Example 2: Vertical separation:</a></li><li><a href="#5">Example 3: Subsubplots with subplots</a></li><li><a href="#6">Example 4: Right-hand axes:</a></li><li><a href="#7">Example 5: Color-coded axes</a></li><li><a href="#8">Tip: Linking axes</a></li><li><a href="#10">Example 6: A grid of subsubplots</a></li><li><a href="#12">Example 7: Oceanographic profiles</a></li><li><a href="#13">Example 8: Overlapping axes</a></li><li><a href="#14">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>subsubplot(mm,nn,pp)
+subsubplot(m,n,p,mm,nn,pp)
+subsubplot(...,'vpad',vspace)
+subsubplot(...,'hpad',hspace)
+h = subsubplot(...)</pre><h2 id="2">Description</h2><p><tt>subsubplot(mm,nn,pp)</tt> divides the current figure into an mm-by-nn grid and creates axes in the position specified by pp. The first subplot is the first column of the first row, the second subplot is the second column of the first row, and so on. This syntax effectively fills the area that would be occupied by <tt>subplot(1,1,1)</tt>.</p><p><tt>subsubplot(m,n,p,mm,nn,pp)</tt> As above, but in this case the <tt>subplot(m,n,p)</tt> is further divided into an mm-by-nn grid, and <tt>subsubplot</tt> creates a new set of axes in the location specified by <tt>pp</tt>.</p><p><tt>subsubplot(...,'vpad',vspace)</tt> specifies the amount of vertical spacing between each subsubplot axis, in normalized figure units on the scale of 0 to 1. The default value is <tt>0</tt>. Setting it to <tt>0.05</tt>, for example, separates axes by 5% of the figure height.</p><p><tt>subsubplot(...,'hpad',hspace)</tt> specifies the amount of horizontal spacing between each subplot axis, in normalized figure units on the scale of 0 to 1. The default value is <tt>0</tt>. Setting it to <tt>0.05</tt>, for example, separates axes by 5% of the figure width.</p><p>|h = subsubplot(...) returns a handle h of the axes created by subsubplot.</p><h2 id="3">Example 1: Two subsubplots</h2><p>Here are two subsubplots stacked atop each other:</p><pre class="codeinput">figure
+subsubplot(2,1,1)
+plot(rand(25,1))
+
+subsubplot(2,1,2)
+plot(rand(25,1))
+</pre><img vspace="5" hspace="5" src="subsubplot_documentation_01.png" alt=""> <h2 id="4">Example 2: Vertical separation:</h2><p>By default, <tt>subsubplot</tt> places axes directly adjacent to each other. To add a little padding between the two axes, specify <tt>'vpad'</tt>. Below we're specify that axes should be separated by 5 percent of the figure's height:</p><pre class="codeinput">figure
+subsubplot(2,1,1,<span class="string">'vpad'</span>,0.05)
+plot(rand(25,1))
+
+subsubplot(2,1,2,<span class="string">'vpad'</span>,0.05)
+plot(rand(25,1))
+</pre><img vspace="5" hspace="5" src="subsubplot_documentation_02.png" alt=""> <h2 id="5">Example 3: Subsubplots with subplots</h2><p>The <tt>subsubplot</tt> function is designed to work within Matlab's built-in <tt>subplot</tt> structure. Below, we use the space that would be occupied by <tt>subplot(2,2,2)</tt> to create two subsubplots, specified by <tt>subsubplot(2,2,2,2,1,1)</tt> and <tt>subsubplot(2,2,2,2,2,2)</tt>:</p><pre class="codeinput">figure
+
+<span class="comment">% Top left subplot:</span>
+subplot(2,2,1)
+plot((1:100).^2)
+axis <span class="string">tight</span>
+
+<span class="comment">% * * * TOP RIGHT SUBSUBPLOTS: * * *</span>
+<span class="comment">% Top subsublot:</span>
+subsubplot(2,2,2,2,1,1)
+plot(rand(30,1))
+
+<span class="comment">% Bottom subsublot:</span>
+subsubplot(2,2,2,2,1,2)
+plot(rand(30,1))
+
+<span class="comment">% Bottom left subplot:</span>
+subplot(2,2,3)
+plot(sind(1:700))
+axis <span class="string">tight</span>
+
+<span class="comment">% Bottom right subplot:</span>
+subplot(2,2,4)
+plot(tand(1:700))
+axis <span class="string">tight</span>
+</pre><img vspace="5" hspace="5" src="subsubplot_documentation_03.png" alt=""> <h2 id="6">Example 4: Right-hand axes:</h2><p>To prevent overlapping y axes, you can either add some space between the axes with the <tt>'vpad'</tt> option, or you can put every other y axis on the right hand side like this:</p><pre class="codeinput"><span class="comment">% labels for each panel:</span>
+panel = {<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>,<span class="string">'e'</span>,<span class="string">'f'</span>};
+
+figure
+<span class="keyword">for</span> k = 1:6
+   ax(k) = subsubplot(6,1,k);
+   plot(rand*30*rand(25,1)) <span class="comment">% plots random data</span>
+   axis <span class="string">tight</span>               <span class="comment">% removes whitespace</span>
+
+   ntitle(panel{k},<span class="string">'location'</span>,<span class="string">'nw'</span>)
+<span class="keyword">end</span>
+
+<span class="comment">% Put every other axis on the right hand side:</span>
+set(ax(2:2:end),<span class="string">'YAxisLocation'</span>, <span class="string">'right'</span>)
+</pre><img vspace="5" hspace="5" src="subsubplot_documentation_04.png" alt=""> <h2 id="7">Example 5: Color-coded axes</h2><p>Same as above, but this time make the axis colors match the line colors:</p><pre class="codeinput">figure
+<span class="keyword">for</span> k = 1:6
+   ax(k) = subsubplot(6,1,k);
+
+   col = rand(1,3);
+   plot(rand*30*rand(25,1),<span class="string">'color'</span>,col)
+   set(gca,<span class="string">'ycolor'</span>,col)
+   axis <span class="string">tight</span>
+   ntitle(panel{k},<span class="string">'location'</span>,<span class="string">'nw'</span>,<span class="string">'color'</span>,col)
+<span class="keyword">end</span>
+
+set(ax(2:2:end),<span class="string">'YAxisLocation'</span>, <span class="string">'right'</span>)
+</pre><img vspace="5" hspace="5" src="subsubplot_documentation_05.png" alt=""> <h2 id="8">Tip: Linking axes</h2><p>Sometimes when zooming in on a subsubplot using the mouse (or by setting axis limits programmatically), you want the extents of other subsubplots to automatically zoom to the same extents. To achieve such behavior, get the handle of each <tt>subsubplot</tt> and use <tt>linkaxes</tt>. For the figure above, linking all the x axis extents is this easy:</p><pre class="codeinput">linkaxes(ax,<span class="string">'x'</span>)
+</pre><img vspace="5" hspace="5" src="subsubplot_documentation_06.png" alt=""> <p>And now you can zoom on any of the subsubplots above and all the other axes in the figure will zoom to the same extents.</p><h2 id="10">Example 6: A grid of subsubplots</h2><p>Here's a 4-by-3 grid of random data plotted with <tt>subsubplot</tt>. We'll also use <a href="ntitle_documentation.html"><tt>ntitle</tt></a> to include little titles in each subsubplot.</p><pre class="codeinput">figure
+
+<span class="keyword">for</span> k = 1:12
+   <span class="comment">% Initialize subsubplots:</span>
+   subsubplot(4,3,k)
+
+   <span class="comment">% plot some random data using random colors:</span>
+   plot(rand(50,1),<span class="string">'color'</span>,rand(1,3))
+   axis <span class="string">tight</span>
+
+   ntitle([<span class="string">'subsubplot '</span>,num2str(k)],<span class="string">'backgroundcolor'</span>,<span class="string">'w'</span>)
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="subsubplot_documentation_07.png" alt=""> <p>Not enough whitespace between each <tt>subsubplot</tt>? Add a little horizontal and vertical padding like this:</p><pre class="codeinput">figure
+
+<span class="keyword">for</span> k = 1:12
+
+   <span class="comment">% Initialize subsubplots:</span>
+   subsubplot(4,3,k,<span class="string">'hpad'</span>,0.03,<span class="string">'vpad'</span>,0.05)
+
+   <span class="comment">% plot some random data using random colors:</span>
+   plot(rand(50,1),<span class="string">'color'</span>,rand(1,3))
+   axis <span class="string">tight</span>
+
+
+   ntitle([<span class="string">'subsubplot '</span>,num2str(k)],<span class="string">'vert'</span>,<span class="string">'bottom'</span>)
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="subsubplot_documentation_08.png" alt=""> <h2 id="12">Example 7: Oceanographic profiles</h2><p>Load some example CTD data and plot temperature and salinity:</p><pre class="codeinput">load <span class="string">example_ctd</span>
+
+<span class="comment">% Initialize a figure:</span>
+figure
+
+<span class="comment">% Plot temperature:</span>
+subsubplot(1,2,1)
+plot(T{1},P{1},<span class="string">'o-'</span>,<span class="string">'color'</span>,rgb(<span class="string">'dark red'</span>))
+axis <span class="string">tight</span> <span class="string">ij</span> <span class="comment">% removes whitespace and flips axes</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+xlabel <span class="string">'temperature'</span>
+set(gca,<span class="string">'xcolor'</span>,rgb(<span class="string">'dark red'</span>))
+
+<span class="comment">% Plot salinity:</span>
+subsubplot(1,2,2)
+plot(S{1},P{1},<span class="string">'o-'</span>,<span class="string">'color'</span>,rgb(<span class="string">'bluegreen'</span>))
+axis <span class="string">tight</span> <span class="string">ij</span> <span class="comment">% removes whitespace and flips axes</span>
+xlabel <span class="string">'salinity'</span>
+set(gca,<span class="string">'xcolor'</span>,rgb(<span class="string">'bluegreen'</span>))
+</pre><img vspace="5" hspace="5" src="subsubplot_documentation_09.png" alt=""> <h2 id="13">Example 8: Overlapping axes</h2><p>In the plot above, the two subsubplots directly abut each other, but there's still a lot of empty space between the two profiles. To bring them together, make the two subsubplots overlap by setting the <tt>'hpad'</tt> to a negative value. Note that if you do this, you'll want to make the background of each axis transparent (rather than the default white). Make the axis backgrounds transparent with <tt>set(gca,'color','none')</tt>:</p><pre class="codeinput"><span class="comment">% Initialize a figure:</span>
+figure
+
+<span class="comment">% Plot temperature:</span>
+subsubplot(1,2,1,<span class="string">'hpad'</span>,-0.45)
+plot(T{1},P{1},<span class="string">'o-'</span>,<span class="string">'color'</span>,rgb(<span class="string">'dark red'</span>))
+axis <span class="string">tight</span> <span class="string">ij</span> <span class="comment">% removes whitespace and flips axes</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+xlabel <span class="string">'temperature'</span>
+set(gca,<span class="string">'xcolor'</span>,rgb(<span class="string">'dark red'</span>),<span class="string">'color'</span>,<span class="string">'none'</span>,<span class="keyword">...</span>
+   <span class="string">'xtick'</span>,-1.8:0.4:0)
+
+<span class="comment">% Plot salinity:</span>
+subsubplot(1,2,2,<span class="string">'hpad'</span>,-0.45)
+plot(S{1},P{1},<span class="string">'o-'</span>,<span class="string">'color'</span>,rgb(<span class="string">'bluegreen'</span>))
+axis <span class="string">tight</span> <span class="string">ij</span> <span class="comment">% removes whitespace and flips axes</span>
+xlabel <span class="string">'salinity'</span>
+set(gca,<span class="string">'xcolor'</span>,rgb(<span class="string">'bluegreen'</span>),<span class="string">'color'</span>,<span class="string">'none'</span>,<span class="keyword">...</span>
+   <span class="string">'xtick'</span>,34.1:0.1:34.6)
+</pre><img vspace="5" hspace="5" src="subsubplot_documentation_10.png" alt=""> <h2 id="14">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |subsubplot| documentation 
+% |subsubplot| creates sub-axes in tiled positions.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax 
+% 
+%  subsubplot(mm,nn,pp)
+%  subsubplot(m,n,p,mm,nn,pp)
+%  subsubplot(...,'vpad',vspace)
+%  subsubplot(...,'hpad',hspace)
+%  h = subsubplot(...)
+% 
+%% Description 
+%
+% |subsubplot(mm,nn,pp)| divides the current figure into an mm-by-nn grid and creates
+% axes in the position specified by pp. The first subplot is the first column of
+% the first row, the second subplot is the second column of the first row, and 
+% so on. This syntax effectively fills the area that would be occupied by
+% |subplot(1,1,1)|.
+% 
+% |subsubplot(m,n,p,mm,nn,pp)| As above, but in this case the |subplot(m,n,p)|
+% is further divided into an mm-by-nn grid, and |subsubplot| creates a new
+% set of axes in the location specified by |pp|. 
+% 
+% |subsubplot(...,'vpad',vspace)| specifies the amount of vertical spacing
+% between each subsubplot axis, in normalized figure units on the scale of 0
+% to 1. The default value is |0|. Setting it to |0.05|, for example, separates axes
+% by 5% of the figure height. 
+% 
+% |subsubplot(...,'hpad',hspace)| specifies the amount of horizontal spacing
+% between each subplot axis, in normalized figure units on the scale of 0
+% to 1. The default value is |0|. Setting it to |0.05|, for example, separates axes
+% by 5% of the figure width. 
+% 
+% |h = subsubplot(...) returns a handle h of the axes created by subsubplot. 
+% 
+
+%% Example 1: Two subsubplots
+% Here are two subsubplots stacked atop each other: 
+
+figure
+subsubplot(2,1,1) 
+plot(rand(25,1))
+
+subsubplot(2,1,2) 
+plot(rand(25,1))
+
+%% Example 2: Vertical separation: 
+% By default, |subsubplot| places axes directly adjacent to each other. To add
+% a little padding between the two axes, specify |'vpad'|. Below we're specify
+% that axes should be separated by 5 percent of the figure's height: 
+
+figure
+subsubplot(2,1,1,'vpad',0.05) 
+plot(rand(25,1))
+
+subsubplot(2,1,2,'vpad',0.05) 
+plot(rand(25,1))
+
+%% Example 3: Subsubplots with subplots
+% The |subsubplot| function is designed to work within Matlab's built-in 
+% |subplot| structure. Below, we use the space that would be occupied by
+% |subplot(2,2,2)| to create two subsubplots, specified by |subsubplot(2,2,2,2,1,1)| 
+% and |subsubplot(2,2,2,2,2,2)|:
+
+figure
+
+% Top left subplot: 
+subplot(2,2,1) 
+plot((1:100).^2)
+axis tight
+
+% * * * TOP RIGHT SUBSUBPLOTS: * * * 
+% Top subsublot: 
+subsubplot(2,2,2,2,1,1) 
+plot(rand(30,1))
+
+% Bottom subsublot: 
+subsubplot(2,2,2,2,1,2) 
+plot(rand(30,1))
+
+% Bottom left subplot:
+subplot(2,2,3) 
+plot(sind(1:700)) 
+axis tight
+
+% Bottom right subplot: 
+subplot(2,2,4)  
+plot(tand(1:700))
+axis tight
+
+%% Example 4: Right-hand axes: 
+% To prevent overlapping y axes, you can either add some space between the 
+% axes with the |'vpad'| option, or you can put every other y axis on the
+% right hand side like this: 
+
+% labels for each panel: 
+panel = {'a','b','c','d','e','f'}; 
+
+figure
+for k = 1:6
+   ax(k) = subsubplot(6,1,k); 
+   plot(rand*30*rand(25,1)) % plots random data
+   axis tight               % removes whitespace
+   
+   ntitle(panel{k},'location','nw')
+end
+   
+% Put every other axis on the right hand side:
+set(ax(2:2:end),'YAxisLocation', 'right')
+
+%% Example 5: Color-coded axes
+% Same as above, but this time make the axis colors match the line colors: 
+
+figure
+for k = 1:6
+   ax(k) = subsubplot(6,1,k); 
+   
+   col = rand(1,3); 
+   plot(rand*30*rand(25,1),'color',col)
+   set(gca,'ycolor',col)
+   axis tight
+   ntitle(panel{k},'location','nw','color',col)
+end
+   
+set(ax(2:2:end),'YAxisLocation', 'right')
+
+%% Tip: Linking axes
+% Sometimes when zooming in on a subsubplot using the mouse (or by setting
+% axis limits programmatically), you want the extents of other subsubplots to
+% automatically zoom to the same extents. To achieve such behavior, get the handle of 
+% each |subsubplot| and use |linkaxes|. For the figure above, linking all the
+% x axis extents is this easy: 
+
+linkaxes(ax,'x') 
+
+%% 
+% And now you can zoom on any of the subsubplots above and all the other 
+% axes in the figure will zoom to the same extents. 
+
+%% Example 6: A grid of subsubplots
+% Here's a 4-by-3 grid of random data plotted with |subsubplot|. We'll also
+% use <ntitle_documentation.html |ntitle|> to include little titles in each 
+% subsubplot. 
+
+figure 
+
+for k = 1:12 
+   % Initialize subsubplots: 
+   subsubplot(4,3,k)
+   
+   % plot some random data using random colors: 
+   plot(rand(50,1),'color',rand(1,3)) 
+   axis tight
+   
+   ntitle(['subsubplot ',num2str(k)],'backgroundcolor','w')
+end
+
+%% 
+% Not enough whitespace between each |subsubplot|? Add a little horizontal 
+% and vertical padding like this: 
+
+figure 
+
+for k = 1:12 
+   
+   % Initialize subsubplots: 
+   subsubplot(4,3,k,'hpad',0.03,'vpad',0.05)
+   
+   % plot some random data using random colors: 
+   plot(rand(50,1),'color',rand(1,3)) 
+   axis tight
+   
+   
+   ntitle(['subsubplot ',num2str(k)],'vert','bottom')
+end
+
+%% Example 7: Oceanographic profiles
+% Load some example CTD data and plot temperature and salinity: 
+
+load example_ctd
+
+% Initialize a figure:
+figure
+
+% Plot temperature: 
+subsubplot(1,2,1) 
+plot(T{1},P{1},'o-','color',rgb('dark red'))
+axis tight ij % removes whitespace and flips axes
+ylabel 'pressure (dbar)' 
+xlabel 'temperature' 
+set(gca,'xcolor',rgb('dark red'))
+
+% Plot salinity: 
+subsubplot(1,2,2) 
+plot(S{1},P{1},'o-','color',rgb('bluegreen'))
+axis tight ij % removes whitespace and flips axes
+xlabel 'salinity' 
+set(gca,'xcolor',rgb('bluegreen'))
+
+%% Example 8: Overlapping axes
+% In the plot above, the two subsubplots directly abut each other, but
+% there's still a lot of empty space between the two profiles. To bring
+% them together, make the two subsubplots overlap by setting the |'hpad'|
+% to a negative value. Note that if you do this, you'll want to make the 
+% background of each axis transparent (rather than the default white). Make
+% the axis backgrounds transparent with |set(gca,'color','none')|:
+
+% Initialize a figure:
+figure
+
+% Plot temperature: 
+subsubplot(1,2,1,'hpad',-0.45) 
+plot(T{1},P{1},'o-','color',rgb('dark red'))
+axis tight ij % removes whitespace and flips axes
+ylabel 'pressure (dbar)' 
+xlabel 'temperature' 
+set(gca,'xcolor',rgb('dark red'),'color','none',...
+   'xtick',-1.8:0.4:0)
+
+% Plot salinity: 
+subsubplot(1,2,2,'hpad',-0.45) 
+plot(S{1},P{1},'o-','color',rgb('bluegreen'))
+axis tight ij % removes whitespace and flips axes
+xlabel 'salinity' 
+set(gca,'xcolor',rgb('bluegreen'),'color','none',...
+   'xtick',34.1:0.1:34.6)
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+
+
+##### SOURCE END #####
+--></body></html>

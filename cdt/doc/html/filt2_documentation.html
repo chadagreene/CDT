@@ -1,0 +1,281 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>filt2 documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-02"><meta name="DC.source" content="filt2_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>filt2</tt> documentation</h1><!--introduction--><p>The <tt>filt2</tt> function performs a highpass, lowpass, bandpass, or bandstop 2D gaussian filter on gridded data such as topographic, atmospheric, oceanographic, or any kind of geospatial data. This function is designed to make it easy to remove features longer or shorter than a given characteristic wavelength. The input grid <i>can</i> contain NaNs!</p><p>See also: <a href="filt1_documentation.html"><tt>filt1</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Explanation of this type of filter</a></li><li><a href="#5">Example</a></li><li><a href="#10">Special note on georeferenced data.</a></li><li><a href="#11">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>Zf = filt2(Z,res,lambda,filtertype)</pre><h2 id="2">Description</h2><p><tt>Zf = filt2(Z,res,lambda,filtertype)</tt> filters 2D dataset <tt>Z</tt> that has resolution <tt>res</tt>, to an approximate wavelength <tt>lambda</tt>. If the <tt>filtertype</tt> is <tt>'lp'</tt> or <tt>'hp'</tt> for lowpass or highpass, <tt>lambda</tt> must be a scalar value.  If the <tt>filtertype</tt> is <tt>'bp'</tt> or <tt>'bs'</tt> for bandpass or bandstop, <tt>lambda</tt> must be a two-element array of the two cutoff wavelengths.</p><h2 id="3">Explanation of this type of filter</h2><p>There are many ways to filter a cat. The approach implemented by <tt>filt2</tt> is less complex than a 2D FFT, but slightly more nuanced than a simple 2D moving average.</p><p>If you have a data matrix <tt>Z</tt> and you  want to create a 2D lowpass-filtered matrix <tt>Zlow</tt>, a common way to do it is to fill each pixel in <tt>Zlow</tt> with the average value of all the nearby pixels in <tt>Z</tt>. You might specify a box size, say, 25 pixels by 25 pixels, and go down each row and column of <tt>Zlow</tt>, filling it with the average value of all the 25 by 25 surrounding pixels from <tt>Z</tt>.  That approach effectively gets rid of the high-frequency noise, but it's a bit inelegant because a pixel 12 pixels away from the center of the box contributes just as much to the filtered center pixel value as the center pixel itself.  Further, a moving square has contributions from corners, which are 1.4 times farther away from the center than the top or side pixels.  It often makes more sense to use a weighting system that is symmetric about the center pixel, where pixels close to the center contribute more than the faraway pixels.</p><p>The 2D moving gaussian window implemented by <tt>filt2</tt> is similar to a moving 2D square window, but the contribution of each pixel is weighted by a gaussian curve which is symmetric about the center pixel.  So where the weighting of a moving square window would look like a box in 3D space, a gaussian window looks more like a rounded cone shape.  Here's the weighting curve generated by <tt>filt2</tt> if you give it a cutoff wavelength of 10 km and a for a 200 m resolution dataset:</p><pre class="codeinput">lambda = 10; <span class="comment">% cutoff "wavelength" in kilometers</span>
+res = 0.2;   <span class="comment">% 200 m resolution of dataset</span>
+
+<span class="comment">% Define standard deviation of gaussian curve:</span>
+sigma = (lambda/res) /(2*pi);
+
+<span class="comment">% Create the 2D gaussian curve:</span>
+f = fspecial(<span class="string">'gaussian'</span>,2*ceil(2.6*sigma)+1,sigma);
+
+surf(f)
+axis <span class="string">tight</span>
+xlabel <span class="string">'pixels'</span>
+ylabel <span class="string">'pixels'</span>
+zlabel <span class="string">'weight in moving average'</span>
+</pre><img vspace="5" hspace="5" src="filt2_documentation_01.png" alt=""> <p>The value <tt>sigma</tt> here is about 8 pixels, at which point the weighting is about 0.6 times the amplitude of the center.</p><h2 id="5">Example</h2><p>Consider a 100 km by 100 km elevation dataset that has a resolution of 200 m.  It has some long 25 km wavelength features aligned with north/south direction, some short ~5 km features oriented diagonally, and a considerable amount of random noise.  There's also a block of missing data. Here's what your datset looks like:</p><pre class="codeinput">res = 0.2; <span class="comment">% 200 m resolution</span>
+
+x = 0:res:100; <span class="comment">% eastings from 0 to 100 km</span>
+y = 0:res:100; <span class="comment">% northings from 0 to 100 km</span>
+[X,Y] = meshgrid(x,y);
+
+<span class="comment">% Z contains 25 km features, ~5 km diagonal features, and noise:</span>
+Z = cos(2*pi*X/25)+cos(2*pi*(X+Y)/7)+randn(size(X));
+
+<span class="comment">% Z also has some missing data:</span>
+Z(100:120,100:120) = nan;
+
+imagesc(x,y,Z);
+axis <span class="string">xy</span> <span class="string">image</span>
+caxis([-1 1])
+title <span class="string">' original Z matrix '</span>
+xlabel <span class="string">' eastings (km) '</span>
+ylabel <span class="string">' northings (km) '</span>
+</pre><img vspace="5" hspace="5" src="filt2_documentation_02.png" alt=""> <p>Filter out all features that are shorter than about 15 km:</p><pre class="codeinput">Zlow = filt2(Z,res,15,<span class="string">'lp'</span>);
+
+imagesc(x,y,Zlow);
+axis <span class="string">xy</span> <span class="string">image</span>
+caxis([-1 1])
+title <span class="string">' 15 km lowpass filtered Z matrix '</span>
+xlabel <span class="string">' eastings (km) '</span>
+ylabel <span class="string">' northings (km) '</span>
+</pre><img vspace="5" hspace="5" src="filt2_documentation_03.png" alt=""> <p>Similarly, filter out all features that are <i>longer</i> than 15 km:</p><pre class="codeinput">Zhi = filt2(Z,res,15,<span class="string">'hp'</span>);
+imagesc(x,y,Zhi);
+axis <span class="string">xy</span> <span class="string">image</span>
+caxis([-1 1])
+title <span class="string">' 15 km highpass filtered Z matrix '</span>
+xlabel <span class="string">' eastings (km) '</span>
+ylabel <span class="string">' northings (km) '</span>
+</pre><img vspace="5" hspace="5" src="filt2_documentation_04.png" alt=""> <p>Or we can keep only the diagonal lines by removing the long 25 km wavelength features and removing the short-wavelength speckle noise: This is where you'll see it becomes a balancing act--tinker with the wavelengths and you'll realize the wider the bandpass region, the more noise gets through, but the more signal gets through too.  Tighten up the bandpass region and you'll also be filtering out some of the 5 km wavelengths we want to keep because this filter does not have a sharp cutoff frequency:</p><pre class="codeinput">Zbp = filt2(Z,res,[4 7],<span class="string">'bp'</span>);
+imagesc(x,y,Zbp);
+axis <span class="string">xy</span> <span class="string">image</span>
+caxis([-1 1])
+title <span class="string">' 4 to 7 km bandpass filtered Z matrix '</span>
+xlabel <span class="string">' eastings (km) '</span>
+ylabel <span class="string">' northings (km) '</span>
+</pre><img vspace="5" hspace="5" src="filt2_documentation_05.png" alt=""> <p>Similar to the bandpass filter, we can use a bandstop filter to get rid of the 5 km wavelength diagonal features:</p><pre class="codeinput">Zbs = filt2(Z,res,[3 12],<span class="string">'bs'</span>);
+imagesc(x,y,Zbs);
+axis <span class="string">xy</span> <span class="string">image</span>
+caxis([-1 1])
+title <span class="string">' 3 to 12 km bandstop filtered Z matrix '</span>
+xlabel <span class="string">' eastings (km) '</span>
+ylabel <span class="string">' northings (km) '</span>
+</pre><img vspace="5" hspace="5" src="filt2_documentation_06.png" alt=""> <h2 id="10">Special note on georeferenced data.</h2><p>This function is great at filtering 2D spatial data, but do not use it on datasets in which latitudes and longitudes are equally spaced! That's because filtering to N degrees does not make any sense. Instead, this function is for use with data in projected coordinates, where grid dimensions are meter or kilometers, or even feet if you're so inclined. But do not use it on the type of grids that are created by <a href="cdtgrid_documentation.html"><tt>cdtgrid</tt></a>.</p><h2 id="11">Author Info</h2><p>This function was written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas Institute for Geophysics in November 2016; however, all I did was repackage Carlos Adrian Vargas Aguilera's superb <a href="http://www.mathworks.com/matlabcentral/fileexchange/20417"><tt>ndnanfilter</tt></a> function to make it a little easier to use for this specific application.  Many thanks to Carlos for his well-thought-out code and clear documentation.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |filt2| documentation 
+% The |filt2| function performs a highpass, lowpass, bandpass, or bandstop 2D gaussian filter on gridded data such as 
+% topographic, atmospheric, oceanographic, or any kind of geospatial data. This function is designed to make it
+% easy to remove features longer or shorter than a given characteristic wavelength. The
+% input grid _can_ contain NaNs!  
+% 
+% See also: <filt1_documentation.html |filt1|>. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  Zf = filt2(Z,res,lambda,filtertype)
+% 
+%% Description 
+% 
+% |Zf = filt2(Z,res,lambda,filtertype)| filters 2D dataset |Z| that has resolution |res|, 
+% to an approximate wavelength |lambda|. If the |filtertype| is |'lp'| or |'hp'| for lowpass
+% or highpass, |lambda| must be a scalar value.  If the |filtertype| is |'bp'| or |'bs'| for 
+% bandpass or bandstop, |lambda| must be a two-element array of the two cutoff wavelengths. 
+% 
+%% Explanation of this type of filter 
+% There are many ways to filter a cat. The approach implemented by |filt2| is less complex than a 2D
+% FFT, but slightly more nuanced than a simple 2D moving average.  
+% 
+% If you have a data matrix |Z| and you  want to create a 2D lowpass-filtered matrix |Zlow|, a common way 
+% to do it is to fill each pixel in |Zlow| with the average value of all the nearby pixels in |Z|. 
+% You might specify a box size, say, 25 pixels by 25 pixels, and go down each row and column of 
+% |Zlow|, filling it with the average value of all the 25 by 25 surrounding pixels from |Z|.  That approach
+% effectively gets rid of the high-frequency noise, but it's a bit inelegant because a pixel 12 pixels away
+% from the center of the box contributes just as much to the filtered center pixel value as the center
+% pixel itself.  Further, a moving square has contributions from corners, which are 1.4 times farther away 
+% from the center than the top or side pixels.  It often makes more sense to use a weighting system that is symmetric 
+% about the center pixel, where pixels close to the center contribute more than the faraway pixels. 
+% 
+% The 2D moving gaussian window implemented by |filt2| is similar to a moving 2D square window, but the contribution
+% of each pixel is weighted by a gaussian curve which is symmetric about the center pixel.  So where the weighting
+% of a moving square window would look like a box in 3D space, a gaussian window looks more like a rounded cone
+% shape.  Here's the weighting curve generated by |filt2| if you give it a cutoff wavelength of 10 km and a
+% for a 200 m resolution dataset:
+
+lambda = 10; % cutoff "wavelength" in kilometers 
+res = 0.2;   % 200 m resolution of dataset
+
+% Define standard deviation of gaussian curve: 
+sigma = (lambda/res) /(2*pi); 
+
+% Create the 2D gaussian curve: 
+f = fspecial('gaussian',2*ceil(2.6*sigma)+1,sigma);
+
+surf(f) 
+axis tight
+xlabel 'pixels' 
+ylabel 'pixels'
+zlabel 'weight in moving average'
+
+%% 
+% The value |sigma| here is about 8 pixels, at which point the weighting is about 0.6 times the 
+% amplitude of the center. 
+
+%% Example
+% Consider a 100 km by 100 km elevation dataset that has a resolution of 200 m.  It has 
+% some long 25 km wavelength features aligned with north/south direction, some short 
+% ~5 km features oriented diagonally, and a considerable amount of random noise.  There's
+% also a block of missing data. Here's what your datset looks like: 
+
+res = 0.2; % 200 m resolution
+
+x = 0:res:100; % eastings from 0 to 100 km
+y = 0:res:100; % northings from 0 to 100 km
+[X,Y] = meshgrid(x,y);
+
+% Z contains 25 km features, ~5 km diagonal features, and noise: 
+Z = cos(2*pi*X/25)+cos(2*pi*(X+Y)/7)+randn(size(X)); 
+
+% Z also has some missing data: 
+Z(100:120,100:120) = nan; 
+
+imagesc(x,y,Z); 
+axis xy image 
+caxis([-1 1])
+title ' original Z matrix '
+xlabel ' eastings (km) '
+ylabel ' northings (km) '
+
+%% 
+% Filter out all features that are shorter than about 15 km: 
+
+Zlow = filt2(Z,res,15,'lp'); 
+
+imagesc(x,y,Zlow); 
+axis xy image 
+caxis([-1 1])
+title ' 15 km lowpass filtered Z matrix ' 
+xlabel ' eastings (km) '
+ylabel ' northings (km) '
+
+%% 
+% Similarly, filter out all features that are _longer_ than 15 km: 
+
+Zhi = filt2(Z,res,15,'hp'); 
+imagesc(x,y,Zhi); 
+axis xy image 
+caxis([-1 1])
+title ' 15 km highpass filtered Z matrix '
+xlabel ' eastings (km) '
+ylabel ' northings (km) '
+
+%% 
+% Or we can keep only the diagonal lines by removing the long 25 km wavelength features
+% and removing the short-wavelength speckle noise: This is where you'll see it becomes a 
+% balancing actREPLACE_WITH_DASH_DASHtinker with the wavelengths and you'll realize the wider the bandpass
+% region, the more noise gets through, but the more signal gets through too.  Tighten
+% up the bandpass region and you'll also be filtering out some of the 5 km wavelengths we 
+% want to keep because this filter does not have a sharp cutoff frequency: 
+
+Zbp = filt2(Z,res,[4 7],'bp'); 
+imagesc(x,y,Zbp); 
+axis xy image 
+caxis([-1 1])
+title ' 4 to 7 km bandpass filtered Z matrix '
+xlabel ' eastings (km) '
+ylabel ' northings (km) '
+
+%% 
+% Similar to the bandpass filter, we can use a bandstop filter to get rid of the 5 km 
+% wavelength diagonal features: 
+
+Zbs = filt2(Z,res,[3 12],'bs'); 
+imagesc(x,y,Zbs); 
+axis xy image 
+caxis([-1 1])
+title ' 3 to 12 km bandstop filtered Z matrix '
+xlabel ' eastings (km) '
+ylabel ' northings (km) '
+
+%% Special note on georeferenced data. 
+% This function is great at filtering 2D spatial data, but do not use it on
+% datasets in which latitudes and longitudes are equally spaced! That's because
+% filtering to N degrees does not make any sense. Instead, this function is 
+% for use with data in projected coordinates, where grid dimensions are meter
+% or kilometers, or even feet if you're so inclined. But do not use it on 
+% the type of grids that are created by <cdtgrid_documentation.html |cdtgrid|>. 
+% 
+%% Author Info
+% This function was written by <http://www.chadagreene.com Chad A. Greene> of the University of Texas Institute for 
+% Geophysics in November 2016; however, all I did was repackage Carlos Adrian Vargas Aguilera's 
+% superb <http://www.mathworks.com/matlabcentral/fileexchange/20417 |ndnanfilter|> function to make it a little
+% easier to use for this specific application.  Many thanks to Carlos for his well-thought-out code and clear documentation.  
+##### SOURCE END #####
+--></body></html>

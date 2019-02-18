@@ -1,0 +1,221 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>newcolorbar documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-02"><meta name="DC.source" content="newcolorbar_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>newcolorbar</tt> documentation</h1><!--introduction--><p>The <tt>newcolorbar</tt> allows multiple colormaps and colorbars to be used in the same subplot.</p><p>This function works by creating a new set of invisible axes matching the size and extents of the current axes. This allows a second colormap to be used in such a way that it is perceived to be two separate colormaps and two colorbars in the same axes.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1</a></li><li><a href="#6">Example 2</a></li><li><a href="#9">Example 3: Three colorbars</a></li><li><a href="#10">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>colorbar
+colorbar(Location)
+colorbar(...,PropertyName,PropertyValue)
+[cb2,ax2,ax1] = colorbar(...)</pre><h2 id="2">Description</h2><p><tt>colorbar</tt> creates a new set of axes and a new colorbar in the default (right) location.</p><p><tt>colorbar(Location)</tt> specifies location of the new colorbar as       'North'              inside plot box near top       'South'              inside bottom       'East'               inside right       'West'               inside left       'NorthOutside'       outside plot box near top       'SouthOutside'       outside bottom       'EastOutside'        outside right (default)       'WestOutside'        outside left</p><p><tt>colorbar(...,PropertyName,PropertyValue)</tt> specifies additional name/value pairs for colorbar.</p><p><tt>[cb2,ax2,ax1] = colorbar(...)</tt> returns handles of the new colorbar <tt>cb2</tt>, the new axes <tt>ax2</tt>, and the previous current axes <tt>ax1</tt>.</p><h2 id="3">Example 1</h2><p>Let's plot some parula-colored scattered data atop a grayscale gridded dataset.  Start by plotting the gridded data.  We'll use the inbuilt <tt>peaks</tt> dataset for this example:</p><pre class="codeinput">pcolor(peaks(500))
+shading <span class="string">interp</span>
+colormap(gca,gray(256))
+colorbar(<span class="string">'southoutside'</span>)
+</pre><img vspace="5" hspace="5" src="newcolorbar_documentation_01.png" alt=""> <p>The <tt>newcolorbar</tt> function differs from Matlab's <tt>colorbar</tt> function in that we have to create a <tt>newcolorbar</tt> <i>before</i> plotting the new color-scaled dataset.  We can create a new colorbar quite simply:</p><pre class="codeinput">newcolorbar
+</pre><img vspace="5" hspace="5" src="newcolorbar_documentation_02.png" alt=""> <p>Then plot some random color-scaled scattered data: Plot a scattered dataset with parula colormap:</p><pre class="codeinput">scatter(500*rand(30,1),500*rand(30,1),60,100*rand(30,1),<span class="string">'filled'</span>)
+</pre><img vspace="5" hspace="5" src="newcolorbar_documentation_03.png" alt=""> <h2 id="6">Example 2</h2><p>Now let's repeat Example 1, but add a little formatting. Use <a href="cmocean_documentation.html"><tt>cmocean</tt></a> to create the lovely colormaps:</p><pre class="codeinput">figure
+pcolor(peaks(500))
+shading <span class="string">interp</span>
+cmocean <span class="string">algae</span>
+cb1 = colorbar(<span class="string">'southoutside'</span>);
+xlabel(cb1,<span class="string">'colorbar for peaks data'</span>)
+</pre><img vspace="5" hspace="5" src="newcolorbar_documentation_04.png" alt=""> <p>Add a new colorbar toward the bottom inside of the current axes and specify blue text:</p><pre class="codeinput">cb2 = newcolorbar(<span class="string">'south'</span>,<span class="string">'color'</span>,<span class="string">'blue'</span>);
+</pre><img vspace="5" hspace="5" src="newcolorbar_documentation_05.png" alt=""> <p>Plot scattered data and label the new colorbar:</p><pre class="codeinput">scatter(500*rand(30,1),500*rand(30,1),100,8*randn(30,1),<span class="string">'filled'</span>)
+cmocean <span class="string">balance</span>
+caxis([-10 10]) <span class="comment">% sets scattered colorbar axis</span>
+xlabel(cb2,<span class="string">'colorbar for scattered data'</span>,<span class="string">'color'</span>,<span class="string">'blue'</span>)
+</pre><img vspace="5" hspace="5" src="newcolorbar_documentation_06.png" alt=""> <h2 id="9">Example 3: Three colorbars</h2><p>Here's an example of three colorbars:</p><pre class="codeinput">figure
+pcolor(peaks(500))
+shading <span class="string">interp</span>
+cmocean <span class="string">algae</span>
+cb1 = colorbar;
+ylabel(cb1,<span class="string">'colorbar for background peaks data'</span>)
+
+cb2 = newcolorbar(<span class="string">'southoutside'</span>) ;
+scatter(500*rand(30,1),500*rand(30,1),100,8*randn(30,1),<span class="string">'filled'</span>)
+cmocean <span class="string">amp</span>
+caxis([-10 10]) <span class="comment">% sets scattered colorbar axis</span>
+xlabel(cb2,<span class="string">'colorbar for scattered data'</span>)
+
+cb3 = newcolorbar(<span class="string">'south'</span>);
+pcolor(1:100,401:500,peaks(100))
+shading <span class="string">interp</span>
+xlabel(cb3,<span class="string">'colorbar for peaks inset'</span>)
+</pre><img vspace="5" hspace="5" src="newcolorbar_documentation_07.png" alt=""> <h2 id="10">Author Info</h2><p>The <tt>newcolorbar</tt> function was written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas at Austin's Institute for Geophysics (UTIG), August 2015. Updated for the Climate Data Toolbox in 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |newcolorbar| documentation
+% The |newcolorbar| allows multiple colormaps and colorbars to be used in  
+% the same subplot. 
+% 
+% This function works by creating a new set of invisible axes matching
+% the size and extents of the current axes. This allows a second colormap
+% to be used in such a way that it is perceived to be two separate colormaps 
+% and two colorbars in the same axes. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>. 
+%% Syntax 
+% 
+%  colorbar
+%  colorbar(Location)
+%  colorbar(...,PropertyName,PropertyValue)
+%  [cb2,ax2,ax1] = colorbar(...)
+% 
+%% Description 
+% 
+% |colorbar| creates a new set of axes and a new colorbar in the default 
+% (right) location. 
+% 
+% |colorbar(Location)| specifies location of the new colorbar as 
+%       'North'              inside plot box near top
+%       'South'              inside bottom
+%       'East'               inside right
+%       'West'               inside left
+%       'NorthOutside'       outside plot box near top
+%       'SouthOutside'       outside bottom
+%       'EastOutside'        outside right (default)  
+%       'WestOutside'        outside left
+%
+% |colorbar(...,PropertyName,PropertyValue)| specifies additional
+% name/value pairs for colorbar. 
+% 
+% |[cb2,ax2,ax1] = colorbar(...)| returns handles of the new colorbar
+% |cb2|, the new axes |ax2|, and the previous current axes |ax1|. 
+% 
+%% Example 1 
+% Let's plot some parula-colored scattered data atop a grayscale gridded
+% dataset.  Start by plotting the gridded data.  We'll use the inbuilt
+% |peaks| dataset for this example: 
+
+pcolor(peaks(500))
+shading interp
+colormap(gca,gray(256))
+colorbar('southoutside')
+
+%% 
+% The |newcolorbar| function differs from Matlab's |colorbar| function in
+% that we have to create a |newcolorbar| _before_ plotting the new
+% color-scaled dataset.  We can create a new colorbar quite simply:
+
+newcolorbar
+
+%% 
+% Then plot some random color-scaled scattered data: 
+% Plot a scattered dataset with parula colormap: 
+
+scatter(500*rand(30,1),500*rand(30,1),60,100*rand(30,1),'filled') 
+
+%% Example 2 
+% Now let's repeat Example 1, but add a little formatting. 
+% Use <cmocean_documentation.html |cmocean|> to create the lovely colormaps: 
+
+figure
+pcolor(peaks(500))
+shading interp
+cmocean algae
+cb1 = colorbar('southoutside'); 
+xlabel(cb1,'colorbar for peaks data') 
+
+%% 
+% Add a new colorbar toward the bottom inside of the current axes and 
+% specify blue text: 
+
+cb2 = newcolorbar('south','color','blue'); 
+
+%% 
+% Plot scattered data and label the new colorbar: 
+
+scatter(500*rand(30,1),500*rand(30,1),100,8*randn(30,1),'filled') 
+cmocean balance
+caxis([-10 10]) % sets scattered colorbar axis 
+xlabel(cb2,'colorbar for scattered data','color','blue')
+
+%% Example 3: Three colorbars
+% Here's an example of three colorbars: 
+
+figure
+pcolor(peaks(500))
+shading interp
+cmocean algae 
+cb1 = colorbar; 
+ylabel(cb1,'colorbar for background peaks data') 
+
+cb2 = newcolorbar('southoutside') ;
+scatter(500*rand(30,1),500*rand(30,1),100,8*randn(30,1),'filled') 
+cmocean amp 
+caxis([-10 10]) % sets scattered colorbar axis 
+xlabel(cb2,'colorbar for scattered data')
+
+cb3 = newcolorbar('south');
+pcolor(1:100,401:500,peaks(100))
+shading interp
+xlabel(cb3,'colorbar for peaks inset') 
+
+%% Author Info
+% The |newcolorbar| function was written by <http://www.chadagreene.com Chad
+% A. Greene> of the University of Texas at Austin's Institute for
+% Geophysics (UTIG), August 2015. Updated for the Climate Data Toolbox in 2019.
+
+##### SOURCE END #####
+--></body></html>

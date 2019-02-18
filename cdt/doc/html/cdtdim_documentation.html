@@ -1,0 +1,213 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>cdtdim documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-16"><meta name="DC.source" content="cdtdim_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>cdtdim</tt> documentation</h1><!--introduction--><p>The <tt>cdtdim</tt> gives the approximate dimensions of each cell in a lat,lon grid assuming an ellipsoidal Earth. This function is similar to <a href="cdtarea_documentation.html"><tt>cdtarea</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Cell size of a 10 degree grid</a></li><li><a href="#8">Example 2: Visualizing grid cell sizes with global data</a></li><li><a href="#15">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[dx,dy] = cdtdim(lat,lon)
+[dx,dy] = cdtdim(lat,lon,'km')</pre><h2 id="2">Description</h2><p><tt>[dx,dy] = cdtdim(lat,lon)</tt> gives an approximate dimensions in meters of each grid cell given by the geographical coordinate grids <tt>lat,lon</tt>. Inputs lat and lon must have matching dimensions, as if they were created by <tt>meshgrid</tt>.</p><p><tt>[dx,dy] = cdtdim(lat,lon,'km')</tt> gives grid cell sizes in kilometers rather than the default meters.</p><h2 id="3">Example 1: Cell size of a 10 degree grid</h2><p>Given a 10 degree global grid made by <a href="cdtgrid_documentation.html"><tt>cdtgrid</tt></a>.</p><pre class="codeinput">[lat,lon] = cdtgrid(10);
+</pre><p>Each grid cell has these dimensions:</p><pre class="codeinput">[dx,dy] = cdtdim(lat,lon,<span class="string">'km'</span>);
+</pre><p>If you look at the values of <tt>dy</tt>, you'll notice they are all the same.  That's because lines of latitude are always equally spaced (one degree of latitude is about 111 km).  So for our 10 degree grid, all the grid cells are unsurprisingly</p><pre class="codeinput">unique(dy(:))
+</pre><pre class="codeoutput">ans =
+   1.0e+03 *
+   -1.1132
+   -1.1129
+   -1.1125
+   -1.1120
+   -1.1113
+   -1.1107
+   -1.1101
+   -1.1097
+   -1.1095
+</pre><p>about 1111 km apart. In the x-direction, however, each grid cell sizes depend on latitude.  Here's a look at how the x dimensions of grid cells vary across the globe:</p><pre class="codeinput">p = pcolor(lon,lat,dx);
+axis <span class="string">image</span>
+ylabel(<span class="string">'latitude'</span>)
+xlabel(<span class="string">'longitude'</span>)
+cb = colorbar;
+ylabel(cb,<span class="string">'grid cell zonal width (km)'</span>)
+</pre><img vspace="5" hspace="5" src="cdtdim_documentation_01.png" alt=""> <p>If you look closely at the map above, you may notice that the values at the top of the world do not appear to match the values at the bottom of the world.  That's due to an unfortunate behavior of <tt>pcolor</tt>, which discards a row and a column of data.  That behavior can be fixed by using interpolated shading or by using <tt>imagesc</tt> instead of <tt>pcolor</tt>, but I used <tt>pcolor</tt> above because it's an easy way to include grid lines.</p><h2 id="8">Example 2: Visualizing grid cell sizes with global data</h2><p>Here's another way to look at how grid cell sizes are calculated by <tt>cdtdim</tt>.  Start by loading a sea surface temperature dataset which has a grid resolution of 0.75 degrees.</p><pre class="codeinput">load <span class="string">global_sst</span>
+</pre><p>And currently <tt>lat</tt> and <tt>lon</tt> are vectors, so turn them into matrices the same size as <tt>sst</tt> using <tt>meshgrid</tt>:</p><pre class="codeinput">[lon,lat] = meshgrid(lon,lat);
+</pre><p>Now just like in Example 1, calculate the sizes <tt>dx</tt> and <tt>dy</tt> of each grid cell:</p><pre class="codeinput">[dx,dy] = cdtdim(lat,lon,<span class="string">'km'</span>);
+</pre><p>This time, instead of displaying grid cell size on an unprojected grid of lats and lons, let's turn <tt>dx</tt> and <tt>dy</tt> into effective x and y values by taking the cumulative sum of <tt>dx</tt>'s and <tt>dy</tt>'s:</p><pre class="codeinput">x = cumsum(dx,2);
+y = cumsum(dy,1);
+</pre><p>We can plot the <tt>x</tt> and <tt>y</tt> locations as simply the cumulative sums starting from zero, but it's not gonna be pretty:</p><pre class="codeinput">plot(x,y,<span class="string">'b.'</span>)
+axis <span class="string">equal</span>
+</pre><img vspace="5" hspace="5" src="cdtdim_documentation_02.png" alt=""> <p>It makes more sense to center those values about the origin, which can be done by removing the mean x and y values. If you have a post-2016b version of Matlab you can simply subtract <tt>x-mean(x,2)</tt> which performs implicit expansion, but us plebians with old versions of Matlab have to use <tt>bsxfun</tt> to subtract:</p><pre class="codeinput">x = bsxfun(@minus,x,mean(x,2));
+y = bsxfun(@minus,y,mean(y,1));
+</pre><p>With the means removed, we see the grid cell calculation performed by <tt>cdtdim</tt> and <tt>cdtarea</tt> resembles a <a href="https://en.wikipedia.org/wiki/Sinusoidal_projection">sinusoidal map projection</a>:</p><pre class="codeinput">pcolor(x,y,sst)
+shading <span class="string">interp</span>
+axis <span class="string">image</span>
+xlabel(<span class="string">'x distance (km)'</span>)
+ylabel(<span class="string">'y distance (km)'</span>)
+cmocean <span class="string">'thermal'</span>
+</pre><img vspace="5" hspace="5" src="cdtdim_documentation_03.png" alt=""> <h2 id="15">Author Info</h2><p>This function was written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas Institute for Geophysics (UTIG).</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |cdtdim| documentation 
+% The |cdtdim| gives the approximate dimensions of each cell in a lat,lon grid assuming an
+% ellipsoidal Earth. This function is similar to <cdtarea_documentation.html |cdtarea|>. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax 
+% 
+%  [dx,dy] = cdtdim(lat,lon)
+%  [dx,dy] = cdtdim(lat,lon,'km')
+% 
+%% Description
+% 
+% |[dx,dy] = cdtdim(lat,lon)| gives an approximate dimensions in meters of each grid cell given 
+% by the geographical coordinate grids |lat,lon|. Inputs lat and lon must have matching dimensions,
+% as if they were created by |meshgrid|. 
+%
+% |[dx,dy] = cdtdim(lat,lon,'km')| gives grid cell sizes in kilometers rather than the default meters.
+%
+%% Example 1: Cell size of a 10 degree grid
+% Given a 10 degree global grid made by <cdtgrid_documentation.html |cdtgrid|>. 
+
+[lat,lon] = cdtgrid(10); 
+
+%% 
+% Each grid cell has these dimensions: 
+
+[dx,dy] = cdtdim(lat,lon,'km'); 
+
+%% 
+% If you look at the values of |dy|, you'll notice they are all the same.  That's because lines of latitude
+% are always equally spaced (one degree of latitude is about 111 km).  So for our 10 degree grid, all the grid
+% cells are unsurprisingly
+
+unique(dy(:))
+
+%% 
+% about 1111 km apart. In the x-direction, however, each grid cell sizes depend on latitude.  Here's a look 
+% at how the x dimensions of grid cells vary across the globe:
+
+p = pcolor(lon,lat,dx); 
+axis image
+ylabel('latitude') 
+xlabel('longitude') 
+cb = colorbar; 
+ylabel(cb,'grid cell zonal width (km)')
+
+%% 
+% If you look closely at the map above, you may notice that the values at the top of the world do not appear to 
+% match the values at the bottom of the world.  That's due to an unfortunate behavior of |pcolor|, which discards
+% a row and a column of data.  That behavior can be fixed by using interpolated shading or by using |imagesc| instead
+% of |pcolor|, but I used |pcolor| above because it's an easy way to include grid lines. 
+
+%% Example 2: Visualizing grid cell sizes with global data
+% Here's another way to look at how grid cell sizes are calculated by |cdtdim|.  Start by loading 
+% a sea surface temperature dataset which has a grid resolution of 0.75 degrees.  
+
+load global_sst 
+
+%% 
+% And currently |lat| and |lon| are vectors, so turn them into matrices the same size as |sst| using |meshgrid|: 
+
+[lon,lat] = meshgrid(lon,lat); 
+
+%% 
+% Now just like in Example 1, calculate the sizes |dx| and |dy| of each grid cell: 
+
+[dx,dy] = cdtdim(lat,lon,'km'); 
+
+%% 
+% This time, instead of displaying grid cell size on an unprojected grid of lats and lons, let's turn |dx| and |dy| 
+% into effective x and y values by taking the cumulative sum of |dx|'s and |dy|'s: 
+
+x = cumsum(dx,2); 
+y = cumsum(dy,1); 
+
+%%
+% We can plot the |x| and |y| locations as simply the cumulative sums starting from zero, but it's not gonna be pretty: 
+
+plot(x,y,'b.') 
+axis equal
+
+%% 
+% It makes more sense to center those values about the origin, which can be done by removing the mean x and y values. 
+% If you have a post-2016b version of Matlab you can simply subtract |x-mean(x,2)| which performs implicit expansion, 
+% but us plebians with old versions of Matlab have to use |bsxfun| to subtract: 
+
+x = bsxfun(@minus,x,mean(x,2)); 
+y = bsxfun(@minus,y,mean(y,1)); 
+
+%% 
+% With the means removed, we see the grid cell calculation performed by |cdtdim| and |cdtarea| resembles a <https://en.wikipedia.org/wiki/Sinusoidal_projection 
+% sinusoidal map projection>: 
+
+pcolor(x,y,sst) 
+shading interp
+axis image 
+xlabel('x distance (km)') 
+ylabel('y distance (km)') 
+cmocean 'thermal'
+
+%% Author Info 
+% This function was written by <http://www.chadagreene.com Chad A. Greene> of the University of Texas Institute for 
+% Geophysics (UTIG).  
+
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,240 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>sun_angle documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-12"><meta name="DC.source" content="sun_angle_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>sun_angle</tt> documentation</h1><!--introduction--><p><tt>sun_angle</tt> gives the solar azimuth and elevation for any time at any location on Earth. This function was adapted from the <tt>SolarAzEl</tt> function by Darin C. Koblick.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents.</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Time series at one location</a></li><li><a href="#5">Example 2: Global grid</a></li><li><a href="#8">Example 3: The tiny effects of elevation</a></li><li><a href="#10">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[az,el] = sun_angle(t,lat,lon)
+[az,el] = sun_angle(t,lat,lon,h)</pre><h2 id="2">Description</h2><p><tt>[az,el] = sun_angle(t,lat,lon)</tt> gives the solar azimuth and elevation in degrees at the specified geographic locations and times <tt>t</tt> in UTC. Input <tt>t</tt> can be datenum, datestr, or datetime format.</p><p><tt>[az,el] = sun_angle(t,lat,lon,h)</tt> specifies height above sea level in meters. If no height is specified, elevations are automatically determined via the CDT function <a href="topo_interp_documentation.html"><tt>topo_interp</tt></a>.</p><h2 id="3">Example 1: Time series at one location</h2><p>As I write this, I'm sitting at a coffee shop in Pasadena, California, (34.16N,118.13W). Determine the sun's azimuth and elevation right now and for the next 10 days.</p><pre class="codeinput">t = linspace(now,now+10,10000); <span class="comment">% a time array 10 days long</span>
+t = t + 8/24; <span class="comment">% converts Pacific Standard Time to UTC</span>
+
+[az,el] = sun_angle(t,34.16,-118.13);
+</pre><p>Use <a href="subsubplot_documentation.html"><tt>subsubplot</tt></a> to plot the sun's angles:</p><pre class="codeinput">subsubplot(2,1,1)
+plot(t,az)
+axis <span class="string">tight</span>
+ylabel <span class="string">'azimuth (deg)'</span>
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+
+subsubplot(2,1,2)
+plot(t,el)
+axis <span class="string">tight</span>
+ylabel <span class="string">'elevation (deg)'</span>
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+</pre><img vspace="5" hspace="5" src="sun_angle_documentation_01.png" alt=""> <h2 id="5">Example 2: Global grid</h2><p>Use <a href="cdtgrid_documentation.html"><tt>cdtgrid</tt></a> to create a quarter-degree global grid and get the sun angles everywhere around the globe at the UTC strike of midnight on May 27, 2019:</p><pre class="codeinput">[lat,lon] = cdtgrid(1/4);
+
+[az,el] = sun_angle(<span class="string">'may 27, 1984 00:00:00'</span>,lat,lon);
+</pre><p>Use <a href="imagescn_documentation.html"><tt>imagescn</tt></a> to plot the solar azimuth and set the colormap to <a href="cmocean_documentation.html"><tt>cmocean</tt></a> <i>phase</i>. Add political boundaries for context using <a href="borders_documentation.html"><tt>borders</tt></a>.</p><pre class="codeinput">figure
+imagescn(lon,lat,az)
+cb = colorbar;
+ylabel(cb,<span class="string">'solar azimuth (deg)'</span>)
+caxis([0 360])
+cmocean <span class="string">phase</span>
+borders(<span class="string">'countries'</span>,<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>))
+</pre><img vspace="5" hspace="5" src="sun_angle_documentation_02.png" alt=""> <p>Overlay sun elevation as contours. Of course, the sun elevation is only physical where the sun is above 0 elevation, so only include positive contours:</p><pre class="codeinput">hold <span class="string">on</span>
+contour(lon,lat,el,[0 0],<span class="string">'k'</span>) <span class="comment">% solid zero contour</span>
+contour(lon,lat,el,0:10:90,<span class="string">'k:'</span>)
+
+text(0,0,{<span class="string">'It''s night time'</span>;<span class="string">'everywhere south'</span>;<span class="string">'of the solid contour'</span>},<span class="keyword">...</span>
+   <span class="string">'horiz'</span>,<span class="string">'center'</span>)
+</pre><img vspace="5" hspace="5" src="sun_angle_documentation_03.png" alt=""> <h2 id="8">Example 3: The tiny effects of elevation</h2><p>The sun's angle is affected by elevation above sea level. By default, <tt>sun_angle</tt> uses <a href="topo_interp_documentation.html"><tt>topo_interp</tt></a> to determine ground surface elevation above sea level if no elevation is specified. But here we consider a hypothetical tower, 10,000 meters tall in the center of London (51.51N, 0.123W). What's the sun azimuth and elevation along this tower at 7:45 pm on July 14, 2019?</p><pre class="codeinput">t = <span class="string">'july 14, 2019 7:45 pm'</span>;
+lat = 51.51;
+lon = -0.123;
+z = 0:10000; <span class="comment">% height along tower (m)</span>
+
+[az,el] = sun_angle(t,lat,lon,z);
+
+figure
+subplot(1,2,1)
+plot(az-az(1),z) <span class="comment">% plot relative to base</span>
+axis <span class="string">tight</span>
+xlabel <span class="string">'\Delta azimuth (deg)'</span>
+ylabel <span class="string">'elevation (m)'</span>
+
+subplot(1,2,2)
+plot(el-el(1),z) <span class="comment">% plot relative to base</span>
+axis <span class="string">tight</span>
+xlabel <span class="string">'\Delta elevation (deg)'</span>
+</pre><img vspace="5" hspace="5" src="sun_angle_documentation_04.png" alt=""> <p>Note the scientific notation on the x axis scales. That tells us the effect of elevation is miniscule on the scale of a few thousand meters.</p><h2 id="10">Author Info</h2><p>This function was originally written by Darin C. Koblick using the formulas described here: <a href="http://stjarnhimlen.se/comp/tutorial.html#5">http://stjarnhimlen.se/comp/tutorial.html#5</a>. It was adapted for the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a> in 2019 by Chad A. Greene.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |sun_angle| documentation
+% |sun_angle| gives the solar azimuth and elevation for any time at any location 
+% on Earth. This function was adapted from the |SolarAzEl| function by Darin C. Koblick.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents.>
+%% Syntax
+% 
+%  [az,el] = sun_angle(t,lat,lon)
+%  [az,el] = sun_angle(t,lat,lon,h)
+% 
+%% Description 
+% 
+% |[az,el] = sun_angle(t,lat,lon)| gives the solar azimuth and elevation in
+% degrees at the specified geographic locations and times |t| in UTC. Input
+% |t| can be datenum, datestr, or datetime format.
+% 
+% |[az,el] = sun_angle(t,lat,lon,h)| specifies height above sea level in
+% meters. If no height is specified, elevations are automatically
+% determined via the CDT function <topo_interp_documentation.html |topo_interp|>. 
+% 
+%% Example 1: Time series at one location
+% As I write this, I'm sitting at a coffee shop in Pasadena, California,
+% (34.16N,118.13W). Determine the sun's azimuth and elevation right now and
+% for the next 10 days. 
+
+t = linspace(now,now+10,10000); % a time array 10 days long
+t = t + 8/24; % converts Pacific Standard Time to UTC
+
+[az,el] = sun_angle(t,34.16,-118.13); 
+
+%% 
+% Use <subsubplot_documentation.html |subsubplot|> to plot the sun's
+% angles: 
+
+subsubplot(2,1,1)
+plot(t,az)
+axis tight
+ylabel 'azimuth (deg)'
+datetick('x','keeplimits') 
+
+subsubplot(2,1,2)
+plot(t,el)
+axis tight
+ylabel 'elevation (deg)'
+datetick('x','keeplimits') 
+
+%% Example 2: Global grid
+% Use <cdtgrid_documentation.html |cdtgrid|> to create a quarter-degree
+% global grid and get the sun angles everywhere around the globe at the UTC
+% strike of midnight on May 27, 2019: 
+
+[lat,lon] = cdtgrid(1/4); 
+
+[az,el] = sun_angle('may 27, 1984 00:00:00',lat,lon); 
+
+%% 
+% Use <imagescn_documentation.html |imagescn|> to plot the solar azimuth
+% and set the colormap to <cmocean_documentation.html |cmocean|> _phase_. 
+% Add political boundaries for context using <borders_documentation.html
+% |borders|>. 
+
+figure
+imagescn(lon,lat,az)
+cb = colorbar; 
+ylabel(cb,'solar azimuth (deg)')
+caxis([0 360])
+cmocean phase 
+borders('countries','color',rgb('gray')) 
+
+%% 
+% Overlay sun elevation as contours. Of course, the sun elevation is only
+% physical where the sun is above 0 elevation, so only include positive
+% contours: 
+
+hold on 
+contour(lon,lat,el,[0 0],'k') % solid zero contour
+contour(lon,lat,el,0:10:90,'k:')
+
+text(0,0,{'It''s night time';'everywhere south';'of the solid contour'},...
+   'horiz','center')
+
+%% Example 3: The tiny effects of elevation
+% The sun's angle is affected by elevation above sea level. By default,
+% |sun_angle| uses <topo_interp_documentation.html |topo_interp|> to
+% determine ground surface elevation above sea level if no elevation is
+% specified. But here we consider a hypothetical tower, 10,000 meters tall 
+% in the center of London (51.51N, 0.123W). What's the sun azimuth and
+% elevation along this tower at 7:45 pm on July 14, 2019? 
+
+t = 'july 14, 2019 7:45 pm'; 
+lat = 51.51; 
+lon = -0.123; 
+z = 0:10000; % height along tower (m) 
+
+[az,el] = sun_angle(t,lat,lon,z); 
+
+figure
+subplot(1,2,1) 
+plot(az-az(1),z) % plot relative to base
+axis tight
+xlabel '\Delta azimuth (deg)'
+ylabel 'elevation (m)'
+
+subplot(1,2,2) 
+plot(el-el(1),z) % plot relative to base
+axis tight
+xlabel '\Delta elevation (deg)'
+
+%% 
+% Note the scientific notation on the x axis scales. That tells us the
+% effect of elevation is miniscule on the scale of a few thousand meters. 
+
+%% Author Info
+% This function was originally written by Darin C. Koblick using the
+% formulas described here: <http://stjarnhimlen.se/comp/tutorial.html#5>.
+% It was adapted for the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>
+% in 2019 by Chad A. Greene. 
+
+##### SOURCE END #####
+--></body></html>

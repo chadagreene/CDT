@@ -1,0 +1,235 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>hfive2struct documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-25"><meta name="DC.source" content="h5struct_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>hfive2struct</tt> documentation</h1><!--introduction--><p><tt>h5struct</tt> loads HDF5 data into a Matlab stucture with the same hierarchy as the original file.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">User Input</a></li><li><a href="#4">Example 1</a></li><li><a href="#9">Example 2</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>data = hfive2struct(filename)
+data = hfive2struct(filename, dataset)
+data = hfive2struct(filename, dataset, true)
+data = hfive2struct(filename, [], true)</pre><h2 id="2">Description</h2><p><tt>data = hfive2struct(filename)</tt> loads all attibutes, dataset values and dataset atributes of the h5 filename into a Matlab stucture with the same hierarchy as the original file. [currenlty handles up to 11 group levels]</p><p><tt>data = hfive2struct(filename, dataset)</tt> loads only the requested dataset and associated attibutes of filename into a Matlab stucture with the same hierarchy as the original filename. <tt>dataset</tt> is the full h5 path to the desired dataset. dataset can be specified as either a string or cell array of stings e.g. /path/to/dataset or {path/to/dataset1, path/to/dataset2}.</p><p><tt>data = hfive2struct(filename, dataset, fill_with_nan)</tt> loads only the requested dataset and associated attibutes of filename into a Matlab stucture. If fill_with_nan = true, all single and double datasets having a _FillValue will have _FillValue replaced with NaNs.</p><h2 id="3">User Input</h2><div><ul><li><tt>filename</tt> full path to hdf5 file</li><li><tt>dataset</tt> full dataset path within hdf5 structure (optional). Can be specified as either a string or cell array of stings e.g. <tt>'/orbit_info/rgt'</tt> or <tt>{'/orbit_info/rgt', /ancillary_data/control'}</tt>.</li><li><tt>fill_with_nan</tt> <tt>true</tt> or <tt>false</tt>, if <tt>true</tt> single and double datasets with a <tt>_FillValue</tt> will have <tt>_FillValue</tt> filled with <tt>NaN</tt>.</li></ul></div><h2 id="4">Example 1</h2><p>Load in all data from an h5 file:</p><pre class="codeinput">D = h5struct(<span class="string">'altimetry_example.h5'</span>);
+</pre><p>Now here are the structured contents of <tt>D</tt></p><pre class="codeinput">D
+</pre><pre class="codeoutput">D = 
+  struct with fields:
+
+                elevation: [1&times;1 struct]
+                 latitude: [1&times;1 struct]
+                longitude: [1&times;1 struct]
+               Attributes: [1&times;1 struct]
+           ancillary_data: [1&times;1 struct]
+    instrument_parameters: [1&times;1 struct]
+</pre><p>To access one of the fields of <tt>D</tt>, follow <tt>D</tt> with a <tt>.</tt> and then the field name. For example, to access the elevation data, do so like this:</p><pre class="codeinput">D.elevation
+</pre><pre class="codeoutput">ans = 
+  struct with fields:
+
+         Value: [236379&times;1 single]
+    Attributes: [1&times;1 struct]
+</pre><p>The elevation measurements reside in the <tt>D.elevation.Value</tt> field, and information about the elevation data can be found in <tt>D.elevation.Attributes</tt>. Here are the attributes of the elevation data:</p><pre class="codeinput">D.elevation.Attributes
+</pre><pre class="codeoutput">ans = 
+  struct with fields:
+
+          h5es_id: 4
+            units: 'meters'
+        long_name: 'elevation'
+    standard_name: 'elevation'
+      description: 'Elevation of the laser spot above ellipsoid'
+</pre><p>Plot elevation and signal strength as a 3D scatterplot:</p><pre class="codeinput">figure
+scatter3(D.longitude.Value, D.latitude.Value, D.elevation.Value,<span class="keyword">...</span>
+   2, D.instrument_parameters.rcv_sigstr.Value,<span class="string">'filled'</span>)
+
+<span class="comment">% Add a grid and some labels:</span>
+grid <span class="string">on</span>
+xlabel(D.longitude.Attributes.units, <span class="string">'interpreter'</span>, <span class="string">'none'</span>);
+ylabel(D.latitude.Attributes.units, <span class="string">'interpreter'</span>, <span class="string">'none'</span>);
+zlabel(D.elevation.Attributes.units, <span class="string">'interpreter'</span>, <span class="string">'none'</span>);
+
+cb = colorbar;
+ylabel(cb,D.instrument_parameters.rcv_sigstr.Attributes.long_name)
+axis <span class="string">tight</span>
+</pre><img vspace="5" hspace="5" src="h5struct_documentation_01.png" alt=""> <h2 id="9">Example 2</h2><p>If you only need some of the data in an HDF5 file, you may prefer to only load the data Here's how:</p><pre class="codeinput">dataset = {<span class="string">'/instrument_parameters/rel_time'</span>, <span class="string">'/elevation'</span>};
+D = h5struct(<span class="string">'altimetry_example.h5'</span>, dataset);
+</pre><p>This time we only loaded the elevation data and the relative time. Here's what <tt>D</tt> looks like:</p><pre class="codeinput">D
+</pre><pre class="codeoutput">D = 
+  struct with fields:
+
+    instrument_parameters: [1&times;1 struct]
+                elevation: [1&times;1 struct]
+</pre><p>Similar to Example 1, plot elevation vs. relative time</p><pre class="codeinput">figure
+plot(D.instrument_parameters.rel_time.Value, D.elevation.Value,<span class="string">'.'</span>,<span class="string">'markersize'</span>,0.5)
+
+<span class="comment">% add a grid and some labels</span>
+grid <span class="string">on</span>
+xlabel(D.instrument_parameters.rel_time.Attributes.units, <span class="string">'interpreter'</span>, <span class="string">'none'</span>);
+ylabel(D.elevation.Attributes.units, <span class="string">'interpreter'</span>, <span class="string">'none'</span>);
+axis <span class="string">tight</span>
+</pre><img vspace="5" hspace="5" src="h5struct_documentation_02.png" alt=""> <h2 id="12">Author Info</h2><p>This function and supporting documentation were written by Alex S. Gardner, JPL-Caltech, Oct 2018.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |hfive2struct| documentation 
+% |h5struct| loads HDF5 data into a Matlab stucture with the same
+% hierarchy as the original file.
+%
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+%
+%  data = hfive2struct(filename)
+%  data = hfive2struct(filename, dataset)
+%  data = hfive2struct(filename, dataset, true)
+%  data = hfive2struct(filename, [], true)
+%
+%% Description
+% |data = hfive2struct(filename)| loads all attibutes, dataset values
+% and dataset atributes of the h5 filename into a Matlab stucture with the same
+% hierarchy as the original file. [currenlty handles up to 11 group levels]
+% 
+% |data = hfive2struct(filename, dataset)| loads only the requested dataset
+% and associated attibutes of filename into a Matlab stucture with the same
+% hierarchy as the original filename. |dataset| is the full h5 path to the
+% desired dataset. dataset can be specified as either a string or cell
+% array of stings e.g. /path/to/dataset or {path/to/dataset1, path/to/dataset2}.
+% 
+% |data = hfive2struct(filename, dataset, fill_with_nan)| loads only the requested
+% dataset and associated attibutes of filename into a Matlab stucture. If 
+% fill_with_nan = true, all single and double datasets having a _FillValue
+% will have _FillValue replaced with NaNs.
+% 
+%% User Input
+% 
+% * |filename| full path to hdf5 file
+% * |dataset| full dataset path within hdf5 structure (optional). Can be specified as 
+% either a string or cell array of stings e.g. |'/orbit_info/rgt'| or |{'/orbit_info/rgt', /ancillary_data/control'}|.
+% * |fill_with_nan| |true| or |false|, if |true| single and double datasets
+% with a |_FillValue| will have |_FillValue| filled with |NaN|.
+
+%% Example 1 
+% Load in all data from an h5 file:
+
+D = h5struct('altimetry_example.h5');
+
+%% 
+% Now here are the structured contents of |D|
+
+D
+
+%% 
+% To access one of the fields of |D|, follow |D| with a |.| and then the field name. 
+% For example, to access the elevation data, do so like this: 
+
+D.elevation
+
+%% 
+% The elevation measurements reside in the |D.elevation.Value| field, and information about the 
+% elevation data can be found in |D.elevation.Attributes|. Here are the attributes of the 
+% elevation data: 
+
+D.elevation.Attributes
+
+%% 
+% Plot elevation and signal strength as a 3D scatterplot: 
+
+figure
+scatter3(D.longitude.Value, D.latitude.Value, D.elevation.Value,...
+   2, D.instrument_parameters.rcv_sigstr.Value,'filled')
+
+% Add a grid and some labels:
+grid on
+xlabel(D.longitude.Attributes.units, 'interpreter', 'none');
+ylabel(D.latitude.Attributes.units, 'interpreter', 'none');
+zlabel(D.elevation.Attributes.units, 'interpreter', 'none');
+
+cb = colorbar; 
+ylabel(cb,D.instrument_parameters.rcv_sigstr.Attributes.long_name)
+axis tight
+
+%% Example 2
+% If you only need some of the data in an HDF5 file, you may prefer to only load the data
+% Here's how:
+
+dataset = {'/instrument_parameters/rel_time', '/elevation'};
+D = h5struct('altimetry_example.h5', dataset);
+
+%% 
+% This time we only loaded the elevation data and the relative time. Here's what 
+% |D| looks like: 
+
+D
+
+%% 
+% Similar to Example 1, plot elevation vs. relative time
+
+figure
+plot(D.instrument_parameters.rel_time.Value, D.elevation.Value,'.','markersize',0.5)
+
+% add a grid and some labels
+grid on
+xlabel(D.instrument_parameters.rel_time.Attributes.units, 'interpreter', 'none');
+ylabel(D.elevation.Attributes.units, 'interpreter', 'none');
+axis tight
+
+%% Author Info
+% This function and supporting documentation were written by Alex S. Gardner,
+% JPL-Caltech, Oct 2018.
+
+##### SOURCE END #####
+--></body></html>

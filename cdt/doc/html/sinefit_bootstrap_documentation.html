@@ -1,0 +1,357 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>sinefit_bootstrap documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-21"><meta name="DC.source" content="sinefit_bootstrap_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>sinefit_bootstrap</tt> documentation</h1><!--introduction--><p><tt>sinefit_bootstrap</tt> performs a bootstrap analysis on the parameters estimated by the function <a href="sinefit_documentation.html"><tt>sinefit</tt></a>. Bootstrapping means applying the <tt>sinefit</tt> function to a bunch of subsamples of the data, then analyzing the distributions of solutions for each parameter to see how robust the solutions are.</p><p>For related functions, see <a href="sineval_documentation.html"><tt>sineval</tt></a> and <a href="sinefit_documentation.html"><tt>sinefit</tt></a> documentation.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#16">Note to users</a></li><li><a href="#17">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>ft = sinefit_bootstrap(t,y)
+ft = sinefit_bootstrap(...,'terms',TermOption)
+ft = sinefit_bootstrap(...,'nboot',nboot)
+[ft,rmse,Nsamp] = sinefit_bootstrap(...)</pre><h2 id="2">Description</h2><p><tt>ft = sinefit_bootstrap(t,y)</tt> fits a 2-term (amplitude and phase) sinusoid to 1000 random subsamples of the time series <tt>t,y</tt>. The output <tt>ft</tt> is a 1000x2 matrix containinng all 1000 solutions for the amplitude and phase, respectively. See <a href="sinefit_documentation.html"><tt>sinefit</tt></a> for a complete description of inputs and outputs.</p><p><tt>ft = sinefit_bootstrap(...,'terms',TermOption)</tt> specifies which terms are calculated in the sinusoid fit. Default is <tt>2</tt> because more terms can be computationally slow! <tt>TermOption</tt> can be 2, 3, 4, or 5:</p><div><ul><li><tt>2</tt>: <tt>ft = [A doy_max]</tt> where <tt>A</tt> is the amplitude of the sinusoid, and <tt>doy_max</tt>      is the day of year corresponding to the maximum value of the sinusoid.      The default <tt>TermOption</tt> is <tt>2</tt>.</li><li><tt>3</tt>: <tt>ft = [A doy_max C]</tt> also estimates <tt>C</tt>, a constant offset. Solving for      adds processing time, so you may prefer to estimate <tt>C</tt> on your own simply      as the mean of the input <tt>y</tt>. However, if you can't assume C=mean(y), you      may prefer this three-term solution.</li><li><tt>4</tt>: <tt>ft = [A doy_max C trend]</tt> also estimates a linear trend over the entire      time series in units of y per year. Again, simultaneously solving for      four terms will be much more computationally expensive than solving for      two yerms, so you may prefer to estimate the trend on your own with      polyfit, then calculate the two-term sine fit on your detrended data.</li><li><tt>5</tt>: <tt>ft = [A doy_max C trend quadratic_term]</tt> also includes a quadratic term      in the solution, but this is experimental for now, because fitting a      polynomial to dates referenced to year zero tends to be scaled poorly.</li></ul></div><p><tt>ft = sinefit_bootstrap(...,'nboot',nboot)</tt> specifies the number of bootstrap samples. Default is <tt>1000</tt>, meaning sinusoids are fit to 1000 random subsamples of the data.</p><p><tt>[ft,rmse,Nsamp] = sinefit_bootstrap(...)</tt> also returns distributions of root-mean-square error of residuals (how well the sinusoids fit the data) and <tt>Nsamp</tt>, the number of datapoints contributing to each subsample of the data.</p><h2 id="3">Example</h2><p>This example performs a bootstrap analysis of the phase and amplitude of a sea ice extent dataset. Load and plot the northern hemisphere sea ice extent time series:</p><pre class="codeinput">load <span class="string">seaice_extent</span>
+
+plot(t,extent_N)
+box <span class="string">off</span>
+axis <span class="string">tight</span>
+ylabel <span class="string">'NH sea ice extent (10^6 km^2)'</span>
+</pre><img vspace="5" hspace="5" src="sinefit_bootstrap_documentation_01.png" alt=""> <p>Well that's about like interpreting a barcode. Try plotting as a function of day of the year for a better depiction of the seasonal cycle. I'm using my <a href="https://www.mathworks.com/matlabcentral/fileexchange/48413-cbdate"><tt>cbdate</tt></a> function for a date-formatted colorbar.</p><pre class="codeinput">figure
+scatter(day(t,<span class="string">'dayofyear'</span>),extent_N,10,datenum(t),<span class="string">'filled'</span>)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+xlabel <span class="string">'day of year'</span>
+cb = cbdate(<span class="string">'yyyy'</span>);
+set(cb,<span class="string">'ydir'</span>,<span class="string">'reverse'</span>) <span class="comment">% flips the direction of the colorbar</span>
+</pre><img vspace="5" hspace="5" src="sinefit_bootstrap_documentation_02.png" alt=""> <p>Now the <tt>sinefit</tt> function can estimate the amplitude, phase, y-intercept, and slope of that time series all at once; however, computation gets quite a bit slower with every extra term, and <tt>sinefit_bootstrap</tt> will have to do the calculation a thousand times, so let's just detrend the data now for simplicity, and only solve for the phase and amplitude . The detrended time series looks like this:</p><pre class="codeinput">y = detrend(extent_N);
+
+figure
+plot(t,y)
+box <span class="string">off</span>
+axis <span class="string">tight</span>
+ylabel <span class="string">'detrended NH sea ice extent (10^6 km^2)'</span>
+</pre><img vspace="5" hspace="5" src="sinefit_bootstrap_documentation_03.png" alt=""> <p>By eye we can see the amplitude of the sinusoid is about 4 million km^2, and this is the northern hemisphere sea ice extent, so we can guess that its maximum will be at the end of northern hemisphere winter or the spring. We can fit a 2-term sinusoid to the full time series to get something better than an eyeball estimation:</p><pre class="codeinput">sinefit(t,y)
+</pre><pre class="codeoutput">ans =
+    4.4085   66.8274
+</pre><p>Those two numbers, 4.4 and 66.8, are the amplitude of the sinusoid and the day that the sinusoid reaches its maximum value. That is, 4.4 million km^2 and day 66 (March 7th). But how robust is that solution? Use <tt>sinefit_bootstrap</tt> to fit sinusoids to 1000 random samples of the sea ice extent time series (This solution will take about 20 seconds)</p><pre class="codeinput">ft = sinefit_bootstrap(t,y);
+
+amp = ft(:,1);  <span class="comment">% amplitude is the first column of ft</span>
+phase = ft(:,2);<span class="comment">% phase is the second column of ft</span>
+</pre><p>If you have the Statistics Toolbox, you can use <tt>scatterhist</tt> to display the distributions of amplitude and phase solutions. Otherwise, you can just plot them in 2D as a scatterplot and/or plot the histograms of the individual distributions of the data:</p><pre class="codeinput">scatterhist(phase,amp)
+xlabel <span class="string">'day of sinusoid maximum'</span>
+ylabel <span class="string">'amplitude (10^6 km^2)'</span>
+</pre><img vspace="5" hspace="5" src="sinefit_bootstrap_documentation_04.png" alt=""> <p>Those are pretty tight clusters. They say that the amplitude and phase of the sinusoid fit should be accurate within about</p><pre class="codeinput">std(amp)
+std(phase)
+</pre><pre class="codeoutput">ans =
+    0.0096
+ans =
+    0.1028
+</pre><p>0.009 km^2 and 0.1 days. That's not surprising, given that we have 40 years (40 cycles) of a very well sampled (365/cycle) dataset, we expect high accuracy of the <tt>sinefit</tt> amplitude and phase. But what if you only have a few data points, collected at random times? Can you still estimate a sinusoid? Here's what I mean: Let's trim down the dataset to just 7 random points:</p><pre class="codeinput"><span class="comment">% Indices of 7 random data points:</span>
+ind = randi(length(y),[7 1]);
+
+<span class="comment">% Trim y and t to only those 7 points:</span>
+y = y(ind);
+t = t(ind);
+
+figure
+plot(t,y,<span class="string">'bo'</span>)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+ylabel <span class="string">'NH sea ice extent (km^2)'</span>
+</pre><img vspace="5" hspace="5" src="sinefit_bootstrap_documentation_05.png" alt=""> <p>That only looks like a few random points. But once again, plotting as a function of day of year can help us see what <tt>sinefit</tt> has to work with:</p><pre class="codeinput">figure
+scatter(day(t,<span class="string">'dayofyear'</span>),y,60,datenum(t),<span class="string">'filled'</span>)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+xlabel <span class="string">'day of year'</span>
+colorbar
+cbdate(<span class="string">'yyyy'</span>);
+</pre><img vspace="5" hspace="5" src="sinefit_bootstrap_documentation_06.png" alt=""> <p>So we see that <tt>sinefit</tt> has something like a sinusoid to approximate, even with only 7 points. It should not be surprising that with just these 7 points, <tt>sinefit</tt> still gets values pretty close to the well-constrained 4.4 amplitude with a maximum on day 66.8</p><pre class="codeinput">ft = sinefit(t,y)
+</pre><pre class="codeoutput">ft =
+    4.5210   72.4296
+</pre><p>Here's what the sinusoid looks like on top of those 7 points:</p><pre class="codeinput">hold <span class="string">on</span>
+plot(1:365,sineval(ft,1:365))
+</pre><img vspace="5" hspace="5" src="sinefit_bootstrap_documentation_07.png" alt=""> <p>Use <tt>sinefit_bootstrap</tt> to quantify the uncertainty.</p><pre class="codeinput">ft = sinefit_bootstrap(t,y);
+
+figure
+scatterhist(ft(:,2),ft(:,1))
+xlabel <span class="string">'day of sinusoid maximum'</span>
+ylabel <span class="string">'amplitude (km^2)'</span>
+
+amp_uncertainty = std(ft(:,1))
+phase_uncertainty = std(ft(:,2))
+</pre><pre class="codeoutput">amp_uncertainty =
+    0.3966
+phase_uncertainty =
+    4.7555
+</pre><img vspace="5" hspace="5" src="sinefit_bootstrap_documentation_08.png" alt=""> <p>And indeed, even with just 7 datapoints collected over 40 years, <tt>sinefit</tt> can estimate the amplitude within about 0.4 million km^2 and the phase within about 7 days.</p><h2 id="16">Note to users</h2><p>One brief note related to the all the parameters estimated by <tt>sinefit</tt>: These parameters describe the best-fit sinusoid, but that does not necessarily mean they fully describe the behavior of the underlying data itself. For example, in terms of climatological average, Northern Hemisphere sea ice extent actually typically reaches a maximum around day 71 (March 12), whereas <tt>sinefit</tt> says the maximum value of the best-fit sinusoid occurs on day 66 (March 7). That's because the true behavior of sea ice extent is more complex than a simple sinusoid. In your work, be sure to consider the difference between true behavior and the 1/yr frequency component of the true behavior.</p><h2 id="17">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The <tt>sinefit</tt>, <tt>sineval</tt>, and <tt>sinefit_bootstrap</tt> functions as well as the supporting documentation were written by Chad A. Greene of the University of Texas Institute for Geophysics.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |sinefit_bootstrap| documentation 
+% |sinefit_bootstrap| performs a bootstrap analysis on the parameters
+% estimated by the function <sinefit_documentation.html |sinefit|>. Bootstrapping means applying the 
+% |sinefit| function to a bunch of subsamples of the data, then analyzing
+% the distributions of solutions for each parameter to see how robust
+% the solutions are. 
+% 
+% For related functions, see <sineval_documentation.html |sineval|> and 
+% <sinefit_documentation.html |sinefit|> documentation. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax
+% 
+%  ft = sinefit_bootstrap(t,y)
+%  ft = sinefit_bootstrap(...,'terms',TermOption) 
+%  ft = sinefit_bootstrap(...,'nboot',nboot)
+%  [ft,rmse,Nsamp] = sinefit_bootstrap(...)
+% 
+%% Description 
+% 
+% |ft = sinefit_bootstrap(t,y)| fits a 2-term (amplitude and phase) sinusoid 
+% to 1000 random subsamples of the time series |t,y|. The output |ft| is a 1000x2
+% matrix containinng all 1000 solutions for the amplitude and phase, respectively. 
+% See <sinefit_documentation.html |sinefit|> for a complete description of inputs and outputs. 
+%
+% |ft = sinefit_bootstrap(...,'terms',TermOption)| specifies which terms are calculated
+% in the sinusoid fit. Default is |2| because more terms can be computationally slow! 
+% |TermOption| can be 2, 3, 4, or 5:
+% 
+% * |2|: |ft = [A doy_max]| where |A| is the amplitude of the sinusoid, and |doy_max| 
+%      is the day of year corresponding to the maximum value of the sinusoid. 
+%      The default |TermOption| is |2|.
+% * |3|: |ft = [A doy_max C]| also estimates |C|, a constant offset. Solving for  
+%      adds processing time, so you may prefer to estimate |C| on your own simply
+%      as the mean of the input |y|. However, if you can't assume C=mean(y), you
+%      may prefer this three-term solution. 
+% * |4|: |ft = [A doy_max C trend]| also estimates a linear trend over the entire
+%      time series in units of y per year. Again, simultaneously solving for 
+%      four terms will be much more computationally expensive than solving for
+%      two yerms, so you may prefer to estimate the trend on your own with 
+%      polyfit, then calculate the two-term sine fit on your detrended data. 
+% * |5|: |ft = [A doy_max C trend quadratic_term]| also includes a quadratic term
+%      in the solution, but this is experimental for now, because fitting a 
+%      polynomial to dates referenced to year zero tends to be scaled poorly.
+%
+% |ft = sinefit_bootstrap(...,'nboot',nboot)| specifies the number of bootstrap samples. 
+% Default is |1000|, meaning sinusoids are fit to 1000 random subsamples of the data.  
+%
+% |[ft,rmse,Nsamp] = sinefit_bootstrap(...)| also returns distributions of root-mean-square
+% error of residuals (how well the sinusoids fit the data) and |Nsamp|, the number
+% of datapoints contributing to each subsample of the data. 
+% 
+%% Example
+% This example performs a bootstrap analysis of the phase and amplitude of
+% a sea ice extent dataset. Load and plot the northern hemisphere sea ice 
+% extent time series: 
+
+load seaice_extent
+
+plot(t,extent_N) 
+box off
+axis tight
+ylabel 'NH sea ice extent (10^6 km^2)'
+
+%% 
+% Well that's about like interpreting a barcode. Try plotting
+% as a function of day of the year for a better depiction of the
+% seasonal cycle. I'm using my <https://www.mathworks.com/matlabcentral/fileexchange/48413-cbdate |cbdate|>
+% function for a date-formatted colorbar.   
+
+figure
+scatter(day(t,'dayofyear'),extent_N,10,datenum(t),'filled')
+axis tight
+box off
+xlabel 'day of year'
+cb = cbdate('yyyy'); 
+set(cb,'ydir','reverse') % flips the direction of the colorbar
+
+%% 
+% Now the |sinefit| function can estimate the amplitude, phase, 
+% y-intercept, and slope of that time series all at once; however, 
+% computation gets quite a bit slower with every extra term, and |sinefit_bootstrap| 
+% will have to do the calculation a thousand times, so let's just detrend
+% the data now for simplicity, and only solve for the phase and amplitude . 
+% The detrended time series looks like this: 
+
+y = detrend(extent_N); 
+
+figure
+plot(t,y) 
+box off
+axis tight
+ylabel 'detrended NH sea ice extent (10^6 km^2)'
+
+%% 
+% By eye we can see the amplitude of the sinusoid is about 4 million km^2, 
+% and this is the northern hemisphere sea ice extent, so we can guess that
+% its maximum will be at the end of northern hemisphere winter or the spring. 
+% We can fit a 2-term sinusoid to the full time series to get something better
+% than an eyeball estimation: 
+
+sinefit(t,y)
+
+%% 
+% Those two numbers, 4.4 and 66.8, are the amplitude of the sinusoid and 
+% the day that the sinusoid reaches its maximum value. That is, 4.4 million km^2 and
+% day 66 (March 7th). But how robust is that solution? Use |sinefit_bootstrap|
+% to fit sinusoids to 1000 random samples of the sea ice extent time series
+% (This solution will take about 20 seconds) 
+
+ft = sinefit_bootstrap(t,y); 
+
+amp = ft(:,1);  % amplitude is the first column of ft
+phase = ft(:,2);% phase is the second column of ft 
+
+%% 
+% If you have the Statistics Toolbox, you can use |scatterhist| to display 
+% the distributions of amplitude and phase solutions. Otherwise, you can 
+% just plot them in 2D as a scatterplot and/or plot the histograms of the 
+% individual distributions of the data: 
+
+scatterhist(phase,amp)
+xlabel 'day of sinusoid maximum'
+ylabel 'amplitude (10^6 km^2)'
+
+%% 
+% Those are pretty tight clusters. They say that the amplitude and phase 
+% of the sinusoid fit should be accurate within about
+
+std(amp) 
+std(phase) 
+
+%% 
+% 0.009 km^2 and 0.1 days. That's not surprising, given that we have 40 years (40 cycles)
+% of a very well sampled (365/cycle) dataset, we expect high accuracy of the |sinefit|
+% amplitude and phase. But what if you only have a few data points, collected at random times? 
+% Can you still estimate a sinusoid? Here's what I mean: Let's trim down the dataset to just 
+% 7 random points: 
+
+% Indices of 7 random data points:  
+ind = randi(length(y),[7 1]); 
+
+% Trim y and t to only those 7 points:
+y = y(ind); 
+t = t(ind); 
+
+figure
+plot(t,y,'bo') 
+axis tight
+box off 
+ylabel 'NH sea ice extent (km^2)'
+
+%%
+% That only looks like a few random points. But once again, plotting as a function of  
+% day of year can help us see what |sinefit| has to work with: 
+
+figure
+scatter(day(t,'dayofyear'),y,60,datenum(t),'filled')
+axis tight
+box off
+xlabel 'day of year'
+colorbar
+cbdate('yyyy'); 
+
+%% 
+% So we see that |sinefit| has something like a sinusoid to approximate, 
+% even with only 7 points. It should not be surprising that with just these
+% 7 points, |sinefit| still gets values pretty close to the well-constrained 
+% 4.4 amplitude with a maximum on day 66.8
+
+ft = sinefit(t,y)
+
+%% 
+% Here's what the sinusoid looks like on top of those 7 points: 
+
+hold on
+plot(1:365,sineval(ft,1:365))
+
+%% 
+% Use |sinefit_bootstrap| to quantify the uncertainty. 
+
+ft = sinefit_bootstrap(t,y); 
+
+figure
+scatterhist(ft(:,2),ft(:,1))
+xlabel 'day of sinusoid maximum'
+ylabel 'amplitude (km^2)'
+
+amp_uncertainty = std(ft(:,1)) 
+phase_uncertainty = std(ft(:,2))
+
+%%
+% And indeed, even with just 7 datapoints collected over 40 years, |sinefit| 
+% can estimate the amplitude within about 0.4 million km^2 and the phase within about 7 days. 
+
+%% Note to users
+% One brief note related to the all the parameters estimated by |sinefit|: These parameters 
+% describe the best-fit sinusoid, but that does not necessarily mean they fully
+% describe the behavior of the underlying data itself. For example, in terms of climatological average, 
+% Northern Hemisphere sea ice extent actually typically reaches a maximum around day 71 (March 12), 
+% whereas |sinefit| says the maximum value of the best-fit sinusoid occurs on day 66 (March 7). That's 
+% because the true behavior of sea ice extent is more complex than a simple sinusoid. In your work, be sure
+% to consider the difference between true behavior and the 1/yr frequency component of the true behavior.
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The |sinefit|, |sineval|, and |sinefit_bootstrap| functions as well as the 
+% supporting documentation were written by Chad A. Greene of the University 
+% of Texas Institute for Geophysics. 
+##### SOURCE END #####
+--></body></html>

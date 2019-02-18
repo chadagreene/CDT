@@ -1,0 +1,240 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>imagescn documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-21"><meta name="DC.source" content="imagescn_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>imagescn</tt> documentation</h1><!--introduction--><p>The <tt>imagescn</tt> behaves just like <tt>imagesc</tt>, but makes NaNs transparent, sets <tt>axis</tt> to <tt>xy</tt> if <tt>xdata</tt> and <tt>ydata</tt> are included, and has more error checking than <tt>imagesc</tt>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Real-world example</a></li><li><a href="#6">Differences between imagesc, imagescn, and pcolor</a></li><li><a href="#7">Example and comparison with other functions</a></li><li><a href="#14">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>imagescn(C)
+imagescn(x,y,C)
+imagescn(x,y,C,clims)
+imagescn('PropertyName',PropertyValue,...)
+h = imagescn(...)</pre><h2 id="2">Description</h2><p><tt>imagescn(C)</tt> displays the data in array C as an image that uses the full range of colors in the colormap. Each element of <tt>C</tt> specifies the color for 1 pixel of the image. The resulting image is an m-by-n grid of pixels where m is the number of columns and n is the number of rows in <tt>C</tt>. The row and column indices of the elements determine the centers of the corresponding pixels. <tt>NaN</tt> values in <tt>C</tt> appear transparent.</p><p><tt>imagescn(x,y,C)</tt> specifies <tt>x</tt> and <tt>y</tt> locations of the centers of the pixels in <tt>C</tt>. If <tt>x</tt> and <tt>y</tt> are two-element vectors, the outer rows and columns of C are centered on the values in <tt>x</tt> and <tt>y</tt>. Mimicking <tt>imagesc</tt>, if <tt>x</tt> or <tt>y</tt> are vectors with more than two elements, only the first and last elements of of the vectors are considered, and spacing is automatically scaled as if you entered two-element arrays. The <tt>imagescn</tt> function takes this one step further, and allows you to enter <tt>x</tt> and <tt>y</tt> as 2D grids the same size as <tt>C</tt>. If <tt>x</tt> and <tt>y</tt> are included, the <tt>imagescn</tt> function automatically sets axes to cartesian <tt>xy</tt> rather than the (reverse) <tt>ij</tt> axes.</p><p><tt>imagescn(x,y,C,clims)</tt> specifies the data values that map to the first and last elements of the colormap. Specify <tt>clims</tt> as a two-element vector of the form <tt>[cmin cmax]</tt>, where values less than or equal to <tt>cmin</tt> map to the first color in the colormap and values greater than or equal to <tt>cmax</tt> map to the last color in the colormap.</p><p><tt>imagescn('PropertyName',PropertyValue,...)</tt> specifies image properties as name-value pairs.</p><p><tt>h = imagescn(...)</tt> returns a handle of the object created.</p><h2 id="3">Real-world example</h2><p>Suppose you have a global topography grid and you want to set all the ocean values to NaN and make them transparent. Let's make a sample 1/8 degree resolution grid and get the topography with <a href="topo_interp_documentation.html"><tt>topo_interp</tt></a>, and a land mask with <a href="island_documentation.html"><tt>island</tt></a>:</p><pre class="codeinput">[lat,lon] = cdtgrid(1/8);
+z = topo_interp(lat,lon);
+land = island(lat,lon);
+
+<span class="comment">% Turn ocean cells to NaN:</span>
+z(~land) = NaN;
+</pre><p>Plotting the data with the standard <tt>imagesc</tt> function would look like this:</p><pre class="codeinput">figure
+imagesc(lon(1,:),lat(:,1),z)
+axis <span class="string">xy</span>
+</pre><img vspace="5" hspace="5" src="imagescn_documentation_01.png" alt=""> <p>Above, we had to specify the rows and colums of the lat,lon grid, and then in the end we didn't even get clear pixels where the ocean was set to NaN. It's much easier to use <tt>imagescn</tt> which lets you input the full lat,lon grids, automatically flips the axes to normal xy format, and makes NaN cells transparent:</p><pre class="codeinput">figure
+imagescn(lon,lat,z)
+</pre><img vspace="5" hspace="5" src="imagescn_documentation_02.png" alt=""> <h2 id="6">Differences between imagesc, imagescn, and pcolor</h2><p>The <tt>imagescn</tt> function plots data with <tt>imagesc</tt>, but after plotting, sets <tt>NaN</tt> pixels to an alpha value of 0. The <tt>imagescn</tt> function allows input coordinates <tt>x</tt> and <tt>y</tt> to be grids, which are assumed to be evenly-spaced and monotonic as if created by <tt>meshgrid</tt>. If <tt>x</tt> and <tt>y</tt> data are included when calling <tt>imagescn</tt>, y axis direction is set to normal, rather than the default behavior of <tt>imagesc</tt>, which sets y axis direction to reverse.</p><p>The <tt>imagescn</tt> function is faster than <tt>pcolor</tt>, which may be beneficial for large datasets, The <tt>pcolor</tt> function (nonsensically) deletes an outside row and column of data (illustrated below), and <tt>pcolor</tt> also refuses to plot data points closest to any <tt>NaN</tt> holes. The <tt>imagescn</tt> function does not delete any data. However, you may still sometimes wish to use <tt>pcolor</tt> if <tt>x,y</tt> coordinates are not evenly spaced or if you want interpolated shading.</p><h2 id="7">Example and comparison with other functions</h2><p>This example compares <tt>imagescn</tt>, <tt>imagesc</tt>, and <tt>pcolor</tt>. Start with a 5x5 sample dataset and put a <tt>NaN</tt> in the center of the matrix.</p><pre class="codeinput"><span class="comment">% A 5x5 sample dataset:</span>
+[X,Y,Z] = peaks(5);
+
+<span class="comment">% With NaN value in the middle:</span>
+Z(3,3) = NaN;
+</pre><p>To be clear, the <tt>NaN</tt> value we put in the middle of <tt>Z</tt> should be displayed at the location (0,0) on the x,y grid.  See, the locations of row 3, column 3 are (0,0):</p><pre class="codeinput">[X(3,3) Y(3,3)]
+</pre><pre class="codeoutput">ans =
+     0     0
+</pre><p>Plotting a grid like this is easy with <tt>pcolor</tt>:</p><pre class="codeinput">figure
+pcolor(X,Y,Z)
+</pre><img vspace="5" hspace="5" src="imagescn_documentation_03.png" alt=""> <p>But hey, wait!  Isn't <tt>Z</tt> a 5x5 matrix?  I only see 4x4!  And shouldn't the <tt>NaN</tt> hole in the middle be centered on the center X and Y values, which are (0,0)?  The off-center problem can be fixed by interpolated shading, but as you can see, interpolated shading causes more lost data:</p><pre class="codeinput">shading <span class="string">interp</span>
+</pre><img vspace="5" hspace="5" src="imagescn_documentation_04.png" alt=""> <p>Instead of <tt>pcolor</tt> we can use the built-in function <tt>imagesc</tt>, but it won't let us enter the <tt>X</tt> and <tt>Y</tt> grids as they are 5x5. To use <tt>imagesc</tt> you have to enter x and y coordinates as 1D vectors:</p><pre class="codeinput">imagesc(X(1,:),Y(:,1),Z)
+</pre><img vspace="5" hspace="5" src="imagescn_documentation_05.png" alt=""> <p>First you might notice that the y axis has switched directions, so you'll need to follow <tt>imagesc</tt> with</p><pre class="codeinput">axis <span class="string">xy</span>
+</pre><img vspace="5" hspace="5" src="imagescn_documentation_06.png" alt=""> <p>Now we have a proper 5x5 matrix, each pixel properly centered on its appropriate x,y location, but the center pixel, the NaN value appears ambiguous with the lowest-value pixel in the image, because by default <tt>imagesc</tt> makes NaN values look like real data with real values, just like other data in your dataset.  That's dangerous.</p><p>The <tt>imagescn</tt> lets you enter x and y values as vectors or 2D grids, properly aligns each data point (assuming the grids are evenly spaced), plots in <tt>xy</tt> coordinates if x and y values are given, and makes <tt>NaN</tt> values transparent.</p><pre class="codeinput">imagescn(X,Y,Z)
+</pre><img vspace="5" hspace="5" src="imagescn_documentation_07.png" alt=""> <h2 id="14">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas Institute for Geophysics (UTIG), February 2017.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |imagescn| documentation
+% The |imagescn| behaves just like |imagesc|, but makes NaNs transparent, sets
+% |axis| to |xy| if |xdata| and |ydata| are included, and has more error checking than |imagesc|. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents> 
+%% Syntax 
+% 
+%  imagescn(C) 
+%  imagescn(x,y,C) 
+%  imagescn(x,y,C,clims) 
+%  imagescn('PropertyName',PropertyValue,...) 
+%  h = imagescn(...) 
+% 
+%% Description 
+% 
+% |imagescn(C)| displays the data in array C as an image that uses the full range of colors in the colormap. 
+% Each element of |C| specifies the color for 1 pixel of the image. The resulting image is an m-by-n grid of 
+% pixels where m is the number of columns and n is the number of rows in |C|. The row and column indices of 
+% the elements determine the centers of the corresponding pixels. |NaN| values in |C| appear transparent. 
+% 
+% |imagescn(x,y,C)| specifies |x| and |y| locations of the centers of the pixels in |C|. If |x| and |y| are two-element
+% vectors, the outer rows and columns of C are centered on the values in |x| and |y|. Mimicking |imagesc|, if 
+% |x| or |y| are vectors with more than two elements, only the first and last elements of of the vectors are 
+% considered, and spacing is automatically scaled as if you entered two-element arrays. The |imagescn| function
+% takes this one step further, and allows you to enter |x| and |y| as 2D grids the same size as |C|. If |x| and |y|
+% are included, the |imagescn| function automatically sets axes to cartesian |xy| rather than the (reverse) |ij| axes. 
+% 
+% |imagescn(x,y,C,clims)| specifies the data values that map to the first and last elements of the colormap. 
+% Specify |clims| as a two-element vector of the form |[cmin cmax]|, where values less than or equal to |cmin| 
+% map to the first color in the colormap and values greater than or equal to |cmax| map to the last color in 
+% the colormap.
+% 
+% |imagescn('PropertyName',PropertyValue,...)| specifies image properties as name-value pairs. 
+% 
+% |h = imagescn(...)| returns a handle of the object created. 
+% 
+%% Real-world example
+% Suppose you have a global topography grid and you want to set all the ocean
+% values to NaN and make them transparent. Let's make a sample 1/8 degree resolution
+% grid and get the topography with <topo_interp_documentation.html |topo_interp|>, 
+% and a land mask with <island_documentation.html |island|>: 
+
+[lat,lon] = cdtgrid(1/8); 
+z = topo_interp(lat,lon); 
+land = island(lat,lon); 
+
+% Turn ocean cells to NaN: 
+z(~land) = NaN; 
+
+%% 
+% Plotting the data with the standard |imagesc| function would look like this: 
+
+figure
+imagesc(lon(1,:),lat(:,1),z)
+axis xy 
+
+%% 
+% Above, we had to specify the rows and colums of the lat,lon grid, and then
+% in the end we didn't even get clear pixels where the ocean was set to NaN. 
+% It's much easier to use |imagescn| which lets you input the full lat,lon grids, 
+% automatically flips the axes to normal xy format, and makes NaN cells transparent: 
+
+figure
+imagescn(lon,lat,z) 
+
+%% Differences between imagesc, imagescn, and pcolor
+% The |imagescn| function plots data with |imagesc|, but after plotting, sets |NaN| pixels to an 
+% alpha value of 0. The |imagescn| function allows input coordinates |x| and |y| to be grids, which 
+% are assumed to be evenly-spaced and monotonic as if created by |meshgrid|. If |x| and |y| data 
+% are included when calling |imagescn|, y axis direction is set to normal, rather than the default
+% behavior of |imagesc|, which sets y axis direction to reverse. 
+% 
+% The |imagescn| function is faster than |pcolor|, which may be beneficial for large datasets, 
+% The |pcolor| function (nonsensically) deletes an outside row and column of data (illustrated below),
+% and |pcolor| also refuses to plot data points closest to any |NaN| holes. The |imagescn| function does 
+% not delete any data. However, you may still sometimes wish to use |pcolor| if |x,y| coordinates are
+% not evenly spaced or if you want interpolated shading. 
+% 
+%% Example and comparison with other functions
+% This example compares |imagescn|, |imagesc|, and |pcolor|. Start with a 5x5 sample dataset 
+% and put a |NaN| in the center of the matrix. 
+
+% A 5x5 sample dataset: 
+[X,Y,Z] = peaks(5);
+
+% With NaN value in the middle: 
+Z(3,3) = NaN; 
+
+%% 
+% To be clear, the |NaN| value we put in the middle of |Z| should be displayed at the location
+% (0,0) on the x,y grid.  See, the locations of row 3, column 3 are (0,0): 
+
+[X(3,3) Y(3,3)]
+
+%% 
+% Plotting a grid like this is easy with |pcolor|: 
+
+figure
+pcolor(X,Y,Z) 
+
+%% 
+% But hey, wait!  Isn't |Z| a 5x5 matrix?  I only see 4x4!  And shouldn't the
+% |NaN| hole in the middle be centered on the center X and Y values, which are
+% (0,0)?  The off-center problem can be fixed by interpolated shading, but as you
+% can see, interpolated shading causes more lost data: 
+
+shading interp
+
+%% 
+% Instead of |pcolor| we can use the built-in function |imagesc|, but it won't let us enter
+% the |X| and |Y| grids as they are 5x5. To use |imagesc| you have to enter x and y coordinates
+% as 1D vectors: 
+
+imagesc(X(1,:),Y(:,1),Z) 
+
+%% 
+% First you might notice that the y axis has switched directions, so you'll need to follow
+% |imagesc| with 
+
+axis xy
+
+%% 
+% Now we have a proper 5x5 matrix, each pixel properly centered on its appropriate x,y location, 
+% but the center pixel, the NaN value appears ambiguous with the lowest-value pixel in the image, 
+% because by default |imagesc| makes NaN values look like real data with real values, just like 
+% other data in your dataset.  That's dangerous. 
+%
+% The |imagescn| lets you enter x and y values as vectors or 2D grids, properly aligns each data
+% point (assuming the grids are evenly spaced), plots in |xy| coordinates if x and y values are given, 
+% and makes |NaN| values transparent.
+
+imagescn(X,Y,Z) 
+
+%% Author Info 
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by <http://www.chadagreene.com Chad A. Greene> of the University of Texas Institute for 
+% Geophysics (UTIG), February 2017.  
+
+
+##### SOURCE END #####
+--></body></html>

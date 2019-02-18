@@ -1,0 +1,434 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>mld documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-17"><meta name="DC.source" content="mld_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>mld</tt> documentation</h1><!--introduction--><p>The <tt>mld</tt> function calculates the mixed layer depth of a water column based on profiles of temperature, salinity, and/or potential density.</p><p>The oceanic mixed layer refers to the well-mixed upper layer of the ocean characterized by constant temperature and salinity values.  While the concept is relatively straightforward, a concensus quantitative definition is lacking. Numerous somewhat-arbitrary algorithms exist, ranging from simple threshold algorithms to complex shape-fitting tools.</p><p>For this particular toolbox function, we chose to adapt the algorithms of <a href="https://doi.org/10.1175/2009JTECHO543.1">Holte and Talley, 2009</a>.  This paper details a multi-algorithm approach to calculating the mixed layer for oceanic Argo profiles, and therefore serves as a nice basis for a function that also strives to offer multiple approaches to mixed layer depth.  The examples below detail some of the most common approaches to this calculation.  Always keep in mind that mixed layer depth calculation is not a one-size-fits-all calculation, and you may need to experiment with many different options to determine which one is most applicable to your data.</p><p>Note that this function currently includes some quirks (for example, salinity profiles are analyzed differently than temperature and density profiles under certain algorithms) that are specific to the Holte &amp; Talley paper and are tailored to open ocean, predominantly Southern-ocean, profiles.  These may or may not be appropriate to all datasets.  We preserve them here, along with default parameter choices, for consistency with the original Holte &amp; Talley code on which this function is based.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Name-Value pair arguments</a></li><li><a href="#4">Example 1: The threshold approach</a></li><li><a href="#6">Example 2: The fit approach</a></li><li><a href="#7">Example 3: Alternate methods</a></li><li><a href="#10">References</a></li><li><a href="#11">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>pmld = mld(pres, temp)
+pmld = mld(pres, temp, salt)
+pmld = mld(..., Name, Value, ...)
+[pmld, mldtbl, pth, h] = mld(...)</pre><h2 id="2">Description</h2><p><tt>pmld = mld(pres, temp)</tt> calculates pressure corresonding to the mixed layer depth of a water column defined by pressure vector <tt>pres</tt> (in db) and temperature vector <tt>temp</tt> (in deg C).  In the temperature-only calculations, the pressure values are used only as a vertical axis, and therefore depth values (in m) can be substituted.</p><p><tt>pmld = mld(pres, temp)</tt> calculates the mixed layer depth pressure of a water column defined by pressure vector <tt>pres</tt> (in db), temperature vector <tt>temp</tt> (in deg C), and salinity vector <tt>salt</tt>.  Note that in this instance pressure values will be used to calculate potential density, and therefore users should be cautious about substituting depth values (in m) in place of pressure.</p><p><tt>pmld = mld(..., Name, Value, ...)</tt> allows users to modify algorithm parameters via the Name-Value parameters listed in the next section.</p><p><tt>[pmld, mldtbl, pth, h] = mld(...)</tt> returns additional information about the internal algorithms used.  The <tt>mldtbl</tt> table holds all mixed layer depth pressure candidate values used if the "best" algorithm is specified.  The <tt>pth</tt> value returns the algorithm pathway used if the "best" algorithm is used; this is primarily for debugging purposes and was designed to match the analysis_t, analysis_s, and analysis_d variables in the original Holte&amp;Talley 2009 supplementary online code (note that this code is not identical to that online supplement, but reproduces the same pathways in most instances).  Finally, if the plot input option is specified, graphics handles will be returned in the handle structure <tt>h</tt>.</p><h2 id="3">Name-Value pair arguments</h2><p><b>metric</b> <tt>'threshold'</tt>, <tt>'gradient'</tt>, <tt>'fit'</tt>, <tt>'extrema'</tt>, <tt>'subsurface'</tt>, <tt>'best'</tt> (default)</p><p>This function allows for 6 different methods of defining the mixed layer depth:</p><div><ul><li><tt>threshold</tt>: The mixed layer depth is the first depth, measured from the reference depth downward, where profile value differs from the reference depth value by more than a threshold amount. Applicable to temperature and density profiles only.</li><li><tt>gradient</tt>: first depth, measured from reference depth downward, where profile gradient exceeds an indicated threshold amount. If the gradient never exceeds the threshold, the depth of highest absolute gradient is used. For salinity profiles, simply looks for maximum gradient.</li><li><tt>fit</tt>: A line is fit to the top, vertical-ish part of the profile and to the highest-gradient, horizontal-ish part of the profile.  The mixed layer depth is set to the pressure where these lines intersect, or 0 if they don't intersect.</li><li><tt>extrema</tt>: pressure of the extreme values.  For temperature, the maximum value is found, and for salinity and  density, the minimum. Note that while these values may be applicable to most oceanic profiles, there are circumstances (for example, temperature inversions in salinity-dominated under-ice environments) where this simple metric will definitely fail.</li><li><tt>subsurface</tt>: This method attempts to find subsurface anomalies at the base of the mixed layer that are the result of surface cooling and mixing events.  The profiles are characterized by a temperature gradient maximum in close proximity to the temperature maximum (or minima, for salinity). If found, the mld value reflects the shallower of the two values; if not found, it is set to 0. Applicable to temperature and salinity profiles only.</li><li><tt>'best'</tt>: All applicable potential mld values are calculated from the above options, and the Holte &amp; Talley 2009 algorithm is used to choose which is the best estimate for a given profile.</li></ul></div><p><b>refpres</b> numeric scalar, default = 10</p><p>reference pressure (db).  Calculations are based on this point of the profile downward; points above are ignored, with the intent to eliminate any diurnal heating artifacts at the surface.</p><p><b>tthresh</b> numeric scalar, default = 0.2</p><p>threshold value used for temperature threshold calculation (deg C)</p><p><b>tgradthresh</b> numeric scalar, default = 0.005</p><p>threshold value used for temperature gradient calculation (deg C m^-1)</p><p><b>dthresh</b> numeric scalar, default = 0.03</p><p>threshold value used for density threshold calculation (kg m^-3)</p><p><b>dgradthresh</b> numeric scalar, default = 0.0005</p><p>threshold value used for density gradient calculation (kg m^-4)</p><p><b>errortol</b> numeric scalar, default = 1e-10</p><p>error tolerance used to choose which points to include in the surface-verticalish-line in the fit algorithm. Cutoff is set to the deepest point where the normalized sum squared error of the fit is less than this tolerance.</p><p><b>range</b> numeric scalar, default = 25</p><p>range parameter used to identify clusters of mld values during the choose-the-best algorithm, i.e. r in Holte &amp; Talley, 2009, section 3b. (db)</p><p><b>deltad</b> numeric scalar, default = 100</p><p>maximum distance allowed between maximim[minimum] value and gradient in temperature[salinity] subsurface calculation. (db)</p><p><b>tcutoffu</b> numeric scalar, default = 0.5</p><p>upper value of temperature change cutoff when classifying a temperature profile as winter-like during the choose-the-best algorithm. (deg C)</p><p><b>tcutoffl</b> numeric scalar, default = -0.25</p><p>lower value of temperature change cutoff when classifying a temperature profile as winter-like during the choose-the-best algorithm. (deg C)</p><p><b>dcutoff</b> numeric scalar, default = -0.06</p><p>potential density change cutoff above which a profile is classified as winter-like during the choose-the-best algorithm. (kg m^-3)</p><p><b>plot</b> logical scalar, default = False</p><p>true to create a figure with the profiles, mixed layer depth points, and some reference detail.</p><p><b>tblformat</b> <tt>'table'</tt> (default), <tt>'array'</tt></p><p>The <tt>mldtbl</tt> output consists of a 3 x 5 array, with rows corresponding to the 5 algorithms (excluding best), and columns corresponding to temperature, salinity, and density, respectively.  The default table format is more self-describing, since the columns and rows are clearly labeled, but the creation of a table array can add significant time to the function execution; array output is recommended if calling this function many times. (Note that if this function is called with only one output, this becomes irrelevant).</p><h2 id="4">Example 1: The threshold approach</h2><p>The threshold definition is the most commonly-used mixed layer depth metric, and underlies several global mixed layer depth products, such as &#65279;Monterey and Levitus (1997).</p><p>To replicate this type of calculation, we start with example data from an Argo float. Use the <a href="transect_documentation.html"><tt>transect</tt></a> function to turn the 34 profiles into a transect plot and set colormaps with <a href="cmocean_documentation.html"><tt>cmocean</tt></a>.</p><pre class="codeinput">A = load(<span class="string">'example_argo.mat'</span>);
+nprof = length(A.date);
+ax(1) = subplot(3,1,1);
+transect(A.date, A.PRES, A.TEMP,<span class="string">'markersize'</span>,2);
+hold <span class="string">on</span>;
+cb(1) = colorbar(<span class="string">'eastoutside'</span>);
+ylabel(cb(1), <span class="string">'Temperature'</span>);
+datetick;
+cmocean(<span class="string">'thermal'</span>);
+
+ax(2) = subplot(3,1,2);
+transect(A.date, A.PRES, A.PSAL,<span class="string">'markersize'</span>,2);
+hold <span class="string">on</span>;
+cb(2) = colorbar(<span class="string">'eastoutside'</span>);
+ylabel(cb(2), <span class="string">'Salinity'</span>);
+datetick;
+cmocean(<span class="string">'haline'</span>);
+
+ax(3) = subplot(3,1,3);
+transect(A.date, A.PRES, A.pden,<span class="string">'markersize'</span>,2);
+hold <span class="string">on</span>;
+cb(3) = colorbar(<span class="string">'eastoutside'</span>);
+ylabel(cb(3), <span class="string">'Density'</span>);
+datetick;
+cmocean(<span class="string">'dense'</span>);
+
+set(ax, <span class="string">'YLim'</span>, [0 500]);
+</pre><img vspace="5" hspace="5" src="mld_documentation_01.png" alt=""> <p>The common threshold value for temperature-only profiles is 0.5 deg C; for density, 0.125 sigma-theta units is typical.</p><pre class="codeinput">pmld = zeros(nprof,3);
+<span class="keyword">for</span> ix = 1:nprof
+    pmld(ix,:) = mld(A.PRES{ix}, A.TEMP{ix}, A.PSAL{ix}, <span class="string">'metric'</span>, <span class="string">'threshold'</span>, <span class="keyword">...</span>
+        <span class="string">'tthresh'</span>, 0.05, <span class="string">'dthresh'</span>, 0.125);
+<span class="keyword">end</span>
+
+plot(ax(1), A.date, pmld(:,1), <span class="string">'w'</span>);
+plot(ax(3), A.date, pmld(:,3), <span class="string">'w'</span>);
+</pre><img vspace="5" hspace="5" src="mld_documentation_02.png" alt=""> <h2 id="6">Example 2: The fit approach</h2><p>Holte &amp; Talley, 2009's fit approach is often a bit more robust at identifying deep winter mixed layer depths, and can be applied to all three profile types.  This function works by fitting two lines to the profile, one near-vertical one representing the mixed part of the profile, and a diagonal one representing the transition part at the bottom of the mixed layer.  Note that this is the most time-consuming option of the five metrics.</p><pre class="codeinput">pmld = zeros(nprof,3);
+<span class="keyword">for</span> ix = 1:nprof
+    pmld(ix,:) = mld(A.PRES{ix}, A.TEMP{ix}, A.PSAL{ix}, <span class="string">'metric'</span>, <span class="string">'fit'</span>);
+<span class="keyword">end</span>
+
+plot(ax(1), A.date, pmld(:,1), <span class="string">':w'</span>);
+plot(ax(2), A.date, pmld(:,2), <span class="string">':w'</span>);
+plot(ax(3), A.date, pmld(:,3), <span class="string">':w'</span>);
+</pre><img vspace="5" hspace="5" src="mld_documentation_03.png" alt=""> <h2 id="7">Example 3: Alternate methods</h2><p>The remaining methods of MLD calculation presented in this function are less common, and have for the most part been developed to deal with situations where a simple threshold calculation fails to identify the desired MLD value.  We refer you to the full Holte &amp; Talley, 2009 paper for a detailed description of these algorithms, and the motivation behind their development.</p><p>The automatic plotting included with this function provides a quick summary of the possibilities. In this figure, T = temperature, S = salinity, D = density (sigma-theta), and P = pressure.  The dashed lines correspond to the fit-method best-fit lines, and the solid line is the final "best" MLD. All those individual candidate MLD values can be found in the <tt>mldtbl</tt> output:</p><pre class="codeinput">[pmld, mldtbl, pth, h] = mld(A.PRES{22}, A.TEMP{22}, A.PSAL{22}, <span class="string">'plot'</span>, true);
+</pre><img vspace="5" hspace="5" src="mld_documentation_04.png" alt=""> <pre class="codeinput">mldtbl
+</pre><pre class="codeoutput">mldtbl =
+  3&times;5 table
+             threshold    gradient     fit      extrema    subsurface
+             _________    ________    ______    _______    __________
+    temp       85.88       81.00      100.18     45.00        9.00   
+    salt         NaN       99.00       83.00     45.00       45.00   
+    pdens      15.88       15.00       94.60      9.00         NaN   
+</pre><p>The most appropriate algorithm varies based on the properties of a given water mass.  Keep in mind that the "best" method was specifically designed for Argo float profiles (and predominately tested on Southern Ocean profiles); we provide it as the default simply due to the history of this function (designed to mimic the Holte &amp; Talley, 2009 supplementary code but with more flexibility).</p><h2 id="10">References</h2><p>Holte J, Talley L (2009) A new algorithm for finding mixed layer depths with applications to argo data and subantarctic mode water formation. J Atmos Ocean Technol 26:1920&#8211;1939 <a href="https://doi.org/10.1175/2009JTECHO543.1">doi:10.1175/2009JTECHO543.1</a></p><p>Monterey, G. and Levitus, S., 1997: Seasonal Variability of Mixed Layer Depth for the World Ocean. NOAA Atlas NESDIS 14, U.S. Gov. Printing Office, Wash., D.C., 96 pp.</p><h2 id="11">Author Info</h2><p>This function and supporting documentation were written by <a href="http://kellyakearney.net">Kelly A. Kearney</a> for the Climate Data Toolbox for Matlab, 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |mld| documentation
+% The |mld| function calculates the mixed layer depth of a water column
+% based on profiles of temperature, salinity, and/or potential density.
+%
+% The oceanic mixed layer refers to the well-mixed upper layer of the ocean
+% characterized by constant temperature and salinity values.  While the
+% concept is relatively straightforward, a concensus quantitative
+% definition is lacking. Numerous somewhat-arbitrary algorithms exist,
+% ranging from simple threshold algorithms to complex shape-fitting tools.
+%
+% For this particular toolbox function, we chose to adapt the algorithms of
+% <https://doi.org/10.1175/2009JTECHO543.1 Holte and Talley, 2009>.  This paper details a multi-algorithm approach to
+% calculating the mixed layer for oceanic Argo profiles, and therefore
+% serves as a nice basis for a function that also strives to offer multiple
+% approaches to mixed layer depth.  The examples below detail some of the
+% most common approaches to this calculation.  Always keep in mind that
+% mixed layer depth calculation is not a one-size-fits-all calculation, and
+% you may need to experiment with many different options to determine which
+% one is most applicable to your data.
+%
+% Note that this function currently includes some quirks (for example,
+% salinity profiles are analyzed differently than temperature and density
+% profiles under certain algorithms) that are specific to the Holte &
+% Talley paper and are tailored to open ocean, predominantly
+% Southern-ocean, profiles.  These may or may not be appropriate to all
+% datasets.  We preserve them here, along with default parameter choices,
+% for consistency with the original Holte & Talley code on which this
+% function is based.    
+%
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax
+%
+%  pmld = mld(pres, temp)
+%  pmld = mld(pres, temp, salt)
+%  pmld = mld(..., Name, Value, ...)
+%  [pmld, mldtbl, pth, h] = mld(...)
+
+%% Description
+%
+% |pmld = mld(pres, temp)| calculates pressure corresonding to the mixed
+% layer depth of a water column defined by pressure vector |pres| (in db)
+% and temperature vector |temp| (in deg C).  In the temperature-only
+% calculations, the pressure values are used only as a vertical axis, and
+% therefore depth values (in m) can be substituted. 
+%
+% |pmld = mld(pres, temp)| calculates the mixed layer depth pressure of a
+% water column defined by pressure vector |pres| (in db), temperature
+% vector |temp| (in deg C), and salinity vector |salt|.  Note that in this 
+% instance pressure values will be used to calculate potential density, and
+% therefore users should be cautious about substituting depth values (in m)
+% in place of pressure.
+%
+% |pmld = mld(..., Name, Value, ...)| allows users to modify algorithm
+% parameters via the Name-Value parameters listed in the next section.
+%
+% |[pmld, mldtbl, pth, h] = mld(...)| returns additional information about
+% the internal algorithms used.  The |mldtbl| table holds all mixed layer
+% depth pressure candidate values used if the "best" algorithm is
+% specified.  The |pth| value returns the algorithm pathway used if the
+% "best" algorithm is used; this is primarily for debugging purposes and
+% was designed to match the analysis_t, analysis_s, and analysis_d
+% variables in the original Holte&Talley 2009 supplementary online code
+% (note that this code is not identical to that online supplement, but
+% reproduces the same pathways in most instances).  Finally, if the plot
+% input option is specified, graphics handles will be returned in the
+% handle structure |h|.
+
+%% Name-Value pair arguments
+%
+% *metric*
+% |'threshold'|, |'gradient'|, |'fit'|, |'extrema'|, |'subsurface'|, |'best'| (default)
+% 
+% This function allows for 6 different methods of defining the
+% mixed layer depth:
+%
+% * |threshold|: The mixed layer depth is the first depth, measured from the
+% reference depth downward, where profile value differs from the reference
+% depth value by more than a threshold amount. Applicable to temperature
+% and density profiles only.  
+% * |gradient|: first depth, measured from reference depth downward, where
+% profile gradient exceeds an indicated threshold amount. If the gradient
+% never exceeds the threshold, the depth of highest absolute gradient is
+% used. For salinity profiles, simply looks for maximum gradient.   
+% * |fit|: A line is fit to the top, vertical-ish part of the profile and to
+% the highest-gradient, horizontal-ish part of the profile.  The mixed
+% layer depth is set to the pressure where these lines intersect, or 0 if
+% they don't intersect.
+% * |extrema|: pressure of the extreme values.  For temperature, the maximum
+% value is found, and for salinity and  density, the minimum. Note that
+% while these values may be applicable to most oceanic profiles, there are
+% circumstances (for example, temperature inversions in salinity-dominated
+% under-ice environments) where this simple metric will definitely fail.
+% * |subsurface|: This method attempts to find subsurface anomalies at the
+% base of the mixed layer that are the result of surface cooling and mixing
+% events.  The profiles are characterized by a temperature gradient maximum
+% in close proximity to the temperature maximum (or minima, for salinity).
+% If found, the mld value reflects the shallower of the two values; if not
+% found, it is set to 0. Applicable to temperature and salinity profiles
+% only.
+% * |'best'|: All applicable potential mld values are calculated from the
+% above options, and the Holte & Talley 2009 algorithm is used to choose
+% which is the best estimate for a given profile. 
+%
+% *refpres* 
+% numeric scalar, default = 10
+% 
+% reference pressure (db).  Calculations are based on this point of the
+% profile downward; points above are ignored, with the intent to eliminate
+% any diurnal heating artifacts at the surface.
+%
+% *tthresh*
+% numeric scalar, default = 0.2
+%
+% threshold value used for temperature threshold calculation (deg C)
+%
+% *tgradthresh*
+% numeric scalar, default = 0.005
+%
+% threshold value used for temperature gradient calculation (deg C m^-1) 
+%
+% *dthresh*
+% numeric scalar, default = 0.03
+%
+% threshold value used for density threshold calculation (kg m^-3)
+%  
+% *dgradthresh*
+% numeric scalar, default = 0.0005
+%
+% threshold value used for density gradient calculation (kg m^-4)
+%  
+% *errortol*
+% numeric scalar, default = 1e-10
+%
+% error tolerance used to choose which points to include in the
+% surface-verticalish-line in the fit algorithm. Cutoff is set to the
+% deepest point where the normalized sum squared error of the fit is less
+% than this tolerance.  
+%
+% *range*
+% numeric scalar, default = 25
+%
+% range parameter used to identify clusters of mld values during the
+% choose-the-best algorithm, i.e. r in Holte & Talley, 2009, section 3b.
+% (db)  
+%  
+% *deltad*
+% numeric scalar, default = 100
+% 
+% maximum distance allowed between maximim[minimum] value and gradient in
+% temperature[salinity] subsurface calculation. (db) 
+%  
+% *tcutoffu*
+% numeric scalar, default = 0.5
+%
+% upper value of temperature change cutoff when classifying a temperature
+% profile as winter-like during the choose-the-best algorithm. (deg C) 
+%  
+% *tcutoffl*
+% numeric scalar, default = -0.25
+%
+% lower value of temperature change cutoff when classifying a temperature
+% profile as winter-like during the choose-the-best algorithm. (deg C) 
+%  
+% *dcutoff*       
+% numeric scalar, default = -0.06
+%
+% potential density change cutoff above which a profile is classified as
+% winter-like during the choose-the-best algorithm. (kg m^-3) 
+%
+%  
+% *plot*
+% logical scalar, default = False
+%
+% true to create a figure with the profiles, mixed layer depth points, and
+% some reference detail.
+%  
+% *tblformat*
+% |'table'| (default), |'array'|
+%
+% The |mldtbl| output consists of a 3 x 5 array, with rows corresponding to
+% the 5 algorithms (excluding best), and columns corresponding to
+% temperature, salinity, and density, respectively.  The default table
+% format is more self-describing, since the columns and rows are clearly
+% labeled, but the creation of a table array can add significant time to
+% the function execution; array output is recommended if calling this
+% function many times. (Note that if this function is called with only one
+% output, this becomes irrelevant).
+
+%% Example 1: The threshold approach
+%
+% The threshold definition is the most commonly-used mixed layer depth
+% metric, and underlies several global mixed layer depth products, such as
+% ﻿Monterey and Levitus (1997).
+%
+% To replicate this type of calculation, we start with example data from an
+% Argo float. Use the <transect_documentation.html |transect|> function to
+% turn the 34 profiles into a transect plot and set colormaps with
+% <cmocean_documentation.html |cmocean|>. 
+
+A = load('example_argo.mat');
+nprof = length(A.date);
+ax(1) = subplot(3,1,1);
+transect(A.date, A.PRES, A.TEMP,'markersize',2);
+hold on;
+cb(1) = colorbar('eastoutside');
+ylabel(cb(1), 'Temperature');
+datetick;
+cmocean('thermal');
+
+ax(2) = subplot(3,1,2);
+transect(A.date, A.PRES, A.PSAL,'markersize',2);
+hold on;
+cb(2) = colorbar('eastoutside');
+ylabel(cb(2), 'Salinity');
+datetick;
+cmocean('haline');
+
+ax(3) = subplot(3,1,3);
+transect(A.date, A.PRES, A.pden,'markersize',2);
+hold on;
+cb(3) = colorbar('eastoutside');
+ylabel(cb(3), 'Density');
+datetick;
+cmocean('dense');
+
+set(ax, 'YLim', [0 500]);
+
+%%
+% The common threshold value for temperature-only profiles is 0.5 deg C;
+% for density, 0.125 sigma-theta units is typical.
+
+pmld = zeros(nprof,3);
+for ix = 1:nprof
+    pmld(ix,:) = mld(A.PRES{ix}, A.TEMP{ix}, A.PSAL{ix}, 'metric', 'threshold', ...
+        'tthresh', 0.05, 'dthresh', 0.125);
+end
+
+plot(ax(1), A.date, pmld(:,1), 'w');
+plot(ax(3), A.date, pmld(:,3), 'w');
+
+%% Example 2: The fit approach
+%
+% Holte & Talley, 2009's fit approach is often a bit more robust at
+% identifying deep winter mixed layer depths, and can be applied to
+% all three profile types.  This function works by fitting two lines to the
+% profile, one near-vertical one representing the mixed part of the
+% profile, and a diagonal one representing the transition part at the
+% bottom of the mixed layer.  Note that this is the most time-consuming
+% option of the five metrics.
+
+pmld = zeros(nprof,3);
+for ix = 1:nprof
+    pmld(ix,:) = mld(A.PRES{ix}, A.TEMP{ix}, A.PSAL{ix}, 'metric', 'fit');
+end
+
+plot(ax(1), A.date, pmld(:,1), ':w');
+plot(ax(2), A.date, pmld(:,2), ':w');
+plot(ax(3), A.date, pmld(:,3), ':w');
+
+
+%% Example 3: Alternate methods
+%
+% The remaining methods of MLD calculation presented in this function are
+% less common, and have for the most part been developed to deal with
+% situations where a simple threshold calculation fails to identify the
+% desired MLD value.  We refer you to the full Holte & Talley, 2009 paper
+% for a detailed description of these algorithms, and the motivation behind
+% their development.
+%
+% The automatic plotting included with this function provides a quick
+% summary of the possibilities. In this figure, T = temperature, S =
+% salinity, D = density (sigma-theta), and P = pressure.  The dashed lines
+% correspond to the fit-method best-fit lines, and the solid line is the
+% final "best" MLD. All those individual candidate MLD values can be found
+% in the |mldtbl| output:
+
+[pmld, mldtbl, pth, h] = mld(A.PRES{22}, A.TEMP{22}, A.PSAL{22}, 'plot', true);
+
+%%
+
+
+mldtbl
+
+%%
+% The most appropriate algorithm varies based on the properties of a given
+% water mass.  Keep in mind that the "best" method was specifically
+% designed for Argo float profiles (and predominately tested on Southern
+% Ocean profiles); we provide it as the default simply due to the history
+% of this function (designed to mimic the Holte & Talley, 2009
+% supplementary code but with more flexibility).
+
+
+%% References
+%
+% Holte J, Talley L (2009) A new algorithm for finding mixed layer depths
+% with applications to argo data and subantarctic mode water formation. J
+% Atmos Ocean Technol 26:1920–1939 <https://doi.org/10.1175/2009JTECHO543.1
+% doi:10.1175/2009JTECHO543.1>
+%
+% Monterey, G. and Levitus, S., 1997: Seasonal Variability of Mixed Layer
+% Depth for the World Ocean. NOAA Atlas NESDIS 14, U.S. Gov. Printing
+% Office, Wash., D.C., 96 pp.
+
+%% Author Info
+% This function and supporting documentation were written by
+% <http://kellyakearney.net Kelly A. Kearney> for the Climate Data Toolbox for Matlab, 2019.
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,392 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>near2 documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-31"><meta name="DC.source" content="near2_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>near2</tt> documentation</h1><!--introduction--><p><tt>near2</tt> finds the subscript indices of the point in a grid closest to a specified location.</p><p>See also <a href="near1_documentation.html"><tt>near1</tt></a>, <a href="geomask_documentation.html"><tt>geomask</tt></a>, and <a href="local_documentation.html"><tt>local</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1</a></li><li><a href="#7">Example 2: Climate data application</a></li><li><a href="#11">Example 3: Masking NaNs</a></li><li><a href="#16">A note the order of georeferenced grids</a></li><li><a href="#18">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[row,col] = near2(X,Y,xi,yi)
+[row,col] = near2(X,Y,xi,yi,mask)
+[row,col,dst] = near2(...)</pre><h2 id="2">Description</h2><p><tt>[row,col] = near2(X,Y,xi,yi)</tt> returns the row and column corresponding to the <tt>X,Y</tt> grid point with the shortest euclidean distance to the point <tt>xi,yi</tt>.If <tt>xi</tt> or <tt>yi</tt> is equidistant between two <tt>X</tt> or <tt>Y</tt> grid points, only the first of the two equally valid rows or columns is returned.</p><p><tt>[row,col] = near2(X,Y,xi,yi,mask)</tt> ignores <tt>X,Y</tt> grid points corresponding to false <tt>mask</tt> values. This option may be useful near data boundaries, where the nearest point in the data grid could correspond to <tt>NaN</tt> data in the time series.</p><p><tt>[row,col,dst] = near2(...)</tt> also returns the euclidean distance <tt>dst</tt> from the point (<tt>X(row,col),Y(row,col)</tt>) to the point (<tt>xi,yi</tt>).</p><h2 id="3">Example 1</h2><p>Consider this grid of X and Y values, and a special location of interest <tt>xi,yi</tt>, which we'll mark with a red x:</p><pre class="codeinput">[X,Y] = meshgrid(50:5:300,480:5:675);
+
+xi = 103.2;
+yi = 517;
+
+plot(X,Y,<span class="string">'.'</span>,<span class="string">'color'</span>,rgb(<span class="string">'light blue'</span>))
+
+hold <span class="string">on</span>
+plot(xi,yi,<span class="string">'rx'</span>)
+axis <span class="string">equal</span> <span class="string">tight</span>
+
+xlabel <span class="string">'x value'</span>
+ylabel <span class="string">'y value'</span>
+</pre><img vspace="5" hspace="5" src="near2_documentation_01.png" alt=""> <p>Use <tt>near2</tt> to determine the subscript indices of the <tt>X,Y</tt> grid points closest to <tt>xi,yi</tt> and mark that grid point with a blue circle:</p><pre class="codeinput">[row,col] = near2(X,Y,xi,yi);
+
+plot(X(row,col),Y(row,col),<span class="string">'bo'</span>)
+</pre><img vspace="5" hspace="5" src="near2_documentation_02.png" alt=""> <p>If you also want to know the distance from (<tt>xi,yi</tt>) to (<tt>X(row,col),Y(row,col)</tt>), request the third function output:</p><pre class="codeinput">[row,col,dst] = near2(X,Y,xi,yi);
+dst
+</pre><pre class="codeoutput">dst =
+    2.6907
+</pre><p>...and we see that our point of interest is about 2.69 units away.</p><h2 id="7">Example 2: Climate data application</h2><p>Suppose you want a time series of sea surface temperatures near Honolulu, Hawaii (21.3 N, 157.8 W). You could do it with <a href="geomask_documentation.html"><tt>geomask</tt></a> and <a href="local_documentation.html"><tt>local</tt></a> or you could use <tt>near2</tt> to find the row and column of the SST grid cell closest to Honolulu. Here's the situation:</p><pre class="codeinput">load <span class="string">pacific_sst</span>
+
+[Lon,Lat] = meshgrid(lon,lat);
+
+figure
+imagescn(lon,lat,mean(sst,3))
+cmocean <span class="string">thermal</span>
+hold <span class="string">on</span>
+plot(-157.8,21.3,<span class="string">'bo'</span>)
+</pre><img vspace="5" hspace="5" src="near2_documentation_03.png" alt=""> <p>The SST grid cell closest to Honolulu can be found like this:</p><pre class="codeinput">[row,col] = near2(Lat,Lon,21.3,-157.8)
+</pre><pre class="codeoutput">row =
+    20
+col =
+    12
+</pre><p>With <tt>row</tt> and <tt>col</tt>, the geographic coordinates of the grid cell are then given by</p><pre class="codeinput">[Lat(row,col) Lon(row,col)]
+</pre><pre class="codeoutput">ans =
+   21.5000 -157.5000
+</pre><p>The SST time series at the grid point given by row,col is then easy to plot. The only trick is you'll need to use the <tt>squeeze</tt> command to squeeze the 1x1x802 time series into an 802x1 array so the <tt>plot</tt> function will understand it:</p><pre class="codeinput">sst_honolulu = squeeze(sst(row,col,:));
+
+figure(22) <span class="comment">% giving this figure a number so we can come back to it later.</span>
+plot(t,sst_honolulu)
+axis <span class="string">tight</span>
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+xlabel <span class="string">'date'</span>
+ylabel <span class="string">'sea surface temperature \circC'</span>
+title <span class="string">'SST near Honolulu'</span>
+</pre><img vspace="5" hspace="5" src="near2_documentation_04.png" alt=""> <h2 id="11">Example 3: Masking NaNs</h2><p>Sometimes the location of interest sits close to a boundary, such that you try to get the time series at the grid cell closest to your location of interest, but all you get are NaNs in return. For example, you might be interested in sea surfaces temperatures close to a city, but because most cities are on land, and most sea surface temperatures are found at sea, there's a good chance that the time series of SSTs closest to your favorite city is just a bunch of NaNs.</p><p>For example, consider this point near Ensenada, Mexico:</p><pre class="codeinput">figure(33) <span class="comment">% giving this figure a number so we can come back to it later.</span>
+imagescn(lon,lat,mean(sst,3))
+cmocean <span class="string">thermal</span>
+hold <span class="string">on</span>
+borders(<span class="string">'countries'</span>,<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>))
+plot(-116,31,<span class="string">'rp'</span>)
+text(-116,31,<span class="string">'Ensenada '</span>,<span class="string">'color'</span>,<span class="string">'r'</span>,<span class="keyword">...</span>
+   <span class="string">'horiz'</span>,<span class="string">'center'</span>,<span class="string">'vert'</span>,<span class="string">'top'</span>)
+axis([-133 -94 10 55])
+
+<span class="comment">% Get nearest grid indices and label them:</span>
+[row,col] = near2(Lat,Lon,31,-116);
+plot(Lon(row,col),Lat(row,col),<span class="string">'bs'</span>)
+text(Lon(row,col),Lat(row,col),<span class="string">' nearest grid cell'</span>,<span class="keyword">...</span>
+   <span class="string">'color'</span>,<span class="string">'b'</span>,<span class="string">'vert'</span>,<span class="string">'middle'</span>)
+</pre><img vspace="5" hspace="5" src="near2_documentation_05.png" alt=""> <p>And sure enough, all the SST data in the grid cell closest to Ensenada are NaNs:</p><pre class="codeinput"><span class="comment">% Get 1D time series of SSTs near Enenada:</span>
+sst_ensenada = squeeze(sst(row,col,:));
+
+<span class="comment">% How many Enesnada SSTs are finite?</span>
+sum(isfinite(sst_ensenada))
+</pre><pre class="codeoutput">ans =
+     0
+</pre><p>To find the closest SST grid cell where data are <i>not</i> NaNs, start by defining a mask of good grid cells, like this:</p><pre class="codeinput"><span class="comment">% Determine which grid cells have finite data:</span>
+mask = all(isfinite(sst),3);
+
+figure
+imagescn(Lon,Lat,mask)
+title <span class="string">'this is the mask'</span>
+</pre><img vspace="5" hspace="5" src="near2_documentation_06.png" alt=""> <p>The mask above shows good (true) grid cells in yellow, and bad (false) grid cells in blue. We can now enter the <tt>mask</tt> into <tt>near2</tt>, to find which <b>good</b> grid cells are closest to Ensenada:</p><pre class="codeinput">[row,col] = near2(Lat,Lon,31,-116,mask);
+
+figure(33) <span class="comment">% goes back to the map</span>
+plot(Lon(row,col),Lat(row,col),<span class="string">'ks'</span>)
+text(Lon(row,col),Lat(row,col),<span class="string">'nearest finite grid cell '</span>,<span class="keyword">...</span>
+   <span class="string">'horiz'</span>,<span class="string">'right'</span>,<span class="string">'vert'</span>,<span class="string">'middle'</span>)
+</pre><img vspace="5" hspace="5" src="near2_documentation_07.png" alt=""> <p>The time series of finite SSTs close to Ensenada can now be compared to the Honolulu SSTs like this:</p><pre class="codeinput">sst_ensenada = squeeze(sst(row,col,:));
+
+figure(22) <span class="comment">% goes back to the Hawaii figure</span>
+hold <span class="string">on</span>
+plot(t,sst_ensenada)
+legend(<span class="string">'Honolu'</span>,<span class="string">'Ensenada'</span>)
+title <span class="string">'SST comparison'</span>
+</pre><img vspace="5" hspace="5" src="near2_documentation_08.png" alt=""> <h2 id="16">A note the order of georeferenced grids</h2><p>It's usually quite important to keep track of latitudes and longitudes separately. Some grids are built like</p><pre>[Lat,Lon] = meshgrid(lat,lon);</pre><p>whereas other grids are built like</p><pre>[Lon,Lat] = meshgrid(lon,lat);</pre><p>and plotting coordinates by</p><pre>plot(lon,lat)</pre><p>will not produce the same results as</p><pre>plot(lat,lon)</pre><p>In contrast, <tt>near2</tt> will always produce the <i>same</i> results whether you treat the longitudes as x or y values. That is, both of the following syntaxes will produce the correct row and column of the SST grid cell closest to Honolulu:</p><pre class="codeinput">[row,col] = near2(Lat,Lon,21.3,-157.8)
+
+[row,col] = near2(Lon,Lat,-157.8,21.3)
+</pre><pre class="codeoutput">row =
+    20
+col =
+    12
+row =
+    20
+col =
+    12
+</pre><p>The only caveat here is that with georeferenced grids, you probably don't want to use the optional third output <tt>dst</tt>. That's because the Euclidean distance in degrees latitude and longitude does not make any sense, given that degrees longitude do not represent the same distance as degrees latitude.</p><h2 id="18">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |near2| documentation
+% |near2| finds the subscript indices of the point in a grid closest to a 
+% specified location. 
+% 
+% See also <near1_documentation.html |near1|>, <geomask_documentation.html
+% |geomask|>, and <local_documentation.html |local|>.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  [row,col] = near2(X,Y,xi,yi)
+%  [row,col] = near2(X,Y,xi,yi,mask)
+%  [row,col,dst] = near2(...)
+% 
+%% Description
+% 
+% |[row,col] = near2(X,Y,xi,yi)| returns the row and column corresponding to the 
+% |X,Y| grid point with the shortest euclidean distance to the point |xi,yi|.If
+% |xi| or |yi| is equidistant between two |X| or |Y| grid points, only the first of
+% the two equally valid rows or columns is returned.  
+% 
+% |[row,col] = near2(X,Y,xi,yi,mask)| ignores |X,Y| grid points corresponding
+% to false |mask| values. This option may be useful near data boundaries, where
+% the nearest point in the data grid could correspond to |NaN| data in the
+% time series. 
+% 
+% |[row,col,dst] = near2(...)| also returns the euclidean distance |dst|
+% from the point (|X(row,col),Y(row,col)|) to the point (|xi,yi|).
+%
+%% Example 1
+% Consider this grid of X and Y values, and a special location of interest
+% |xi,yi|, which we'll mark with a red x: 
+
+[X,Y] = meshgrid(50:5:300,480:5:675); 
+
+xi = 103.2; 
+yi = 517; 
+
+plot(X,Y,'.','color',rgb('light blue'))
+
+hold on
+plot(xi,yi,'rx') 
+axis equal tight
+
+xlabel 'x value'
+ylabel 'y value' 
+
+%% 
+% Use |near2| to determine the subscript indices of the |X,Y| grid points
+% closest to |xi,yi| and mark that grid point with a blue circle: 
+
+[row,col] = near2(X,Y,xi,yi); 
+
+plot(X(row,col),Y(row,col),'bo') 
+
+%% 
+% If you also want to know the distance from (|xi,yi|) to
+% (|X(row,col),Y(row,col)|), request the third function output: 
+
+[row,col,dst] = near2(X,Y,xi,yi); 
+dst
+
+%% 
+% ...and we see that our point of interest is about 2.69 units away.
+
+%% Example 2: Climate data application
+% Suppose you want a time series of sea surface temperatures near Honolulu,
+% Hawaii (21.3 N, 157.8 W). You could do it with
+% <geomask_documentation.html |geomask|> and <local_documentation.html
+% |local|> or you could use |near2| to find the row and column of the SST
+% grid cell closest to Honolulu. Here's the situation: 
+
+load pacific_sst 
+
+[Lon,Lat] = meshgrid(lon,lat); 
+
+figure
+imagescn(lon,lat,mean(sst,3))
+cmocean thermal
+hold on
+plot(-157.8,21.3,'bo') 
+
+%%
+% The SST grid cell closest to Honolulu can be found like this:
+
+[row,col] = near2(Lat,Lon,21.3,-157.8)
+
+%%
+% With |row| and |col|, the geographic coordinates of the grid cell are
+% then given by 
+
+[Lat(row,col) Lon(row,col)]
+
+%% 
+% The SST time series at the grid point given by row,col is then easy to
+% plot. The only trick is you'll need to use the |squeeze| command to
+% squeeze the 1x1x802 time series into an 802x1 array so the |plot|
+% function will understand it: 
+
+sst_honolulu = squeeze(sst(row,col,:)); 
+
+figure(22) % giving this figure a number so we can come back to it later.
+plot(t,sst_honolulu) 
+axis tight
+datetick('x','keeplimits') 
+xlabel 'date'
+ylabel 'sea surface temperature \circC'
+title 'SST near Honolulu'
+
+%% Example 3: Masking NaNs
+% Sometimes the location of interest sits close to a boundary, such that
+% you try to get the time series at the grid cell closest to your location
+% of interest, but all you get are NaNs in return. For example, you might
+% be interested in sea surfaces temperatures close to a city, but because
+% most cities are on land, and most sea surface temperatures are found at sea,
+% there's a good chance that the time series of SSTs closest to your
+% favorite city is just a bunch of NaNs. 
+% 
+% For example, consider this point near Ensenada, Mexico: 
+
+figure(33) % giving this figure a number so we can come back to it later.
+imagescn(lon,lat,mean(sst,3))
+cmocean thermal 
+hold on
+borders('countries','color',rgb('gray'))
+plot(-116,31,'rp') 
+text(-116,31,'Ensenada ','color','r',...
+   'horiz','center','vert','top')
+axis([-133 -94 10 55])
+
+% Get nearest grid indices and label them: 
+[row,col] = near2(Lat,Lon,31,-116); 
+plot(Lon(row,col),Lat(row,col),'bs')
+text(Lon(row,col),Lat(row,col),' nearest grid cell',...
+   'color','b','vert','middle') 
+
+%% 
+% And sure enough, all the SST data in the grid cell closest to Ensenada are
+% NaNs: 
+
+% Get 1D time series of SSTs near Enenada: 
+sst_ensenada = squeeze(sst(row,col,:)); 
+
+% How many Enesnada SSTs are finite? 
+sum(isfinite(sst_ensenada))
+
+%% 
+% To find the closest SST grid cell where data are _not_ NaNs, start by defining
+% a mask of good grid cells, like this: 
+
+% Determine which grid cells have finite data: 
+mask = all(isfinite(sst),3); 
+
+figure
+imagescn(Lon,Lat,mask)
+title 'this is the mask' 
+
+%%
+% The mask above shows good (true) grid cells in yellow, and bad (false)
+% grid cells in blue. We can now enter the |mask| into |near2|, to find
+% which *good* grid cells are closest to Ensenada: 
+
+[row,col] = near2(Lat,Lon,31,-116,mask); 
+
+figure(33) % goes back to the map
+plot(Lon(row,col),Lat(row,col),'ks')
+text(Lon(row,col),Lat(row,col),'nearest finite grid cell ',...
+   'horiz','right','vert','middle')
+
+%% 
+% The time series of finite SSTs close to Ensenada can now be compared to
+% the Honolulu SSTs like this: 
+
+sst_ensenada = squeeze(sst(row,col,:)); 
+
+figure(22) % goes back to the Hawaii figure
+hold on
+plot(t,sst_ensenada)
+legend('Honolu','Ensenada')
+title 'SST comparison'
+
+%% A note the order of georeferenced grids
+% It's usually quite important to keep track of latitudes and longitudes
+% separately. Some grids are built like 
+% 
+%  [Lat,Lon] = meshgrid(lat,lon); 
+% 
+% whereas other grids are built like
+% 
+%  [Lon,Lat] = meshgrid(lon,lat); 
+% 
+% and plotting coordinates by 
+% 
+%  plot(lon,lat) 
+% 
+% will not produce the same results as 
+% 
+%  plot(lat,lon) 
+% 
+% In contrast, |near2| will always produce the _same_ results whether you
+% treat the longitudes as x or y values. That is, both of the following
+% syntaxes will produce the correct row and column of the SST grid cell
+% closest to Honolulu: 
+
+[row,col] = near2(Lat,Lon,21.3,-157.8)
+
+[row,col] = near2(Lon,Lat,-157.8,21.3)
+
+%%
+% The only caveat here is that with georeferenced grids, you probably don't
+% want to use the optional third output |dst|. That's because the Euclidean
+% distance in degrees latitude and longitude does not make any sense, given
+% that degrees longitude do not represent the same distance as degrees
+% latitude. 
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+
+##### SOURCE END #####
+--></body></html>

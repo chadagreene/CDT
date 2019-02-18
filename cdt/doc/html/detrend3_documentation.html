@@ -1,0 +1,238 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>detrend3 documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-07"><meta name="DC.source" content="detrend3_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>detrend3</tt> documentation</h1><!--introduction--><p><tt>detrend3</tt> performs linear least squares detrending along the third dimension of a matrix.</p><p>See also: <a href="trend_documentation.html"><tt>trend</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: A 3D gridded dataset</a></li><li><a href="#8">Example 2: Sea Surface Temperatures</a></li><li><a href="#11">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>Ad = detrend3(A)
+Ad = detrend3(A,t)</pre><h2 id="2">Description</h2><p><tt>Ad = detrend3(A)</tt> removes the linear trend from the third dimension of <tt>A</tt> assuming slices of <tt>A</tt> are sampled at constant intervals.</p><p><tt>Ad = detrend3(A,t)</tt> specifies times <tt>t</tt> associated with each slice of A. Times <tt>t</tt> do not need to occur at regular intervals in time.</p><h2 id="3">Example 1: A 3D gridded dataset</h2><p>This sample dataset has a trend of 3.2 units/timestep everywhere:</p><pre class="codeinput">t = 50:50:1000;
+y = 3.2*t + 0.1*randn(size(t)); <span class="comment">% the trend is 3.2*t (plus some random noise)</span>
+
+<span class="comment">% Create 5x5 grid w/trend dictated by y:</span>
+Z = expand3(ones(5),y);
+</pre><p>Here's proof via the <a href="trend_documentation.html"><tt>trend</tt></a> trend function:</p><pre class="codeinput">trend(Z,t)
+</pre><pre class="codeoutput">ans =
+    3.2000    3.2000    3.2000    3.2000    3.2000
+    3.2000    3.2000    3.2000    3.2000    3.2000
+    3.2000    3.2000    3.2000    3.2000    3.2000
+    3.2000    3.2000    3.2000    3.2000    3.2000
+    3.2000    3.2000    3.2000    3.2000    3.2000
+</pre><p>Now let's detrend:</p><pre class="codeinput">Z_detrend = detrend3(Z,t);
+</pre><p>And now what's the trend?</p><pre class="codeinput">trend(Z_detrend,t)
+</pre><pre class="codeoutput">ans =
+   1.0e-14 *
+   -0.2049   -0.2049   -0.2049   -0.2049   -0.2049
+   -0.2049   -0.2049   -0.2049   -0.2049   -0.2049
+   -0.2049   -0.2049   -0.2049   -0.2049   -0.2049
+   -0.2049   -0.2049   -0.2049   -0.2049   -0.2049
+   -0.2049   -0.2049   -0.2049   -0.2049   -0.2049
+</pre><p>Just numerical noise (note that it is zero to the level of 1.0e-14).</p><h2 id="8">Example 2: Sea Surface Temperatures</h2><p>This example calculates an area-averaged sea surface temperature anomaly from a gridded time series, then <i>detrends</i> the gridded sst time series and plots the detrended anomaly time series.</p><p>Begin by loading the sample pacific_sst.mat dataset of monthly SSTs. Use <a href="cdtarea_documentation.html"><tt>cdtarea</tt></a> to get the area of each grid cell, and then use <a href="local_documentation.html"><tt>local</tt></a> to get the 1D time series of area-weighted ssts for all ocean grid cells.</p><pre class="codeinput"><span class="comment">% Load example data:</span>
+load <span class="string">pacific_sst</span>
+
+<span class="comment">% Turn lat,lon arrays into grids:</span>
+[Lon,Lat] = meshgrid(lon,lat);
+
+<span class="comment">% Get the area (m^2) of each grid cell:</span>
+A = cdtarea(Lat,Lon); <span class="comment">% area of each grid cell (m^2)</span>
+
+<span class="comment">% Make a mask of only finite data (to effectively ignore land)</span>
+mask = all(isfinite(sst),3);
+
+<span class="comment">% Get 1D time series of area-weighted sst:</span>
+sst_1 = local(sst,mask,<span class="string">'weight'</span>,A);
+</pre><p>Now plot the area-weighted sst anomaly using the <a href="anomaly_documentation.html"><tt>anomaly</tt></a> function. For context, plot the linear trend with <a href="polyplot_documentation"><tt>polyplot</tt></a>:</p><pre class="codeinput">figure
+anomaly(t,sst_1-mean(sst_1))
+axis <span class="string">tight</span>
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+ntitle(<span class="string">'sea surface temperature anomaly (not detrended)'</span>)
+
+hold <span class="string">on</span>
+polyplot(t,sst_1-mean(sst_1),1,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,3)
+</pre><img vspace="5" hspace="5" src="detrend3_documentation_01.png" alt=""> <p>Now detrend the entire 3D sst dataset and plot the same area-averaged time series, but this time using the detrended data:</p><pre class="codeinput"><span class="comment">% Detrend the full 3d time series:</span>
+sst_dt = detrend3(sst);
+
+<span class="comment">% Get the area-averaged detrended SST time series:</span>
+sst_dt_1 = local(sst_dt,mask,<span class="string">'weight'</span>,A);
+
+figure
+anomaly(t,sst_dt_1-mean(sst_dt_1))
+axis <span class="string">tight</span>
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+ntitle(<span class="string">'DETRENDED sea surface temperature anomaly'</span>)
+
+hold <span class="string">on</span>
+polyplot(t,sst_dt_1-mean(sst_dt_1),1,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,3)
+</pre><img vspace="5" hspace="5" src="detrend3_documentation_02.png" alt=""> <h2 id="11">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |detrend3| documentation
+% |detrend3| performs linear least squares detrending along the third dimension
+% of a matrix.
+% 
+% See also: <trend_documentation.html |trend|>.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  Ad = detrend3(A) 
+%  Ad = detrend3(A,t)
+% 
+%% Description
+% 
+% |Ad = detrend3(A)| removes the linear trend from the third dimension of |A|
+% assuming slices of |A| are sampled at constant intervals. 
+% 
+% |Ad = detrend3(A,t)| specifies times |t| associated with each slice of A. 
+% Times |t| do not need to occur at regular intervals in time. 
+% 
+%% Example 1: A 3D gridded dataset 
+% This sample dataset has a trend of 3.2 units/timestep everywhere: 
+
+t = 50:50:1000; 
+y = 3.2*t + 0.1*randn(size(t)); % the trend is 3.2*t (plus some random noise)
+
+% Create 5x5 grid w/trend dictated by y: 
+Z = expand3(ones(5),y); 
+
+%%
+% Here's proof via the <trend_documentation.html |trend|> trend function: 
+
+trend(Z,t)
+
+%% 
+% Now let's detrend: 
+
+Z_detrend = detrend3(Z,t); 
+
+%%
+% And now what's the trend? 
+
+trend(Z_detrend,t)
+
+%% 
+% Just numerical noise (note that it is zero to the level of 1.0e-14). 
+
+%% Example 2: Sea Surface Temperatures 
+% This example calculates an area-averaged sea surface temperature anomaly 
+% from a gridded time series, then _detrends_ the gridded sst time series 
+% and plots the detrended anomaly time series. 
+% 
+% Begin by loading the sample pacific_sst.mat dataset of monthly SSTs. Use 
+% <cdtarea_documentation.html |cdtarea|> to get the area of each grid cell, 
+% and then use <local_documentation.html |local|> to get the 1D time series 
+% of area-weighted ssts for all ocean grid cells. 
+
+% Load example data: 
+load pacific_sst
+
+% Turn lat,lon arrays into grids: 
+[Lon,Lat] = meshgrid(lon,lat); 
+
+% Get the area (m^2) of each grid cell: 
+A = cdtarea(Lat,Lon); % area of each grid cell (m^2)
+
+% Make a mask of only finite data (to effectively ignore land)
+mask = all(isfinite(sst),3); 
+
+% Get 1D time series of area-weighted sst: 
+sst_1 = local(sst,mask,'weight',A); 
+
+%% 
+% Now plot the area-weighted sst anomaly using the <anomaly_documentation.html |anomaly|> 
+% function. For context, plot the linear trend with <polyplot_documentation |polyplot|>: 
+
+figure
+anomaly(t,sst_1-mean(sst_1))
+axis tight
+datetick('x','keeplimits') 
+ntitle('sea surface temperature anomaly (not detrended)')
+
+hold on
+polyplot(t,sst_1-mean(sst_1),1,'k','linewidth',3)
+
+%% 
+% Now detrend the entire 3D sst dataset and plot the same area-averaged 
+% time series, but this time using the detrended data: 
+
+% Detrend the full 3d time series: 
+sst_dt = detrend3(sst); 
+
+% Get the area-averaged detrended SST time series: 
+sst_dt_1 = local(sst_dt,mask,'weight',A); 
+
+figure
+anomaly(t,sst_dt_1-mean(sst_dt_1))
+axis tight
+datetick('x','keeplimits') 
+ntitle('DETRENDED sea surface temperature anomaly')
+
+hold on
+polyplot(t,sst_dt_1-mean(sst_dt_1),1,'k','linewidth',3)
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

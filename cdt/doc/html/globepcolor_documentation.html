@@ -1,0 +1,187 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>globepcolor documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-16"><meta name="DC.source" content="globepcolor_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>globepcolor</tt> documentation</h1><!--introduction--><p>The <tt>globepcolor</tt> function plots georeferenced data on a globe where color is scaled by the data value.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Global topography</a></li><li><a href="#4">Example 2: Earth radius</a></li><li><a href="#7">Example 3: Just a slice of Earth</a></li><li><a href="#8">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>globepcolor(lat,lon,C)
+globepcolor(...,'radius',GlobeRadius)
+h = globepcolor(...)</pre><h2 id="2">Description</h2><p><tt>globepcolor(lat,lon,C)</tt> creates a pseudocolor globe plot of the gridded values given by <tt>C</tt>. The inputs <tt>lat</tt> and <tt>lon</tt> are the same size as <tt>C</tt> and can be defined for arbitrary domains using the <tt>meshgrid</tt> function.</p><p><tt>globepcolor(...,'radius',GlobeRadius)</tt> specifies the radius of the globe. The Default <tt>GlobeRadius</tt> is 6371, the standard radius of the Earth in kilometers.</p><p><tt>h = globepcolor(...)</tt> returns the handle <tt>h</tt> of the plotted objects.</p><h2 id="3">Example 1: Global topography</h2><p>For this example, plot color-scaled global topography. use <a href="cdtgrid_documentation.html"><tt>cdtgrid</tt></a> to create a quarter-degree grid, and <a href="topo_interp_documentation.html"><tt>topo_interp</tt></a> to get the corresponding topography. Set the colormap with <a href="cmocean_documentation.html"><tt>cmocean</tt></a>:</p><pre class="codeinput">[Lat,Lon] = cdtgrid(0.25);
+Z = topo_interp(Lat,Lon);
+
+globepcolor(Lat,Lon,Z);
+cmocean(<span class="string">'topo'</span>,<span class="string">'pivot'</span>)
+axis <span class="string">tight</span> <span class="comment">% removes whitespace</span>
+</pre><img vspace="5" hspace="5" src="globepcolor_documentation_01.png" alt=""> <h2 id="4">Example 2: Earth radius</h2><p>The <tt>globe*</tt> functions in CDT plot the Earth as a sphere, though in reality it's more of an oblate spheroid (aka ellipsoid), or a sphere whose radius is a function of latitude. We can use <tt>globepcolor</tt> to depict the difference between a spherical Earth and an ellipsoidal Earth as follows.</p><p>Use <a href="cdtgrid_documentation.html"><tt>cdtgrid</tt></a> to make a global grid and use <a href="earth_radius_documentation.html"><tt>earth_radius</tt></a> to get the latitude-dependent radius at each grid cell:</p><pre class="codeinput">[Lat,Lon] = cdtgrid;
+
+R = earth_radius(Lat,<span class="string">'km'</span>);
+</pre><p>Since Earth's radius is a function of latitude, show where the standard Earth radius of 6371 km accurate overestimates versus underestimates the true radius of the Earth. Use the <tt>'pivot'</tt> option in <a href="cmocean_documentation.html"><tt>cmocean</tt></a> to make the colors pivot about the 6371 km value:</p><pre class="codeinput">figure
+globepcolor(Lat,Lon,R);
+axis <span class="string">tight</span>
+
+c = colorbar;
+set(get(c,<span class="string">'title'</span>),<span class="string">'string'</span>,<span class="string">'Radius (km)'</span>);
+cmocean(<span class="string">'diff'</span>,<span class="string">'pivot'</span>,6371) <span class="comment">% sets the colormap</span>
+globeborders <span class="comment">% adds political boundaries for context</span>
+</pre><img vspace="5" hspace="5" src="globepcolor_documentation_02.png" alt=""> <p>In the plot above, wherever the surface is brown, the Earth radius is larger than the standard 6371 km, and wherever the surface is blue the distance from the surface to the center of the earth is less than 6371 km.</p><p>Adjust the view from polar to equatorial:</p><pre class="codeinput">view([0 0])
+</pre><img vspace="5" hspace="5" src="globepcolor_documentation_03.png" alt=""> <h2 id="7">Example 3: Just a slice of Earth</h2><p>Plot Earth radius, displaying only longitudes between 0 and 30 degrees:</p><pre class="codeinput">figure
+[Lon,Lat] = meshgrid(0:30,-90:90);
+R = earth_radius(Lat,<span class="string">'km'</span>);
+
+globepcolor(Lat,Lon,R);
+c = colorbar;
+set(get(c,<span class="string">'title'</span>),<span class="string">'string'</span>,<span class="string">'Radius (km)'</span>);
+view([135 0])
+</pre><img vspace="5" hspace="5" src="globepcolor_documentation_04.png" alt=""> <h2 id="8">Author Info</h2><p>This function and supporting documentation were written by Natalie S. Wolfenbarger for the Climate Data Toolbox for Matlab, 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |globepcolor| documentation 
+% The |globepcolor| function plots georeferenced data on a globe where
+% color is scaled by the data value.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax 
+% 
+%  globepcolor(lat,lon,C)
+%  globepcolor(...,'radius',GlobeRadius)
+%  h = globepcolor(...)
+% 
+%% Description
+% 
+% |globepcolor(lat,lon,C)| creates a pseudocolor globe plot of the gridded 
+% values given by |C|. The inputs |lat| and |lon| are the same size as |C|
+% and can be defined for arbitrary domains using the |meshgrid| function.
+% 
+% |globepcolor(...,'radius',GlobeRadius)| specifies the radius of the globe.
+% The Default |GlobeRadius| is 6371, the standard radius of the Earth in kilometers.
+% 
+% |h = globepcolor(...)| returns the handle |h| of the plotted objects. 
+%
+%% Example 1: Global topography
+% For this example, plot color-scaled global topography. use <cdtgrid_documentation.html |cdtgrid|>
+% to create a quarter-degree grid, and <topo_interp_documentation.html |topo_interp|> to get the corresponding
+% topography. Set the colormap with <cmocean_documentation.html |cmocean|>:
+
+[Lat,Lon] = cdtgrid(0.25); 
+Z = topo_interp(Lat,Lon); 
+
+globepcolor(Lat,Lon,Z);
+cmocean('topo','pivot') 
+axis tight % removes whitespace
+
+%% Example 2: Earth radius
+% The |globe*| functions in CDT plot the Earth as a sphere, though in reality 
+% it's more of an oblate spheroid (aka ellipsoid), or a sphere whose radius is a function 
+% of latitude. We can use |globepcolor| to depict the difference between a spherical
+% Earth and an ellipsoidal Earth as follows. 
+% 
+% Use <cdtgrid_documentation.html |cdtgrid|> to make a global grid and use
+% <earth_radius_documentation.html |earth_radius|> to get the latitude-dependent radius at
+% each grid cell: 
+
+[Lat,Lon] = cdtgrid; 
+
+R = earth_radius(Lat,'km'); 
+
+%% 
+% Since Earth's radius is a function of latitude, show where the standard
+% Earth radius of 6371 km accurate overestimates versus underestimates
+% the true radius of the Earth. Use the |'pivot'| option in <cmocean_documentation.html |cmocean|>
+% to make the colors pivot about the 6371 km value: 
+
+figure
+globepcolor(Lat,Lon,R);
+axis tight
+
+c = colorbar;
+set(get(c,'title'),'string','Radius (km)');
+cmocean('diff','pivot',6371) % sets the colormap
+globeborders % adds political boundaries for context
+
+%%
+% In the plot above, wherever the surface is brown, the Earth radius is larger
+% than the standard 6371 km, and wherever the surface is blue the distance from 
+% the surface to the center of the earth is less than 6371 km.
+% 
+% Adjust the view from polar to equatorial:
+
+view([0 0])
+
+%% Example 3: Just a slice of Earth
+% Plot Earth radius, displaying only longitudes between 0 and 30 degrees:
+
+figure
+[Lon,Lat] = meshgrid(0:30,-90:90);
+R = earth_radius(Lat,'km'); 
+
+globepcolor(Lat,Lon,R);
+c = colorbar;
+set(get(c,'title'),'string','Radius (km)');
+view([135 0])
+
+%% Author Info
+% This function and supporting documentation were written by Natalie S.
+% Wolfenbarger for the Climate Data Toolbox for Matlab, 2019. 
+##### SOURCE END #####
+--></body></html>

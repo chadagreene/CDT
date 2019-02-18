@@ -1,0 +1,148 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Climate Data Toolbox for Matlab</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-17"><meta name="DC.source" content="CDT_Getting_Started.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Climate Data Toolbox for Matlab</h1><!--introduction--><p><img vspace="5" hspace="5" src="CDT_reduced.jpg" alt=""> </p><p>Welcome to the Climate Data Toolbox for Matlab! Here are some tips on getting started with CDT:</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">CDT Contents</a></li><li><a href="#2">Downloading CDT</a></li><li><a href="#3">Installing CDT in Matlab</a></li><li><a href="#4">Accessing Help</a></li><li><a href="#5">Citing this toolbox</a></li></ul></div><h2 id="1">CDT Contents</h2><p>For a complete list of CDT functions, datasets, and tutorials, check out the <a href="CDT_Contents.html"><b>CDT Contents</b></a> page.</p><h2 id="2">Downloading CDT</h2><p>You have a few options for downloading CDT. You can get the most recent release of the toolbox <a href="http://chadagreene.com/ClimateDataToolbox.mltbx">here</a> (about 100 MB) and just double-click on the file to install it (described below) or you can find all the latest individual files through the Add-Ons menu (Method 2 described below), on the <a href="https://www.mathworks.com/matlabcentral/fileexchange/">Mathworks File Exhange</a> or on <a href="https://github.com/chadagreene/CDT">GitHub</a>.</p><h2 id="3">Installing CDT in Matlab</h2><p>You have two options for how to install CDT:</p><p>1. If you have already downloaded the .mltbx file, navigate to it in your file system and it might look something like this:</p><p><img vspace="5" hspace="5" src="cdt_install_screenshot_1.png" alt=""> </p><p>Just double-click on that file and when the menu pops up, click <b>Install</b>. Installation should take less than a second.</p><p>2. Alternatively, if you haven't already downloaded the mltbx file, you can get it via the Add-On button from directly within Matlab. That looks like this in the HOME menu:</p><p><img vspace="5" hspace="5" src="cdt_install_screenshot_2.png" alt=""> </p><p>Click <b>Get Add-Ons</b>, look up <i>Climate Data Toolbox</i>, and follow the prompts to download and install CDT automatically.</p><h2 id="4">Accessing Help</h2><p>Need help? Just type</p><pre>cdt</pre><p>to access TMD documentation. For help with specific functions, type <tt>cdt</tt> followed by the function name. For example,</p><pre>cdt eof</pre><p>to access help for the <tt>eof</tt> function.</p><p>Still need help?</p><div><ul><li>The fastest way to get help is to ask a question on the <a href="https://www.mathworks.com/matlabcentral/answers/index">Matlab Answers forum.</a></li><li>If you find a bug or experience some other technical issue that the Answers forum cannot solve, please report it via the <a href="https://github.com/chadagreene/CDT/issues">CDT Issues page</a>.</li><li>You can also try emailing me directly at <a href="mailto:chad@chadagreene.com">chad@chadagreene.com</a>. I can't promise a response, but I do read all the messages I receive. To maximize your chances of receiving a response, please describe the issue you're experiencing, describe what you're <i>trying</i> to accomplish, include any error messages, and <b>provide a minimal working example</b> if applicable.</li></ul></div><h2 id="5">Citing this toolbox</h2><p>A manuscript describing the Climate Data Toolbox for Matlab is in preparation. The citation will probably be something like</p><div><ul><li>Greene &amp; friends, 2019? The Climate Data Toolbox for Matlab. <i>Prestigious Journal,</i> Vol (Issue) pages.</li></ul></div><p>By the time you read this, a proper citation may be available. Please check the internet before publishing, and cite our paper accordingly. The CDT team thanks you!</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Climate Data Toolbox for Matlab
+% 
+% <<CDT_reduced.jpg>>
+% 
+% Welcome to the Climate Data Toolbox for Matlab! Here are some tips 
+% on getting started with CDT:
+
+%% CDT Contents
+% For a complete list of CDT functions, datasets, and tutorials, check out the 
+% <CDT_Contents.html *CDT Contents*> page. 
+
+%% Downloading CDT 
+% You have a few options for downloading CDT. You can get the most recent
+% release of the toolbox <http://chadagreene.com/ClimateDataToolbox.mltbx
+% here> (about 100 MB) and just double-click on the file to install it (described 
+% below) or you can find all the latest individual files through the
+% Add-Ons menu (Method 2 described below), on the
+% <https://www.mathworks.com/matlabcentral/fileexchange/ Mathworks File
+% Exhange> or on <https://github.com/chadagreene/CDT GitHub>.
+
+%% Installing CDT in Matlab
+% You have two options for how to install CDT:
+% 
+% 1. If you have already downloaded
+% the .mltbx file, navigate to it in your file system and it might look something
+% like this: 
+% 
+% <<cdt_install_screenshot_1.png>>
+% 
+% Just double-click on that file and when the menu pops up, click *Install*. 
+% Installation should take less than a second. 
+% 
+% 2. Alternatively, if you haven't already downloaded the mltbx file, you can get 
+% it via the Add-On button from directly within Matlab. That looks
+% like this in the HOME menu: 
+% 
+% <<cdt_install_screenshot_2.png>>
+% 
+% Click *Get Add-Ons*, look up _Climate Data Toolbox_, and follow the prompts to download
+% and install CDT automatically. 
+%
+%% Accessing Help 
+% Need help? Just type 
+% 
+%  cdt
+% 
+% to access TMD documentation. For help with specific functions, type
+% |cdt| followed by the function name. For example, 
+% 
+%  cdt eof 
+% 
+% to access help for the |eof| function. 
+% 
+% Still need help? 
+% 
+% * The fastest way to get help is to ask a question on the <https://www.mathworks.com/matlabcentral/answers/index
+% Matlab Answers forum.> 
+% * If you find a bug or experience some other technical issue that the Answers
+% forum cannot solve, please report it via the <https://github.com/chadagreene/CDT/issues
+% CDT Issues page>. 
+% * You can also try emailing me directly at chad@chadagreene.com. I can't promise a response, 
+% but I do read all the messages I receive. To maximize your chances of receiving a response, 
+% please describe the issue you're experiencing, describe what you're _trying_ to accomplish, 
+% include any error messages, and *provide a minimal working example* if applicable. 
+% 
+
+%% Citing this toolbox
+% A manuscript describing the Climate Data Toolbox for Matlab
+% is in preparation. The citation will probably be something like
+% 
+% * Greene & friends, 2019? The Climate Data Toolbox for Matlab. _Prestigious 
+% Journal,_ Vol (Issue) pages.
+% 
+% By the time you read this, a proper citation may be available. Please
+% check the internet before publishing, and cite our paper accordingly.
+% The CDT team thanks you! 
+##### SOURCE END #####
+--></body></html>

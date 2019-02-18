@@ -1,0 +1,259 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>spiralplot documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-02"><meta name="DC.source" content="spiralplot_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>spiralplot</tt> documentation</h1><!--introduction--><p>The <tt>spiralplot</tt> function makes a spiral plot that shows the annual nature and long-term trend of a time series.</p><p>This function was inspired by work by Ed Hawkins of the University of Reading. More information on spiral plots can be found <a href="http://www.climate-lab-book.ac.uk/spirals/">here</a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Simple</a></li><li><a href="#4">Example 2: Specify z axis limits</a></li><li><a href="#5">Example 3: Specify z ticks:</a></li><li><a href="#6">Example 4: Add a colorbar for time</a></li><li><a href="#7">Example 5: Format the axis label text</a></li><li><a href="#8">Example 6: Make a gif</a></li><li><a href="#11">References</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>spiralplot(t,z)
+spiralplot(...,'LineWidth',LineWidth)
+spiralplot(...,'zmin',zmin)
+spiralplot(...,'ztick',Zticks)
+spiralplot(...,'format',MonthFormat)
+spiralplot(...,'fontsize',LabelFontsize)
+spiralplot(...,'nospokes')
+[h,hax,htxt] = spiralplot(...)</pre><h2 id="2">Description</h2><p><tt>spiralplot(t,z)</tt> plots a time series of z as a spiral plot, where time is in datetime or datenum format.</p><p><tt>spiralplot(...,'LineWidth',LineWidth)</tt> specifies <tt>LineWidth</tt> of the spiral plot. Default <tt>LineWidth</tt> is 2.</p><p><tt>spiralplot(...,'zlim',zlim)</tt> specifies a minimum and maximum values the z axis. Default <tt>zlim</tt> corresponds to the range of <tt>z</tt>; however, depending on the application it might make sense to put <tt>0</tt> or some other critical value at the center of the graph.</p><p><tt>spiralplot(...,'ztick',Zticks)</tt> specifies the values of z axis lines and labels.</p><p><tt>spiralplot(...,'format',MonthFormat)</tt> formats the way months are labeled using <tt>datestr</tt> formatting options. Options for month formatting are:</p><div><ul><li><tt>'mmmm'</tt> Full name, (e.g., March, December)</li></ul></div><div><ul><li><tt>'mmm'</tt> First three letters, (e.g., Mar, Dec)</li></ul></div><div><ul><li><tt>'mm'</tt> Two digits, (e.g., 03, 12)</li></ul></div><div><ul><li><tt>'m'</tt> Capitalized first letter, (e.g., M, D)</li></ul></div><p><tt>spiralplot(...,'fontsize',LabelFontsize)</tt> specifies the fontsize of the month names and z axis labels.</p><p><tt>spiralplot(...,'nospokes')</tt> removes the spokes from the axes.</p><p><tt>[h,hax,htxt] = spiralplot(...)</tt> returns handles of the color-scaled line, axis objects, and text objects.</p><h2 id="3">Example 1: Simple</h2><p>This example uses sea ice extent data from the <a href="http://dx.doi.org/10.7265/N5736NV7">NSIDC</a> (See References below).</p><p>Load the example data and plot the northern hemisphere sea ice extent:</p><pre class="codeinput">load <span class="string">seaice_extent</span>
+
+spiralplot(t,extent_N)
+</pre><img vspace="5" hspace="5" src="spiralplot_documentation_01.png" alt=""> <h2 id="4">Example 2: Specify z axis limits</h2><p>The plot above does not show how close to zero the sea ice extent has been. So it might be best to put zero in the center of the circle:</p><pre class="codeinput">figure
+spiralplot(t,extent_N,<span class="string">'zlim'</span>,[0 18])
+</pre><img vspace="5" hspace="5" src="spiralplot_documentation_02.png" alt=""> <h2 id="5">Example 3: Specify z ticks:</h2><p>Perhaps you want to label the values 3, 8.2, and 15 instead of using the default tick label calculations. Here's how:</p><pre class="codeinput">figure
+spiralplot(t,extent_N,<span class="string">'zlim'</span>,[0 18],<span class="string">'ztick'</span>,[3 8.2 15])
+</pre><img vspace="5" hspace="5" src="spiralplot_documentation_03.png" alt=""> <h2 id="6">Example 4: Add a colorbar for time</h2><p>To include a colorbar that shows time, use the <a href="cbdate_documentation.html"><tt>cbdate</tt></a> function.</p><pre class="codeinput">cb = colorbar(<span class="string">'location'</span>,<span class="string">'southoutside'</span>);
+cbdate(<span class="string">'yyyy'</span>,<span class="string">'horiz'</span>)
+</pre><img vspace="5" hspace="5" src="spiralplot_documentation_04.png" alt=""> <h2 id="7">Example 5: Format the axis label text</h2><pre class="codeinput">cla <span class="comment">% clears the spiral plot above, but keeps the colorbar</span>
+spiralplot(t,extent_N,<span class="string">'fontsize'</span>,8,<span class="string">'format'</span>,<span class="string">'mmmm'</span>)
+</pre><img vspace="5" hspace="5" src="spiralplot_documentation_05.png" alt=""> <h2 id="8">Example 6: Make a gif</h2><p>Making a gif is pretty easy with <tt>spiralplot</tt> and the <a href="gif_documentation.html"><tt>gif</tt></a> function. Just initialize the first frame like this:</p><pre>  years = 1980:2017;</pre><pre>  figure('position',[100 100 377 420])</pre><pre>  % Place a colorbar:
+  cb = colorbar('southoutside');
+  set(cb,'fontsize',10)</pre><pre>  % Set the color axis to the full date range:
+  caxis(datenum([min(t) max(t)]))</pre><pre>  % Format the colorbar axis like dates:
+  cbdate('yyyy','horiz')</pre><pre>  % Get indices of all dates before Jan 1, 1980:
+  ind = t&lt;datetime(years(1),1,1);</pre><pre>  % Make a spiral plot
+  spiralplot(t(ind),extent_N(ind),'zlim',[0 17],...
+     'fontsize',10,'format','mmmm')</pre><pre>  % Place a text label in the center:
+  text(0,0,'1979','vert','middle','horiz','center')</pre><pre>  % Write the first frame of a new .gif animation:
+  gif('seaice_extent.gif','frame',gcf)</pre><p>After the first frame is set, loop through the rest of the years and save each frame:</p><pre>  % Loop through each subsequent year:
+  for k = 2:length(years)</pre><pre>     cla % clears the old plot</pre><pre>     % Get indices of all dates before the kth year:
+     ind = t&lt;datenum(years(k),1,1);</pre><pre>     % Make a spiral plot
+     spiralplot(t(ind),extent_N(ind),'zlim',[0 17],...
+        'fontsize',10,'format','mmmm')</pre><pre>     % Place a text label in the center:
+     text(0,0,num2str(years(k)-1),...
+        'vert','middle','horiz','center')</pre><pre>     % save this frame:
+     gif
+  end</pre><p>And here's the result:</p><p><img vspace="5" hspace="5" src="seaice_extent.gif" alt=""> </p><h2 id="11">References</h2><p>Sea ice data by Fetterer et al. are available at the NSIDC.</p><p>Fetterer, F., K. Knowles, W. Meier, and M. Savoie. 2016, updated daily. Sea Ice Index, Version 2. Boulder, Colorado USA. NSIDC: National Snow and Ice Data Center. <a href="http://dx.doi.org/10.7265/N5736NV7">doi:10.7265/N5736NV7</a>.</p><h2 id="12">Author Info</h2><p>This function was written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas Institute for Geophysics (UTIG), June 2017.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |spiralplot| documentation 
+% The |spiralplot| function makes a spiral plot that shows the annual nature and long-term trend 
+% of a time series. 
+% 
+% This function was inspired by work by Ed Hawkins of the University of Reading. More information
+% on spiral plots can be found <http://www.climate-lab-book.ac.uk/spirals/ here>.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax 
+% 
+%  spiralplot(t,z) 
+%  spiralplot(...,'LineWidth',LineWidth) 
+%  spiralplot(...,'zmin',zmin) 
+%  spiralplot(...,'ztick',Zticks) 
+%  spiralplot(...,'format',MonthFormat) 
+%  spiralplot(...,'fontsize',LabelFontsize) 
+%  spiralplot(...,'nospokes') 
+%  [h,hax,htxt] = spiralplot(...) 
+% 
+%% Description 
+% 
+% |spiralplot(t,z)| plots a time series of z as a spiral plot, where time is 
+% in datetime or datenum format. 
+% 
+% |spiralplot(...,'LineWidth',LineWidth)| specifies |LineWidth| of the spiral plot. Default |LineWidth| is 2. 
+%
+% |spiralplot(...,'zlim',zlim)| specifies a minimum and maximum values the z axis. Default |zlim| corresponds 
+% to the range of |z|; however, depending on the application it might make sense to put |0| or some other critical 
+% value at the center of the graph. 
+% 
+% |spiralplot(...,'ztick',Zticks)| specifies the values of z axis lines and labels. 
+% 
+% |spiralplot(...,'format',MonthFormat)| formats the way months are labeled using |datestr| formatting options. 
+% Options for month formatting are: 
+% 
+% * |'mmmm'| Full name, (e.g., March, December) 
+% 
+% * |'mmm'| First three letters, (e.g., Mar, Dec) 
+% 
+% * |'mm'| Two digits, (e.g., 03, 12) 
+% 
+% * |'m'| Capitalized first letter, (e.g., M, D)
+% 
+% |spiralplot(...,'fontsize',LabelFontsize)| specifies the fontsize of the month names and z axis labels. 
+% 
+% |spiralplot(...,'nospokes')| removes the spokes from the axes. 
+% 
+% |[h,hax,htxt] = spiralplot(...)| returns handles of the color-scaled line, axis objects, and text objects. 
+% 
+%% Example 1: Simple
+% This example uses sea ice extent data from the <http://dx.doi.org/10.7265/N5736NV7 NSIDC> (See References below). 
+% 
+% Load the example data and plot the northern hemisphere sea ice extent: 
+
+load seaice_extent
+
+spiralplot(t,extent_N)
+
+%% Example 2: Specify z axis limits
+% The plot above does not show how close to zero the sea ice extent has been. So it 
+% might be best to put zero in the center of the circle: 
+
+figure
+spiralplot(t,extent_N,'zlim',[0 18])
+
+%% Example 3: Specify z ticks: 
+% Perhaps you want to label the values 3, 8.2, and 15 instead of using the default
+% tick label calculations. Here's how: 
+
+figure
+spiralplot(t,extent_N,'zlim',[0 18],'ztick',[3 8.2 15])
+
+%% Example 4: Add a colorbar for time 
+% To include a colorbar that shows time, use the <cbdate_documentation.html |cbdate|> 
+% function. 
+
+cb = colorbar('location','southoutside'); 
+cbdate('yyyy','horiz')
+
+%% Example 5: Format the axis label text
+
+cla % clears the spiral plot above, but keeps the colorbar 
+spiralplot(t,extent_N,'fontsize',8,'format','mmmm')
+
+%% Example 6: Make a gif
+% Making a gif is pretty easy with |spiralplot| and the 
+% <gif_documentation.html |gif|> function. Just initialize the first frame like this: 
+% 
+%    years = 1980:2017; 
+% 
+%    figure('position',[100 100 377 420])
+% 
+%    % Place a colorbar: 
+%    cb = colorbar('southoutside');
+%    set(cb,'fontsize',10)
+% 
+%    % Set the color axis to the full date range: 
+%    caxis(datenum([min(t) max(t)])) 
+% 
+%    % Format the colorbar axis like dates: 
+%    cbdate('yyyy','horiz')
+% 
+%    % Get indices of all dates before Jan 1, 1980: 
+%    ind = t<datetime(years(1),1,1); 
+% 
+%    % Make a spiral plot 
+%    spiralplot(t(ind),extent_N(ind),'zlim',[0 17],...
+%       'fontsize',10,'format','mmmm')
+% 
+%    % Place a text label in the center: 
+%    text(0,0,'1979','vert','middle','horiz','center')
+% 
+%    % Write the first frame of a new .gif animation: 
+%    gif('seaice_extent.gif','frame',gcf)
+
+%% 
+% After the first frame is set, loop through the rest of the years and save each frame: 
+% 
+%    % Loop through each subsequent year: 
+%    for k = 2:length(years) 
+% 
+%       cla % clears the old plot 
+% 
+%       % Get indices of all dates before the kth year: 
+%       ind = t<datenum(years(k),1,1); 
+% 
+%       % Make a spiral plot 
+%       spiralplot(t(ind),extent_N(ind),'zlim',[0 17],...
+%          'fontsize',10,'format','mmmm')
+% 
+%       % Place a text label in the center: 
+%       text(0,0,num2str(years(k)-1),...
+%          'vert','middle','horiz','center')
+% 
+%       % save this frame: 
+%       gif
+%    end
+%
+%% 
+% And here's the result: 
+% 
+% <<seaice_extent.gif>>
+
+%% References
+% Sea ice data by Fetterer et al. are available at the NSIDC. 
+% 
+% Fetterer, F., K. Knowles, W. Meier, and M. Savoie. 2016, updated daily. Sea Ice Index, Version 2.
+% Boulder, Colorado USA. NSIDC: National Snow and Ice Data Center. <http://dx.doi.org/10.7265/N5736NV7 doi:10.7265/N5736NV7>.
+% 
+%% Author Info
+% This function was written by <http://www.chadagreene.com Chad A. Greene> of the University of Texas Institute
+% for Geophysics (UTIG), June 2017. 
+##### SOURCE END #####
+--></body></html>

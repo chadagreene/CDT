@@ -1,0 +1,323 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>cdtgradient documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-17"><meta name="DC.source" content="cdtgradient_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>cdtgradient</tt> documentation</h1><!--introduction--><p><tt>cdtgradient</tt> calculates the spatial gradient of gridded data equally spaced in geographic coordinates.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Theory</a></li><li><a href="#6">Example 2: Reality</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[FX,FY] = cdtgradient(lat,lon,F)
+[FX,FY] = cdtgradient(lat,lon,F,'km')</pre><h2 id="2">Description</h2><p><tt>[FX,FY] = cdtgradient(lat,lon,F)</tt> for the gridded variable F and corresponding geographic coordinates <tt>lat</tt> and <tt>lon</tt>, <tt>cdtgradient</tt> calculates <tt>FX</tt>, the spatial rate of west-to-east change in <tt>F</tt> per meter along the Earth's surface, and <tt>FY</tt>, the south-to-north change in <tt>F</tt> per meter. This function assumes an ellipsoidal Earth as modeled by the <a href="cdtdim_documentation.html"><tt>cdtdim</tt></a> and <a href="earth_radius_documentation.html"><tt>earth_radius</tt></a>. A positive value of <tt>FX</tt> indicates that <tt>F</tt> increases from west to east in that grid cell, as a positive value of <tt>FY</tt> indicates <tt>F</tt> increases from south to north. <tt>F</tt> can be a 2D or 3D matrix whose first two dimensions must correspond to <tt>lat</tt> and <tt>lon</tt>. If <tt>F</tt> is 3D, outputs <tt>FX</tt> and <tt>FY</tt> will also be 3D, with each grid along the third dimension calculated separately.</p><p><tt>[FX,FY] = cdtgradient(lat,lon,F,'km')</tt> returns gradients per kilometer rather than the default meters.</p><h2 id="3">Example 1: Theory</h2><p>Here's a global grid of some variable <tt>F</tt>, which is only a function of latitude and increases from south to north at a rate of 1 unit <tt>F</tt> per degree of latitude. Use <a href="cdtgrid_documentation.html"><tt>cdtgrid</tt></a> to create the grid and then define <tt>F</tt> as the value of the latitude plus 100:</p><pre class="codeinput"><span class="comment">% Create a quarter-degree grid:</span>
+[lat,lon] = cdtgrid(0.25);
+
+<span class="comment">% Define F:</span>
+F = lat + 100;
+
+<span class="comment">% Plot F on a globe:</span>
+figure
+globepcolor(lat,lon,F)
+globeborders(<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>))
+axis <span class="string">tight</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'data F'</span>)
+</pre><img vspace="5" hspace="5" src="cdtgradient_documentation_01.png" alt=""> <p>In the figure above we see that the range of <tt>F</tt> values go from about 10 near the South Pole to about 190 near the North Pole. That's because <tt>F</tt> is just the latitude of each grid cell plus 100.</p><p>With this dataset we know that at any given latitude, <tt>F</tt> is the same for all longitudes. That means <tt>Fx</tt> should be zero everywhere on the globe, because <tt>F</tt> never changes from west to east.</p><p>However, <tt>F</tt> does change from south to north, at a rate of 1 unit <tt>F</tt> per degree latitude. It's handy to know that degrees of latitude are separated by about 111 km (from the original definition of the meter, which said the distance from the Equator to the North Pole is 10 million meters). So if each degree of latitude is separated by 111 km, and <tt>F</tt> increases by 1 unit for each degree of latitude, then <tt>Fy</tt> should be 1/111 = 0.009 everwhere on the globe. Let's see:</p><pre class="codeinput">[Fx,Fy] = cdtgradient(lat,lon,F,<span class="string">'km'</span>);
+
+figure
+subplot(1,2,1)
+pcolor(lon,lat,Fx)
+borders(<span class="string">'countries'</span>,<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>))
+shading <span class="string">interp</span>
+axis <span class="string">off</span> <span class="comment">% removes ticks</span>
+cb1=colorbar(<span class="string">'location'</span>,<span class="string">'southoutside'</span>);
+xlabel(cb1,<span class="string">'\partialF/\partialx (units of F)/km'</span>)
+
+subplot(1,2,2)
+pcolor(lon,lat,Fy)
+shading <span class="string">interp</span>
+borders(<span class="string">'countries'</span>,<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>))
+axis <span class="string">off</span> <span class="comment">% removes ticks</span>
+cb2=colorbar(<span class="string">'location'</span>,<span class="string">'southoutside'</span>);
+xlabel(cb2,<span class="string">'\partialF/\partialy (units of F)/km'</span>)
+</pre><img vspace="5" hspace="5" src="cdtgradient_documentation_02.png" alt=""> <p>Above, we see that our predictions fared pretty well. <tt>Fx</tt> is zero everywhere in the world, as we predicted, and the values of <tt>Fy</tt> center on our predicted value of 9e-3. There is some latitudinal variation in <tt>Fy</tt>, however, because the Earth is not a perfect sphere, but an ellipsoid whose degrees of latitude are not perfectly spaced by 111,111 m, as the original definition of the meter might have you believe.</p><h2 id="6">Example 2: Reality</h2><p>For this example, we'll use the example surface pressure data that comes with CDT. Start by loading it:</p><pre class="codeinput">filename = <span class="string">'ERA_Interim_2017.nc'</span>;
+sp = ncread(filename,<span class="string">'sp'</span>); <span class="comment">% surface pressure</span>
+lat = double(ncread(filename,<span class="string">'latitude'</span>));
+lon = double(ncread(filename,<span class="string">'longitude'</span>));
+[Lat,Lon] = meshgrid(lat,lon);
+</pre><p>The absolute surface pressure isn't particularly interesting because it mostly tracks surface elevation. But surface pressure <i>anomalies</i> are quite a bit more interesting because they give us an idea of how far out of balance the system is at a given point in time.</p><p>For convenience, let's calculate the surface pressure anomaly for January of 2017 as the surface pressure field for that month, minus the mean surface pressure from all of 2017:</p><pre class="codeinput"><span class="comment">% Surface pressure "anomaly":</span>
+spa = sp(:,:,1)-mean(sp,3);
+</pre><p>Here's the surface pressure anomaly we want to analyze:</p><pre class="codeinput">figure
+globepcolor(Lat,Lon,spa);
+globeborders(<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>))
+axis <span class="string">tight</span>
+cmocean(<span class="string">'delta'</span>,<span class="string">'pivot'</span>) <span class="comment">% sets colormap</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'surface pressure anomaly (Pa)'</span>)
+view(125,5) <span class="comment">% sets viewing angle</span>
+</pre><img vspace="5" hspace="5" src="cdtgradient_documentation_03.png" alt=""> <p>Calculate the zonal and meridional surface pressure gradients in Pa/km like this</p><pre class="codeinput">[Sx,Sy] = cdtgradient(Lat,Lon,spa,<span class="string">'km'</span>);
+
+figure
+subplot(1,2,1)
+pcolor(Lon,Lat,Sx)
+borders(<span class="string">'countries'</span>,<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>))
+shading <span class="string">interp</span>
+axis <span class="string">off</span> <span class="comment">% removes ticks</span>
+cb1=colorbar(<span class="string">'location'</span>,<span class="string">'southoutside'</span>);
+xlabel(cb1,<span class="string">'zonal pressure gradient Pa/km'</span>)
+caxis([-1 1])
+cmocean <span class="string">diff</span>
+
+subplot(1,2,2)
+pcolor(Lon,Lat,Sy)
+shading <span class="string">interp</span>
+borders(<span class="string">'countries'</span>,<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>))
+axis <span class="string">off</span> <span class="comment">% removes ticks</span>
+cb2=colorbar(<span class="string">'location'</span>,<span class="string">'southoutside'</span>);
+xlabel(cb2,<span class="string">'meridional pressure gradient /km'</span>)
+caxis([-1 1])
+cmocean <span class="string">diff</span>
+</pre><img vspace="5" hspace="5" src="cdtgradient_documentation_04.png" alt=""> <p>The figure above may be somewhat difficult to interpret, so we'll take a different approach. Instead of plotting <tt>Sx</tt> and <tt>Sy</tt> as color, plot them as vectors atop the surface pressure anomaly map:</p><pre class="codeinput">figure
+pcolor(Lon,Lat,spa)
+shading <span class="string">interp</span>
+hold <span class="string">on</span>
+borders(<span class="string">'countries'</span>,<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>),<span class="string">'center'</span>,180)
+cmocean(<span class="string">'delta'</span>,<span class="string">'pivot'</span>) <span class="comment">% sets colormap</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'surface pressure anomaly (Pa)'</span>)
+
+quiversc(Lon,Lat,Sx,Sy,<span class="string">'k'</span>,<span class="string">'density'</span>,100)
+</pre><img vspace="5" hspace="5" src="cdtgradient_documentation_05.png" alt=""> <p>In the map above, we see that gradient vectors always point from low values to high values. Naturally, that's the opposite direction of the pressure gradient force.</p><h2 id="12">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |cdtgradient| documentation 
+% |cdtgradient| calculates the spatial gradient of gridded data equally spaced in geographic
+% coordinates. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax 
+% 
+%  [FX,FY] = cdtgradient(lat,lon,F)
+%  [FX,FY] = cdtgradient(lat,lon,F,'km')
+% 
+%% Description
+% 
+% |[FX,FY] = cdtgradient(lat,lon,F)| for the gridded variable F and corresponding geographic
+% coordinates |lat| and |lon|, |cdtgradient| calculates |FX|, the spatial rate of west-to-east change 
+% in |F| per meter along the Earth's surface, and |FY|, the south-to-north change in |F| per meter. 
+% This function assumes an ellipsoidal Earth as modeled by the <cdtdim_documentation.html |cdtdim|>
+% and <earth_radius_documentation.html |earth_radius|>. A positive value of |FX| indicates that |F|
+% increases from west to east in that grid cell, as a positive value of |FY| indicates |F| increases 
+% from south to north. |F| can be a 2D or 3D matrix whose first two dimensions must correspond to
+% |lat| and |lon|. If |F| is 3D, outputs |FX| and |FY| will also be 3D, with each grid
+% along the third dimension calculated separately. 
+% 
+% |[FX,FY] = cdtgradient(lat,lon,F,'km')| returns gradients per kilometer rather than the
+% default meters. 
+% 
+%% Example 1: Theory
+% Here's a global grid of some variable |F|, which is only a function of latitude and
+% increases from south to north at a rate of 1 unit |F| per degree of latitude. Use
+% <cdtgrid_documentation.html |cdtgrid|> to create the grid and then define |F| as the 
+% value of the latitude plus 100: 
+
+% Create a quarter-degree grid: 
+[lat,lon] = cdtgrid(0.25); 
+
+% Define F: 
+F = lat + 100; 
+
+% Plot F on a globe: 
+figure
+globepcolor(lat,lon,F)
+globeborders('color',rgb('gray'))
+axis tight
+cb = colorbar; 
+ylabel(cb,'data F')
+
+%% 
+% In the figure above we see that the range of |F| values go from about 10 near the South Pole 
+% to about 190 near the North Pole. That's because |F| is just the latitude of each grid cell
+% plus 100. 
+% 
+% With this dataset we know that at any given latitude, |F| is the same for all longitudes.
+% That means |Fx| should be zero everywhere on the globe, because |F| never changes from
+% west to east. 
+% 
+% However, |F| does change from south to north, at a rate of 1 unit |F| per degree
+% latitude. It's handy to know that degrees of latitude are separated by about 111 km
+% (from the original definition of the meter, which said the distance from the Equator to
+% the North Pole is 10 million meters). So if each degree of latitude is separated by 111
+% km, and |F| increases by 1 unit for each degree of latitude, then |Fy| should be 1/111 =
+% 0.009 everwhere on the globe. Let's see: 
+
+[Fx,Fy] = cdtgradient(lat,lon,F,'km'); 
+
+figure
+subplot(1,2,1)
+pcolor(lon,lat,Fx)
+borders('countries','color',rgb('gray'))
+shading interp
+axis off % removes ticks 
+cb1=colorbar('location','southoutside'); 
+xlabel(cb1,'\partialF/\partialx (units of F)/km')
+
+subplot(1,2,2)
+pcolor(lon,lat,Fy)
+shading interp
+borders('countries','color',rgb('gray'))
+axis off % removes ticks 
+cb2=colorbar('location','southoutside'); 
+xlabel(cb2,'\partialF/\partialy (units of F)/km')
+
+%% 
+% Above, we see that our predictions fared pretty well. |Fx| is zero everywhere in the
+% world, as we predicted, and the values of |Fy| center on our predicted value of 9e-3. 
+% There is some latitudinal variation in |Fy|, however, because the Earth is not a perfect
+% sphere, but an ellipsoid whose degrees of latitude are not perfectly spaced by 111,111
+% m, as the original definition of the meter might have you believe. 
+
+%% Example 2: Reality
+% For this example, we'll use the example surface pressure data that comes with CDT. Start
+% by loading it: 
+
+filename = 'ERA_Interim_2017.nc';
+sp = ncread(filename,'sp'); % surface pressure 
+lat = double(ncread(filename,'latitude'));
+lon = double(ncread(filename,'longitude'));
+[Lat,Lon] = meshgrid(lat,lon);
+
+%% 
+% The absolute surface pressure isn't particularly interesting because it mostly tracks
+% surface elevation. But surface pressure _anomalies_ are quite a bit more interesting 
+% because they give us an idea of how far out of balance the system is at a given point 
+% in time. 
+% 
+% For convenience, let's calculate the surface pressure anomaly for January of 2017 as the
+% surface pressure field for that month, minus the mean surface pressure from all of 2017:
+
+% Surface pressure "anomaly": 
+spa = sp(:,:,1)-mean(sp,3);
+
+%% 
+% Here's the surface pressure anomaly we want to analyze: 
+
+figure
+globepcolor(Lat,Lon,spa);
+globeborders('color',rgb('gray'))
+axis tight
+cmocean('delta','pivot') % sets colormap
+cb = colorbar; 
+ylabel(cb,'surface pressure anomaly (Pa)')
+view(125,5) % sets viewing angle
+
+%% 
+% Calculate the zonal and meridional surface pressure gradients in Pa/km like this
+
+[Sx,Sy] = cdtgradient(Lat,Lon,spa,'km'); 
+
+figure
+subplot(1,2,1)
+pcolor(Lon,Lat,Sx)
+borders('countries','color',rgb('gray'))
+shading interp
+axis off % removes ticks 
+cb1=colorbar('location','southoutside'); 
+xlabel(cb1,'zonal pressure gradient Pa/km')
+caxis([-1 1])
+cmocean diff
+
+subplot(1,2,2)
+pcolor(Lon,Lat,Sy)
+shading interp
+borders('countries','color',rgb('gray'))
+axis off % removes ticks 
+cb2=colorbar('location','southoutside'); 
+xlabel(cb2,'meridional pressure gradient /km')
+caxis([-1 1])
+cmocean diff
+
+%%
+% The figure above may be somewhat difficult to interpret, so we'll take a different
+% approach. Instead of plotting |Sx| and |Sy| as color, plot them as vectors atop the
+% surface pressure anomaly map: 
+
+figure 
+pcolor(Lon,Lat,spa) 
+shading interp
+hold on 
+borders('countries','color',rgb('gray'),'center',180)
+cmocean('delta','pivot') % sets colormap
+cb = colorbar; 
+ylabel(cb,'surface pressure anomaly (Pa)')
+
+quiversc(Lon,Lat,Sx,Sy,'k','density',100) 
+
+%%
+% In the map above, we see that gradient vectors always point from low values to high
+% values. Naturally, that's the opposite direction of the pressure gradient force. 
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,187 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>earth_radius documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-16"><meta name="DC.source" content="earth_radius_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>earth_radius</tt> documentation</h1><!--introduction--><p><tt>earth_radius</tt> gives the radius of the Earth.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Nominal radius</a></li><li><a href="#5">Example 2: Latitude dependence of Earth's radius</a></li><li><a href="#8">Example 3: A grid</a></li><li><a href="#10">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>r = earth_radius
+r = earth_radius(lat)
+r = earth_radius(...,'km')</pre><h2 id="2">Description</h2><p><tt>r = earth_radius</tt> returns <tt>6371000</tt>, the nominal radius of the Earth in meters.</p><p><tt>r = earth_radius(lat)</tt> gives the radius of the Earth as a function of latitude.</p><p><tt>r = earth_radius(...,'km')</tt> returns values in kilometers.</p><h2 id="3">Example 1: Nominal radius</h2><p>Get the nominal Earth radius in meters:</p><pre class="codeinput">earth_radius
+</pre><pre class="codeoutput">ans =
+     6371000
+</pre><p>...or in kilometers:</p><pre class="codeinput">earth_radius(<span class="string">'km'</span>)
+</pre><pre class="codeoutput">ans =
+        6371
+</pre><h2 id="5">Example 2: Latitude dependence of Earth's radius</h2><p>The Earth is more of an ellipsoid than a sphere, meaning its radius depends on latitude. Percentage-wise, how far off is the nomonal Earth radius at the Equator?</p><pre class="codeinput">100*(earth_radius-earth_radius(0))/earth_radius(0)
+</pre><pre class="codeoutput">ans =
+   -0.1119
+</pre><p>That says the nominal Earth radius of 6371 km is about a tenth of a percent smaller than the true radius at the Equator. Should we expect the same error at the North Pole?</p><pre class="codeinput">100*(earth_radius-earth_radius(90))/earth_radius(90)
+</pre><pre class="codeoutput">ans =
+    0.2241
+</pre><p>In fact, the nominal radius is about <i>two</i> tenths of a percent larger than the true radius at the poles. Here's Earth's radius as a function of latitude:</p><pre class="codeinput">lat = 0:90;
+r = earth_radius(lat,<span class="string">'km'</span>);
+
+plot(lat,r)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+
+hline(earth_radius(<span class="string">'km'</span>)) <span class="comment">% the nominal earth radius</span>
+xlabel <span class="string">latitude</span>
+ylabel <span class="string">'radius (km)'</span>
+
+legend(<span class="string">'latitude dependent'</span>,<span class="string">'nominal'</span>)
+legend <span class="string">boxoff</span>
+</pre><img vspace="5" hspace="5" src="earth_radius_documentation_01.png" alt=""> <h2 id="8">Example 3: A grid</h2><p>Use <a href="cdtgrid_documentation.html"><tt>cdtgrid</tt></a> to make a global grid, and <tt>earth_radius</tt> to get Earth's radius at each point on the grid:</p><pre class="codeinput">[lat,lon] = cdtgrid;
+r = earth_radius(lat,<span class="string">'km'</span>);
+</pre><p>Plot them on a globe with <a href="globepcolor_documentation.html"><tt>globepcolor</tt></a>:</p><pre class="codeinput">figure
+globepcolor(lat,lon,r)
+globeborders   <span class="comment">% plots political boundaries</span>
+globegraticule <span class="comment">% plots grid lines</span>
+axis <span class="string">tight</span>     <span class="comment">% removes empty space</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'radius (km)'</span>)
+</pre><img vspace="5" hspace="5" src="earth_radius_documentation_02.png" alt=""> <h2 id="10">Author Info</h2><p>This function and supporting documentation were written by Natalie S. Wolfenbarger and Chad A. Greene for the Climate Data Toolbox for Matlab, 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |earth_radius| documentation
+% |earth_radius| gives the radius of the Earth. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  r = earth_radius
+%  r = earth_radius(lat)
+%  r = earth_radius(...,'km') 
+% 
+%% Description
+% 
+% |r = earth_radius| returns |6371000|, the nominal radius of the Earth in meters. 
+%
+% |r = earth_radius(lat)| gives the radius of the Earth as a function of latitude.
+% 
+% |r = earth_radius(...,'km')| returns values in kilometers.
+% 
+%% Example 1: Nominal radius
+% Get the nominal Earth radius in meters: 
+
+earth_radius 
+
+%% 
+% ...or in kilometers: 
+
+earth_radius('km')
+
+%% Example 2: Latitude dependence of Earth's radius
+% The Earth is more of an ellipsoid than a sphere, meaning its radius depends on latitude.
+% Percentage-wise, how far off is the nomonal Earth radius at the Equator? 
+
+100*(earth_radius-earth_radius(0))/earth_radius(0)
+
+%%
+% That says the nominal Earth radius of 6371 km is about a tenth of a percent smaller than
+% the true radius at the Equator. Should we expect the same error at the North Pole? 
+
+100*(earth_radius-earth_radius(90))/earth_radius(90)
+
+%% 
+% In fact, the nominal radius is about _two_ tenths of a percent larger than the true
+% radius at the poles. Here's Earth's radius as a function of latitude: 
+
+lat = 0:90; 
+r = earth_radius(lat,'km');
+
+plot(lat,r)
+axis tight
+box off
+
+hline(earth_radius('km')) % the nominal earth radius
+xlabel latitude
+ylabel 'radius (km)'
+
+legend('latitude dependent','nominal')
+legend boxoff
+
+%% Example 3: A grid
+% Use <cdtgrid_documentation.html |cdtgrid|> to make a global grid, and |earth_radius| to 
+% get Earth's radius at each point on the grid: 
+
+[lat,lon] = cdtgrid; 
+r = earth_radius(lat,'km'); 
+
+%% 
+% Plot them on a globe with <globepcolor_documentation.html |globepcolor|>: 
+
+figure 
+globepcolor(lat,lon,r) 
+globeborders   % plots political boundaries 
+globegraticule % plots grid lines 
+axis tight     % removes empty space
+cb = colorbar; 
+ylabel(cb,'radius (km)')
+
+%% Author Info
+% This function and supporting documentation were written by Natalie S.
+% Wolfenbarger and Chad A. Greene for the Climate Data Toolbox for Matlab, 2019. 
+##### SOURCE END #####
+--></body></html>

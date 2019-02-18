@@ -1,0 +1,184 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>globegraticule documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-14"><meta name="DC.source" content="globegraticule_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>globegraticule</tt> documentation</h1><!--introduction--><p>The <tt>globegraticule</tt> function plots a graticule globe. Optional inputs control the appearance and behavior of the graticule.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1</a></li><li><a href="#5">Example 2</a></li><li><a href="#6">Example 3</a></li><li><a href="#7">Example 4</a></li><li><a href="#8">Example 5</a></li><li><a href="#10">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>globegraticule
+globegraticule(lat,lon)
+globegraticule(...,LineProperty,LineValue)
+globegraticule(...,'radius',GlobeRadius)
+h = globegraticule(...)</pre><h2 id="2">Description</h2><p><tt>globegraticule</tt> plots a graticule or grid on an empty globe.</p><p><tt>globegraticule(lat,lon)</tt> specifies latitudes and longitudes depicted by the graticule.</p><p><tt>globegraticule(...,LineProperty,LineValue)</tt> plots a graticule with user-specified line properties to control appearance and behavior.</p><p><tt>globegraticule(...,'radius',GlobeRadius)</tt> specifies the radius of the graticule as <tt>GlobeRadius</tt>. Default <tt>GlobeRadius</tt> is 6371.</p><p><tt>h = globegraticule(...)</tt> returns the handle <tt>h</tt> of the plotted objects.</p><h2 id="3">Example 1</h2><p>Plot a simple, gray graticule on a globe:</p><pre class="codeinput">figure
+globegraticule
+</pre><img vspace="5" hspace="5" src="globegraticule_documentation_01.png" alt=""> <p>The globe above is an empty wire frame. Fill it in with <a href="globefill_documentation.html"><tt>globefill</tt></a>:</p><pre class="codeinput">globefill
+</pre><img vspace="5" hspace="5" src="globegraticule_documentation_02.png" alt=""> <h2 id="5">Example 2</h2><p>Plot a red graticule:</p><pre class="codeinput">figure
+globegraticule(<span class="string">'color'</span>,<span class="string">'r'</span>)
+globefill
+</pre><img vspace="5" hspace="5" src="globegraticule_documentation_03.png" alt=""> <h2 id="6">Example 3</h2><p>Add a thick, blue, dashed line along the equator:</p><pre class="codeinput">globegraticule(0,[],<span class="string">'color'</span>,<span class="string">'b'</span>,<span class="string">'linestyle'</span>,<span class="string">'--'</span>,<span class="string">'linewidth'</span>,4)
+</pre><img vspace="5" hspace="5" src="globegraticule_documentation_04.png" alt=""> <h2 id="7">Example 4</h2><p>Plot a graticule with <img src="globegraticule_documentation_eq12102913104298171340.png" alt="$$10^{\circ} {\times} 10^{\circ}$"> latitude and lonitude bins:</p><pre class="codeinput">figure
+globegraticule(-90:10:90,0:10:360)
+</pre><img vspace="5" hspace="5" src="globegraticule_documentation_05.png" alt=""> <h2 id="8">Example 5</h2><p>Plot a graticule on top of other data and specify viewing geometry:</p><pre class="codeinput">[lat,lon] = cdtgrid;
+z = topo_interp(lat,lon);
+
+figure
+globepcolor(lat,lon,z)
+hold <span class="string">on</span>
+axis <span class="string">tight</span>
+view(30,40) <span class="comment">% defines viewing angle (azimuth,elevation)</span>
+
+globegraticule(<span class="string">'linestyle'</span>,<span class="string">':'</span>)
+
+camlight <span class="comment">% adjusts lighting</span>
+material <span class="string">dull</span> <span class="comment">% adjusts the reflectance</span>
+</pre><img vspace="5" hspace="5" src="globegraticule_documentation_06.png" alt=""> <p>Draw the equator and prime meridian:</p><pre class="codeinput">globegraticule(0,[],<span class="string">'color'</span>,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,1) <span class="comment">% equator</span>
+globegraticule([],0,<span class="string">'color'</span>,[0 0.5 0],<span class="string">'linewidth'</span>,1) <span class="comment">% prime meridian</span>
+</pre><img vspace="5" hspace="5" src="globegraticule_documentation_07.png" alt=""> <h2 id="10">Author Info</h2><p>This function and supporting documentation were written by Natalie S. Wolfenbarger for the Climate Data Toolbox for Matlab, 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |globegraticule| documentation
+% The |globegraticule| function plots a graticule globe. Optional inputs
+% control the appearance and behavior of the graticule.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  globegraticule
+%  globegraticule(lat,lon)
+%  globegraticule(...,LineProperty,LineValue)
+%  globegraticule(...,'radius',GlobeRadius) 
+%  h = globegraticule(...)
+% 
+%% Description
+% 
+% |globegraticule| plots a graticule or grid on an empty globe. 
+%
+% |globegraticule(lat,lon)| specifies latitudes and longitudes depicted by
+% the graticule.
+% 
+% |globegraticule(...,LineProperty,LineValue)| plots a graticule with
+% user-specified line properties to control appearance and behavior. 
+% 
+% |globegraticule(...,'radius',GlobeRadius)| specifies the radius of the
+% graticule as |GlobeRadius|. Default |GlobeRadius| is 6371. 
+% 
+% |h = globegraticule(...)| returns the handle |h| of the plotted objects. 
+% 
+%% Example 1
+% Plot a simple, gray graticule on a globe: 
+
+figure
+globegraticule
+
+%% 
+% The globe above is an empty wire frame. Fill it in with
+% <globefill_documentation.html |globefill|>:
+
+globefill
+
+%% Example 2
+% Plot a red graticule: 
+
+figure
+globegraticule('color','r')
+globefill 
+
+%% Example 3
+% Add a thick, blue, dashed line along the equator:
+
+globegraticule(0,[],'color','b','linestyle','REPLACE_WITH_DASH_DASH','linewidth',4)
+
+%% Example 4
+% Plot a graticule with $$10^{\circ} {\times} 10^{\circ}$ latitude and lonitude bins:
+
+figure
+globegraticule(-90:10:90,0:10:360)
+
+%% Example 5
+% Plot a graticule on top of other data and specify viewing geometry: 
+
+[lat,lon] = cdtgrid; 
+z = topo_interp(lat,lon); 
+
+figure
+globepcolor(lat,lon,z)
+hold on
+axis tight
+view(30,40) % defines viewing angle (azimuth,elevation)
+
+globegraticule('linestyle',':')
+
+camlight % adjusts lighting
+material dull % adjusts the reflectance
+
+%%
+% Draw the equator and prime meridian: 
+
+globegraticule(0,[],'color','k','linewidth',1) % equator 
+globegraticule([],0,'color',[0 0.5 0],'linewidth',1) % prime meridian
+
+%% Author Info
+% This function and supporting documentation were written by Natalie S.
+% Wolfenbarger for the Climate Data Toolbox for Matlab, 2019. 
+##### SOURCE END #####
+--></body></html>

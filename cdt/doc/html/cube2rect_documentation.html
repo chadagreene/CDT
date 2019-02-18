@@ -1,0 +1,265 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>cube2rect documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-19"><meta name="DC.source" content="cube2rect_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>cube2rect</tt> documentation</h1><!--introduction--><p>The <tt>cube2rect</tt> function reshapes a 3D matrix for use with standard Matlab functions.</p><p><tt>cube2rect</tt> enables easy, efficient, vectorized analysis instead of using nested loops to operate on each row and column of a matrix. Its complement is <a href="rect2cube_documentation.html"><tt>rect2cube</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Why does this function exist?</a></li><li><a href="#4">Example 1a: A simple 2x2 grid</a></li><li><a href="#7">Example 1b: Masking regions of data</a></li><li><a href="#8">Example 2: Sea surface temperatures:</a></li><li><a href="#14">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>A2 = cube2rect(A3)
+A2 = cube2rect(A3,mask)</pre><h2 id="2">Description</h2><p><tt>A2 = cube2rect(A3)</tt> for a 3D matrix <tt>A3</tt> whose dimension correspond to space x space x time, <tt>cube2rect</tt> reshapes the <tt>A3</tt> into a 2D matrix <tt>A2</tt> whose dimensions correspond to time x space.</p><p><tt>A2 = cube2rect(A3,mask)</tt> uses only the grid cells corresponding to true values in a 2D <tt>mask</tt>. This option can reduce memory requirements for large datasets where some regions (perhaps all land or all ocean grid cells) can be neglected in processing.</p><h2 id="3">Why does this function exist?</h2><p>Good question! The short answer is it enables fast and easy vectorization, meaning no more nested loops. A more nuanced explanation with lots of examples can be found in this <a href="tutorial_3D_analysis.html">Tutorial on 3D data analysis</a>.</p><h2 id="4">Example 1a: A simple 2x2 grid</h2><p>Consider this 2x2 grid. At time 1, values are just over 100. By time 2, all of the values have increased by 100, except the lower left grid cell that increases by 120. And the trend continues at time 3, where all the values are on the order of 300. Here's the data:</p><pre class="codeinput"><span class="comment">% First time slice:</span>
+A(:,:,1) = [101 103;
+            102 104];
+
+<span class="comment">% Second time slice:</span>
+A(:,:,2) = [201 203;
+            222 204];
+
+<span class="comment">% Third time slice:</span>
+A(:,:,3) = [301 303;
+            342 304];
+</pre><p>Many standard Matlab functions operate down columns of 2D matrices, and we can easily use those functions if we reshape <tt>A</tt> such that one dimension corresponds to time and the other dimension corresponds to space.  Here's how to reshape <tt>A</tt> with <tt>cube2rect</tt>:</p><pre class="codeinput">cube2rect(A)
+</pre><pre class="codeoutput">ans =
+   101   102   103   104
+   201   222   203   204
+   301   342   303   304
+</pre><p>Now each column corresponds to a grid cell in <tt>A</tt> and each row corresponds to time. It's like this:</p><pre>    s p a c e
+   ----------&gt;
+t | 101   102   103   104
+i | 201   222   203   204
+m | 301   342   303   304
+e v</pre><h2 id="7">Example 1b: Masking regions of data</h2><p>If you want to perform computationally intensive operations on a large dataset, it can sometimes help to mask out all the grid cells that don't need to be analyzied. For example, if you have a high resolution global dataset with lots of measurements through time, you might want to use <a href="island_documentation.html"><tt>island</tt></a> to mask out land areas or ocean areas, and only peform analysis on the regions of interest. Using the simple 2x2 dataset from above, here's what it would look like if you want to mask out the upper right grid cell before reshaping <tt>A</tt>:</p><pre class="codeinput">mask = [true false;
+        true true]
+
+cube2rect(A,mask)
+</pre><pre class="codeoutput">mask =
+  2&times;2 logical array
+   1   0
+   1   1
+ans =
+   101   102   104
+   201   222   204
+   301   342   304
+</pre><h2 id="8">Example 2: Sea surface temperatures:</h2><p>Fake data can feel a bit abstract, so let's look at how you might employ <tt>cube2rect</tt> with real climate data.</p><pre class="codeinput">load <span class="string">pacific_sst</span>
+</pre><p>In the pacific_sst sample dataset, we have an <tt>sst</tt> variable with the dimensions</p><pre class="codeinput">size(sst)
+</pre><pre class="codeoutput">ans =
+    60    55   802
+</pre><p>which corresponds to 60 latitude grid cells, 55 longitude grid cells, and 802 monthly solutions. To calculate the mean sea surface temperature at each grid cell, we could specify the third dimension of <tt>sst</tt> when calling mean like this:</p><pre class="codeinput">meanSST = mean(sst,3);
+
+imagescn(lon,lat,meanSST)
+cmocean <span class="string">thermal</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'mean sea surface temperature (\circC)'</span>)
+</pre><img vspace="5" hspace="5" src="cube2rect_documentation_01.png" alt=""> <p>Yeah, of course you can get the mean sea surface temperature that easy, but <tt>cube2rect</tt> is intended to allow more applications than just the built in <tt>mean</tt>, <tt>std</tt>, etc. So let's use <tt>cube2rect</tt> to get get a plot of the mean SST, just like the one above. First, reshape the 3D <tt>sst</tt> matrix:</p><pre class="codeinput">sstr = cube2rect(sst);
+
+size(sstr)
+</pre><pre class="codeoutput">ans =
+         802        3300
+</pre><p>Now the reshaped <tt>sstr</tt> matrix contains 802 rows corresponding to each of the 802 time steps, and 3300 columns which correspond to each of the 60x55 grid cells. Calculating the mean sea surface temperature at each grid cell is easy now:</p><pre class="codeinput">my_meanSST_2d = mean(sstr);
+
+size(my_meanSST_2d)
+</pre><pre class="codeoutput">ans =
+           1        3300
+</pre><p>Now <tt>my_meanSST</tt> contains just one row--that's a single mean value for each of the 3300 grid cells. To get those grid cells back into their original shape, use <a href="rect2cube_documentation.html"><tt>rect2cube</tt></a>. It's the yin to <tt>cube2rect</tt>'s yang.</p><pre class="codeinput">my_meanSST_3d = rect2cube(my_meanSST_2d,[60 55 802]);
+
+imagescn(lon,lat,my_meanSST_3d)
+cmocean <span class="string">thermal</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'mean sea surface temperature'</span>)
+</pre><img vspace="5" hspace="5" src="cube2rect_documentation_02.png" alt=""> <h2 id="14">Author Info</h2><p>This function and supporting documentation were written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas Institute for Geophysics (UTIG).</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |cube2rect| documentation 
+% The |cube2rect| function reshapes a 3D matrix for use with standard Matlab functions. 
+% 
+% |cube2rect| enables easy, efficient, vectorized analysis instead of using 
+% nested loops to operate on each row and column of a matrix. Its complement
+% is <rect2cube_documentation.html |rect2cube|>. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax
+% 
+%  A2 = cube2rect(A3) 
+%  A2 = cube2rect(A3,mask) 
+% 
+%% Description 
+% 
+% |A2 = cube2rect(A3)| for a 3D matrix |A3| whose dimension correspond to space x space x time, 
+% |cube2rect| reshapes the |A3| into a 2D matrix |A2| whose dimensions correspond to time x space. 
+% 
+% |A2 = cube2rect(A3,mask)| uses only the grid cells corresponding to true values in a 2D |mask|. 
+% This option can reduce memory requirements for large datasets where some regions (perhaps all land
+% or all ocean grid cells) can be neglected in processing. 
+% 
+%% Why does this function exist? 
+% Good question! The short answer is it enables fast and easy vectorization, 
+% meaning no more nested loops. A more nuanced explanation with lots of examples
+% can be found in this <tutorial_3D_analysis.html Tutorial on 3D data analysis>.
+%% Example 1a: A simple 2x2 grid
+% Consider this 2x2 grid. At time 1, values are just over 100. By time 2, all of the values
+% have increased by 100, except the lower left grid cell that increases by 120. And the
+% trend continues at time 3, where all the values are on the order of 300. Here's the data: 
+
+% First time slice: 
+A(:,:,1) = [101 103; 
+            102 104]; 
+         
+% Second time slice:          
+A(:,:,2) = [201 203; 
+            222 204]; 
+
+% Third time slice:          
+A(:,:,3) = [301 303; 
+            342 304]; 
+
+%% 
+% Many standard Matlab functions operate down columns of 2D matrices, and we can 
+% easily use those functions if we reshape |A| such that one dimension corresponds
+% to time and the other dimension corresponds to space.  Here's how to reshape |A| 
+% with |cube2rect|: 
+
+cube2rect(A)         
+         
+%% 
+% Now each column corresponds to a grid cell in |A| and each row corresponds to time. 
+% It's like this: 
+% 
+%      s p a c e 
+%     REPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASHREPLACE_WITH_DASH_DASH>
+%  t | 101   102   103   104
+%  i | 201   222   203   204
+%  m | 301   342   303   304
+%  e v 
+% 
+%% Example 1b: Masking regions of data
+% If you want to perform computationally intensive operations on a large dataset, 
+% it can sometimes help to mask out all the grid cells that don't need to be analyzied. 
+% For example, if you have a high resolution global dataset with lots of measurements through
+% time, you might want to use <island_documentation.html |island|> to mask out land areas
+% or ocean areas, and only peform analysis on the regions of interest. Using the simple 2x2 
+% dataset from above, here's what it would look like if you want to mask out the upper right
+% grid cell before reshaping |A|: 
+
+mask = [true false;
+        true true]
+          
+cube2rect(A,mask)
+
+%% Example 2: Sea surface temperatures: 
+% Fake data can feel a bit abstract, so let's look at how you might employ |cube2rect| with 
+% real climate data. 
+ 
+load pacific_sst
+
+%% 
+% In the pacific_sst sample dataset, we have an |sst| variable with the dimensions 
+
+size(sst) 
+
+%% 
+% which corresponds to 60 latitude grid cells, 55 longitude grid cells, and 802 monthly 
+% solutions. To calculate the mean sea surface temperature at each grid cell, we could 
+% specify the third dimension of |sst| when calling mean like this: 
+
+meanSST = mean(sst,3); 
+
+imagescn(lon,lat,meanSST) 
+cmocean thermal 
+cb = colorbar; 
+ylabel(cb,'mean sea surface temperature (\circC)') 
+
+%% 
+% Yeah, of course you can get the mean sea surface temperature that easy, but |cube2rect| 
+% is intended to allow more applications than just the built in |mean|, |std|, etc. So let's 
+% use |cube2rect| to get get a plot of the mean SST, just like the one above. First, reshape
+% the 3D |sst| matrix: 
+
+sstr = cube2rect(sst); 
+
+size(sstr) 
+
+%% 
+% Now the reshaped |sstr| matrix contains 802 rows corresponding to each of the 802 time 
+% steps, and 3300 columns which correspond to each of the 60x55 grid cells. Calculating 
+% the mean sea surface temperature at each grid cell is easy now: 
+
+my_meanSST_2d = mean(sstr); 
+
+size(my_meanSST_2d) 
+
+%% 
+% Now |my_meanSST| contains just one rowREPLACE_WITH_DASH_DASHthat's a single mean value for each of the 
+% 3300 grid cells. To get those grid cells back into their original shape, use <rect2cube_documentation.html 
+% |rect2cube|>. It's the yin to |cube2rect|'s yang. 
+
+my_meanSST_3d = rect2cube(my_meanSST_2d,[60 55 802]); 
+
+imagescn(lon,lat,my_meanSST_3d) 
+cmocean thermal 
+cb = colorbar; 
+ylabel(cb,'mean sea surface temperature') 
+
+%% Author Info
+% This function and supporting documentation were written by <http://www.chadagreene.com Chad A. Greene> of the University of Texas Institute
+% for Geophysics (UTIG). 
+##### SOURCE END #####
+--></body></html>

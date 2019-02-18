@@ -1,0 +1,177 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>quiversc documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-11"><meta name="DC.source" content="quiversc_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>quiversc</tt> documentation</h1><!--introduction--><p><tt>quiversc</tt> scales a dense grid of quiver arrows to comfortably fit in axes before plotting them.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">The problem</a></li><li><a href="#4">Example 1</a></li><li><a href="#5">Example 2: Define arrow properties</a></li><li><a href="#6">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>quiversc(x,y,u,v)
+quiversc(...,'density',DensityValue)
+quiversc(...,scale)
+quiversc(...,LineSpec)
+quiversc(...,LineSpec,'filled')
+quiversc(...,'Name',Value)
+h = quiversc(...)</pre><h2 id="2">Description</h2><p><tt>quiversc(x,y,u,v)</tt> plots vectors as arrows at the coordinates specified in each corresponding pair of elements in <tt>x</tt> and <tt>y</tt>. The matrices <tt>x</tt>, <tt>y</tt>, <tt>u</tt>, and <tt>v</tt> must all be the same size and contain corresponding position and velocity components. By default, the arrows are scaled to just not overlap, but you can scale them to be longer or shorter if you want.</p><p><tt>quiversc(...,'density',DensityFactor)</tt> specifies density of quiver arrows. The <tt>DensityFactor</tt> defines how many arrows are plotted. Default <tt>DensityFactor</tt> is <tt>50</tt>, meaning <tt>hypot(Nrows,Ncols)=50</tt>, but if your plot is too crowded you may specify a lower <tt>DensityFactor</tt> (and/or adjust the markersize).</p><p><tt>quiversc(...,scale)</tt> automatically scales the length of the arrows to fit within the grid and then stretches them by the factor scale. <tt>scale = 2</tt> doubles their relative length, and <tt>scale = 0.5</tt> halves the length. Use <tt>scale = 0</tt> to plot the velocity vectors without automatic scaling. You can also tune the length of arrows after they have been drawn by choosing the Plot Edit tool, selecting the quiver object, opening the Property Editor, and adjusting the Length slider.</p><p><tt>quiversc(...,LineSpec)</tt> specifies line style, marker symbol, and color using any valid <tt>LineSpec</tt>. quiversc draws the markers at the origin of the vectors.</p><p><tt>quiversc(...,LineSpec,'filled')</tt> fills markers specified by <tt>LineSpec</tt>.</p><p><tt>quiversc(...,'Name',Value)</tt> specifies property name and property value pairs for the quiver objects the function creates.</p><p><tt>h = quiversc(...)</tt> returns the quiver object handle <tt>h</tt>.</p><h2 id="3">The problem</h2><p><b>Here's the problem:</b> When you try to plot a dense grid of wind patterns using Matlab's built-in <tt>quiver</tt> function, things can get too crowded to make any sense out of what's going on:</p><pre class="codeinput">load <span class="string">pacific_wind</span>
+
+figure
+quiver(lon,lat,u10,v10)
+axis <span class="string">tight</span> <span class="comment">% eliminates empty space</span>
+borders    <span class="comment">% national borders for context</span>
+</pre><img vspace="5" hspace="5" src="quiversc_documentation_01.png" alt=""> <h2 id="4">Example 1</h2><p>Above, the 417x761 grid of wind vectors means there are more than 300,000 arrows in that plot. To put that into context, there are 761 arrows spanning the width of the plot, and that's probably about how many pixels the plot is occupying on your screen. In other words, if each arrow is about the size of a pixel, they're gonna be too small gain any understanding from.</p><p>So try the same thing, but this time with <tt>quiversc</tt>:</p><pre class="codeinput">figure
+quiversc(lon,lat,u10,v10)
+axis <span class="string">tight</span>
+borders
+</pre><img vspace="5" hspace="5" src="quiversc_documentation_02.png" alt=""> <h2 id="5">Example 2: Define arrow properties</h2><p>Make the arrows red and plot fewer of them by setting the density to 30 rather than the default 50:</p><pre class="codeinput">figure
+quiversc(lon,lat,u10,v10,<span class="string">'r'</span>,<span class="string">'density'</span>,75)
+axis <span class="string">tight</span>
+borders
+</pre><img vspace="5" hspace="5" src="quiversc_documentation_03.png" alt=""> <h2 id="6">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |quiversc| documentation
+% |quiversc| scales a dense grid of quiver arrows to comfortably fit in axes
+% before plotting them.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  quiversc(x,y,u,v)
+%  quiversc(...,'density',DensityValue)
+%  quiversc(...,scale)
+%  quiversc(...,LineSpec)
+%  quiversc(...,LineSpec,'filled')
+%  quiversc(...,'Name',Value)
+%  h = quiversc(...)
+% 
+%% Description 
+% 
+% |quiversc(x,y,u,v)| plots vectors as arrows at the coordinates specified in 
+% each corresponding pair of elements in |x| and |y|. The matrices |x|, |y|, |u|, and 
+% |v| must all be the same size and contain corresponding position and velocity
+% components. By default, the arrows are scaled to just not overlap, but you 
+% can scale them to be longer or shorter if you want.
+% 
+% |quiversc(...,'density',DensityFactor)| specifies density of quiver arrows. The 
+% |DensityFactor| defines how many arrows are plotted. Default |DensityFactor| is 
+% |50|, meaning |hypot(Nrows,Ncols)=50|, but if your plot is too crowded you may 
+% specify a lower |DensityFactor| (and/or adjust the markersize). 
+% 
+% |quiversc(...,scale)| automatically scales the length of the arrows to fit within 
+% the grid and then stretches them by the factor scale. |scale = 2| doubles their 
+% relative length, and |scale = 0.5| halves the length. Use |scale = 0| to plot the 
+% velocity vectors without automatic scaling. You can also tune the length of 
+% arrows after they have been drawn by choosing the Plot Edit tool, selecting 
+% the quiver object, opening the Property Editor, and adjusting the Length slider.
+% 
+% |quiversc(...,LineSpec)| specifies line style, marker symbol, and color using 
+% any valid |LineSpec|. quiversc draws the markers at the origin of the vectors.
+% 
+% |quiversc(...,LineSpec,'filled')| fills markers specified by |LineSpec|.
+% 
+% |quiversc(...,'Name',Value)| specifies property name and property value pairs
+% for the quiver objects the function creates.
+% 
+% |h = quiversc(...)| returns the quiver object handle |h|. 
+% 
+%% The problem 
+% *Here's the problem:* When you try to plot a dense grid of wind patterns 
+% using Matlab's built-in |quiver| function, things can get too crowded 
+% to make any sense out of what's going on: 
+
+load pacific_wind
+
+figure
+quiver(lon,lat,u10,v10)
+axis tight % eliminates empty space
+borders    % national borders for context 
+
+%% Example 1
+% Above, the 417x761 grid of wind vectors means there are more than 300,000
+% arrows in that plot. To put that into context, there are 761 arrows spanning 
+% the width of the plot, and that's probably about how many pixels the plot is 
+% occupying on your screen. In other words, if each arrow is about the size
+% of a pixel, they're gonna be too small gain any understanding from. 
+% 
+% So try the same thing, but this time with |quiversc|: 
+
+figure
+quiversc(lon,lat,u10,v10)
+axis tight 
+borders 
+
+%% Example 2: Define arrow properties
+% Make the arrows red and plot fewer of them by setting the density to 30 
+% rather than the default 50: 
+
+figure
+quiversc(lon,lat,u10,v10,'r','density',75)
+axis tight 
+borders 
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,271 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>plotpsd documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-02"><meta name="DC.source" content="plotpsd_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>plotpsd</tt> documentation</h1><!--introduction--><p>This function plots a power spectral density of a time series using the <tt>periodogram</tt> function. <b>Requires Matlab's Signal Processing Toolbox.</b></p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Train whistle</a></li><li><a href="#10">Example 2: Sea ice extent</a></li><li><a href="#14">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>plotpsd(y,Fs)
+plotpsd(y,x)
+plotpsd(...,LineProperty,LineValue)
+plotpsd(...,'logx')
+plotpsd(...,'db')
+plotpsd(...,'lambda')
+h = plotpsd(...)</pre><h2 id="2">Description</h2><p><tt>plotpsd(y,Fs)</tt> plots a power spectrum of 1D array <tt>y</tt> at sampling frequency <tt>Fs</tt> using the <tt>periodogram</tt> function. Sampling frequency <tt>Fs</tt> must be a scalar.</p><p><tt>plotpsd(y,x)</tt> plots a power spectrum of <tt>y</tt> referenced to an independent variable <tt>x</tt>. This syntax requires <tt>x</tt> and <tt>y</tt> to be of equal length and <tt>x</tt> must be equally spaced and monotically increasing.  For time series, <tt>x</tt> likely has units of time; for spatial analysis <tt>x</tt> may have units of length.</p><p><tt>plotpsd(...,LineProperty,LineValue)</tt> specifies the plot's line style with any combinations of LineSpec properties (e.g., <tt>'color','r','linewidth',2</tt>, etc).</p><p><tt>plotpsd(...,'logx')</tt> specfies a <tt>semilogx</tt> plot.</p><p><tt>plotpsd(...,'db')</tt> plots power spectrum in decibels.</p><p><tt>plotpsd(...,'lambda')</tt> labels horizontal axis as wavelengths rather than the default frequency. Note, this syntax assumes lambda = 1/f.</p><p><tt>h = plotpsd(...)</tt> returns a handle <tt>h</tt> of the plotted graphics object.</p><h2 id="3">Example 1: Train whistle</h2><p>Using the inbuilt <tt>train</tt> whistle example, plot start by plotting the time series for context:</p><pre class="codeinput">load <span class="string">train</span>
+t = (0:length(y)-1)/Fs;
+
+plot(t,y)
+box <span class="string">off</span>
+xlabel <span class="string">'time (s)'</span>
+</pre><img vspace="5" hspace="5" src="plotpsd_documentation_01.png" alt=""> <p>If you have headphones on, you can play that train whistle like this:</p><pre>soundsc(y,Fs)</pre><p>The power spectrum of the train signal looks like this:</p><pre class="codeinput">plotpsd(y,Fs)
+xlabel <span class="string">'frequency (Hz)'</span>
+</pre><img vspace="5" hspace="5" src="plotpsd_documentation_02.png" alt=""> <p>This makes the three horns of the train quite clear!  Don't like the default thin blue line?  Plot a fat red line instead:</p><pre class="codeinput">plotpsd(y,Fs,<span class="string">'color'</span>,<span class="string">'red'</span>,<span class="string">'linewidth'</span>,4)
+xlabel <span class="string">'frequency (Hz)'</span>
+</pre><img vspace="5" hspace="5" src="plotpsd_documentation_03.png" alt=""> <p>Want to see that as a magenta line plotted in decibels?</p><pre class="codeinput">plotpsd(y,Fs,<span class="string">'m'</span>,<span class="string">'db'</span>)
+xlabel <span class="string">'frequency (Hz)'</span>
+</pre><img vspace="5" hspace="5" src="plotpsd_documentation_04.png" alt=""> <p>Here's a black line with decibels on the vertical scale and a log scale in the horizontal direction.</p><pre class="codeinput">plotpsd(y,Fs,<span class="string">'k'</span>,<span class="string">'db'</span>,<span class="string">'logx'</span>)
+axis <span class="string">tight</span>
+xlabel <span class="string">'frequency (Hz)'</span>
+</pre><img vspace="5" hspace="5" src="plotpsd_documentation_05.png" alt=""> <p>Suppose you have some measurements <tt>y</tt> tied to some time vector <tt>t</tt> and you don't want to go through the effort of calculating the sampling rate. If this is the case, simply enter <tt>t</tt> instead of <tt>Fs</tt>:</p><pre class="codeinput">plotpsd(y,t,<span class="string">'b:'</span>,<span class="string">'logx'</span>)
+xlabel <span class="string">'frequency (Hz)'</span>
+</pre><img vspace="5" hspace="5" src="plotpsd_documentation_06.png" alt=""> <h2 id="10">Example 2: Sea ice extent</h2><p>Load this sea ice extent data that comes with CDT, and only use data from after 1988 because the stuff before then wasn't at daily resolution:</p><pre class="codeinput">load <span class="string">seaice_extent.mat</span> <span class="comment">% some sample data that comes with CDT</span>
+
+<span class="comment">% Indices of dates since 1989:</span>
+ind = t&gt;datetime(1989,1,1);
+
+figure
+plot(t(ind),extent_N(ind))
+ylabel <span class="string">'northern hemisphere sea ice extent (10^6 km^2)'</span>
+box <span class="string">off</span> <span class="comment">% removes the ugly, contraining frame</span>
+axis <span class="string">tight</span>
+</pre><img vspace="5" hspace="5" src="plotpsd_documentation_07.png" alt=""> <p>That clearly has some periodicity to it. We can use <a href="doy_documentation.html"><tt>doy</tt></a> to make a scatterplot of all the data relative to the julian day of year:</p><pre class="codeinput">jday = doy(t);
+
+scatter(jday(ind),extent_N(ind),10,datenum(t(ind)),<span class="string">'filled'</span>)
+cb = cbdate(<span class="string">'yyyy'</span>);     <span class="comment">% formats the colorbar as dates</span>
+set(cb,<span class="string">'ydir'</span>,<span class="string">'reverse'</span>) <span class="comment">% flips the colorbar axis</span>
+axis <span class="string">tight</span>
+ylabel <span class="string">'northern hemisphere sea ice extent (10^6 km^2)'</span>
+xlabel <span class="string">'day of year'</span>
+</pre><img vspace="5" hspace="5" src="plotpsd_documentation_08.png" alt=""> <p>From the two figures above, we can expect the sea ice extent time series to have energy at the 1/yr frequency in addition to some long term trends which should be represented as broadband energy in the low frequencies.</p><p>Plot the power spectral density as a function of period (here, lambda), assuming a sampling frequency of 365.25 equally-spaced samples per year:</p><pre class="codeinput">figure
+plotpsd(extent_N(ind),365.25,<span class="string">'lambda'</span>)
+set(gca,<span class="string">'xscale'</span>,<span class="string">'log'</span>,<span class="string">'yscale'</span>,<span class="string">'log'</span>)
+axis <span class="string">tight</span>
+xlabel <span class="string">'period (years)'</span>
+</pre><img vspace="5" hspace="5" src="plotpsd_documentation_09.png" alt=""> <p>As expected, a peak at the 1 year period stands out. But there are also a few other minor peaks, particularly at the 6-month and 4-month periods. Use <a href="vline_documentation.html"><tt>vline</tt></a> to show them:</p><pre class="codeinput">vline((1:12)/12,<span class="string">'--'</span>,<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>))
+
+yl = ylim; <span class="comment">% y limits of the plot</span>
+text(12/12,yl(2),<span class="string">'12'</span>,<span class="string">'vert'</span>,<span class="string">'top'</span>)
+text(6/12,yl(2),<span class="string">'6'</span>,<span class="string">'vert'</span>,<span class="string">'top'</span>)
+text(4/12,yl(2),<span class="string">'4 (months)'</span>,<span class="string">'vert'</span>,<span class="string">'top'</span>)
+</pre><img vspace="5" hspace="5" src="plotpsd_documentation_10.png" alt=""> <h2 id="14">Author Info</h2><p>This function and supporting documentation were written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas at Austin's Institute for Geophysics (UTIG), October 2015. Adapted for the Climate Data Toolbox in 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |plotpsd| documentation
+% This function plots a power spectral density of a time series using
+% the |periodogram| function. *Requires Matlab's Signal Processing Toolbox.*
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax 
+% 
+%  plotpsd(y,Fs) 
+%  plotpsd(y,x) 
+%  plotpsd(...,LineProperty,LineValue) 
+%  plotpsd(...,'logx') 
+%  plotpsd(...,'db') 
+%  plotpsd(...,'lambda') 
+%  h = plotpsd(...) 
+% 
+%% Description
+% 
+% |plotpsd(y,Fs)| plots a power spectrum of 1D array |y| at sampling frequency |Fs|
+% using the |periodogram| function. Sampling frequency |Fs| must be a scalar.  
+%
+% |plotpsd(y,x)| plots a power spectrum of |y| referenced to an independent variable
+% |x|. This syntax requires |x| and |y| to be of equal length and |x| must be equally
+% spaced and monotically increasing.  For time series, |x| likely has units of time; 
+% for spatial analysis |x| may have units of length.  
+%
+% |plotpsd(...,LineProperty,LineValue)| specifies the plot's line style with any
+% combinations of LineSpec properties (e.g., |'color','r','linewidth',2|, etc). 
+%
+% |plotpsd(...,'logx')| specfies a |semilogx| plot.  
+%
+% |plotpsd(...,'db')| plots power spectrum in decibels.  
+%
+% |plotpsd(...,'lambda')| labels horizontal axis as wavelengths rather than the default
+% frequency. Note, this syntax assumes lambda = 1/f.   
+%
+% |h = plotpsd(...)| returns a handle |h| of the plotted graphics object. 
+%
+%% Example 1: Train whistle
+% Using the inbuilt |train| whistle example, plot start by plotting the
+% time series for context: 
+
+load train 
+t = (0:length(y)-1)/Fs; 
+
+plot(t,y)
+box off
+xlabel 'time (s)'
+
+%% 
+% If you have headphones on, you can play that train whistle like this: 
+% 
+%  soundsc(y,Fs) 
+%
+%% 
+% The power spectrum of the train signal looks like this: 
+
+plotpsd(y,Fs) 
+xlabel 'frequency (Hz)'
+
+%% 
+% This makes the three horns of the train quite clear!  Don't like the
+% default thin blue line?  Plot a fat red line instead:
+
+plotpsd(y,Fs,'color','red','linewidth',4)
+xlabel 'frequency (Hz)' 
+
+%% 
+% Want to see that as a magenta line plotted in decibels? 
+
+plotpsd(y,Fs,'m','db')
+xlabel 'frequency (Hz)' 
+
+%% 
+% Here's a black line with decibels on the vertical scale and a log scale in the horizontal direction. 
+
+plotpsd(y,Fs,'k','db','logx')
+axis tight
+xlabel 'frequency (Hz)' 
+
+%% 
+% Suppose you have some measurements |y| tied to some time vector |t| and
+% you don't want to go through the effort of calculating the sampling rate.
+% If this is the case, simply enter |t| instead of |Fs|: 
+
+plotpsd(y,t,'b:','logx')
+xlabel 'frequency (Hz)' 
+
+%% Example 2: Sea ice extent
+% Load this sea ice extent data that comes with CDT, and only use data from 
+% after 1988 because the stuff before then wasn't at daily resolution:
+
+load seaice_extent.mat % some sample data that comes with CDT
+
+% Indices of dates since 1989:
+ind = t>datetime(1989,1,1); 
+
+figure
+plot(t(ind),extent_N(ind))
+ylabel 'northern hemisphere sea ice extent (10^6 km^2)'
+box off % removes the ugly, contraining frame
+axis tight
+
+%% 
+% That clearly has some periodicity to it. We can use <doy_documentation.html |doy|> 
+% to make a scatterplot of all the data relative to the julian day of year: 
+
+jday = doy(t); 
+
+scatter(jday(ind),extent_N(ind),10,datenum(t(ind)),'filled')
+cb = cbdate('yyyy');     % formats the colorbar as dates
+set(cb,'ydir','reverse') % flips the colorbar axis
+axis tight
+ylabel 'northern hemisphere sea ice extent (10^6 km^2)'
+xlabel 'day of year'
+
+%% 
+% From the two figures above, we can expect the sea ice extent time series
+% to have energy at the 1/yr frequency in addition to some long term trends
+% which should be represented as broadband energy in the low frequencies. 
+% 
+% Plot the power spectral density as a function of period (here, lambda), assuming
+% a sampling frequency of 365.25 equally-spaced samples per year: 
+
+figure
+plotpsd(extent_N(ind),365.25,'lambda')
+set(gca,'xscale','log','yscale','log') 
+axis tight
+xlabel 'period (years)'
+
+%% 
+% As expected, a peak at the 1 year period stands out. But there are 
+% also a few other minor peaks, particularly at the 6-month and 4-month 
+% periods. Use <vline_documentation.html |vline|> to show them: 
+
+vline((1:12)/12,'REPLACE_WITH_DASH_DASH','color',rgb('gray'))
+
+yl = ylim; % y limits of the plot
+text(12/12,yl(2),'12','vert','top')
+text(6/12,yl(2),'6','vert','top')
+text(4/12,yl(2),'4 (months)','vert','top')
+
+%% Author Info
+% This function and supporting documentation were written by
+% <http://www.chadagreene.com Chad A. Greene> of the University of Texas at
+% Austin's Institute for Geophysics (UTIG), October 2015. 
+% Adapted for the Climate Data Toolbox in 2019. 
+
+##### SOURCE END #####
+--></body></html>

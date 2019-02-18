@@ -1,0 +1,215 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>topo_interp documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-04"><meta name="DC.source" content="topo_interp_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>topo_interp</tt> documentation</h1><!--introduction--><p>The <tt>topo_interp</tt> function interpolates elevation relative to sea level at any geographic points. The data are from the <a href="https://www.eea.europa.eu/data-and-maps/data/world-digital-elevation-model-etopo5">ETOPO5 world digital elevation model</a>, which is provided at 5-minute (or 1/12 degree) grid resolution.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: A grid</a></li><li><a href="#6">Example 2: An elevation profile</a></li><li><a href="#9">Example 3: Load the raw data</a></li><li><a href="#11">A note on aliasing</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>zi = topo_interp(lati,loni)
+zi = topo_interp(lati,loni,'method',InterpMethod)</pre><h2 id="2">Description</h2><p><tt>zi = topo_interp(lati,loni)</tt> returns elevations relative to sea level at the geographic points <tt>lati,loni</tt>.</p><p><tt>zi = topo_interp(lati,loni,'method',InterpMethod)</tt> specifies an interpolation method and can be any method accepted by <tt>interp2</tt>. Default method is <tt>'linear'</tt>.</p><h2 id="3">Example 1: A grid</h2><p>Here's a global grid at 0.25 degree resolution:</p><pre class="codeinput">[lat,lon] = cdtgrid(0.25);
+</pre><p>Elevations at each grid point are obtained like this:</p><pre class="codeinput">Z = topo_interp(lat,lon);
+</pre><p>Plot the elevation grid like this. Below I'm using <a href="cmocean_documentation.html"><tt>cmocean</tt></a> for the topography colormap:</p><pre class="codeinput">pcolor(lon,lat,Z)
+shading <span class="string">interp</span>
+
+cb = colorbar;
+ylabel(cb,<span class="string">'elevation (m)'</span>)
+cmocean(<span class="string">'topo'</span>,<span class="string">'pivot'</span>) <span class="comment">% sets the colormap</span>
+</pre><img vspace="5" hspace="5" src="topo_interp_documentation_01.png" alt=""> <h2 id="6">Example 2: An elevation profile</h2><p>Suppose you want to take a trip from Paris (48.8567N, 2.3508E)to Bangkok (13.7525N, 100.494167E). Here's a crude line made up of 1000 points between the two cities:</p><pre class="codeinput">lat = linspace(48.8567,13.7525,1000);
+lon = linspace( 2.3508,100.494167,1000);
+
+hold <span class="string">on</span>
+plot(lon,lat,<span class="string">'r-'</span>,<span class="string">'linewidth'</span>,2)
+</pre><img vspace="5" hspace="5" src="topo_interp_documentation_02.png" alt=""> <p>An elevation profile along that route is this easy:</p><pre class="codeinput">z = topo_interp(lat,lon);
+
+figure
+plot(lon,z)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'elevation (m)'</span>
+</pre><img vspace="5" hspace="5" src="topo_interp_documentation_03.png" alt=""> <p>Or to depict the land and water more intuitively, use the <a href="anomaly_documentation.html"><tt>anomaly</tt></a> function and specify colors using <a href="rgb_documentation.html"><tt>rgb</tt></a>:</p><pre class="codeinput">figure
+anomaly(lon,z,<span class="string">'topcolor'</span>,rgb(<span class="string">'dirt'</span>),<span class="keyword">...</span>
+   <span class="string">'bottomcolor'</span>,rgb(<span class="string">'ocean blue'</span>))
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'elevation (m)'</span>
+</pre><img vspace="5" hspace="5" src="topo_interp_documentation_04.png" alt=""> <h2 id="9">Example 3: Load the raw data</h2><p>To access the raw data, just type</p><pre class="codeinput">load(<span class="string">'global_topography.mat'</span>);
+</pre><p>which contains the variables <tt>lat</tt>, <tt>lon</tt>, and <tt>Z</tt>. Plot them like this:</p><pre class="codeinput">figure
+imagesc(lon,lat,Z)
+axis <span class="string">xy</span> <span class="string">image</span>
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'elevation (m)'</span>)
+cmocean(<span class="string">'topo'</span>,<span class="string">'pivot'</span>)
+</pre><img vspace="5" hspace="5" src="topo_interp_documentation_05.png" alt=""> <h2 id="11">A note on aliasing</h2><p>The ETOPO5 dataset is provided at 5 minute (or 1/12 degree) resolution, but the <tt>topo_interp</tt> function does <i>not</i> do any anti-aliasing before interpolation. To meet the <a href="https://en.wikipedia.org/wiki/Nyquist_frequency">Nyquist requirement</a> to prevent aliasing, you should technically interploate to grid points spaced at least twice the 5 minute resolution of the underlying dataset. That would be a very dense grid for the global dataset, so you may wish to accept a little bit of potential aliasing. Or you can load the raw data, use <tt>imresize</tt> to reduce the grid (while performing anti-aliasing) and interpolate. It's up to you.</p><h2 id="12">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |topo_interp| documentation 
+% The |topo_interp| function interpolates elevation relative to sea level at any
+% geographic points. The data are from the <https://www.eea.europa.eu/data-and-maps/data/world-digital-elevation-model-etopo5
+% ETOPO5 world digital elevation model>, which is provided at 5-minute (or 1/12 degree) grid resolution. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax
+% 
+%  zi = topo_interp(lati,loni)
+%  zi = topo_interp(lati,loni,'method',InterpMethod) 
+% 
+%% Description 
+% 
+% |zi = topo_interp(lati,loni)| returns elevations relative to sea level
+% at the geographic points |lati,loni|. 
+% 
+% |zi = topo_interp(lati,loni,'method',InterpMethod)| specifies an interpolation
+% method and can be any method accepted by |interp2|. Default method is |'linear'|. 
+% 
+%% Example 1: A grid
+% Here's a global grid at 0.25 degree resolution: 
+
+[lat,lon] = cdtgrid(0.25); 
+
+%% 
+% Elevations at each grid point are obtained like this: 
+
+Z = topo_interp(lat,lon); 
+
+%% 
+% Plot the elevation grid like this. Below I'm using <cmocean_documentation.html |cmocean|> 
+% for the topography colormap: 
+
+pcolor(lon,lat,Z) 
+shading interp
+
+cb = colorbar; 
+ylabel(cb,'elevation (m)')
+cmocean('topo','pivot') % sets the colormap
+
+%% Example 2: An elevation profile 
+% Suppose you want to take a trip from Paris (48.8567N, 2.3508E)to Bangkok 
+% (13.7525N, 100.494167E). Here's a crude line made up of 1000 points between
+% the two cities: 
+
+lat = linspace(48.8567,13.7525,1000); 
+lon = linspace( 2.3508,100.494167,1000); 
+
+hold on
+plot(lon,lat,'r-','linewidth',2)
+
+%% 
+% An elevation profile along that route is this easy: 
+
+z = topo_interp(lat,lon); 
+
+figure
+plot(lon,z)
+axis tight
+box off
+xlabel 'longitude'
+ylabel 'elevation (m)'
+
+%% 
+% Or to depict the land and water more intuitively, use the <anomaly_documentation.html |anomaly|> 
+% function and specify colors using <rgb_documentation.html |rgb|>: 
+
+figure
+anomaly(lon,z,'topcolor',rgb('dirt'),...
+   'bottomcolor',rgb('ocean blue'))
+axis tight
+box off
+xlabel 'longitude'
+ylabel 'elevation (m)'
+
+%% Example 3: Load the raw data
+% To access the raw data, just type 
+
+load('global_topography.mat'); 
+
+%% 
+% which contains the variables |lat|, |lon|, and |Z|. Plot them like this: 
+
+figure
+imagesc(lon,lat,Z)
+axis xy image 
+xlabel 'longitude'
+ylabel 'latitude'
+cb = colorbar; 
+ylabel(cb,'elevation (m)')
+cmocean('topo','pivot')
+
+%% A note on aliasing
+% The ETOPO5 dataset is provided at 5 minute (or 1/12 degree) resolution, but 
+% the |topo_interp| function does _not_ do any anti-aliasing before interpolation. 
+% To meet the <https://en.wikipedia.org/wiki/Nyquist_frequency Nyquist requirement>
+% to prevent aliasing, you should technically interploate to grid points spaced
+% at least twice the 5 minute resolution of the underlying dataset. That would be 
+% a very dense grid for the global dataset, so you may wish to accept a little
+% bit of potential aliasing. Or you can load the raw data, use |imresize| to reduce
+% the grid (while performing anti-aliasing) and interpolate. It's up to you. 
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

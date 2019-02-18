@@ -1,0 +1,177 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>xyz2grid documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-21"><meta name="DC.source" content="xyz2grid_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>xyz2grid</tt> documentation</h1><!--introduction--><p><tt>xyz2grid</tt> converts regularly-spaced columnated x,y,z data into gridded data. See also <a href="xyzread_documentation.html"><tt>xyzread</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1</a></li><li><a href="#6">Example 2: Antarctic Curie Depth</a></li><li><a href="#7">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>Z = xyz2grid(x,y,z)
+Z = xyz2grid(filename)
+Z = xyz2grid(filename,Name,Value)
+[X,Y,Z] = xyz2grid(...)</pre><h2 id="2">Description</h2><p><tt>Z = xyz2grid(x,y,z)</tt> assumes x and y have some form of regularity and puts the corresponding values of <tt>z</tt> into a regular 2D MxN gridded matrix <tt>Z</tt>.</p><p><tt>Z = xyz2grid(filename)</tt> loads data from a .xyz file of three columns (x, y, and z) then puts the data into a grid.  This function assumes the input x,y,z data have some gridded regularity, but may have some missing data points.</p><p><tt>Z = xyz2grid(filename,Name,Value)</tt> opens a .xyz file with any <tt>textscan</tt> options <tt>Name,Value</tt>, for example, <tt>'headerlines',1</tt>.</p><p><tt>[X,Y,Z] = xyz2grid(...)</tt> returns 2D meshgridded <tt>X</tt> and <tt>Y</tt> matrices corresponding to the values in <tt>Z</tt>.</p><h2 id="3">Example 1</h2><p>You may have some columns of x,y, and z values that look like this:</p><pre class="codeinput">x = [1 1 2 2 2 3 3];
+y = [1 2 1 2 3 1 3];
+z = [1 2 4 5 6 7 9];
+
+scatter(x,y,500,z,<span class="string">'filled'</span>)
+axis([0 4 0 4])
+colorbar
+</pre><img vspace="5" hspace="5" src="xyz2grid_documentation_01.png" alt=""> <p>From the scatter plot above, you can see that there is some gridded regularity to the data, even though a couple of spots in the grid are missing.  That's okay.  Let's grid it up:</p><pre class="codeinput">[X,Y,Z] = xyz2grid(x,y,z)
+</pre><pre class="codeoutput">X =
+     1     2     3
+     1     2     3
+     1     2     3
+Y =
+     3     3     3
+     2     2     2
+     1     1     1
+Z =
+   NaN     6     9
+     2     5   NaN
+     1     4     7
+</pre><p>You can see the two missing values are filled by <tt>NaN</tt>. You can plot the gridded data with <tt>surf(X,Y,Z)</tt> or <tt>pcolor(X,Y,Z)</tt>, but let's use <a href="imagescn_documentation.html"><tt>imagescn</tt></a> instead:</p><pre class="codeinput">imagescn(X,Y,Z)
+axis([0 4 0 4])
+colorbar
+</pre><img vspace="5" hspace="5" src="xyz2grid_documentation_02.png" alt=""> <h2 id="6">Example 2: Antarctic Curie Depth</h2><p>For this example, use load and plot Antarctic Curie depth data from <a href="https://doi.org/10.1002/2017GL075609">Martos 2017</a>:</p><pre class="codeinput">[X,Y,CD] = xyz2grid(<span class="string">'Curie_Depth.xyz'</span>);
+
+figure
+imagescn(X,Y,CD)
+cmocean <span class="string">dense</span>
+
+cb = colorbar;
+ylabel(cb,<span class="string">'Curie Depth (km)'</span>)
+</pre><img vspace="5" hspace="5" src="xyz2grid_documentation_03.png" alt=""> <h2 id="7">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |xyz2grid| documentation
+% |xyz2grid| converts regularly-spaced columnated x,y,z data into gridded data. 
+% See also <xyzread_documentation.html |xyzread|>.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax 
+% 
+%  Z = xyz2grid(x,y,z)
+%  Z = xyz2grid(filename)
+%  Z = xyz2grid(filename,Name,Value)
+%  [X,Y,Z] = xyz2grid(...)
+% 
+%% Description 
+% 
+% |Z = xyz2grid(x,y,z)| assumes x and y have some form of regularity and puts
+% the corresponding values of |z| into a regular 2D MxN gridded matrix |Z|. 
+% 
+% |Z = xyz2grid(filename)| loads data from a .xyz file of three columns 
+% (x, y, and z) then puts the data into a grid.  This function assumes the 
+% input x,y,z data have some gridded regularity, but may have some missing 
+% data points. 
+% 
+% |Z = xyz2grid(filename,Name,Value)| opens a .xyz file with any |textscan| 
+% options |Name,Value|, for example, |'headerlines',1|. 
+% 
+% |[X,Y,Z] = xyz2grid(...)| returns 2D meshgridded |X| and |Y| matrices corresponding
+% to the values in |Z|. 
+% 
+%% Example 1
+% You may have some columns of x,y, and z values that look like this: 
+
+x = [1 1 2 2 2 3 3];
+y = [1 2 1 2 3 1 3];
+z = [1 2 4 5 6 7 9]; 
+
+scatter(x,y,500,z,'filled') 
+axis([0 4 0 4])
+colorbar
+
+%% 
+% From the scatter plot above, you can see that there is some gridded 
+% regularity to the data, even though a couple of spots in the grid
+% are missing.  That's okay.  Let's grid it up: 
+
+[X,Y,Z] = xyz2grid(x,y,z)
+
+%% 
+% You can see the two missing values are filled by |NaN|. You can plot
+% the gridded data with |surf(X,Y,Z)| or |pcolor(X,Y,Z)|, but let's 
+% use <imagescn_documentation.html |imagescn|> instead: 
+
+imagescn(X,Y,Z)
+axis([0 4 0 4])
+colorbar
+
+%% Example 2: Antarctic Curie Depth
+% For this example, use load and plot Antarctic Curie depth data from <https://doi.org/10.1002/2017GL075609 Martos 2017>: 
+
+[X,Y,CD] = xyz2grid('Curie_Depth.xyz'); 
+
+figure
+imagescn(X,Y,CD) 
+cmocean dense
+
+cb = colorbar;
+ylabel(cb,'Curie Depth (km)') 
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

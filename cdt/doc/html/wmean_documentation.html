@@ -1,0 +1,348 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>wmean documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-07"><meta name="DC.source" content="wmean_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>wmean</tt> documentation</h1><!--introduction--><p>The <tt>wmean</tt> function computes the weighted average or weighted mean value.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: 1D array</a></li><li><a href="#6">Example 2: 2D matrix</a></li><li><a href="#12">Example 3: Area-weighted SST</a></li><li><a href="#17">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>M = wmean(A,weights)
+M = wmean(...,'all')
+M = wmean(...,'dim',dim)
+M = wmean(...,'nanflag')</pre><h2 id="2">Description</h2><p><tt>M = wmean(A,weights)</tt> returns the weighted mean of the elements of <tt>A</tt> along the first array dimension whose size does not equal 1. Dimensions of <tt>A</tt> must match the dimensions of <tt>weights</tt>.</p><div><ul><li>If <tt>A</tt> is a vector, then <tt>wmean(A,weights)</tt> returns the weighted mean of the elements.</li><li>If <tt>A</tt> is a matrix, then <tt>wmean(A,weights)</tt> returns a row vector containing the weighted mean of each column.</li><li>If <tt>A</tt> is a multidimensional array, then <tt>wmean(A,weights)</tt> operates along the first array dimension whose size does not equal 1, treating the elements as vectors. This dimension becomes 1 while the sizes of all other dimensions remain the same.</li></ul></div><p><tt>M = wmean(...,'all')</tt> computes the weighted mean over all elements. (Requires Matlab R2018b or later.)</p><p><tt>M = wmean(...,'dim',dim)</tt> returns the mean along dimension dim. For example, if <tt>A</tt> is a matrix, then <tt>wmean(A,weights,'dim',2)</tt> is a column vector containing the weighted mean of each row.</p><p><tt>M = wmean(...,'nanflag')</tt> specifies whether to include or omit <tt>NaN</tt> values from the calculation for any of the previous syntaxes. <tt>wmean(A,weights,'includenan')</tt> includes all <tt>NaN</tt> values in the calculation while <tt>wmean(A,weights,'omitnan')</tt> ignores them.</p><h2 id="3">Example 1: 1D array</h2><p>Here's an array of values <tt>y</tt> and their mean without any special weighting:</p><pre class="codeinput">y = 0:2:10
+mean(y)
+</pre><pre class="codeoutput">y =
+  Columns 1 through 5
+             0          2.00          4.00          6.00          8.00
+  Column 6
+         10.00
+ans =
+          5.00
+</pre><p>The answer above is equivalent to using <tt>wmean</tt> with equal weights for each value in <tt>y</tt>:</p><pre class="codeinput">weight = [1 1 1 1 1 1];
+
+wmean(y,weight)
+</pre><pre class="codeoutput">ans =
+          5.00
+</pre><p>But perhaps you're doing a calculation in which the values close to zero are to be weighted most heavily, like this:</p><pre class="codeinput">weight = logspace(1,0,6)
+
+wmean(y,weight)
+</pre><pre class="codeoutput">weight =
+  Columns 1 through 5
+         10.00          6.31          3.98          2.51          1.58
+  Column 6
+          1.00
+ans =
+          2.61
+</pre><h2 id="6">Example 2: 2D matrix</h2><p>Here's a 2D matrix <tt>A</tt>, and just like in Example 1 we'll start by using equal weights across the board:</p><pre class="codeinput"><span class="comment">% A data matrix:</span>
+A = [0 1 2
+     2 3 4
+     4 5 6
+     6 7 8]
+
+<span class="comment">% Equal weights everywhere:</span>
+w = ones(size(A))
+
+wmean(A,w)
+</pre><pre class="codeoutput">A =
+             0          1.00          2.00
+          2.00          3.00          4.00
+          4.00          5.00          6.00
+          6.00          7.00          8.00
+w =
+          1.00          1.00          1.00
+          1.00          1.00          1.00
+          1.00          1.00          1.00
+          1.00          1.00          1.00
+ans =
+          3.00          4.00          5.00
+</pre><p>If you need to operate across rows instead of down the columns of <tt>A</tt>, specify dimension 2 as follows:</p><pre class="codeinput">wmean(A,w,<span class="string">'dim'</span>,2)
+</pre><pre class="codeoutput">ans =
+          1.00
+          3.00
+          5.00
+          7.00
+</pre><p>If you're following along at home, you can prove to yourself that the answer above, in which all weights are equal, gives the same answer as <tt>mean(A,2)</tt>.</p><p><b>Question:</b> How could we make the weighted mean of <tt>A</tt> turn out to be equal to the second row of <tt>A</tt>?</p><p><b>Answer:</b> I can think of two ways. One way is to set all the weights to zero, except row 2. Alternatively, we could keep those rows the way they are, and instead set the second row of weights to some insanely large number:</p><pre class="codeinput">w(2,:) = 1e100
+
+wmean(A,w)
+</pre><pre class="codeoutput">w =
+          1.00          1.00          1.00
+ 10000000000000000159028911097599180468360808563945281389781327557747838772170381060813469985856815104.00 10000000000000000159028911097599180468360808563945281389781327557747838772170381060813469985856815104.00 10000000000000000159028911097599180468360808563945281389781327557747838772170381060813469985856815104.00
+          1.00          1.00          1.00
+          1.00          1.00          1.00
+ans =
+          2.00          3.00          4.00
+</pre><p>What if one element in <tt>A</tt> is <tt>NaN</tt>?</p><pre class="codeinput">A(2,2) = NaN
+
+wmean(A,w)
+</pre><pre class="codeoutput">A =
+             0          1.00          2.00
+          2.00           NaN          4.00
+          4.00          5.00          6.00
+          6.00          7.00          8.00
+ans =
+          2.00           NaN          4.00
+</pre><p>We can ignore that missing entry instead of turning the whole solution for that column to <tt>NaN</tt>:</p><pre class="codeinput">wmean(A,w,<span class="string">'omitnan'</span>)
+</pre><pre class="codeoutput">ans =
+          2.00          4.33          4.00
+</pre><h2 id="12">Example 3: Area-weighted SST</h2><p>Here's a map of sea surface temperatures using some example data that comes with CDT:</p><pre class="codeinput"><span class="comment">% Load the sample data:</span>
+load <span class="string">global_sst</span>
+
+<span class="comment">% Convert from Kelvin to Celsius:</span>
+sst = sst-273.15;
+
+<span class="comment">% Plot SSTs:</span>
+imagescn(lon,lat,sst)
+cmocean <span class="string">thermal</span> <span class="comment">% colormap</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'sea surface temperature \circC'</span>)
+</pre><img vspace="5" hspace="5" src="wmean_documentation_01.png" alt=""> <p>A beginner might try to get the average global sea surface temperature by taking the <i>unweighted</i> mean of all <tt>sst</tt> values:</p><pre class="codeinput">mean(sst,<span class="string">'all'</span>,<span class="string">'omitnan'</span>)
+</pre><pre class="codeoutput">ans =
+         13.84
+</pre><p>However, we must recall that the sst grid corresponds to equally spaced latitudes and longitudes, which are <b>not</b> all equal in area. Lines of longitude converge at the poles, so an area-averaged measure of SST requires weighting the mean by are of each grid cell.</p><p>To accomplish this, turn the <tt>lat</tt> and <tt>lon</tt> arrays into grids and use <a href="cdtarea_documentation.html"><tt>cdtarea</tt></a> to get the area of each grid cell. Here are the areas of each grid cell:</p><pre class="codeinput"><span class="comment">% turn lat,lon arrays into grids:</span>
+[Lon,Lat] = meshgrid(lon,lat);
+
+<span class="comment">% Get the area of each grid cell:</span>
+A = cdtarea(Lat,Lon,<span class="string">'km2'</span>);
+
+imagescn(lon,lat,A)
+hold <span class="string">on</span>
+borders <span class="comment">% national borders</span>
+
+cb = colorbar;
+ylabel(cb,<span class="string">'grid cell area (km^2)'</span>)
+</pre><img vspace="5" hspace="5" src="wmean_documentation_02.png" alt=""> <p>With the grid cell areas <tt>A</tt>, we can now get the area-averaged sea surface temperature with <tt>wmean</tt>:</p><pre class="codeinput">wmean(sst,A,<span class="string">'all'</span>,<span class="string">'omitnan'</span>)
+</pre><pre class="codeoutput">ans =
+         18.45
+</pre><p>That's quite a difference from the 13.8 degree value we obtained using the unweighted mean! And it's not surprising: The "unweighted" mean in this context was actually a misnomer because by giving equal weight to each grid cell in the mean SST calculation, we were actually giving undue weight to the tiny grid, cold grid cells near the poles. So it is no surprise that the "unweighted" mean SST value is lower than the area-averaged SST value.</p><h2 id="17">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |wmean| documentation 
+% The |wmean| function computes the weighted average or weighted mean value.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax
+% 
+%  M = wmean(A,weights)
+%  M = wmean(...,'all')
+%  M = wmean(...,'dim',dim)
+%  M = wmean(...,'nanflag') 
+% 
+%% Description
+% 
+% |M = wmean(A,weights)| returns the weighted mean of the elements of |A| along the first
+% array dimension whose size does not equal 1. Dimensions of |A| must match the 
+% dimensions of |weights|. 
+% 
+% * If |A| is a vector, then |wmean(A,weights)| returns the weighted mean of the elements. 
+% * If |A| is a matrix, then |wmean(A,weights)| returns a row vector containing the weighted 
+% mean of each column.
+% * If |A| is a multidimensional array, then |wmean(A,weights)| operates along the first 
+% array dimension whose size does not equal 1, treating the elements as vectors.
+% This dimension becomes 1 while the sizes of all other dimensions remain the same.
+% 
+% |M = wmean(...,'all')| computes the weighted mean over all elements. (Requires Matlab
+% R2018b or later.)
+% 
+% |M = wmean(...,'dim',dim)| returns the mean along dimension dim. For example, if |A| 
+% is a matrix, then |wmean(A,weights,'dim',2)| is a column vector containing the
+% weighted mean of each row.
+% 
+% |M = wmean(...,'nanflag')| specifies whether to include or omit |NaN| values from the 
+% calculation for any of the previous syntaxes. |wmean(A,weights,'includenan')| includes 
+% all |NaN| values in the calculation while |wmean(A,weights,'omitnan')| ignores them.
+% 
+%% Example 1: 1D array
+% Here's an array of values |y| and their mean without any special weighting: 
+
+y = 0:2:10
+mean(y)
+
+%% 
+% The answer above is equivalent to using |wmean| with equal weights for 
+% each value in |y|: 
+
+weight = [1 1 1 1 1 1]; 
+
+wmean(y,weight)
+
+%% 
+% But perhaps you're doing a calculation in which the values close to zero
+% are to be weighted most heavily, like this:  
+
+weight = logspace(1,0,6)
+
+wmean(y,weight)
+
+%% Example 2: 2D matrix
+% Here's a 2D matrix |A|, and just like in Example 1 we'll start by using 
+% equal weights across the board: 
+
+% A data matrix: 
+A = [0 1 2 
+     2 3 4
+     4 5 6
+     6 7 8]
+
+% Equal weights everywhere:  
+w = ones(size(A))
+
+wmean(A,w)
+
+%%
+% If you need to operate across rows instead of down the columns of |A|, 
+% specify dimension 2 as follows: 
+
+wmean(A,w,'dim',2) 
+
+%% 
+% If you're following along at home, you can prove to yourself that the answer
+% above, in which all weights are equal, gives the same answer as |mean(A,2)|. 
+%% 
+% *Question:* How could we make the weighted mean of |A| turn out to be equal to 
+% the second row of |A|? 
+% 
+% *Answer:* I can think of two ways. One way is to set all the weights to zero, 
+% except row 2. Alternatively, we could keep those rows the way they are, and 
+% instead set the second row of weights to some insanely large number: 
+
+w(2,:) = 1e100
+
+wmean(A,w)
+
+%% 
+% What if one element in |A| is |NaN|? 
+
+A(2,2) = NaN
+
+wmean(A,w)
+
+%% 
+% We can ignore that missing entry instead of turning the whole solution for
+% that column to |NaN|: 
+
+wmean(A,w,'omitnan')
+
+%% Example 3: Area-weighted SST
+% Here's a map of sea surface temperatures using some example data that comes 
+% with CDT: 
+
+% Load the sample data:
+load global_sst
+
+% Convert from Kelvin to Celsius:
+sst = sst-273.15; 
+
+% Plot SSTs: 
+imagescn(lon,lat,sst)
+cmocean thermal % colormap
+cb = colorbar; 
+ylabel(cb,'sea surface temperature \circC')
+
+%% 
+% A beginner might try to get the average global sea surface temperature
+% by taking the _unweighted_ mean of all |sst| values: 
+
+mean(sst,'all','omitnan')
+
+%% 
+% However, we must recall that the sst grid corresponds to equally spaced 
+% latitudes and longitudes, which are *not* all equal in area. Lines of longitude
+% converge at the poles, so an area-averaged measure of SST requires weighting 
+% the mean by are of each grid cell. 
+% 
+% To accomplish this, turn the |lat| and |lon| arrays into grids and use
+% <cdtarea_documentation.html |cdtarea|> to get the area of each grid cell. 
+% Here are the areas of each grid cell: 
+
+% turn lat,lon arrays into grids:
+[Lon,Lat] = meshgrid(lon,lat); 
+
+% Get the area of each grid cell: 
+A = cdtarea(Lat,Lon,'km2'); 
+
+imagescn(lon,lat,A)
+hold on
+borders % national borders
+    
+cb = colorbar; 
+ylabel(cb,'grid cell area (km^2)')
+
+%% 
+% With the grid cell areas |A|, we can now get the area-averaged sea surface
+% temperature with |wmean|: 
+
+wmean(sst,A,'all','omitnan')
+
+%% 
+% That's quite a difference from the 13.8 degree value we obtained using 
+% the unweighted mean! And it's not surprising: The "unweighted" mean in this
+% context was actually a misnomer because by giving equal weight to each grid
+% cell in the mean SST calculation, we were actually giving undue weight 
+% to the tiny grid, cold grid cells near the poles. So it is no surprise 
+% that the "unweighted" mean SST value is lower than the area-averaged SST value. 
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

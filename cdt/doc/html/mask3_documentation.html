@@ -1,0 +1,284 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>mask3 documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-21"><meta name="DC.source" content="mask3_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>mask3</tt> documentation</h1><!--introduction--><p>The <tt>mask3</tt> applies a mask to all levels of 3D matrix corresponding to a 2D mask.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Set masked values to NaN</a></li><li><a href="#4">Example 2: Set masked values to a scalar</a></li><li><a href="#6">Example 3: Fill masked regions with a grid</a></li><li><a href="#8">Example 4: Surface pressure time series</a></li><li><a href="#14">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>Am = mask3(A,mask)
+Am = mask3(A,mask,repval)</pre><h2 id="2">Description</h2><p>Am = mask3(A,mask) sets all elements along the third dimenion of the 3D matrix A to NaN wherevever there are true elements in the corresponding 2D logical mask.</p><p>Am = mask3(A,mask,repval) fills masked elements with a specified value. Default repval is NaN.</p><h2 id="3">Example 1: Set masked values to NaN</h2><p>Here's some random sample data <tt>A</tt> which contains 300 time steps of a 100x100 grid. Make a mask and set all the <tt>true</tt> values in the mask to <tt>NaN</tt>:</p><pre class="codeinput"><span class="comment">% Gridded time series:</span>
+A = rand(100,100,300);
+
+<span class="comment">% true wherever sample peaks data exceeds 1:</span>
+mask = peaks(100)&gt;1;
+
+<span class="comment">% Make A NaN where the mask is true:</span>
+Am = mask3(A,mask);
+
+<span class="comment">% Plot:</span>
+figure
+subplot(1,2,1)
+imagesc(mask)
+colorbar
+title <span class="string">'this is the mask'</span>
+axis <span class="string">image</span>
+
+subplot(1,2,2)
+imagesc(sum(isfinite(Am),3))
+colorbar
+title <span class="string">'number of finite values in Am'</span>
+axis <span class="string">image</span>
+</pre><img vspace="5" hspace="5" src="mask3_documentation_01.png" alt=""> <h2 id="4">Example 2: Set masked values to a scalar</h2><p>Suppose instead you want to set all the masked grid cells to a specific value, like <tt>0.5</tt>. Here's how you'd do that:</p><pre class="codeinput">Am = mask3(A,mask,0.5);
+
+figure
+imagesc(mean(Am,3))
+colorbar
+</pre><img vspace="5" hspace="5" src="mask3_documentation_02.png" alt=""> <p>In the figure above we see that all the <tt>true</tt> values in the mask are exactly 0.5. Everything else looks like noise because all the other grid cells show the average of 300 random values.</p><h2 id="6">Example 3: Fill masked regions with a grid</h2><p>Sometimes when you have a gridded time series you want to fill a region not with a single scalar value, but with a corresponding grid of values. For example, for the same mask as above, you might have a grid of replacement values <tt>repgrid</tt> like this:</p><pre class="codeinput">repgrid = rot90(peaks(100),1);
+
+figure
+subplot(1,2,1)
+imagesc(mask)
+axis <span class="string">image</span>
+title <span class="string">'this is the mask'</span>
+
+subplot(1,2,2)
+imagesc(repgrid)
+axis <span class="string">image</span>
+title <span class="string">'this is the replacement grid'</span>
+</pre><img vspace="5" hspace="5" src="mask3_documentation_03.png" alt=""> <p>Replace all the masked grid cells in <tt>A</tt> with the corresponding values in <tt>repgrid</tt>:</p><pre class="codeinput">Am = mask3(A,mask,repgrid);
+
+figure
+imagesc(mean(Am,3))
+</pre><img vspace="5" hspace="5" src="mask3_documentation_04.png" alt=""> <h2 id="8">Example 4: Surface pressure time series</h2><p>This example uses data frome the ERA_Interim_2017.nc dataset. (For more on working with .nc files, see the <a href="tutorial_netcdf.html">NetCDF Tutorial</a>.) Start by loading the data:</p><pre class="codeinput">filename = <span class="string">'ERA_Interim_2017.nc'</span>;
+lon = ncread(filename,<span class="string">'longitude'</span>);
+lat = ncread(filename,<span class="string">'latitude'</span>);
+SP = ncread(filename,<span class="string">'sp'</span>);
+</pre><p>The surface pressure time series <tt>SP</tt> has the dimensions</p><pre class="codeinput">size(SP)
+</pre><pre class="codeoutput">ans =
+   480   241    12
+</pre><p>which correspond to latitude, longitude, and time.</p><p>Let's mask out all the points in <tt>SP</tt> that correspond to ocean. To do that, make a <tt>Lat,Lon</tt> grid from the 1d <tt>lat,lon</tt> arrays and use <a href="island_documentation.html"><tt>island</tt></a> to find out which grid cells are land and which ones are ocean.</p><pre class="codeinput">[Lat,Lon] = meshgrid(lat,lon);
+
+land = island(Lat,Lon);
+
+<span class="comment">% ocean is *not* land:</span>
+ocean = ~land;
+</pre><p>Here's the time-averaged mean of the full dataset:</p><pre class="codeinput">figure
+pcolor(Lon,Lat,mean(SP,3))
+shading <span class="string">interp</span>
+axis <span class="string">tight</span>
+cmocean <span class="string">dense</span> <span class="comment">% optional colormap</span>
+</pre><img vspace="5" hspace="5" src="mask3_documentation_05.png" alt=""> <p>Now set all ocean grid cells to <tt>NaN</tt>:</p><pre class="codeinput">SPm = mask3(SP,ocean);
+
+figure
+pcolor(Lon,Lat,mean(SPm,3))
+shading <span class="string">interp</span>
+axis <span class="string">tight</span>
+cmocean <span class="string">dense</span> <span class="comment">% optional colormap</span>
+</pre><img vspace="5" hspace="5" src="mask3_documentation_06.png" alt=""> <h2 id="14">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |mask3| documentation 
+% The |mask3| applies a mask to all levels of 3D matrix corresponding to a 2D mask.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents> 
+%% Syntax
+% 
+%  Am = mask3(A,mask)
+%  Am = mask3(A,mask,repval)
+% 
+%% Description
+% 
+% Am = mask3(A,mask) sets all elements along the third dimenion of the 3D 
+% matrix A to NaN wherevever there are true elements in the corresponding 2D 
+% logical mask.
+% 
+% Am = mask3(A,mask,repval) fills masked elements with a specified 
+% value. Default repval is NaN.  
+% 
+%% Example 1: Set masked values to NaN
+% Here's some random sample data |A| which contains 300 time steps of a 100x100
+% grid. Make a mask and set all the |true| values in the mask to |NaN|: 
+
+% Gridded time series: 
+A = rand(100,100,300); 
+
+% true wherever sample peaks data exceeds 1:
+mask = peaks(100)>1; 
+
+% Make A NaN where the mask is true: 
+Am = mask3(A,mask); 
+
+% Plot:
+figure
+subplot(1,2,1) 
+imagesc(mask) 
+colorbar
+title 'this is the mask' 
+axis image
+
+subplot(1,2,2) 
+imagesc(sum(isfinite(Am),3))
+colorbar
+title 'number of finite values in Am'
+axis image
+
+%% Example 2: Set masked values to a scalar
+% Suppose instead you want to set all the masked grid cells to a 
+% specific value, like |0.5|. Here's how you'd do that: 
+
+Am = mask3(A,mask,0.5); 
+
+figure
+imagesc(mean(Am,3))
+colorbar
+
+%% 
+% In the figure above we see that all the |true| values in the mask are 
+% exactly 0.5. Everything else looks like noise because all the other grid
+% cells show the average of 300 random values. 
+
+%% Example 3: Fill masked regions with a grid
+% Sometimes when you have a gridded time series you want to fill a region 
+% not with a single scalar value, but with a corresponding grid of values. 
+% For example, for the same mask as above, you might have a grid of replacement 
+% values |repgrid| like this: 
+
+repgrid = rot90(peaks(100),1); 
+
+figure
+subplot(1,2,1) 
+imagesc(mask)
+axis image
+title 'this is the mask'
+
+subplot(1,2,2) 
+imagesc(repgrid)
+axis image
+title 'this is the replacement grid'
+
+%% 
+% Replace all the masked grid cells in |A| with the corresponding 
+% values in |repgrid|: 
+
+Am = mask3(A,mask,repgrid); 
+
+figure
+imagesc(mean(Am,3)) 
+
+%% Example 4: Surface pressure time series
+% This example uses data frome the ERA_Interim_2017.nc dataset. (For more on 
+% working with .nc files, see the <tutorial_netcdf.html NetCDF Tutorial>.)
+% Start by loading the data: 
+
+filename = 'ERA_Interim_2017.nc'; 
+lon = ncread(filename,'longitude'); 
+lat = ncread(filename,'latitude'); 
+SP = ncread(filename,'sp'); 
+
+%% 
+% The surface pressure time series |SP| has the dimensions 
+
+size(SP) 
+
+%% 
+% which correspond to latitude, longitude, and time. 
+
+%% 
+% Let's mask out all the points in |SP| that correspond to ocean. 
+% To do that, make a |Lat,Lon| grid from the 1d |lat,lon| arrays 
+% and use <island_documentation.html |island|> to find out which grid cells
+% are land and which ones are ocean. 
+
+[Lat,Lon] = meshgrid(lat,lon); 
+
+land = island(Lat,Lon); 
+
+% ocean is *not* land: 
+ocean = ~land; 
+
+%% 
+% Here's the time-averaged mean of the full dataset: 
+
+figure
+pcolor(Lon,Lat,mean(SP,3))
+shading interp
+axis tight 
+cmocean dense % optional colormap
+
+%% 
+% Now set all ocean grid cells to |NaN|: 
+
+SPm = mask3(SP,ocean); 
+
+figure
+pcolor(Lon,Lat,mean(SPm,3))
+shading interp
+axis tight 
+cmocean dense % optional colormap
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

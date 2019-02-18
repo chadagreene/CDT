@@ -1,0 +1,185 @@
+<?xml version='1.0' encoding="utf-8"?>
+<toc version="2.0">
+<!-- First tocitem specifies top level in Help browser Contents pane -->
+<tocitem target="CDT_Getting_Started.html">Climate Data Toolbox
+
+   <!-- Functions -->
+   <tocitem target="CDT_Contents.html"> Functions
+      <tocitem target="CDT_Contents.html#1"> Descriptive Statistics
+         <tocitem target="scatstat1_documentation.html">scatstat1</tocitem>
+         <tocitem target="scatstat2_documentation.html">scatstat2</tocitem>
+         <tocitem target="wmean_documentation.html">wmean</tocitem>
+         <tocitem target="standardize_documentation.html">standardize</tocitem>
+         <tocitem target="ensemble2bnd_documentation.html">ensemble2bnd</tocitem>
+         <tocitem target="trend_documentation.html">trend</tocitem>
+         <tocitem target="detrend3_documentation.html">detrend3</tocitem>
+         <tocitem target="monthly_documentation.html">monthly</tocitem>
+         <tocitem target="season_documentation.html">season</tocitem>
+         <tocitem target="deseason_documentation.html">deseason</tocitem>
+         <tocitem target="climatology_documentation.html">climatology</tocitem>
+         <tocitem target="sinefit_documentation.html">sinefit</tocitem>
+         <tocitem target="sineval_documentation.html">sineval</tocitem>
+      </tocitem>
+      
+      <tocitem target="CDT_Contents.html#2"> Matrix Manipulation
+         <tocitem target="cube2rect_documentation.html">cube2rect</tocitem>
+         <tocitem target="rect2cube_documentation.html">rect2cube</tocitem>
+         <tocitem target="mask3_documentation.html">mask3</tocitem>
+         <tocitem target="expand3_documentation.html">expand3</tocitem>
+         <tocitem target="local_documentation.html">local</tocitem>
+         <tocitem target="near1_documentation.html">near1</tocitem>
+         <tocitem target="near2_documentation.html">near2</tocitem>
+         <tocitem target="cell2nancat_documentation.html">cell2nancat</tocitem>
+         <tocitem target="C2xyz_documentation.html">C2xyz</tocitem>
+         <tocitem target="xyz2grid_documentation.html">xyz2grid</tocitem>
+         <tocitem target="xyzread_documentation.html">xyzread</tocitem>
+      </tocitem>
+      
+      <tocitem target="CDT_Contents.html#3"> Georeferenced Grids
+         <tocitem target="recenter_documentation.html">recenter</tocitem>
+         <tocitem target="cdtgrid_documentation.html">cdtgrid</tocitem>
+         <tocitem target="cdtdim_documentation.html">cdtdim</tocitem>
+         <tocitem target="cdtarea_documentation.html">cdtarea</tocitem>
+         <tocitem target="cdtgradient_documentation.html">cdtgradient</tocitem>
+         <tocitem target="cdtdivergence_documentation.html">cdtdivergence</tocitem>
+         <tocitem target="cdtcurl_documentation.html">cdtcurl</tocitem>
+         <tocitem target="geomask_documentation.html">geomask</tocitem>
+         <tocitem target="island_documentation.html">island</tocitem>
+         <tocitem target="binind2latlon_documentation.html">binind2latlon</tocitem>
+      </tocitem>
+      
+      <tocitem target="CDT_Contents.html#4"> Spatial Patterns
+         <tocitem target="filt2_documentation.html">filt2</tocitem>
+         <tocitem target="scatstat2_documentation.html">scatstat2</tocitem>
+         <tocitem target="eof_documentation.html">eof</tocitem>
+         <tocitem target="reof_documentation.html">reof</tocitem>
+         <tocitem target="corr3_documentation.html">corr3</tocitem>
+         <tocitem target="xcorr3_documentation.html">xcorr3</tocitem>
+         <tocitem target="xcov3_documentation.html">xcov3</tocitem>
+      </tocitem>
+      
+      <tocitem target="CDT_Contents.html#5"> Time Series
+         <tocitem target="filt1_documentation.html">filt1</tocitem>
+         <tocitem target="scatstat1_documentation.html">scatstat1</tocitem>
+         <tocitem target="doy_documentation.html">doy</tocitem>
+      </tocitem>
+      
+      <tocitem target="CDT_Contents.html#6"> Uncertainty Quantification
+         <tocitem target="mann_kendall_documentation.html">mann_kendall</tocitem>
+         <tocitem target="ts_normstrap_documentation.html">ts_normstrap</tocitem>
+         <tocitem target="sinefit_bootstrap_documentation.html">sinefit_bootstrap</tocitem>
+      </tocitem>
+      
+      <tocitem target="CDT_Contents.html#7"> Climate Indices
+         <tocitem target="enso_documentation.html">enso</tocitem>
+         <tocitem target="sam_documentation.html">sam</tocitem>
+         <tocitem target="nam_documentation.html">nam</tocitem>
+      </tocitem>
+      
+      <tocitem target="CDT_Contents.html#8"> Oceans and Atmospheres
+         <tocitem target="bottom_documentation.html">bottom</tocitem>
+         <tocitem target="windstress_documentation.html">windstress</tocitem>
+         <tocitem target="ekman_documentation.html">ekman</tocitem>
+         <tocitem target="coriolisf_documentation.html">coriolisf</tocitem>
+         <tocitem target="rossby_radius_documentation.html">rossby_radius</tocitem>
+         <tocitem target="mld_documentation.html">mld</tocitem>
+         <tocitem target="transect_documentation.html">transect</tocitem>
+         <tocitem target="transectc_documentation.html">transectc</tocitem>
+         <tocitem target="binind2latlon_documentation.html">binind2latlon</tocitem>
+      </tocitem>
+      
+      
+      <tocitem target="CDT_Contents.html#9"> Geophysical Attributes
+         <tocitem target="earth_radius_documentation.html">earth_radius</tocitem>
+         <tocitem target="air_pressure_documentation.html">air_pressure</tocitem>
+         <tocitem target="air_density_documentation.html">air_density</tocitem>
+         <tocitem target="sun_angle_documentation.html">sun_angle</tocitem>
+         <tocitem target="daily_insolation_documentation.html">daily_insolation</tocitem>
+         <tocitem target="topo_interp_documentation.html">topo_interp</tocitem>
+         <tocitem target="island_documentation.html">island</tocitem>
+         <tocitem target="dist2coast_documentation.html">dist2coast</tocitem>
+      </tocitem>
+      
+      
+      <tocitem target="CDT_Contents.html#10"> Graphics
+         <tocitem target="rgb_documentation.html">rgb</tocitem>
+         <tocitem target="cmocean_documentation.html">cmocean</tocitem>
+         <tocitem target="newcolorbar_documentation.html">newcolorbar</tocitem>
+         <tocitem target="cbarrow_documentation.html">cbarrow</tocitem>
+         <tocitem target="cbdate_documentation.html">cbdate</tocitem>
+         <tocitem target="hline_documentation.html">hline</tocitem>
+         <tocitem target="vline_documentation.html">vline</tocitem>
+         <tocitem target="hfill_documentation.html">hfill</tocitem>
+         <tocitem target="vfill_documentation.html">vfill</tocitem>
+         <tocitem target="ntitle_documentation.html">ntitle</tocitem>
+         <tocitem target="gif_documentation.html">gif</tocitem>
+      </tocitem>
+      
+      <tocitem target="CDT_Contents.html#11"> Line Plots
+         <tocitem target="anomaly_documentation.html">anomaly</tocitem>
+         <tocitem target="boundedline_documentation.html">boundedline</tocitem>
+         <tocitem target="subsubplot_documentation.html">subsubplot</tocitem>
+         <tocitem target="spiralplot_documentation.html">spiralplot</tocitem>
+         <tocitem target="plotpsd_documentation.html">plotpsd</tocitem>
+         <tocitem target="polyplot_documentation.html">polyplot</tocitem>      
+      </tocitem>
+      
+      <tocitem target="CDT_Contents.html#12"> Maps
+         <tocitem target="earthimage_documentation.html">earthimage</tocitem>
+         <tocitem target="imagescn_documentation.html">imagescn</tocitem>
+         <tocitem target="borders_documentation.html">borders</tocitem>
+         <tocitem target="bordersm_documentation.html">bordersm</tocitem>
+         <tocitem target="labelborders_documentation.html">labelborders</tocitem>
+         <tocitem target="labelbordersm_documentation.html">labelbordersm</tocitem>
+         <tocitem target="stipple_documentation.html">stipple</tocitem>
+         <tocitem target="stipplem_documentation.html">stipplem</tocitem>
+         <tocitem target="quiversc_documentation.html">quiversc</tocitem>
+         <tocitem target="patchsc_documentation.html">patchsc</tocitem>
+      </tocitem>
+      
+      <tocitem target="CDT_Contents.html#13"> Globes
+         <tocitem target="globeimage_documentation.html">globeimage</tocitem>
+         <tocitem target="globeplot_documentation.html">globeplot</tocitem>
+         <tocitem target="globepcolor_documentation.html">globepcolor</tocitem>
+         <tocitem target="globesurf_documentation.html">globesurf</tocitem>
+         <tocitem target="globecontour_documentation.html">globecontour</tocitem>
+         <tocitem target="globescatter_documentation.html">globescatter</tocitem>
+         <tocitem target="globeborders_documentation.html">globeborders</tocitem>
+         <tocitem target="globequiver_documentation.html">globequiver</tocitem>
+         <tocitem target="globestipple_documentation.html">globestipple</tocitem>
+         <tocitem target="globegraticule_documentation.html">globegraticule</tocitem>
+         <tocitem target="globefill_documentation.html">globefill</tocitem>
+      </tocitem>
+      
+      <tocitem target="CDT_Contents.html#14"> NetCDF and HDF5
+         <tocitem target="ncstruct_documentation.html">ncstruct</tocitem>
+         <tocitem target="ncdateread_documentation.html">ncdateread</tocitem>
+         <tocitem target="ncdatelim_documentation.html">ncdatelim</tocitem>
+         <tocitem target="h5struct_documentation.html">h5struct</tocitem>
+      </tocitem>
+   </tocitem>
+   
+   
+   <!-- Tutorials -->
+   <tocitem target="CDT_Contents.html#15"> Tutorials
+      <tocitem target="tutorial_netcdf.html">NetCDF data</tocitem>
+      <tocitem target="tutorial_dates_and_times.html">Dates and times</tocitem>
+      <tocitem target="tutorial_trends.html">Linear trends</tocitem>
+      <tocitem target="tutorial_mapping.html">Mapmaking</tocitem>
+   </tocitem>
+   
+   
+   <!-- Sample Data -->
+   <tocitem target="CDT_Contents.html#16">Sample Datasets</tocitem>
+
+   
+   <!-- Citing CDT -->
+   <tocitem target="citing_cdt.html">Citing CDT</tocitem>
+
+   
+   <!-- Website -->
+   <tocitem target="https://github.com/chadagreene/CDT"> 
+            CDT on GitHub
+   </tocitem>
+</tocitem>
+</toc>

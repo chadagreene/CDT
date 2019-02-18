@@ -1,0 +1,617 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>filt1 documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-02"><meta name="DC.source" content="filt1_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>filt1</tt> documentation</h1><!--introduction--><p>The <tt>filt1</tt> applies a zero-phase butterworth filter. <b>Requires Matlab's Signal Processing Toolbox.</b></p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Train Whistle</a></li><li><a href="#10">Example 2: Topographic Profile</a></li><li><a href="#16">Example 3: Sea ice extent</a></li><li><a href="#18">Example 4: Gridded 3D time series</a></li><li><a href="#27">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>yf = filt1(filtertype,y,'fc',Fc)
+yf = filt1(filtertype,y,'Tc',Tc)
+yf = filt1(filtertype,y,'lambdac',lambdac)
+yf = filt1(...,'fs',Fs)
+yf = filt1(...,'x',x)
+yf = filt1(...,'Ts',Ts)
+yf = filt1(...,'order',FilterOrder)
+yf = filt1(...,'dim',dim)
+[yf,filtb,filta] = filt1(...)</pre><h2 id="2">Description</h2><p><tt>yf = filt1(filtertype,y,'fc',Fc)</tt> filters 1D signal <tt>y</tt> using a specified <tt>filtertype</tt> and cutoff frequency <tt>Fc</tt>. For high-pass or low-pass filters <tt>Fc</tt> must be a scalar. For band- pass and band-stop filters <tt>Fc</tt> must be a two-element array. The <tt>filtertype</tt> can be</p><div><ul><li><tt>'hp'</tt> high-pass with scalar cutoff frequency <tt>Fc</tt></li><li><tt>'lp'</tt> low-pass with scalar cutoff frequency <tt>Fc</tt></li><li><tt>'bp'</tt> band-pass with two-element cutoff frequencies <tt>Fc</tt></li><li><tt>'bs'</tt> band-stop with two-element cutoff frequencies <tt>Fc</tt></li></ul></div><p><tt>yf = filt1(filtertype,y,'Tc',Tc)</tt> specifies cutoff period(s) rather than cutoff frequencies. This syntax assumes T = 1/f and is exactly the same as the 'lambdac' option, but perhaps a little more intuitive for working with time series.</p><p><tt>yf = filt1(filtertype,y,'lambdac',lambdac)</tt> specifies cutoff wavelength(s) rather than cutoff frequencies.  This syntax assumes lambda = 1/f.</p><p><tt>yf = filt1(...,'fs',Fs)</tt> specifies a sampling frequency <tt>Fs</tt>. If neither <tt>'fs'</tt>, <tt>'x'</tt>, nor <tt>'Ts'</tt> are specified, <tt>Fs = 1</tt> is assumed.</p><p><tt>yf = filt1(...,'x',x)</tt> specifies a vector of  monotonically- increasing, equally-spaced sampling times or <tt>x</tt> locations corresponding to <tt>y</tt>, which is used to determine sampling frequency. If neither <tt>'fs'</tt>, <tt>'x'</tt>, nor <tt>'Ts'</tt> are specified, <tt>Fs = 1</tt> is assumed.</p><p><tt>yf = filt1(...,'Ts',Ts)</tt> specifies a sampling period or sampling distance such that <tt>Fs = 1/Ts</tt>. If neither <tt>'fs'</tt>, <tt>'x'</tt>, nor <tt>'Ts'</tt> are specified, <tt>Fs = 1</tt> is assumed.</p><p><tt>yf = filt1(...,'dim',dim)</tt> specifies a dimension along which to operate. By default, filt1 operates along the first nonsingleton dimension for 1D or 2D arrays, but operates down dimension 3 for 3D gridded datasets.</p><p><tt>yf = filt1(...,'order',FilterOrder)</tt> specifies the order (sometimes called <i>rolloff</i>) of the Butterworth filter. If unspecified, <tt>FilterOrder = 1</tt> is assumed.</p><p><tt>[yf,filtb,filta] = filt1(...)</tt> also returns the filter numerator <tt>filta</tt> and denominator <tt>filtb</tt>.</p><h2 id="3">Example 1: Train Whistle</h2><p>For this example we'll use the built-in train whistle example file and we'll add a little gaussian random noise to make things interesting.</p><pre class="codeinput">load <span class="string">train</span>
+y = y+0.1*randn(size(y));
+</pre><p>The original signal can be plotted in black like this. First we have to build a time vector from the sampling frequency <tt>Fs</tt>:</p><pre class="codeinput">t = (0:length(y)-1)/Fs;
+
+plot(t,y,<span class="string">'k-'</span>,<span class="string">'linewidth'</span>,1)
+box <span class="string">off</span>;
+axis <span class="string">tight</span>
+xlabel <span class="string">'time (seconds)'</span>
+hold <span class="string">on</span>
+</pre><img vspace="5" hspace="5" src="filt1_documentation_01.png" alt=""> <p>If you have speakers you can listen to the train whistle like this:</p><pre>soundsc(y,Fs)</pre><p>High-pass filter the train whistle, keeping only frequencies above 750 Hz and plot it on top of the original black signal:</p><pre class="codeinput">yhp = filt1(<span class="string">'hp'</span>,y,<span class="string">'fs'</span>,Fs,<span class="string">'fc'</span>,750);
+
+hold <span class="string">on</span>
+plot(t,yhp,<span class="string">'r'</span>)
+</pre><img vspace="5" hspace="5" src="filt1_documentation_02.png" alt=""> <p>Or perhaps you want to low-pass filter the original signal to eliminate frequencies below 1100 Hz. Note: Above we specified a sampling frequency by setting an <tt>'fs'</tt> value. You may alternatively define a vector as the independent variable <tt>'x'</tt>.  In this case the independent variable is time, but for spatial filtering it would likely be cumulative distance along some path.</p><p>The three primary frequencies of the train whistle are spaced somewhat close together in frequency space, so the default first-order butterworth filter we used above will not eliminate all of the energy below 750 Hz. You may wish to use a steeper rolloff by specifing <tt>'order',5</tt>.  We'll plot the low-pass filtered train whistle in blue.</p><pre class="codeinput">ylp = filt1(<span class="string">'lp'</span>,y,<span class="string">'x'</span>,t,<span class="string">'fc'</span>,1100,<span class="string">'order'</span>,5);
+plot(t,ylp,<span class="string">'b'</span>)
+</pre><img vspace="5" hspace="5" src="filt1_documentation_03.png" alt=""> <p>Use <a href="plotpsd_documentation.html"><tt>plotpsd</tt></a> to compare:</p><pre class="codeinput">figure
+plotpsd(y,Fs,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2)
+hold <span class="string">on</span>
+plotpsd(yhp,Fs,<span class="string">'r'</span>)
+plotpsd(ylp,Fs,<span class="string">'b'</span>)
+
+xlabel <span class="string">'frequency (Hz)'</span>
+axis([600 1300 0 0.02])
+legend(<span class="string">'original signal'</span>,<span class="string">'highpass 800 Hz'</span>,<span class="keyword">...</span>
+    <span class="string">'lowpass 1100 Hz'</span>,<span class="string">'location'</span>,<span class="string">'northwest'</span>)
+legend <span class="string">boxoff</span>
+</pre><img vspace="5" hspace="5" src="filt1_documentation_04.png" alt=""> <pre class="codeinput">clear <span class="string">variables</span>
+close <span class="string">all</span>
+</pre><h2 id="10">Example 2: Topographic Profile</h2><p>Suppose you have a topographic profile with elevation measurements every 10 meters for 40 kilometers.  And let's say the profile has three dominant wavelengths--761 m, 4 km, and 9.4 meters.  The profile might look like this. As in Example 1, I'm using <tt>plotpsd</tt> to plot a periodogram.</p><pre class="codeinput">SpatialRes = 10;       <span class="comment">% Samples every 10 m</span>
+x = 0:SpatialRes:40e3; <span class="comment">% Domain 0 to 40 km</span>
+lambda1 = 761;         <span class="comment">% 761 meters</span>
+lambda2 = 4000;        <span class="comment">% 4 kilometers</span>
+lambda3 = 3000*pi;     <span class="comment">% ~9.4 kilometers</span>
+
+<span class="comment">% Generate profile:</span>
+y = rand(size(x)) + 5*sin(2*pi*x/lambda1) + <span class="keyword">...</span>
+    11*sin(2*pi*x/lambda2) + 15*sin(2*pi*x/lambda3) ;
+
+<span class="comment">% Plot profile:</span>
+figure(<span class="string">'position'</span>,[100 100 560 506])
+subplot(211)
+plot(x/1000,y,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2)
+hold <span class="string">on</span>
+xlabel <span class="string">'distance along some path (km)'</span>
+ylabel <span class="string">'elevation (m)'</span>
+box <span class="string">off</span>
+axis <span class="string">tight</span>
+
+<span class="comment">% Plot power spectrum:</span>
+subplot(212)
+plotpsd(y,x,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2,<span class="string">'db'</span>,<span class="string">'log'</span>,<span class="string">'lambda'</span>)
+hold <span class="string">on</span>
+xlabel <span class="string">'wavelength (km)'</span>
+ylabel <span class="string">'power spectrum (dB)'</span>
+axis <span class="string">tight</span>
+ylim([-10 70])
+</pre><img vspace="5" hspace="5" src="filt1_documentation_05.png" alt=""> <p>Above you can see the three primary wavelengths as three peaks in the periodogram.</p><p>Perhaps you want to elimiate the high-frequency random noise we added to the topography with <tt>rand</tt>.  To do that, you can lowpass filter out all wavelenths shorter than 300 m:</p><pre class="codeinput">ylo = filt1(<span class="string">'lp'</span>,y,<span class="string">'x'</span>,x,<span class="string">'lambdac'</span>,300);
+
+subplot(211)
+plot(x/1000,ylo,<span class="string">'r'</span>)
+
+subplot(212)
+plotpsd(ylo,x,<span class="string">'r'</span>,<span class="string">'db'</span>,<span class="string">'log'</span>,<span class="string">'lambda'</span>)
+</pre><img vspace="5" hspace="5" src="filt1_documentation_06.png" alt=""> <p>Above, when we lowpass filtered the topography we specified an array <tt>x</tt> as the path distance corresponding to <tt>y</tt>.  Alternatively, we could have specified spatial resolution which is our sampling distance <tt>'Ts'</tt> to achieve the same result. Below we highpass filter the original topography to remove wavelengths longer than 6 km.  Use a tight rolloff by specifying a 5th order butterworth filter.</p><pre class="codeinput">yhi = filt1(<span class="string">'hp'</span>,y,<span class="string">'Ts'</span>,SpatialRes,<span class="string">'lambdac'</span>,6000,<span class="string">'order'</span>,5);
+
+subplot(211)
+plot(x/1000,yhi,<span class="string">'b'</span>)
+
+subplot(212)
+plotpsd(yhi,x,<span class="string">'b'</span>,<span class="string">'db'</span>,<span class="string">'log'</span>,<span class="string">'lambda'</span>)
+</pre><img vspace="5" hspace="5" src="filt1_documentation_07.png" alt=""> <p>Perhaps you want to remove high-frequency noise and the low frequencies. You can do that by filtering the signal twice, or with a bandpass filter. We can retain only that middle peak in the power spectrum by bandpass filtering out all wavelengths shorter than 3000 meters or longer than</p><pre class="codeinput">ybp = filt1(<span class="string">'bp'</span>,y,<span class="string">'x'</span>,x,<span class="string">'lambdac'</span>,[3000 5000],<span class="string">'order'</span>,3);
+
+subplot(211)
+plot(x/1000,ybp,<span class="string">'m'</span>)
+
+subplot(212)
+plotpsd(ybp,x,<span class="string">'m'</span>,<span class="string">'db'</span>,<span class="string">'log'</span>,<span class="string">'lambda'</span>)
+</pre><img vspace="5" hspace="5" src="filt1_documentation_08.png" alt=""> <p>Perhaps you want to remove only a range of frequencies.  You can do that by subtracting a bandpassed signal from the original signal a la:</p><pre class="codeinput">ybs = y - ybp;
+</pre><p>or you can create a bandstop filter directly with using the same syntax as we did with the bandpass filter:</p><pre class="codeinput">ybs = filt1(<span class="string">'bs'</span>,y,<span class="string">'x'</span>,x,<span class="string">'lambdac'</span>,[3000 5000],<span class="string">'order'</span>,3);
+
+subplot(211)
+plot(x/1000,ybs,<span class="string">'color'</span>,[.98 .45 .02])
+
+subplot(212)
+plotpsd(ybs,x,<span class="string">'color'</span>,[.98 .45 .02],<span class="string">'db'</span>,<span class="string">'log'</span>,<span class="string">'lambda'</span>)
+
+legend(<span class="string">'original'</span>,<span class="string">'lowpass'</span>,<span class="string">'highpass'</span>,<span class="keyword">...</span>
+    <span class="string">'bandpass'</span>,<span class="string">'bandstop'</span>,<span class="string">'location'</span>,<span class="string">'northeast'</span>)
+legend <span class="string">boxoff</span>
+</pre><img vspace="5" hspace="5" src="filt1_documentation_09.png" alt=""> <h2 id="16">Example 3: Sea ice extent</h2><p>Load the example time series of sea ice extent, and only use the data from 1989 toward the present, because the older data is sampled at less than daily resolution.</p><pre class="codeinput">load <span class="string">seaice_extent.mat</span>
+
+<span class="comment">% Get post-1989 indices:</span>
+ind = t&gt;datetime(1989,1,1);
+
+<span class="comment">% Trim the dataset to 1989-2018:</span>
+t = t(ind);
+extent_N = extent_N(ind);
+
+figure
+plot(t,extent_N)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+ylabel <span class="string">'northern hemisphere sea ice extent (10^6 km^2)'</span>
+</pre><img vspace="5" hspace="5" src="filt1_documentation_10.png" alt=""> <p>Can we try to filter out the seasonal cycle? Of course the <a href="deseason_documentation.html"><tt>deseason</tt></a> function is one way to do it, but what if we do it with this butterworth filter? A bandstop filter on the seasonal cycle requires us to define the corner frequencies, so how about everything between the 6 month period and the 2 year period?</p><pre class="codeinput">extent_N_filt = filt1(<span class="string">'bs'</span>,extent_N,<span class="string">'fs'</span>,365.25,<span class="string">'Tc'</span>,[0.5 2]);
+
+hold <span class="string">on</span>
+plot(t,extent_N_filt,<span class="string">'linewidth'</span>,2)
+</pre><img vspace="5" hspace="5" src="filt1_documentation_11.png" alt=""> <h2 id="18">Example 4: Gridded 3D time series</h2><p>Suppose you're interested in SSTs in the Gulf of Mexico (GoM):</p><pre class="codeinput">load <span class="string">pacific_sst</span>
+
+figure
+imagescn(lon,lat,mean(sst,3))
+cmocean <span class="string">thermal</span> <span class="comment">% colormap</span>
+hold <span class="string">on</span>
+
+<span class="comment">% A crude outline of the gulf of mexico:</span>
+gomlon = [-91.4 -103.8  -98.8  -88.6  -82.8  -82.3];
+gomlat = [33.0   30.6   20.4   16.6   21.8   34.1];
+plot(gomlon,gomlat,<span class="string">'ro'</span>)
+
+text(-92.4,23.9,<span class="string">'Gulf of Mexico'</span>,<span class="string">'color'</span>,<span class="string">'red'</span>,<span class="keyword">...</span>
+   <span class="string">'horiz'</span>,<span class="string">'center'</span>,<span class="string">'vert'</span>,<span class="string">'bot'</span>) <span class="comment">% sets text alignment</span>
+</pre><img vspace="5" hspace="5" src="filt1_documentation_12.png" alt=""> <p>We can use <a href="geomask_documentation.html"><tt>geomask</tt></a> and <a href="local_documentation.html"><tt>local</tt></a> to get a time series of GoM SSTs. First, make the mask and plot it as a blue contour just to make sure the mask is about in the right spot:</p><pre class="codeinput">[Lon,Lat] = meshgrid(lon,lat);
+mask = geomask(Lat,Lon,gomlat,gomlon);
+
+contour(Lon,Lat,double(mask),[0.5 0.5],<span class="string">'b'</span>)
+</pre><img vspace="5" hspace="5" src="filt1_documentation_13.png" alt=""> <p>With the <tt>mask</tt> defined, getting a 1D time series of mean SSTs in the Gulf of Mexico is easy:</p><pre class="codeinput">sst_gom = local(sst,mask,<span class="string">'omitnan'</span>);
+
+figure
+plot(t,sst_gom)
+axis <span class="string">tight</span>
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+ylabel <span class="string">'Gulf of Mexico sea surface temperature \circC'</span>
+</pre><img vspace="5" hspace="5" src="filt1_documentation_14.png" alt=""> <p>This dataset is at monthly temporal resolution, so if we want to lowpass filter it, keeping only frequencies with periods longer than 18 months, we could operate on the 1d <tt>sst1</tt> dataset like this:</p><pre class="codeinput"><span class="comment">% lowpass filtered 1D sst1:</span>
+sst_gom_lp = filt1(<span class="string">'lp'</span>,sst_gom,<span class="string">'Tc'</span>,18);
+
+hold <span class="string">on</span>
+plot(t,sst_gom_lp)
+
+legend(<span class="string">'original'</span>,<span class="string">'lowpass filtered'</span>)
+</pre><img vspace="5" hspace="5" src="filt1_documentation_15.png" alt=""> <p>You'll notice that there's still plenty of energy at the 1 year frequency. That's because the <a href="https://en.wikipedia.org/wiki/Butterworth_filter">Butterworth filter</a> is not ideal--in frequency space its shoulders are broad. To sharpen them up and more effectively cut energy at periods shorter than 18 months, increase the order of the filter:</p><pre class="codeinput"><span class="comment">% lowpass filtered 1D sst1:</span>
+sst_gom_lp5 = filt1(<span class="string">'lp'</span>,sst_gom,<span class="string">'Tc'</span>,18,<span class="string">'order'</span>,5);
+
+plot(t,sst_gom_lp5)
+legend(<span class="string">'original'</span>,<span class="keyword">...</span>
+ <span class="string">'lowpass filtered'</span>,<span class="keyword">...</span>
+ <span class="string">'lowpass 5th order'</span>)
+</pre><img vspace="5" hspace="5" src="filt1_documentation_16.png" alt=""> <p>And now you see some interannual variability that isn't too dominated by the seasonal cycle. It's probably not a great idea to be filtering away the majority of the variability in any application, but here we're just toying with the mechanics of the function, so we'll just say it's fine and move on.</p><p>But what if, instead of filtering just the 1D array, you want to filter the time series at every grid cell? The computationally inefficient way to do it would be to nest a couple of loops, going through every row and every column of the grid, all 65x55 grid cells. But that would mean doing the same operation more than 3000 times, even for this coarse grid! Fortunately, <tt>filt1</tt> can do it much more efficiently. If since <tt>sst</tt> is a 3D matrix, <tt>filt1</tt> already knows to operate down the third dimension, although you can always specify <tt>'dim',3</tt> if you want to be extra sure.</p><p>Here's how to filter the entire 3D gridded SST time series using <tt>filt1</tt>:</p><pre class="codeinput">sst_lp = filt1(<span class="string">'lp'</span>,sst,<span class="string">'Tc'</span>,18);
+</pre><p>Now we can look at the local GoM time series of the <i>filtered</i> 3D sst data, and it should perfectly match:</p><pre class="codeinput">sst_lp_gom = local(sst_lp,mask,<span class="string">'omitnan'</span>);
+
+plot(t,sst_lp_gom)
+legend(<span class="string">'original'</span>,<span class="keyword">...</span>
+ <span class="string">'lowpass filtered'</span>,<span class="keyword">...</span>
+ <span class="string">'lowpass 5th order'</span>,<span class="keyword">...</span>
+ <span class="string">'local after 1st order filter'</span>)
+</pre><img vspace="5" hspace="5" src="filt1_documentation_17.png" alt=""> <p>Indeed, taking the local mean time series of the filtered SST grid gives the same results as filtering the meal local time series. Here's a direct comparison, because that plot above is getting a bit busy:</p><pre class="codeinput">figure
+plot(sst_lp_gom,sst_gom_lp,<span class="string">'.'</span>)
+xlabel <span class="string">'filtered first, then locally averaged'</span>
+ylabel <span class="string">'locally averaged first, then filtered'</span>
+</pre><img vspace="5" hspace="5" src="filt1_documentation_18.png" alt=""> <p>The difference between the two is just numerical noise.</p><h2 id="27">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |filt1| documentation
+% The |filt1| applies a zero-phase butterworth filter.
+% *Requires Matlab's Signal Processing Toolbox.*
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  yf = filt1(filtertype,y,'fc',Fc)
+%  yf = filt1(filtertype,y,'Tc',Tc)
+%  yf = filt1(filtertype,y,'lambdac',lambdac)
+%  yf = filt1(...,'fs',Fs)
+%  yf = filt1(...,'x',x)
+%  yf = filt1(...,'Ts',Ts)
+%  yf = filt1(...,'order',FilterOrder)
+%  yf = filt1(...,'dim',dim)
+%  [yf,filtb,filta] = filt1(...)
+% 
+%% Description
+% 
+% |yf = filt1(filtertype,y,'fc',Fc)| filters 1D signal |y|
+% using a specified |filtertype| and cutoff frequency |Fc|. For 
+% high-pass or low-pass filters |Fc| must be a scalar. For band-
+% pass and band-stop filters |Fc| must be a two-element array. The 
+% |filtertype| can be 
+% 
+% * |'hp'| high-pass with scalar cutoff frequency |Fc|
+% * |'lp'| low-pass with scalar cutoff frequency |Fc|
+% * |'bp'| band-pass with two-element cutoff frequencies |Fc|
+% * |'bs'| band-stop with two-element cutoff frequencies |Fc| 
+% 
+% |yf = filt1(filtertype,y,'Tc',Tc)| specifies cutoff period(s)
+% rather than cutoff frequencies. This syntax assumes T = 1/f and is exactly
+% the same as the 'lambdac' option, but perhaps a little more intuitive for
+% working with time series. 
+% 
+% |yf = filt1(filtertype,y,'lambdac',lambdac)| specifies cutoff
+% wavelength(s) rather than cutoff frequencies.  This syntax assumes
+% lambda = 1/f. 
+% 
+% |yf = filt1(...,'fs',Fs)| specifies a sampling frequency |Fs|. 
+% If neither |'fs'|, |'x'|, nor |'Ts'| are specified, |Fs = 1| is assumed.    
+% 
+% |yf = filt1(...,'x',x)| specifies a vector of  monotonically-
+% increasing, equally-spaced sampling times or |x| locations corresponding
+% to |y|, which is used to determine sampling frequency. If neither |'fs'|, 
+% |'x'|, nor |'Ts'| are specified, |Fs = 1| is assumed.  
+% 
+% |yf = filt1(...,'Ts',Ts)| specifies a sampling period or sampling distance
+% such that |Fs = 1/Ts|. If neither |'fs'|, |'x'|, nor |'Ts'| are specified, 
+% |Fs = 1| is assumed.    
+% 
+% |yf = filt1(...,'dim',dim)| specifies a dimension along which to operate. 
+% By default, filt1 operates along the first nonsingleton dimension for 1D or 
+% 2D arrays, but operates down dimension 3 for 3D gridded datasets. 
+% 
+% |yf = filt1(...,'order',FilterOrder)| specifies the order (sometimes 
+% called _rolloff_) of the Butterworth filter. If unspecified, |FilterOrder = 1| is assumed. 
+% 
+% |[yf,filtb,filta] = filt1(...)| also returns the filter numerator 
+% |filta| and denominator |filtb|. 
+% 
+%% Example 1: Train Whistle
+% For this example we'll use the built-in train whistle example file and we'll add 
+% a little gaussian random noise to make things interesting.  
+
+load train 
+y = y+0.1*randn(size(y)); 
+
+%% 
+% The original signal can be plotted in black like this. First we have to
+% build a time vector from the sampling frequency |Fs|: 
+
+t = (0:length(y)-1)/Fs; 
+
+plot(t,y,'k-','linewidth',1) 
+box off; 
+axis tight
+xlabel 'time (seconds)' 
+hold on 
+
+%% 
+% If you have speakers you can listen to the train whistle like this: 
+% 
+%  soundsc(y,Fs)
+%
+%% 
+% High-pass filter the train whistle, keeping only frequencies above 750 Hz
+% and plot it on top of the original black signal: 
+
+yhp = filt1('hp',y,'fs',Fs,'fc',750); 
+
+hold on 
+plot(t,yhp,'r')
+
+%%
+% Or perhaps you want to low-pass filter the original signal to eliminate
+% frequencies below 1100 Hz. Note: Above we specified a sampling frequency
+% by setting an |'fs'| value. You may alternatively define a vector as the
+% independent variable |'x'|.  In this case the independent variable is time, but
+% for spatial filtering it would likely be cumulative distance along some
+% path.
+% 
+% The three primary frequencies of the train whistle are spaced somewhat close
+% together in frequency space, so the default first-order butterworth filter we used above
+% will not eliminate all of the energy below 750 Hz. You may wish to use a
+% steeper rolloff by specifing |'order',5|.  We'll plot the low-pass
+% filtered train whistle in blue. 
+
+ylp = filt1('lp',y,'x',t,'fc',1100,'order',5); 
+plot(t,ylp,'b')
+
+%%
+% Use <plotpsd_documentation.html |plotpsd|> to compare: 
+
+figure
+plotpsd(y,Fs,'k','linewidth',2)
+hold on
+plotpsd(yhp,Fs,'r')
+plotpsd(ylp,Fs,'b')
+
+xlabel 'frequency (Hz)'
+axis([600 1300 0 0.02])
+legend('original signal','highpass 800 Hz',...
+    'lowpass 1100 Hz','location','northwest')
+legend boxoff
+
+%% 
+clear variables
+close all 
+%% Example 2: Topographic Profile
+% Suppose you have a topographic profile with elevation measurements every 10 meters
+% for 40 kilometers.  And let's say the profile has three dominant wavelengthsREPLACE_WITH_DASH_DASH761 m, 
+% 4 km, and 9.4 meters.  The profile might look like this. As in Example 1, I'm using 
+% |plotpsd| to plot a periodogram.   
+
+SpatialRes = 10;       % Samples every 10 m
+x = 0:SpatialRes:40e3; % Domain 0 to 40 km
+lambda1 = 761;         % 761 meters
+lambda2 = 4000;        % 4 kilometers
+lambda3 = 3000*pi;     % ~9.4 kilometers
+
+% Generate profile: 
+y = rand(size(x)) + 5*sin(2*pi*x/lambda1) + ...
+    11*sin(2*pi*x/lambda2) + 15*sin(2*pi*x/lambda3) ; 
+
+% Plot profile: 
+figure('position',[100 100 560 506])
+subplot(211)
+plot(x/1000,y,'k','linewidth',2)
+hold on
+xlabel 'distance along some path (km)'
+ylabel 'elevation (m)' 
+box off
+axis tight
+
+% Plot power spectrum: 
+subplot(212)
+plotpsd(y,x,'k','linewidth',2,'db','log','lambda')
+hold on
+xlabel 'wavelength (km)' 
+ylabel 'power spectrum (dB)'
+axis tight
+ylim([-10 70])
+
+%% 
+% Above you can see the three primary wavelengths as three peaks in the
+% periodogram.  
+% 
+% Perhaps you want to elimiate the high-frequency random noise we added to the topography
+% with |rand|.  To do that, you can lowpass filter out all wavelenths shorter than 300 m:  
+
+ylo = filt1('lp',y,'x',x,'lambdac',300); 
+
+subplot(211)
+plot(x/1000,ylo,'r')
+
+subplot(212)
+plotpsd(ylo,x,'r','db','log','lambda')
+
+%%
+% Above, when we lowpass filtered the topography we specified an array
+% |x| as the path distance corresponding to |y|.  Alternatively, we could 
+% have specified spatial resolution which is our sampling distance |'Ts'|
+% to achieve the same result. Below we highpass filter the original topography to 
+% remove wavelengths longer than 6 km.  Use a tight rolloff by specifying a 5th order
+% butterworth filter. 
+
+yhi = filt1('hp',y,'Ts',SpatialRes,'lambdac',6000,'order',5); 
+
+subplot(211)
+plot(x/1000,yhi,'b')
+
+subplot(212)
+plotpsd(yhi,x,'b','db','log','lambda')
+
+%% 
+% Perhaps you want to remove high-frequency noise and the low frequencies.
+% You can do that by filtering the signal twice, or with a bandpass filter.
+% We can retain only that middle peak in the power spectrum by bandpass
+% filtering out all wavelengths shorter than 3000 meters or longer than 
+ 
+ybp = filt1('bp',y,'x',x,'lambdac',[3000 5000],'order',3); 
+
+subplot(211)
+plot(x/1000,ybp,'m')
+
+subplot(212)
+plotpsd(ybp,x,'m','db','log','lambda')
+
+%% 
+% Perhaps you want to remove only a range of frequencies.  You can do that
+% by subtracting a bandpassed signal from the original signal a la: 
+
+ybs = y - ybp; 
+
+%% 
+% or you can create a bandstop filter directly with using the same syntax
+% as we did with the bandpass filter: 
+
+ybs = filt1('bs',y,'x',x,'lambdac',[3000 5000],'order',3); 
+
+subplot(211)
+plot(x/1000,ybs,'color',[.98 .45 .02])
+
+subplot(212)
+plotpsd(ybs,x,'color',[.98 .45 .02],'db','log','lambda')
+
+legend('original','lowpass','highpass',...
+    'bandpass','bandstop','location','northeast')
+legend boxoff
+
+%% Example 3: Sea ice extent
+% Load the example time series of sea ice extent, and only use the data from 
+% 1989 toward the present, because the older data is sampled at less than daily
+% resolution. 
+
+load seaice_extent.mat 
+
+% Get post-1989 indices:
+ind = t>datetime(1989,1,1); 
+
+% Trim the dataset to 1989-2018: 
+t = t(ind); 
+extent_N = extent_N(ind); 
+
+figure
+plot(t,extent_N)
+axis tight
+box off
+ylabel 'northern hemisphere sea ice extent (10^6 km^2)'
+
+%% 
+% Can we try to filter out the seasonal cycle? Of course the <deseason_documentation.html |deseason|> 
+% function is one way to do it, but what if we do it with this butterworth filter? 
+% A bandstop filter on the seasonal cycle requires us to define the corner frequencies,
+% so how about everything between the 6 month period and the 2 year period? 
+
+extent_N_filt = filt1('bs',extent_N,'fs',365.25,'Tc',[0.5 2]); 
+
+hold on
+plot(t,extent_N_filt,'linewidth',2)
+
+%% Example 4: Gridded 3D time series 
+% Suppose you're interested in SSTs in the Gulf of Mexico (GoM): 
+
+load pacific_sst
+
+figure
+imagescn(lon,lat,mean(sst,3))
+cmocean thermal % colormap
+hold on
+
+% A crude outline of the gulf of mexico: 
+gomlon = [-91.4 -103.8  -98.8  -88.6  -82.8  -82.3]; 
+gomlat = [33.0   30.6   20.4   16.6   21.8   34.1]; 
+plot(gomlon,gomlat,'ro')
+
+text(-92.4,23.9,'Gulf of Mexico','color','red',...
+   'horiz','center','vert','bot') % sets text alignment
+
+%% 
+% We can use <geomask_documentation.html |geomask|> and <local_documentation.html 
+% |local|> to get a time series of GoM SSTs. First, make the mask and plot it
+% as a blue contour just to make sure the mask is about in the right spot: 
+
+[Lon,Lat] = meshgrid(lon,lat); 
+mask = geomask(Lat,Lon,gomlat,gomlon); 
+
+contour(Lon,Lat,double(mask),[0.5 0.5],'b') 
+
+%% 
+% With the |mask| defined, getting a 1D time series of mean SSTs in the 
+% Gulf of Mexico is easy:
+
+sst_gom = local(sst,mask,'omitnan'); 
+
+figure
+plot(t,sst_gom) 
+axis tight
+datetick('x','keeplimits') 
+ylabel 'Gulf of Mexico sea surface temperature \circC'
+
+%% 
+% This dataset is at monthly temporal resolution, so if we want to lowpass 
+% filter it, keeping only frequencies with periods longer than 18 months, we could
+% operate on the 1d |sst1| dataset like this: 
+
+% lowpass filtered 1D sst1: 
+sst_gom_lp = filt1('lp',sst_gom,'Tc',18); 
+
+hold on
+plot(t,sst_gom_lp) 
+
+legend('original','lowpass filtered')
+
+%%
+% You'll notice that there's still plenty of energy at the 1 year frequency. 
+% That's because the <https://en.wikipedia.org/wiki/Butterworth_filter 
+% Butterworth filter> is not idealREPLACE_WITH_DASH_DASHin frequency space its shoulders are broad. 
+% To sharpen them up and more effectively cut energy at periods shorter than
+% 18 months, increase the order of the filter: 
+
+% lowpass filtered 1D sst1: 
+sst_gom_lp5 = filt1('lp',sst_gom,'Tc',18,'order',5); 
+
+plot(t,sst_gom_lp5) 
+legend('original',...
+ 'lowpass filtered',...
+ 'lowpass 5th order')
+
+%% 
+% And now you see some interannual variability that isn't too dominated by the 
+% seasonal cycle. It's probably not a great idea to be filtering away the majority
+% of the variability in any application, but here we're just toying with the 
+% mechanics of the function, so we'll just say it's fine and move on. 
+% 
+% But what if, instead of filtering just the 1D array, you want to filter
+% the time series at every grid cell? The computationally inefficient 
+% way to do it would be to nest a couple of loops, going through every row
+% and every column of the grid, all 65x55 grid cells. But that would mean 
+% doing the same operation more than 3000 times, even for this coarse grid! 
+% Fortunately, |filt1| can do it much more efficiently. If since |sst| is
+% a 3D matrix, |filt1| already knows to operate down the third dimension, 
+% although you can always specify |'dim',3| if you want to be extra sure. 
+% 
+% Here's how to filter the entire 3D gridded SST time series using |filt1|: 
+
+sst_lp = filt1('lp',sst,'Tc',18); 
+
+%% 
+% Now we can look at the local GoM time series of the _filtered_ 3D sst 
+% data, and it should perfectly match:
+
+sst_lp_gom = local(sst_lp,mask,'omitnan'); 
+
+plot(t,sst_lp_gom)
+legend('original',...
+ 'lowpass filtered',...
+ 'lowpass 5th order',...
+ 'local after 1st order filter')
+
+%% 
+% Indeed, taking the local mean time series of the filtered SST grid gives the
+% same results as filtering the meal local time series. Here's a direct
+% comparison, because that plot above is getting a bit busy: 
+
+figure
+plot(sst_lp_gom,sst_gom_lp,'.')
+xlabel 'filtered first, then locally averaged'
+ylabel 'locally averaged first, then filtered'
+
+%% 
+% The difference between the two is just numerical noise. 
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the University of Texas at Austin. 
+
+##### SOURCE END #####
+--></body></html>

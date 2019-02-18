@@ -1,0 +1,220 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>globescatter documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-25"><meta name="DC.source" content="globescatter_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>globescatter</tt> documentation</h1><!--introduction--><p>The <tt>globescatter</tt> function plots georeferenced data as color-scaled spheres on a globe.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1</a></li><li><a href="#6">Example 2</a></li><li><a href="#7">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>globescatter(lat,lon)
+globescatter(lat,lon,sz)
+globescatter(lat,lon,sz,c)
+globescatter(...,'filled')
+globescatter(...,PropertyName,PropertyValue,...)
+globescatter(...,'radius',GlobeRadius)
+h = globescatter(...)</pre><h2 id="2">Description</h2><p><tt>globescatter(lat,lon)</tt> creates a scatter plot of the georeferenced data points specified by lat,lon on a globe.</p><p><tt>globescatter(lat,lon,sz)</tt> specifies the size of the circles.</p><p><tt>globescatter(lat,lon,sz,c)</tt> draws each circle with the color specified by C.</p><div><ul><li>If <tt>c</tt> is a RGB triplet or character vector or string containing a color name, then all circles are plotted with the specified color.</li><li>If <tt>c</tt> is a three column matrix with the number of rows in <tt>c</tt> equal to the length of <tt>lat</tt> and <tt>lon</tt>, then each row of <tt>c</tt> specifies an RGB color value for the corresponding circle.</li><li>If <tt>c</tt> is a vector with length equal to the length of <tt>lat</tt> and <tt>lon</tt>, then the values in <tt>c</tt> are linearly mapped to the colors in the current colormap.</li></ul></div><p><tt>globescatter(...,'filled')</tt> fills in the circles, using any of the input argument combinations in the previous syntaxes.</p><p><tt>globescatter(...,PropertyName,PropertyValue,...)</tt> modifies the scatter chart using one or more name-value pair arguments.</p><p><tt>globescatter(...,'radius',GlobeRadius)</tt> specifies the radius of the globe as <tt>GlobeRadius</tt>. Default <tt>GlobeRadius</tt> is 6371.</p><p><tt>h = globescatter(...)</tt> returns the handle <tt>h</tt> of the plotted objects.</p><h2 id="3">Example 1</h2><p>Plot the locations of the <a href="https://earthquake.usgs.gov/earthquakes/browse/largest-world.php">20 largest earthquakes</a> in the world as documented by the USGS:</p><pre class="codeinput">lat = [-38.14, 60.91, 3.3, 38.3, 52.62, -36.12, 0.96, 51.25, 28.36,<span class="keyword">...</span>
+    2.33, 2.09, 51.5, 53.49, -5.05, -28.29, 44.87, 54.49, -4.44, -16.27, 39.21];
+lon = [-73.41, -147.34, 95.98, 142.37, 159.78, -72.9, -79.37, 178.72,<span class="keyword">...</span>
+    96.45, 93.06, 97.11, -175.63, -162.83, 131.61, -69.85, 149.48,<span class="keyword">...</span>
+    160.47, 101.37, -73.64, 144.59];
+
+globescatter(lat,lon)
+globefill
+globeborders
+camlight <span class="comment">% adds lighting</span>
+material <span class="string">dull</span> <span class="comment">% makes it less shiny</span>
+axis <span class="string">tight</span>
+</pre><img vspace="5" hspace="5" src="globescatter_documentation_01.png" alt=""> <p>Above, we filled in the inside of the globe with <a href="globefill_documentation.html"><tt>globefill</tt></a>, plotted political boundaries with <a href="globeborders_documentation.html"><tt>globeborders</tt></a>, and added a sense of dimension lighting via <tt>camlight</tt>.</p><p>Now do the same as above, but scale the marker sizes according to earthquake magnitudes:</p><pre class="codeinput"><span class="comment">% earthquake magnitudes:</span>
+m = [9.5, 9.2, 9.1, 9.1, 9, 8.8, 8.8, 8.7, 8.6, 8.6, 8.6, 8.6, 8.6,<span class="keyword">...</span>
+    8.5, 8.5, 8.5, 8.4, 8.4, 8.4, 8.4];
+
+globescatter(lat,lon,10.^m/1e6)
+</pre><img vspace="5" hspace="5" src="globescatter_documentation_02.png" alt=""> <h2 id="6">Example 2</h2><p>Imagine a bunch of drifters scattered about the ocean, like Argo floats. Use <a href="dist2coast_documentation.html"><tt>dist2coast</tt></a> to get the distance to the nearest land and plot them as scaled colors:</p><pre class="codeinput"><span class="comment">% Make 10000 randomly distributed datapoints:</span>
+N = 10000;
+lat = 180*rand(N,1)-90;
+lon = 360*rand(N,1)-180;
+
+<span class="comment">% Eliminate land:</span>
+land = island(lat,lon);
+lat(land) = [];
+lon(land) = [];
+
+<span class="comment">% Get distances to land:</span>
+d = dist2coast(lat,lon);
+
+figure
+globescatter(lat,lon,10,d,<span class="string">'filled'</span>)
+globeimage
+cmocean <span class="string">-matter</span>
+axis <span class="string">tight</span>
+view(50,10)
+cb = colorbar;
+ylabel(cb,<span class="string">'distance to land (km)'</span>)
+caxis([0 2000])
+</pre><img vspace="5" hspace="5" src="globescatter_documentation_03.png" alt=""> <h2 id="7">Author Info</h2><p>This function and supporting documentation were written by Natalie S. Wolfenbarger for the Climate Data Toolbox for Matlab, 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |globescatter| documentation 
+% The |globescatter| function plots georeferenced data as color-scaled spheres on a
+% globe.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax 
+% 
+%  globescatter(lat,lon)
+%  globescatter(lat,lon,sz)
+%  globescatter(lat,lon,sz,c)
+%  globescatter(...,'filled')
+%  globescatter(...,PropertyName,PropertyValue,...)
+%  globescatter(...,'radius',GlobeRadius)
+%  h = globescatter(...)
+% 
+%% Description
+% 
+% |globescatter(lat,lon)| creates a scatter plot of the georeferenced
+% data points specified by lat,lon on a globe.
+% 
+% |globescatter(lat,lon,sz)| specifies the size of the circles.
+%
+% |globescatter(lat,lon,sz,c)| draws each circle with the color specified by C.
+% 
+% * If |c| is a RGB triplet or character vector or string containing a color
+% name, then all circles are plotted with the specified color. 
+% * If |c| is a three column matrix with the number of rows in |c| equal to the length of
+% |lat| and |lon|, then each row of |c| specifies an RGB color value for the corresponding circle. 
+% * If |c| is a vector with length equal to the length of |lat| and |lon|, then the values 
+% in |c| are linearly mapped to the colors in the current colormap.
+% 
+% |globescatter(...,'filled')| fills in the circles, using any of the input argument
+% combinations in the previous syntaxes.
+% 
+% |globescatter(...,PropertyName,PropertyValue,...)| modifies the scatter chart using 
+% one or more name-value pair arguments.
+% 
+% |globescatter(...,'radius',GlobeRadius)| specifies the radius of the
+% globe as |GlobeRadius|. Default |GlobeRadius| is 6371. 
+% 
+% |h = globescatter(...)| returns the handle |h| of the plotted objects.
+% 
+%% Example 1
+% Plot the locations of the <https://earthquake.usgs.gov/earthquakes/browse/largest-world.php 
+% 20 largest earthquakes> in the world as documented by the USGS:
+
+lat = [-38.14, 60.91, 3.3, 38.3, 52.62, -36.12, 0.96, 51.25, 28.36,...
+    2.33, 2.09, 51.5, 53.49, -5.05, -28.29, 44.87, 54.49, -4.44, -16.27, 39.21];
+lon = [-73.41, -147.34, 95.98, 142.37, 159.78, -72.9, -79.37, 178.72,...
+    96.45, 93.06, 97.11, -175.63, -162.83, 131.61, -69.85, 149.48,...
+    160.47, 101.37, -73.64, 144.59];
+ 
+globescatter(lat,lon) 
+globefill
+globeborders
+camlight % adds lighting
+material dull % makes it less shiny
+axis tight
+
+%% 
+% Above, we filled in the inside of the globe with <globefill_documentation.html |globefill|>, 
+% plotted political boundaries with <globeborders_documentation.html |globeborders|>, and 
+% added a sense of dimension lighting via |camlight|. 
+ 
+%%  
+% Now do the same as above, but scale the marker sizes according to earthquake magnitudes: 
+
+% earthquake magnitudes:
+m = [9.5, 9.2, 9.1, 9.1, 9, 8.8, 8.8, 8.7, 8.6, 8.6, 8.6, 8.6, 8.6,...
+    8.5, 8.5, 8.5, 8.4, 8.4, 8.4, 8.4];
+
+globescatter(lat,lon,10.^m/1e6)
+
+%% Example 2
+% Imagine a bunch of drifters scattered about the ocean, like Argo floats. Use <dist2coast_documentation.html 
+% |dist2coast|> to get the distance to the nearest land and plot them as scaled colors: 
+
+% Make 10000 randomly distributed datapoints: 
+N = 10000; 
+lat = 180*rand(N,1)-90; 
+lon = 360*rand(N,1)-180; 
+
+% Eliminate land: 
+land = island(lat,lon); 
+lat(land) = []; 
+lon(land) = []; 
+
+% Get distances to land: 
+d = dist2coast(lat,lon); 
+
+figure
+globescatter(lat,lon,10,d,'filled')
+globeimage
+cmocean -matter
+axis tight
+view(50,10)
+cb = colorbar; 
+ylabel(cb,'distance to land (km)') 
+caxis([0 2000]) 
+
+%% Author Info
+% This function and supporting documentation were written by Natalie S.
+% Wolfenbarger for the Climate Data Toolbox for Matlab, 2019. 
+##### SOURCE END #####
+--></body></html>

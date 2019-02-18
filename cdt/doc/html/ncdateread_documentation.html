@@ -1,0 +1,243 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ncdateread documentation</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-24"><meta name="DC.source" content="ncdateread_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>ncdateread</tt> documentation</h1><!--introduction--><p>This function reads in a time variable from a netCDF file into a datetime array, assuming that the variable conforms to CF standards with a ' <i>time units</i> since <i>reference time</i>' units attribute.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#7">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>tdt = ncdateread(file, var)
+[tdt, tnum, unit, refdate] = ncdateread(file, var)</pre><h2 id="2">Description</h2><p><tt>tdt = ncdateread(file, var)</tt> reads values from the time variable <tt>var</tt> in the netCDF file (or files) <tt>file</tt> into the datetime array <tt>tdt</tt>, assuming that variable uses a standard (i.e. gregorian) calendar and includes a units attribute in the form of ' <i>time units</i> since <i>reference time</i>'. The supported time units are microseconds, milliseconds, seconds, hours, minutes, and days (or day).  <tt>file</tt> can be either a string/character array holding the path of a single file, or a cell array of strings holding a set of files that share a single unlimited time dimension.</p><p><tt>[tdt, tnum, unit, refdate] = ncdateread(file, var)</tt> also returns the original file time values <tt>tnum</tt> in their unconverted form, the <tt>unit</tt> character array, and a datetime <tt>refdate</tt> that matches the reference date in the units attribute.</p><p><tt>[...] = ncdateread(file, var, tnum)</tt> provides an option to convert numeric-time values in a variable using the same unit properties in the indicated by the file and variable name.</p><p>NOTE: Options for year or month units are intentionally not included here due to the possibility for incorrect translation related to these units. CF standards define a year to be exactly 365.242198781 days, rather than a calendar year; similarly, a month is 1/12 of this value.  This is rarely a useful way of counting time, and therefore we leave it to the user to determine whether a file using these units intends the calendar year interpretation or the strict interpretation and to manually parse the date themselves.</p><h2 id="3">Example</h2><p>The example ERA Interim file follows typical climate data standards for its time attribute:</p><pre class="codeinput">ncdisp(<span class="string">'ERA_Interim_2017.nc'</span>, <span class="string">'time'</span>);
+</pre><pre class="codeoutput">Source:
+           /Users/kakearney/Documents/MATLAB/Add-Ons/Toolboxes/Climate Data Toolbox/code/cdt_data/ERA_Interim_2017.nc
+Format:
+           64bit
+Dimensions:
+           time = 12    (UNLIMITED)
+Variables:
+    time
+           Size:       12x1
+           Dimensions: time
+           Datatype:   int32
+           Attributes:
+                       units     = 'hours since 1900-01-01 00:00:00.0'
+                       long_name = 'time'
+                       calendar  = 'gregorian'
+</pre><p>Here, we can read that time data directly from the file without needing to know ahead of time what the units or reference date are:</p><pre class="codeinput">[tdt, tnum, unit, refdate] = ncdateread(<span class="string">'ERA_Interim_2017.nc'</span>, <span class="string">'time'</span>)
+</pre><pre class="codeoutput">
+tdt = 
+
+  12&times;1 datetime array
+
+   2017-01-01
+   2017-02-01
+   2017-03-01
+   2017-04-01
+   2017-05-01
+   2017-06-01
+   2017-07-01
+   2017-08-01
+   2017-09-01
+   2017-10-01
+   2017-11-01
+   2017-12-01
+
+
+tnum =
+
+  12&times;1 int32 column vector
+
+   1025628
+   1026372
+   1027044
+   1027788
+   1028508
+   1029252
+   1029972
+   1030716
+   1031460
+   1032180
+   1032924
+   1033644
+
+
+unit =
+
+    'hours'
+
+
+refdate = 
+
+  datetime
+
+   1900-01-01
+
+</pre><p>If the time variables were already in our workspace (for example, if the data had been read in using some of the more flexible hyperslab subsetting options available in <tt><a href="ncreads_documentation.html">ncreads</a></tt>, we can convert the values after the fact by pointing to a file with the necessary conversion units data:</p><pre class="codeinput">A = ncreads(<span class="string">'ERA_Interim_2017.nc'</span>, struct(<span class="string">'time'</span>, [1 5 2]));
+A.time
+</pre><pre class="codeoutput">
+ans =
+
+  5&times;1 int32 column vector
+
+   1025628
+   1027044
+   1028508
+   1029972
+   1031460
+
+</pre><pre class="codeinput">A.time = ncdateread(<span class="string">'ERA_Interim_2017.nc'</span>, <span class="string">'time'</span>, A.time);
+A.time
+</pre><pre class="codeoutput">
+ans = 
+
+  5&times;1 datetime array
+
+   2017-01-01
+   2017-03-01
+   2017-05-01
+   2017-07-01
+   2017-09-01
+
+</pre><h2 id="7">Author Info</h2><p>This function and supporting documentation was written by Kelly Kearney for the Climate Data Toolbox for Matlab, 2019.  It is available as part of this toolbox, and can also be downloaded individually from <a href="https://github.com/kakearney/ncreads-pkg">GitHub</a>.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |ncdateread| documentation 
+%
+% This function reads in a time variable from a netCDF file into a datetime
+% array, assuming that the variable conforms to CF standards with a ' _time
+% units_ since _reference time_' units attribute. 
+%
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%
+%% Syntax
+%
+%  tdt = ncdateread(file, var)
+%  [tdt, tnum, unit, refdate] = ncdateread(file, var)
+%
+%% Description
+%
+% |tdt = ncdateread(file, var)| reads values from the time variable |var|
+% in the netCDF file (or files) |file| into the datetime array |tdt|,
+% assuming that variable uses a standard (i.e. gregorian) calendar and
+% includes a units attribute in the form of ' _time units_ since _reference
+% time_'. The supported time units are microseconds, milliseconds, seconds,
+% hours, minutes, and days (or day).  |file| can be either a
+% string/character array holding the path of a single file, or a cell array
+% of strings holding a set of files that share a single unlimited time
+% dimension.
+%
+% |[tdt, tnum, unit, refdate] = ncdateread(file, var)| also returns the
+% original file time values |tnum| in their unconverted form, the |unit|
+% character array, and a datetime |refdate| that matches the reference date
+% in the units attribute.
+%
+% |[...] = ncdateread(file, var, tnum)| provides an option to convert
+% numeric-time values in a variable using the same unit properties in the
+% indicated by the file and variable name. 
+%
+% NOTE: Options for year or month units are intentionally not included here
+% due to the possibility for incorrect translation related to these units.
+% CF standards define a year to be exactly 365.242198781 days, rather than
+% a calendar year; similarly, a month is 1/12 of this value.  This is
+% rarely a useful way of counting time, and therefore we leave it to the
+% user to determine whether a file using these units intends the calendar
+% year interpretation or the strict interpretation and to manually parse
+% the date themselves.
+%
+%% Example
+%
+% The example ERA Interim file follows typical climate data standards for
+% its time attribute:
+
+ncdisp('ERA_Interim_2017.nc', 'time');
+
+%%
+% Here, we can read that time data directly from the file without needing
+% to know ahead of time what the units or reference date are:
+
+[tdt, tnum, unit, refdate] = ncdateread('ERA_Interim_2017.nc', 'time')
+
+%% 
+%
+% If the time variables were already in our workspace (for example, if the
+% data had been read in using some of the more flexible hyperslab
+% subsetting options available in |<ncreads_documentation.html ncreads>|,
+% we can convert the values after the fact by pointing to a file with the
+% necessary conversion units data:
+
+A = ncreads('ERA_Interim_2017.nc', struct('time', [1 5 2]));
+A.time
+
+%%
+A.time = ncdateread('ERA_Interim_2017.nc', 'time', A.time);
+A.time
+
+%% Author Info
+%
+% This function and supporting documentation was written by Kelly Kearney
+% for the Climate Data Toolbox for Matlab, 2019.  It is available as part
+% of this toolbox, and can also be downloaded individually from
+% <https://github.com/kakearney/ncreads-pkg GitHub>.
+
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,175 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>cbdate documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-02"><meta name="DC.source" content="cbdate_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>cbdate</tt> documentation</h1><!--introduction--><p>The <tt>cbdate</tt> function formats colorbar ticks as dates strings.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#9">Author Info:</a></li></ul></div><h2 id="1">Syntax</h2><pre>cbdate
+cbdate(h)
+cbdate(datenums)
+cbdate(datenums,dateformat)
+cbdate(datestrs)
+cbdate('horiz')
+h = cbdate(...)</pre><h2 id="2">Description</h2><p><tt>cbdate</tt> converts tick marks of current colorbar to date strings.</p><p><tt>cbdate(h)</tt> specifies a colorbar handle <tt>h</tt> on which to perform <tt>cbdate</tt>. If no handle is specified, cbdate will try to find a current colorbar.</p><p><tt>cbdate(datenums)</tt> specifies datenums to set as tick marks.</p><p><tt>cbdate(datenums,dateformat)</tt> specifies date formatting as described in the documentation for datestring. For example, <tt>'mmm yyyy'</tt> will print date strings as Nov 2014.</p><p><tt>cbdate(datestrs)</tt> specifies date strings to use as colorbar ticks.</p><p><tt>cbdate('horiz')</tt> must be declared if the colorbar is horizontal (pre-R2014b).</p><p><tt>h = cbdate(...)</tt> returns a colorbar handle <tt>h</tt>.</p><h2 id="3">Example</h2><p>You've plotted some data with its color scaled as a function of date. The plot looks like this:</p><pre class="codeinput">t = datenum(2014,1:24,15);
+y = sin(t/200);
+
+figure(<span class="string">'pos'</span>,[100 100 700 400])
+scatter(t,y,60,t,<span class="string">'filled'</span>);
+datetick(<span class="string">'x'</span>,<span class="string">'yyyy'</span>)
+
+colorbar
+</pre><img vspace="5" hspace="5" src="cbdate_documentation_01.png" alt=""> <p>7.361 x 10^5 does not mean much to most folks. Let's change those datenum ticks on the colorbar to date strings:</p><pre class="codeinput">cbdate
+</pre><img vspace="5" hspace="5" src="cbdate_documentation_02.png" alt=""> <p>Your original data were monthly data, centered on the 15th of each month, so it does not make much sense to have colorbar tick labels label days. Monthly resolution is about the best we can describe. So let's format those tick labels to show only the month:</p><pre class="codeinput">cbdate(<span class="string">'mmmm'</span>)
+</pre><img vspace="5" hspace="5" src="cbdate_documentation_03.png" alt=""> <p>Or perhaps you'd like your tick labels referenced to specific input data points. The variable <tt>t</tt> is in <tt>datenum</tt> format, so it can be used as an input directly to <tt>cbdate</tt>. Here we label every third month:</p><pre class="codeinput">cbdate(t(1:3:end))
+</pre><img vspace="5" hspace="5" src="cbdate_documentation_04.png" alt=""> <p>Or perhaps you want to label two specific dates:</p><pre class="codeinput">cbdate({<span class="string">'apr 1, 2014'</span>;<span class="string">'jan 12, 2015'</span>})
+</pre><img vspace="5" hspace="5" src="cbdate_documentation_05.png" alt=""> <p>Perhaps your colorbar is horizontal:</p><pre class="codeinput">colorbar(<span class="string">'location'</span>,<span class="string">'north'</span>);
+cbdate(<span class="string">'horiz'</span>,<span class="string">'mmm-yy'</span>)
+</pre><img vspace="5" hspace="5" src="cbdate_documentation_06.png" alt=""> <h2 id="9">Author Info:</h2><p>This function was written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas Institute for Geophysics (<a href="http://www.ig.utexas.edu/people/students/cgreene/">UTIG</a>) in November of 2014. Updated for the Climate Data Toolbox for Matlab in 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |cbdate| documentation
+% The |cbdate| function formats colorbar ticks as dates strings. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  cbdate
+%  cbdate(h)
+%  cbdate(datenums)
+%  cbdate(datenums,dateformat) 
+%  cbdate(datestrs)
+%  cbdate('horiz') 
+%  h = cbdate(...) 
+% 
+%% Description
+% 
+% |cbdate| converts tick marks of current colorbar to date strings. 
+%
+% |cbdate(h)| specifies a colorbar handle |h| on which to perform |cbdate|. If
+% no handle is specified, cbdate will try to find a current colorbar. 
+% 
+% |cbdate(datenums)| specifies datenums to set as tick marks. 
+%
+% |cbdate(datenums,dateformat)| specifies date formatting as described in the 
+% documentation for datestring. For example, |'mmm yyyy'| will print date
+% strings as Nov 2014. 
+%
+% |cbdate(datestrs)| specifies date strings to use as colorbar ticks. 
+% 
+% |cbdate('horiz')| must be declared if the colorbar is horizontal
+% (pre-R2014b). 
+% 
+% |h = cbdate(...)| returns a colorbar handle |h|. 
+% 
+%% Example
+% You've plotted some data with its color scaled as a function of date. The
+% plot looks like this: 
+
+t = datenum(2014,1:24,15); 
+y = sin(t/200); 
+
+figure('pos',[100 100 700 400])
+scatter(t,y,60,t,'filled'); 
+datetick('x','yyyy')
+
+colorbar
+
+%% 
+% 7.361 x 10^5 does not mean much to most folks. Let's change those datenum
+% ticks on the colorbar to date strings: 
+
+cbdate
+%% 
+% Your original data were monthly data, centered on the 15th of each month,
+% so it does not make much sense to have colorbar tick labels label days.
+% Monthly resolution is about the best we can describe. So let's format
+% those tick labels to show only the month: 
+
+cbdate('mmmm')
+
+%% 
+% Or perhaps you'd like your tick labels referenced to specific input data points. 
+% The variable |t| is in |datenum| format, so it can be used as an input directly to |cbdate|. 
+% Here we label every third month:
+
+cbdate(t(1:3:end))
+
+%% 
+% Or perhaps you want to label two specific dates:
+
+cbdate({'apr 1, 2014';'jan 12, 2015'})
+
+%% 
+% Perhaps your colorbar is horizontal: 
+
+colorbar('location','north');
+cbdate('horiz','mmm-yy')
+
+%% Author Info: 
+% This function was written by <http://www.chadagreene.com Chad A. Greene>
+% of the University of Texas Institute for Geophysics
+% (<http://www.ig.utexas.edu/people/students/cgreene/ UTIG>) in November of
+% 2014. Updated for the Climate Data Toolbox for Matlab in 2019. 
+##### SOURCE END #####
+--></body></html>

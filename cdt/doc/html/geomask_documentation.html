@@ -1,0 +1,345 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>geomask documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-10"><meta name="DC.source" content="geomask_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>geomask</tt> documentation</h1><!--introduction--><p>The <tt>geomask</tt> returns true for locations within a specified geographic region.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Geographic quadrangle</a></li><li><a href="#5">Example 2: Nearest grid cell</a></li><li><a href="#9">Example 3: Arbitrarily-shaped polygon(s)</a></li><li><a href="#11">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>mask = geomask(lat,lon,latv,lonv)
+mask = geomask(lat,lon,latv,lonv,'inclusive')
+[mask,coords] = geomask(...)</pre><h2 id="2">Description</h2><p><tt>mask = geomask(lat,lon,latv,lonv)</tt> returns a mask the size of <tt>lat</tt> and <tt>lon</tt> that is <tt>true</tt> for all points within the bounds given by <tt>latv,lonv</tt>.</p><div><ul><li>scalar <tt>latv,lonv</tt>: If <tt>latv,lonv</tt> are scalar values, the output <tt>mask</tt> will be <tt>true</tt> for only the pixel closest to <tt>latv,lonv</tt>.</li></ul></div><div><ul><li>two-element arrays: If <tt>latv,lonv</tt> are two-element arrays (e.g., <tt>[40 50],[110 120]</tt>) the output <tt>mask</tt> will be true for all <tt>lat,lon</tt> values within the geographic quadrangle bounded by <tt>latv,lonv</tt>.</li></ul></div><div><ul><li>polygon defined by <tt>latv,lonv</tt>: If <tt>latv,lonv</tt> contain more than two elements, the output <tt>mask</tt> will be true for all elements of lat,lon within the polygon defined by <tt>latv,lonv</tt>.</li></ul></div><div><ul><li>polygons in cell format: If <tt>latv,lonv</tt> are cell arrays (as is common for multiple areas in a shapefile), the output <tt>mask</tt> is true for all elements within any of the polygons in <tt>latv,lonv</tt>.</li></ul></div><p><tt>mask = geomask(lat,lon,latv,lonv,'inclusive')</tt> includes <tt>lat,lon</tt> points that are on the boundary or boundaries defined by <tt>latv,lonv</tt>.</p><p><tt>[mask,coords] = geomask(...)</tt> If <tt>latv,lonv</tt> are scalar, the optional coords output is a structure containing the coordinates of the pixel in the mask. The coords structure includes <tt>coords.row</tt> and <tt>coords.col</tt> which are the row and column of of the <tt>lat,lon</tt> grid, and <tt>coords.lat</tt> and <tt>coords.lon</tt>, which are the geographic location of the output grid cell.</p><h2 id="3">Example 1: Geographic quadrangle</h2><p>Sometimes you're interested in values that are withing a geographic quadrangle. One such quadrangle is the  Nino 3.4 box is defined as (5&deg;S to 5&deg;N, 170&deg;W to 120&deg;W). Here's some sample sea surface temperature data</p><pre class="codeinput"><span class="comment">% Load some sample data:</span>
+load <span class="string">pacific_sst.mat</span>
+
+<span class="comment">% Plot the sample data:</span>
+imagescn(lon,lat,mean(sst,3))
+axis <span class="string">xy</span> <span class="string">image</span>
+cmocean <span class="string">thermal</span>
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+
+<span class="comment">% Define the Nino 3.4 box:</span>
+latv = [-5 -5 5 5 -5];
+lonv = [-170 -120 -120 -170 -170];
+
+<span class="comment">% Plot the Nino 3.4 box:</span>
+hold <span class="string">on</span>
+plot(lonv,latv,<span class="string">'k-'</span>,<span class="string">'linewidth'</span>,2)
+</pre><img vspace="5" hspace="5" src="geomask_documentation_01.png" alt=""> <p>For a simple geographic quadrangle the easiest way to get a mask is to define the limits of the bounding box (similar to <tt>ingeoquad</tt> if you have Matlab's Mapping Toolbox).</p><p>Start by converting the <tt>lat,lon</tt> arrays into a grid, then get the mask by specifing the limits of the region interest:</p><pre class="codeinput"><span class="comment">% Convert lat,lon into a grid:</span>
+[Lon,Lat] = meshgrid(lon,lat);
+
+<span class="comment">% Get a mask of grid cells within the quadrangle:</span>
+mask = geomask(Lat,Lon,[-5 5],[-170 -120]);
+
+<span class="comment">% Plot the mask:</span>
+figure
+imagescn(lon,lat,mask)
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+title <span class="string">'yellow indicates *true* grid cells (the Nino 3.4 box)'</span>
+</pre><img vspace="5" hspace="5" src="geomask_documentation_02.png" alt=""> <h2 id="5">Example 2: Nearest grid cell</h2><p>Sometimes you need a time series near a single point of interest. For example, you might want to plot the SST time series near Honolulu (21.3 N, 157.8 W). Let's find the grid cell closest to Honolulu:</p><pre class="codeinput">[honolulu,coords] = geomask(Lat,Lon,21.3,-157.8);
+
+figure
+imagescn(lon,lat,honolulu)
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+hold <span class="string">on</span>
+borders <span class="comment">% plots national boundaries for context</span>
+</pre><img vspace="5" hspace="5" src="geomask_documentation_03.png" alt=""> <p>A single-pixel mask may be of limited use, but for such masks, <tt>geomask</tt> also offers the row, column, and geographic locations of the nearest pixel, see:</p><pre class="codeinput">coords
+</pre><pre class="codeoutput">coords = 
+  struct with fields:
+
+    row: 20
+    col: 12
+    lat: 21.5000
+    lon: -157.5000
+</pre><p>As proof, below we plot the mean SST map with a red star over our desired Honolulu location and a blue square over the grid cell closest to Honolulu:</p><pre class="codeinput"><span class="comment">% Plot the mean SST for context:</span>
+figure
+imagescn(lon,lat,mean(sst,3))
+axis <span class="string">xy</span>
+cmocean <span class="string">thermal</span>
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+
+<span class="comment">% Plot Honolulu as a red star and its nearest grid cell as a blue square:</span>
+hold <span class="string">on</span>
+plot(-157.8,21.3,<span class="string">'rp'</span>)
+plot(coords.lon,coords.lat,<span class="string">'bs'</span>)
+text(-157.8,21.3,<span class="string">' Honolulu'</span>,<span class="string">'color'</span>,<span class="string">'r'</span>,<span class="string">'vert'</span>,<span class="string">'top'</span>)
+text(coords.lon,coords.lat,<span class="string">'  nearest grid cell'</span>,<span class="string">'color'</span>,<span class="string">'b'</span>,<span class="string">'vert'</span>,<span class="string">'bottom'</span>)
+</pre><img vspace="5" hspace="5" src="geomask_documentation_04.png" alt=""> <p>And with the row and column information in the <tt>coords</tt> output, it's easy to get a time series for the Honolulu grid cell. Note that <tt>sst</tt> is a 3D matrix, so we have to use the <tt>squeeze</tt> command to remove singleton dimensions. For clarity, I</p><pre class="codeinput">sst_honolulu = sst(coords.row,coords.col,:);
+
+<span class="comment">% remove singleton dimensions:</span>
+sst_honolulu = squeeze(sst_honolulu);
+
+figure
+plot(t,sst_honolulu)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+ylabel(<span class="string">'Honolulu SST'</span>)
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+</pre><img vspace="5" hspace="5" src="geomask_documentation_05.png" alt=""> <h2 id="9">Example 3: Arbitrarily-shaped polygon(s)</h2><p>If you want to make a mask of an arbitrary polygon or multiple polygons, you can use the standard Matlab function <tt>inpolygon</tt>, or you can let <tt>geomask</tt> do it for you. With <tt>geomask</tt>, <tt>latv</tt> and <tt>lonv</tt> can be numeric arrays just like you would use with <tt>inpolygon</tt>, or <tt>latv</tt> and <tt>lonv</tt> can be cell arrays with polygons in each cell.</p><p>In this example, we have a global grid and we want to know which grid cells are within the borders of Latin American countries. CDT comes with sample <tt>borderdata</tt>, and by going through the country names, you can manually pick out which countries correspond to Latin America. Below I've picked 20 Latin American countries which we'll use in to make the mask.</p><p>This example may take a couple of seconds to compute because the national outlines in <tt>borderdata</tt> are somewhat high resolution and it takes time for <tt>geomask</tt> to compare the grid cells to the outline of 41,500 border data vertices.</p><pre class="codeinput"><span class="comment">% For this sample 1 degree resolution grid:</span>
+[Lat,Lon] = geogrid;
+
+<span class="comment">% Load some national border data:</span>
+B = load(<span class="string">'borderdata.mat'</span>);
+
+<span class="comment">% Use only Latin American countries:</span>
+latv = B.lat([8 17 21 33 38 39 41 48 49 55 75 78 79 120 159 161 162 165 211 214]);
+lonv = B.lon([8 17 21 33 38 39 41 48 49 55 75 78 79 120 159 161 162 165 211 214]);
+
+<span class="comment">% Find grid cells corresponding to Latin American countries:</span>
+mask = geomask(Lat,Lon,latv,lonv);
+
+<span class="comment">% Plot the mask:</span>
+figure
+imagescn(Lon,Lat,mask)
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+</pre><img vspace="5" hspace="5" src="geomask_documentation_06.png" alt=""> <p>With the <tt>mask</tt> for Latin American countries, it is now possible to use <a href="local_documentation.html"><tt>local</tt></a> to get a time series, say, of area-averaged land surface temperatures in Latin American countries.</p><h2 id="11">Author Info</h2><p>The <tt>geomask</tt> function and supporting documentation were written by <a href="http://www.chadagreene">Chad A. Greene</a> of the University of Texas at Austin, Institute for Geophysics (UTIG).</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |geomask| documentation
+% The |geomask| returns true for locations within a specified geographic region. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+% 
+%% Syntax
+% 
+%  mask = geomask(lat,lon,latv,lonv) 
+%  mask = geomask(lat,lon,latv,lonv,'inclusive') 
+%  [mask,coords] = geomask(...) 
+% 
+%% Description 
+% 
+% |mask = geomask(lat,lon,latv,lonv)| returns a mask the size of |lat| and |lon| that is 
+% |true| for all points within the bounds given by |latv,lonv|. 
+% 
+% * scalar |latv,lonv|: If |latv,lonv| are scalar values, the output |mask| will be |true|
+% for only the pixel closest to |latv,lonv|. 
+% 
+% * two-element arrays: If |latv,lonv| are two-element arrays (e.g., |[40 50],[110 120]|) 
+% the output |mask| will be true for all |lat,lon| values within the geographic 
+% quadrangle bounded by |latv,lonv|. 
+% 
+% * polygon defined by |latv,lonv|: If |latv,lonv| contain more than two elements, the
+% output |mask| will be true for all elements of lat,lon within the polygon 
+% defined by |latv,lonv|. 
+% 
+% * polygons in cell format: If |latv,lonv| are cell arrays (as is common for multiple 
+% areas in a shapefile), the output |mask| is true for all elements within any 
+% of the polygons in |latv,lonv|. 
+% 
+% |mask = geomask(lat,lon,latv,lonv,'inclusive')| includes |lat,lon| points that are on 
+% the boundary or boundaries defined by |latv,lonv|. 
+% 
+% |[mask,coords] = geomask(...)| If |latv,lonv| are scalar, the optional coords output 
+% is a structure containing the coordinates of the pixel in the mask. The coords
+% structure includes |coords.row| and |coords.col| which are the row and column of 
+% of the |lat,lon| grid, and |coords.lat| and |coords.lon|, which are the geographic 
+% location of the output grid cell. 
+% 
+%% Example 1: Geographic quadrangle 
+% Sometimes you're interested in values that are withing a geographic quadrangle. One such 
+% quadrangle is the  Nino 3.4 box is defined as (5°S to 5°N, 170°W to 120°W). Here's some 
+% sample sea surface temperature data
+
+% Load some sample data: 
+load pacific_sst.mat
+
+% Plot the sample data: 
+imagescn(lon,lat,mean(sst,3))
+axis xy image
+cmocean thermal 
+xlabel 'longitude'
+ylabel 'latitude'
+
+% Define the Nino 3.4 box: 
+latv = [-5 -5 5 5 -5]; 
+lonv = [-170 -120 -120 -170 -170]; 
+
+% Plot the Nino 3.4 box: 
+hold on
+plot(lonv,latv,'k-','linewidth',2)
+
+%% 
+% For a simple geographic quadrangle the easiest way to get a mask is to
+% define the limits of the bounding box (similar to |ingeoquad| if you have
+% Matlab's Mapping Toolbox). 
+% 
+% Start by converting the |lat,lon| arrays into a grid, then 
+% get the mask by specifing the limits of the region interest: 
+
+% Convert lat,lon into a grid: 
+[Lon,Lat] = meshgrid(lon,lat); 
+
+% Get a mask of grid cells within the quadrangle: 
+mask = geomask(Lat,Lon,[-5 5],[-170 -120]); 
+
+% Plot the mask: 
+figure
+imagescn(lon,lat,mask)
+xlabel 'longitude'
+ylabel 'latitude'
+title 'yellow indicates *true* grid cells (the Nino 3.4 box)'
+
+%% Example 2: Nearest grid cell
+% Sometimes you need a time series near a single point of interest. For 
+% example, you might want to plot the SST time series near Honolulu (21.3 N, 157.8 W). 
+% Let's find the grid cell closest to Honolulu: 
+
+[honolulu,coords] = geomask(Lat,Lon,21.3,-157.8); 
+
+figure
+imagescn(lon,lat,honolulu)
+xlabel 'longitude'
+ylabel 'latitude'
+hold on
+borders % plots national boundaries for context
+
+%% 
+% A single-pixel mask may be of limited use, but for such masks, |geomask| also offers 
+% the row, column, and geographic locations of the nearest pixel, see: 
+
+coords
+
+%%
+% As proof, below we plot the mean SST map with a red star
+% over our desired Honolulu location and a blue square over the grid cell closest to 
+% Honolulu: 
+
+% Plot the mean SST for context: 
+figure
+imagescn(lon,lat,mean(sst,3))
+axis xy 
+cmocean thermal 
+xlabel 'longitude'
+ylabel 'latitude'
+
+% Plot Honolulu as a red star and its nearest grid cell as a blue square: 
+hold on
+plot(-157.8,21.3,'rp') 
+plot(coords.lon,coords.lat,'bs') 
+text(-157.8,21.3,' Honolulu','color','r','vert','top') 
+text(coords.lon,coords.lat,'  nearest grid cell','color','b','vert','bottom')
+
+%% 
+% And with the row and column information in the |coords| output, it's easy to get a 
+% time series for the Honolulu grid cell. Note that |sst| is a 3D matrix, so we have 
+% to use the |squeeze| command to remove singleton dimensions. For clarity, I
+
+sst_honolulu = sst(coords.row,coords.col,:); 
+
+% remove singleton dimensions: 
+sst_honolulu = squeeze(sst_honolulu); 
+
+figure
+plot(t,sst_honolulu) 
+axis tight
+box off
+ylabel('Honolulu SST') 
+datetick('x','keeplimits') 
+
+%% Example 3: Arbitrarily-shaped polygon(s) 
+% If you want to make a mask of an arbitrary polygon or multiple polygons, you can use the 
+% standard Matlab function |inpolygon|, or you can let |geomask| do it for you. With |geomask|, 
+% |latv| and |lonv| can be numeric arrays just like you would use with |inpolygon|, or 
+% |latv| and |lonv| can be cell arrays with polygons in each cell. 
+% 
+% In this example, we have a global grid and we want to know which grid cells are within 
+% the borders of Latin American countries. CDT comes with sample |borderdata|, and by 
+% going through the country names, you can manually pick out which countries correspond
+% to Latin America. Below I've picked 20 Latin American countries which we'll use in to 
+% make the mask. 
+% 
+% This example may take a couple of seconds to compute because the national outlines in 
+% |borderdata| are somewhat high resolution and it takes time for |geomask| to compare 
+% the grid cells to the outline of 41,500 border data vertices.  
+
+% For this sample 1 degree resolution grid: 
+[Lat,Lon] = geogrid; 
+
+% Load some national border data:
+B = load('borderdata.mat'); 
+
+% Use only Latin American countries: 
+latv = B.lat([8 17 21 33 38 39 41 48 49 55 75 78 79 120 159 161 162 165 211 214]);
+lonv = B.lon([8 17 21 33 38 39 41 48 49 55 75 78 79 120 159 161 162 165 211 214]); 
+
+% Find grid cells corresponding to Latin American countries: 
+mask = geomask(Lat,Lon,latv,lonv); 
+
+% Plot the mask: 
+figure
+imagescn(Lon,Lat,mask) 
+xlabel 'longitude'
+ylabel 'latitude'
+
+%% 
+% With the |mask| for Latin American countries, it is now possible to use <local_documentation.html |local|>
+% to get a time series, say, of area-averaged land surface temperatures in Latin American countries. 
+
+%% Author Info
+% The |geomask| function and supporting documentation were written by <http://www.chadagreene Chad A. Greene> of the University
+% of Texas at Austin, Institute for Geophysics (UTIG).   
+##### SOURCE END #####
+--></body></html>

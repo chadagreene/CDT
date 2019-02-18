@@ -1,0 +1,142 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>sineval documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-21"><meta name="DC.source" content="sineval_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>sineval</tt> documentation</h1><!--introduction--><p><tt>sineval</tt> produces a sinusoid of specified amplitude and phase with a frequency of 1/yr.</p><p>For related functions, see <a href="sinefit_documentation.html"><tt>sinefit</tt></a> and <a href="sinefit_bootstrap_documentation.html"><tt>sinefit_bootstrap</tt></a> documentation.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#4">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>y = sineval(ft,t)</pre><h2 id="2">Description</h2><p><tt>y = sineval(ft,t)</tt> evaluates a sinusoid of given fit parameters <tt>ft</tt> at times <tt>t</tt>. Times <tt>t</tt> can be in datenum, datetime, or datestr format, and parameters <tt>ft</tt> correspond to the outputs of the <a href="sinefit_documentation.html"><tt>sinefit</tt></a> function and can have 2 to 5 elements, which describe the following:</p><div><ul><li><tt>2</tt>: <tt>ft = [A doy_max]</tt> where <tt>A</tt> is the amplitude of the sinusoid, and <tt>doy_max</tt>      is the day of year corresponding to the maximum value of the sinusoid.      The default <tt>TermOption</tt> is <tt>2</tt>.</li><li><tt>3</tt>: <tt>ft = [A doy_max C]</tt> also estimates <tt>C</tt>, a constant offset. Solving for      adds processing time, so you may prefer to estimate <tt>C</tt> on your own simply      as the mean of the input <tt>y</tt>. However, if you can't assume C=mean(y), you      may prefer this three-term solution.</li><li><tt>4</tt>: <tt>ft = [A doy_max C trend]</tt> also estimates a linear trend over the entire      time series in units of y per year. Again, simultaneously solving for      four terms will be much more computationally expensive than solving for      two yerms, so you may prefer to estimate the trend on your own with      polyfit, then calculate the two-term sine fit on your detrended data.</li><li><tt>5</tt>: <tt>ft = [A doy_max C trend quadratic_term]</tt> also includes a quadratic term      in the solution, but this is experimental for now, because fitting a      polynomial to dates referenced to year zero tends to be scaled poorly.</li></ul></div><h2 id="3">Example</h2><p>I live in Austin, Texas, where the hottest day of the year occurs around August 12 at around 96 degrees F, and it's about 36 degrees colder in the winter. In ther words, the amplitude of the seasonal sinusoid might be 18 degrees, where the maximum value occurs on julian day 224, and the mean value is 78 degrees. Using these crude numbers, here's a year's climatology for Austin's daily high temperatures:</p><pre class="codeinput"><span class="comment">% t can be just about any date format and it'll be okay:</span>
+t = days(1:365);
+
+<span class="comment">% Sinusoid of high temperatures:</span>
+HighTemp = sineval([18 224 78],t);
+
+plot(t,HighTemp)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+xlabel <span class="string">'day of year'</span>
+ylabel <span class="string">'temperature ({\circ}F)'</span>
+</pre><img vspace="5" hspace="5" src="sineval_documentation_01.png" alt=""> <h2 id="4">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The <tt>sinefit</tt>, <tt>sineval</tt>, and <tt>sinefit_bootstrap</tt> functions as well as the supporting documentation were written by Chad A. Greene of the University of Texas Institute for Geophysics.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |sineval| documentation 
+% |sineval| produces a sinusoid of specified amplitude and phase with
+% a frequency of 1/yr. 
+% 
+% For related functions, see <sinefit_documentation.html |sinefit|> and 
+% <sinefit_bootstrap_documentation.html |sinefit_bootstrap|> documentation. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax
+% 
+%  y = sineval(ft,t)
+% 
+%% Description 
+% 
+% |y = sineval(ft,t)| evaluates a sinusoid of given fit parameters |ft| 
+% at times |t|. Times |t| can be in datenum, datetime, or datestr format, 
+% and parameters |ft| correspond to the outputs of the <sinefit_documentation.html |sinefit|> function
+% and can have 2 to 5 elements, which describe the following: 
+% 
+% * |2|: |ft = [A doy_max]| where |A| is the amplitude of the sinusoid, and |doy_max| 
+%      is the day of year corresponding to the maximum value of the sinusoid. 
+%      The default |TermOption| is |2|.
+% * |3|: |ft = [A doy_max C]| also estimates |C|, a constant offset. Solving for  
+%      adds processing time, so you may prefer to estimate |C| on your own simply
+%      as the mean of the input |y|. However, if you can't assume C=mean(y), you
+%      may prefer this three-term solution. 
+% * |4|: |ft = [A doy_max C trend]| also estimates a linear trend over the entire
+%      time series in units of y per year. Again, simultaneously solving for 
+%      four terms will be much more computationally expensive than solving for
+%      two yerms, so you may prefer to estimate the trend on your own with 
+%      polyfit, then calculate the two-term sine fit on your detrended data. 
+% * |5|: |ft = [A doy_max C trend quadratic_term]| also includes a quadratic term
+%      in the solution, but this is experimental for now, because fitting a 
+%      polynomial to dates referenced to year zero tends to be scaled poorly.
+% 
+%% Example 
+% I live in Austin, Texas, where the hottest day of the year occurs around August 12
+% at around 96 degrees F, and it's about 36 degrees colder in the winter. In ther words, 
+% the amplitude of the seasonal sinusoid might be 18 degrees, where the maximum value 
+% occurs on julian day 224, and the mean value is 78 degrees. Using these crude numbers, 
+% here's a year's climatology for Austin's daily high temperatures: 
+
+% t can be just about any date format and it'll be okay: 
+t = days(1:365); 
+
+% Sinusoid of high temperatures: 
+HighTemp = sineval([18 224 78],t); 
+
+plot(t,HighTemp)
+axis tight
+box off
+xlabel 'day of year'
+ylabel 'temperature ({\circ}F)'
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The |sinefit|, |sineval|, and |sinefit_bootstrap| functions as well as the 
+% supporting documentation were written by Chad A. Greene of the University 
+% of Texas Institute for Geophysics. 
+##### SOURCE END #####
+--></body></html>

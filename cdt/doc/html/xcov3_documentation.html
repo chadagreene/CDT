@@ -1,0 +1,446 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>xcov3 documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-15"><meta name="DC.source" content="xcov3_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>xcov3</tt> documentation</h1><!--introduction--><p>The <tt>xcov3</tt> function gives a map of covariance between grid cells of a 3D spatiotemporal dataset and a reference time series.</p><p>See also: <a href="xcorr3_documentation.html"><tt>xcorr3</tt></a> and <tt>cov</tt>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Comparison of four artificial signals</a></li><li><a href="#10">Example 2: Sea Surface Temperatures</a></li><li><a href="#20">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>r = xcov3(A,ref)
+r = xcov3(...,'detrend')
+r = xcov3(...,'maxlag',maxlag)
+r = xcov3(...,'mask',mask)
+[r,rmax,lags] = xcov3(...)</pre><h2 id="2">Description</h2><p><tt>r = xcov3(A,ref)</tt> gives a 2D correlation map <tt>r</tt>, which has dimensions corresponding to dimensions 1 and 2 of <tt>A</tt>. The 3D matrix <tt>A</tt> is assumed to have spatial dimensions 1 and 3 which may correspond to x and y, lat and lon, lon and lat, etc. The third dimension of <tt>A</tt> is assumed to correspond to time.  The array <tt>ref</tt> is a time series reference signal against which you're comparing each grid cell of <tt>A</tt>. Length of <tt>ref</tt> must match the third dimension of <tt>A</tt>.</p><p><tt>r = xcov3(...,'detrend')</tt> removes the mean and linear trend from each time series before calculating correlation. This is recommended for any type of analysis where data values in <tt>A</tt> or the range of values in <tt>ref</tt> are not centered on zero.</p><p><tt>r = xcov3(...,'maxlag',maxlag)</tt> specifies maximum lag as an integer scalar number of time steps. If you specify <tt>maxlag</tt>, the returned cross-correlation sequence ranges from <tt>-maxlag</tt> to <tt>maxlag</tt>. Default <tt>maxlag</tt> is N-1 time steps.</p><p><tt>r = xcov3(...,'mask',mask)</tt> only performs analysis on true grid cells in the mask whose dimensions correspond to the first two (spatial) dimensions of A. The option to apply a mask is intended to minimize processing time if <tt>A</tt> is large.  By default, <b>any</b> <tt>NaN</tt> value in <tt>A</tt> sets the corresponding grid cell in the default mask to <tt>false</tt>.</p><p><tt>[r,rmax,lags] = xcov3(...)</tt> returns the zero-phase correlation coefficient <tt>r</tt>, the maximum correlation coefficient <tt>rmax</tt>, and time lags corresponding to maximum correlation.  A negative <tt>lag</tt> value implies the local time series happens <i>after</i> the reference signal.  A positive <tt>lag</tt> indicates the local phenomena leads the reference signal.</p><h2 id="3">Example 1: Comparison of four artificial signals</h2><p>Consider this simple 2x2 grid with 10,000 time steps.  You want to see if which grid cells vary in time with some reference signal <tt>y</tt>:</p><pre class="codeinput"><span class="comment">% A time vector:</span>
+t = 1:10000;
+
+<span class="comment">% And some reference signal:</span>
+y = sind(t);
+
+<span class="comment">% Build A:</span>
+A = nan(2,2,10000);
+A(1,1,:) = 2*y;            <span class="comment">% 2x ref signal</span>
+A(1,2,:) = sind(t-43);     <span class="comment">% ref with lag of 43 time steps</span>
+A(2,1,:) = randn(size(t)); <span class="comment">% gaussian noise</span>
+A(2,2,:) = -y;             <span class="comment">% perfectly out of phase</span>
+</pre><p>It's not easy to visualize what those four grid cells of <tt>A</tt> are doing, so hopefully this helps: This is a spatial way of looking at what's in <tt>A</tt>:</p><pre>A = [ 2x ref signal       ref with lag of -43 time steps;
+     gaussian noise            perfectly out of phase   ]</pre><p>Now we can see how each grid cell of <tt>A</tt> varies with (or without) <tt>y</tt>:</p><pre class="codeinput">[r0,rmax,lags] = xcov3(A,y);
+</pre><p>The zero-phase correlation looks like this:</p><pre class="codeinput">r0
+</pre><pre class="codeoutput">r0 =
+          1.00          0.36
+         -0.01         -0.50
+</pre><p>That tells us exactly what we already knew.  The top left grid cell of <tt>A</tt> has values that are two times <tt>y</tt>, so its correlation with <tt>y</tt> is a perfect <tt>1.0000</tt>. Similarly, the lower right grid cell of <tt>A</tt> has a time series we defined as <tt>-y</tt>, so its correlation with <tt>y</tt> is <tt>-1.0000</tt>.  The lower left of <tt>A</tt> contains only noise, so it is not very well correlated with <tt>y</tt> at all.  The tricky one is the upper right grid cell of <tt>A</tt>, which has the same signal as <tt>y</tt>, but offset in time by 43 time steps.  Here's a snippet of what <tt>y</tt> and <tt>sind(t-43)</tt> look like:</p><pre class="codeinput">plot(t(1:400),y(1:400),<span class="string">'b'</span>)
+hold <span class="string">on</span>
+plot(t(1:400),sind(t(1:400)-43),<span class="string">'r'</span>)
+xlabel(<span class="string">'time'</span>)
+legend(<span class="string">'reference signal y'</span>,<span class="string">'y with 43 time-step lag'</span>)
+</pre><img vspace="5" hspace="5" src="xcov3_documentation_01.png" alt=""> <p>In the plot above, it's clear that <tt>y</tt> and the time-lagged version of <tt>y</tt> are often going up or down together, but sometimes the time lag means they're not perfectly correlated, thus, the correlation coefficient of <tt>0.73</tt> if we don't take the temporal offset into account.  However, you can also see that if you shift one of the signals by 43 time steps, the two signals would be perfectly correlated.  And in fact, that's clear if we look at the maximum correlation coefficients:</p><pre class="codeinput">rmax
+</pre><pre class="codeoutput">rmax =
+          1.04          0.67
+          0.22          0.56
+</pre><p>We see that if we shift the <tt>A</tt> values around in time, the upper right grid cell of <tt>A</tt> matches the reference time series with a correlation coefficient of 1 (or close to 1), meaning a perfect match.  The signals line up best with these lags:</p><pre class="codeinput">lags
+</pre><pre class="codeoutput">lags =
+      -9721.00       9999.00
+       9976.00       9904.00
+</pre><p>And again, this tells us exactly what we already knew.  The upper left grid cell of <tt>A</tt> matches the reference time series perfectly with zero lag; we intentionally applied a 43 time step lag to the upper right grid cell of <tt>A</tt>; the lower left grid cell is never well-correlated with the reference signal so its lag value is meaningless, and the lower right grid cell of <tt>A</tt> matches the reference signal with a 180 time-step offset (because in this example, offsets conveniently correspond to degrees).</p><h2 id="10">Example 2: Sea Surface Temperatures</h2><p>The example above is intended to give a sense of the theory behind how <tt>xcov3</tt> works, but it doesn't capture the insights of spatiotemporal patterns you can get by applying <tt>xcov3</tt> to real data.  So let's take a look at a sample reanalysis dataset of sea surface temperatures:</p><pre class="codeinput">load <span class="string">pacific_sst</span>
+whos <span class="string">lat</span> <span class="string">lon</span> <span class="string">t</span>
+</pre><pre class="codeoutput">  Name        Size            Bytes  Class     Attributes
+
+  lat        60x1               480  double              
+  lon        55x1               440  double              
+  t         802x1              6416  double              
+
+</pre><p>The sample dataset contains an <tt>sst</tt> matrix which has the following resolutions:</p><pre class="codeinput">mean(diff(lat))
+mean(diff(lon))
+mean(diff(t))
+</pre><pre class="codeoutput">ans =
+         -2.00
+ans =
+          2.00
+ans =
+         30.44
+</pre><p>That is, <tt>sst</tt> is a 2x2 degree grid with monthly temporal resolution.</p><p>I have a hypothesis that sea surface temperatures vary sinusoidally with the seasons. To compare sea surface temperatures with a sinusoid, first create a reference sinusoid that corresponds to months of the year:</p><pre class="codeinput">[~,month,~] = datevec(t);
+ref = sin((month+1)*pi/6);
+
+plot(t,ref)
+xlim([datenum(<span class="string">'jan 1, 1990'</span>) datenum(<span class="string">'jan 1, 1995'</span>)])
+box <span class="string">off</span>
+datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>)
+title <span class="string">' reference time series '</span>
+</pre><img vspace="5" hspace="5" src="xcov3_documentation_02.png" alt=""> <p>The reference signal has a maximum value in February of each year. My hypothesis is that sea surface temperatures in the southern hemisphere should be positively correlated with the reference signal, meaning sea surface temperatures in the southern hemisphere should reach their maximum in February and minimum in August.  The northern hemisphere should exhibit the exact opposite pattern, with maxima each August and minima each February.</p><p>Let's take a look at the correlation between the raw sea surface temperature data and our reference sinusoid.  (Below I'm using <a href="imagescn_documentation.html"><tt>imagescn</tt></a> to create an <tt>imagesc</tt> plot where NaN values are transparent, but you can use <tt>imagesc</tt> or <tt>pcolor</tt> if you prefer.  I'm also using a <a href="cmocean_documentation.html"><tt>cmocean</tt></a> colormap (Thyng et al., 2016), which is divergent and perceptually uniform.)</p><pre class="codeinput">r0 = xcov3(sst,ref);
+
+figure
+imagescn(lon,lat,r0)
+axis <span class="string">xy</span> <span class="string">image</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'zero-phase correlation'</span>)
+caxis([-1 1])
+cmocean <span class="string">balance</span>
+</pre><img vspace="5" hspace="5" src="xcov3_documentation_03.png" alt=""> <p>In the map above, we see that sea surface temperatures seem only <i>slightly</i> correlated with the reference sinusoid. But we've made an oversight!  We forgot to remove the mean from the <tt>sst</tt> dataset, so of course correlation with the sinusoid is weak.  Here's a map of mean sea surface temperature, which contaminated the analysis above:</p><pre class="codeinput">figure
+imagescn(lon,lat,mean(sst,3))
+axis <span class="string">xy</span> <span class="string">image</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'mean temperature'</span>)
+cmocean <span class="string">thermal</span>
+</pre><img vspace="5" hspace="5" src="xcov3_documentation_04.png" alt=""> <p>Before using <tt>xcov3</tt> you can remove the mean manually if you'd like, or you can simply use the <tt>'detrend'</tt> option, which will remove the mean for you.  The <tt>'detrend'</tt> option also removes the long-term (global warming) trend, which is convenient because when the mean and long-term trend are removed, all that's left is the seasonal cycle and inter-annual variability.</p><p>So let's see how sea surface temperature <i>anomalies</i> (rather than absolute values) compare to our reference sinusoid:</p><pre class="codeinput">[r0,rmax,lags] = xcov3(sst,ref,<span class="string">'detrend'</span>);
+
+figure
+imagescn(lon,lat,r0)
+axis <span class="string">xy</span> <span class="string">image</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'zero-phase correlation'</span>)
+caxis([-1 1])
+cmocean <span class="string">balance</span>
+</pre><img vspace="5" hspace="5" src="xcov3_documentation_05.png" alt=""> <p>Wow! Now that's some clear evidence that sea surface temperatures appear to vary seasonally. And as expected, positive correlation with the reference sinusoid is apparent in the southern hemisphere, meaning the southern hemisphere sea surface temperatures reach their maximum around Februrary and minimum around August.  The northern hemisphere is almost perfectly anti-correlated with the southern hemisphere. Near the equator there is very little correlation with the reference sinusoid.  But perhaps the phase we chose for the reference signal does not perfectly match the data.  If we move the reference signal around through time, what's the best match each grid cell can attain with the reference sinusoid?</p><pre class="codeinput">figure
+imagescn(lon,lat,rmax)
+axis <span class="string">xy</span> <span class="string">image</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'maximum correlation'</span>)
+caxis([-1 1])
+cmocean <span class="string">balance</span>
+</pre><img vspace="5" hspace="5" src="xcov3_documentation_06.png" alt=""> <p>The map above shows us that nearly the whole Pacific Ocean has some sinusoidal variability. We can find the phase of the best-matching sinusoid by looking at the lags:</p><pre class="codeinput">figure
+imagescn(lon,lat,lags)
+axis <span class="string">xy</span> <span class="string">image</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'lags (months)'</span>)
+</pre><img vspace="5" hspace="5" src="xcov3_documentation_07.png" alt=""> <p>The map above appears to be junk.  That grid cell near (180W,4S) needs about 391 months (32 years) of offset to get the best match with a sinusoid?  Take another look at the maximum correlation map, and you'll see that (180W,4S) is never well correlated with a sinusoid--its sea surface temperatures do not appear to have a seasonal cycle.  And given that a negative offset of 6 months is mathematically the same as a positive 6 month offset with our reference signal, we should actually limit the maximum lags to 6 time steps, which will keep the lags within +/- 6 months:</p><pre class="codeinput">[r0,rmax,lags] = xcov3(sst,ref,<span class="string">'maxlags'</span>,6,<span class="string">'detrend'</span>);
+
+figure
+imagescn(lon,lat,lags)
+axis <span class="string">xy</span> <span class="string">image</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'lags (months)'</span>)
+
+caxis([-6 6])
+cmocean <span class="string">phase</span>
+</pre><img vspace="5" hspace="5" src="xcov3_documentation_08.png" alt=""> <p>The map above shows us that temperature maxima off the coast of Alaska appear to occur at about a six month offset from temperature maxima off the coast of Chile.</p><p>The map above uses the <tt>cmocean</tt> <i>phase</i> colormap because a negative 6 month lag is the same as a positive six month lag in this case, thus we needed a colormap that is the same at the top and bottom.</p><p>Just for kicks, let's overlay the maximum correlation <tt>rmax</tt> as contour lines and how about some national <a href="borders_documentation.html"><tt>borders</tt></a> for context:</p><pre class="codeinput">hold <span class="string">on</span>
+[C,h] = contour(lon,lat,rmax,<span class="string">'color'</span>,0.2*[1 1 1]);
+clabel(C,h,<span class="string">'color'</span>,rgb(<span class="string">'dark gray'</span>),<span class="string">'fontsize'</span>,8,<span class="string">'labelspacing'</span>,300);
+
+borders(<span class="string">'countries'</span>,<span class="string">'facecolor'</span>,rgb(<span class="string">'tan'</span>))
+</pre><img vspace="5" hspace="5" src="xcov3_documentation_09.png" alt=""> <h2 id="20">Author Info</h2><p>The <tt>xcov3</tt> function and supporting documentation were written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas Institute for Geophysics (UTIG), February 2017.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |xcov3| documentation 
+% The |xcov3| function gives a map of covariance between grid cells of a 3D spatiotemporal dataset 
+% and a reference time series. 
+% 
+% See also: <xcorr3_documentation.html |xcorr3|> and |cov|. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax
+% 
+%  r = xcov3(A,ref)
+%  r = xcov3(...,'detrend')
+%  r = xcov3(...,'maxlag',maxlag)
+%  r = xcov3(...,'mask',mask)
+%  [r,rmax,lags] = xcov3(...)
+% 
+%% Description
+% 
+% |r = xcov3(A,ref)| gives a 2D correlation map |r|, which has dimensions corresponding to dimensions 1 and 2 of |A|. The 3D matrix
+% |A| is assumed to have spatial dimensions 1 and 3 which may correspond to x and y, lat and lon, lon and lat, etc. The third
+% dimension of |A| is assumed to correspond to time.  The array |ref| is a time series reference signal against which you're comparing
+% each grid cell of |A|. Length of |ref| must match the third dimension of |A|. 
+% 
+% |r = xcov3(...,'detrend')| removes the mean and linear trend from each time series before calculating correlation. This is 
+% recommended for any type of analysis where data values in |A| or the range of values in |ref| are not centered on zero. 
+% 
+% |r = xcov3(...,'maxlag',maxlag)| specifies maximum lag as an integer scalar number of time steps. If you specify |maxlag|, the 
+% returned cross-correlation sequence ranges from |-maxlag| to |maxlag|. Default |maxlag| is N-1 time steps.
+%
+% |r = xcov3(...,'mask',mask)| only performs analysis on true grid cells in the mask whose dimensions correspond to the first 
+% two (spatial) dimensions of A. The option to apply a mask is intended to minimize processing time if |A| is large.  By default, 
+% *any* |NaN| value in |A| sets the corresponding grid cell in the default mask to |false|. 
+% 
+% |[r,rmax,lags] = xcov3(...)| returns the zero-phase correlation coefficient |r|, the maximum correlation coefficient |rmax|, and
+% time lags corresponding to maximum correlation.  A negative |lag| value implies the local time series happens _after_ the reference 
+% signal.  A positive |lag| indicates the local phenomena leads the reference signal. 
+% 
+%% Example 1: Comparison of four artificial signals
+% Consider this simple 2x2 grid with 10,000 time steps.  You want to see if which grid cells vary in time with 
+% some reference signal |y|: 
+
+% A time vector: 
+t = 1:10000; 
+
+% And some reference signal:
+y = sind(t); 
+
+% Build A: 
+A = nan(2,2,10000); 
+A(1,1,:) = 2*y;            % 2x ref signal
+A(1,2,:) = sind(t-43);     % ref with lag of 43 time steps
+A(2,1,:) = randn(size(t)); % gaussian noise
+A(2,2,:) = -y;             % perfectly out of phase 
+
+%% 
+% It's not easy to visualize what those four grid cells of |A| are doing, so hopefully 
+% this helps: This is a spatial way of looking at what's in |A|: 
+% 
+%  A = [ 2x ref signal       ref with lag of -43 time steps;
+%       gaussian noise            perfectly out of phase   ]
+% 
+% Now we can see how each grid cell of |A| varies with (or without) |y|: 
+ 
+[r0,rmax,lags] = xcov3(A,y); 
+
+%% 
+% The zero-phase correlation looks like this: 
+
+r0
+
+%% 
+% That tells us exactly what we already knew.  The top left grid cell of |A| has 
+% values that are two times |y|, so its correlation with |y| is a perfect
+% |1.0000|. Similarly, the lower right grid cell of |A| has a time series we defined
+% as |-y|, so its correlation with |y| is |-1.0000|.  The lower left of |A| contains
+% only noise, so it is not very well correlated with |y| at all.  The tricky one is
+% the upper right grid cell of |A|, which has the same signal as |y|, but offset in
+% time by 43 time steps.  Here's a snippet of what |y| and |sind(t-43)| look like: 
+
+plot(t(1:400),y(1:400),'b') 
+hold on
+plot(t(1:400),sind(t(1:400)-43),'r') 
+xlabel('time') 
+legend('reference signal y','y with 43 time-step lag')
+
+%% 
+% In the plot above, it's clear that |y| and the time-lagged version of |y| are often
+% going up or down together, but sometimes the time lag means they're not perfectly
+% correlated, thus, the correlation coefficient of |0.73| if we don't take the temporal
+% offset into account.  However, you can also see that if you shift one of the signals
+% by 43 time steps, the two signals would be perfectly correlated.  And in fact, that's
+% clear if we look at the maximum correlation coefficients: 
+
+rmax
+
+%% 
+% We see that if we shift the |A| values around in time, the upper right grid cell of |A| 
+% matches the reference time series with a correlation coefficient of 1 (or close to 1), 
+% meaning a perfect match.  The signals line up best with these lags: 
+
+lags
+
+%% 
+% And again, this tells us exactly what we already knew.  The upper left grid cell of |A| 
+% matches the reference time series perfectly with zero lag; we intentionally applied a 43
+% time step lag to the upper right grid cell of |A|; the lower left grid cell is never 
+% well-correlated with the reference signal so its lag value is meaningless, and the lower
+% right grid cell of |A| matches the reference signal with a 180 time-step offset (because 
+% in this example, offsets conveniently correspond to degrees). 
+
+%% Example 2: Sea Surface Temperatures 
+% The example above is intended to give a sense of the theory behind how |xcov3| works, 
+% but it doesn't capture the insights of spatiotemporal patterns you can get by applying 
+% |xcov3| to real data.  So let's take a look at a sample reanalysis dataset of sea surface
+% temperatures: 
+
+load pacific_sst
+whos lat lon t
+
+%% 
+% The sample dataset contains an |sst| matrix which has the following resolutions: 
+
+mean(diff(lat))
+mean(diff(lon))
+mean(diff(t))
+
+%% 
+% That is, |sst| is a 2x2 degree grid with monthly temporal resolution.  
+% 
+% I have a hypothesis that sea surface temperatures vary sinusoidally with the seasons.  
+% To compare sea surface temperatures with a sinusoid, first create a reference
+% sinusoid that corresponds to months of the year:
+
+[~,month,~] = datevec(t); 
+ref = sin((month+1)*pi/6); 
+
+plot(t,ref)
+xlim([datenum('jan 1, 1990') datenum('jan 1, 1995')]) 
+box off
+datetick('x','keeplimits')
+title ' reference time series '
+
+%% 
+% The reference signal has a maximum value in February of each year. My hypothesis is that
+% sea surface temperatures in the southern hemisphere should be positively correlated with the 
+% reference signal, meaning sea surface temperatures in the southern hemisphere should reach their
+% maximum in February and minimum in August.  The northern hemisphere should exhibit the
+% exact opposite pattern, with maxima each August and minima each February. 
+% 
+% Let's take a look at the correlation between the raw sea surface temperature data and our 
+% reference sinusoid.  (Below I'm using <imagescn_documentation.html |imagescn|> 
+% to create an |imagesc| plot where NaN values are transparent, but you can use |imagesc| or 
+% |pcolor| if you prefer.  I'm also using a <cmocean_documentation.html |cmocean|> colormap 
+% (Thyng et al., 2016), which is divergent and perceptually uniform.) 
+ 
+r0 = xcov3(sst,ref); 
+
+figure
+imagescn(lon,lat,r0)
+axis xy image
+cb = colorbar; 
+ylabel(cb,'zero-phase correlation') 
+caxis([-1 1]) 
+cmocean balance
+
+%% 
+% In the map above, we see that sea surface temperatures seem only _slightly_ correlated with
+% the reference sinusoid. But we've made an oversight!  We forgot to remove the mean from the 
+% |sst| dataset, so of course correlation with the sinusoid is weak.  Here's a map of mean sea
+% surface temperature, which contaminated the analysis above: 
+
+figure
+imagescn(lon,lat,mean(sst,3))
+axis xy image
+cb = colorbar; 
+ylabel(cb,'mean temperature') 
+cmocean thermal
+
+%% 
+% Before using |xcov3| you can remove the mean manually if you'd like, or you can simply use 
+% the |'detrend'| option, which will remove the mean for you.  The |'detrend'| option also 
+% removes the long-term (global warming) trend, which is convenient because when the mean and
+% long-term trend are removed, all that's left is the seasonal cycle and inter-annual variability. 
+% 
+% So let's see how sea surface temperature _anomalies_ (rather than absolute values) compare to our
+% reference sinusoid: 
+
+[r0,rmax,lags] = xcov3(sst,ref,'detrend'); 
+
+figure
+imagescn(lon,lat,r0)
+axis xy image
+cb = colorbar; 
+ylabel(cb,'zero-phase correlation') 
+caxis([-1 1]) 
+cmocean balance
+
+%%
+% Wow! Now that's some clear evidence that sea surface temperatures appear to vary seasonally. And
+% as expected, positive correlation with the reference sinusoid is apparent in the southern hemisphere, 
+% meaning the southern hemisphere sea surface temperatures reach their maximum around Februrary and minimum
+% around August.  The northern hemisphere is almost perfectly anti-correlated with the southern hemisphere.
+% Near the equator there is very little correlation with the reference sinusoid.  But perhaps the phase we
+% chose for the reference signal does not perfectly match the data.  If we move the reference signal around 
+% through time, what's the best match each grid cell can attain with the reference sinusoid?
+
+figure
+imagescn(lon,lat,rmax)
+axis xy image
+cb = colorbar; 
+ylabel(cb,'maximum correlation') 
+caxis([-1 1]) 
+cmocean balance
+
+%% 
+% The map above shows us that nearly the whole Pacific Ocean has some sinusoidal variability. We can find
+% the phase of the best-matching sinusoid by looking at the lags: 
+
+figure
+imagescn(lon,lat,lags)
+axis xy image
+cb = colorbar; 
+ylabel(cb,'lags (months)') 
+
+%% 
+% The map above appears to be junk.  That grid cell near (180W,4S) needs about 391 months (32 years) 
+% of offset to get the best match with a sinusoid?  Take another look at the maximum correlation 
+% map, and you'll see that (180W,4S) is never well correlated with a sinusoidREPLACE_WITH_DASH_DASHits sea surface temperatures
+% do not appear to have a seasonal cycle.  And given that a negative offset of 6 months is mathematically the 
+% same as a positive 6 month offset with our reference signal, we should actually limit the maximum lags
+% to 6 time steps, which will keep the lags within +/- 6 months: 
+
+[r0,rmax,lags] = xcov3(sst,ref,'maxlags',6,'detrend'); 
+
+figure
+imagescn(lon,lat,lags)
+axis xy image
+cb = colorbar; 
+ylabel(cb,'lags (months)') 
+
+caxis([-6 6])
+cmocean phase
+
+%% 
+% The map above shows us that temperature maxima off the coast of Alaska appear to occur at about a six month 
+% offset from temperature maxima off the coast of Chile. 
+% 
+% The map above uses the |cmocean| _phase_ colormap because a negative 6 month lag is the same as a positive 
+% six month lag in this case, thus we needed a colormap that is the same at the top and bottom. 
+% 
+% Just for kicks, let's overlay the maximum correlation |rmax| as contour lines and how about some national 
+% <borders_documentation.html |borders|> for context: 
+
+hold on
+[C,h] = contour(lon,lat,rmax,'color',0.2*[1 1 1]); 
+clabel(C,h,'color',rgb('dark gray'),'fontsize',8,'labelspacing',300); 
+
+borders('countries','facecolor',rgb('tan'))
+
+%% Author Info
+% The |xcov3| function and supporting documentation were written by <http://www.chadagreene.com Chad A. Greene> of the University of Texas
+% Institute for Geophysics (UTIG), February 2017. 
+
+
+##### SOURCE END #####
+--></body></html>

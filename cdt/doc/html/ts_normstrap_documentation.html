@@ -1,0 +1,278 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ts_normstrap documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-12"><meta name="DC.source" content="ts_normstrap_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>ts_normstrap</tt> documentation</h1><!--introduction--><p><tt>ts_normstrap</tt> performs a bootstrap uncertainty analysis on a time series given an uncertainty value at each step assuming a normal probability distribution. Bootstrapping means estimating a value at each time point within particular uncertainty bounds with a given probability distribution. Ultimately, the goal is to generate several realizations of the time series and provide confidence intervals at each time step.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>tsb = ts_normstrap(ts)
+tsb = ts_normstrap(ts,e)
+tsb = ts_normstrap(ts,E)
+tsb = ts_normstrap(ts,'nboot',nboot)
+[tsb,Nts] = ts_normstrap(...)</pre><h2 id="2">Description</h2><p><tt>tsb = ts_normstrap(ts)</tt> calculates confidence intervals for a given timeseries after randomly subsampling vector <tt>ts</tt> 1000 times at each point with a normal probability, assuming an uncertainty of 1 standard deviation of the overall time series <tt>ts</tt>. The output <tt>tbs</tt> is a <tt>length(ts)</tt> x2 matrix containg the +/- 1 standard deviation bounds of time series <tt>ts</tt>. Note that <tt>ts</tt> is a vector without time dimensions as the bounds are returned at the points of query.</p><p><tt>tsb = ts_normstrap(ts,e)</tt> specifies the uncertainty value <tt>e</tt> from which the uncertainty distribution at each step in the vector <tt>ts</tt> is calculated and thereby overrides the default value of 1 standard deviation of <tt>ts</tt>.</p><p><tt>tsb = ts_normstrap(ts,E)</tt> specifies a vector <tt>E</tt> containing uncertainty values at each step from which the uncertainty distribution in vector <tt>ts</tt> is calculated.</p><p><tt>tsb = ts_normstrap(...,'nboot',nboot)</tt> specifies the number of bootstrap samples. Default is 1000, meaning 1000 random time series are calculated.</p><p><tt>[tsb,Nts] = ts_normstrap(...)</tt> also returns the 1000 (or the specified number of) randomly generated time series with given uncertainty.</p><p><tt>[tsb,Nts] = ts_normstrap(...)</tt> also returns the 1000 (or the specified number of) randomly generated time series subsampled with the specified uncertainty.</p><h2 id="3">Example</h2><p>This example performs a bootstrap analysis of a randomly generated time series of 50 points, which we shall assume to be 50 measurements of oxygen isotopes in water with a mean value around -5 permil VSMOW.</p><pre class="codeinput">iso_ts = -5 + randn(50,1);
+
+<span class="comment">% Let's say they were continuously sampled over 50 days in 2018</span>
+t1 = datetime(2018,1,1,8,0,0);
+t = t1:t1+49;
+</pre><p>Let's plot the data</p><pre class="codeinput">figure
+plot(t,iso_ts)
+box <span class="string">off</span>
+axis <span class="string">tight</span>
+ylabel <span class="string">'Oxygen Isotope Composition (permil VSMOW)'</span>
+set(gca,<span class="string">'ydir'</span>,<span class="string">'reverse'</span>) <span class="comment">% flips the direction of the Y-Axis</span>
+</pre><img vspace="5" hspace="5" src="ts_normstrap_documentation_01.png" alt=""> <p>Now we want uncertainty bounds for the time series</p><pre class="codeinput">tsb = ts_normstrap(iso_ts);
+
+<span class="comment">% This will, by default, give uncertainty bounds close the the standard</span>
+<span class="comment">% deviation of the overall |iso_ts| timeseries</span>
+overall_sd = std(iso_ts)
+default_bootstrap_uncertainty = mean(tsb)
+
+<span class="comment">% Let's plot it up on the original plot as a 2-sigma bound (multiply by 2)</span>
+hold <span class="string">on</span>;
+plot(t,iso_ts+2.*tsb,<span class="string">':r'</span>)
+plot(t,iso_ts-2.*tsb,<span class="string">':r'</span>)
+</pre><pre class="codeoutput">overall_sd =
+    0.9011
+default_bootstrap_uncertainty =
+    0.9054
+</pre><img vspace="5" hspace="5" src="ts_normstrap_documentation_02.png" alt=""> <p>Now let's be a little more specific and specify the analytical uncertainty of the oxygen isotopic measurement as 0.1 permil</p><pre class="codeinput">tsb = ts_normstrap(iso_ts,0.1);
+
+specified_bootstrap_uncertainty = mean(tsb)
+</pre><pre class="codeoutput">specified_bootstrap_uncertainty =
+    0.0995
+</pre><p>Let's plot the new, better uncertainty, also as a 2-sigma bound</p><pre class="codeinput">hold <span class="string">on</span>;
+plot(t,iso_ts+2.*tsb,<span class="string">':k'</span>)
+plot(t,iso_ts-2.*tsb,<span class="string">':k'</span>)
+</pre><img vspace="5" hspace="5" src="ts_normstrap_documentation_03.png" alt=""> <p>Now let's compare a low number of bootstrap samples to a high number of samples</p><pre class="codeinput">tsb_low = ts_normstrap(iso_ts,0.1,<span class="string">'nboot'</span>,3);
+tsb_high = ts_normstrap(iso_ts,0.1,<span class="string">'nboot'</span>,500);
+
+low_bootstrap_uncertainty = mean(tsb_low)
+high_bootstrap_uncertainty = mean(tsb_high)
+</pre><pre class="codeoutput">low_bootstrap_uncertainty =
+    0.0897
+high_bootstrap_uncertainty =
+    0.0998
+</pre><p>Let's plot them both now:</p><pre class="codeinput">figure; hold <span class="string">on</span>;
+plot(t,iso_ts)
+box <span class="string">off</span>
+axis <span class="string">tight</span>
+ylabel <span class="string">'Oxygen Isotope Composition (permil VSMOW)'</span>
+set(gca,<span class="string">'ydir'</span>,<span class="string">'reverse'</span>) <span class="comment">% flips the direction of the Y-Axis</span>
+
+plot(t,iso_ts+2.*tsb_low,<span class="string">'--r'</span>)
+plot(t,iso_ts-2.*tsb_low,<span class="string">'--r'</span>)
+
+plot(t,iso_ts+2.*tsb_high,<span class="string">'--g'</span>)
+plot(t,iso_ts-2.*tsb_high,<span class="string">'--g'</span>)
+</pre><img vspace="5" hspace="5" src="ts_normstrap_documentation_04.png" alt=""> <p>Notice that sometimes the low number indicates higher uncertainty and sometimes it shows a lower uncertainty. Keep in mind that larger number of bootstrap samples will generally converge to some value.</p><p>For fun, let's plot all the time series that we have generated!</p><pre class="codeinput">[tsb,Nts] = ts_normstrap(iso_ts,0.08,<span class="string">'nboot'</span>,500);
+
+figure;hold <span class="string">on</span>;
+plot(t,Nts,<span class="string">'color'</span>,[0.7 0.7 0.7]) <span class="comment">% In gray</span>
+plot(t,iso_ts,<span class="string">'ko-'</span>,<span class="string">'linewidth'</span>,1.5); <span class="comment">% In black</span>
+</pre><img vspace="5" hspace="5" src="ts_normstrap_documentation_05.png" alt=""> <h2 id="12">Author Info</h2><p>The <tt>ts_normstrap</tt> function and supporting information were written for The Climate Data Toolbox for Matlab by <a href="http://www.kaustubh.info">Kaustubh Thirumalai</a> of the University of Arizona, January 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |ts_normstrap| documentation 
+% |ts_normstrap| performs a bootstrap uncertainty analysis on a
+% time series given an uncertainty value at each step assuming a normal
+% probability distribution. Bootstrapping means estimating a value at each
+% time point within particular uncertainty bounds with a given probability
+% distribution. Ultimately, the goal is to generate several realizations of
+% the time series and provide confidence intervals at each time step. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax
+% 
+%  tsb = ts_normstrap(ts)
+%  tsb = ts_normstrap(ts,e)
+%  tsb = ts_normstrap(ts,E)
+%  tsb = ts_normstrap(ts,'nboot',nboot)
+%  [tsb,Nts] = ts_normstrap(...)
+% 
+%% Description 
+% 
+% |tsb = ts_normstrap(ts)| calculates confidence intervals for a given timeseries
+% after randomly subsampling vector |ts| 1000 times at each point with a
+% normal probability, assuming an uncertainty of 1 standard deviation 
+% of the overall time series |ts|. The output |tbs| is a |length(ts)| x2
+% matrix containg the +/- 1 standard deviation bounds of time series |ts|.
+% Note that |ts| is a vector without time dimensions as the bounds are
+% returned at the points of query.
+% 
+% |tsb = ts_normstrap(ts,e)| specifies the uncertainty value |e| from
+% which the uncertainty distribution at each step in the vector |ts| is calculated 
+% and thereby overrides the default value of 1 standard deviation of |ts|.
+%
+% |tsb = ts_normstrap(ts,E)| specifies a vector |E| containing uncertainty
+% values at each step from which the uncertainty distribution in vector
+% |ts| is calculated. 
+%
+% |tsb = ts_normstrap(...,'nboot',nboot)| specifies the number of bootstrap samples. 
+% Default is 1000, meaning 1000 random time series are calculated.
+%
+% |[tsb,Nts] = ts_normstrap(...)| also returns the 1000 (or the specified
+% number of) randomly generated time series with given uncertainty.
+%
+% |[tsb,Nts] = ts_normstrap(...)| also returns the 1000 (or the specified
+% number of) randomly generated time series subsampled with the specified
+% uncertainty.
+%
+%% Example
+% This example performs a bootstrap analysis of a randomly generated
+% time series of 50 points, which we shall assume to be 50 measurements
+% of oxygen isotopes in water with a mean value around -5 permil VSMOW.
+
+iso_ts = -5 + randn(50,1);
+
+% Let's say they were continuously sampled over 50 days in 2018
+t1 = datetime(2018,1,1,8,0,0);
+t = t1:t1+49;
+
+%% 
+% Let's plot the data
+
+figure
+plot(t,iso_ts) 
+box off
+axis tight
+ylabel 'Oxygen Isotope Composition (permil VSMOW)'
+set(gca,'ydir','reverse') % flips the direction of the Y-Axis
+
+%% 
+% Now we want uncertainty bounds for the time series
+
+tsb = ts_normstrap(iso_ts);
+
+% This will, by default, give uncertainty bounds close the the standard
+% deviation of the overall |iso_ts| timeseries
+overall_sd = std(iso_ts)
+default_bootstrap_uncertainty = mean(tsb)
+
+% Let's plot it up on the original plot as a 2-sigma bound (multiply by 2)
+hold on;
+plot(t,iso_ts+2.*tsb,':r')
+plot(t,iso_ts-2.*tsb,':r')
+
+%% 
+% Now let's be a little more specific and specify the analytical
+% uncertainty of the oxygen isotopic measurement as 0.1 permil
+
+tsb = ts_normstrap(iso_ts,0.1);
+
+specified_bootstrap_uncertainty = mean(tsb)
+
+%%
+% Let's plot the new, better uncertainty, also as a 2-sigma bound
+
+hold on;
+plot(t,iso_ts+2.*tsb,':k')
+plot(t,iso_ts-2.*tsb,':k')
+
+%% 
+% Now let's compare a low number of bootstrap samples to a high number of
+% samples
+
+tsb_low = ts_normstrap(iso_ts,0.1,'nboot',3);
+tsb_high = ts_normstrap(iso_ts,0.1,'nboot',500);
+
+low_bootstrap_uncertainty = mean(tsb_low)
+high_bootstrap_uncertainty = mean(tsb_high)
+
+%% 
+% Let's plot them both now:
+
+figure; hold on;
+plot(t,iso_ts) 
+box off
+axis tight
+ylabel 'Oxygen Isotope Composition (permil VSMOW)'
+set(gca,'ydir','reverse') % flips the direction of the Y-Axis
+
+plot(t,iso_ts+2.*tsb_low,'REPLACE_WITH_DASH_DASHr')
+plot(t,iso_ts-2.*tsb_low,'REPLACE_WITH_DASH_DASHr')
+
+plot(t,iso_ts+2.*tsb_high,'REPLACE_WITH_DASH_DASHg')
+plot(t,iso_ts-2.*tsb_high,'REPLACE_WITH_DASH_DASHg')
+
+%%
+% Notice that sometimes the low number indicates higher uncertainty and
+% sometimes it shows a lower uncertainty. Keep in mind that larger number
+% of bootstrap samples will generally converge to some value.
+
+%%
+% For fun, let's plot all the time series that we have generated!
+
+[tsb,Nts] = ts_normstrap(iso_ts,0.08,'nboot',500);
+
+figure;hold on;
+plot(t,Nts,'color',[0.7 0.7 0.7]) % In gray
+plot(t,iso_ts,'ko-','linewidth',1.5); % In black
+
+%% Author Info
+% The |ts_normstrap| function and supporting information were written for 
+% The Climate Data Toolbox for Matlab by 
+% <http://www.kaustubh.info Kaustubh Thirumalai> of the University of 
+% Arizona, January 2019.
+
+##### SOURCE END #####
+--></body></html>

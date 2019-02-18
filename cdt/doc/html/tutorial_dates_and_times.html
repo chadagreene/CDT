@@ -1,0 +1,307 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Dates and times</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-16"><meta name="DC.source" content="tutorial_dates_and_times.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Dates and times</h1><!--introduction--><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><p>There are several different ways to work with dates and times in Matlab. This tutorial reviews the different date formats and discusses the relative strengths and weaknesses associated with each in the context of Earth science data.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Intro and Overview</a></li><li><a href="#4"><tt>datenum</tt></a></li><li><a href="#5"><tt>datestr</tt></a></li><li><a href="#7"><tt>datevec</tt></a></li><li><a href="#10"><tt>datetime</tt></a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Intro and Overview</h2><p>As an example, we'll consider the way time is packaged in <a href="tutorial_netcdf.html">NetCDF</a> format. Of course, the simplest way to load times from NetCDF files is to use the CDT function <a href="ncdateread_documentation.html"><tt>ncdateread</tt></a>, but this tutorial concerns what's going on behind the scenes of <tt>ncdateread</tt>, so we'll start with the raw time format as it's packaged in the example .nc file.</p><p>Begin by reading the time array:</p><pre class="codeinput">t = ncread(<span class="string">'ERA_Interim_2017.nc'</span>,<span class="string">'time'</span>)
+</pre><pre class="codeoutput">t =
+  12&times;1 int32 column vector
+   1025628
+   1026372
+   1027044
+   1027788
+   1028508
+   1029252
+   1029972
+   1030716
+   1031460
+   1032180
+   1032924
+   1033644
+</pre><p>At this point, you may feel somewhat bewildered. What are all those numbers? Use <tt>ncdisp</tt> to get some insight:</p><pre class="codeinput">ncdisp(<span class="string">'ERA_Interim_2017.nc'</span>,<span class="string">'time'</span>)
+</pre><pre class="codeoutput">Source:
+           /home/chad/Documents/MATLAB/github/cdt/cdt_data/ERA_Interim_2017.nc
+Format:
+           64bit
+Dimensions:
+           time = 12    (UNLIMITED)
+Variables:
+    time
+           Size:       12x1
+           Dimensions: time
+           Datatype:   int32
+           Attributes:
+                       units     = 'hours since 1900-01-01 00:00:00.0'
+                       long_name = 'time'
+                       calendar  = 'gregorian'
+</pre><p>That tells us the units of <tt>time</tt> are</p><pre>units = 'hours since 1900-01-01 00:00:00.0'</pre><p>Sometimes the units might be days since 1971 or years since the Big Bang or seconds since I was born, so always be sure to check the units.</p><p>Time in units of hours since the year 1900 is not very intuitive to understand, so I recommend developing a habit of using either the <a href="https://www.mathworks.com/help/matlab/ref/datenum.html"><tt>datenum</tt></a> or <a href="https://www.mathworks.com/help/matlab/ref/datetime.html"><tt>datetime</tt></a> format consistently. Matlab makes it pretty easy to switch between <tt>datenum</tt> and <tt>datetime</tt> formats, but they each have their strengths and weaknesses. Here's a breakdown:</p><div><ul><li><tt>datenum</tt>: The units are simply the number of days since January 1 of the year 0 AD, and this was the standard date format in Matlab for decades. If you type <tt>now</tt> into your command window it will say something like <tt>ans = 7.3740e+5</tt> because it's been over 737,000 days since Jesus was born. Use <a href="https://www.mathworks.com/help/matlab/ref/datestr.html"><tt>datestr</tt></a>, <a href="https://www.mathworks.com/help/matlab/ref/datevec.html"><tt>datevec</tt></a>, or <tt>datetime</tt> to convert <tt>datenum</tt> to calendar dates.</li><li><tt>datetime</tt>: This format was introduced in Matlab 2014b. Because <tt>datetime</tt> is an object, it is able to be 'smart' in many ways because Matlab always knows it represents time (as opposed to <tt>datenum</tt> which is just a number to Matlab). But because <tt>datetime</tt> is 'smart' it sometimes has unexpected behavior or incompatibilities, in which case <tt>datenum</tt> might just be a better choice.</li></ul></div><p>For our example file, remember that <tt>t</tt> represents the number of hours since the strike of midnight on New Years Day, 1900. That's what all those numbers in <tt>t</tt> are.</p><h2 id="4"><tt>datenum</tt></h2><p>To convert those hours to <tt>datenum</tt> format, use 1900,1,1 as the date and put <tt>t</tt> in the hours place.</p><p>Also, the <tt>time</tt> variable in the NetCDF file was in int32 format, which <tt>datenum</tt> does not accept. So convert <tt>t</tt> to double when calling <tt>datenum</tt>:</p><pre class="codeinput">t = datenum(1900,1,1,double(t),0,0)
+</pre><pre class="codeoutput">t =
+     736696.50
+     736727.50
+     736755.50
+     736786.50
+     736816.50
+     736847.50
+     736877.50
+     736908.50
+     736939.50
+     736969.50
+     737000.50
+     737030.50
+</pre><h2 id="5"><tt>datestr</tt></h2><p>Those are date numbers, and they don't make much sense to us humans. But already we can see something interesting: The datenums are not integers - they each end in <tt>.5</tt>, meaning the times correspond to noon on each day. To understand what these datenums mean, simply put them into the <tt>datestr</tt> function:</p><pre class="codeinput">datestr(t)
+</pre><pre class="codeoutput">ans =
+  12&times;20 char array
+    '01-Jan-2017 12:00:00'
+    '01-Feb-2017 12:00:00'
+    '01-Mar-2017 12:00:00'
+    '01-Apr-2017 12:00:00'
+    '01-May-2017 12:00:00'
+    '01-Jun-2017 12:00:00'
+    '01-Jul-2017 12:00:00'
+    '01-Aug-2017 12:00:00'
+    '01-Sep-2017 12:00:00'
+    '01-Oct-2017 12:00:00'
+    '01-Nov-2017 12:00:00'
+    '01-Dec-2017 12:00:00'
+</pre><p>That tells us exactly what we expected: This monthly data corresponds to noon on the first day of each month in 2017.</p><h2 id="7"><tt>datevec</tt></h2><p>Another useful format is called <tt>datevec</tt>. Date vectors can be very helpful, especially when you want to analyze only the data, say, associated with the month of September. Date vectors give you the year, month, and day (and hour, minute, and second, if you wish) associated with any given times <tt>t</tt>. Here's how to get date vectors from a datnum array:</p><pre class="codeinput">[year, month, day] = datevec(t);
+</pre><p>With that, we now know the year, month, and day of each time <tt>t</tt>. Here they are, displayed all together:</p><pre class="codeinput">[year month day]
+</pre><pre class="codeoutput">ans =
+       2017.00          1.00          1.00
+       2017.00          2.00          1.00
+       2017.00          3.00          1.00
+       2017.00          4.00          1.00
+       2017.00          5.00          1.00
+       2017.00          6.00          1.00
+       2017.00          7.00          1.00
+       2017.00          8.00          1.00
+       2017.00          9.00          1.00
+       2017.00         10.00          1.00
+       2017.00         11.00          1.00
+       2017.00         12.00          1.00
+</pre><p>The reason this is useful, is it's now very easy to get all the indices of dates corresponding to a given month. For example, here are all the indices corresponding to any September data:</p><pre class="codeinput">ind = month==9
+</pre><pre class="codeoutput">ind =
+  12&times;1 logical array
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   0
+   1
+   0
+   0
+   0
+</pre><h2 id="10"><tt>datetime</tt></h2><p>If you'd like to convert datenum to datetime format, simply put <tt>t</tt> into the <tt>datetime</tt> function, and tell it you want to convert from datenum:</p><pre class="codeinput">t = datetime(t,<span class="string">'ConvertFrom'</span>,<span class="string">'datenum'</span>)
+</pre><pre class="codeoutput">t = 
+  12&times;1 datetime array
+   01-Jan-2017 12:00:00
+   01-Feb-2017 12:00:00
+   01-Mar-2017 12:00:00
+   01-Apr-2017 12:00:00
+   01-May-2017 12:00:00
+   01-Jun-2017 12:00:00
+   01-Jul-2017 12:00:00
+   01-Aug-2017 12:00:00
+   01-Sep-2017 12:00:00
+   01-Oct-2017 12:00:00
+   01-Nov-2017 12:00:00
+   01-Dec-2017 12:00:00
+</pre><p>Converting back to datenum is this easy:</p><pre class="codeinput">t = datenum(t)
+</pre><pre class="codeoutput">t =
+     736696.50
+     736727.50
+     736755.50
+     736786.50
+     736816.50
+     736847.50
+     736877.50
+     736908.50
+     736939.50
+     736969.50
+     737000.50
+     737030.50
+</pre><h2 id="12">Author Info</h2><p>This tutorial was written by Chad A. Greene for the Climate Data Toolbox for Matlab, February 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Dates and times 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+% 
+% There are several different ways to work with dates and times in
+% Matlab. This tutorial reviews the different date formats and discusses
+% the relative strengths and weaknesses associated with each in the context
+% of Earth science data. 
+
+%% Intro and Overview 
+% As an example, we'll consider the way time is packaged in <tutorial_netcdf.html NetCDF>
+% format. Of course, the simplest way to load times from NetCDF files is to
+% use the CDT function <ncdateread_documentation.html |ncdateread|>, but
+% this tutorial concerns what's going on behind the scenes of |ncdateread|,
+% so we'll start with the raw time format as it's packaged in the example
+% .nc file. 
+% 
+% Begin by reading the time array: 
+
+t = ncread('ERA_Interim_2017.nc','time')
+
+%% 
+% At this point, you may feel somewhat bewildered. What are all those
+% numbers? Use |ncdisp| to get some insight: 
+
+ncdisp('ERA_Interim_2017.nc','time')
+
+%%  
+% That tells us the units of |time| are 
+% 
+%  units = 'hours since 1900-01-01 00:00:00.0'
+% 
+% Sometimes the units might be days since 1971 or years since the Big Bang
+% or seconds since I was born, so always be sure to check the units. 
+% 
+% Time in units of hours since the year 1900 is not very intuitive to 
+% understand, so I recommend developing a habit of using either the <https://www.mathworks.com/help/matlab/ref/datenum.html
+% |datenum|> or <https://www.mathworks.com/help/matlab/ref/datetime.html |datetime|> 
+% format consistently. Matlab makes it pretty easy to switch between
+% |datenum| and |datetime| formats, but they each have their strengths and 
+% weaknesses. Here's a breakdown: 
+% 
+% * |datenum|: The units are simply the number of days since January 1 of the year 0 AD, 
+% and this was the standard date format in Matlab for decades. 
+% If you type |now| into your command window it will say something like |ans = 7.3740e+5|
+% because it's been over 737,000 days since Jesus was born. Use 
+% <https://www.mathworks.com/help/matlab/ref/datestr.html |datestr|>, 
+% <https://www.mathworks.com/help/matlab/ref/datevec.html |datevec|>, or 
+% |datetime| to convert |datenum| to calendar dates. 
+% * |datetime|: This format was introduced in Matlab 2014b. Because |datetime| is an 
+% object, it is able to be 'smart' in many ways because Matlab always knows it represents
+% time (as opposed to |datenum| which is just a number to Matlab). But because 
+% |datetime| is 'smart' it sometimes has unexpected behavior or incompatibilities, 
+% in which case |datenum| might just be a better choice. 
+% 
+% For our example file, remember that |t| represents the number of hours since
+% the strike of midnight on New Years Day, 1900. That's what all those
+% numbers in |t| are. 
+%% |datenum|
+% To convert those hours to |datenum| format, use 1900,1,1 as the date and 
+% put |t| in the hours place. 
+% 
+% Also, the |time| variable in the NetCDF file was in int32 format, which 
+% |datenum| does not accept. So convert |t| to double when calling |datenum|: 
+
+t = datenum(1900,1,1,double(t),0,0)
+
+%% |datestr|
+% Those are date numbers, and they don't make much sense to us humans. But 
+% already we can see something interesting: The datenums are not integers - 
+% they each end in |.5|, meaning the times correspond to noon on each day. 
+% To understand what these datenums mean, simply put them into the |datestr| 
+% function: 
+
+datestr(t) 
+
+%% 
+% That tells us exactly what we expected: This monthly data corresponds to 
+% noon on the first day of each month in 2017. 
+
+%% |datevec|
+% Another useful format is called |datevec|. Date vectors can be very helpful, especially when you want to analyze 
+% only the data, say, associated with the month of September. Date vectors
+% give you the year, month, and day (and hour, minute, and second, if you
+% wish) associated with any given times |t|. Here's how to get date vectors
+% from a datnum array: 
+
+[year, month, day] = datevec(t); 
+
+%% 
+% With that, we now know the year, month, and day of each time |t|. Here
+% they are, displayed all together: 
+
+[year month day]
+
+%% 
+% The reason this is useful, is it's now very easy to get all the indices
+% of dates corresponding to a given month. For example, here are all the
+% indices corresponding to any September data: 
+
+ind = month==9
+
+%% |datetime|
+% If you'd like to convert datenum to datetime format, simply put |t| into
+% the |datetime| function, and tell it you want to convert from datenum: 
+
+t = datetime(t,'ConvertFrom','datenum')
+
+%% 
+% Converting back to datenum is this easy: 
+
+t = datenum(t) 
+
+%% Author Info 
+% This tutorial was written by Chad A. Greene for the Climate Data Toolbox 
+% for Matlab, February 2019. 
+
+##### SOURCE END #####
+--></body></html>

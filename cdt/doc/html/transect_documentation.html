@@ -1,0 +1,612 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>transect documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-06"><meta name="DC.source" content="transect_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>transect</tt> documentation</h1><!--introduction--><p><tt>transect</tt> produces a color-scaled transect diagram of oceanographic data from CTD profiles collected at different locations and/or times.</p><p>See also: <a href="transectc_documentation.html"><tt>transectc</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Methods</a></li><li><a href="#4">Examples</a></li><li><a href="#6">Example 1: Simplest form</a></li><li><a href="#7">Example 2: Specify measurement markers:</a></li><li><a href="#9">Example 4: Show the bed</a></li><li><a href="#11">Example 5: Fill in the gaps</a></li><li><a href="#13">Example 6: Extend the domain</a></li><li><a href="#15">Example 7: Make it fancy</a></li><li><a href="#20">Converting ODV text data into a cell array</a></li><li><a href="#29">Plot a single cast</a></li><li><a href="#30">Plot multiple casts with the transect function</a></li><li><a href="#33">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>transect(x,d,v)
+transect(...,'LineProperty',Value)
+transect(...,'bed',BedDepth)
+transect(...,'bedcolor',ColorSpec)
+transect(...,'extrap')
+transect(...,'interp','InterpMethod)
+transect(...,'di',di)
+transect(...,'xi',xi)
+[h_trans,h_marker,h_bed] = transect(...)</pre><h2 id="2">Description</h2><p><tt>transect(x,d,v</tt> creates a color-scaled transect diagram of the variable <tt>v</tt> at the horizontal locations (or times) <tt>x</tt> and depths <tt>d</tt>. <tt>x</tt> must be a numeric array of values indicating the locations or times of each CTD profile. Inputs <tt>d</tt> and <tt>v</tt> must each be cell arrays containing depths and measurements at each CTD location. (See the section below on converting data to cell arrays.)</p><p><tt>transect(...,'LineProperty',Value)</tt> sets the line or marker style for each datapoint. By default, each datapoint is indicated by a black dot, but profiles can just as easily be indicated with different marker types or lines of specified color, style, thickness, etc.</p><p><tt>transect(...,'bed',BedDepth)</tt> specifies bed depths to create a patch object indicating the bed profile along the transect.</p><p><tt>transect(...,'bedcolor',ColorSpec)</tt> specifies color of the bed. Default <tt>bedcolor</tt> is black.</p><p><tt>transect(...,'extrap')</tt> turns on the option to extrapolate beyond the extents of data. By default, transect does not extrapolate, but the option is available to fill in gaps, such as between lowest datapoint and the seabed.</p><p><tt>transect(...,'interp','InterpMethod)</tt> specifies an interpolation method (see the Methods section below). Default is <tt>'linear'</tt>.</p><p><tt>transect(...,'di',di)</tt> specifies interpolation depths <tt>di</tt>. By default, <tt>transect</tt> creates a grid by interpolating to 1000 equally-spaced depths between the shallowest and deepest measurement.</p><p><tt>transect(...,'xi',xi)</tt> specifies interpolation locations (or times) <tt>xi</tt>. By default, <tt>transect</tt> interpolates to 2000 equally-spaced points <tt>xi</tt> between the minimum and maximum values of <tt>x</tt>.</p><p><tt>[h_trans,h_marker,h_bed] = transect(...)</tt> returns handles of the transect plot, the markers, and the bed patch object.</p><h2 id="3">Methods</h2><p>This function interpolates twice to create a gridded profile of variable <tt>v</tt>. The first round interpolates the data from each CTD profile to equally- spaced depths <tt>di</tt>. The second round interpolates horizontally to equally-spaced locations or times <tt>xi</tt>. By default, both interpolations are linear and no extrapolation is performed.</p><h2 id="4">Examples</h2><p>The examples below use some Argo data that you can load like this:</p><pre class="codeinput">load <span class="string">example_ctd</span>
+
+whos <span class="comment">% displays the names and sizes of each variable</span>
+</pre><pre class="codeoutput">  Name      Size            Bytes  Class     Attributes
+
+  P         1x95            25152  cell                
+  S         1x95            25152  cell                
+  T         1x95            25152  cell                
+  bed       1x95              760  double              
+  x         1x95              760  double              
+
+</pre><p>The Argo data contain 95 profiles taken as the float drifted along. Each profile was taken at a location in <tt>x</tt>, the corresponding bed depths are given by <tt>bed</tt> and the temperatures <tt>T</tt> and salinities <tt>S</tt> are in cell arrays at the corresponding pressures <tt>P</tt>.</p><h2 id="6">Example 1: Simplest form</h2><p>Here's a simple transect of temperature data T taken at locations x and depths P:</p><pre class="codeinput">transect(x,P,T)
+
+xlabel <span class="string">'distance along transect (km)'</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+</pre><img vspace="5" hspace="5" src="transect_documentation_01.png" alt=""> <h2 id="7">Example 2: Specify measurement markers:</h2><p>Same as above, but this time make the markers small gray dots:</p><pre class="codeinput">transect(x,P,T,<span class="string">'color'</span>,rgb(<span class="string">'gray'</span>),<span class="string">'markersize'</span>,2)
+
+xlabel <span class="string">'distance along transect (km)'</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+</pre><img vspace="5" hspace="5" src="transect_documentation_02.png" alt=""> <p>Or instead of markers, you can make each profile its own line. Below the profiles are indicated by red dashed lines:</p><pre class="codeinput">transect(x,P,T,<span class="string">'marker'</span>,<span class="string">'none'</span>,<span class="string">'linestyle'</span>,<span class="string">'--'</span>,<span class="string">'color'</span>,<span class="string">'r'</span>)
+
+xlabel <span class="string">'distance along transect (km)'</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+</pre><img vspace="5" hspace="5" src="transect_documentation_03.png" alt=""> <h2 id="9">Example 4: Show the bed</h2><p>To show the bed profile, just enter bed depths corresponding to each <tt>x</tt> value:</p><pre class="codeinput">transect(x,P,T,<span class="string">'bed'</span>,bed)
+
+xlabel <span class="string">'distance along transect (km)'</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+</pre><img vspace="5" hspace="5" src="transect_documentation_04.png" alt=""> <p>Color the bed brown by specifying the RGB values of brown. If you don't know the RGB values off the top of your head, just use the <a href="rgb_documentation.html"><tt>rgb</tt></a> function:</p><pre class="codeinput">transect(x,P,T,<span class="string">'bed'</span>,bed,<span class="string">'bedcolor'</span>,rgb(<span class="string">'brown'</span>))
+
+xlabel <span class="string">'distance along transect (km)'</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+</pre><img vspace="5" hspace="5" src="transect_documentation_05.png" alt=""> <h2 id="11">Example 5: Fill in the gaps</h2><p>Don't like those gaps between the bed and the lowermost data? Or the gap near the surface between in the middle of the profile above? This function lets you extrapolate beyond the underlying data values if you wish, by specifying <tt>'extrap'</tt>:</p><pre class="codeinput">transect(x,P,T,<span class="string">'bed'</span>,bed,<span class="string">'extrap'</span>)
+
+xlabel <span class="string">'distance along transect (km)'</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+
+caxis([-1.9 0.9]) <span class="comment">% sets color axis limits</span>
+</pre><img vspace="5" hspace="5" src="transect_documentation_06.png" alt=""> <p>Keep in mind that it might not be appropriate to extrapolate, depending on your application. Also note that extrapolation to places below the seabed in the lower left hand corner produces some pretty high temperature values, so we had to set the color axes to match the actual oceanographic values.</p><h2 id="13">Example 6: Extend the domain</h2><p>Do you want to extend the domain a little beyond the extents of the underlying data? The data go from 0 to 108 kilometers. Add 5 km on each side by specifying <tt>'xi'</tt> values accordingly:</p><pre class="codeinput"><span class="comment">% Interpolate to every 0.1 km between -5 &amp; 113 km:</span>
+xi = -5:0.1:113;
+
+transect(x,P,T,<span class="string">'extrap'</span>,<span class="string">'xi'</span>,xi)
+
+xlabel <span class="string">'distance along transect (km)'</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+
+caxis([-1.9 0.9]) <span class="comment">% sets color axis limits</span>
+</pre><img vspace="5" hspace="5" src="transect_documentation_07.png" alt=""> <p>Be careful when extending the domain too far past the underying data. We only extrapolated a little past the data in the example above, and the edges are already a bit wonky. Try going more than 5 km and you'll really see some wacky stuff.</p><h2 id="15">Example 7: Make it fancy</h2><p>Combine the options above to little gray dot markers at each measurement, include a bed profile, and set the colormap with <a href="cmocean_documentation.html"><tt>cmocean</tt></a>:</p><pre class="codeinput">transect(x,P,T,<span class="keyword">...</span>
+   <span class="string">'color'</span>,rgb(<span class="string">'gray'</span>),<span class="keyword">...</span><span class="comment"> % gray markers</span>
+   <span class="string">'markersize'</span>,2,<span class="keyword">...</span><span class="comment">      % small dots</span>
+   <span class="string">'bed'</span>,bed,<span class="keyword">...</span><span class="comment">           % seabed elevations</span>
+   <span class="string">'extrap'</span>)
+
+caxis([-1.9 0.9])          <span class="comment">% sets color axis limits</span>
+
+xlabel <span class="string">'distance along transect (km)'</span>
+ylabel <span class="string">'pressure (dbar)'</span>
+cmocean <span class="string">thermal</span>            <span class="comment">% sets the colormap</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'temperature \circC'</span>)
+</pre><img vspace="5" hspace="5" src="transect_documentation_08.png" alt=""> <p>Add white contours for salinity using the <a href="transectc_documentation.html"><tt>transectc</tt></a> function:</p><pre class="codeinput">hold <span class="string">on</span>
+[C,h] = transectc(x,P,S,<span class="string">'w'</span>);
+</pre><img vspace="5" hspace="5" src="transect_documentation_09.png" alt=""> <p>Or label them:</p><pre class="codeinput">delete(h) <span class="comment">% deletes contours from above</span>
+
+[C,h] = transectc(x,P,S,<span class="string">'w'</span>,<span class="string">'ShowText'</span>,<span class="string">'on'</span>,<span class="string">'LabelSpacing'</span>,1000);
+</pre><img vspace="5" hspace="5" src="transect_documentation_10.png" alt=""> <p>Add your favorite salinity contour and make it pea green:</p><pre class="codeinput">[C,h] = transectc(x,P,S,[34.5 34.5]);
+
+h.Color = rgb(<span class="string">'pea green'</span>);
+h.LineWidth = 3;
+</pre><img vspace="5" hspace="5" src="transect_documentation_11.png" alt=""> <pre class="codeinput">clear <span class="comment">% clears previous data before the following example</span>
+</pre><h2 id="20">Converting ODV text data into a cell array</h2><p>For this example, we'll use cruise some data that has been saved as a .txt file by Ocean Data Viewer. The data provided with CDT are a subset of oceanographic profile data from a 2005/2005 cruise off the coast of Antarctica. The full dataset is described on the Australian Antarctic Data Centre's website <a href="http://dx.doi.org/doi:10.4225/15/58058ce3994de">here</a>, but we'll just use the subset that comes with CDT as an example file.</p><p>Begin by loading the example data:</p><pre class="codeinput">D = importdata(<span class="string">'BROKE_cruise_odv.txt'</span>)
+</pre><pre class="codeoutput">D = 
+  struct with fields:
+
+          data: [9220&times;7 double]
+      textdata: {'Stn'  'Lat'  'Lon'  'Pr'  'T'  'S'  'O2'}
+    colheaders: {'Stn'  'Lat'  'Lon'  'Pr'  'T'  'S'  'O2'}
+</pre><p>The <tt>data</tt> field contains seven columns, corresponding to:</p><div><ol><li>station number</li><li>latitude</li><li>longitude</li><li>pressure</li><li>temperature</li><li>salinity</li><li>oxygen</li></ol></div><p>If you open up the BROKE_cruise_odv.txt file, you'll see that the first column contains the number 103, repeated 668 times. That's because station 103 contains 668 temperature, salinity, and oxygen measurements, each at a different pressure (depth). Below the 668 rows of data corresponding to station 103, there are 584 rows corresponding to station 104, and so on. In total, there are 16 unique stations, each with a different number of rows of data.</p><p>Create a 16x1 <tt>stn</tt> array containing the 16 unique station numbers along with the row indices which will allow us to get the locations of those stations:</p><pre class="codeinput"><span class="comment">% Unique station numbers:</span>
+[stn,ind] = unique(D.data(:,1));
+</pre><p>With the indices <tt>ind</tt> corresponding to each station, get the 16 locations of each station like this, because latitude and longitude are the second and third columns of <tt>D.data</tt>:</p><pre class="codeinput">lat = D.data(ind,2);
+lon = D.data(ind,3);
+</pre><p>Here's the greographic track of the ship:</p><pre class="codeinput">figure
+axis([10 140 -75 -10]) <span class="comment">% sets axis limits</span>
+earthimage
+hold <span class="string">on</span>
+plot(lon,lat,<span class="string">'.-'</span>,<span class="string">'color'</span>,rgb(<span class="string">'orange'</span>))
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+</pre><img vspace="5" hspace="5" src="transect_documentation_12.png" alt=""> <p>Zoom in on the figure to see that each CTD station is numbered 103 through 118.</p><pre class="codeinput">text(lon,lat,num2str(stn),<span class="keyword">...</span><span class="comment"> % labels each station</span>
+   <span class="string">'fontsize'</span>,9,<span class="keyword">...</span>
+   <span class="string">'color'</span>,rgb(<span class="string">'orange'</span>))
+
+axis([65 95 -70 -59]) <span class="comment">% sets axis limits</span>
+</pre><img vspace="5" hspace="5" src="transect_documentation_13.png" alt=""> <p>To to put all the measurements into cell arrays, loop through each unique station, finding all the row indicies associated with each station number, like this:</p><pre class="codeinput"><span class="keyword">for</span> k = 1:16
+
+   <span class="comment">% Get indices of station corresponding to stn(k):</span>
+   ind = D.data(:,1)==stn(k);
+
+   <span class="comment">% Put pressure, temperature, etc of this station into cell arrays:</span>
+   Pr{k} = D.data(ind,4);
+   T{k} = D.data(ind,5);
+   S{k} = D.data(ind,6);
+   O2{k} = D.data(ind,7);
+<span class="keyword">end</span>
+</pre><p>Now <tt>T{1}</tt> contains all the temperature measurements for the CTD cast at</p><pre class="codeinput">stn(1)
+</pre><pre class="codeoutput">ans =
+   103
+</pre><p>...station number 103, and <tt>Pr{1}</tt> contains the corresponding pressures.</p><h2 id="29">Plot a single cast</h2><p>Cell arrays allow data of diffent sizes to be stored within a single structure, and that's useful when each CTD cast has a different number of measurements, taken at different depths.</p><p>Given that each cell contains the data from a unique CTD cast, plotting a single cast is relatively straightforward. Here we plot the data from station 110 (<tt>stn(8)</tt>). Temperature is plotted on the first (bottom) axis and salinity is plotted on the second (top) axis.</p><pre class="codeinput">figure
+plot(T{8},Pr{8},<span class="string">'color'</span>,rgb(<span class="string">'deep blue'</span>))
+ax1 = gca;
+set(ax1,<span class="string">'XColor'</span>,rgb(<span class="string">'deep blue'</span>),<span class="keyword">...</span>
+    <span class="string">'YDir'</span>,<span class="string">'reverse'</span>);
+xlabel(<span class="string">'In situ Temperature'</span>)
+ylabel(<span class="string">'Pressure (dbar)'</span>)
+
+ax1_pos = ax1.Position; <span class="comment">% store the position of the first axis.</span>
+ax2 = axes(<span class="string">'Position'</span>,ax1_pos,<span class="keyword">...</span>
+    <span class="string">'XAxisLocation'</span>,<span class="string">'top'</span>,<span class="keyword">...</span>
+    <span class="string">'YAxisLocation'</span>,<span class="string">'right'</span>,<span class="keyword">...</span>
+    <span class="string">'Color'</span>,<span class="string">'none'</span>,<span class="keyword">...</span>
+    <span class="string">'XColor'</span>,rgb(<span class="string">'deep red'</span>),<span class="keyword">...</span>
+    <span class="string">'YTickLabel'</span>,[],<span class="keyword">...</span>
+    <span class="string">'YDir'</span>,<span class="string">'reverse'</span>);
+hold <span class="string">on</span>
+plot(S{8},Pr{8},<span class="string">'Parent'</span>,ax2,<span class="string">'color'</span>,rgb(<span class="string">'pale red'</span>))
+grid <span class="string">on</span>
+xlabel(<span class="string">'Salinity'</span>)
+</pre><img vspace="5" hspace="5" src="transect_documentation_14.png" alt=""> <h2 id="30">Plot multiple casts with the transect function</h2><p>Take the data that is now stored in cell arrays and plot a transect of the temperature and salinity data. Assuming each CTD cast hit the bottom, we can use the maximum pressure at each station as the bed depth:</p><pre class="codeinput"><span class="comment">% Assume max pressure is bed depth:</span>
+maxPress = cellfun(@max,Pr);
+
+figure
+transect(lat,Pr,T,<span class="keyword">...</span>
+    <span class="string">'color'</span>,rgb(<span class="string">'gray'</span>),<span class="keyword">...</span>
+    <span class="string">'marker'</span>,<span class="string">'none'</span>,<span class="keyword">...</span>
+    <span class="string">'linestyle'</span>,<span class="string">'--'</span>,<span class="keyword">...</span>
+    <span class="string">'bed'</span>,maxPress,<span class="keyword">...</span>
+    <span class="string">'extrap'</span>,<span class="keyword">...</span>
+    <span class="string">'bedcolor'</span>,rgb(<span class="string">'charcoal'</span>));
+
+caxis([-1.82 2.02])
+
+cmocean(<span class="string">'thermal'</span>)
+cb = colorbar;
+ylabel(cb,<span class="string">'In situ temperature \circC'</span>)
+xlabel <span class="string">'Latitude (\circN)'</span>
+ylabel <span class="string">'Pressure (dbar)'</span>
+
+<span class="comment">% Label the stations:</span>
+text(lat,zeros(size(lat)),num2str(stn),<span class="keyword">...</span>
+   <span class="string">'vert'</span>,<span class="string">'bottom'</span>,<span class="keyword">...</span><span class="comment"> % pins text labels from their bottoms</span>
+   <span class="string">'horiz'</span>,<span class="string">'center'</span>,<span class="keyword">...</span><span class="comment">% centers the labels</span>
+   <span class="string">'fontsize'</span>,8,<span class="keyword">...</span>
+   <span class="string">'color'</span>,rgb(<span class="string">'gray'</span>))
+</pre><img vspace="5" hspace="5" src="transect_documentation_15.png" alt=""> <p>Add contours of temperatures:</p><pre class="codeinput">hold <span class="string">on</span>
+transectc(lat,Pr,T,<span class="string">'k'</span>,<span class="string">'ShowText'</span>,<span class="string">'on'</span>,<span class="string">'LabelSpacing'</span>,1000);
+</pre><img vspace="5" hspace="5" src="transect_documentation_16.png" alt=""> <p>Highlight the 0 degree isotherm and zoom in on the top 1000 dbar:</p><pre class="codeinput">transectc(lat,Pr,T,[0 0],<span class="string">'w--'</span>);
+
+ylim([0 1000])
+</pre><img vspace="5" hspace="5" src="transect_documentation_17.png" alt=""> <h2 id="33">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by David E. Gwyther of University of Tasmania, and Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |transect| documentation 
+% |transect| produces a color-scaled transect diagram of oceanographic data 
+% from CTD profiles collected at different locations and/or times.  
+% 
+% See also: <transectc_documentation.html |transectc|>.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax 
+% 
+%  transect(x,d,v)
+%  transect(...,'LineProperty',Value)
+%  transect(...,'bed',BedDepth)
+%  transect(...,'bedcolor',ColorSpec)
+%  transect(...,'extrap')
+%  transect(...,'interp','InterpMethod)
+%  transect(...,'di',di)
+%  transect(...,'xi',xi)
+%  [h_trans,h_marker,h_bed] = transect(...)
+% 
+%% Description 
+% 
+% |transect(x,d,v| creates a color-scaled transect diagram of the variable |v|
+% at the horizontal locations (or times) |x| and depths |d|. |x| must be a numeric
+% array of values indicating the locations or times of each CTD profile. Inputs
+% |d| and |v| must each be cell arrays containing depths and measurements at each
+% CTD location. (See the section below on converting data to cell arrays.)
+% 
+% |transect(...,'LineProperty',Value)| sets the line or marker style for each 
+% datapoint. By default, each datapoint is indicated by a black dot, but profiles
+% can just as easily be indicated with different marker types or lines of 
+% specified color, style, thickness, etc. 
+% 
+% |transect(...,'bed',BedDepth)| specifies bed depths to create a patch object
+% indicating the bed profile along the transect. 
+% 
+% |transect(...,'bedcolor',ColorSpec)| specifies color of the bed. Default |bedcolor|
+% is black. 
+% 
+% |transect(...,'extrap')| turns on the option to extrapolate beyond the extents
+% of data. By default, transect does not extrapolate, but the option is available
+% to fill in gaps, such as between lowest datapoint and the seabed. 
+% 
+% |transect(...,'interp','InterpMethod)| specifies an interpolation method (see
+% the Methods section below). Default is |'linear'|.
+% 
+% |transect(...,'di',di)| specifies interpolation depths |di|. By default, |transect|
+% creates a grid by interpolating to 1000 equally-spaced depths between the 
+% shallowest and deepest measurement. 
+% 
+% |transect(...,'xi',xi)| specifies interpolation locations (or times) |xi|. By 
+% default, |transect| interpolates to 2000 equally-spaced points |xi| between the 
+% minimum and maximum values of |x|.  
+% 
+% |[h_trans,h_marker,h_bed] = transect(...)| returns handles of the transect plot, 
+% the markers, and the bed patch object. 
+% 
+%% Methods
+% This function interpolates twice to create a gridded profile of variable 
+% |v|. The first round interpolates the data from each CTD profile to equally-
+% spaced depths |di|. The second round interpolates horizontally to equally-spaced
+% locations or times |xi|. By default, both interpolations are linear and no 
+% extrapolation is performed. 
+% 
+%% Examples
+% The examples below use some Argo data that you can load like this: 
+
+load example_ctd
+
+whos % displays the names and sizes of each variable
+
+%% 
+% The Argo data contain 95 profiles taken as the float drifted along. 
+% Each profile was taken at a location in |x|, the corresponding bed depths
+% are given by |bed| and the temperatures |T| and salinities |S| are in 
+% cell arrays at the corresponding pressures |P|. 
+
+%% Example 1: Simplest form 
+% Here's a simple transect of temperature data T taken at locations x
+% and depths P: 
+
+transect(x,P,T)
+
+xlabel 'distance along transect (km)' 
+ylabel 'pressure (dbar)'
+
+%% Example 2: Specify measurement markers: 
+% Same as above, but this time make the markers small gray dots: 
+
+transect(x,P,T,'color',rgb('gray'),'markersize',2)
+
+xlabel 'distance along transect (km)' 
+ylabel 'pressure (dbar)'
+
+%% 
+% Or instead of markers, you can make each profile its own line. Below the
+% profiles are indicated by red dashed lines: 
+
+transect(x,P,T,'marker','none','linestyle','REPLACE_WITH_DASH_DASH','color','r')
+
+xlabel 'distance along transect (km)' 
+ylabel 'pressure (dbar)'
+
+%% Example 4: Show the bed
+% To show the bed profile, just enter bed depths corresponding to each 
+% |x| value: 
+
+transect(x,P,T,'bed',bed)
+
+xlabel 'distance along transect (km)' 
+ylabel 'pressure (dbar)'
+
+%% 
+% Color the bed brown by specifying the RGB values of brown. If you don't know
+% the RGB values off the top of your head, just use the <rgb_documentation.html |rgb|> 
+% function: 
+
+transect(x,P,T,'bed',bed,'bedcolor',rgb('brown'))
+
+xlabel 'distance along transect (km)' 
+ylabel 'pressure (dbar)'
+
+%% Example 5: Fill in the gaps
+% Don't like those gaps between the bed and the lowermost data? Or the gap
+% near the surface between in the middle of the profile above? This function
+% lets you extrapolate beyond the underlying data values if you wish, by 
+% specifying |'extrap'|: 
+
+transect(x,P,T,'bed',bed,'extrap')
+
+xlabel 'distance along transect (km)' 
+ylabel 'pressure (dbar)'
+
+caxis([-1.9 0.9]) % sets color axis limits
+
+%% 
+% Keep in mind that it might not be appropriate to extrapolate, depending on your 
+% application. Also note that extrapolation to places below the seabed in the 
+% lower left hand corner produces some pretty high temperature values, so we had 
+% to set the color axes to match the actual oceanographic values. 
+
+%% Example 6: Extend the domain
+% Do you want to extend the domain a little beyond the extents of the underlying
+% data? The data go from 0 to 108 kilometers. Add 5 km on each side by 
+% specifying |'xi'| values accordingly: 
+
+% Interpolate to every 0.1 km between -5 & 113 km:
+xi = -5:0.1:113; 
+
+transect(x,P,T,'extrap','xi',xi)
+
+xlabel 'distance along transect (km)' 
+ylabel 'pressure (dbar)'
+
+caxis([-1.9 0.9]) % sets color axis limits
+
+%% 
+% Be careful when extending the domain too far past the underying data. 
+% We only extrapolated a little past the data in the example above, and 
+% the edges are already a bit wonky. Try going more than 5 km and you'll 
+% really see some wacky stuff. 
+
+%% Example 7: Make it fancy
+% Combine the options above to little gray dot markers at each measurement, 
+% include a bed profile, and set the colormap with <cmocean_documentation.html |cmocean|>: 
+
+transect(x,P,T,...
+   'color',rgb('gray'),... % gray markers
+   'markersize',2,...      % small dots
+   'bed',bed,...           % seabed elevations
+   'extrap')
+
+caxis([-1.9 0.9])          % sets color axis limits
+
+xlabel 'distance along transect (km)' 
+ylabel 'pressure (dbar)'
+cmocean thermal            % sets the colormap
+cb = colorbar;
+ylabel(cb,'temperature \circC') 
+
+%% 
+% Add white contours for salinity using the <transectc_documentation.html |transectc|> 
+% function: 
+
+hold on
+[C,h] = transectc(x,P,S,'w'); 
+
+%% 
+% Or label them: 
+
+delete(h) % deletes contours from above
+
+[C,h] = transectc(x,P,S,'w','ShowText','on','LabelSpacing',1000); 
+
+%% 
+% Add your favorite salinity contour and make it pea green: 
+
+[C,h] = transectc(x,P,S,[34.5 34.5]); 
+
+h.Color = rgb('pea green');
+h.LineWidth = 3; 
+
+%% 
+clear % clears previous data before the following example
+%% Converting ODV text data into a cell array
+% For this example, we'll use cruise some data that has been saved as a 
+% .txt file by Ocean Data Viewer. The data provided with CDT are a subset
+% of oceanographic profile data from a 2005/2005 cruise off the coast of
+% Antarctica. The full dataset is described on the Australian Antarctic Data Centre's website
+% <http://dx.doi.org/doi:10.4225/15/58058ce3994de here>, but we'll just 
+% use the subset that comes with CDT as an example file. 
+% 
+% Begin by loading the example data: 
+
+D = importdata('BROKE_cruise_odv.txt')
+
+%% 
+% The |data| field contains seven columns, corresponding to: 
+% 
+% # station number
+% # latitude
+% # longitude 
+% # pressure 
+% # temperature 
+% # salinity 
+% # oxygen
+
+%%
+% If you open up the BROKE_cruise_odv.txt file, you'll see that the first column
+% contains the number 103, repeated 668 times. That's because station 103 contains 668 
+% temperature, salinity, and oxygen measurements, each at a different pressure (depth). 
+% Below the 668 rows of data corresponding to station 103, there are 584 rows corresponding
+% to station 104, and so on. In total, there are 16 unique stations, each with 
+% a different number of rows of data. 
+% 
+% Create a 16x1 |stn| array containing the 16 unique station numbers along with
+% the row indices which will allow us to get the locations of those stations: 
+
+% Unique station numbers: 
+[stn,ind] = unique(D.data(:,1)); 
+
+%% 
+% With the indices |ind| corresponding to each station, get the 16 locations
+% of each station like this, because latitude and longitude are the second 
+% and third columns of |D.data|: 
+
+lat = D.data(ind,2); 
+lon = D.data(ind,3); 
+
+%% 
+% Here's the greographic track of the ship: 
+
+figure
+axis([10 140 -75 -10]) % sets axis limits 
+earthimage
+hold on
+plot(lon,lat,'.-','color',rgb('orange')) 
+xlabel 'longitude'
+ylabel 'latitude'
+
+%% 
+% Zoom in on the figure to see that each CTD station is 
+% numbered 103 through 118. 
+
+text(lon,lat,num2str(stn),... % labels each station 
+   'fontsize',9,...
+   'color',rgb('orange'))
+
+axis([65 95 -70 -59]) % sets axis limits 
+
+%% 
+% To to put all the measurements into cell arrays, loop through each unique station, 
+% finding all the row indicies associated with each station number, like this: 
+
+for k = 1:16
+   
+   % Get indices of station corresponding to stn(k): 
+   ind = D.data(:,1)==stn(k); 
+   
+   % Put pressure, temperature, etc of this station into cell arrays: 
+   Pr{k} = D.data(ind,4); 
+   T{k} = D.data(ind,5); 
+   S{k} = D.data(ind,6); 
+   O2{k} = D.data(ind,7); 
+end
+
+%% 
+% Now |T{1}| contains all the temperature measurements for the CTD cast 
+% at 
+
+stn(1) 
+
+%%
+% ...station number 103, and |Pr{1}| contains the corresponding pressures. 
+
+%% Plot a single cast
+% Cell arrays allow data of diffent sizes to be stored within a
+% single structure, and that's useful when each CTD cast has a different
+% number of measurements, taken at different depths. 
+% 
+% Given that each cell contains the data from a unique CTD cast, plotting
+% a single cast is relatively straightforward. Here we plot the data from 
+% station 110 (|stn(8)|). Temperature is plotted on the first (bottom) axis 
+% and salinity is plotted on the second (top) axis.
+
+figure
+plot(T{8},Pr{8},'color',rgb('deep blue'))
+ax1 = gca;
+set(ax1,'XColor',rgb('deep blue'),...
+    'YDir','reverse');
+xlabel('In situ Temperature')
+ylabel('Pressure (dbar)')
+
+ax1_pos = ax1.Position; % store the position of the first axis.
+ax2 = axes('Position',ax1_pos,...
+    'XAxisLocation','top',...
+    'YAxisLocation','right',...
+    'Color','none',...
+    'XColor',rgb('deep red'),...
+    'YTickLabel',[],...
+    'YDir','reverse');
+hold on
+plot(S{8},Pr{8},'Parent',ax2,'color',rgb('pale red'))
+grid on
+xlabel('Salinity')
+
+%% Plot multiple casts with the transect function
+% Take the data that is now stored in cell arrays and plot a transect of
+% the temperature and salinity data. Assuming each CTD cast hit the bottom, we 
+% can use the maximum pressure at each station as the bed depth: 
+
+% Assume max pressure is bed depth: 
+maxPress = cellfun(@max,Pr);
+
+figure
+transect(lat,Pr,T,...
+    'color',rgb('gray'),...
+    'marker','none',...
+    'linestyle','REPLACE_WITH_DASH_DASH',...
+    'bed',maxPress,...
+    'extrap',...
+    'bedcolor',rgb('charcoal'));
+ 
+caxis([-1.82 2.02])
+
+cmocean('thermal')
+cb = colorbar;
+ylabel(cb,'In situ temperature \circC')
+xlabel 'Latitude (\circN)' 
+ylabel 'Pressure (dbar)'
+
+% Label the stations: 
+text(lat,zeros(size(lat)),num2str(stn),...
+   'vert','bottom',... % pins text labels from their bottoms
+   'horiz','center',...% centers the labels
+   'fontsize',8,...
+   'color',rgb('gray'))
+
+%%
+% Add contours of temperatures:
+
+hold on
+transectc(lat,Pr,T,'k','ShowText','on','LabelSpacing',1000);
+
+%% 
+% Highlight the 0 degree isotherm and zoom in on the top 1000 dbar: 
+
+transectc(lat,Pr,T,[0 0],'wREPLACE_WITH_DASH_DASH');
+
+ylim([0 1000])
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by David E. Gwyther 
+% of University of Tasmania, and Chad A. Greene of the University of Texas at Austin. 
+
+##### SOURCE END #####
+--></body></html>

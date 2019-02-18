@@ -1,0 +1,254 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>windstress documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-11"><meta name="DC.source" content="windstress_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>windstress</tt> documentation</h1><!--introduction--><p>The <tt>windstress</tt> function estimates wind stress on the ocean from wind speed.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1a: Estimate wind stress from reanalysis data</a></li><li><a href="#4">Example 1b: Be careful with components</a></li><li><a href="#6">Example 2: (Theoretical) effect of sea ice</a></li><li><a href="#8">References</a></li><li><a href="#9">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>Tau = windstress(u10)
+[Taux,Tauy] = windstress(u10,v10)
+[...] = windstress(...,'Cd',Cd)
+[...] = windstress(...,'ci',seaIce)
+[...] = windstress(...,'rho',airDensity)</pre><h2 id="2">Description</h2><p><tt>Tau = windstress(u10)</tt> estimates the wind stress (in pascals) imparted on the ocean by the wind speed (in meters per second) 10 m above the surface. Output <tt>Tau</tt> is the same size as input <tt>u10</tt>.</p><p><tt>[Taux,Tauy] = windstress(u10,v10)</tt> simultaneously computes zonal and meridional components of wind stress.</p><p><tt>[...] = windstress(...,'Cd',Cd)</tt> specifies a coefficient of friction <tt>Cd</tt>. Default <tt>Cd</tt> is <tt>1.25e-3</tt>, which is a global average (<a href="http://dx.doi.org/10.1175/2007JCLI1825.1">Kara et al., 2007</a>) but in reality <tt>Cd</tt> can vary quite a bit in space and time. <tt>Cd</tt> can be a scalar or a vector, 2D matrix, or 3D matrix the same size as <tt>u10</tt> (and <tt>v10</tt> if <tt>v10</tt> is included).</p><p><tt>[...] = windstress(...,'ci',seaIce)</tt> specifies sea ice concentration for estimation of <tt>Cd</tt> as given by <a href="http://dx.doi.org/10.1007/s10546-005-1445-8">L&uuml;pkes and Birnbaum, 2005</a>. Input <tt>seaIce</tt> is a fraction of sea ice cover and must be in the range 0 to 1 inclusive. <tt>seaIce</tt> can be a scalar or a vector, 2D matrix, or 3D matrix the same size as <tt>u10</tt> (and <tt>v10</tt> if <tt>v10</tt> is included).</p><p><tt>[...] = windstress(...,'rho',airDensity)</tt> specifies air density, which can be a scalar or a vector, 2D matrix, or 3D matrix the same size as <tt>u10</tt> (and <tt>v10</tt> if <tt>v10</tt> is included). Default value of <tt>airDensity</tt> is 1.225 kg/m^3.</p><h2 id="3">Example 1a: Estimate wind stress from reanalysis data</h2><p>Load the sample <tt>pacific_wind.mat</tt>, then plot the wind stress on the ocean resulting from the wind. Below I'm using the <tt>sst</tt> dataset to mask out land values, but you could just as easily use <a href="island_documentation.html"><tt>island</tt></a> if there weren't already this easy way to distinguish land from ocean in the dataset.</p><p>We'll use <a href="imagescn_documentation.html"><tt>imagescn</tt></a> to plot wind stress and <a href="quiversc_documentation.html"><tt>quiversc</tt></a> to plot the wind vectors:</p><pre class="codeinput">load <span class="string">pacific_wind</span>
+
+<span class="comment">% Calculate magnitude of wind stress from wind speed</span>
+Tau = windstress(hypot(u10,v10));
+
+<span class="comment">% Mask-out land values by setting them to NaN:</span>
+Tau(isnan(sst)) = NaN;
+
+<span class="comment">% Plot with imagesn, imagesc, or pcolor:</span>
+figure
+imagescn(lon,lat,Tau)
+axis <span class="string">xy</span> <span class="string">image</span>
+cb = colorbar;
+ylabel(cb,<span class="string">' wind stress (Pa) '</span>)
+xlabel(<span class="string">'longitude'</span>)
+ylabel(<span class="string">'latitude'</span>)
+
+<span class="comment">% Add wind speed vectors:</span>
+hold <span class="string">on</span>
+quiversc(lon,lat,u10,v10,<span class="string">'k'</span>)
+</pre><img vspace="5" hspace="5" src="windstress_documentation_01.png" alt=""> <h2 id="4">Example 1b: Be careful with components</h2><p>There's a funny thing about wind stress, which is its magnitude is proportional to the square of wind speed. If you calculate each component (zonal and meridional) of wind stress individually from each component of wind speed (u10 and v10), the resulting wind stress vectors can have an incorrect magnitude and direction!</p><p>Consider a velocity vector whose components are u10 = 2 m/s and v10 = 1 m/s. From this we know the velocity vector has an angle <tt>atand(1/2) = 26.6</tt> degrees.  Wind stress is proportional to the square of wind speed, but if we square each component of the wind speed to obtain a wind stress vector, the resulting wind stress vector will not even point in the right direction!  Squaring each component of wind speed in this example would give a wind stress vector with an angle <tt>atand(1/4) = 14.0</tt> degrees. And its magnitude would be incorrect too.</p><p>Compare the correctly-computed wind stress vectors to the incorrectly-computed wind stress vectors by placing correct vectors (blue) and incorrect vectors (red) on top of the black wind velocity vectors from Example 1a:</p><pre class="codeinput"><span class="comment">% Calculate correct wind stress components:</span>
+[Taux,Tauy] = windstress(u10,v10);
+
+<span class="comment">% Plot correct blue wind stress vectors atop the black wind velocity vectors:</span>
+quiversc(lon,lat,Taux,Tauy,<span class="string">'b'</span>)
+<span class="comment">% Incorrectly calculate wind stress as components:</span>
+Taux_wrong = windstress(u10);
+Tauy_wrong = windstress(v10);
+
+<span class="comment">% Plot incorrect red wind stress vectors:</span>
+quiversc(lon,lat,Taux_wrong,Tauy_wrong,<span class="string">'r'</span>)
+
+<span class="comment">% Zoom in:</span>
+axis([-145 -110 15 40])
+</pre><img vspace="5" hspace="5" src="windstress_documentation_02.png" alt=""> <p>Above, the correct (blue) wind stress vectors align with the black wind velocity vectors, whereas computing wind stress components individually from wind speed components produces red wind stress vectors of incorrect magnitude and direction.</p><h2 id="6">Example 2: (Theoretical) effect of sea ice</h2><p>Explore the relationship between wind speed, sea ice concentration, and wind stress.  Start by defining values of wind speed from 0 to 25 m/s, and sea ice concentration from 0 to 1, then calculate wind stress and plot it as a function of wind speed and sea ice concentration:</p><pre class="codeinput"><span class="comment">% Define some values of wind speed and sea ice concentration:</span>
+[U,ci] = meshgrid(0:0.1:25,0:0.01:1);
+
+<span class="comment">% Calculate wind stress:</span>
+Tau = windstress(U,<span class="string">'ci'</span>,ci);
+
+<span class="comment">% Plot wind stress as a fn of wind speed and sea ice concentration:</span>
+figure
+imagescn(U,ci,Tau)
+xlabel(<span class="string">'10 m wind speed (m/s)'</span>)
+ylabel(<span class="string">'sea ice concentration'</span>)
+cb = colorbar;
+ylabel(cb,<span class="string">' wind stress (Pa) '</span>)
+</pre><img vspace="5" hspace="5" src="windstress_documentation_03.png" alt=""> <p>Note how at first wind stress increases with sea ice concentration because the jagged edges of the sea ice give the wind something to grab onto, but when the sea ice concentration exceeds 63%, the clogged ice field begins to prevent the wind from transferring energy to the water.</p><h2 id="8">References</h2><p>Kara, A. Birol, et al. "Wind stress drag coefficient over the global ocean." Journal of Climate 20.23 (2007): 5856-5864. <a href="http://dx.doi.org/10.1175/2007JCLI1825.1">doi:10.1175/2007JCLI1825.1</a>.</p><p>L&uuml;pkes, Christof, and Gerit Birnbaum. "Surface drag in the Arctic marginal sea-ice zone: a comparison of different parameterisation concepts." Boundary-layer meteorology 117.2 (2005): 179-211. <a href="http://dx.doi.org/10.1007/s10546-005-1445-8">doi:10.1007/s10546-005-1445-8</a>.</p><h2 id="9">Author Info</h2><p>The <tt>windstress</tt> function and supporting documentation were written by <a href="http://www.chadagreene">Chad A. Greene</a> of the University of Texas at Austin, Institute for Geophysics (UTIG), February 2017.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |windstress| documentation 
+% The |windstress| function estimates wind stress on the ocean from wind speed.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax 
+% 
+%  Tau = windstress(u10)
+%  [Taux,Tauy] = windstress(u10,v10)
+%  [...] = windstress(...,'Cd',Cd) 
+%  [...] = windstress(...,'ci',seaIce) 
+%  [...] = windstress(...,'rho',airDensity)
+% 
+%% Description 
+% 
+% |Tau = windstress(u10)| estimates the wind stress (in pascals) imparted on the ocean by the wind speed
+% (in meters per second) 10 m above the surface. Output |Tau| is the same size as input |u10|. 
+% 
+% |[Taux,Tauy] = windstress(u10,v10)| simultaneously computes zonal and meridional components of wind stress.
+% 
+% |[...] = windstress(...,'Cd',Cd)| specifies a coefficient of friction |Cd|. Default |Cd| is |1.25e-3|, which is a 
+% global average (<http://dx.doi.org/10.1175/2007JCLI1825.1 Kara et al., 2007>) but in reality |Cd| can vary quite a bit in space and time. |Cd| can be a 
+% scalar or a vector, 2D matrix, or 3D matrix the same size as |u10| (and |v10| if |v10| is included). 
+% 
+% |[...] = windstress(...,'ci',seaIce)| specifies sea ice concentration for estimation of |Cd| as given by <http://dx.doi.org/10.1007/s10546-005-1445-8 Lüpkes
+% and Birnbaum, 2005>. Input |seaIce| is a fraction of sea ice cover and must be in the range 0 to 1 inclusive. 
+% |seaIce| can be a scalar or a vector, 2D matrix, or 3D matrix the same size as |u10| (and |v10| if |v10| is included). 
+% 
+% |[...] = windstress(...,'rho',airDensity)| specifies air density, which can be a scalar or a vector, 2D matrix, 
+% or 3D matrix the same size as |u10| (and |v10| if |v10| is included). Default value of |airDensity| is 1.225 kg/m^3. 
+% 
+
+%% Example 1a: Estimate wind stress from reanalysis data 
+% Load the sample |pacific_wind.mat|, then plot the wind stress on the ocean resulting from the
+% wind. Below I'm using the |sst| dataset to mask out land values, but you could just as easily
+% use <island_documentation.html |island|> if there weren't already this easy way to distinguish
+% land from ocean in the dataset. 
+% 
+% We'll use <imagescn_documentation.html |imagescn|> to plot wind stress and 
+% <quiversc_documentation.html |quiversc|> to plot the wind vectors: 
+
+load pacific_wind
+
+% Calculate magnitude of wind stress from wind speed 
+Tau = windstress(hypot(u10,v10)); 
+
+% Mask-out land values by setting them to NaN: 
+Tau(isnan(sst)) = NaN; 
+
+% Plot with imagesn, imagesc, or pcolor: 
+figure
+imagescn(lon,lat,Tau) 
+axis xy image
+cb = colorbar; 
+ylabel(cb,' wind stress (Pa) ') 
+xlabel('longitude') 
+ylabel('latitude') 
+
+% Add wind speed vectors: 
+hold on
+quiversc(lon,lat,u10,v10,'k')
+
+%% Example 1b: Be careful with components
+% There's a funny thing about wind stress, which is its magnitude is proportional to the square of wind speed. 
+% If you calculate each component (zonal and meridional) of wind stress individually from each 
+% component of wind speed (u10 and v10), the resulting wind stress vectors can have an incorrect magnitude
+% and direction! 
+% 
+% Consider a velocity vector whose components are u10 = 2 m/s and v10 = 1 m/s. From this we know the velocity vector
+% has an angle |atand(1/2) = 26.6| degrees.  Wind stress is proportional to the square of wind speed, but if 
+% we square each component of the wind speed to obtain a wind stress vector, the resulting wind stress vector
+% will not even point in the right direction!  Squaring each component of wind speed in this example would give
+% a wind stress vector with an angle |atand(1/4) = 14.0| degrees. And its magnitude would be incorrect too. 
+% 
+% Compare the correctly-computed wind stress vectors to the incorrectly-computed wind stress vectors by placing
+% correct vectors (blue) and incorrect vectors (red) on top of the black wind velocity vectors from Example 1a: 
+
+% Calculate correct wind stress components: 
+[Taux,Tauy] = windstress(u10,v10); 
+
+% Plot correct blue wind stress vectors atop the black wind velocity vectors: 
+quiversc(lon,lat,Taux,Tauy,'b')
+% Incorrectly calculate wind stress as components: 
+Taux_wrong = windstress(u10); 
+Tauy_wrong = windstress(v10); 
+
+% Plot incorrect red wind stress vectors: 
+quiversc(lon,lat,Taux_wrong,Tauy_wrong,'r')
+
+% Zoom in: 
+axis([-145 -110 15 40])
+
+%% 
+% Above, the correct (blue) wind stress vectors align with the black wind velocity vectors, whereas
+% computing wind stress components individually from wind speed components produces red wind stress
+% vectors of incorrect magnitude and direction. 
+
+%% Example 2: (Theoretical) effect of sea ice
+% Explore the relationship between wind speed, sea ice concentration, and wind stress.  Start by defining
+% values of wind speed from 0 to 25 m/s, and sea ice concentration from 0 to 1, then calculate wind stress
+% and plot it as a function of wind speed and sea ice concentration: 
+
+% Define some values of wind speed and sea ice concentration: 
+[U,ci] = meshgrid(0:0.1:25,0:0.01:1); 
+
+% Calculate wind stress: 
+Tau = windstress(U,'ci',ci); 
+
+% Plot wind stress as a fn of wind speed and sea ice concentration: 
+figure
+imagescn(U,ci,Tau)
+xlabel('10 m wind speed (m/s)') 
+ylabel('sea ice concentration') 
+cb = colorbar; 
+ylabel(cb,' wind stress (Pa) ') 
+
+%% 
+% Note how at first wind stress increases with sea ice concentration because the jagged edges of the sea ice
+% give the wind something to grab onto, but when the sea ice concentration exceeds 63%, the clogged ice field
+% begins to prevent the wind from transferring energy to the water. 
+
+%% References 
+% 
+% Kara, A. Birol, et al. "Wind stress drag coefficient over the global ocean." Journal of Climate 20.23 (2007): 5856-5864.
+% <http://dx.doi.org/10.1175/2007JCLI1825.1 doi:10.1175/2007JCLI1825.1>.
+% 
+% Lüpkes, Christof, and Gerit Birnbaum. "Surface drag in the Arctic marginal sea-ice zone: a comparison of different 
+% parameterisation concepts." Boundary-layer meteorology 117.2 (2005): 179-211. <http://dx.doi.org/10.1007/s10546-005-1445-8 doi:10.1007/s10546-005-1445-8>.
+% 
+%% Author Info
+% The |windstress| function and supporting documentation were written by <http://www.chadagreene Chad A. Greene> of the University
+% of Texas at Austin, Institute for Geophysics (UTIG), February 2017.  
+##### SOURCE END #####
+--></body></html>

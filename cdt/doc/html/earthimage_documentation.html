@@ -1,0 +1,175 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>earthimage documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-09"><meta name="DC.source" content="earthimage_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>earthimage</tt> documentation</h1><!--introduction--><p><tt>earthimage</tt> plots an unprojected image base map of Earth.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Simple</a></li><li><a href="#5">Example 2: Grayscale</a></li><li><a href="#6">Example 3: Transparent Ocean</a></li><li><a href="#7">Example 4: Grayscale land with transparent ocean</a></li><li><a href="#8">Example 4: Colorful land with a black ocean</a></li><li><a href="#9">Example 5: Grayscale land with a pink ocean</a></li><li><a href="#10">Example 6: Centered on the Pacific</a></li><li><a href="#11">Author info</a></li></ul></div><h2 id="1">Syntax</h2><pre>earthimage
+earthimage('gray')
+earthimage('watercolor',rgbValues)
+earthimage('center',centerLon)
+h = earthimage(...)</pre><h2 id="2">Description</h2><p><tt>earthimage</tt> plots an image base map of Earth in unprojected coordinates.</p><p><tt>earthimage('gray')</tt> plots the image in grayscale.</p><p><tt>earthimage('watercolor',rgbValues)</tt> specifies the color of the ocean with a three-element [R G B] vector (e.g., <tt>[1 0 0]</tt> for red).</p><p><tt>earthimage('center',centerLon)</tt> specifies a center longitude, which can be anything between -180 and 360. Default <tt>centerLon</tt> is <tt>0</tt>.</p><p><tt>h = earthimage(...)</tt> returns a handle h of the plotted image.</p><h2 id="3">Example 1: Simple</h2><p>For a simple base map image, just type <tt>earthimage</tt>:</p><pre class="codeinput">earthimage
+</pre><img vspace="5" hspace="5" src="earthimage_documentation_01.png" alt=""> <p>You can then go about adding other layers to the base map with normal Matlab plotting functions, where x is used for longitudes and y is used for latitudes:</p><pre class="codeinput">hold <span class="string">on</span>
+borders(<span class="string">'countries'</span>,<span class="string">'color'</span>,0.5*[1 1 1])
+xlabel <span class="string">'degrees longitude'</span>
+ylabel <span class="string">'degrees latitude'</span>
+</pre><img vspace="5" hspace="5" src="earthimage_documentation_02.png" alt=""> <h2 id="5">Example 2: Grayscale</h2><p>For a grayscale image, specify <tt>'gray'</tt>:</p><pre class="codeinput">figure
+earthimage <span class="string">gray</span>
+</pre><img vspace="5" hspace="5" src="earthimage_documentation_03.png" alt=""> <h2 id="6">Example 3: Transparent Ocean</h2><p>To make the ocean transparent, specify <tt>'watercolor','none'</tt>:</p><pre class="codeinput">earthimage(<span class="string">'watercolor'</span>,<span class="string">'none'</span>)
+</pre><img vspace="5" hspace="5" src="earthimage_documentation_04.png" alt=""> <h2 id="7">Example 4: Grayscale land with transparent ocean</h2><p>Get grayscale land and transparent oceans like this:</p><pre class="codeinput">earthimage(<span class="string">'gray'</span>,<span class="string">'watercolor'</span>,<span class="string">'none'</span>)
+</pre><img vspace="5" hspace="5" src="earthimage_documentation_05.png" alt=""> <h2 id="8">Example 4: Colorful land with a black ocean</h2><p>To specify a specific ocean color, enter the RGB values of the color you want the ocean to be. For example, plot make the ocean black by specifying the values <tt>[0 0 0]</tt> for <tt>'watercolor'</tt>:</p><pre class="codeinput">earthimage(<span class="string">'watercolor'</span>,[0 0 0])
+</pre><img vspace="5" hspace="5" src="earthimage_documentation_06.png" alt=""> <h2 id="9">Example 5: Grayscale land with a pink ocean</h2><p>If you don't know the RGB values of your favorite color, use the <a href="rgb_documentation.html"><tt>rgb</tt></a> function instead:</p><pre class="codeinput">earthimage(<span class="string">'gray'</span>,<span class="string">'watercolor'</span>,rgb(<span class="string">'pink'</span>))
+</pre><img vspace="5" hspace="5" src="earthimage_documentation_07.png" alt=""> <h2 id="10">Example 6: Centered on the Pacific</h2><p>By default, the central longitude is 0 degrees, the Prime Meridian. But if you'd like the map to be centered on a different longitude, just specify the center longitude like this:</p><pre class="codeinput">figure
+earthimage(<span class="string">'center'</span>,120)
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+</pre><img vspace="5" hspace="5" src="earthimage_documentation_08.png" alt=""> <h2 id="11">Author info</h2><p>This function and supporting documentation were written by Chad A. Greene, 2018.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |earthimage| documentation
+% |earthimage| plots an unprojected image base map of Earth. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax
+% 
+%  earthimage
+%  earthimage('gray') 
+%  earthimage('watercolor',rgbValues)
+%  earthimage('center',centerLon)
+%  h = earthimage(...)
+% 
+%% Description
+% 
+% |earthimage| plots an image base map of Earth in unprojected coordinates. 
+% 
+% |earthimage('gray')| plots the image in grayscale. 
+% 
+% |earthimage('watercolor',rgbValues)| specifies the color of the ocean
+% with a three-element [R G B] vector (e.g., |[1 0 0]| for red). 
+% 
+% |earthimage('center',centerLon)| specifies a center longitude, which can be 
+% anything between -180 and 360. Default |centerLon| is |0|. 
+% 
+% |h = earthimage(...)| returns a handle h of the plotted image. 
+% 
+%% Example 1: Simple
+% For a simple base map image, just type |earthimage|: 
+
+earthimage
+
+%% 
+% You can then go about adding other layers to the base map with normal
+% Matlab plotting functions, where x is used for longitudes and y is used 
+% for latitudes: 
+
+hold on
+borders('countries','color',0.5*[1 1 1])
+xlabel 'degrees longitude'
+ylabel 'degrees latitude'
+
+%% Example 2: Grayscale
+% For a grayscale image, specify |'gray'|: 
+
+figure
+earthimage gray
+
+%% Example 3: Transparent Ocean
+% To make the ocean transparent, specify |'watercolor','none'|:
+
+earthimage('watercolor','none')
+
+%% Example 4: Grayscale land with transparent ocean
+% Get grayscale land and transparent oceans like this: 
+
+earthimage('gray','watercolor','none')
+
+%% Example 4: Colorful land with a black ocean
+% To specify a specific ocean color, enter the RGB values of the 
+% color you want the ocean to be. For example, plot make the ocean
+% black by specifying the values |[0 0 0]| for |'watercolor'|: 
+
+earthimage('watercolor',[0 0 0])
+
+%% Example 5: Grayscale land with a pink ocean
+% If you don't know the RGB values 
+% of your favorite color, use the <rgb_documentation.html |rgb|> function
+% instead: 
+
+earthimage('gray','watercolor',rgb('pink'))
+
+%% Example 6: Centered on the Pacific
+% By default, the central longitude is 0 degrees, the Prime Meridian. But if you'd 
+% like the map to be centered on a different longitude, just specify the center longitude
+% like this: 
+
+figure
+earthimage('center',120)
+xlabel 'longitude'
+ylabel 'latitude'
+
+%% Author info
+% This function and supporting documentation were written by Chad A. Greene, 2018. 
+
+##### SOURCE END #####
+--></body></html>

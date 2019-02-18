@@ -1,0 +1,167 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>polyplot documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-04"><meta name="DC.source" content="polyplot_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>polyplot</tt> documentation</h1><!--introduction--><p>This function plots a polynomial fit to scattered <i>x,y</i> data. This function can be used to easily add a linear trend line or other polynomial fit to a data plot.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Examples</a></li><li><a href="#8">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>polyplot(x,y)
+polyplot(x,y,n)
+polyplot(...,'Name',Value,...)
+polyplot(...,'error')
+[h,p,delta] = polyplot(...)</pre><h2 id="2">Description</h2><p><tt>polyplot(x,y)</tt> places a least-squares linear trend line through scattered <i>x,y</i> data.</p><p><tt>polyplot(x,y,n)</tt> specifies the degree <tt>n</tt> of the polynomial fit to the <i>x,y</i> data. Default <tt>n</tt> is <tt>1</tt>.</p><p><tt>polyplot(...,'Name',Value,...)</tt> formats linestyle using <tt>LineSpec</tt> property name-value pairs (e.g., <tt>'linewidth',3</tt>). If 'error' bounds are plotted, only <a href="boundedline_documentation.html"><tt>boundedline</tt></a> properties are accepted.</p><p><tt>polyplot(...,'error')</tt> includes lines corresponding to approximately +/- 1 standard deviation of errors <tt>delta</tt>. At least 50% of data should lie within the bounds of error lines. Error bounds are plotted with <a href="boundedline_documentation.html"><tt>boundedline</tt></a>.</p><p><tt>h = polyplot(...)</tt> returns handle(s) <tt>h</tt> of plotted objects.</p><h2 id="3">Examples</h2><p>Given some data:</p><pre class="codeinput">x = 1:100;
+y = 12 - 0.01*x.^2 + 3*x + sind(x) + 30*rand(size(x));
+</pre><p>Plot the data and add a simple linear trend line:</p><pre class="codeinput">plot(x,y,<span class="string">'bo'</span>)
+hold <span class="string">on</span>
+polyplot(x,y);
+
+legend(<span class="string">'data'</span>,<span class="string">'linear fit'</span>,<span class="string">'location'</span>,<span class="string">'southeast'</span>)
+</pre><img vspace="5" hspace="5" src="polyplot_documentation_01.png" alt=""> <p>Instead of a linear trend, make it a cubic fit:</p><pre class="codeinput">polyplot(x,y,3,<span class="string">'r'</span>);
+legend(<span class="string">'data'</span>,<span class="string">'linear fit'</span>,<span class="string">'cubic fit'</span>,<span class="string">'location'</span>,<span class="string">'southeast'</span>)
+</pre><img vspace="5" hspace="5" src="polyplot_documentation_02.png" alt=""> <p>Add a fat, black 7th-order polynomial fit:</p><pre class="codeinput">polyplot(x,y,7,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,4);
+legend(<span class="string">'data'</span>,<span class="string">'linear fit'</span>,<span class="string">'cubic fit'</span>,<span class="keyword">...</span>
+   <span class="string">'7^{th} order fit'</span>,<span class="string">'location'</span>,<span class="string">'southeast'</span>)
+</pre><img vspace="5" hspace="5" src="polyplot_documentation_03.png" alt=""> <p>Same as above, but with +/- 1 standard deviation of error lines:</p><pre class="codeinput">figure
+h(1) = plot(x,y,<span class="string">'bo'</span>);
+hold <span class="string">on</span>
+h(2:3) = polyplot(x,y,7,<span class="string">'r'</span>,<span class="string">'error'</span>,<span class="string">'alpha'</span>);
+legend(h,<span class="string">'data'</span>,<span class="string">'7^{th} order fit'</span>,<span class="string">'\pm1\sigma'</span>,<span class="string">'location'</span>,<span class="string">'southeast'</span>)
+</pre><img vspace="5" hspace="5" src="polyplot_documentation_04.png" alt=""> <h2 id="8">Author Info</h2><p>The <tt>polyplot</tt> function and supporting documentation were created by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas at Austin's <a href="http://www.ig.utexas.edu/research/cryosphere/">Institute for Geophysics (UTIG)</a>. January 2015. Adapted for CDT in 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |polyplot| documentation 
+% This function plots a polynomial fit to scattered _x,y_ data. This function
+% can be used to easily add a linear trend line or other polynomial fit
+% to a data plot. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+%
+%  polyplot(x,y)
+%  polyplot(x,y,n)
+%  polyplot(...,'Name',Value,...)
+%  polyplot(...,'error')
+%  [h,p,delta] = polyplot(...)
+% 
+%% Description 
+% 
+% |polyplot(x,y)| places a least-squares linear trend line through 
+% scattered _x,y_ data. 
+%
+% |polyplot(x,y,n)| specifies the degree |n| of the polynomial fit to 
+% the _x,y_ data. Default |n| is |1|. 
+%
+% |polyplot(...,'Name',Value,...)| formats linestyle using |LineSpec|
+% property name-value pairs (e.g., |'linewidth',3|). If 'error' bounds are 
+% plotted, only <boundedline_documentation.html |boundedline|> properties are accepted. 
+% 
+% |polyplot(...,'error')| includes lines corresponding to approximately
+% +/- 1 standard deviation of errors |delta|. At least 50% of data should 
+% lie within the bounds of error lines. Error bounds are plotted with 
+% <boundedline_documentation.html |boundedline|>. 
+%
+% |h = polyplot(...)| returns handle(s) |h| of plotted objects.
+
+%% Examples 
+% Given some data: 
+
+x = 1:100; 
+y = 12 - 0.01*x.^2 + 3*x + sind(x) + 30*rand(size(x)); 
+
+%% 
+% Plot the data and add a simple linear trend line: 
+
+plot(x,y,'bo')
+hold on
+polyplot(x,y); 
+
+legend('data','linear fit','location','southeast')
+%% 
+% Instead of a linear trend, make it a cubic fit:
+
+polyplot(x,y,3,'r');
+legend('data','linear fit','cubic fit','location','southeast')
+
+%% 
+% Add a fat, black 7th-order polynomial fit: 
+
+polyplot(x,y,7,'k','linewidth',4);
+legend('data','linear fit','cubic fit',...
+   '7^{th} order fit','location','southeast')
+
+%% 
+% Same as above, but with +/- 1 standard deviation of error lines: 
+
+figure
+h(1) = plot(x,y,'bo');
+hold on
+h(2:3) = polyplot(x,y,7,'r','error','alpha');
+legend(h,'data','7^{th} order fit','\pm1\sigma','location','southeast')
+
+%% Author Info
+% The |polyplot| function and supporting documentation were created by
+% <http://www.chadagreene.com Chad A. Greene> of the University of Texas 
+% at Austin's <http://www.ig.utexas.edu/research/cryosphere/ Institute for
+% Geophysics (UTIG)>. January 2015. Adapted for CDT in 2019.
+##### SOURCE END #####
+--></body></html>

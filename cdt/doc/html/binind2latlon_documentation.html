@@ -1,0 +1,190 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>binind2latlon documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-21"><meta name="DC.source" content="binind2latlon_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>binind2latlon</tt> documentation</h1><!--introduction--><p><tt>binind2latlon</tt> converts binned index values of a sinusoidal grid to geocoordinates.</p><p>More information on the sinusoidal grid <a href="https://oceancolor.gsfc.nasa.gov/docs/format/l3bins">here</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: A small grid</a></li><li><a href="#5">Example 2: Actual data</a></li><li><a href="#9">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[lat,lon] = binind2latlon(binind)
+[lat,lon] = binind2latlon(...,'rows',NumberOfRows)</pre><h2 id="2">Description</h2><p><tt>[lat,lon] = binind2latlon(binind)</tt> gives the geo coordinates for the bin indices <tt>binind</tt>.</p><p><tt>[lat,lon] = binind2latlon(...,'rows',NumberOfRows)</tt> specifies the number of rows in the grid. By default, binind2latlon will try to figure out the number of rows automatically, but there's no guarantee it'll work. If you know the number of rows, specify them just to be sure. According to the Resolutions table <a href="https://oceancolor.gsfc.nasa.gov/docs/format/l3bins/">here</a>, common numbers of rows are as follows:</p><div><ul><li>180 rows for 1 a degree grid</li><li>2160 rows for 5 minute grid</li><li>4320 rows for a 1.5 minute grid</li></ul></div><h2 id="3">Example 1: A small grid</h2><p>Let's recreate the simple 18 row example seen <a href="https://oceancolor.gsfc.nasa.gov/docs/format/l3bins/">here</a>. Start by plotting national borders with my <a href="https://www.mathworks.com/matlabcentral/fileexchange/50390-borders"><tt>borders</tt></a> function:</p><pre class="codeinput">borders(<span class="string">'countries'</span>,<span class="string">'k-'</span>)
+axis <span class="string">tight</span>
+xlabel <span class="string">'longitude'</span>
+ylabel <span class="string">'latitude'</span>
+</pre><img vspace="5" hspace="5" src="binind2latlon_documentation_01.png" alt=""> <p>The example on the NASA site contains 412 bins that span 18 rows of latitude:</p><pre class="codeinput"><span class="comment">% List of bin numbers:</span>
+bins = (1:412)';
+
+<span class="comment">% What geocoordinates correspond to each bin number?</span>
+[lat,lon] = binind2latlon(bins,<span class="string">'rows'</span>,18);
+
+<span class="comment">% Label each bin centered on its geocoordinate:</span>
+text(lon,lat,num2str(bins),<span class="string">'color'</span>,<span class="string">'r'</span>,<span class="string">'horiz'</span>,<span class="string">'center'</span>,<span class="string">'fontsize'</span>,6)
+</pre><img vspace="5" hspace="5" src="binind2latlon_documentation_02.png" alt=""> <h2 id="5">Example 2: Actual data</h2><p>This example uses some monthly CHL data found <a href="https://oceandata.sci.gsfc.nasa.gov/MODIS-Aqua/Binned/Monthly/CHL">here</a>. Start by reading in the data. Although these files end in .nc, the <a href="https://www.mathworks.com/help/matlab/ref/ncread.html"><tt>ncread</tt></a> function does not recognize the datatype for the variables we want to plot. So we have to use <a href="https://www.mathworks.com/help/matlab/ref/h5read.html"><tt>h5read</tt></a> instead:</p><pre class="codeinput">A = h5read(<span class="string">'A20021822002212.L3b_MO_CHL.nc'</span>,<span class="string">'/level-3_binned_data/chlor_a'</span>);
+B = h5read(<span class="string">'A20021822002212.L3b_MO_CHL.nc'</span>,<span class="string">'/level-3_binned_data/BinList'</span>);
+
+<span class="comment">% For convenience, assign z and bins as variables:</span>
+z = double(A.sum_squared);
+bins = B.bin_num;
+</pre><p>The geocoordinates of each of those <tt>z</tt> values can be found quite easily:</p><pre class="codeinput">[lat,lon] = binind2latlon(bins);
+</pre><p>Notice there are over 11 million measurements here, so we might want to look at just the measurements in a small area, say the Indian Ocean, in the region (40S-20N, 35E-110E). Get the indices corresponding to these coordinates with <a href="geomask_documentation"><tt>geomask</tt></a>:</p><pre class="codeinput">ind = geomask(lat,lon,[-40 20],[35 110]);
+</pre><p>There are 1625033 datapoints in that geographic region, and unfortunately they don't make a perfect grid, so if you want gridded data you'll have to use <a href="https://www.mathworks.com/help/matlab/ref/griddata.html"><tt>griddata</tt></a> or <a href="https://www.mathworks.com/help/matlab/ref/scatteredinterpolant-object.html"><tt>scatteredInterpolant</tt></a>. Or you can make a scatterplot of the data. Old versions of Matlab like the one I'm using choke when you give <tt>scatter</tt> a lot of data points, so below I'm using Aslak Grinsted's <a href="https://www.mathworks.com/matlabcentral/fileexchange/47205-fastscatter-m"><tt>fastscatter</tt></a> function. I'm also using the <a href="cmocean_documentation.html"><tt>cmocean</tt></a> colormap (Thyng et al., 2016).</p><pre class="codeinput">figure
+fastscatter(lon(ind),lat(ind),z(ind),<span class="string">'markersize'</span>,.1)
+axis <span class="string">tight</span>
+caxis([0 4])
+cb = colorbar;
+ylabel(cb,<span class="string">'sum squared'</span>)
+cmocean <span class="string">algae</span>
+borders(<span class="string">'countries'</span>,<span class="string">'facecolor'</span>,0.6*[1 1 1])
+</pre><img vspace="5" hspace="5" src="binind2latlon_documentation_03.png" alt=""> <h2 id="9">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. This function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |binind2latlon| documentation 
+% |binind2latlon| converts binned index values of a sinusoidal grid to geocoordinates. 
+% 
+% More information on the sinusoidal grid <https://oceancolor.gsfc.nasa.gov/docs/format/l3bins here>. 
+%% Syntax
+% 
+%  [lat,lon] = binind2latlon(binind) 
+%  [lat,lon] = binind2latlon(...,'rows',NumberOfRows) 
+% 
+%% Description 
+% 
+% |[lat,lon] = binind2latlon(binind)| gives the geo coordinates for the bin indices |binind|. 
+% 
+% |[lat,lon] = binind2latlon(...,'rows',NumberOfRows)| specifies the number of rows in the 
+% grid. By default, binind2latlon will try to figure out the number of rows automatically, 
+% but there's no guarantee it'll work. If you know the number of rows, specify them just
+% to be sure. According to the Resolutions table <https://oceancolor.gsfc.nasa.gov/docs/format/l3bins/ here>, 
+% common numbers of rows are as follows: 
+% 
+% * 180 rows for 1 a degree grid
+% * 2160 rows for 5 minute grid
+% * 4320 rows for a 1.5 minute grid
+% 
+%% Example 1: A small grid
+% Let's recreate the simple 18 row example seen <https://oceancolor.gsfc.nasa.gov/docs/format/l3bins/ here>. 
+% Start by plotting national borders with my <https://www.mathworks.com/matlabcentral/fileexchange/50390-borders |borders|>
+% function: 
+
+borders('countries','k-') 
+axis tight
+xlabel 'longitude'
+ylabel 'latitude' 
+
+%%
+% The example on the NASA site contains 412 bins that span 18 rows of latitude: 
+
+% List of bin numbers: 
+bins = (1:412)'; 
+
+% What geocoordinates correspond to each bin number? 
+[lat,lon] = binind2latlon(bins,'rows',18); 
+
+% Label each bin centered on its geocoordinate: 
+text(lon,lat,num2str(bins),'color','r','horiz','center','fontsize',6) 
+
+%% Example 2: Actual data
+% This example uses some monthly CHL data found <https://oceandata.sci.gsfc.nasa.gov/MODIS-Aqua/Binned/Monthly/CHL here>.
+% Start by reading in the data. Although these files end in .nc, the <https://www.mathworks.com/help/matlab/ref/ncread.html |ncread|>
+% function does not recognize the datatype for the variables we want to plot. So we have to use <https://www.mathworks.com/help/matlab/ref/h5read.html
+% |h5read|> instead: 
+
+A = h5read('A20021822002212.L3b_MO_CHL.nc','/level-3_binned_data/chlor_a');
+B = h5read('A20021822002212.L3b_MO_CHL.nc','/level-3_binned_data/BinList');
+
+% For convenience, assign z and bins as variables: 
+z = double(A.sum_squared); 
+bins = B.bin_num; 
+
+%%
+% The geocoordinates of each of those |z| values can be found quite easily:
+
+[lat,lon] = binind2latlon(bins); 
+
+%% 
+% Notice there are over 11 million measurements here, so we might want to look at just the 
+% measurements in a small area, say the Indian Ocean, in the region (40S-20N, 35E-110E).
+% Get the indices corresponding to these coordinates with <geomask_documentation |geomask|>: 
+
+ind = geomask(lat,lon,[-40 20],[35 110]); 
+
+%% 
+% There are 1625033 datapoints in that geographic region, and unfortunately they don't make a perfect grid, so if you want gridded data you'll have to use 
+% <https://www.mathworks.com/help/matlab/ref/griddata.html |griddata|> or <https://www.mathworks.com/help/matlab/ref/scatteredinterpolant-object.html |scatteredInterpolant|>. 
+% Or you can make a scatterplot of the data. Old versions of Matlab like the one I'm using choke when 
+% you give |scatter| a lot of data points, so below I'm using Aslak Grinsted's <https://www.mathworks.com/matlabcentral/fileexchange/47205-fastscatter-m
+% |fastscatter|> function. I'm also using the <cmocean_documentation.html |cmocean|> colormap (Thyng et al., 2016). 
+ 
+figure
+fastscatter(lon(ind),lat(ind),z(ind),'markersize',.1) 
+axis tight
+caxis([0 4])
+cb = colorbar; 
+ylabel(cb,'sum squared') 
+cmocean algae
+borders('countries','facecolor',0.6*[1 1 1]) 
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% This function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin. 
+##### SOURCE END #####
+--></body></html>

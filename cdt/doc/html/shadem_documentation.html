@@ -1,0 +1,357 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>shadem documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-25"><meta name="DC.source" content="shadem_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>shadem</tt> documentation</h1><!--introduction--><p>The great Roger Miller once sang, <i>As long as there's a hill there's a valley / Long as there's a valley then the river can flow free / As long as there's a Sun there's a shadow / As long as there's a shadow there's a place for you and me.</i> While it's possible that he was referring to sneakin' around with some little lover, it's just as likely that he was singing praises of <tt>shadem</tt>, this hill-shading function for Matlab.</p><p><tt>shadem</tt> adjusts lighting to give a sense of depth to the display of gridded elevation data. Although it was designed for use with the Matlab's Mapping Toolbox, this function can just as easily be used for <tt>pcolor</tt> or <tt>surface</tt> plots of any type and the Mapping Toolbox is <i>not</i> required.</p><p>Matlab's Mapping Toolbox is packaged with several sub-par functions that are intended to create shaded relief maps, but the built-in shading functions are difficult to use, create unattractive maps, and cannot be used with a colorbar.</p><p>Where <tt>surflsrm</tt>, <tt>surflm</tt>, <tt>shaderel</tt>, and <tt>meshlsrm</tt> each require an iterative process of guess-and-check to determine visually appealing lighting azimuth and elevation, <tt>shadem</tt> allows interaction with the map from the mouse and keyboard: Sunlight comes from wherever you click on your map, and intensity of the shading effect can be adjusted by pressing the up and down keys.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: 2D <tt>pcolor</tt></a></li><li><a href="#5">Example 2: 3D <tt>surf</tt></a></li><li><a href="#7">Example 3: Global topography, unprojected coordinates</a></li><li><a href="#10">Example 4: Adding another variable</a></li><li><a href="#13">Example 5: Global topography with Matlab's Mapping Toolbox</a></li><li><a href="#14">Known Issue</a></li><li><a href="#15">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>shadem
+shadem('ui')
+shadem(...,LightAngle)
+shadem(...,LightingType)
+shadem(...,MaterialType)
+shadem(...,gain)
+shadem(...,'sun')
+shadem(...,'obj',ObjectHandle)
+[lighth,MaterialType,gain,LightingType,LightAngle] = shadem(...)
+shadem('reset')</pre><h2 id="2">Description</h2><p><tt>shadem</tt> applies simple lighting to surfaces and patch objects on the current axes.</p><p><tt>shadem('ui')</tt> illuminates the current axes and opens a user interface. When the user interface is running, controls are as follows</p><div><ul><li><b>Mouse Click</b> illuminates surfaces from the direction of the mouse click, at an elevation given by proximity to the center of the image. Clicking near the far right side of a map will make light come from the right at a low angle (low elevation). Clicking closer to the center of the image will illuminate topography from above (high angle).</li><li><b>p</b> sets <tt>LightingType</tt> to <tt>'phong'</tt> method (default).</li><li><b>f</b> sets <tt>LightingType</tt> to <tt>'flat'</tt> method.</li><li><b>g</b> sets <tt>LightingType</tt> to <tt>'gouraud'</tt> method (discontinued in R2014b).</li><li><b>n</b> sets <tt>LightingType</tt> to <tt>'none'</tt> turns lighting off.</li><li><b>d</b> sets <tt>MaterialType</tt> to <tt>'dull'</tt> (default).</li><li><b>space</b> sets <tt>MaterialType</tt> to Matlab's <tt>'default'</tt> material (but note the default material in this program is <tt>'dull'</tt>.)</li><li><b>m</b> sets <tt>MaterialType</tt> to <tt>'metal'</tt>.</li><li><b>s</b> sets <tt>MaterialType</tt> to <tt>'shiny'</tt>.</li><li><b>up key</b> turns <tt>gain</tt> up.</li><li><b>down key</b> turns <tt>gain</tt> down.</li><li><b>w</b> sets light source color to white (default).</li><li><b>q</b> sets light source to a color of sunlight corresponding to sun elevation angle.</li><li><b>Return</b> confirms current settings and terminates the user interface. Hit Return only when you are satisfied with the way your map looks.</li><li><b>Esc</b> returns the map to its initial state and exits the user interface.</li></ul></div><p><tt>shadem(...,LightAngle)</tt> specifies <tt>LightAngle</tt> as a two-element array in the form <tt>[az el]</tt>, where <tt>az</tt> is the azimuthal (horizontal) rotation of the light source and <tt>el</tt> is the vertical elevation of the light source.  0 azimuth lies at the six o'clock position on the map and positive degrees move counterclockwise around the map. An elevation of 90 degrees places light source directly above the map, creating a "high noon" type of shadow, whereas elevation angles closer to zero degrees create "sunrise" or "sunset" shadows. Interpretation of azimuth and elevation is the same as that of the <tt>view</tt> or <tt>lightangle</tt> commands. Default <tt>LightAngle</tt> is <tt>[90 45]</tt>. Any two-element array input to the <tt>shadem</tt> function is assumed to be a declaration of <tt>LightAngle</tt>.</p><p><tt>shadem(...,LightingType)</tt> selects the algorithm used to calculate the effects of light objects on all surface and patch objects in the current axes. Options are</p><div><ul><li><tt>'phong'</tt> (default)</li><li><tt>'flat'</tt></li><li><tt>'gouraud'</tt> (discontinued in R2014b)</li><li><tt>'none'</tt> (but I'm not sure why you'd do select this option in <tt>shadem</tt>)</li></ul></div><p><tt>shadem(...,MaterialType)</tt> sets lighting characteristics of surface and patch objects. <tt>MaterialType</tt> can be</p><div><ul><li><tt>'dull'</tt> (default)</li><li><tt>'default'</tt> (albeit not the default <tt>MaterialType</tt> in <tt>shadem</tt>)</li><li><tt>'metal'</tt></li><li><tt>'shiny'</tt></li></ul></div><p><tt>shadem(...,gain)</tt> specifies intensity of shading by exaggerating or minimizing the <i>z</i> component of the active surface. This is helpful when <i>x</i> and <i>y</i> coordinates of data mapping might range from -0.5 to 0.5 map units, while <i>z</i> data ranges from -4000 to 3000 meters.  Default <tt>gain</tt> is <tt>0</tt>. Negative <tt>gain</tt> values reduce the hillshading effect; positive values increase the effect.  Any scalar input to <tt>shadem</tt> is interpreted as a <tt>gain</tt> value.</p><p><tt>shadem(...,'sun')</tt> sets color of the lighting object as a function of light elevation angle to mimic the color of sunlight at sunrise/sunset, noon, or any angle in between.</p><p><tt>shadem(...,'obj',ObjectHandle)</tt> specifies a surface object as a target when multiple surface objects exist in the current set of axes. This usage is a bit clunky, may result in strange maps, and is not fully endorsed by the author of the function. Nonetheless, the ability to specify an active surface sometimes helps the author of this function, and he thinks that maybe sometimes it could help you too.</p><p><tt>[lighth,MaterialType,gain,LightingType,LightAngle] = shadem(...)</tt> returns a handle of the <tt>lightangle</tt> object <tt>lighth</tt>, <tt>MaterialType</tt>, <tt>gain</tt> value, <tt>LightingType</tt>, and <tt>LightAngle</tt> azimuth and elevation.</p><p><tt>shadem('reset')</tt> resets shading by deleting light objects. Note that this may not completely undo all settings put in place by previous calls of <tt>shadem</tt>. In some cases this program alters <i>z</i> data values, and the <tt>'reset'</tt> command does not return <i>z</i> values to their original state.</p><h2 id="3">Example 1: 2D <tt>pcolor</tt></h2><p>Consider this gridded surface:</p><pre class="codeinput">pcolor(repmat(peaks,2))
+shading <span class="string">interp</span>
+colorbar
+</pre><img vspace="5" hspace="5" src="shadem_documentation_01.png" alt=""> <p>Use <tt>shadem</tt> to give the surface a sense of depth, and make it shiny:</p><pre class="codeinput">shadem <span class="string">shiny</span>
+</pre><img vspace="5" hspace="5" src="shadem_documentation_02.png" alt=""> <h2 id="5">Example 2: 3D <tt>surf</tt></h2><p>This program also works with 3D data.</p><pre class="codeinput">figure
+surf(peaks)
+shading <span class="string">interp</span>
+</pre><img vspace="5" hspace="5" src="shadem_documentation_03.png" alt=""> <p>Apply <tt>shadem</tt> with Matlab's <tt>'default'</tt> material propterties. Let light enter from 60 degrees in the horizontal at 50 degrees elevation:</p><pre class="codeinput">shadem([60 50])
+</pre><img vspace="5" hspace="5" src="shadem_documentation_04.png" alt=""> <h2 id="7">Example 3: Global topography, unprojected coordinates</h2><p>For this example, use <a href="cdtgrid_documentation.html"><tt>cdtgrid</tt></a> to make a quarter-degree global grid and <a href="topo_interp_documentation.html"><tt>topo_interp</tt></a> to get the corresponding topography. Set the colormap with <a href="cmocean_documentation.html"><tt>cmocean</tt></a>:</p><pre class="codeinput"><span class="comment">% quarter-degree lat,lon grid:</span>
+[lat,lon] = cdtgrid(1/4);
+
+<span class="comment">% global topography:</span>
+z = topo_interp(lat,lon);
+<span class="comment">%</span>
+figure
+pcolor(lon,lat,z)
+shading <span class="string">interp</span>
+cmocean(<span class="string">'topo'</span>,<span class="string">'pivot'</span>) <span class="comment">% sets the colormap</span>
+</pre><img vspace="5" hspace="5" src="shadem_documentation_05.png" alt=""> <p>Add hillshade to the global topography map like this</p><pre class="codeinput">shadem(-17,[225 80])
+</pre><img vspace="5" hspace="5" src="shadem_documentation_06.png" alt=""> <p>In the figure above, we used a gain value of -17. The amount of gain you use is related to how the units of x and y (in the case above, lon and lat) compare to the units of z. If x,y, and z are all in the same units, a gain value of zero might be appropriate.</p><h2 id="10">Example 4: Adding another variable</h2><p>Hillshade is great for providing context, so even when topography isn't the main point of a map, you can still use relief shading to show how a variable interacts with topography. Case in point: the plot above depicts topography both with hillshade, and with the cmocean <i>topo</i> colormap. But even if we take the colormap away, the relief shading is still evident. here's the same map as above, but setting the colormap to pure white:</p><pre class="codeinput">colormap([1 1 1])
+</pre><img vspace="5" hspace="5" src="shadem_documentation_07.png" alt=""> <p>So perhaps you have some other variable you're really trying to put into perspective. For example, the distance to the nearest coast line, which can be obtained with <a href="dist2coast_documentation.html"><tt>dist2coast</tt></a>. For the same grid as Example 3, get the distances to the coast, and use <a href="island_documentation.html"><tt>island</tt></a> to set the land values to negative distances:</p><pre class="codeinput"><span class="comment">% Get distances to the coast for the grid from example 3:</span>
+D = dist2coast(lat,lon);
+
+<span class="comment">% Set land values to negative:</span>
+land = island(lat,lon);
+D(land) = -D(land);
+
+figure
+surf(lon,lat,z,D)
+shading <span class="string">interp</span>
+view(2)
+axis <span class="string">tight</span>
+cmocean(<span class="string">'balance'</span>,<span class="string">'pivot'</span>)
+cb = colorbar;
+ylabel(cb,<span class="string">'distance to nearest coast (km)'</span>)
+</pre><img vspace="5" hspace="5" src="shadem_documentation_08.png" alt=""> <p>Now use <tt>shadem</tt> to put that map in the context of global topography:</p><pre class="codeinput">shadem(-19)
+</pre><img vspace="5" hspace="5" src="shadem_documentation_09.png" alt=""> <h2 id="13">Example 5: Global topography with Matlab's Mapping Toolbox</h2><p>If you have Matlab's mapping toolbox, repeat Example 3, but for a <tt>worldmap</tt>:</p><pre class="codeinput">figure
+worldmap(<span class="string">'world'</span>)
+cla <span class="comment">% removes grid lines</span>
+pcolorm(lat,lon,z)
+cmocean(<span class="string">'topo'</span>,<span class="string">'pivot'</span>)
+shadem(7,[225 75])
+</pre><img vspace="5" hspace="5" src="shadem_documentation_10.png" alt=""> <h2 id="14">Known Issue</h2><p>I have received feedback that the <tt>LightAngle</tt> cannot be adjusted when using the Mapping Toolbox with Matlab release R2014b.  As I understand it, this bug only affects the Mapping Toobox release 2014b and has been fixed in R2015a.</p><h2 id="15">Author Info</h2><p>The <tt>shadem</tt> function and supporting documentation were created by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas at Austin's <a href="http://www.ig.utexas.edu/research/cryosphere/">Institute for Geophysics (UTIG)</a>. January 2015.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |shadem| documentation
+% The great Roger Miller once sang, _As long as there's a hill there's a valley /
+% Long as there's a valley then the river can flow free / As long as
+% there's a Sun there's a shadow / As long as there's a shadow there's a
+% place for you and me._ While it's possible that he was referring to
+% sneakin' around with some little lover, it's just as likely that he was singing praises of
+% |shadem|, this hill-shading function for Matlab.  
+% 
+% |shadem| adjusts lighting to give a sense of depth to the display of 
+% gridded elevation data. Although it was designed for use with the Matlab's 
+% Mapping Toolbox, this function can just as easily be used for |pcolor| or
+% |surface| plots of any type and the Mapping Toolbox is _not_ required. 
+% 
+% Matlab's Mapping Toolbox is packaged with several sub-par functions
+% that are intended to create shaded relief maps, but the built-in 
+% shading functions are difficult to use, create unattractive maps, and
+% cannot be used with a colorbar. 
+% 
+% Where |surflsrm|, |surflm|, |shaderel|, and |meshlsrm| each require an iterative
+% process of guess-and-check to determine visually appealing lighting azimuth and 
+% elevation, |shadem| allows interaction with the map from the mouse
+% and keyboard: Sunlight comes from wherever you click on your map, and
+% intensity of the shading effect can be adjusted by pressing the up and
+% down keys. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax 
+% 
+%  shadem
+%  shadem('ui') 
+%  shadem(...,LightAngle) 
+%  shadem(...,LightingType)
+%  shadem(...,MaterialType)  
+%  shadem(...,gain)
+%  shadem(...,'sun')
+%  shadem(...,'obj',ObjectHandle)  
+%  [lighth,MaterialType,gain,LightingType,LightAngle] = shadem(...)
+%  shadem('reset') 
+% 
+%% Description  
+% 
+% |shadem| applies simple lighting to surfaces and patch objects on the current axes.
+% 
+% |shadem('ui')| illuminates the current axes and opens a user
+% interface. When the user interface is running, controls are as follows 
+% 
+% * *Mouse Click* illuminates surfaces from the direction of the mouse
+% click, at an elevation given by proximity to the center of the image.
+% Clicking near the far right side of a map will make light come from the
+% right at a low angle (low elevation). Clicking closer to the center of the image will
+% illuminate topography from above (high angle). 
+% * *p* sets |LightingType| to |'phong'| method (default).
+% * *f* sets |LightingType| to |'flat'| method.
+% * *g* sets |LightingType| to |'gouraud'| method (discontinued in R2014b).
+% * *n* sets |LightingType| to |'none'| turns lighting off.
+% * *d* sets |MaterialType| to |'dull'| (default).
+% * *space* sets |MaterialType| to Matlab's |'default'| material (but note the
+% default material in this program is |'dull'|.) 
+% * *m* sets |MaterialType| to |'metal'|. 
+% * *s* sets |MaterialType| to |'shiny'|.
+% * *up key* turns |gain| up.
+% * *down key* turns |gain| down.
+% * *w* sets light source color to white (default). 
+% * *q* sets light source to a color of sunlight corresponding to sun elevation angle.
+% * *Return* confirms current settings and terminates the user interface.
+% Hit Return only when you are satisfied with the way your map looks. 
+% * *Esc* returns the map to its initial state and exits the user
+% interface. 
+% 
+% |shadem(...,LightAngle)| specifies |LightAngle| as a two-element array in the form |[az el]|, 
+% where |az| is the azimuthal (horizontal) rotation of the light source and |el|
+% is the vertical elevation of the light source.  0 azimuth lies at the six o'clock position on the 
+% map and positive degrees move counterclockwise around the map. An
+% elevation of 90 degrees places light source directly above the map,
+% creating a "high noon" type of shadow, whereas elevation angles closer to 
+% zero degrees create "sunrise" or "sunset" shadows. Interpretation of azimuth and elevation 
+% is the same as that of the |view| or |lightangle| commands. Default |LightAngle| is |[90 45]|. 
+% Any two-element array input to the |shadem| function is
+% assumed to be a declaration of |LightAngle|. 
+% 
+% |shadem(...,LightingType)| selects the algorithm used to calculate the effects of light 
+% objects on all surface and patch objects in the current axes. Options are
+% 
+% * |'phong'| (default) 
+% * |'flat'| 
+% * |'gouraud'| (discontinued in R2014b) 
+% * |'none'| (but I'm not sure why you'd do select this option in |shadem|)
+% 
+% |shadem(...,MaterialType)| sets lighting characteristics of surface
+% and patch objects. |MaterialType| can be 
+%
+% * |'dull'| (default) 
+% * |'default'| (albeit not the default |MaterialType| in |shadem|)
+% * |'metal'|
+% * |'shiny'|
+% 
+% |shadem(...,gain)| specifies intensity of shading by exaggerating or minimizing
+% the _z_ component of the active surface. This is helpful when _x_ and _y_
+% coordinates of data mapping might range from -0.5 to 0.5 map units, while
+% _z_ data ranges from -4000 to 3000 meters.  Default |gain| is |0|.
+% Negative |gain| values reduce the hillshading effect; positive values
+% increase the effect.  Any scalar input to |shadem| is interpreted as
+% a |gain| value. 
+% 
+% |shadem(...,'sun')| sets color of the lighting object as a function of light 
+% elevation angle to mimic the color of sunlight at sunrise/sunset, noon,
+% or any angle in between.
+% 
+% |shadem(...,'obj',ObjectHandle)| specifies a surface object as a
+% target when multiple surface objects exist in the current set of axes. 
+% This usage is a bit clunky, may result in strange maps, and is not fully 
+% endorsed by the author of the function. Nonetheless, the ability to specify 
+% an active surface sometimes helps the author of this function, and he
+% thinks that maybe sometimes it could help you too. 
+% 
+% |[lighth,MaterialType,gain,LightingType,LightAngle] = shadem(...)|
+% returns a handle of the |lightangle| object |lighth|, |MaterialType|,
+% |gain| value, |LightingType|, and |LightAngle| azimuth and elevation. 
+% 
+% |shadem('reset')| resets shading by deleting light objects. Note
+% that this may not completely undo all settings put in place by previous 
+% calls of |shadem|. In some cases this program alters _z_ data values, 
+% and the |'reset'| command does not return _z_ values to their original
+% state. 
+% 
+%% Example 1: 2D |pcolor|
+% Consider this gridded surface: 
+
+pcolor(repmat(peaks,2))
+shading interp
+colorbar
+
+%%
+% Use |shadem| to give the surface a sense of depth, and make it shiny: 
+
+shadem shiny
+
+%% Example 2: 3D |surf| 
+% This program also works with 3D data.
+
+figure 
+surf(peaks) 
+shading interp
+
+%% 
+% Apply |shadem| with Matlab's |'default'| material propterties. Let
+% light enter from 60 degrees in the horizontal at 50 degrees elevation: 
+
+shadem([60 50]) 
+
+%% Example 3: Global topography, unprojected coordinates
+% For this example, use <cdtgrid_documentation.html |cdtgrid|> to make a quarter-degree 
+% global grid and <topo_interp_documentation.html |topo_interp|> to get the corresponding
+% topography. Set the colormap with <cmocean_documentation.html |cmocean|>: 
+
+% quarter-degree lat,lon grid: 
+[lat,lon] = cdtgrid(1/4); 
+
+% global topography: 
+z = topo_interp(lat,lon); 
+%
+figure
+pcolor(lon,lat,z) 
+shading interp
+cmocean('topo','pivot') % sets the colormap
+
+%% 
+% Add hillshade to the global topography map like this
+
+shadem(-17,[225 80])
+
+%% 
+% In the figure above, we used a gain value of -17. The amount of gain you use is related
+% to how the units of x and y (in the case above, lon and lat) compare to the units of z. 
+% If x,y, and z are all in the same units, a gain value of zero might be appropriate. 
+
+%% Example 4: Adding another variable 
+% Hillshade is great for providing context, so even when topography isn't the main point
+% of a map, you can still use relief shading to show how a variable interacts with topography. 
+% Case in point: the plot above depicts topography both with hillshade, and with the cmocean 
+% _topo_ colormap. But even if we take the colormap away, the relief shading is still evident. 
+% here's the same map as above, but setting the colormap to pure white: 
+
+colormap([1 1 1]) 
+
+%% 
+% So perhaps you have some other variable you're really trying to put into perspective. For 
+% example, the distance to the nearest coast line, which can be obtained with <dist2coast_documentation.html |dist2coast|>. 
+% For the same grid as Example 3, get the distances to the coast, and use <island_documentation.html |island|> 
+% to set the land values to negative distances: 
+
+% Get distances to the coast for the grid from example 3: 
+D = dist2coast(lat,lon); 
+
+% Set land values to negative: 
+land = island(lat,lon); 
+D(land) = -D(land); 
+
+figure
+surf(lon,lat,z,D)
+shading interp
+view(2)
+axis tight 
+cmocean('balance','pivot') 
+cb = colorbar; 
+ylabel(cb,'distance to nearest coast (km)') 
+
+%% 
+% Now use |shadem| to put that map in the context of global topography:
+
+shadem(-19)
+
+%% Example 5: Global topography with Matlab's Mapping Toolbox
+% If you have Matlab's mapping toolbox, repeat Example 3, but for a |worldmap|: 
+
+figure
+worldmap('world') 
+cla % removes grid lines
+pcolorm(lat,lon,z) 
+cmocean('topo','pivot')
+shadem(7,[225 75]) 
+
+%% Known Issue
+% I have received feedback that the |LightAngle| cannot be adjusted when
+% using the Mapping Toolbox with Matlab release R2014b.  As I understand
+% it, this bug only affects the Mapping Toobox release 2014b and has been
+% fixed in R2015a. 
+
+%% Author Info 
+% The |shadem| function and supporting documentation were created by
+% <http://www.chadagreene.com Chad A. Greene> of the University of Texas 
+% at Austin's <http://www.ig.utexas.edu/research/cryosphere/ Institute for
+% Geophysics (UTIG)>. January 2015. 
+
+##### SOURCE END #####
+--></body></html>
