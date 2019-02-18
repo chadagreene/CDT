@@ -3,7 +3,7 @@
 ![Climate Data Toolbox for Matlab](CDT_reduced.jpg)
 
 # CDT Contents and Documentation
-To view the CDT contents and documentation, click [here](http://www.chadagreene.com/CDT/CDT_Contents.html).
+[**Click here**](http://www.chadagreene.com/CDT/CDT_Contents.html) to view the CDT documentation online.
 
 # Installing the toolbox:
 
@@ -15,9 +15,7 @@ The installation process puts the files in a folder called
 ```~MATLAB/Add-Ons/Toolboxes/Climate Data Toolbox/```
 
 ### ...or as individual files and folders:
-Put the cdt folder somewhere Matlab can find it, and then right-click on it from within Matlab and select "Add to Path--Selected folder and subfolders."
-
-
+The files in this GitHub repository may be slightly more up to date than the prepackaged .mltbx toolbox. So if you want to be on the bleeding edge of innovation, get the cdt folder, put it somewhere Matlab can find it, and then right-click on it from within Matlab and select "Add to Path--Selected folder and subfolders."
 
 # After installation:
 Type 
