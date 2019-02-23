@@ -26,7 +26,7 @@ function pevap = pet(Ra,tmax,tmin,tmean,varargin)
 % (University of Potsdam).
 % February 2019. 
 % 
-% See also spei, solarrad 
+% See also spei and solar_radiation. 
 
 lambda = 2.45; % MJ/kg
 % Modification of the empirical coefficient according to Samani (2000)

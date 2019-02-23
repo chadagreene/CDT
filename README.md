@@ -3,7 +3,7 @@
 ![Climate Data Toolbox for Matlab](CDT_reduced.jpg)
 
 # CDT Contents and Documentation
-[**Click here**](http://www.chadagreene.com/CDT/CDT_Contents.html) to view the CDT documentation online.
+[**Click here**](https://www.chadagreene.com/CDT/CDT_Contents.html) to view the CDT documentation online.
 
 # Installing the toolbox:
 
