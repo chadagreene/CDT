@@ -41,7 +41,7 @@ function [az,el] = sun_angle(t,lat,lon,h)
 %
 %% See also
 % 
-% See also daily_insolation and topo_interp. 
+% See also solar_radiation, daily_insolation, and topo_interp. 
 
 %% Error checks and input parsing: 
 

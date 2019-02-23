@@ -108,6 +108,9 @@
 % * <sam_documentation.html *|sam|*> calculates the Southern Annular Mode index from sea-level
 % pressures.
 % * <nam_documentation.html *|nam|*> calculates the Northern Annular Mode.
+% * <pet_documentation.html *|pet|*> gives potential reference evapotranspiration
+% following Hargreaves-Samani.
+% * <spei_documentation.html *|spei|*> computes the standardised precipitation-evapotranspiration index.
 
 %% Oceans & Atmospheres
 %
@@ -130,6 +133,8 @@
 % * <air_pressure_documentation.html *|air_pressure|*> computes pressure from the baromometric forumula for a US Standard Atmosphere. 
 % * <air_density_documentation.html *|air_density|*> computes density the baromometric forumula for a US Standard Atmosphere. 
 % * <sun_angle_documentation.html *|sun_angle|*> gives the solar azimuth and elevation for any time at any location on Earth.
+% * <solar_radiation_documentation.html *|solar_radiation|*> computes modern daily total extraterrestrial solar radiation
+% received at the top of Earth's atmosphere.
 % * <daily_insolation_documentation.html *|daily_insolation|*> computes daily average insolation as a function of day and latitude at
 % any point during the past 5 million years.
 % * <topo_interp_documentation.html *|topo_interp|*> interpolates elevations at any geographic locations from ETOPO5.
@@ -248,6 +253,8 @@
 % * *|land_mask.mat|*: A 1/8 degree binary mask indicating areas of land or ocean. This
 % dataset is called by the <island_documentation.html |island|> function. 
 % * *|mlo_daily_C02.mat|*: Atmospheric Carbon Dioxide Dry Air Mole Fractions from quasi-continuous measurements at Mauna Loa, Hawaii. From <http://dx.doi.org/10.7289/V54X55RG NOAA>.
+% * *|ncep-ncar.mat|*: Temperature and precipitation reanalysis data described in the
+% documentation for the <spei_documentation.html |spei|> function. 
 % * *|orbit91.txt|*: Earth's orbital parameters from <https://doi.org/10.1016/0277-3791(91)90033-Q Berger A. and Loutre M.F., 1991> used as an example for <daily_insolation_documentation.html |daily_insolation|>. 
 % * *|orbital_parameter_data.mat|*: used by the <daily_insolation_documentation.html |daily_insolation|> function written
 % by Ian Eisenman and Peter Huybers, Harvard University, August 2006. 
