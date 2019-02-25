@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>solar_radiation documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-22"><meta name="DC.source" content="solar_radiation_documentation.m"><style type="text/css">
+      --><title>solar_radiation documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-25"><meta name="DC.source" content="solar_radiation_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>solar_radiation</tt> documentation</h1><!--introduction--><p>The <tt>solar_radiation</tt> function computes modern daily total extraterrestrial solar radiation received at the top of Earth's atmosphere.</p><p>This function is quite similar to the <a href="daily_insolation_documentation.html"><tt>daily_insolation</tt></a> function, and one may suit your needs better than the other. The <tt>daily_insolation</tt> function is best suited for investigations involving orbital changes over tousands to millions of years, whereas <tt>solar_radiation</tt> may be easier to use for applications such as present-day precipitation/drought research.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example: A solar panel in Berlin</a></li><li><a href="#4">References</a></li><li><a href="#5">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>Ra = solar_radiation(t,lat)</pre><h2 id="2">Description</h2><p><tt>Ra = solar_radiation(t,lat)</tt> calculates the extraterrestrial radiation (MJ m^(-2) day^(-1)) based on the dates <tt>t</tt> and latitude <tt>lat</tt>. Dates <tt>t</tt> can be in datetime, datenum, or datestr format, but must be a 1D array or a scalar. lat can be scalar, vector, or grid. If <tt>lat</tt> is a vector or array with size nrows and ncols then <tt>Ra</tt> has the size <tt>[nrows,ncols,length(t)]</tt>.</p><h2 id="3">Example: A solar panel in Berlin</h2><p>Let's assume you have a 1 square meter solar panel in Berlin, Germany (52.5N,13.4E). If there were no atmosphere, how many joules of energy would it receive per day from March 1, 2017 to March 1, 2019?</p><pre class="codeinput"><span class="comment">% define an array of dates:</span>
+  </style></head><body><div class="content"><h1><tt>solar_radiation</tt> documentation</h1><!--introduction--><p>The <tt>solar_radiation</tt> function computes modern daily total extraterrestrial solar radiation received at the top of Earth's atmosphere.</p><p>This function is quite similar to the <a href="daily_insolation_documentation.html"><tt>daily_insolation</tt></a> function, and one may suit your needs better than the other. The <tt>daily_insolation</tt> function is best suited for investigations involving orbital changes over tousands to millions of years, whereas <tt>solar_radiation</tt> may be easier to use for applications such as present-day precipitation/drought research.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: A solar panel in Berlin</a></li><li><a href="#4">Example 2: Solar energy in the world's oceans</a></li><li><a href="#12">References</a></li><li><a href="#13">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>Ra = solar_radiation(t,lat)</pre><h2 id="2">Description</h2><p><tt>Ra = solar_radiation(t,lat)</tt> calculates the extraterrestrial radiation (MJ m^(-2) day^(-1)) based on the dates <tt>t</tt> and latitude <tt>lat</tt>. Dates <tt>t</tt> can be in datetime, datenum, or datestr format, but must be a 1D array or a scalar. lat can be scalar, vector, or grid. If <tt>lat</tt> is a vector or array with size nrows and ncols then <tt>Ra</tt> has the size <tt>[nrows,ncols,length(t)]</tt>.</p><h2 id="3">Example 1: A solar panel in Berlin</h2><p>Let's assume you have a 1 square meter solar panel in Berlin, Germany (52.5N,13.4E). If there were no atmosphere, how many joules of energy would it receive per day from March 1, 2017 to March 1, 2019?</p><pre class="codeinput"><span class="comment">% define an array of dates:</span>
 t = datetime(<span class="string">'march 1, 2017'</span>):datetime(<span class="string">'march 1, 2019'</span>);
 
 <span class="comment">% define the latitude of Berlin:</span>
@@ -81,7 +81,56 @@ plot(t,Ra)
 axis <span class="string">tight</span>
 box <span class="string">off</span> <span class="comment">% removes frame</span>
 ylabel <span class="string">'daily radiation MJ m^{-2}'</span>
-</pre><img vspace="5" hspace="5" src="solar_radiation_documentation_01.png" alt=""> <h2 id="4">References</h2><p>The <tt>solar_radiation</tt> function computes the equation by</p><div><ul><li>Allen et al. (1998),</li><li>McMahon, T. A., et al. "Estimating actual, potential, reference crop and pan evaporation using standard meteorological data: a pragmatic synthesis." Hydrology and Earth System Sciences 17.4 (2013): 1331-1363 <a href="https://doi.org/10.5194/hess-17-1331-2013">https://doi.org/10.5194/hess-17-1331-2013</a>.</li><li>McCullough and Porter (1971)</li><li>McCullough (1968)</li></ul></div><p>See also the supplement to McMahon et al 2013 <a href="https://www.hydrol-earth-syst-sci.net/17/1331/2013/hess-17-1331-2013-supplement.pdf">here.</a></p><h2 id="5">Author Info</h2><p>The <tt>solar_radiation</tt> function was written by Jos&eacute; Delgado and Wolfgang Schwanghart (University of Potsdam). February 2019. Climate Data Toolbox for Matlab.&szlig;</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="solar_radiation_documentation_01.png" alt=""> <h2 id="4">Example 2: Solar energy in the world's oceans</h2><p>Before we begin this example, it's important to note that the <tt>solar_radiation</tt> function estimates the top-of-atmosphere radiation, so the following discussion ignores all atmospheric effects. With that caveat in mind let's consider how much solar energy hits the Earth's oceans on a given day.</p><p>To begin, pick a day. How about St. Patrick's Day, March 17. Estimating how much energy hit the Earth's oceans on St. Patrick's Day means we have to make a global grid and calculate the solar radiation at each point in that grid. A very dense grid will be more accurate, but whereas a very coarse grid will require less memory. Let's use <a href="cdtgrid_documentation.html"><tt>cdtgrid</tt></a> to create a half-degree global grid, and calculate the radiation at each point on that grid:</p><pre class="codeinput"><span class="comment">% Make a half-degree grid:</span>
+[Lat,Lon] = cdtgrid(1/2);
+
+<span class="comment">% Calculate Ra on St. Patrick's Day:</span>
+Ra = solar_radiation(<span class="string">'march 17'</span>,Lat);
+
+<span class="comment">% Plot</span>
+figure
+imagescn(Lon,Lat,Ra)
+hold <span class="string">on</span>
+earthimage(<span class="string">'watercolor'</span>,<span class="string">'none'</span>)
+cmocean <span class="string">solar</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'solar radiation MJ m^{-2}'</span>)
+title <span class="string">'St. Patricks Day'</span>
+</pre><img vspace="5" hspace="5" src="solar_radiation_documentation_02.png" alt=""> <p>Above, the land surface was plotted with <a href="earthimage_documentation.html"><tt>earthimage</tt></a> and the colormap was set with <a href="cmocean_documentation.html"><tt>cmocean</tt></a>.</p><p>Now you may be wondering, how much energy does the ocean receive compared to land? Answering that question requires us to know the area of each grid cell to compute the total energy received at each grid cell. Use <a href="cdtarea_documentation.html"><tt>cdtarea</tt></a> to get the area of each grid cell, and multiply <tt>Ra</tt> by area to get the total energy received per grid cell on St. Patrick's Day:</p><pre class="codeinput"><span class="comment">% Get area of each grid cell:</span>
+A = cdtarea(Lat,Lon);  <span class="comment">% (m^2)</span>
+
+<span class="comment">% Calculate total energy received per grid cell:</span>
+E = Ra.*A;
+</pre><p>So which receives more total solar energy--the land or the ocean? use <a href="island_documentation.html"><tt>island</tt></a> to determine which grid cells correspond, then sum up the solar energy that hits land and ocean:</p><pre class="codeinput"><span class="comment">% Get a mask of grid cells that are land:</span>
+land = island(Lat,Lon);
+
+<span class="comment">% Total solar energy that hits land on St Patrick's Day:</span>
+sum(E(land)) <span class="comment">% MJ</span>
+</pre><pre class="codeoutput">ans =
+   4.0392e+15
+</pre><p>That's 4*10^15 MJ of solar energy that hit the land surface on St. Patrick's Day. Versus ocean:</p><pre class="codeinput">sum(E(~land)) <span class="comment">% MJ</span>
+</pre><pre class="codeoutput">ans =
+   1.1155e+16
+</pre><p>That's 1*10^16 MJ that hit the ocean. Not surprisingly, the ocean is has a larger surface area than land, so it receives more solar energy.</p><p>We can expand this analysis to changes in time by entering <tt>t</tt> as an array of times, like this, where we calculate daily solar radiation for every day in the year 2019:</p><pre class="codeinput">t = datetime(<span class="string">'jan 1, 2019'</span>):datetime(<span class="string">'dec 31, 2019'</span>);
+
+Ra = solar_radiation(t,Lat);
+</pre><p>Above, we entered 1x365 datetime array <tt>t</tt> and a 360x720 grid of latitudes <tt>Lat</tt>. The resulting <tt>Ra</tt> is then 360x720x365, which corresponds to a gridded solution for each day of the year.</p><p>Multiply <tt>Ra</tt> by grid cell area <tt>A</tt> to get the gridded time series of energy received at each grid cell, and use the <a href="local_documentation.html"><tt>local</tt></a> function to get time series of energy incident on land versus ocean:</p><pre class="codeinput"><span class="comment">% Daily energy is Ra times grid cell area:</span>
+E = Ra.*A;
+
+<span class="comment">% Sums of land and ocean energy:</span>
+E_land = local(E,land,@sum);
+E_ocean = local(E,~land,@sum);
+
+figure
+plot(t,E_land)
+hold <span class="string">on</span>
+plot(t,E_ocean)
+plot(t,E_land+E_ocean,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,2)
+axis <span class="string">tight</span>
+box <span class="string">off</span>
+legend(<span class="string">'land'</span>,<span class="string">'ocean'</span>,<span class="string">'total'</span>)
+ylabel <span class="string">'Earth''s daily energy received (MJ)'</span>
+</pre><img vspace="5" hspace="5" src="solar_radiation_documentation_03.png" alt=""> <p>The plot above shows that at all times of the year, the ocean receives more solar energy than the land surface. That is unsurprising, because the ocean's surface is larger than Earth's land surface. But there are some other interesting things that are happening there too.</p><p>The curve for land may not surprise the majority of Earth's population, who live north of the equator. If you live in the northern hemisphere you may see that and think, "yes, the Earth is warmer in the summer." But of course when it's summer in the nothern hemisphere, it's winter in the southern hemisphere, so shouldn't things equal out?</p><p>No. Because most's of Earth's land area is in the northern hemisphere, so in terms of sums, the Earth's land surface receives more energy in June than in December.</p><p>When we look at how solar energy at the ocean's surface changes throughout the year, we see just the opposite of what we see on land. That's partly because the ocean has more surface area in the southern hemisphere than the northern hemisphere, but that doesn't fully explain the dip in the ocean's energy in June and July.</p><p>Looking at the total solar energy received, we see that it's not constant throughout the year. In fact, the Earth is farthest away from the Sun around <a href="https://simple.wikipedia.org/wiki/Perihelion">July 4th</a> of every year, so on the whole, that's when the Earth receives the least amount of solar energy.</p><h2 id="12">References</h2><p>The <tt>solar_radiation</tt> function computes the equation by</p><div><ul><li>Allen et al. (1998),</li><li>McMahon, T. A., et al. "Estimating actual, potential, reference crop and pan evaporation using standard meteorological data: a pragmatic synthesis." Hydrology and Earth System Sciences 17.4 (2013): 1331-1363 <a href="https://doi.org/10.5194/hess-17-1331-2013">https://doi.org/10.5194/hess-17-1331-2013</a>.</li><li>McCullough and Porter (1971)</li><li>McCullough (1968)</li></ul></div><p>See also the supplement to McMahon et al 2013 <a href="https://www.hydrol-earth-syst-sci.net/17/1331/2013/hess-17-1331-2013-supplement.pdf">here.</a></p><h2 id="13">Author Info</h2><p>The <tt>solar_radiation</tt> function was written by Jos&eacute; Delgado and Wolfgang Schwanghart (University of Potsdam). February 2019. Climate Data Toolbox for Matlab.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |solar_radiation| documentation 
 % The |solar_radiation| function computes modern daily total extraterrestrial solar radiation
@@ -106,7 +155,7 @@ ylabel <span class="string">'daily radiation MJ m^{-2}'</span>
 % vector, or grid. If |lat| is a vector or array with size nrows and ncols
 % then |Ra| has the size |[nrows,ncols,length(t)]|.
 % 
-%% Example: A solar panel in Berlin
+%% Example 1: A solar panel in Berlin
 % Let's assume you have a 1 square meter solar panel in Berlin, Germany (52.5N,13.4E).
 % If there were no atmosphere, how many joules of energy would it receive per day
 % from March 1, 2017 to March 1, 2019? 
@@ -127,6 +176,136 @@ axis tight
 box off % removes frame
 ylabel 'daily radiation MJ m^{-2}'
 
+%% Example 2: Solar energy in the world's oceans
+% Before we begin this example, it's important to note that the |solar_radiation| 
+% function estimates the top-of-atmosphere radiation, so the following discussion
+% ignores all atmospheric effects. With that caveat in mind let's consider how 
+% much solar energy hits the Earth's oceans on a given day. 
+% 
+% To begin, pick a day. How about St. Patrick's Day, March 17. Estimating 
+% how much energy hit the Earth's oceans on St. Patrick's Day means we have to 
+% make a global grid and calculate the solar radiation at each point in that 
+% grid. A very dense grid will be more accurate, but whereas a very coarse grid
+% will require less memory. Let's use <cdtgrid_documentation.html |cdtgrid|> 
+% to create a half-degree global grid, and calculate the radiation at each 
+% point on that grid: 
+
+% Make a half-degree grid: 
+[Lat,Lon] = cdtgrid(1/2); 
+
+% Calculate Ra on St. Patrick's Day: 
+Ra = solar_radiation('march 17',Lat); 
+
+% Plot
+figure
+imagescn(Lon,Lat,Ra) 
+hold on
+earthimage('watercolor','none')
+cmocean solar 
+cb = colorbar; 
+ylabel(cb,'solar radiation MJ m^{-2}')
+title 'St. Patricks Day'
+
+%% 
+% Above, the land surface was plotted with <earthimage_documentation.html |earthimage|>  
+% and the colormap was set with <cmocean_documentation.html |cmocean|>.
+% 
+% Now you may be wondering, how much energy does the ocean receive compared 
+% to land? Answering that question requires us to know the area of each grid cell 
+% to compute the total energy received at each grid cell. Use <cdtarea_documentation.html 
+% |cdtarea|> to get the area of each grid cell, and multiply |Ra| by area to 
+% get the total energy received per grid cell on St. Patrick's Day: 
+
+% Get area of each grid cell: 
+A = cdtarea(Lat,Lon);  % (m^2)
+
+% Calculate total energy received per grid cell: 
+E = Ra.*A; 
+
+%%
+% So which receives more total solar energyREPLACE_WITH_DASH_DASHthe land or the ocean? 
+% use <island_documentation.html |island|> to determine which grid cells correspond, 
+% then sum up the solar energy that hits land and ocean: 
+
+% Get a mask of grid cells that are land: 
+land = island(Lat,Lon); 
+
+% Total solar energy that hits land on St Patrick's Day: 
+sum(E(land)) % MJ
+
+%% 
+% That's 4*10^15 MJ of solar energy that hit the land surface on St. Patrick's Day.
+% Versus ocean: 
+
+sum(E(~land)) % MJ
+
+%% 
+% That's 1*10^16 MJ that hit the ocean. Not surprisingly, the ocean is has a 
+% larger surface area than land, so it receives more solar energy. 
+
+%% 
+% We can expand this analysis to changes in time by entering |t| as an 
+% array of times, like this, where we calculate daily solar radiation 
+% for every day in the year 2019: 
+
+t = datetime('jan 1, 2019'):datetime('dec 31, 2019'); 
+
+Ra = solar_radiation(t,Lat); 
+
+%% 
+% Above, we entered 1x365 datetime array |t| and a 360x720 grid of latitudes
+% |Lat|. The resulting |Ra| is then 360x720x365, which corresponds to a gridded
+% solution for each day of the year. 
+% 
+% Multiply |Ra| by grid cell area |A| to get the gridded time series of energy 
+% received at each grid cell, and use the <local_documentation.html |local|> 
+% function to get time series of energy incident on land versus ocean: 
+
+% Daily energy is Ra times grid cell area: 
+E = Ra.*A; 
+
+% Sums of land and ocean energy: 
+E_land = local(E,land,@sum); 
+E_ocean = local(E,~land,@sum); 
+
+figure
+plot(t,E_land)
+hold on
+plot(t,E_ocean) 
+plot(t,E_land+E_ocean,'k','linewidth',2)
+axis tight
+box off
+legend('land','ocean','total')
+ylabel 'Earth''s daily energy received (MJ)' 
+
+%% 
+% The plot above shows that at all times of the year, the ocean receives more 
+% solar energy than the land surface. That is unsurprising, because the ocean's surface
+% is larger than Earth's land surface. But there are some other interesting 
+% things that are happening there too. 
+% 
+% The curve for land may not surprise the majority of Earth's population, who
+% live north of the equator. If you live in the northern hemisphere you may 
+% see that and think, "yes, the Earth is warmer in the summer." But of course 
+% when it's summer in the nothern hemisphere, it's winter in the southern 
+% hemisphere, so shouldn't things equal out? 
+% 
+% No. Because most's of Earth's land area is in the northern hemisphere, so 
+% in terms of sums, the Earth's land surface receives more energy in June
+% than in December. 
+% 
+% When we look at how solar energy at the ocean's surface changes throughout the
+% year, we see just the opposite of what we see on land. That's partly because
+% the ocean has more surface area in the southern hemisphere than the northern
+% hemisphere, but that doesn't fully explain the dip in the ocean's energy in June 
+% and July. 
+% 
+% Looking at the total solar energy received, we see that it's not constant 
+% throughout the year. In fact, the Earth is farthest away from the Sun
+% around <https://simple.wikipedia.org/wiki/Perihelion July 4th> of every 
+% year, so on the whole, that's when the Earth receives the least amount of 
+% solar energy. 
+
 %% References
 % The |solar_radiation| function computes the equation by 
 % 
@@ -142,6 +321,6 @@ ylabel 'daily radiation MJ m^{-2}'
 % 
 %% Author Info
 % The |solar_radiation| function was written by José Delgado and Wolfgang Schwanghart 
-% (University of Potsdam). February 2019. Climate Data Toolbox for Matlab.ß
+% (University of Potsdam). February 2019. Climate Data Toolbox for Matlab.
 ##### SOURCE END #####
 --></body></html>

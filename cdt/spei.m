@@ -1,36 +1,41 @@
 function [s,tint] = spei(t,prec,pevap,varargin)
-% spei computes the standardised precipitation-evapotranspiration index
+% spei computes the standardised precipitation-evapotranspiration index 
+% based on a standardization of a simplified water balance based on the 
+% climatology of a particular location. 
 %
 %% Syntax
 %
-%     [s,tint] = spei(t,prec,pevap)
-%     [s,tint] = spei(t,prec,pevap,'integrationtime',1)
+%  [s,tint] = spei(t,prec,pevap)
+%  [s,tint] = spei(t,prec,pevap,'integrationtime',months)
+%  [s,tint] = spei(t,prec,pevap,'movmean',days)
 %
 %% Description
 %
-% The standardised precipitation-evaporation index is based on a
-% standardization of a simplified water balance based on the climatology of
-% a particular location. 
+% [s,tint] = spei(t,prec,pevap) computes the standardised precipitation-evapotranspiration
+% index s and integration times tint, given precipitation prec and potential 
+% evaporation pevap corresponding to times t. prec and pevap can be either 
+% be 1D vectors or 3D cubes, whose first two dimensions are spatial and whose
+% third dimension corresponds to times t. The dimensions of prec and pevap must agree. 
+% Times t can be datetime or datenum format. 
 %
-%% Input arguments
+% [s,tint] = spei(t,prec,pevap,'integrationtime',months) integrates over 1, 2, 3, 4, 6, 
+% or 12 months. The default integration time is 1 month. 
 %
-%  t        datenum or datetime vector
-%  prec     precipitation vector or time-space cube
-%  pevap    potential evaporation (same size as prec)
+% [s,tint] = spei(t,prec,pevap,'movmean',days) specifies the duration of the 
+% moving mean in days. Default moving mean is 31 days. You can either set 
+% 'movmean' or 'integrationtime', but not both. 
 %
-%  Parameter name/value pairs
-%
-%  'movmean' 31 days (scalar)
-%  'integrationtime'  integration time (either 1 2 3 4 6 or 12) month. The
-%           default is 1 month. You can either set movmean or
-%           integrationtime, but not both of them.
-%
+%% Examples 
+% For examples, type 
+% 
+%   cdt spei 
+% 
 %% Author Info
 % The spei function were written by José Delgado and Wolfgang Schwanghart 
 % (University of Potsdam).
 % February 2019. 
 % 
-% See also pet, solarrad 
+% See also pet and solar_radiation. 
 
 p = inputParser;
 addParameter(p,'integrationtime',[],@(x) ismember(x,[1 2 3 4 6 12])); % integration time in months
@@ -88,8 +93,6 @@ if ~isempty(p.Results.integrationtime)
     % nr of elements in the output vector
     nout = numel(un);
 end
-
-
 
 % temporal averaging
 if iscube

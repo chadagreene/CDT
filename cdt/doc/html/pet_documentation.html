@@ -1,0 +1,179 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>pet documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-25"><meta name="DC.source" content="pet_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>pet</tt> documentation</h1><!--introduction--><p>The <tt>pet</tt> gives the potential reference evapotranspiration following Hargreaves-Samani.</p><p>See also: <a href="spei_documentation.html"><tt>spei</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#4">Calculate extraterrestrial solar radiation</a></li><li><a href="#5">Calculate potential evapotranspiration</a></li><li><a href="#6">References</a></li><li><a href="#7">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>pevap = pet(Ra,tmax,tmin,tmean)</pre><h2 id="2">Description</h2><p><tt>pevap = pet(Ra,tmax,tmin,tmean)</tt> computes the Hargreaves equation for the potential evapotranspiration (PET) for extraterrestrial radiation <tt>Ra</tt> (such as from the <a href="solar_radiation.html"><tt>solar_radiation</tt></a> function), and temperature maxima, minima, and means. Temperatures <tt>tmax</tt>, <tt>tmin</tt>, and <tt>tmean</tt> can be vectors, or can be cubes in which the first two dimensions are spatial and the third dimension corresponds to time. The inputs <tt>tmax</tt>, <tt>tmin</tt>, and <tt>tmean</tt> represent maximinum, minimum, and mean temperatures over a given time period.</p><h2 id="3">Example</h2><p>This example is an abbreviated form of the example given in the documentation for the <a href="spei_documentation.html"><tt>spei</tt></a> function. You may wish to check out that page for a little more context and in-depth explanation.</p><p>Begin by loading data and converting units. Precipitation comes in units kg^2/m^2/s and we change these units to mm/day. Temperatures are in K and we change them to degrees C.</p><pre class="codeinput">load <span class="string">ncep-ncar</span>
+
+P    = P*3600*24;
+T    = T-273.15;
+TMAX = TMAX-273.15;
+TMIN = TMIN-273.15;
+</pre><h2 id="4">Calculate extraterrestrial solar radiation</h2><p><a href="https://doi.org/10.13031/2013.26773">Hargreaves and Samani's</a> PET equation requires extraterrestrial radiation (Ra) as input. Ra is the solar radiation on a horizontal surface at the top of the Earth's atmosphere and is computed based on the orbital parameters of the Earth which are dependent on latitude. We wish to have the temporal variations of solar radiation integrated over daily time intervals which can be calculated using the function &lt;solar_radiation_documentation.html <tt>solar_radiation</tt> function. Use <tt>meshgrid</tt> to turn the <tt>lat,lon</tt> vectors into grids, which will thereby give us a distinct latitude value for each grid cell:</p><pre class="codeinput">[Lon,Lat] = meshgrid(lon,lat);
+
+Ra  = solar_radiation(t,Lat);
+
+<span class="comment">% Plot grid cell 5,5:</span>
+plot(t,squeeze(Ra(5,5,:)))
+ylabel(<span class="string">'Ra [MJ m^2 day^{-1}]'</span>)
+title([<span class="string">'Solar radiation at '</span> num2str(lat(5)) <span class="string">'\circN'</span>])
+</pre><img vspace="5" hspace="5" src="pet_documentation_01.png" alt=""> <h2 id="5">Calculate potential evapotranspiration</h2><p>SPEI requires precipitation and potential evapotranspiration (PET). PET is calculated based on the formula of Hargreaves and Samani (1985) which estimates reference crop evapotranspiration based on temperature and extraterrestrial radiation.</p><p>There are numerous approaches to calculating potential evaporation. A compilation is found <a href="https://doi.org/10.5194/hess-17-1331-2013">here</a> (see supplements). Here we use the formula of Hargreaves-Samani (1985) which is a temperature based method to calculate the potential evapotranspiration (PET) and is implemented in the function pet. The main advantage of using the Hargreaves-Samani equation lies in its simplicity and low requirements regarding input parameters.</p><pre class="codeinput">pevap = pet(Ra,TMAX,TMIN,T);
+
+plot(t,squeeze(pevap(5,5,:)))
+ylabel(<span class="string">'PET [mm day^{-1}]'</span>)
+title([<span class="string">'Potential evaporation at '</span> num2str(lat(5)) <span class="string">'\circN, '</span> num2str(lon(5)) <span class="string">'\circE'</span> ])
+<span class="comment">%</span>
+</pre><img vspace="5" hspace="5" src="pet_documentation_02.png" alt=""> <h2 id="6">References</h2><div><ul><li>Hargreaves, George H., and Zohrab A. Samani. "Reference crop evapotranspiration from temperature." Applied Engineering in Agriculture 1.2 (1985): 96-99. <a href="https://doi.org/10.13031/2013.26773">doi:10.13031/2013.26773</a>.</li><li>Samani, Zohrab. "Estimating solar radiation and evapotranspiration using minimum climatological data." Journal of Irrigation and Drainage Engineering 126.4 (2000): 265-267. <a href="https://doi.org/10.1061/(ASCE)0733-9437(2000)126:4(265)">10.1061/(ASCE)0733-9437(2000)126:4(265)</a>.</li></ul></div><h2 id="7">Author Info</h2><p>This function and supporting documentation were written by Jos&eacute; Delgado and Wolfgang Schwanghart (University of Potsdam), February 2019, for the Climate Data Toolbox for Matlab.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |pet| documentation 
+% The |pet| gives the potential reference evapotranspiration following Hargreaves-Samani.
+% 
+% See also: <spei_documentation.html |spei|>. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+%
+%  pevap = pet(Ra,tmax,tmin,tmean)
+%
+%% Description
+%
+% |pevap = pet(Ra,tmax,tmin,tmean)| computes the Hargreaves equation for the
+% potential evapotranspiration (PET) for extraterrestrial radiation |Ra| (such
+% as from the <solar_radiation.html |solar_radiation|> function), and temperature maxima, minima, and means. 
+% Temperatures |tmax|, |tmin|, and |tmean| can be vectors, or can be cubes in which the first
+% two dimensions are spatial and the third dimension corresponds to time. The inputs
+% |tmax|, |tmin|, and |tmean| represent maximinum, minimum, and mean temperatures
+% over a given time period. 
+%
+%% Example 
+% This example is an abbreviated form of the example given in the documentation 
+% for the <spei_documentation.html |spei|> function. You may wish to check out 
+% that page for a little more context and in-depth explanation. 
+% 
+% Begin by loading data and converting units. Precipitation comes in units kg^2/m^2/s and we change these units to mm/day. 
+% Temperatures are in K and we change them to degrees C.
+
+load ncep-ncar
+
+P    = P*3600*24;
+T    = T-273.15;
+TMAX = TMAX-273.15;
+TMIN = TMIN-273.15;
+
+%% Calculate extraterrestrial solar radiation
+% <https://doi.org/10.13031/2013.26773 Hargreaves and Samani's> PET equation requires extraterrestrial radiation (Ra) 
+% as input. Ra is the solar radiation on a horizontal surface at the top of the 
+% Earth's atmosphere and is computed based on the orbital parameters of the Earth 
+% which are dependent on latitude. We wish to have the temporal variations of 
+% solar radiation integrated over daily time intervals which can be calculated 
+% using the function <solar_radiation_documentation.html |solar_radiation| 
+% function. Use |meshgrid| to turn the |lat,lon| vectors into grids, which 
+% will thereby give us a distinct latitude value for each grid cell: 
+
+[Lon,Lat] = meshgrid(lon,lat); 
+
+Ra  = solar_radiation(t,Lat);
+
+% Plot grid cell 5,5: 
+plot(t,squeeze(Ra(5,5,:)))
+ylabel('Ra [MJ m^2 day^{-1}]')
+title(['Solar radiation at ' num2str(lat(5)) '\circN'])
+
+%% Calculate potential evapotranspiration
+% SPEI requires precipitation and potential evapotranspiration (PET). PET 
+% is calculated based on the formula of Hargreaves and Samani (1985) which estimates 
+% reference crop evapotranspiration based on temperature and extraterrestrial 
+% radiation.
+%
+% There are numerous approaches to calculating potential evaporation. A compilation 
+% is found <https://doi.org/10.5194/hess-17-1331-2013 here> (see supplements). 
+% Here we use the formula of Hargreaves-Samani (1985) which is a temperature based 
+% method to calculate the potential evapotranspiration (PET) and is implemented 
+% in the function pet. The main advantage of using the Hargreaves-Samani equation 
+% lies in its simplicity and low requirements regarding input parameters. 
+
+pevap = pet(Ra,TMAX,TMIN,T);
+
+plot(t,squeeze(pevap(5,5,:)))
+ylabel('PET [mm day^{-1}]')
+title(['Potential evaporation at ' num2str(lat(5)) '\circN, ' num2str(lon(5)) '\circE' ])
+% 
+%% References 
+% 
+% * Hargreaves, George H., and Zohrab A. Samani. "Reference crop evapotranspiration 
+% from temperature." Applied Engineering in Agriculture 1.2 (1985): 96-99.
+% <https://doi.org/10.13031/2013.26773 doi:10.13031/2013.26773>.
+% * Samani, Zohrab. "Estimating solar radiation and evapotranspiration using 
+% minimum climatological data." Journal of Irrigation and Drainage Engineering
+% 126.4 (2000): 265-267. <https://doi.org/10.1061/(ASCE)0733-9437(2000)126:4(265)
+% 10.1061/(ASCE)0733-9437(2000)126:4(265)>.
+% 
+%% Author Info 
+% This function and supporting documentation were written by José Delgado 
+% and Wolfgang Schwanghart (University of Potsdam), February 2019, for the 
+% Climate Data Toolbox for Matlab. 
+##### SOURCE END #####
+--></body></html>

@@ -62,7 +62,7 @@ dr2 = 1 + 0.033*cos(2*pi*dy);
 rho = 0.409*sin(2*pi*dy - 1.39); % same size as t
 
 % ws - sunset hour angle
-ws  = acos( - bsxfun(@times,tan(lat),tan(rho)));
+ws  = real(acos( - bsxfun(@times,tan(lat),tan(rho))));
 
 Ra = 1440/pi * Gsc * bsxfun(@times,dr2, (ws .* bsxfun(@times,sin(lat),sin(rho)) + ...
                            bsxfun(@times,cos(lat),cos(rho)).*sin(ws)));
