@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>solar_radiation documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-25"><meta name="DC.source" content="solar_radiation_documentation.m"><style type="text/css">
+      --><title>solar_radiation documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-28"><meta name="DC.source" content="solar_radiation_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -130,7 +130,7 @@ axis <span class="string">tight</span>
 box <span class="string">off</span>
 legend(<span class="string">'land'</span>,<span class="string">'ocean'</span>,<span class="string">'total'</span>)
 ylabel <span class="string">'Earth''s daily energy received (MJ)'</span>
-</pre><img vspace="5" hspace="5" src="solar_radiation_documentation_03.png" alt=""> <p>The plot above shows that at all times of the year, the ocean receives more solar energy than the land surface. That is unsurprising, because the ocean's surface is larger than Earth's land surface. But there are some other interesting things that are happening there too.</p><p>The curve for land may not surprise the majority of Earth's population, who live north of the equator. If you live in the northern hemisphere you may see that and think, "yes, the Earth is warmer in the summer." But of course when it's summer in the nothern hemisphere, it's winter in the southern hemisphere, so shouldn't things equal out?</p><p>No. Because most's of Earth's land area is in the northern hemisphere, so in terms of sums, the Earth's land surface receives more energy in June than in December.</p><p>When we look at how solar energy at the ocean's surface changes throughout the year, we see just the opposite of what we see on land. That's partly because the ocean has more surface area in the southern hemisphere than the northern hemisphere, but that doesn't fully explain the dip in the ocean's energy in June and July.</p><p>Looking at the total solar energy received, we see that it's not constant throughout the year. In fact, the Earth is farthest away from the Sun around <a href="https://simple.wikipedia.org/wiki/Perihelion">July 4th</a> of every year, so on the whole, that's when the Earth receives the least amount of solar energy.</p><h2 id="12">References</h2><p>The <tt>solar_radiation</tt> function computes the equation by</p><div><ul><li>Allen et al. (1998),</li><li>McMahon, T. A., et al. "Estimating actual, potential, reference crop and pan evaporation using standard meteorological data: a pragmatic synthesis." Hydrology and Earth System Sciences 17.4 (2013): 1331-1363 <a href="https://doi.org/10.5194/hess-17-1331-2013">https://doi.org/10.5194/hess-17-1331-2013</a>.</li><li>McCullough and Porter (1971)</li><li>McCullough (1968)</li></ul></div><p>See also the supplement to McMahon et al 2013 <a href="https://www.hydrol-earth-syst-sci.net/17/1331/2013/hess-17-1331-2013-supplement.pdf">here.</a></p><h2 id="13">Author Info</h2><p>The <tt>solar_radiation</tt> function was written by Jos&eacute; Delgado and Wolfgang Schwanghart (University of Potsdam). February 2019. Climate Data Toolbox for Matlab.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="solar_radiation_documentation_03.png" alt=""> <p>The plot above shows that at all times of the year, the ocean receives more solar energy than the land surface. That is unsurprising, because the ocean's surface is larger than Earth's land surface. But there are some other interesting things that are happening there too.</p><p>The curve for land may not surprise the majority of Earth's population, who live north of the equator. If you live in the northern hemisphere you may see that and think, "yes, the Earth is warmer in the summer." But of course when it's summer in the nothern hemisphere, it's winter in the southern hemisphere, so shouldn't things equal out?</p><p>No. Because most's of Earth's land area is in the northern hemisphere, so in terms of sums, the Earth's land surface receives more energy in June than in December.</p><p>When we look at how solar energy at the ocean's surface changes throughout the year, we see just the opposite of what we see on land. That's partly because the ocean has more surface area in the southern hemisphere than the northern hemisphere, but that doesn't fully explain the dip in the ocean's energy in June and July.</p><p>Looking at the total solar energy received, we see that it's not constant throughout the year. In fact, the Earth is farthest away from the Sun around <a href="https://simple.wikipedia.org/wiki/Perihelion">July 4th</a> of every year, so on the whole, that's when the Earth receives the least amount of solar energy.</p><h2 id="12">References</h2><p>The <tt>solar_radiation</tt> function computes the equation described in:</p><div><ul><li>Allen, R.G., Pereira, L.S., Raes, D., and Smith, M.: Crop evapotranspiration Guidelines for computing crop water requirements FAO Irrigation and Drainage Paper 56, Food and Agriculture Organization of the United Nations, 1998</li><li>McCullough (1968) McCullough, E.C.: Total daily radiant energy available extraterrestrially as a harmonic series in the day of the year, Arch. Met. Geoph. Biokl., Ser. B, 16, 129-143, 1968.</li><li>McCullough and Porter (1971) McCullough, E.C. and Porter, W.P.: Computing clear day solar radiation spectra for the terrestrial ecological environment, Ecology, 52, 1008-1015, 1971.</li><li>McMahon, T. A., et al. "Estimating actual, potential, reference crop and pan evaporation using standard meteorological data: a pragmatic synthesis." Hydrology and Earth System Sciences 17.4 (2013): 1331-1363 <a href="https://doi.org/10.5194/hess-17-1331-2013">https://doi.org/10.5194/hess-17-1331-2013</a>.</li></ul></div><p>See also the supplement to McMahon et al 2013 <a href="https://www.hydrol-earth-syst-sci.net/17/1331/2013/hess-17-1331-2013-supplement.pdf">here.</a></p><h2 id="13">Author Info</h2><p>The <tt>solar_radiation</tt> function was written by Jos&eacute; Delgado and Wolfgang Schwanghart (University of Potsdam). February 2019. Climate Data Toolbox for Matlab.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |solar_radiation| documentation 
 % The |solar_radiation| function computes modern daily total extraterrestrial solar radiation
@@ -307,17 +307,25 @@ ylabel 'Earth''s daily energy received (MJ)'
 % solar energy. 
 
 %% References
-% The |solar_radiation| function computes the equation by 
+% The |solar_radiation| function computes the equation described in: 
 % 
-% * Allen et al. (1998), 
-% * McMahon, T. A., et al. "Estimating actual, potential, reference crop and pan 
-% evaporation using standard meteorological data: a pragmatic synthesis." Hydrology 
-% and Earth System Sciences 17.4 (2013): 1331-1363 <https://doi.org/10.5194/hess-17-1331-2013>.
-% * McCullough and Porter (1971) 
-% * McCullough (1968)
+% * Allen, R.G., Pereira, L.S., Raes, D., and Smith, M.: Crop evapotranspiration
+% Guidelines for computing crop water requirements FAO Irrigation and Drainage Paper 56,
+% Food and Agriculture Organization of the United Nations, 1998
+% * McCullough (1968) McCullough, E.C.: Total daily radiant energy available
+% extraterrestrially as a harmonic series in the day of the year, Arch. Met. Geoph.
+% Biokl., Ser. B, 16, 129-143, 1968.
+% * McCullough and Porter (1971) McCullough, E.C. and Porter, W.P.: Computing clear day
+% solar radiation spectra for the terrestrial ecological environment, Ecology, 52,
+% 1008-1015, 1971.
+% * McMahon, T. A., et al. "Estimating actual, potential, reference crop and pan
+% evaporation using standard meteorological data: a pragmatic synthesis." Hydrology and
+% Earth System Sciences 17.4 (2013): 1331-1363
+% <https://doi.org/10.5194/hess-17-1331-2013>.
 % 
-% See also the supplement to McMahon et al 2013  
-% <https://www.hydrol-earth-syst-sci.net/17/1331/2013/hess-17-1331-2013-supplement.pdf here.>
+% See also the supplement to McMahon et al 2013
+% <https://www.hydrol-earth-syst-sci.net/17/1331/2013/hess-17-1331-2013-supplement.pdf
+% here.>
 % 
 %% Author Info
 % The |solar_radiation| function was written by José Delgado and Wolfgang Schwanghart 

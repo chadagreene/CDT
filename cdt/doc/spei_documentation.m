@@ -8,25 +8,21 @@
 % <CDT_Contents.html Back to Climate Data Tools Contents>. 
 %% Syntax
 %
-%  [s,tint] = spei(t,prec,pevap)
+%  s = spei(t,prec,pevap)
 %  [s,tint] = spei(t,prec,pevap,'integrationtime',months)
-%  [s,tint] = spei(t,prec,pevap,'movmean',days)
 %
 %% Description
 %
-% |[s,tint] = spei(t,prec,pevap)| computes the standardised precipitation-evapotranspiration
-% index |s| and integration times |tint|, given precipitation prec and potential 
-% evaporation pevap corresponding to times |t|. |prec| and |pevap| can be either 
-% be 1D vectors or 3D cubes, whose first two dimensions are spatial and whose
-% third dimension corresponds to times |t|. The dimensions of |prec| and |pevap| must agree. 
-% Times |t| can be datetime or datenum format. 
+% |s = spei(t,prec,pevap)| computes the standardised precipitation-evapotranspiration
+% index |s|, given precipitation prec and potential evaporation pevap corresponding 
+% to times |t|. |prec| and |pevap| can be either be 1D vectors or 3D cubes, whose
+% first two dimensions are spatial and whose third dimension corresponds to times 
+% |t|. The dimensions of |prec| and |pevap| must agree. Times |t| can be datetime 
+% or datenum format. 
 %
 % |[s,tint] = spei(t,prec,pevap,'integrationtime',months)| integrates over 1, 2, 3, 4, 6, 
-% or 12 months. The default integration time is |1| month. 
-%
-% |[s,tint] = spei(t,prec,pevap,'movmean',days)| specifies the duration of the 
-% moving mean in days. Default moving mean is |31| days. You can either set 
-% |'movmean'| or |'integrationtime'|, but not both. 
+% or 12 months. The default integration time is |1| month. Output |tint| contains
+% the dates of the reduced time series.
 %
 %% Example 
 % This example demonstates how to calculate and display temporal and spatial 
@@ -64,7 +60,7 @@ TMIN = TMIN-273.15;
 % Earth's atmosphere and is computed based on the orbital parameters of the Earth 
 % which are dependent on latitude. We wish to have the temporal variations of 
 % solar radiation integrated over daily time intervals which can be calculated 
-% using the function <solar_radiation_documentation.html |solar_radiation| 
+% using the function <solar_radiation_documentation.html |solar_radiation|> 
 % function. Use |meshgrid| to turn the |lat,lon| vectors into grids, which 
 % will thereby give us a distinct latitude value for each grid cell: 
 
@@ -101,17 +97,21 @@ title(['Potential evaporation at ' num2str(lat(5)) '\circN, ' num2str(lon(5)) '\
 % to detect, monitor and analyze droughts. The SPEI allows comparison of drought 
 % severity through time and space, since it can be calculated over a wide range 
 % of climates. The function |spei| calculates the index based on the difference 
-% between precipitation and PET and enables setting differently sized moving average 
-% windows and integration times.
+% between precipitation and PET and enables setting differently sized integration times.
 
-[s,tint] = spei(t,P,pevap,'movmean',93);
+% Two ways of calculating SPEI: 
+s = spei(t,P,pevap); 
+[s3,t3] = spei(t,P,pevap,'integrationtime',3);
 
 figure
 subsubplot(2,1,1)
 plot(t,squeeze(s(5,5,:)))
+hold on
+plot(t3,squeeze(s3(5,5,:)))
 ylabel('SPEI')
 axis tight
 title(['SPEI at ' num2str(lat(5)) '\circN, ' num2str(lon(5)) '\circE' ])
+legend('raw','3 month integration')
 
 subsubplot(2,1,2)
 plot(t,squeeze(P(5,5,:)))

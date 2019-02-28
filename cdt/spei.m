@@ -5,25 +5,21 @@ function [s,tint] = spei(t,prec,pevap,varargin)
 %
 %% Syntax
 %
-%  [s,tint] = spei(t,prec,pevap)
+%  s = spei(t,prec,pevap)
 %  [s,tint] = spei(t,prec,pevap,'integrationtime',months)
-%  [s,tint] = spei(t,prec,pevap,'movmean',days)
 %
 %% Description
 %
-% [s,tint] = spei(t,prec,pevap) computes the standardised precipitation-evapotranspiration
-% index s and integration times tint, given precipitation prec and potential 
-% evaporation pevap corresponding to times t. prec and pevap can be either 
-% be 1D vectors or 3D cubes, whose first two dimensions are spatial and whose
-% third dimension corresponds to times t. The dimensions of prec and pevap must agree. 
-% Times t can be datetime or datenum format. 
+% s = spei(t,prec,pevap) computes the standardised precipitation-evapotranspiration
+% index s, given precipitation prec and potential evaporation pevap corresponding 
+% to times t. prec and pevap can be either be 1D vectors or 3D cubes, whose
+% first two dimensions are spatial and whose third dimension corresponds to times 
+% t. The dimensions of prec and pevap must agree. Times t can be datetime 
+% or datenum format. 
 %
 % [s,tint] = spei(t,prec,pevap,'integrationtime',months) integrates over 1, 2, 3, 4, 6, 
-% or 12 months. The default integration time is 1 month. 
-%
-% [s,tint] = spei(t,prec,pevap,'movmean',days) specifies the duration of the 
-% moving mean in days. Default moving mean is 31 days. You can either set 
-% 'movmean' or 'integrationtime', but not both. 
+% or 12 months. The default integration time is 1 month. Output tint contains
+% the dates of the reduced time series.
 %
 %% Examples 
 % For examples, type 

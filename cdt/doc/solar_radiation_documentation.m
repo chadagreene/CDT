@@ -173,17 +173,25 @@ ylabel 'Earth''s daily energy received (MJ)'
 % solar energy. 
 
 %% References
-% The |solar_radiation| function computes the equation by 
+% The |solar_radiation| function computes the equation described in: 
 % 
-% * Allen et al. (1998), 
-% * McMahon, T. A., et al. "Estimating actual, potential, reference crop and pan 
-% evaporation using standard meteorological data: a pragmatic synthesis." Hydrology 
-% and Earth System Sciences 17.4 (2013): 1331-1363 <https://doi.org/10.5194/hess-17-1331-2013>.
-% * McCullough and Porter (1971) 
-% * McCullough (1968)
+% * Allen, R.G., Pereira, L.S., Raes, D., and Smith, M.: Crop evapotranspiration
+% Guidelines for computing crop water requirements FAO Irrigation and Drainage Paper 56,
+% Food and Agriculture Organization of the United Nations, 1998
+% * McCullough (1968) McCullough, E.C.: Total daily radiant energy available
+% extraterrestrially as a harmonic series in the day of the year, Arch. Met. Geoph.
+% Biokl., Ser. B, 16, 129-143, 1968.
+% * McCullough and Porter (1971) McCullough, E.C. and Porter, W.P.: Computing clear day
+% solar radiation spectra for the terrestrial ecological environment, Ecology, 52,
+% 1008-1015, 1971.
+% * McMahon, T. A., et al. "Estimating actual, potential, reference crop and pan
+% evaporation using standard meteorological data: a pragmatic synthesis." Hydrology and
+% Earth System Sciences 17.4 (2013): 1331-1363
+% <https://doi.org/10.5194/hess-17-1331-2013>.
 % 
-% See also the supplement to McMahon et al 2013  
-% <https://www.hydrol-earth-syst-sci.net/17/1331/2013/hess-17-1331-2013-supplement.pdf here.>
+% See also the supplement to McMahon et al 2013
+% <https://www.hydrol-earth-syst-sci.net/17/1331/2013/hess-17-1331-2013-supplement.pdf
+% here.>
 % 
 %% Author Info
 % The |solar_radiation| function was written by José Delgado and Wolfgang Schwanghart 

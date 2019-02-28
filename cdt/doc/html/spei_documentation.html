@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>spei_documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-25"><meta name="DC.source" content="spei_documentation.m"><style type="text/css">
+      --><title>spei_documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-28"><meta name="DC.source" content="spei_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,9 +66,8 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>spei_documentation</tt></h1><!--introduction--><p>The <tt>spei</tt> function calculates the standardised precipitation-evapotranspiration index based on a standardization of a simplified water balance based on the climatology of a particular location.</p><p>See also: <a href="pet_documentation.html"><tt>pet</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#6">Calculate extraterrestrial solar radiation</a></li><li><a href="#7">Calculate potential evapotranspiration</a></li><li><a href="#8">Calculate SPEI</a></li><li><a href="#9">Retrieving NCEP/NCAR reanalysis data</a></li><li><a href="#10">References</a></li><li><a href="#11">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[s,tint] = spei(t,prec,pevap)
-[s,tint] = spei(t,prec,pevap,'integrationtime',months)
-[s,tint] = spei(t,prec,pevap,'movmean',days)</pre><h2 id="2">Description</h2><p><tt>[s,tint] = spei(t,prec,pevap)</tt> computes the standardised precipitation-evapotranspiration index <tt>s</tt> and integration times <tt>tint</tt>, given precipitation prec and potential evaporation pevap corresponding to times <tt>t</tt>. <tt>prec</tt> and <tt>pevap</tt> can be either be 1D vectors or 3D cubes, whose first two dimensions are spatial and whose third dimension corresponds to times <tt>t</tt>. The dimensions of <tt>prec</tt> and <tt>pevap</tt> must agree. Times <tt>t</tt> can be datetime or datenum format.</p><p><tt>[s,tint] = spei(t,prec,pevap,'integrationtime',months)</tt> integrates over 1, 2, 3, 4, 6, or 12 months. The default integration time is <tt>1</tt> month.</p><p><tt>[s,tint] = spei(t,prec,pevap,'movmean',days)</tt> specifies the duration of the moving mean in days. Default moving mean is <tt>31</tt> days. You can either set <tt>'movmean'</tt> or <tt>'integrationtime'</tt>, but not both.</p><h2 id="3">Example</h2><p>This example demonstates how to calculate and display temporal and spatial patterns of the standardised precipitation-evapotranspiration index SPEI. We will use NCEP/NCAR reanalysis data (<a href="https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.DAILY/">Climate Data Assimiliation System I Daily</a>) downloaded from <a href="https://iridl.ldeo.columbia.edu/">IRI/LDEO Climate Data Library of the University of Columbia</a>.</p><p>The file ncep-ncar.mat contains a number of three dimensional arrays of daily values of mean temperature (T), maximum temperature (TMAX), minimum temperature (TMIN) and precipitation (P) as well as a vectors for time, latitude and longitude. Retrieving these variables from the Climate Data Library is explained at the bottom of this page.</p><pre class="codeinput">load <span class="string">ncep-ncar</span>
+  </style></head><body><div class="content"><h1><tt>spei_documentation</tt></h1><!--introduction--><p>The <tt>spei</tt> function calculates the standardised precipitation-evapotranspiration index based on a standardization of a simplified water balance based on the climatology of a particular location.</p><p>See also: <a href="pet_documentation.html"><tt>pet</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#6">Calculate extraterrestrial solar radiation</a></li><li><a href="#7">Calculate potential evapotranspiration</a></li><li><a href="#8">Calculate SPEI</a></li><li><a href="#9">Retrieving NCEP/NCAR reanalysis data</a></li><li><a href="#10">References</a></li><li><a href="#11">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>s = spei(t,prec,pevap)
+[s,tint] = spei(t,prec,pevap,'integrationtime',months)</pre><h2 id="2">Description</h2><p><tt>s = spei(t,prec,pevap)</tt> computes the standardised precipitation-evapotranspiration index <tt>s</tt>, given precipitation prec and potential evaporation pevap corresponding to times <tt>t</tt>. <tt>prec</tt> and <tt>pevap</tt> can be either be 1D vectors or 3D cubes, whose first two dimensions are spatial and whose third dimension corresponds to times <tt>t</tt>. The dimensions of <tt>prec</tt> and <tt>pevap</tt> must agree. Times <tt>t</tt> can be datetime or datenum format.</p><p><tt>[s,tint] = spei(t,prec,pevap,'integrationtime',months)</tt> integrates over 1, 2, 3, 4, 6, or 12 months. The default integration time is <tt>1</tt> month. Output <tt>tint</tt> contains the dates of the reduced time series.</p><h2 id="3">Example</h2><p>This example demonstates how to calculate and display temporal and spatial patterns of the standardised precipitation-evapotranspiration index SPEI. We will use NCEP/NCAR reanalysis data (<a href="https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.DAILY/">Climate Data Assimiliation System I Daily</a>) downloaded from <a href="https://iridl.ldeo.columbia.edu/">IRI/LDEO Climate Data Library of the University of Columbia</a>.</p><p>The file ncep-ncar.mat contains a number of three dimensional arrays of daily values of mean temperature (T), maximum temperature (TMAX), minimum temperature (TMIN) and precipitation (P) as well as a vectors for time, latitude and longitude. Retrieving these variables from the Climate Data Library is explained at the bottom of this page.</p><pre class="codeinput">load <span class="string">ncep-ncar</span>
 </pre><p>Our data spans following time range</p><pre class="codeinput">disp([min(t) max(t)])
 disp(years(max(t)-min(t)))
 </pre><pre class="codeoutput">   2008-01-01   2018-12-31
@@ -77,7 +76,7 @@ disp(years(max(t)-min(t)))
 T    = T-273.15;
 TMAX = TMAX-273.15;
 TMIN = TMIN-273.15;
-</pre><h2 id="6">Calculate extraterrestrial solar radiation</h2><p><a href="https://doi.org/10.13031/2013.26773">Hargreaves and Samani's</a> PET equation requires extraterrestrial radiation (Ra) as input. Ra is the solar radiation on a horizontal surface at the top of the Earth's atmosphere and is computed based on the orbital parameters of the Earth which are dependent on latitude. We wish to have the temporal variations of solar radiation integrated over daily time intervals which can be calculated using the function &lt;solar_radiation_documentation.html <tt>solar_radiation</tt> function. Use <tt>meshgrid</tt> to turn the <tt>lat,lon</tt> vectors into grids, which will thereby give us a distinct latitude value for each grid cell:</p><pre class="codeinput">[Lon,Lat] = meshgrid(lon,lat);
+</pre><h2 id="6">Calculate extraterrestrial solar radiation</h2><p><a href="https://doi.org/10.13031/2013.26773">Hargreaves and Samani's</a> PET equation requires extraterrestrial radiation (Ra) as input. Ra is the solar radiation on a horizontal surface at the top of the Earth's atmosphere and is computed based on the orbital parameters of the Earth which are dependent on latitude. We wish to have the temporal variations of solar radiation integrated over daily time intervals which can be calculated using the function <a href="solar_radiation_documentation.html"><tt>solar_radiation</tt></a> function. Use <tt>meshgrid</tt> to turn the <tt>lat,lon</tt> vectors into grids, which will thereby give us a distinct latitude value for each grid cell:</p><pre class="codeinput">[Lon,Lat] = meshgrid(lon,lat);
 
 Ra  = solar_radiation(t,Lat);
 
@@ -90,14 +89,19 @@ title([<span class="string">'Solar radiation at '</span> num2str(lat(5)) <span c
 plot(t,squeeze(pevap(5,5,:)))
 ylabel(<span class="string">'PET [mm day^{-1}]'</span>)
 title([<span class="string">'Potential evaporation at '</span> num2str(lat(5)) <span class="string">'\circN, '</span> num2str(lon(5)) <span class="string">'\circE'</span> ])
-</pre><img vspace="5" hspace="5" src="spei_documentation_02.png" alt=""> <h2 id="8">Calculate SPEI</h2><p>The SPEI is a drought index that can be used by different scientific disciplines to detect, monitor and analyze droughts. The SPEI allows comparison of drought severity through time and space, since it can be calculated over a wide range of climates. The function <tt>spei</tt> calculates the index based on the difference between precipitation and PET and enables setting differently sized moving average windows and integration times.</p><pre class="codeinput">[s,tint] = spei(t,P,pevap,<span class="string">'movmean'</span>,93);
+</pre><img vspace="5" hspace="5" src="spei_documentation_02.png" alt=""> <h2 id="8">Calculate SPEI</h2><p>The SPEI is a drought index that can be used by different scientific disciplines to detect, monitor and analyze droughts. The SPEI allows comparison of drought severity through time and space, since it can be calculated over a wide range of climates. The function <tt>spei</tt> calculates the index based on the difference between precipitation and PET and enables setting differently sized integration times.</p><pre class="codeinput"><span class="comment">% Two ways of calculating SPEI:</span>
+s = spei(t,P,pevap);
+[s3,t3] = spei(t,P,pevap,<span class="string">'integrationtime'</span>,3);
 
 figure
 subsubplot(2,1,1)
 plot(t,squeeze(s(5,5,:)))
+hold <span class="string">on</span>
+plot(t3,squeeze(s3(5,5,:)))
 ylabel(<span class="string">'SPEI'</span>)
 axis <span class="string">tight</span>
 title([<span class="string">'SPEI at '</span> num2str(lat(5)) <span class="string">'\circN, '</span> num2str(lon(5)) <span class="string">'\circE'</span> ])
+legend(<span class="string">'raw'</span>,<span class="string">'3 month integration'</span>)
 
 subsubplot(2,1,2)
 plot(t,squeeze(P(5,5,:)))
@@ -165,25 +169,21 @@ axis <span class="string">tight</span>
 % <CDT_Contents.html Back to Climate Data Tools Contents>. 
 %% Syntax
 %
-%  [s,tint] = spei(t,prec,pevap)
+%  s = spei(t,prec,pevap)
 %  [s,tint] = spei(t,prec,pevap,'integrationtime',months)
-%  [s,tint] = spei(t,prec,pevap,'movmean',days)
 %
 %% Description
 %
-% |[s,tint] = spei(t,prec,pevap)| computes the standardised precipitation-evapotranspiration
-% index |s| and integration times |tint|, given precipitation prec and potential 
-% evaporation pevap corresponding to times |t|. |prec| and |pevap| can be either 
-% be 1D vectors or 3D cubes, whose first two dimensions are spatial and whose
-% third dimension corresponds to times |t|. The dimensions of |prec| and |pevap| must agree. 
-% Times |t| can be datetime or datenum format. 
+% |s = spei(t,prec,pevap)| computes the standardised precipitation-evapotranspiration
+% index |s|, given precipitation prec and potential evaporation pevap corresponding 
+% to times |t|. |prec| and |pevap| can be either be 1D vectors or 3D cubes, whose
+% first two dimensions are spatial and whose third dimension corresponds to times 
+% |t|. The dimensions of |prec| and |pevap| must agree. Times |t| can be datetime 
+% or datenum format. 
 %
 % |[s,tint] = spei(t,prec,pevap,'integrationtime',months)| integrates over 1, 2, 3, 4, 6, 
-% or 12 months. The default integration time is |1| month. 
-%
-% |[s,tint] = spei(t,prec,pevap,'movmean',days)| specifies the duration of the 
-% moving mean in days. Default moving mean is |31| days. You can either set 
-% |'movmean'| or |'integrationtime'|, but not both. 
+% or 12 months. The default integration time is |1| month. Output |tint| contains
+% the dates of the reduced time series.
 %
 %% Example 
 % This example demonstates how to calculate and display temporal and spatial 
@@ -221,7 +221,7 @@ TMIN = TMIN-273.15;
 % Earth's atmosphere and is computed based on the orbital parameters of the Earth 
 % which are dependent on latitude. We wish to have the temporal variations of 
 % solar radiation integrated over daily time intervals which can be calculated 
-% using the function <solar_radiation_documentation.html |solar_radiation| 
+% using the function <solar_radiation_documentation.html |solar_radiation|> 
 % function. Use |meshgrid| to turn the |lat,lon| vectors into grids, which 
 % will thereby give us a distinct latitude value for each grid cell: 
 
@@ -258,17 +258,21 @@ title(['Potential evaporation at ' num2str(lat(5)) '\circN, ' num2str(lon(5)) '\
 % to detect, monitor and analyze droughts. The SPEI allows comparison of drought 
 % severity through time and space, since it can be calculated over a wide range 
 % of climates. The function |spei| calculates the index based on the difference 
-% between precipitation and PET and enables setting differently sized moving average 
-% windows and integration times.
+% between precipitation and PET and enables setting differently sized integration times.
 
-[s,tint] = spei(t,P,pevap,'movmean',93);
+% Two ways of calculating SPEI: 
+s = spei(t,P,pevap); 
+[s3,t3] = spei(t,P,pevap,'integrationtime',3);
 
 figure
 subsubplot(2,1,1)
 plot(t,squeeze(s(5,5,:)))
+hold on
+plot(t3,squeeze(s3(5,5,:)))
 ylabel('SPEI')
 axis tight
 title(['SPEI at ' num2str(lat(5)) '\circN, ' num2str(lon(5)) '\circE' ])
+legend('raw','3 month integration')
 
 subsubplot(2,1,2)
 plot(t,squeeze(P(5,5,:)))
