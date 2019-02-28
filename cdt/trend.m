@@ -1,4 +1,4 @@
-function [tr,p] = trend(A,Fs_or_t,varargin)
+function [tr,p] = trend(y,Fs_or_t,varargin)
 % trend calculates the linear trend of a data series by least squares. Data
 % do not need to be equally spaced in time. 
 %
@@ -8,6 +8,7 @@ function [tr,p] = trend(A,Fs_or_t,varargin)
 %  tr = trend(y,Fs) 
 %  tr = trend(y,t) 
 %  tr = trend(...,'dim',dim)
+%  tr = trend(...,'omitnan')
 %  [tr,p] = trend(...)
 %  [tr,p] = trend(...,corrOptions)
 % 
@@ -30,6 +31,16 @@ function [tr,p] = trend(A,Fs_or_t,varargin)
 % the first nonsingleton dimension of y; if y is a 2D matrix, the trend is 
 % calcaulated down the rows (dimension 1) of y; if y is a 3D matrix, the 
 % trend is calculated down dimension 3. 
+% 
+% tr = trend(...,'omitnan') solves the least squares trend, even where not all
+% values of y are finite. This option may be somewhat slow if many grid cells 
+% contain some, but not all, NaNs. A word of caution when using the 'omitnan'
+% option: the trend is calculated only over the timespan in which finite data
+% exist. Therefore, for example, if some grid cells contain finite data only
+% for one year of a 10 year record, it is possible that the apparent "10 year" trend 
+% reported by the trend function could actually be an aliased signal. Accordingly, 
+% the 'omitnan' option should only be used when NaNs are scattered somewhat 
+% evenly throughout the temporal record. 
 % 
 % [tr,p] = trend(...) returns the p-value of statistical significance of 
 % the trend. (Requires the Statistics Toolbox)
@@ -65,6 +76,14 @@ if isempty(Fs_or_t)
    Fs_or_t = 1; 
 end
 
+tmp = strncmpi(varargin,'omitnan',4); 
+if any(tmp)
+   omitnan = true; 
+   varargin = varargin(~tmp); 
+else
+   omitnan = false;
+end
+
 % Dimension of operation: 
 tmp = strncmpi(varargin,'dimension',3); 
 if any(tmp)
@@ -73,10 +92,10 @@ if any(tmp)
    varargin = varargin(~tmp); 
    assert(ismember(dim,[1 2 3]),'Error: trend can only operate along dimension 1, 2, or 3.')
 else
-   if ndims(A)==3 % if it's a 3D matrix, operate down dim 3
+   if ndims(y)==3 % if it's a 3D matrix, operate down dim 3
       dim = 3; 
    else
-      dim = find(size(A)>1,1,'first'); % if it's 2D, operate down the first nonsingleton dimension. 
+      dim = find(size(y)>1,1,'first'); % if it's 2D, operate down the first nonsingleton dimension. 
    end
 end
 
@@ -84,7 +103,7 @@ end
 
 % Did the user declare a sampling rate or a time array?
 if isscalar(Fs_or_t)
-   t = 0:1/Fs_or_t:(size(A,dim)-1)/Fs_or_t; % for the case where Fs_or_t is declared as sampling frequency.   
+   t = 0:1/Fs_or_t:(size(y,dim)-1)/Fs_or_t; % for the case where Fs_or_t is declared as sampling frequency.   
 else
    t = Fs_or_t; 
 end
@@ -96,21 +115,45 @@ switch dim
    case 1
       % do nothing
    case 2
-      A = permute(A,[2 1]); 
+      y = permute(y,[2 1]); 
    case 3
-      mask = all(isfinite(A),3); 
-      A = cube2rect(A,mask); 
+      if omitnan
+         mask = sum(isfinite(y),3)>1; 
+      else
+         mask = all(isfinite(y),3); 
+      end
+      y = cube2rect(y,mask); 
    otherwise
       error('The trend function only works on 1D, 2D, or 3D matrices.') 
 end
 
-
 %% Compute trend
 % (It's the slope of the least squares fit)
 
-assert(isequal(size(A,1),length(t)),'Dimension mismatch: length of t must match the size of y along which the trend is being calculated. Specify a different dimension?')
+assert(isequal(size(y,1),length(t)),'Dimension mismatch: length of t must match the size of y along which the trend is being calculated. Specify a different dimension?')
  
-coefficients = [t ones(size(t))]\A; 
+coefficients = [t ones(size(t))]\y; 
+
+% Deal with spurious NaNs: 
+if omitnan
+   % Determine which elements of the y data are finite: 
+   isf = isfinite(y); 
+   
+   % Which columns of data (or grid cells) contain some NaNs, but not all NaNs?   
+   col = find(sum(isf)>1 & sum(isf)<length(t)); 
+   
+   % Loop through the columns (each a grid cell) that we have any hope of solving: 
+   for k = 1:length(col)
+      % For this grid cell, which indices are finite? 
+      ind = isf(:,col(k)); 
+      
+      % Solve least squares for this grid cell: 
+      tmp = [t(ind) ones(size(t(ind)))]\y(ind); 
+      
+      % Fill in the missing value in the coefficients matrix: 
+      coefficients(1,col(k)) = tmp(1); 
+   end
+end
 
 % Un-reshape: 
 switch dim
@@ -127,7 +170,24 @@ end
 %% Compute correlations and statistical significance
 
 if nargout>1
-   [~,p] = corr(A,t,varargin{:});    
+   [~,p] = corr(y,t,varargin{:});    
+   
+   % Deal with spurious NaNs: 
+   if omitnan
+      % Loop through the columns (each a grid cell) that we have any hope of solving: 
+      % (we've already figured out isf and col above)
+      for k = 1:length(col)
+         % For this grid cell, which indices are finite? 
+         ind = isf(:,col(k)); 
+
+         % Solve p for this grid cell: 
+         [~,tmp] = corr(y(ind),t(ind),varargin{:}); 
+
+         % Fill in the missing value in the p array: 
+         p(col(k)) = tmp; 
+      end
+   end
+
    
    % Un-reshape: 
    switch dim

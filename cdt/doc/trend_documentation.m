@@ -11,6 +11,7 @@
 %  tr = trend(y,Fs) 
 %  tr = trend(y,t) 
 %  tr = trend(...,'dim',dim)
+%  tr = trend(...,'omitnan')
 %  [tr,p] = trend(...)
 %  [tr,p] = trend(...,corrOptions)
 % 
@@ -33,6 +34,16 @@
 % the first nonsingleton dimension of y; if y is a 2D matrix, the trend is 
 % calcaulated down the rows (dimension 1) of |y|; if |y| is a 3D matrix, the 
 % trend is calculated down dimension 3. 
+% 
+% |tr = trend(...,'omitnan')| solves the least squares trend, even where not all
+% values of |y| are finite. This option may be somewhat slow if many grid cells 
+% contain some, but not all, NaNs. A word of caution when using the |'omitnan'|
+% option: the trend is calculated only over the timespan in which finite data
+% exist. Therefore, for example, if some grid cells contain finite data only
+% for one year of a 10 year record, it is possible that the apparent "10 year" trend 
+% reported by the trend function could actually be an aliased signal. Accordingly, 
+% the |'omitnan'| option should only be used when NaNs are scattered somewhat 
+% evenly throughout the temporal record. 
 % 
 % |[tr,p] = trend(...)| returns the p-value of statistical significance of 
 % the trend. (Requires the Statistics Toolbox)
@@ -151,7 +162,7 @@ colorbar
 % put in there. Note the colorbar scale--all of the values center around 
 % negative pi, exactly as expected. 
 
-%% Example 4: Sea surface temperatures 
+%% Example 4a: Sea surface temperatures 
 % Load the sample pacific_sst.mat dataset, which contains monthly gridded sea surface
 % temperature data, and calculate trends. 
 
@@ -181,6 +192,39 @@ StatisticallySignificant = p<0.01;
 
 hold on
 stipple(Lon,Lat,StatisticallySignificant)
+text(-85,60,'Hudson Bay','vert','top','horiz','center','fontangle','italic') 
+
+%% Example 4b: The 'omitnan' option
+% The keen observer may have noticed that in the figure above, the trend
+% is undefined in the Hudson Bay. However, we do have a lot of good data there!
+% Take a look at the total number of finite measurements in the SST dataset: 
+
+figure
+imagescn(lon,lat,sum(isfinite(sst),3))
+cb = colorbar; 
+ylabel(cb,'sum of finite sst measurements')
+caxis([650 802])
+
+%% 
+% In the figure above, we see that there are more than 600 good SST measurements
+% in Hudson Bay, and even though that's not the full 802 month record, it should 
+% be plenty to calculate a least-squares trend. In this case we can use 
+% the |'omitnan'| option: 
+
+[tr,p] = trend(sst,12,'omitnan'); 
+
+figure
+imagescn(lon,lat,tr) 
+cb = colorbar; 
+ylabel(cb,'SST trend \circC yr^{-1}') 
+cmocean('balance','pivot') % sets the colormap with zero in the middle
+
+hold on
+stipple(Lon,Lat,p<0.01) % marks the statistically significant areas
+
+%% 
+% Above we see that there has been a warming trend in Hudson Bay, and it is
+% statistically significant. 
 
 %% Author Info
 % This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.

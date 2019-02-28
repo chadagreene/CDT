@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>trend documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-07"><meta name="DC.source" content="trend_documentation.m"><style type="text/css">
+      --><title>trend documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-27"><meta name="DC.source" content="trend_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,12 +66,13 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>trend</tt> documentation</h1><!--introduction--><p><tt>trend</tt> calculates the linear trend of a data series by least squares. Data do not need to be equally spaced in time.</p><p>See also <a href="detrend3_documentation.html"><tt>detrend3</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: 1D Array</a></li><li><a href="#8">Example 2: 2D data</a></li><li><a href="#13">Example 3: A 3D dataset</a></li><li><a href="#16">Example 4: Sea surface temperatures</a></li><li><a href="#19">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>tr = trend(y)
+  </style></head><body><div class="content"><h1><tt>trend</tt> documentation</h1><!--introduction--><p><tt>trend</tt> calculates the linear trend of a data series by least squares. Data do not need to be equally spaced in time.</p><p>See also <a href="detrend3_documentation.html"><tt>detrend3</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: 1D Array</a></li><li><a href="#8">Example 2: 2D data</a></li><li><a href="#13">Example 3: A 3D dataset</a></li><li><a href="#16">Example 4a: Sea surface temperatures</a></li><li><a href="#19">Example 4b: The 'omitnan' option</a></li><li><a href="#22">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>tr = trend(y)
 tr = trend(y,Fs)
 tr = trend(y,t)
 tr = trend(...,'dim',dim)
+tr = trend(...,'omitnan')
 [tr,p] = trend(...)
-[tr,p] = trend(...,corrOptions)</pre><h2 id="2">Description</h2><p><tt>tr = trend(y)</tt> calculates the linear trend per sample of <tt>y</tt>.</p><p><tt>tr = trend(y,Fs)</tt> specifies a sampling rate <tt>Fs</tt>. For example, to obtain a trend per year from data collected at monthly resolution, set <tt>Fs</tt> equal to 12. This syntax assumes all values in y are equally spaced in time.</p><p><tt>tr = trend(y,t)</tt> specifies a vector <tt>t</tt> relative to which the trend is calculated. Each element of t corresponds to a measurement in <tt>y</tt>, and when this syntax is used, times do <b>not</b> need to be equally spaced. Units of the trend are (units y)/units(t) so if the units of <tt>t</tt> are in days (such as <tt>datenum</tt>), multiply by 365.25 to obtain the trend per year.</p><p><tt>tr = trend(...,'dim',dim)</tt> specifies the dimension along which the trend is calculated. By default, if <tt>y</tt> is a 1D array, the trend is calculated along the first nonsingleton dimension of y; if y is a 2D matrix, the trend is calcaulated down the rows (dimension 1) of <tt>y</tt>; if <tt>y</tt> is a 3D matrix, the trend is calculated down dimension 3.</p><p><tt>[tr,p] = trend(...)</tt> returns the p-value of statistical significance of the trend. (Requires the Statistics Toolbox)</p><p><tt>[tr,p] = trend(...,corrOptions)</tt> specifies any optional Name-Value pair arguments accpted by the corr function. For example, <tt>'Type','Kendall'</tt> specifies computing Kendall's tau correlation coefficient.</p><h2 id="3">Example 1: 1D Array</h2><p>Here's a time series sampled at 12 times per year:</p><pre class="codeinput">Fs = 12;                   <span class="comment">% sampling rate (12 samples per year)</span>
+[tr,p] = trend(...,corrOptions)</pre><h2 id="2">Description</h2><p><tt>tr = trend(y)</tt> calculates the linear trend per sample of <tt>y</tt>.</p><p><tt>tr = trend(y,Fs)</tt> specifies a sampling rate <tt>Fs</tt>. For example, to obtain a trend per year from data collected at monthly resolution, set <tt>Fs</tt> equal to 12. This syntax assumes all values in y are equally spaced in time.</p><p><tt>tr = trend(y,t)</tt> specifies a vector <tt>t</tt> relative to which the trend is calculated. Each element of t corresponds to a measurement in <tt>y</tt>, and when this syntax is used, times do <b>not</b> need to be equally spaced. Units of the trend are (units y)/units(t) so if the units of <tt>t</tt> are in days (such as <tt>datenum</tt>), multiply by 365.25 to obtain the trend per year.</p><p><tt>tr = trend(...,'dim',dim)</tt> specifies the dimension along which the trend is calculated. By default, if <tt>y</tt> is a 1D array, the trend is calculated along the first nonsingleton dimension of y; if y is a 2D matrix, the trend is calcaulated down the rows (dimension 1) of <tt>y</tt>; if <tt>y</tt> is a 3D matrix, the trend is calculated down dimension 3.</p><p><tt>tr = trend(...,'omitnan')</tt> solves the least squares trend, even where not all values of <tt>y</tt> are finite. This option may be somewhat slow if many grid cells contain some, but not all, NaNs. A word of caution when using the <tt>'omitnan'</tt> option: the trend is calculated only over the timespan in which finite data exist. Therefore, for example, if some grid cells contain finite data only for one year of a 10 year record, it is possible that the apparent "10 year" trend reported by the trend function could actually be an aliased signal. Accordingly, the <tt>'omitnan'</tt> option should only be used when NaNs are scattered somewhat evenly throughout the temporal record.</p><p><tt>[tr,p] = trend(...)</tt> returns the p-value of statistical significance of the trend. (Requires the Statistics Toolbox)</p><p><tt>[tr,p] = trend(...,corrOptions)</tt> specifies any optional Name-Value pair arguments accpted by the corr function. For example, <tt>'Type','Kendall'</tt> specifies computing Kendall's tau correlation coefficient.</p><h2 id="3">Example 1: 1D Array</h2><p>Here's a time series sampled at 12 times per year:</p><pre class="codeinput">Fs = 12;                   <span class="comment">% sampling rate (12 samples per year)</span>
 t = (2000:1/Fs:2007)';     <span class="comment">% time vector sampled at Fs per unit time</span>
 y = 40*t + 123*rand(size(t)) - 8e4; <span class="comment">% forced trend of 40 units y per second</span>
 
@@ -82,13 +83,13 @@ ylabel <span class="string">'some variable'</span>
 polyplot(t,y,1)
 </pre><img vspace="5" hspace="5" src="trend_documentation_02.png" alt=""> <p>...but what's the numerical value of that trend? In other words, how steep is the slope? When we defined <tt>y</tt>, we specified that it should be 40*t (plus some random noise and an offset), so the trend should be about 40:</p><pre class="codeinput">trend(y)
 </pre><pre class="codeoutput">ans =
-    3.4192
+    3.1634
 </pre><p>That trend isn't even close to 40! That's because if we don't specify a sampling frequency or a time vector, the <tt>trend</tt> function gives the trend in <tt>y</tt> per sample. Specify the sampling rate of 12 samples per year like this:</p><pre class="codeinput">trend(y,Fs)
 </pre><pre class="codeoutput">ans =
-   41.0304
+   37.9609
 </pre><p>...and that's the value close to 40 that we were expecting. It's not exactly 40 because we intentionally added noise, but it's about 40, as expected.</p><p>You may have noticed by now that the trend can be calculated any of three ways, and each will give the same answer. You can multiply the trend by the sampling rate, or you can specify the sampling rate in the <tt>trend</tt> function, or you can specify the corresponding time vector <tt>t</tt>, and they'll all give the same answer:</p><pre class="codeinput">[trend(y)*Fs trend(y,Fs) trend(y,t)]
 </pre><pre class="codeoutput">ans =
-   41.0304   41.0304   41.0304
+   37.9609   37.9609   37.9609
 </pre><h2 id="8">Example 2: 2D data</h2><p>If you have a bunch of measurements that all line up to the same times, the <tt>trend</tt> function can calculate all the trends at once, in a computationally efficient manner. Consider these four time series built from the <tt>y</tt> array we defined in example 1:</p><pre class="codeinput"><span class="comment">%   [y    y+400        very noisy y           only noise     ];</span>
 A = [y    y+400     y+200*randn(size(y))    100*rand(size(y))];
 
@@ -103,23 +104,23 @@ box <span class="string">off</span>       <span class="comment">% removes ugly f
 legend <span class="string">boxoff</span> <span class="comment">% removes ugly frame from legend</span>
 </pre><img vspace="5" hspace="5" src="trend_documentation_03.png" alt=""> <p>The trends of each column can be computed like this:</p><pre class="codeinput">trend(A,t)
 </pre><pre class="codeoutput">ans =
-   41.0304   41.0304   39.7128    1.2342
+   37.9609   37.9609   34.4816   -0.2823
 </pre><p>That's what we expected: About 40 units/year for columns 1 and 2, which are the same data aside from the offset; somewhat of a trend for column 3, and not much of a trend for the noise-only column 4.</p><p><b>Are any of these trends statistically significant?</b> Use the optional second function output to see:</p><pre class="codeinput">[tr,p] = trend(A,t)
 </pre><pre class="codeoutput">tr =
-   41.0304   41.0304   39.7128    1.2342
+   37.9609   37.9609   34.4816   -0.2823
 p =
-    0.0000    0.0000    0.0003    0.4006
+    0.0000    0.0000    0.0046    0.8380
 </pre><p>The p values for the first three columns indicate statistical significance, but the fourth column tells us that any trend measured there is probably junk.</p><p>What if your data go across columns through time instead of down rows? Just specify the dimension:</p><pre class="codeinput">[tr,p] = trend(A',t,<span class="string">'dim'</span>,2)
 </pre><pre class="codeoutput">tr =
-   41.0304
-   41.0304
-   39.7128
-    1.2342
+   37.9609
+   37.9609
+   34.4816
+   -0.2823
 p =
     0.0000
     0.0000
-    0.0003
-    0.4006
+    0.0046
+    0.8380
 </pre><h2 id="13">Example 3: A 3D dataset</h2><p>Here's a sample dataset that goes down at a rate of -pi per time slice. Use <a href="expand3_documentation.html"><tt>expand3</tt></a> to create the sample dataset, and then add a bunch of noise to keep things interesting:</p><pre class="codeinput"><span class="comment">% 60x80 grid that goes down -pi in each frame:</span>
 Y = expand3(ones(60,80),-pi*(1:100));
 
@@ -127,7 +128,7 @@ Y = expand3(ones(60,80),-pi*(1:100));
 Y = Y + 10*randn(size(Y)) + 900;
 </pre><p>Here's the trend in <tt>Y</tt>:</p><pre class="codeinput">imagesc(trend(Y))
 colorbar
-</pre><img vspace="5" hspace="5" src="trend_documentation_04.png" alt=""> <p>Might look like noise at first, but that's just the noise we intentionally put in there. Note the colorbar scale--all of the values center around negative pi, exactly as expected.</p><h2 id="16">Example 4: Sea surface temperatures</h2><p>Load the sample pacific_sst.mat dataset, which contains monthly gridded sea surface temperature data, and calculate trends.</p><pre class="codeinput">load <span class="string">pacific_sst</span>
+</pre><img vspace="5" hspace="5" src="trend_documentation_04.png" alt=""> <p>Might look like noise at first, but that's just the noise we intentionally put in there. Note the colorbar scale--all of the values center around negative pi, exactly as expected.</p><h2 id="16">Example 4a: Sea surface temperatures</h2><p>Load the sample pacific_sst.mat dataset, which contains monthly gridded sea surface temperature data, and calculate trends.</p><pre class="codeinput">load <span class="string">pacific_sst</span>
 
 [tr,p] = trend(sst,12);
 
@@ -141,7 +142,23 @@ cmocean(<span class="string">'balance'</span>,<span class="string">'pivot'</span
 
 hold <span class="string">on</span>
 stipple(Lon,Lat,StatisticallySignificant)
-</pre><img vspace="5" hspace="5" src="trend_documentation_06.png" alt=""> <h2 id="19">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+text(-85,60,<span class="string">'Hudson Bay'</span>,<span class="string">'vert'</span>,<span class="string">'top'</span>,<span class="string">'horiz'</span>,<span class="string">'center'</span>,<span class="string">'fontangle'</span>,<span class="string">'italic'</span>)
+</pre><img vspace="5" hspace="5" src="trend_documentation_06.png" alt=""> <h2 id="19">Example 4b: The 'omitnan' option</h2><p>The keen observer may have noticed that in the figure above, the trend is undefined in the Hudson Bay. However, we do have a lot of good data there! Take a look at the total number of finite measurements in the SST dataset:</p><pre class="codeinput">figure
+imagescn(lon,lat,sum(isfinite(sst),3))
+cb = colorbar;
+ylabel(cb,<span class="string">'sum of finite sst measurements'</span>)
+caxis([650 802])
+</pre><img vspace="5" hspace="5" src="trend_documentation_07.png" alt=""> <p>In the figure above, we see that there are more than 600 good SST measurements in Hudson Bay, and even though that's not the full 802 month record, it should be plenty to calculate a least-squares trend. In this case we can use the <tt>'omitnan'</tt> option:</p><pre class="codeinput">[tr,p] = trend(sst,12,<span class="string">'omitnan'</span>);
+
+figure
+imagescn(lon,lat,tr)
+cb = colorbar;
+ylabel(cb,<span class="string">'SST trend \circC yr^{-1}'</span>)
+cmocean(<span class="string">'balance'</span>,<span class="string">'pivot'</span>) <span class="comment">% sets the colormap with zero in the middle</span>
+
+hold <span class="string">on</span>
+stipple(Lon,Lat,p&lt;0.01) <span class="comment">% marks the statistically significant areas</span>
+</pre><img vspace="5" hspace="5" src="trend_documentation_08.png" alt=""> <p>Above we see that there has been a warming trend in Hudson Bay, and it is statistically significant.</p><h2 id="22">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |trend| documentation
 % |trend| calculates the linear trend of a data series by least squares. Data
@@ -156,6 +173,7 @@ stipple(Lon,Lat,StatisticallySignificant)
 %  tr = trend(y,Fs) 
 %  tr = trend(y,t) 
 %  tr = trend(...,'dim',dim)
+%  tr = trend(...,'omitnan')
 %  [tr,p] = trend(...)
 %  [tr,p] = trend(...,corrOptions)
 % 
@@ -178,6 +196,16 @@ stipple(Lon,Lat,StatisticallySignificant)
 % the first nonsingleton dimension of y; if y is a 2D matrix, the trend is 
 % calcaulated down the rows (dimension 1) of |y|; if |y| is a 3D matrix, the 
 % trend is calculated down dimension 3. 
+% 
+% |tr = trend(...,'omitnan')| solves the least squares trend, even where not all
+% values of |y| are finite. This option may be somewhat slow if many grid cells 
+% contain some, but not all, NaNs. A word of caution when using the |'omitnan'|
+% option: the trend is calculated only over the timespan in which finite data
+% exist. Therefore, for example, if some grid cells contain finite data only
+% for one year of a 10 year record, it is possible that the apparent "10 year" trend 
+% reported by the trend function could actually be an aliased signal. Accordingly, 
+% the |'omitnan'| option should only be used when NaNs are scattered somewhat 
+% evenly throughout the temporal record. 
 % 
 % |[tr,p] = trend(...)| returns the p-value of statistical significance of 
 % the trend. (Requires the Statistics Toolbox)
@@ -296,7 +324,7 @@ colorbar
 % put in there. Note the colorbar scaleREPLACE_WITH_DASH_DASHall of the values center around 
 % negative pi, exactly as expected. 
 
-%% Example 4: Sea surface temperatures 
+%% Example 4a: Sea surface temperatures 
 % Load the sample pacific_sst.mat dataset, which contains monthly gridded sea surface
 % temperature data, and calculate trends. 
 
@@ -326,6 +354,39 @@ StatisticallySignificant = p<0.01;
 
 hold on
 stipple(Lon,Lat,StatisticallySignificant)
+text(-85,60,'Hudson Bay','vert','top','horiz','center','fontangle','italic') 
+
+%% Example 4b: The 'omitnan' option
+% The keen observer may have noticed that in the figure above, the trend
+% is undefined in the Hudson Bay. However, we do have a lot of good data there!
+% Take a look at the total number of finite measurements in the SST dataset: 
+
+figure
+imagescn(lon,lat,sum(isfinite(sst),3))
+cb = colorbar; 
+ylabel(cb,'sum of finite sst measurements')
+caxis([650 802])
+
+%% 
+% In the figure above, we see that there are more than 600 good SST measurements
+% in Hudson Bay, and even though that's not the full 802 month record, it should 
+% be plenty to calculate a least-squares trend. In this case we can use 
+% the |'omitnan'| option: 
+
+[tr,p] = trend(sst,12,'omitnan'); 
+
+figure
+imagescn(lon,lat,tr) 
+cb = colorbar; 
+ylabel(cb,'SST trend \circC yr^{-1}') 
+cmocean('balance','pivot') % sets the colormap with zero in the middle
+
+hold on
+stipple(Lon,Lat,p<0.01) % marks the statistically significant areas
+
+%% 
+% Above we see that there has been a warming trend in Hudson Bay, and it is
+% statistically significant. 
 
 %% Author Info
 % This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
