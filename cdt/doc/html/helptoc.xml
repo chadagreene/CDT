@@ -74,6 +74,8 @@
          <tocitem target="enso_documentation.html">enso</tocitem>
          <tocitem target="sam_documentation.html">sam</tocitem>
          <tocitem target="nam_documentation.html">nam</tocitem>
+         <tocitem target="pet_documentation.html">pet</tocitem>
+         <tocitem target="spei_documentation.html">spei</tocitem>
       </tocitem>
       
       <tocitem target="CDT_Contents.html#8"> Oceans and Atmospheres
@@ -94,6 +96,7 @@
          <tocitem target="air_pressure_documentation.html">air_pressure</tocitem>
          <tocitem target="air_density_documentation.html">air_density</tocitem>
          <tocitem target="sun_angle_documentation.html">sun_angle</tocitem>
+         <tocitem target="solar_radiation_documentation.html">solar_radiation</tocitem>
          <tocitem target="daily_insolation_documentation.html">daily_insolation</tocitem>
          <tocitem target="topo_interp_documentation.html">topo_interp</tocitem>
          <tocitem target="island_documentation.html">island</tocitem>

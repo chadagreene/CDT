@@ -1,0 +1,366 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>spei_documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-28"><meta name="DC.source" content="spei_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>spei_documentation</tt></h1><!--introduction--><p>The <tt>spei</tt> function calculates the standardised precipitation-evapotranspiration index based on a standardization of a simplified water balance based on the climatology of a particular location.</p><p>See also: <a href="pet_documentation.html"><tt>pet</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#6">Calculate extraterrestrial solar radiation</a></li><li><a href="#7">Calculate potential evapotranspiration</a></li><li><a href="#8">Calculate SPEI</a></li><li><a href="#9">Retrieving NCEP/NCAR reanalysis data</a></li><li><a href="#10">References</a></li><li><a href="#11">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>s = spei(t,prec,pevap)
+[s,tint] = spei(t,prec,pevap,'integrationtime',months)</pre><h2 id="2">Description</h2><p><tt>s = spei(t,prec,pevap)</tt> computes the standardised precipitation-evapotranspiration index <tt>s</tt>, given precipitation prec and potential evaporation pevap corresponding to times <tt>t</tt>. <tt>prec</tt> and <tt>pevap</tt> can be either be 1D vectors or 3D cubes, whose first two dimensions are spatial and whose third dimension corresponds to times <tt>t</tt>. The dimensions of <tt>prec</tt> and <tt>pevap</tt> must agree. Times <tt>t</tt> can be datetime or datenum format.</p><p><tt>[s,tint] = spei(t,prec,pevap,'integrationtime',months)</tt> integrates over 1, 2, 3, 4, 6, or 12 months. The default integration time is <tt>1</tt> month. Output <tt>tint</tt> contains the dates of the reduced time series.</p><h2 id="3">Example</h2><p>This example demonstates how to calculate and display temporal and spatial patterns of the standardised precipitation-evapotranspiration index SPEI. We will use NCEP/NCAR reanalysis data (<a href="https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.DAILY/">Climate Data Assimiliation System I Daily</a>) downloaded from <a href="https://iridl.ldeo.columbia.edu/">IRI/LDEO Climate Data Library of the University of Columbia</a>.</p><p>The file ncep-ncar.mat contains a number of three dimensional arrays of daily values of mean temperature (T), maximum temperature (TMAX), minimum temperature (TMIN) and precipitation (P) as well as a vectors for time, latitude and longitude. Retrieving these variables from the Climate Data Library is explained at the bottom of this page.</p><pre class="codeinput">load <span class="string">ncep-ncar</span>
+</pre><p>Our data spans following time range</p><pre class="codeinput">disp([min(t) max(t)])
+disp(years(max(t)-min(t)))
+</pre><pre class="codeoutput">   2008-01-01   2018-12-31
+   10.9982
+</pre><p>Precipitation comes in units kg^2/m^2/s and we change these units to mm/day. Temperatures are in K and we change them to degrees C.</p><pre class="codeinput">P    = P*3600*24;
+T    = T-273.15;
+TMAX = TMAX-273.15;
+TMIN = TMIN-273.15;
+</pre><h2 id="6">Calculate extraterrestrial solar radiation</h2><p><a href="https://doi.org/10.13031/2013.26773">Hargreaves and Samani's</a> PET equation requires extraterrestrial radiation (Ra) as input. Ra is the solar radiation on a horizontal surface at the top of the Earth's atmosphere and is computed based on the orbital parameters of the Earth which are dependent on latitude. We wish to have the temporal variations of solar radiation integrated over daily time intervals which can be calculated using the function <a href="solar_radiation_documentation.html"><tt>solar_radiation</tt></a> function. Use <tt>meshgrid</tt> to turn the <tt>lat,lon</tt> vectors into grids, which will thereby give us a distinct latitude value for each grid cell:</p><pre class="codeinput">[Lon,Lat] = meshgrid(lon,lat);
+
+Ra  = solar_radiation(t,Lat);
+
+<span class="comment">% Plot grid cell 5,5:</span>
+plot(t,squeeze(Ra(5,5,:)))
+ylabel(<span class="string">'Ra [MJ m^2 day^{-1}]'</span>)
+title([<span class="string">'Solar radiation at '</span> num2str(lat(5)) <span class="string">'\circN'</span>])
+</pre><img vspace="5" hspace="5" src="spei_documentation_01.png" alt=""> <h2 id="7">Calculate potential evapotranspiration</h2><p>SPEI requires precipitation and potential evapotranspiration (PET). PET is calculated based on the formula of Hargreaves and Samani (1985) which estimates reference crop evapotranspiration based on temperature and extraterrestrial radiation.</p><p>There are numerous approaches to calculating potential evaporation. A compilation is found <a href="https://doi.org/10.5194/hess-17-1331-2013">here</a> (see supplements). Here we use the formula of Hargreaves-Samani (1985) which is a temperature based method to calculate the potential evapotranspiration (PET) and is implemented in the function pet. The main advantage of using the Hargreaves-Samani equation lies in its simplicity and low requirements regarding input parameters.</p><pre class="codeinput">pevap = pet(Ra,TMAX,TMIN,T);
+
+plot(t,squeeze(pevap(5,5,:)))
+ylabel(<span class="string">'PET [mm day^{-1}]'</span>)
+title([<span class="string">'Potential evaporation at '</span> num2str(lat(5)) <span class="string">'\circN, '</span> num2str(lon(5)) <span class="string">'\circE'</span> ])
+</pre><img vspace="5" hspace="5" src="spei_documentation_02.png" alt=""> <h2 id="8">Calculate SPEI</h2><p>The SPEI is a drought index that can be used by different scientific disciplines to detect, monitor and analyze droughts. The SPEI allows comparison of drought severity through time and space, since it can be calculated over a wide range of climates. The function <tt>spei</tt> calculates the index based on the difference between precipitation and PET and enables setting differently sized integration times.</p><pre class="codeinput"><span class="comment">% Two ways of calculating SPEI:</span>
+s = spei(t,P,pevap);
+[s3,t3] = spei(t,P,pevap,<span class="string">'integrationtime'</span>,3);
+
+figure
+subsubplot(2,1,1)
+plot(t,squeeze(s(5,5,:)))
+hold <span class="string">on</span>
+plot(t3,squeeze(s3(5,5,:)))
+ylabel(<span class="string">'SPEI'</span>)
+axis <span class="string">tight</span>
+title([<span class="string">'SPEI at '</span> num2str(lat(5)) <span class="string">'\circN, '</span> num2str(lon(5)) <span class="string">'\circE'</span> ])
+legend(<span class="string">'raw'</span>,<span class="string">'3 month integration'</span>)
+
+subsubplot(2,1,2)
+plot(t,squeeze(P(5,5,:)))
+ylabel(<span class="string">'precipitation [mm day^{-1}]'</span>)
+set(gca,<span class="string">'yaxislocation'</span>,<span class="string">'right'</span>)
+axis <span class="string">tight</span>
+</pre><img vspace="5" hspace="5" src="spei_documentation_03.png" alt=""> <h2 id="9">Retrieving NCEP/NCAR reanalysis data</h2><p>Here is the script that shows how to receive the  ncep-ncar.mat file that we used in this file.</p><pre>  whitespace = '%20';
+  bopen      = '%28';
+  bclose     = '%29';
+  datestart = '1 Jan 2008';
+  dateend   = '31 Dec 2018';
+  lonlims   = '30.0/50.0'; %'27.1875/45.9375';
+  latlims   = '20.0/5.0';
+  vars      = {'temp','maximum','minimum'};</pre><pre>  for r = 1:numel(vars)
+      url = ['https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.DAILY/' ...
+          '.Diagnostic/.above_ground/',...
+          '.' vars{r} '/T/'...
+          '(' datestart ')(' dateend ')RANGEEDGES/' ...
+          'X/' lonlims '/RANGEEDGES/'...
+          'Y/' latlims '/RANGEEDGES/dods'];</pre><pre>      url = replace(url,' ',whitespace);
+      url = replace(url,'(',bopen);
+      url = replace(url,')',bclose);
+      if r == 1
+         lon   = ncread(url,'X');
+         lat   = ncread(url,'Y');
+         t     = ncdateread(url,'T');
+      end</pre><pre>      if r == 1
+          T  = ncread(url,'temp');
+      elseif r == 2
+          TMAX  = ncread(url,'temp');
+      else
+          TMIN  = ncread(url,'temp');
+      end
+  end
+  T = squeeze(T);
+  TMAX = squeeze(TMAX);
+  TMIN = squeeze(TMIN);</pre><pre>  vars = 'prate'; % in kg/m2/s
+  url = ['https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.DAILY/' ...
+          '.Diagnostic/.surface/',...
+          '.' vars '/T/'...
+          '(' datestart ')(' dateend ')RANGEEDGES/' ...
+          'X/' lonlims '/RANGEEDGES/'...
+          'Y/' latlims '/RANGEEDGES/dods'];
+  url = replace(url,' ',whitespace);
+  url = replace(url,'(',bopen);
+  url = replace(url,')',bclose);
+  lonp   = ncread(url,'X');
+  latp   = ncread(url,'Y');
+  P  = ncread(url,'prate');
+  P  = squeeze(P);</pre><pre>  % The three dimensional arrays have their first and second dimensions switched.
+  % Here we use the function permute to swap the dimensions:
+  lon = lon';
+  T    = permute(T,[2 1 3]);
+  TMAX = permute(TMAX,[2 1 3]);
+  TMIN = permute(TMIN,[2 1 3]);
+  P    = permute(P,[2 1 3]);</pre><pre>  save ncep-nacar.mat</pre><h2 id="10">References</h2><div><ul><li>Hargreaves, George H., and Zohrab A. Samani. "Reference crop evapotranspiration from temperature." Applied Engineering in Agriculture 1.2 (1985): 96-99. <a href="https://doi.org/10.13031/2013.26773">doi:10.13031/2013.26773</a>.</li></ul></div><div><ul><li>McMahon, T. A., et al. "Estimating actual, potential, reference crop and pan evaporation using standard meteorological data: a pragmatic synthesis." Hydrology and Earth System Sciences 17.4 (2013): 1331-1363. <a href="https://doi.org/10.5194/hess-17-1331-2013">doi:10.5194/hess-17-1331-2013</a>.</li></ul></div><h2 id="11">Author Info</h2><p>This function and supporting documentation were written by Jos&eacute; Delgado and Wolfgang Schwanghart (University of Potsdam), February 2019, for the Climate Data Toolbox for Matlab.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |spei_documentation|
+% The |spei| function calculates the standardised precipitation-evapotranspiration index
+% based on a standardization of a simplified water balance based on the 
+% climatology of a particular location. 
+%
+% See also: <pet_documentation.html |pet|>. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>. 
+%% Syntax
+%
+%  s = spei(t,prec,pevap)
+%  [s,tint] = spei(t,prec,pevap,'integrationtime',months)
+%
+%% Description
+%
+% |s = spei(t,prec,pevap)| computes the standardised precipitation-evapotranspiration
+% index |s|, given precipitation prec and potential evaporation pevap corresponding 
+% to times |t|. |prec| and |pevap| can be either be 1D vectors or 3D cubes, whose
+% first two dimensions are spatial and whose third dimension corresponds to times 
+% |t|. The dimensions of |prec| and |pevap| must agree. Times |t| can be datetime 
+% or datenum format. 
+%
+% |[s,tint] = spei(t,prec,pevap,'integrationtime',months)| integrates over 1, 2, 3, 4, 6, 
+% or 12 months. The default integration time is |1| month. Output |tint| contains
+% the dates of the reduced time series.
+%
+%% Example 
+% This example demonstates how to calculate and display temporal and spatial 
+% patterns of the standardised precipitation-evapotranspiration index SPEI. We 
+% will use NCEP/NCAR reanalysis data (<https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.DAILY/ 
+% Climate Data Assimiliation System I Daily>) downloaded from <https://iridl.ldeo.columbia.edu/ 
+% IRI/LDEO Climate Data Library of the University of Columbia>.
+% 
+% The file ncep-ncar.mat contains a number of three dimensional arrays of daily 
+% values of mean temperature (T), maximum temperature (TMAX), minimum temperature 
+% (TMIN) and precipitation (P) as well as a vectors for time, latitude and longitude. 
+% Retrieving these variables from the Climate Data Library is explained at the 
+% bottom of this page. 
+
+load ncep-ncar
+
+%% 
+% Our data spans following time range
+
+disp([min(t) max(t)])
+disp(years(max(t)-min(t)))
+
+%% 
+% Precipitation comes in units kg^2/m^2/s and we change these units to mm/day. 
+% Temperatures are in K and we change them to degrees C.
+
+P    = P*3600*24;
+T    = T-273.15;
+TMAX = TMAX-273.15;
+TMIN = TMIN-273.15;
+
+%% Calculate extraterrestrial solar radiation
+% <https://doi.org/10.13031/2013.26773 Hargreaves and Samani's> PET equation requires extraterrestrial radiation (Ra) 
+% as input. Ra is the solar radiation on a horizontal surface at the top of the 
+% Earth's atmosphere and is computed based on the orbital parameters of the Earth 
+% which are dependent on latitude. We wish to have the temporal variations of 
+% solar radiation integrated over daily time intervals which can be calculated 
+% using the function <solar_radiation_documentation.html |solar_radiation|> 
+% function. Use |meshgrid| to turn the |lat,lon| vectors into grids, which 
+% will thereby give us a distinct latitude value for each grid cell: 
+
+[Lon,Lat] = meshgrid(lon,lat); 
+
+Ra  = solar_radiation(t,Lat);
+
+% Plot grid cell 5,5: 
+plot(t,squeeze(Ra(5,5,:)))
+ylabel('Ra [MJ m^2 day^{-1}]')
+title(['Solar radiation at ' num2str(lat(5)) '\circN'])
+
+%% Calculate potential evapotranspiration
+% SPEI requires precipitation and potential evapotranspiration (PET). PET 
+% is calculated based on the formula of Hargreaves and Samani (1985) which estimates 
+% reference crop evapotranspiration based on temperature and extraterrestrial 
+% radiation.
+%
+% There are numerous approaches to calculating potential evaporation. A compilation 
+% is found <https://doi.org/10.5194/hess-17-1331-2013 here> (see supplements). 
+% Here we use the formula of Hargreaves-Samani (1985) which is a temperature based 
+% method to calculate the potential evapotranspiration (PET) and is implemented 
+% in the function pet. The main advantage of using the Hargreaves-Samani equation 
+% lies in its simplicity and low requirements regarding input parameters. 
+
+pevap = pet(Ra,TMAX,TMIN,T);
+
+plot(t,squeeze(pevap(5,5,:)))
+ylabel('PET [mm day^{-1}]')
+title(['Potential evaporation at ' num2str(lat(5)) '\circN, ' num2str(lon(5)) '\circE' ])
+
+%% Calculate SPEI
+% The SPEI is a drought index that can be used by different scientific disciplines 
+% to detect, monitor and analyze droughts. The SPEI allows comparison of drought 
+% severity through time and space, since it can be calculated over a wide range 
+% of climates. The function |spei| calculates the index based on the difference 
+% between precipitation and PET and enables setting differently sized integration times.
+
+% Two ways of calculating SPEI: 
+s = spei(t,P,pevap); 
+[s3,t3] = spei(t,P,pevap,'integrationtime',3);
+
+figure
+subsubplot(2,1,1)
+plot(t,squeeze(s(5,5,:)))
+hold on
+plot(t3,squeeze(s3(5,5,:)))
+ylabel('SPEI')
+axis tight
+title(['SPEI at ' num2str(lat(5)) '\circN, ' num2str(lon(5)) '\circE' ])
+legend('raw','3 month integration')
+
+subsubplot(2,1,2)
+plot(t,squeeze(P(5,5,:)))
+ylabel('precipitation [mm day^{-1}]')
+set(gca,'yaxislocation','right') 
+axis tight
+
+%% Retrieving NCEP/NCAR reanalysis data
+% Here is the script that shows how to receive the  ncep-ncar.mat file that 
+% we used in this file.
+% 
+%    whitespace = '%20';
+%    bopen      = '%28';
+%    bclose     = '%29';
+%    datestart = '1 Jan 2008';
+%    dateend   = '31 Dec 2018';
+%    lonlims   = '30.0/50.0'; %'27.1875/45.9375';
+%    latlims   = '20.0/5.0';
+%    vars      = {'temp','maximum','minimum'};
+% 
+%    for r = 1:numel(vars)
+%        url = ['https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.DAILY/' ...
+%            '.Diagnostic/.above_ground/',...
+%            '.' vars{r} '/T/'...
+%            '(' datestart ')(' dateend ')RANGEEDGES/' ...
+%            'X/' lonlims '/RANGEEDGES/'...
+%            'Y/' latlims '/RANGEEDGES/dods'];
+% 
+%        url = replace(url,' ',whitespace);
+%        url = replace(url,'(',bopen);
+%        url = replace(url,')',bclose);
+%        if r == 1
+%           lon   = ncread(url,'X');
+%           lat   = ncread(url,'Y');
+%           t     = ncdateread(url,'T');
+%        end
+% 
+%        if r == 1
+%            T  = ncread(url,'temp');
+%        elseif r == 2
+%            TMAX  = ncread(url,'temp');
+%        else
+%            TMIN  = ncread(url,'temp');
+%        end
+%    end
+%    T = squeeze(T);
+%    TMAX = squeeze(TMAX);
+%    TMIN = squeeze(TMIN);
+% 
+%    vars = 'prate'; % in kg/m2/s
+%    url = ['https://iridl.ldeo.columbia.edu/SOURCES/.NOAA/.NCEP-NCAR/.CDAS-1/.DAILY/' ...
+%            '.Diagnostic/.surface/',...
+%            '.' vars '/T/'...
+%            '(' datestart ')(' dateend ')RANGEEDGES/' ...
+%            'X/' lonlims '/RANGEEDGES/'...
+%            'Y/' latlims '/RANGEEDGES/dods'];
+%    url = replace(url,' ',whitespace);
+%    url = replace(url,'(',bopen);
+%    url = replace(url,')',bclose);
+%    lonp   = ncread(url,'X');
+%    latp   = ncread(url,'Y');
+%    P  = ncread(url,'prate'); 
+%    P  = squeeze(P);
+% 
+%    % The three dimensional arrays have their first and second dimensions switched. 
+%    % Here we use the function permute to swap the dimensions:
+%    lon = lon';
+%    T    = permute(T,[2 1 3]);
+%    TMAX = permute(TMAX,[2 1 3]);
+%    TMIN = permute(TMIN,[2 1 3]);
+%    P    = permute(P,[2 1 3]);
+% 
+%    save ncep-nacar.mat 
+%    
+%% References 
+% 
+% * Hargreaves, George H., and Zohrab A. Samani. "Reference crop evapotranspiration 
+% from temperature." Applied Engineering in Agriculture 1.2 (1985): 96-99.
+% <https://doi.org/10.13031/2013.26773 doi:10.13031/2013.26773>.
+% 
+% * McMahon, T. A., et al. "Estimating actual, potential, reference crop and 
+% pan evaporation using standard meteorological data: a pragmatic synthesis."
+% Hydrology and Earth System Sciences 17.4 (2013): 1331-1363.
+% <https://doi.org/10.5194/hess-17-1331-2013 doi:10.5194/hess-17-1331-2013>.
+
+%% Author Info 
+% This function and supporting documentation were written by José Delgado 
+% and Wolfgang Schwanghart (University of Potsdam), February 2019, for the 
+% Climate Data Toolbox for Matlab. 
+##### SOURCE END #####
+--></body></html>

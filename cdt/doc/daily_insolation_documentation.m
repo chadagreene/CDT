@@ -1,9 +1,13 @@
 %% |daily_insolation| documentation
-% daily_insolation computes daily average insolation as a function of day and latitude at
+% |daily_insolation| computes daily average insolation as a function of day and latitude at
 % any point during the past 5 million years.
 % 
 % This function is from Ian Eisenman and Peter Huybers (see the reference
-% below). 
+% below). The |daily_insolation| function is quite similar to the <solar_radiation_documentation.html |solar_radiation|> 
+% function, but one may suit your needs better than the other. The |daily_insolation| 
+% function is best suited for investigations involving orbital changes over 
+% thousands to millions of years, whereas the |solar_radiation| may be easier to use
+% for applications such as present-day precipitation/drought research. 
 % 
 % <CDT_Contents.html Back to Climate Data Tools Contents>. 
 %% Syntax 
@@ -11,6 +15,7 @@
 %  Fsw = daily_insolation(kyear,lat,day)
 %  Fsw = daily_insolation(kyear,lat,day,day_type)
 %  Fsw = daily_insolation(kyear,lat,day,day_type,'constant',So)
+%  Fsw = daily_insolation(kyear,lat,day,day_type,'mjmd')
 %  [Fsw, ecc, obliquity, long_perh] = daily_insolation(...)
 % 
 %% Description
@@ -34,6 +39,9 @@
 %  
 % |Fsw = daily_insolation(kyear,lat,day,day_type,'constant',So)| specfies a
 % solar constant |So|. Default |So| is |1365| W/m^2.  
+% 
+% |Fsw = daily_insolation(kyear,lat,day,day_type,'mjmd')| returns |Fsw| in units 
+% of (MJ/m^2)/day rather than the default W/m^2.
 % 
 % |[Fsw, ecc, obliquity, long_perh] = daily_insolation(...)| also returns the
 % orbital eccentricity, obliquity, and longitude of perihelion (precession angle).

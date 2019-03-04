@@ -3,13 +3,18 @@ function [Fsw,ecc,obliquity,long_perh] = daily_insolation(kyear,lat,day,day_type
 % any point during the past 5 million years.
 % 
 % This function is from Ian Eisenman and Peter Huybers (see the reference
-% below). 
+% below). The daily_insolation function is quite similar to the solar_radiation 
+% function, but one may suit your needs better than the other. The daily_insolation 
+% function is best suited for investigations involving orbital changes over 
+% thousands to millions of years, whereas the solar_radiation may be easier to use
+% for applications such as present-day precipitation/drought research. 
 % 
 %% Syntax 
 %  
 %  Fsw = daily_insolation(kyear,lat,day)
 %  Fsw = daily_insolation(kyear,lat,day,day_type)
 %  Fsw = daily_insolation(kyear,lat,day,day_type,'constant',So)
+%  Fsw = daily_insolation(kyear,lat,day,day_type,'mjmd')
 %  [Fsw, ecc, obliquity, long_perh] = daily_insolation(...)
 % 
 %% Description
@@ -33,6 +38,9 @@ function [Fsw,ecc,obliquity,long_perh] = daily_insolation(kyear,lat,day,day_type
 %  
 % Fsw = daily_insolation(kyear,lat,day,day_type,'constant',So) specfies a
 % solar constant So. Default So is 1365 W/m^2.  
+% 
+% Fsw = daily_insolation(kyear,lat,day,day_type,'mjmd') returns Fsw in units 
+% of (MJ/m^2)/day rather than the default W/m^2.
 % 
 % [Fsw, ecc, obliquity, long_perh] = daily_insolation(...) also returns the
 % orbital eccentricity, obliquity, and longitude of perihelion (precession angle).
@@ -60,6 +68,7 @@ function [Fsw,ecc,obliquity,long_perh] = daily_insolation(kyear,lat,day,day_type
 % This file is available online at
 % http://deas.harvard.edu/~eisenman/downloads
 %
+% See also: sun_angle and solar_radiation. 
 
 %% Error checks and input parsing:
 
@@ -84,14 +93,18 @@ else
    So = 1365; % solar constant (W/m^2)
 end
 
+if any(strcmpi(varargin,'mjmd'))
+   mjmd = true; % convert to MJ/m^2/day
+else
+   mjmd = false; 
+end
+
 %% Get orbital parameters: 
 
 if day_type>=0
     [ecc,epsilon,omega]=orbital_parameters(kyear); % function is below in this file
 else
-    if length(kyear)~=3
-        disp('Error: expect 3-element kyear argument for day_type<0'), Fsw=nan; inso; return
-    end
+    assert(length(kyear)==3,'Error: expect 3-element kyear argument for day_type<0')
     ecc=kyear(1);
     epsilon=kyear(2) * pi/180;
     omega=kyear(3) * pi/180;
@@ -131,9 +144,12 @@ Ho( ( abs(lat) >= pi/2 - abs(delta) ) & ( lat.*delta <= 0 ) )=0;
 Fsw=So/pi*(1+ecc.*cos(lambda-omega)).^2 ./ ...
     (1-ecc.^2).^2 .* ...
     ( Ho.*sin(lat).*sin(delta) + cos(lat).*cos(delta).*sin(Ho) );
-
+ 
+if mjmd
+   Fsw = Fsw*0.0864; % 0.0864 = 60*60*24/1e6 MJ per day conversion
 end
 
+end
 %% Subfunction
 
 % === Calculate orbital parameters ===
