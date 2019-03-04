@@ -2,16 +2,20 @@
 % The |mld| function calculates the mixed layer depth of a water column
 % based on profiles of temperature, salinity, and/or potential density.
 %
-% The oceanic mixed layer refers to the well-mixed upper layer of the ocean
-% characterized by constant temperature and salinity values.  While the
-% concept is relatively straightforward, a concensus quantitative
-% definition is lacking. Numerous somewhat-arbitrary algorithms exist,
-% ranging from simple threshold algorithms to complex shape-fitting tools.
+% The oceanic mixed layer refers to the well-mixed upper layer of the
+% ocean that is turbulently mixed and characterized by constant temperature
+% and salinity values.  While the concept of a mixed layer is relatively
+% straightforward, a concensus quantitative definition for how to
+% specifically define it is lacking. Numerous algorithms exist, ranging
+% from simple threshold algorithms to complex shape-fitting tools, and
+% there is a large body of literature debating the relative merits of each.  
 %
 % For this particular toolbox function, we chose to adapt the algorithms of
-% <https://doi.org/10.1175/2009JTECHO543.1 Holte and Talley, 2009>.  This paper details a multi-algorithm approach to
-% calculating the mixed layer for oceanic Argo profiles, and therefore
-% serves as a nice basis for a function that also strives to offer multiple
+% <https://doi.org/10.1175/2009JTECHO543.1 Holte and Talley, 2009>.  This
+% paper details a multi-algorithm approach to 
+% calculating the mixed layer for oceanic Argo profiles.  Those algorithms
+% encompass the most commonly-used metrics, and therefore 
+% serves as a nice starting point for this function that also strives to offer multiple
 % approaches to mixed layer depth.  The examples below detail some of the
 % most common approaches to this calculation.  Always keep in mind that
 % mixed layer depth calculation is not a one-size-fits-all calculation, and
@@ -19,10 +23,10 @@
 % one is most applicable to your data.
 %
 % Note that this function currently includes some quirks (for example,
-% salinity profiles are analyzed differently than temperature and density
+% salinity profiles are treated differently than temperature and density
 % profiles under certain algorithms) that are specific to the Holte &
-% Talley paper and are tailored to open ocean, predominantly
-% Southern-ocean, profiles.  These may or may not be appropriate to all
+% Talley paper and are tailored to open ocean, float-measured profiles.
+% These may or may not be appropriate to all 
 % datasets.  We preserve them here, along with default parameter choices,
 % for consistency with the original Holte & Talley code on which this
 % function is based.    
@@ -188,12 +192,12 @@
 
 %% Example 1: The threshold approach
 %
-% The threshold definition is the most commonly-used mixed layer depth
+% The threshold definition is by far the most commonly-used mixed layer depth
 % metric, and underlies several global mixed layer depth products, such as
-% ﻿Monterey and Levitus (1997).
+% ﻿Monterey and Levitus (1997) and de Boyer Montegut et al. (2004).
 %
 % To replicate this type of calculation, we start with example data from an
-% Argo float. Use the <transect_documentation.html |transect|> function to
+% Argo float. We visualize this data using the <transect_documentation.html |transect|> function to
 % turn the 34 profiles into a transect plot and set colormaps with
 % <cmocean_documentation.html |cmocean|>. 
 
@@ -224,10 +228,12 @@ datetick;
 cmocean('dense');
 
 set(ax, 'YLim', [0 500]);
+set(ax(3), 'clim', [25 30]);
 
 %%
-% The common threshold value for temperature-only profiles is 0.5 deg C;
-% for density, 0.125 sigma-theta units is typical.
+% ﻿Monterey and Levitus (1997) use a temperature threshold of 0.5 deg C
+% and a density threshold of 0.125 kg/m^3.  This is a typical default choice
+% for MLD calculations.
 
 pmld = zeros(nprof,3);
 for ix = 1:nprof
@@ -235,8 +241,24 @@ for ix = 1:nprof
         'tthresh', 0.05, 'dthresh', 0.125);
 end
 
-plot(ax(1), A.date, pmld(:,1), 'w');
-plot(ax(3), A.date, pmld(:,3), 'w');
+plot(ax(1), A.date, pmld(:,1), 'b');
+plot(ax(3), A.date, pmld(:,3), 'r');
+
+%%
+% de Boyer Montegut et al. (2004) argue that the ﻿Monterey and Levitus
+% (1997) thresholds work for gridded and averaged profiles, but are less
+% suitable to direct profile measurements.  They instead use temperature
+% and density thresholds of 0.2 deg C and 0.03 kg/m^3, respectively.  Let's
+% see how this compares to the previous estimates for this set of profiles:
+
+pmld = zeros(nprof,3);
+for ix = 1:nprof
+    pmld(ix,:) = mld(A.PRES{ix}, A.TEMP{ix}, A.PSAL{ix}, 'metric', 'threshold', ...
+        'tthresh', 0.02, 'dthresh', 0.03);
+end
+
+plot(ax(1), A.date, pmld(:,1), '--b');
+plot(ax(3), A.date, pmld(:,3), '--r');
 
 %% Example 2: The fit approach
 %
@@ -253,9 +275,9 @@ for ix = 1:nprof
     pmld(ix,:) = mld(A.PRES{ix}, A.TEMP{ix}, A.PSAL{ix}, 'metric', 'fit');
 end
 
-plot(ax(1), A.date, pmld(:,1), ':w');
-plot(ax(2), A.date, pmld(:,2), ':w');
-plot(ax(3), A.date, pmld(:,3), ':w');
+plot(ax(1), A.date, pmld(:,1), ':b');
+plot(ax(2), A.date, pmld(:,2), ':r');
+plot(ax(3), A.date, pmld(:,3), ':r');
 
 
 %% Example 3: Alternate methods
@@ -291,6 +313,10 @@ mldtbl
 
 
 %% References
+%
+% de ﻿Boyer Montégut C, Madec G, Fischer AS, Lazar A, Iudicone D (2004)
+% Mixed layer depth over the global ocean: An examination of profile data
+% and a profile-based climatology. J Geophys Res C Ocean 109:1–20  
 %
 % Holte J, Talley L (2009) A new algorithm for finding mixed layer depths
 % with applications to argo data and subantarctic mode water formation. J

@@ -18,7 +18,7 @@ function [pmld, mldtbl, pth, h] = mld(varargin)
 % This function offers the option to either return a single one of the MLD
 % calculations or the "best" according to the Holte & Talley algorithm;
 % note that the Holte & Talley algorithm was designed with oceanic Argo
-% float profiles in  mind, and therefore the "best" algorithm is may not be
+% float profiles in  mind, and therefore the hybrid algorithm is may not be
 % the most applicable for profiles with non-oceanic features or a much
 % finer or coarser depth/pressure resolution. 
 %
@@ -45,7 +45,7 @@ function [pmld, mldtbl, pth, h] = mld(varargin)
 %   salt:           vector of salinity values; if not included, only
 %                   temperature-based MLD will be calculated.  If included,
 %                   salinity and potential density-based MLDs will be
-%                   added.
+%                   added as applicable to the chosen metric.
 %
 % Optional input arguments, passed as parameter/value pairs [default]:
 %
@@ -89,7 +89,7 @@ function [pmld, mldtbl, pth, h] = mld(varargin)
 %                                 to temperature and salinity profiles
 %                                 only.
 %           
-%                   'best':       All applicable potential MLD values are
+%                   'hybrid':     All applicable potential MLD values are
 %                                 calculated, and the Holte & Talley 2009
 %                                 algorithm is used to choose which is the
 %                                 best estimate for a given profile.   
@@ -125,7 +125,7 @@ function [pmld, mldtbl, pth, h] = mld(varargin)
 %                   [1e-10]
 %
 %   range:          range parameter used to identify clusters of MLD values
-%                   during the choose-the-best algorithm, i.e. r in Holte &
+%                   during the hybrid algorithm, i.e. r in Holte &
 %                   Talley, 2009, section 3b. (db)
 %                   [25]
 %
@@ -136,16 +136,16 @@ function [pmld, mldtbl, pth, h] = mld(varargin)
 %
 %   tcutoffu:       upper value of temperature change cutoff when
 %                   classifying a temperature profile as winter-like during
-%                   the choose-the-best algorithm. (deg C)
+%                   the hybrid algorithm. (deg C)
 %                   [0.5]
 %
 %   tcutoffl:       lower value of temperature change cutoff when
 %                   classifying a temperature profile as winter-like during
-%                   the choose-the-best algorithm. (deg C)
+%                   the hybrid algorithm. (deg C)
 %                   [-0.25]
 %
 %   dcutoff:        potential density change cutoff above which a profile
-%                   is classified as winter-like during the choose-the-best
+%                   is classified as winter-like during the hybrid
 %                   algorithm. (kg m^-3)
 %                   [-0.06]
 %
@@ -198,7 +198,7 @@ p.addRequired('pres', @(x) validateattributes(x, {'numeric'}, {'vector', 'increa
 p.addRequired('temp');
 p.addOptional('sal', []);
 
-p.addParameter('metric',      'best', @(x) validateattributes(x, {'string', 'char'}, {'scalartext'}));
+p.addParameter('metric',      'hybrid', @(x) validateattributes(x, {'string', 'char'}, {'scalartext'}));
 p.addParameter('tthresh',     0.2);
 p.addParameter('tgradthresh', 0.005);
 p.addParameter('dthresh',     0.03);
@@ -271,12 +271,12 @@ mldval = nan(3, 5);
 
 % Validate metric and tblformat strings
 
-validatestring(Opt.metric,    [aopt 'best'],      'mld', 'metric');
+validatestring(Opt.metric,    [aopt 'hybrid'],      'mld', 'metric');
 validatestring(Opt.tblformat, {'array', 'table'}, 'mld', 'tblformat');
 
 % Flag to run algorithms
 
-if strcmp(Opt.metric, 'best')
+if strcmp(Opt.metric, 'hybrid')
     runalg = true(size(aopt));
 else
     runalg = ismember(aopt, Opt.metric);
@@ -311,7 +311,7 @@ if runalg(4)
     mldval(1,4) = alg4_extrema(pres, temp, 'max');
 end
 
-% Subsurface (coocurring subsurface extreme value and max gradient
+% Subsurface (co-ocurring subsurface extreme value and max gradient
 
 if runalg(5)
     [mldval(1,5), pmaxtgrad] = alg5_subsurface(pres, temp, 'max', Opt.deltad);
