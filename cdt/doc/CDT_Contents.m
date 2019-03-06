@@ -107,7 +107,11 @@
 % * <enso_documentation.html *|enso|*> computes the El Nino Southern Oscillation index. 
 % * <sam_documentation.html *|sam|*> calculates the Southern Annular Mode index from sea-level
 % pressures.
-% * <nam_documentation.html *|nam|*> calculates the Northern Annular Mode.
+% * <nao_documentation.html *|nao|*> calculates the North Atlantic Oscillation index from sea-level
+% pressures based on the definition proposed by Hurrell, 1995. (Equivalent to the Arctic Oscillation or Northern
+% Annular Mode).
+% * <amo_documentation.html *|amo|*> calculates the Atlantic Multidecadal Oscillation index from sea surface
+% temperatures based on the definition proposed by Enfield et al. 2001. 
 % * <pet_documentation.html *|pet|*> gives potential reference evapotranspiration
 % following Hargreaves-Samani.
 % * <spei_documentation.html *|spei|*> computes the standardised precipitation-evapotranspiration index.
@@ -253,6 +257,7 @@
 % * *|land_mask.mat|*: A 1/8 degree binary mask indicating areas of land or ocean. This
 % dataset is called by the <island_documentation.html |island|> function. 
 % * *|mlo_daily_C02.mat|*: Atmospheric Carbon Dioxide Dry Air Mole Fractions from quasi-continuous measurements at Mauna Loa, Hawaii. From <http://dx.doi.org/10.7289/V54X55RG NOAA>.
+% * *|nao_slp_data.mat|*: Observations of zonal mean sea level pressure from the <https://crudata.uea.ac.uk/cru/data/nao/index.htm Climate Research Unit>, used as an example for the <nao_documentation.html |nao|> function. 
 % * *|ncep-ncar.mat|*: Temperature and precipitation reanalysis data described in the
 % documentation for the <spei_documentation.html |spei|> function. 
 % * *|orbit91.txt|*: Earth's orbital parameters from <https://doi.org/10.1016/0277-3791(91)90033-Q Berger A. and Loutre M.F., 1991> used as an example for <daily_insolation_documentation.html |daily_insolation|>. 

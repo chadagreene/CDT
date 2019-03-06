@@ -134,6 +134,28 @@ figure;hold on;
 plot(t,Nts,'color',[0.7 0.7 0.7]) % In gray
 plot(t,iso_ts,'ko-','linewidth',1.5); % In black
 
+%% References
+% The original bootstrap was introduced formally to the literature by
+% Eforon in 1979:
+% Efron, B., 1979: Bootstrap methods: another look at the jackknife. 
+% Ann. Stat. 7, 1-26. <https://doi.org/10.1007/978-1-4612-4380-9_41 doi:10.1007/978-1-4612-4380-9_41>.
+%
+% Although this is a rather dense read! Here are some (paleoclimate)
+% applications: 
+%
+% Thirumalai, K., T. M. Quinn, and G. Marino, 2016: Constraining 
+% past seawater delta-18-O and temperature records developed from 
+% foraminiferal geochemistry, Paleoceanography <https://doi.org/10.1002/2016PA002970 
+% doi:10.1002/2016PA002970>.
+% 
+% Carré, M., J. P. Sachs, J. M. Wallace, and C. Favier, 2012: 
+% Exploring errors in paleoclimate proxy reconstructions using Monte 
+% Carlo simulations: paleotemperature from mollusk and coral 
+% geochemistry, Clim. Past, 8(2), 433-450. <https://doi.org/10.5194/cp-8-433-2012
+% doi:10.5194/cp-8-433-2012>.
+% 
+% The first figure in both of these papers provide a flowchart to
+% understand basic schematics of the bootstrap in age uncertainty.
 %% Author Info
 % The |ts_normstrap| function and supporting information were written for 
 % The Climate Data Toolbox for Matlab by 

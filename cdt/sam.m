@@ -58,7 +58,7 @@ ind = t>=datenum(1971,1,1) & t<datenum(2001,1,1);
 
 % Calculate anomalies relative to baseline: 
 anom40 = nslp40 - mean(nslp40(ind)); 
-anom65 = nslp65 - mean(nslp40(ind)); 
+anom65 = nslp65 - mean(nslp65(ind)); 
 
 % The SAM index is now the difference of the two normalized anomalies: 
 idx = anom40 - anom65; 

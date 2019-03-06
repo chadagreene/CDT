@@ -90,6 +90,41 @@ cb = colorbar;
 ylabel(cb,'elevation (m)')
 cmocean('topo','pivot')
 
+%% Example 4: The effects of sea level rise
+% Let's take a quick look at the places that could be affected by sea level rise. 
+% Since we already loaded the full-resolution dataset in Example 3, we'll just
+% use that dataset, except we'll begin by setting all ocean values to NaN. 
+% So make everything that's less than or equal to zero elevation NaN: 
+
+Z(Z<=0) = NaN; 
+
+%%
+% All the ice in Greenland and Antarctica holds the potential to raise global 
+% sea levels by about 67 m. Of course that scenario is not likely anytime soon, 
+% but let's look at the effects of such an event. We will have to make a crude 
+% (and incorrect) assumption that sea level would be distributed evenly around 
+% the present-day oceans, but it's a start. 
+% 
+% To investigate the effects of adding about 67 m of sea level to the global 
+% ocean, plot the masked topography and set the color axis limits from 0 to 
+% 67 m: 
+
+figure
+imagescn(lon,lat,Z) 
+caxis([0 67]) 
+cb = colorbar; 
+ylabel(cb,'sea level rise (m)') 
+cmocean -amp % sets the colormap
+
+%% 
+% To a first-order approximation, anywhere that's red is at risk of going 
+% underwater in the event of total collapse of the ice sheets. Darker red
+% means more vulnerable. Let's zoom in on the eastern seaboard. Use the 
+% <borders_documentation.html |borders|> function to plot state boundaries.
+
+axis([-100 -70 24 41])
+borders('states') 
+
 %% A note on aliasing
 % The ETOPO5 dataset is provided at 5 minute (or 1/12 degree) resolution, but 
 % the |topo_interp| function does _not_ do any anti-aliasing before interpolation. 
@@ -99,6 +134,7 @@ cmocean('topo','pivot')
 % a very dense grid for the global dataset, so you may wish to accept a little
 % bit of potential aliasing. Or you can load the raw data, use |imresize| to reduce
 % the grid (while performing anti-aliasing) and interpolate. It's up to you. 
+
 %% Author Info
 % This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
 % The function and supporting documentation were written by Chad A. Greene

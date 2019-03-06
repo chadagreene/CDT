@@ -1,0 +1,202 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>nao documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-05"><meta name="DC.source" content="nao_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>nao</tt> documentation</h1><!--introduction--><p><tt>nao</tt> calculates the North Atlantic Oscillation index from sea-level pressures based on the definition proposed by <a href="http://science.sciencemag.org/content/269/5224/676">Hurrell, 1995</a>. For all practical purposes the NAO index is equivalent to the Arctic Oscillation as well as the North Annular Mode. For more information see <a href="http://www.atmos.colostate.edu/~davet/ao/introduction.html">this introduction to Annular Modes by David Thompson at NCAR</a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#4">Load Data</a></li><li><a href="#5">Plot pressure data</a></li><li><a href="#6">Calculate NAO index</a></li><li><a href="#8">A note on filtering</a></li><li><a href="#9">References</a></li><li><a href="#10">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>idx = nao(slpA,slpB,t)</pre><h2 id="2">Description</h2><p><tt>idx = nao(slp40,slp65,t)</tt> calculates the North Atlantic Oscillation index from two time series of sea-level pressures at two stations (A and B) and their corresponding times <tt>t</tt>. Here, Station A (either Azores or Lisbon or Gibraltar) is usually south of Station B (Iceland).</p><h2 id="3">Example</h2><p>Here, we'll recreate Figure 4 from Jones et al.'s classic 1997 paper, Extension to the North Atlantic Oscillation using early instrumental pressure observations from Gibraltar and South-west Iceland (<a href="https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-0088%2819971115%2917%3A13%3C1433%3A%3AAID-JOC203%3E3.0.CO%3B2-P">Jones et al., 1997</a>), which depicts the monthly NAO index. This dataset builds on Hurrell's 1995 paper and station data can be found <a href="here">https://crudata.uea.ac.uk/cru/data/nao/index.htm</a>. The dataset we utilize here goes from January, 1865 to December, 2017.</p><h2 id="4">Load Data</h2><p>We can load data containing zonal-mean SLP at 40S and 65S calculated from observations from 1957 January to 2018 December.</p><pre class="codeinput">load <span class="string">nao_slp_data.mat</span>
+</pre><h2 id="5">Plot pressure data</h2><p>The <tt>nao_slp_data.mat</tt> file contains monthly mean SLP data from 1865 to 2018 for Gibraltar (A) and Iceland (B). See above to find where you can obtain this dataset. Here is the pressure data we'll use to calculate the NAO:</p><pre class="codeinput">figure
+plot(t,slpA);
+hold <span class="string">on</span>
+plot(t,slpB)
+axis <span class="string">tight</span>
+legend(<span class="string">'SLP at Gibraltar'</span>,<span class="string">'SLP at SW Iceland'</span>)
+</pre><img vspace="5" hspace="5" src="nao_documentation_01.png" alt=""> <h2 id="6">Calculate NAO index</h2><p>The <tt>nao</tt> function normalizes each time series relative to the full baseline dataset and differences the two pressure anomaly time series to yield the NAO index. We'll calculate NAO, then smooth it with a 12 month moving average (see the note below on filtering):</p><pre class="codeinput"><span class="comment">% Calculate NAO index:</span>
+nao_idx = nao(slpA,slpB,t);
+
+<span class="comment">% Apply a moving-mean filter:</span>
+nao_idx_f = movmean(nao_idx,12);
+
+figure
+plot(t,nao_idx_f,<span class="string">'k'</span>,<span class="string">'linewidth'</span>,1)
+
+ylim([-3 3])                                  <span class="comment">% sets vertical limits</span>
+hline(0,<span class="string">'k-'</span>)                                 <span class="comment">% draws horizontal line</span>
+set(gca,<span class="string">'xaxislocation'</span>,<span class="string">'top'</span>)                <span class="comment">% to match Jones 1997</span>
+</pre><img vspace="5" hspace="5" src="nao_documentation_02.png" alt=""> <p>Above, the built-in Matlab function <tt>movmean</tt> was used to calculate the 12 month moving mean, and a horizontal dashed line was drawn with <a href="hline_documentation.html"><tt>hline</tt></a> to match Marshall's Figure 7.</p><h2 id="8">A note on filtering</h2><p>The caption to Figure 4 in Jones et al., 1997 indicates that a 12-month Gaussian filter was used to smooth the time series before plotting. A Gaussian filter is a type of moving-average filter, and it's weighted such that values near the edges of the moving window don't contribute much to the average. The weighting of a Gaussian filter window takes the shape of a Gaussian curve, in contrast to an ordinary moving-average filter whose weighting window is effectively a rectangle wherein all values contribute equally to the average.</p><p>Unfortunately, the Jones et al. description of a "12-month Gaussian filter" is somewhat ambiguous, because it's unclear whether that means the total width of the Gaussian window, or the 1-sigma width, or twice the 1-sigma width, or something else entirely. How exactly do you define the width of something that should trail that takes an infinite distance to gradually trail off to zero? Sometimes people talk about Gaussian filters in terms of 2*pi*sigma, because that's the distance at which the weighting factor is equal to exp(-0.5), but it's unclear if that's what Jones et al. intended.</p><p>We don't really have a clear answer on the exact width of the Gaussian window, or its exact shape; however, in this particular case, the details of the filter design probably do not matter very much. We used a plain moving-average above, and still got a plot that looks pretty much the same as Figure 4 of Jones et al. That tells us that while it would be nice if we could replicate the methods of Jones et al. exactly, their methods and explanations were enough to replicate their results generally.</p><h2 id="9">References</h2><p>Hurrell, J.W., 1995: Decadal Trends in the North Atlantic Oscillation: Regional Temperatures and Precipitation. <i>Science</i> Vol. 269, pp.676-679 <a href="http://science.sciencemag.org/content/269/5224/676">doi:10.1126/science.269.5224.676</a></p><p>Jones, P. D. et al., 1997: Extension to the North Atlantic oscillation using early instrumental pressure observations from Gibraltar and south-west Iceland. Int. <i>J. Climatol.</i>, 17: 1433-1450. <a href="https://doi.org/10.1002/(SICI)1097-0088(19971115)17:13%3C1433::AID-JOC203%3E3.0.CO;2-P">https://doi.org/10.1002/(SICI)1097-0088(19971115)17:13%3C1433::AID-JOC203%3E3.0.CO;2-P</a></p><h2 id="10">Author Info</h2><p>The <tt>nao</tt> function and supporting documentation were written by <a href="http://www.kaustubh.info">Kaustubh Thirumalai</a> for the Climate Data Toolbox for Matlab, 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |nao| documentation 
+% |nao| calculates the North Atlantic Oscillation index from sea-level
+% pressures based on the definition proposed by <http://science.sciencemag.org/content/269/5224/676 Hurrell, 1995>. For all
+% practical purposes the NAO index is equivalent to the Arctic Oscillation
+% as well as the North Annular Mode. For more information see <http://www.atmos.colostate.edu/~davet/ao/introduction.html this introduction 
+% to Annular Modes by David Thompson at NCAR>.
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax 
+% 
+%  idx = nao(slpA,slpB,t) 
+% 
+%% Description 
+% 
+% |idx = nao(slp40,slp65,t)| calculates the North Atlantic Oscillation index 
+% from two time series of sea-level pressures at two stations (A and B) 
+% and their corresponding times |t|. Here, Station A (either Azores or
+% Lisbon or Gibraltar) is usually south of Station B (Iceland).
+% 
+%% Example
+% Here, we'll recreate Figure 4 from Jones et al.'s classic 1997 paper, 
+% Extension to the North Atlantic Oscillation using early instrumental pressure observations from Gibraltar and South-west Iceland
+% (<https://rmets.onlinelibrary.wiley.com/doi/abs/10.1002/%28SICI%291097-0088%2819971115%2917%3A13%3C1433%3A%3AAID-JOC203%3E3.0.CO%3B2-P Jones et al., 1997>),
+% which depicts the monthly NAO index. This dataset builds on Hurrell's
+% 1995 paper and station data can be found <here
+% https://crudata.uea.ac.uk/cru/data/nao/index.htm>. The dataset we utilize
+% here goes from January, 1865 to December, 2017.
+
+%% Load Data 
+% We can load data containing zonal-mean SLP at 40S and 65S calculated
+% from observations from 1957 January to 2018 December.
+
+load nao_slp_data.mat
+
+%% Plot pressure data
+% The |nao_slp_data.mat| file contains monthly mean SLP data from 1865
+% to 2018 for Gibraltar (A) and Iceland (B). See above to find where 
+% you can obtain this dataset. 
+% Here is the pressure data we'll use to calculate the NAO:
+
+figure
+plot(t,slpA); 
+hold on
+plot(t,slpB)
+axis tight
+legend('SLP at Gibraltar','SLP at SW Iceland') 
+
+%% Calculate NAO index
+% The |nao| function normalizes each time series relative to the full
+% baseline dataset and differences the two pressure anomaly time series to
+% yield the NAO index. We'll calculate NAO, then smooth it with a 12 month 
+% moving average (see the note below on filtering): 
+
+% Calculate NAO index: 
+nao_idx = nao(slpA,slpB,t);
+
+% Apply a moving-mean filter: 
+nao_idx_f = movmean(nao_idx,12);
+
+figure
+plot(t,nao_idx_f,'k','linewidth',1)
+
+ylim([-3 3])                                  % sets vertical limits
+hline(0,'k-')                                 % draws horizontal line 
+set(gca,'xaxislocation','top')                % to match Jones 1997
+
+%% 
+% Above, the built-in Matlab function |movmean| was used to calculate the
+% 12 month moving mean, and a horizontal dashed line was drawn with
+% <hline_documentation.html |hline|> to match Marshall's Figure 7. 
+
+%% A note on filtering
+% The caption to Figure 4 in Jones et al., 1997 indicates that a 12-month Gaussian
+% filter was used to smooth the time series before plotting. A Gaussian filter
+% is a type of moving-average filter, and it's weighted such that values near the
+% edges of the moving window don't contribute much to the average. The weighting
+% of a Gaussian filter window takes the shape of a Gaussian curve, in contrast
+% to an ordinary moving-average filter whose weighting window is effectively a 
+% rectangle wherein all values contribute equally to the average. 
+% 
+% Unfortunately, the Jones et al. description of a "12-month Gaussian filter" is 
+% somewhat ambiguous, because it's unclear whether that means the total width of the
+% Gaussian window, or the 1-sigma width, or twice the 1-sigma width, or something 
+% else entirely. How exactly do you define the width of something that should trail
+% that takes an infinite distance to gradually trail off to zero? Sometimes people 
+% talk about Gaussian filters in terms of 2*pi*sigma, 
+% because that's the distance at which the weighting factor is equal to exp(-0.5), 
+% but it's unclear if that's what Jones et al. intended. 
+% 
+% We don't really have a clear answer on the exact width of the Gaussian window, 
+% or its exact shape; however, in this particular case, the details of the 
+% filter design probably do not matter very much. We used a plain moving-average
+% above, and still got a plot that looks pretty much the same as Figure 4 of 
+% Jones et al. That tells us that while it would be nice if we could replicate 
+% the methods of Jones et al. exactly, their methods and explanations were enough
+% to replicate their results generally. 
+%
+%% References
+% 
+% Hurrell, J.W., 1995: Decadal Trends in the North Atlantic Oscillation: 
+% Regional Temperatures and Precipitation. _Science_ Vol. 269, pp.676-679
+% <http://science.sciencemag.org/content/269/5224/676 doi:10.1126/science.269.5224.676>
+% 
+% Jones, P. D. et al., 1997: Extension to the North Atlantic oscillation 
+% using early instrumental pressure observations from Gibraltar and 
+% south-west Iceland. Int. _J. Climatol._, 17: 1433-1450.
+% <https://doi.org/10.1002/(SICI)1097-0088(19971115)17:13%3C1433::AID-JOC203%3E3.0.CO;2-P>
+
+%% Author Info
+% The |nao| function and supporting documentation were written by <http://www.kaustubh.info Kaustubh Thirumalai> 
+% for the Climate Data Toolbox for Matlab, 2019. 
+##### SOURCE END #####
+--></body></html>
