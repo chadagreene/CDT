@@ -28,76 +28,139 @@
 %% Example
 % In this example, we will calculate the AMO index using the monthly
 % north_atlantic_sst.mat dataset that comes with CDT. Start by loading the data
-% that comes with CDT. 
-
-% This dataset contains monthly SST from 1870-2017 for the Northern
+% that comes with CDT. It contains monthly sea surface temperatures from 1870-2017 for the Northern
 % Atlantic region (0-70N)
 
 load north_atlantic_sst.mat
 
-% Get 2D grids from lat,lon arrays: 
-[Lon,Lat] = meshgrid(lon,lat);
+%% 
+% Here are the variables we're working with: 
 
-% This should provide recognizable map: 
-pcolor(Lon,Lat,mean(na_sst,3))
-
-%%
-
-
-%% Calculate the AMO Index
-
-idx = amo(na_sst,t,Lat,Lon); 
-
-%% Plot it up real nice
-% With that, we can now plot the AMO timeseries and a 121-month moving
-% average as recommended by NOAA <here
-% https://www.esrl.noaa.gov/psd/data/timeseries/AMO/>
-
-figure
-anomaly(datenum(t),idx); hold on;
-plot(t,movmean(idx,121),'-','color',rgb('black'),'linewidth',3);
-axis tight
-hline(0,'k') % places a horizontal line at 0
-datetick('x','keeplimits')
-ylabel 'AMO SST anomaly (\circC)'
+whos % displays variable names and size
 
 %% 
+% The table above tells us that we have a |lat| array, a |lon| array, and 
+% a |t| array, which correspond to the dimensions of an |sst_na| data cube
+% of SSTs in the North Atlantic. 
+% 
+% We'll need to tell the |amo| function exactly what latitudes and longitudes
+% correspond to each grid cell in the |sst_na| data, so convert the |lat| and 
+% |lon| arrays into grids like this: 
 
-load atlantic_sst.mat
+[Lon,Lat] = meshgrid(lon,lat);
 
-sst(abs(sst)>100) = NaN; 
-sst = permute(sst,[2 1 3]);
-[Lat,Lon] = cdtgrid;
-A = cdtarea(Lat,Lon);
+%% 
+% To get a little bit of context, let's take a look at the data we'll be 
+% working with. Make a |pcolor| plot of time-averaged mean SSTs (down dimension 3 
+% of the |sst_na| data cube). Set the colormap to _thermal_ via the <cmocean_documentation.html 
+% |cmocean|> function, and underlay with an <earthimage_documentation.html |earthimage|> 
+% to give a better sense of where we're looking at: 
 
-idx = amo(sst,t,Lat,Lon); 
-
-figure
-subplot(2,1,1) 
-anomaly(datenum(t),movmean(idx,121),...
-   'topcolor',rgb('orange'),'bottomcolor',rgb('yellow'))
-axis tight
-datetick('x','keeplimits')
-
+pcolor(Lon,Lat,mean(sst_na,3))
+shading interp
+cmocean thermal % sets the colormap
+cb = colorbar; 
+ylabel(cb,'mean SST (\circC)')
+hold on
+earthimage('bottom') % underlay with a satellite image of Earth
 
 %%
+% The map above shows only the region from 0N to 70N and 75W to 5 E. That's the
+% geoquad the |amo| function uses to calculate the AMO index, but if you're working
+% with an SST dataset that covers a larger area, don't worry--the |amo| function
+% uses the |Lat,Lon| grids you give it to make calculations based only on values
+% in the North Atlantic. 
+%% Calculate the AMO Index
+% The |amo| function works by entering the |sst| data cube along with corresponding
+% times and |Lat,Lon| grids: 
 
+idx = amo(sst_na,t,Lat,Lon); 
 
-sstd = detrend3(deseason(sst,t));
+%%
+% Plot the raw AMO index: 
 
-[C,P] = corr3(sstd,idx);
+figure
+plot(t,idx)
+ylabel 'AMO index'
 
-[Latr,Lonr,Cr,Pr] = recenter(Lat,Lon,C,P,'center',180);
+%% 
+% The plot above shows North Atlantic sea surface temperature variability, and 
+% it seems to have a sort of oscillatory behavior, and the periods of the oscillations
+% appears to be multiple decades long. You might say it's some sort of Atlantic
+% Multidecadal Oscillation. 
+% 
+% NOAA <https://www.esrl.noaa.gov/psd/data/timeseries/AMO/ recommends taking 
+% a 10 year (121 month) moving average> to smooth out the time series: 
 
-subplot(2,1,2)
-imagescn(Lonr,Latr,Cr);
-ylim([-40 65])
-caxis([-1 1])
-cmocean bal
+% Low-pass filter with a 121 month moving average: 
+idx_f = movmean(idx,121); 
+
 hold on
-contour(Lonr,Latr,Cr,[0 0],'k-')
-set(gca,'color','k') 
+plot(t,idx_f,'k-','linewidth',2)
+legend('AMO index','AMO (10 year moving mean)')
 
+%% 
+% To show we're on the right track, we can use the <anomaly_documentation.html |anomaly|>
+% function to mimic Figure 1a from <https://doi.org/10.1029/2000GL012745
+% Enfield et al., 2001>: 
+
+figure
+anomaly(datenum(t),idx_f,...
+   'topcolor',rgb('orange'),'bottomcolor',rgb('yellow'))
+axis tight
+datetick('x')
+xlim(datenum([1860 2000],1,1)) % sets x axis date limits
+ylim([-0.3 0.3])               % sets y axis limits
+
+%% 
+% Figure 1b of Enfield et al. shows the correlation between the AMO index and global
+% sea surface temperatures. Unfortunately, our sample dataset only covers the North
+% Atlantic, so for a comparison to other places around the globe we'll have to 
+% use the pacific_sst sample dataset: 
+
+P = load('pacific_sst.mat'); 
+
+%%
+% Enfield et al. correlated the lowpass-filtered AMO (which is inherently 
+% deseasoned) to deseasoned, lowpass-filtered global SSTs. So let's deseason
+% and lowpass filter the Pacific Ocean SST dataset: 
+
+% Deseason and lowpass filter SSTs: 
+sstd = deseason(P.sst,P.t);
+sstdf = movmean(sstd,121,3); 
+
+%% 
+% Before we can correlate our lowpass-filtered AMO index to the deseasoned,
+% lowpass-filtered Pacific SSTs, we'll have to synchronize the two time series. 
+% An easy way to do that is to interpolate the |idx_f| array to the Pacific SST 
+% times, like this: 
+
+idx_fi = interp1(datenum(t),idx_f,P.t); 
+
+% Plot the interpolated values to ensure everything lines up: 
+hold on
+plot(P.t,idx_fi,'b-','linewidth',4)
+
+%% 
+% The fat blue line above indicates we've correctly interpolated the |idx_f| 
+% values to the times |P.t|, which correspond to the times of the Pacific Ocean 
+% SST time series. 
+% 
+% Now we're able to correlate the lowpass-filtered, interpolated AMO index |idx_fi| 
+% with Pacific SSTs: 
+
+% Correlate ssts to AMO: 
+C = corr3(sstdf,idx_fi);
+
+figure
+imagescn(P.lon,P.lat,C)
+caxis([-1 1]) 
+cmocean balance 
+
+%% 
+% The map above does not exactly match figure 1b from Enfield et al., likely because
+% we're only comparing the AMO to 802 months (66 years) of a multi-decadal phenomenon. 
+% A proper correlation would look at several complete cycles of the oscillation. 
 
 %% Reference
 % 
@@ -108,5 +171,5 @@ set(gca,'color','k')
 % 
 %% Author Info
 % This function was written by Kaustubh Thirumalai of the University of 
-% Arizona, March 2019.
+% Arizona, for the Climate Data Toolbox for Matlab. March 2019.
 % <http://www.kaustubh.info>

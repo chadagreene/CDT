@@ -8,6 +8,7 @@
 %  earthimage('gray') 
 %  earthimage('watercolor',rgbValues)
 %  earthimage('center',centerLon)
+%  earthimage(...,'bottom')
 %  h = earthimage(...)
 % 
 %% Description
@@ -21,6 +22,9 @@
 % 
 % |earthimage('center',centerLon)| specifies a center longitude, which can be 
 % anything between -180 and 360. Default |centerLon| is |0|. 
+%
+% |earthimage(...,'bottom')| places the earth image at the bottom of the 
+% graphical stack (beneath other objects that have already been plotted).
 % 
 % |h = earthimage(...)| returns a handle h of the plotted image. 
 % 
@@ -80,4 +84,5 @@ xlabel 'longitude'
 ylabel 'latitude'
 
 %% Author info
-% This function and supporting documentation were written by Chad A. Greene, 2018. 
+% This function and supporting documentation were written by Chad A. Greene, 
+% for the Cimate Data Toolbox for Matlab, 2018. 

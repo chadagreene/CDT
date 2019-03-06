@@ -260,6 +260,8 @@
 % * *|nao_slp_data.mat|*: Observations of zonal mean sea level pressure from the <https://crudata.uea.ac.uk/cru/data/nao/index.htm Climate Research Unit>, used as an example for the <nao_documentation.html |nao|> function. 
 % * *|ncep-ncar.mat|*: Temperature and precipitation reanalysis data described in the
 % documentation for the <spei_documentation.html |spei|> function. 
+% * *|north_atlantic_sst.mat|*: 2 degree monthly gridded sea surface temperatures spanning the
+% North Atlantic ocean from 1870 to 2017. 
 % * *|orbit91.txt|*: Earth's orbital parameters from <https://doi.org/10.1016/0277-3791(91)90033-Q Berger A. and Loutre M.F., 1991> used as an example for <daily_insolation_documentation.html |daily_insolation|>. 
 % * *|orbital_parameter_data.mat|*: used by the <daily_insolation_documentation.html |daily_insolation|> function written
 % by Ian Eisenman and Peter Huybers, Harvard University, August 2006. 
