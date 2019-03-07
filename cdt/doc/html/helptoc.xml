@@ -27,6 +27,7 @@
          <tocitem target="mask3_documentation.html">mask3</tocitem>
          <tocitem target="expand3_documentation.html">expand3</tocitem>
          <tocitem target="local_documentation.html">local</tocitem>
+         <tocitem target="reshapetimeseries_documentation.html">reshapetimeseries</tocitem>
          <tocitem target="near1_documentation.html">near1</tocitem>
          <tocitem target="near2_documentation.html">near2</tocitem>
          <tocitem target="cell2nancat_documentation.html">cell2nancat</tocitem>
@@ -62,6 +63,7 @@
          <tocitem target="filt1_documentation.html">filt1</tocitem>
          <tocitem target="scatstat1_documentation.html">scatstat1</tocitem>
          <tocitem target="doy_documentation.html">doy</tocitem>
+         <tocitem target="reshapetimeseries_documentation.html">reshapetimeseries</tocitem>
       </tocitem>
       
       <tocitem target="CDT_Contents.html#6"> Uncertainty Quantification

@@ -41,6 +41,8 @@
 % from a region of interest in a 3D matrix. For example, if you have a big global 
 % 3D sea surface temperature dataset, this function makes it easy to obtain a time 
 % series of the average sst within a region of interest.
+% * <reshapetimeseries_documentation.html *|reshapetimeseries|*> reshapes timeseries data
+% to year by time-of-year grid.
 % * <near1_documentation.html *|near1|*> finds the linear index of the point in an array closest to a 
 % specified coordinate. 
 % * <near2_documentation.html *|near2|*> finds the subscript indices of the point in a grid closest to a 
@@ -93,6 +95,8 @@
 % 1D radius of each value. This is similar to taking a moving mean, but points do not have to be equally 
 % spaced, nor do x values need to be monotonically increasing. 
 % * <doy_documentation.html *|doy|*> returns the day of year. 
+% * <reshapetimeseries_documentation.html *|reshapetimeseries|*> reshapes timeseries data
+% to year by time-of-year grid.
 %% Uncertainty Quantification
 %
 % * <mann_kendall_documentation.html *|mann_kendall|*> performs a standard simple Mann-Kendall test to 
