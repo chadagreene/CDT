@@ -104,6 +104,8 @@ legend('mean SLP at 40\circS','mean SLP at 65\circS')
 % 
 % Marshall, G. J., 2003: Trends in the Southern Annular Mode 
 % from observations and reanalyses. J. Clim., 16, 4134-4143.
+% <https://journals.ametsoc.org/doi/pdf/10.1175/1520-0442%282003%29016%3C4134%3ATITSAM%3E2.0.CO%3B2>
 
 %% Author Info
-% The |enso| function and supporting documentation were written by <Kaustubh Thirumalai http://www.kaustubh.info> 
+% The |sam| function and supporting documentation were written by <http://www.kaustubh.info Kaustubh Thirumalai> 
+% for the Climate Data Toolbox for Matlab, 2019.

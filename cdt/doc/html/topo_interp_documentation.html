@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>topo_interp documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-04"><meta name="DC.source" content="topo_interp_documentation.m"><style type="text/css">
+      --><title>topo_interp documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-05"><meta name="DC.source" content="topo_interp_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>topo_interp</tt> documentation</h1><!--introduction--><p>The <tt>topo_interp</tt> function interpolates elevation relative to sea level at any geographic points. The data are from the <a href="https://www.eea.europa.eu/data-and-maps/data/world-digital-elevation-model-etopo5">ETOPO5 world digital elevation model</a>, which is provided at 5-minute (or 1/12 degree) grid resolution.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: A grid</a></li><li><a href="#6">Example 2: An elevation profile</a></li><li><a href="#9">Example 3: Load the raw data</a></li><li><a href="#11">A note on aliasing</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>zi = topo_interp(lati,loni)
+  </style></head><body><div class="content"><h1><tt>topo_interp</tt> documentation</h1><!--introduction--><p>The <tt>topo_interp</tt> function interpolates elevation relative to sea level at any geographic points. The data are from the <a href="https://www.eea.europa.eu/data-and-maps/data/world-digital-elevation-model-etopo5">ETOPO5 world digital elevation model</a>, which is provided at 5-minute (or 1/12 degree) grid resolution.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: A grid</a></li><li><a href="#6">Example 2: An elevation profile</a></li><li><a href="#9">Example 3: Load the raw data</a></li><li><a href="#11">Example 4: The effects of sea level rise</a></li><li><a href="#14">A note on aliasing</a></li><li><a href="#15">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>zi = topo_interp(lati,loni)
 zi = topo_interp(lati,loni,'method',InterpMethod)</pre><h2 id="2">Description</h2><p><tt>zi = topo_interp(lati,loni)</tt> returns elevations relative to sea level at the geographic points <tt>lati,loni</tt>.</p><p><tt>zi = topo_interp(lati,loni,'method',InterpMethod)</tt> specifies an interpolation method and can be any method accepted by <tt>interp2</tt>. Default method is <tt>'linear'</tt>.</p><h2 id="3">Example 1: A grid</h2><p>Here's a global grid at 0.25 degree resolution:</p><pre class="codeinput">[lat,lon] = cdtgrid(0.25);
 </pre><p>Elevations at each grid point are obtained like this:</p><pre class="codeinput">Z = topo_interp(lat,lon);
 </pre><p>Plot the elevation grid like this. Below I'm using <a href="cmocean_documentation.html"><tt>cmocean</tt></a> for the topography colormap:</p><pre class="codeinput">pcolor(lon,lat,Z)
@@ -104,7 +104,16 @@ ylabel <span class="string">'latitude'</span>
 cb = colorbar;
 ylabel(cb,<span class="string">'elevation (m)'</span>)
 cmocean(<span class="string">'topo'</span>,<span class="string">'pivot'</span>)
-</pre><img vspace="5" hspace="5" src="topo_interp_documentation_05.png" alt=""> <h2 id="11">A note on aliasing</h2><p>The ETOPO5 dataset is provided at 5 minute (or 1/12 degree) resolution, but the <tt>topo_interp</tt> function does <i>not</i> do any anti-aliasing before interpolation. To meet the <a href="https://en.wikipedia.org/wiki/Nyquist_frequency">Nyquist requirement</a> to prevent aliasing, you should technically interploate to grid points spaced at least twice the 5 minute resolution of the underlying dataset. That would be a very dense grid for the global dataset, so you may wish to accept a little bit of potential aliasing. Or you can load the raw data, use <tt>imresize</tt> to reduce the grid (while performing anti-aliasing) and interpolate. It's up to you.</p><h2 id="12">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="topo_interp_documentation_05.png" alt=""> <h2 id="11">Example 4: The effects of sea level rise</h2><p>Let's take a quick look at the places that could be affected by sea level rise. Since we already loaded the full-resolution dataset in Example 3, we'll just use that dataset, except we'll begin by setting all ocean values to NaN. So make everything that's less than or equal to zero elevation NaN:</p><pre class="codeinput">Z(Z&lt;=0) = NaN;
+</pre><p>All the ice in Greenland and Antarctica holds the potential to raise global sea levels by about 67 m. Of course that scenario is not likely anytime soon, but let's look at the effects of such an event. We will have to make a crude (and incorrect) assumption that sea level would be distributed evenly around the present-day oceans, but it's a start.</p><p>To investigate the effects of adding about 67 m of sea level to the global ocean, plot the masked topography and set the color axis limits from 0 to 67 m:</p><pre class="codeinput">figure
+imagescn(lon,lat,Z)
+caxis([0 67])
+cb = colorbar;
+ylabel(cb,<span class="string">'sea level rise (m)'</span>)
+cmocean <span class="string">-amp</span> <span class="comment">% sets the colormap</span>
+</pre><img vspace="5" hspace="5" src="topo_interp_documentation_06.png" alt=""> <p>To a first-order approximation, anywhere that's red is at risk of going underwater in the event of total collapse of the ice sheets. Darker red means more vulnerable. Let's zoom in on the eastern seaboard. Use the <a href="borders_documentation.html"><tt>borders</tt></a> function to plot state boundaries.</p><pre class="codeinput">axis([-100 -70 24 41])
+borders(<span class="string">'states'</span>)
+</pre><img vspace="5" hspace="5" src="topo_interp_documentation_07.png" alt=""> <h2 id="14">A note on aliasing</h2><p>The ETOPO5 dataset is provided at 5 minute (or 1/12 degree) resolution, but the <tt>topo_interp</tt> function does <i>not</i> do any anti-aliasing before interpolation. To meet the <a href="https://en.wikipedia.org/wiki/Nyquist_frequency">Nyquist requirement</a> to prevent aliasing, you should technically interploate to grid points spaced at least twice the 5 minute resolution of the underlying dataset. That would be a very dense grid for the global dataset, so you may wish to accept a little bit of potential aliasing. Or you can load the raw data, use <tt>imresize</tt> to reduce the grid (while performing anti-aliasing) and interpolate. It's up to you.</p><h2 id="15">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the University of Texas at Austin.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |topo_interp| documentation 
 % The |topo_interp| function interpolates elevation relative to sea level at any
@@ -198,6 +207,41 @@ cb = colorbar;
 ylabel(cb,'elevation (m)')
 cmocean('topo','pivot')
 
+%% Example 4: The effects of sea level rise
+% Let's take a quick look at the places that could be affected by sea level rise. 
+% Since we already loaded the full-resolution dataset in Example 3, we'll just
+% use that dataset, except we'll begin by setting all ocean values to NaN. 
+% So make everything that's less than or equal to zero elevation NaN: 
+
+Z(Z<=0) = NaN; 
+
+%%
+% All the ice in Greenland and Antarctica holds the potential to raise global 
+% sea levels by about 67 m. Of course that scenario is not likely anytime soon, 
+% but let's look at the effects of such an event. We will have to make a crude 
+% (and incorrect) assumption that sea level would be distributed evenly around 
+% the present-day oceans, but it's a start. 
+% 
+% To investigate the effects of adding about 67 m of sea level to the global 
+% ocean, plot the masked topography and set the color axis limits from 0 to 
+% 67 m: 
+
+figure
+imagescn(lon,lat,Z) 
+caxis([0 67]) 
+cb = colorbar; 
+ylabel(cb,'sea level rise (m)') 
+cmocean -amp % sets the colormap
+
+%% 
+% To a first-order approximation, anywhere that's red is at risk of going 
+% underwater in the event of total collapse of the ice sheets. Darker red
+% means more vulnerable. Let's zoom in on the eastern seaboard. Use the 
+% <borders_documentation.html |borders|> function to plot state boundaries.
+
+axis([-100 -70 24 41])
+borders('states') 
+
 %% A note on aliasing
 % The ETOPO5 dataset is provided at 5 minute (or 1/12 degree) resolution, but 
 % the |topo_interp| function does _not_ do any anti-aliasing before interpolation. 
@@ -207,6 +251,7 @@ cmocean('topo','pivot')
 % a very dense grid for the global dataset, so you may wish to accept a little
 % bit of potential aliasing. Or you can load the raw data, use |imresize| to reduce
 % the grid (while performing anti-aliasing) and interpolate. It's up to you. 
+
 %% Author Info
 % This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
 % The function and supporting documentation were written by Chad A. Greene

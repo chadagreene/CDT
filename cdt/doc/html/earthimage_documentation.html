@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>earthimage documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-09"><meta name="DC.source" content="earthimage_documentation.m"><style type="text/css">
+      --><title>earthimage documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-06"><meta name="DC.source" content="earthimage_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -70,7 +70,8 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 earthimage('gray')
 earthimage('watercolor',rgbValues)
 earthimage('center',centerLon)
-h = earthimage(...)</pre><h2 id="2">Description</h2><p><tt>earthimage</tt> plots an image base map of Earth in unprojected coordinates.</p><p><tt>earthimage('gray')</tt> plots the image in grayscale.</p><p><tt>earthimage('watercolor',rgbValues)</tt> specifies the color of the ocean with a three-element [R G B] vector (e.g., <tt>[1 0 0]</tt> for red).</p><p><tt>earthimage('center',centerLon)</tt> specifies a center longitude, which can be anything between -180 and 360. Default <tt>centerLon</tt> is <tt>0</tt>.</p><p><tt>h = earthimage(...)</tt> returns a handle h of the plotted image.</p><h2 id="3">Example 1: Simple</h2><p>For a simple base map image, just type <tt>earthimage</tt>:</p><pre class="codeinput">earthimage
+earthimage(...,'bottom')
+h = earthimage(...)</pre><h2 id="2">Description</h2><p><tt>earthimage</tt> plots an image base map of Earth in unprojected coordinates.</p><p><tt>earthimage('gray')</tt> plots the image in grayscale.</p><p><tt>earthimage('watercolor',rgbValues)</tt> specifies the color of the ocean with a three-element [R G B] vector (e.g., <tt>[1 0 0]</tt> for red).</p><p><tt>earthimage('center',centerLon)</tt> specifies a center longitude, which can be anything between -180 and 360. Default <tt>centerLon</tt> is <tt>0</tt>.</p><p><tt>earthimage(...,'bottom')</tt> places the earth image at the bottom of the graphical stack (beneath other objects that have already been plotted).</p><p><tt>h = earthimage(...)</tt> returns a handle h of the plotted image.</p><h2 id="3">Example 1: Simple</h2><p>For a simple base map image, just type <tt>earthimage</tt>:</p><pre class="codeinput">earthimage
 </pre><img vspace="5" hspace="5" src="earthimage_documentation_01.png" alt=""> <p>You can then go about adding other layers to the base map with normal Matlab plotting functions, where x is used for longitudes and y is used for latitudes:</p><pre class="codeinput">hold <span class="string">on</span>
 borders(<span class="string">'countries'</span>,<span class="string">'color'</span>,0.5*[1 1 1])
 xlabel <span class="string">'degrees longitude'</span>
@@ -85,7 +86,7 @@ earthimage <span class="string">gray</span>
 earthimage(<span class="string">'center'</span>,120)
 xlabel <span class="string">'longitude'</span>
 ylabel <span class="string">'latitude'</span>
-</pre><img vspace="5" hspace="5" src="earthimage_documentation_08.png" alt=""> <h2 id="11">Author info</h2><p>This function and supporting documentation were written by Chad A. Greene, 2018.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="earthimage_documentation_08.png" alt=""> <h2 id="11">Author info</h2><p>This function and supporting documentation were written by Chad A. Greene, for the Cimate Data Toolbox for Matlab, 2018.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |earthimage| documentation
 % |earthimage| plots an unprojected image base map of Earth. 
@@ -97,6 +98,7 @@ ylabel <span class="string">'latitude'</span>
 %  earthimage('gray') 
 %  earthimage('watercolor',rgbValues)
 %  earthimage('center',centerLon)
+%  earthimage(...,'bottom')
 %  h = earthimage(...)
 % 
 %% Description
@@ -110,6 +112,9 @@ ylabel <span class="string">'latitude'</span>
 % 
 % |earthimage('center',centerLon)| specifies a center longitude, which can be 
 % anything between -180 and 360. Default |centerLon| is |0|. 
+%
+% |earthimage(...,'bottom')| places the earth image at the bottom of the 
+% graphical stack (beneath other objects that have already been plotted).
 % 
 % |h = earthimage(...)| returns a handle h of the plotted image. 
 % 
@@ -169,7 +174,8 @@ xlabel 'longitude'
 ylabel 'latitude'
 
 %% Author info
-% This function and supporting documentation were written by Chad A. Greene, 2018. 
+% This function and supporting documentation were written by Chad A. Greene, 
+% for the Cimate Data Toolbox for Matlab, 2018. 
 
 ##### SOURCE END #####
 --></body></html>

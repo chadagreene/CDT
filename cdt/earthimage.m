@@ -7,6 +7,7 @@ function h = earthimage(varargin)
 %  earthimage('gray') 
 %  earthimage('watercolor',rgbValues)
 %  earthimage('center',centerLon)
+%  earthimage(...'bottom')
 %  h = earthimage(...)
 % 
 %% Description
@@ -21,6 +22,9 @@ function h = earthimage(varargin)
 % earthimage('center',centerLon) specifies a center longitude, which can be 
 % anything between -180 and 360. Default centerLon is 0. 
 %
+% earthimage(...,'bottom') places the earth image at the bottom of the 
+% graphical stack (beneath other objects that have already been plotted).
+% 
 % h = earthimage(...) returns a handle h of the plotted image. 
 % 
 %% Examples 
@@ -40,6 +44,7 @@ grayscale = false;
 adjustOcean = false; 
 clearOcean = false; % a transparent ocean
 centerLon = 0; % central longitude 
+bot = false; % put the image on the bottom of the graphical stack?  
 
 % Check for user-defined changes to the defaults:
 if nargin>0
@@ -47,6 +52,11 @@ if nargin>0
    % Does the user want a grayscale image? 
    if any([strncmpi(varargin,'grayscale',4) strncmpi(varargin,'greyscale',4)])
       grayscale = true; 
+   end
+   
+   if any(strncmpi(varargin,'bottom',3))
+      hold on
+      bot = true; 
    end
 
    % Does the user want to specify a color of the ocean? 
@@ -128,6 +138,10 @@ end
 
 if clearOcean
    h.AlphaData = ~ocean; 
+end
+
+if bot
+   uistack(h,'bottom')
 end
 
 %% Clean up: 

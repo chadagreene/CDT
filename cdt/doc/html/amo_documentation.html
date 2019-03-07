@@ -1,0 +1,299 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>amo documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-06"><meta name="DC.source" content="amo_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>amo</tt> documentation</h1><!--introduction--><p><tt>amo</tt> computes a version of the Atlantic Multidecadal Oscillation index.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#8">Calculate the AMO Index</a></li><li><a href="#17">Reference</a></li><li><a href="#18">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>idx = amo(sst,t)
+idx = amo(sst,t,lat,lon)</pre><h2 id="2">Description</h2><p><tt>idx = amo(sst,t)</tt> calculates AMO index from a time series of sea surface temperatures sst and their corresponding times <tt>t</tt>. <tt>sst</tt> can be a vector of sea surface temperatures that have been averaged over a region of interest, or <tt>sst</tt> can be a 3D matrix whose third dimension correponds to times <tt>t</tt>. If <tt>sst</tt> is a 3D matrix, a time series is automatically generated by averaging all the grid cells in <tt>sst</tt> for each time step. Usually, the AMO is calculated from the area-weighted average of ssts in the northern Atlantic from 0-70&ordm;N.</p><p><tt>idx = amo(sst,t,lat,lon)</tt> calculates the AMO index for 3D <tt>sst</tt> time series and corresponding grid coordinates <tt>lat</tt>,|lon|. Using this syntax, grid cells within the AMO region are automatically determined and the AMO index is calculated from the area-averaged time series of ssts within that region.</p><h2 id="3">Example</h2><p>In this example, we will calculate the AMO index using the monthly north_atlantic_sst.mat dataset that comes with CDT. Start by loading the data that comes with CDT. It contains monthly sea surface temperatures from 1870-2017 for the Northern Atlantic region (0-70N)</p><pre class="codeinput">load <span class="string">north_atlantic_sst.mat</span>
+</pre><p>Here are the variables we're working with:</p><pre class="codeinput">whos <span class="comment">% displays variable names and size</span>
+</pre><pre class="codeoutput">  Name           Size                    Bytes  Class       Attributes
+
+  lat           36x1                       144  single                
+  lon           41x1                       164  single                
+  sst_na        36x41x1776            10485504  single                
+  t           1776x1                     28417  datetime              
+
+</pre><p>The table above tells us that we have a <tt>lat</tt> array, a <tt>lon</tt> array, and a <tt>t</tt> array, which correspond to the dimensions of an <tt>sst_na</tt> data cube of SSTs in the North Atlantic.</p><p>We'll need to tell the <tt>amo</tt> function exactly what latitudes and longitudes correspond to each grid cell in the <tt>sst_na</tt> data, so convert the <tt>lat</tt> and <tt>lon</tt> arrays into grids like this:</p><pre class="codeinput">[Lon,Lat] = meshgrid(lon,lat);
+</pre><p>To get a little bit of context, let's take a look at the data we'll be working with. Make a <tt>pcolor</tt> plot of time-averaged mean SSTs (down dimension 3 of the <tt>sst_na</tt> data cube). Set the colormap to <i>thermal</i> via the <a href="cmocean_documentation.html"><tt>cmocean</tt></a> function, and underlay with an <a href="earthimage_documentation.html"><tt>earthimage</tt></a> to give a better sense of where we're looking at:</p><pre class="codeinput">pcolor(Lon,Lat,mean(sst_na,3))
+shading <span class="string">interp</span>
+cmocean <span class="string">thermal</span> <span class="comment">% sets the colormap</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'mean SST (\circC)'</span>)
+hold <span class="string">on</span>
+earthimage(<span class="string">'bottom'</span>) <span class="comment">% underlay with a satellite image of Earth</span>
+</pre><img vspace="5" hspace="5" src="amo_documentation_01.png" alt=""> <p>The map above shows only the region from 0N to 70N and 75W to 5 E. That's the geoquad the <tt>amo</tt> function uses to calculate the AMO index, but if you're working with an SST dataset that covers a larger area, don't worry--the <tt>amo</tt> function uses the <tt>Lat,Lon</tt> grids you give it to make calculations based only on values in the North Atlantic.</p><h2 id="8">Calculate the AMO Index</h2><p>The <tt>amo</tt> function works by entering the <tt>sst</tt> data cube along with corresponding times and <tt>Lat,Lon</tt> grids:</p><pre class="codeinput">idx = amo(sst_na,t,Lat,Lon);
+</pre><p>Plot the raw AMO index:</p><pre class="codeinput">figure
+plot(t,idx)
+ylabel <span class="string">'AMO index'</span>
+</pre><img vspace="5" hspace="5" src="amo_documentation_02.png" alt=""> <p>The plot above shows North Atlantic sea surface temperature variability, and it seems to have a sort of oscillatory behavior, and the periods of the oscillations appears to be multiple decades long. You might say it's some sort of Atlantic Multidecadal Oscillation.</p><p>NOAA <a href="https://www.esrl.noaa.gov/psd/data/timeseries/AMO/">recommends taking a 10 year (121 month) moving average</a> to smooth out the time series:</p><pre class="codeinput"><span class="comment">% Low-pass filter with a 121 month moving average:</span>
+idx_f = movmean(idx,121);
+
+hold <span class="string">on</span>
+plot(t,idx_f,<span class="string">'k-'</span>,<span class="string">'linewidth'</span>,2)
+legend(<span class="string">'AMO index'</span>,<span class="string">'AMO (10 year moving mean)'</span>)
+</pre><img vspace="5" hspace="5" src="amo_documentation_03.png" alt=""> <p>To show we're on the right track, we can use the <a href="anomaly_documentation.html"><tt>anomaly</tt></a> function to mimic Figure 1a from <a href="https://doi.org/10.1029/2000GL012745">Enfield et al., 2001</a>:</p><pre class="codeinput">figure
+anomaly(datenum(t),idx_f,<span class="keyword">...</span>
+   <span class="string">'topcolor'</span>,rgb(<span class="string">'orange'</span>),<span class="string">'bottomcolor'</span>,rgb(<span class="string">'yellow'</span>))
+axis <span class="string">tight</span>
+datetick(<span class="string">'x'</span>)
+xlim(datenum([1860 2000],1,1)) <span class="comment">% sets x axis date limits</span>
+ylim([-0.3 0.3])               <span class="comment">% sets y axis limits</span>
+</pre><img vspace="5" hspace="5" src="amo_documentation_04.png" alt=""> <p>Figure 1b of Enfield et al. shows the correlation between the AMO index and global sea surface temperatures. Unfortunately, our sample dataset only covers the North Atlantic, so for a comparison to other places around the globe we'll have to use the pacific_sst sample dataset:</p><pre class="codeinput">P = load(<span class="string">'pacific_sst.mat'</span>);
+</pre><p>Enfield et al. correlated the lowpass-filtered AMO (which is inherently deseasoned) to deseasoned, lowpass-filtered global SSTs. So let's deseason and lowpass filter the Pacific Ocean SST dataset:</p><pre class="codeinput"><span class="comment">% Deseason and lowpass filter SSTs:</span>
+sstd = deseason(P.sst,P.t);
+sstdf = movmean(sstd,121,3);
+</pre><p>Before we can correlate our lowpass-filtered AMO index to the deseasoned, lowpass-filtered Pacific SSTs, we'll have to synchronize the two time series. An easy way to do that is to interpolate the <tt>idx_f</tt> array to the Pacific SST times, like this:</p><pre class="codeinput">idx_fi = interp1(datenum(t),idx_f,P.t);
+
+<span class="comment">% Plot the interpolated values to ensure everything lines up:</span>
+hold <span class="string">on</span>
+plot(P.t,idx_fi,<span class="string">'b-'</span>,<span class="string">'linewidth'</span>,4)
+</pre><img vspace="5" hspace="5" src="amo_documentation_05.png" alt=""> <p>The fat blue line above indicates we've correctly interpolated the <tt>idx_f</tt> values to the times <tt>P.t</tt>, which correspond to the times of the Pacific Ocean SST time series.</p><p>Now we're able to correlate the lowpass-filtered, interpolated AMO index <tt>idx_fi</tt> with Pacific SSTs:</p><pre class="codeinput"><span class="comment">% Correlate ssts to AMO:</span>
+C = corr3(sstdf,idx_fi);
+
+figure
+imagescn(P.lon,P.lat,C)
+caxis([-1 1])
+cmocean <span class="string">balance</span>
+</pre><img vspace="5" hspace="5" src="amo_documentation_06.png" alt=""> <p>The map above does not exactly match figure 1b from Enfield et al., likely because we're only comparing the AMO to 802 months (66 years) of a multi-decadal phenomenon. A proper correlation would look at several complete cycles of the oscillation.</p><h2 id="17">Reference</h2><p>Enfield, D.B., A.M. Mestas-Nunez, and P.J. Trimble, 2001: The Atlantic Multidecadal Oscillation and its relationship to rainfall and river flows in the continental U.S., Geophys. Res. Lett., 28: 2077-2080. <a href="https://doi.org/10.1029/2000GL012745">doi:0.1029/2000GL012745</a></p><h2 id="18">Author Info</h2><p>This function was written by Kaustubh Thirumalai of the University of Arizona, for the Climate Data Toolbox for Matlab. March 2019. <a href="http://www.kaustubh.info">http://www.kaustubh.info</a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |amo| documentation 
+% |amo| computes a version of the Atlantic Multidecadal Oscillation index. 
+%
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+% 
+%% Syntax 
+% 
+%  idx = amo(sst,t) 
+%  idx = amo(sst,t,lat,lon)
+%
+%% Description 
+% 
+% |idx = amo(sst,t)| calculates AMO index from a time series of 
+% sea surface temperatures sst and their corresponding times |t|. 
+% |sst| can be a vector of sea surface temperatures that have been
+% averaged over a region of interest, or |sst| can be a 3D matrix whose third
+% dimension correponds to times |t|. If |sst| is a 3D matrix, a time series is
+% automatically generated by averaging all the grid cells in |sst| for each
+% time step. Usually, the AMO is calculated from the area-weighted average
+% of ssts in the northern Atlantic from 0-70ºN.
+%
+% |idx = amo(sst,t,lat,lon)| calculates the AMO index for 3D |sst| time
+% series and corresponding grid coordinates |lat|,|lon|. Using this syntax,
+% grid cells within the AMO region are automatically determined and
+% the AMO index is calculated from the area-averaged time series of ssts
+% within that region. 
+
+%% Example
+% In this example, we will calculate the AMO index using the monthly
+% north_atlantic_sst.mat dataset that comes with CDT. Start by loading the data
+% that comes with CDT. It contains monthly sea surface temperatures from 1870-2017 for the Northern
+% Atlantic region (0-70N)
+
+load north_atlantic_sst.mat
+
+%% 
+% Here are the variables we're working with: 
+
+whos % displays variable names and size
+
+%% 
+% The table above tells us that we have a |lat| array, a |lon| array, and 
+% a |t| array, which correspond to the dimensions of an |sst_na| data cube
+% of SSTs in the North Atlantic. 
+% 
+% We'll need to tell the |amo| function exactly what latitudes and longitudes
+% correspond to each grid cell in the |sst_na| data, so convert the |lat| and 
+% |lon| arrays into grids like this: 
+
+[Lon,Lat] = meshgrid(lon,lat);
+
+%% 
+% To get a little bit of context, let's take a look at the data we'll be 
+% working with. Make a |pcolor| plot of time-averaged mean SSTs (down dimension 3 
+% of the |sst_na| data cube). Set the colormap to _thermal_ via the <cmocean_documentation.html 
+% |cmocean|> function, and underlay with an <earthimage_documentation.html |earthimage|> 
+% to give a better sense of where we're looking at: 
+
+pcolor(Lon,Lat,mean(sst_na,3))
+shading interp
+cmocean thermal % sets the colormap
+cb = colorbar; 
+ylabel(cb,'mean SST (\circC)')
+hold on
+earthimage('bottom') % underlay with a satellite image of Earth
+
+%%
+% The map above shows only the region from 0N to 70N and 75W to 5 E. That's the
+% geoquad the |amo| function uses to calculate the AMO index, but if you're working
+% with an SST dataset that covers a larger area, don't worryREPLACE_WITH_DASH_DASHthe |amo| function
+% uses the |Lat,Lon| grids you give it to make calculations based only on values
+% in the North Atlantic. 
+%% Calculate the AMO Index
+% The |amo| function works by entering the |sst| data cube along with corresponding
+% times and |Lat,Lon| grids: 
+
+idx = amo(sst_na,t,Lat,Lon); 
+
+%%
+% Plot the raw AMO index: 
+
+figure
+plot(t,idx)
+ylabel 'AMO index'
+
+%% 
+% The plot above shows North Atlantic sea surface temperature variability, and 
+% it seems to have a sort of oscillatory behavior, and the periods of the oscillations
+% appears to be multiple decades long. You might say it's some sort of Atlantic
+% Multidecadal Oscillation. 
+% 
+% NOAA <https://www.esrl.noaa.gov/psd/data/timeseries/AMO/ recommends taking 
+% a 10 year (121 month) moving average> to smooth out the time series: 
+
+% Low-pass filter with a 121 month moving average: 
+idx_f = movmean(idx,121); 
+
+hold on
+plot(t,idx_f,'k-','linewidth',2)
+legend('AMO index','AMO (10 year moving mean)')
+
+%% 
+% To show we're on the right track, we can use the <anomaly_documentation.html |anomaly|>
+% function to mimic Figure 1a from <https://doi.org/10.1029/2000GL012745
+% Enfield et al., 2001>: 
+
+figure
+anomaly(datenum(t),idx_f,...
+   'topcolor',rgb('orange'),'bottomcolor',rgb('yellow'))
+axis tight
+datetick('x')
+xlim(datenum([1860 2000],1,1)) % sets x axis date limits
+ylim([-0.3 0.3])               % sets y axis limits
+
+%% 
+% Figure 1b of Enfield et al. shows the correlation between the AMO index and global
+% sea surface temperatures. Unfortunately, our sample dataset only covers the North
+% Atlantic, so for a comparison to other places around the globe we'll have to 
+% use the pacific_sst sample dataset: 
+
+P = load('pacific_sst.mat'); 
+
+%%
+% Enfield et al. correlated the lowpass-filtered AMO (which is inherently 
+% deseasoned) to deseasoned, lowpass-filtered global SSTs. So let's deseason
+% and lowpass filter the Pacific Ocean SST dataset: 
+
+% Deseason and lowpass filter SSTs: 
+sstd = deseason(P.sst,P.t);
+sstdf = movmean(sstd,121,3); 
+
+%% 
+% Before we can correlate our lowpass-filtered AMO index to the deseasoned,
+% lowpass-filtered Pacific SSTs, we'll have to synchronize the two time series. 
+% An easy way to do that is to interpolate the |idx_f| array to the Pacific SST 
+% times, like this: 
+
+idx_fi = interp1(datenum(t),idx_f,P.t); 
+
+% Plot the interpolated values to ensure everything lines up: 
+hold on
+plot(P.t,idx_fi,'b-','linewidth',4)
+
+%% 
+% The fat blue line above indicates we've correctly interpolated the |idx_f| 
+% values to the times |P.t|, which correspond to the times of the Pacific Ocean 
+% SST time series. 
+% 
+% Now we're able to correlate the lowpass-filtered, interpolated AMO index |idx_fi| 
+% with Pacific SSTs: 
+
+% Correlate ssts to AMO: 
+C = corr3(sstdf,idx_fi);
+
+figure
+imagescn(P.lon,P.lat,C)
+caxis([-1 1]) 
+cmocean balance 
+
+%% 
+% The map above does not exactly match figure 1b from Enfield et al., likely because
+% we're only comparing the AMO to 802 months (66 years) of a multi-decadal phenomenon. 
+% A proper correlation would look at several complete cycles of the oscillation. 
+
+%% Reference
+% 
+% Enfield, D.B., A.M. Mestas-Nunez, and P.J. Trimble, 2001: The 
+% Atlantic Multidecadal Oscillation and its relationship to rainfall and 
+% river flows in the continental U.S., Geophys. Res. Lett., 28: 2077-2080.
+% <https://doi.org/10.1029/2000GL012745 doi:0.1029/2000GL012745>
+% 
+%% Author Info
+% This function was written by Kaustubh Thirumalai of the University of 
+% Arizona, for the Climate Data Toolbox for Matlab. March 2019.
+% <http://www.kaustubh.info>
+
+##### SOURCE END #####
+--></body></html>

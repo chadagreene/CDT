@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ts_normstrap documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-12"><meta name="DC.source" content="ts_normstrap_documentation.m"><style type="text/css">
+      --><title>ts_normstrap documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-05"><meta name="DC.source" content="ts_normstrap_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>ts_normstrap</tt> documentation</h1><!--introduction--><p><tt>ts_normstrap</tt> performs a bootstrap uncertainty analysis on a time series given an uncertainty value at each step assuming a normal probability distribution. Bootstrapping means estimating a value at each time point within particular uncertainty bounds with a given probability distribution. Ultimately, the goal is to generate several realizations of the time series and provide confidence intervals at each time step.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>tsb = ts_normstrap(ts)
+  </style></head><body><div class="content"><h1><tt>ts_normstrap</tt> documentation</h1><!--introduction--><p><tt>ts_normstrap</tt> performs a bootstrap uncertainty analysis on a time series given an uncertainty value at each step assuming a normal probability distribution. Bootstrapping means estimating a value at each time point within particular uncertainty bounds with a given probability distribution. Ultimately, the goal is to generate several realizations of the time series and provide confidence intervals at each time step.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#12">References</a></li><li><a href="#13">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>tsb = ts_normstrap(ts)
 tsb = ts_normstrap(ts,e)
 tsb = ts_normstrap(ts,E)
 tsb = ts_normstrap(ts,'nboot',nboot)
@@ -93,14 +93,14 @@ hold <span class="string">on</span>;
 plot(t,iso_ts+2.*tsb,<span class="string">':r'</span>)
 plot(t,iso_ts-2.*tsb,<span class="string">':r'</span>)
 </pre><pre class="codeoutput">overall_sd =
-    0.9011
+    1.0830
 default_bootstrap_uncertainty =
-    0.9054
+    1.0817
 </pre><img vspace="5" hspace="5" src="ts_normstrap_documentation_02.png" alt=""> <p>Now let's be a little more specific and specify the analytical uncertainty of the oxygen isotopic measurement as 0.1 permil</p><pre class="codeinput">tsb = ts_normstrap(iso_ts,0.1);
 
 specified_bootstrap_uncertainty = mean(tsb)
 </pre><pre class="codeoutput">specified_bootstrap_uncertainty =
-    0.0995
+    0.1002
 </pre><p>Let's plot the new, better uncertainty, also as a 2-sigma bound</p><pre class="codeinput">hold <span class="string">on</span>;
 plot(t,iso_ts+2.*tsb,<span class="string">':k'</span>)
 plot(t,iso_ts-2.*tsb,<span class="string">':k'</span>)
@@ -110,9 +110,9 @@ tsb_high = ts_normstrap(iso_ts,0.1,<span class="string">'nboot'</span>,500);
 low_bootstrap_uncertainty = mean(tsb_low)
 high_bootstrap_uncertainty = mean(tsb_high)
 </pre><pre class="codeoutput">low_bootstrap_uncertainty =
-    0.0897
+    0.0956
 high_bootstrap_uncertainty =
-    0.0998
+    0.0997
 </pre><p>Let's plot them both now:</p><pre class="codeinput">figure; hold <span class="string">on</span>;
 plot(t,iso_ts)
 box <span class="string">off</span>
@@ -130,7 +130,7 @@ plot(t,iso_ts-2.*tsb_high,<span class="string">'--g'</span>)
 figure;hold <span class="string">on</span>;
 plot(t,Nts,<span class="string">'color'</span>,[0.7 0.7 0.7]) <span class="comment">% In gray</span>
 plot(t,iso_ts,<span class="string">'ko-'</span>,<span class="string">'linewidth'</span>,1.5); <span class="comment">% In black</span>
-</pre><img vspace="5" hspace="5" src="ts_normstrap_documentation_05.png" alt=""> <h2 id="12">Author Info</h2><p>The <tt>ts_normstrap</tt> function and supporting information were written for The Climate Data Toolbox for Matlab by <a href="http://www.kaustubh.info">Kaustubh Thirumalai</a> of the University of Arizona, January 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="ts_normstrap_documentation_05.png" alt=""> <h2 id="12">References</h2><p>The original bootstrap was introduced formally to the literature by Eforon in 1979: Efron, B., 1979: Bootstrap methods: another look at the jackknife. Ann. Stat. 7, 1-26. <a href="https://doi.org/10.1007/978-1-4612-4380-9_41">doi:10.1007/978-1-4612-4380-9_41</a>.</p><p>Although this is a rather dense read! Here are some (paleoclimate) applications:</p><p>Thirumalai, K., T. M. Quinn, and G. Marino, 2016: Constraining past seawater delta-18-O and temperature records developed from foraminiferal geochemistry, Paleoceanography <a href="https://doi.org/10.1002/2016PA002970">doi:10.1002/2016PA002970</a>.</p><p>Carr&eacute;, M., J. P. Sachs, J. M. Wallace, and C. Favier, 2012: Exploring errors in paleoclimate proxy reconstructions using Monte Carlo simulations: paleotemperature from mollusk and coral geochemistry, Clim. Past, 8(2), 433-450. <a href="https://doi.org/10.5194/cp-8-433-2012">doi:10.5194/cp-8-433-2012</a>.</p><p>The first figure in both of these papers provide a flowchart to understand basic schematics of the bootstrap in age uncertainty.</p><h2 id="13">Author Info</h2><p>The <tt>ts_normstrap</tt> function and supporting information were written for The Climate Data Toolbox for Matlab by <a href="http://www.kaustubh.info">Kaustubh Thirumalai</a> of the University of Arizona, January 2019.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |ts_normstrap| documentation 
 % |ts_normstrap| performs a bootstrap uncertainty analysis on a
@@ -268,6 +268,28 @@ figure;hold on;
 plot(t,Nts,'color',[0.7 0.7 0.7]) % In gray
 plot(t,iso_ts,'ko-','linewidth',1.5); % In black
 
+%% References
+% The original bootstrap was introduced formally to the literature by
+% Eforon in 1979:
+% Efron, B., 1979: Bootstrap methods: another look at the jackknife. 
+% Ann. Stat. 7, 1-26. <https://doi.org/10.1007/978-1-4612-4380-9_41 doi:10.1007/978-1-4612-4380-9_41>.
+%
+% Although this is a rather dense read! Here are some (paleoclimate)
+% applications: 
+%
+% Thirumalai, K., T. M. Quinn, and G. Marino, 2016: Constraining 
+% past seawater delta-18-O and temperature records developed from 
+% foraminiferal geochemistry, Paleoceanography <https://doi.org/10.1002/2016PA002970 
+% doi:10.1002/2016PA002970>.
+% 
+% Carré, M., J. P. Sachs, J. M. Wallace, and C. Favier, 2012: 
+% Exploring errors in paleoclimate proxy reconstructions using Monte 
+% Carlo simulations: paleotemperature from mollusk and coral 
+% geochemistry, Clim. Past, 8(2), 433-450. <https://doi.org/10.5194/cp-8-433-2012
+% doi:10.5194/cp-8-433-2012>.
+% 
+% The first figure in both of these papers provide a flowchart to
+% understand basic schematics of the bootstrap in age uncertainty.
 %% Author Info
 % The |ts_normstrap| function and supporting information were written for 
 % The Climate Data Toolbox for Matlab by 

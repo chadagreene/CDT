@@ -93,7 +93,7 @@ end
 
 % Columnate inputs to insure consistent behavior: 
 x = x(:); 
-y = y(:); 
+y = double(y(:)); 
 
 % Archive the x and y values before tinkering with them (we'll plot the archived vals later).
 x_archive = x; 
