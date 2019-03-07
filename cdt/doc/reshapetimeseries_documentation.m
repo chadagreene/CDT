@@ -1,8 +1,8 @@
 %% |reshapetimeseries| documentation 
 %
 % The |rehspaetimeseries| function reshapes a vector of timeseries data
-% onto a grid, accounting for messiness associated with leap days or
-% unevenly-spaced data.
+% onto a time-of-year x year grid, accounting for messiness associated with
+% leap days or unevenly-spaced data. 
 %
 % <CDT_Contents.html Back to Climate Data Tools Contents>
 %
@@ -27,7 +27,7 @@ load seaice_extent;
 plot(t, extent_N);
 
 %%
-% We can use <doy_documentation.html |doy|) to put this data on a
+% We can use <doy_documentation.html |doy|> to put this data on a
 % day-of-year axis rather than datetimes:
 
 cla;
@@ -41,6 +41,9 @@ plot(doy(t), extent_N);
 [g, tdoy] = findgroups(floor(doy(t)));
 iceavg = splitapply(@nanmean, extent_N, g);
 
+hold on;
+plot(tdoy, iceavg, 'linewidth', 2);
+
 %%
 % But that syntax gets awfully clunky when you want to do more in-depth
 % analysis.  Both of these tasks would be a lot simpler if we could just
@@ -51,6 +54,7 @@ iceavg = splitapply(@nanmean, extent_N, g);
 
 [ice, yr, tmid] = reshapetimeseries(t, extent_N);
 
+cla;
 plot(tmid, ice, 'b')
 hold on
 
@@ -69,7 +73,7 @@ plot(tmidm, icem, 'r')
 %%
 % While Jan 1 is usually a good place to place the year-to-year wrap,
 % sometimes your dataset may call for a different placement.  For example,
-% we can place the wrap near the low point of this timeries, in October.
+% we can place the wrap near the low point of this timeries, in mid September.
 % In this example, we choose 52 evenly-spaced bins per year, which is
 % approximately a weekly average:
 
@@ -108,7 +112,8 @@ ylabel('Year fraction');
 % In this case, we'd want to make sure we chose a larger interval when
 % doing any real analysis:
 
-[ice, yr, tmid] = reshapetimeseries(t(isearly), extent_N(isearly), 'bin', floor(365/2));
+[ice, yr, tmid] = reshapetimeseries(t(isearly), extent_N(isearly), ...
+    'bin', floor(365/2));
 
 figure;
 imagesc(yr, tlbl, ice);
