@@ -1,0 +1,368 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ensemble2bnd documentation</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-06"><meta name="DC.source" content="ensemble2bnd_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>ensemble2bnd</tt> documentation</h1><!--introduction--><p>The <tt>ensemble2bnd</tt> function calculates statistics across an ensemble of datasets, and provides several options to plot these ensemble statistics.</p><p>In this context, we use "ensemble" to refer to any set of vector datasets using the same independent-variable coordinates. Ensemble data is common in climate science; model studies often use intra-model ensembles to encompass uncertainty in initial conditions or parameters, and intermodel ensembles to further encompass structural uncertainties in model processes.  Timeseries data is also a prime candidate for this type of analysis, since we often want to look at interannual variability.</p><p>The ensemble2bnd function was originally created to feed ensemble data into the <a href="boundedline_documentation"><tt>boundedline</tt></a> function, and has expanded to allow several options to plot the mean, median, quartiles, upper/lower bounds, etc. of these types of datasets.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example: Sea ice interannual variability</a></li></ul></div><h2 id="1">Syntax</h2><pre>A = ensemble2bnd(x,y)
+[A, h] = ensemble2bnd(x,y, 'plot', plottype)
+[...] = ensemble2bnd(..., 'dims', dims)
+[...] = ensemble2bnd(..., 'center', center)
+[...] = ensemble2bnd(..., 'prc', prc)
+[...] = ensemble2bnd(..., 'alpha', alphaval)
+[...] = ensemble2bnd(..., 'tlim', tlim)
+[...] = ensemble2bnd(..., 'cmap', colors)
+[...] = ensemble2bnd(..., 'axis', hax)
+[...] = ensemble2bnd(..., 'whisker', w)</pre><h2 id="2">Description</h2><p><tt>[A, h] = ensemble2bnd(x,y)</tt> calculates the mean and upper/lower bounds of y at each x-coordinate.  The x data should be a vector array, and y is a nx x ny x nens array, where nx corresponds to the number of x-dimension points (i.e. length of x input), ny corresponds to the number of different datasets, and nens is the number of ensemble members in each dataset. (See 'dims' parameter to permute these dimensions)</p><p><tt>[A, h] = ensemble2bnd(x,y, 'plot', plottype)</tt> plots the datasets as either lines with shaded patches indicating percentiles ('boundedline'), lines with errorbars ('errorbar'), unstacked bar plots with errorbars ('bar'), or boxplots ('boxplot').  The default, 'none', indicates no plots will be created.</p><p><tt>ensemble2bnd(..., 'dims', dims)</tt> allows for permutation of the input matrix y via a 3-letter string consisting of the letters x, y, and e that indicate which dimensions in the input matrix correspond to the independent coordinate, the different datasets, and the ensembles per dataset, respectively.  The default is 'xye'.</p><p><tt>ensemble2bnd(..., 'center', center)</tt> switches the center-line statistic between the 'mean' (default) and 'median' of each dataset.</p><p><tt>ensemble2bnd(..., 'prc', prc)</tt> specifies the percentile values corresponding to lower and upper bounds.  These should come in pairs, from lowest to highest percentile.  The default is [0 100].</p><p><tt>ensemble2bnd(..., 'alpha', true)</tt> indicates that boundedline patches should be plotted using tranparent patches rather than opaque patches.</p><p><tt>ensemble2bnd(..., 'tlim', tlim)</tt> changes the color limits associated with the patches or errorbars associated with percentiles. By default, the center lines/bars/points are drawn with the indicated color (saturation = 1), and colors of bounds objects (patch, errorbars, etc) use lighter versions of the color, getting lighter as bounds expand (default limits are [0.1 0.5]).</p><p><tt>ensemble2bnd(..., 'cmap', colors)</tt> provides an alternative color order for the datasets plotted.</p><p><tt>ensemble2bnd(..., 'axis', hax)</tt> adds any plots to the indicated axis rather than the current axis.</p><p><tt>ensemble2bnd(..., 'whisker', w)</tt> changes te whisker length factor used to calculated outliers for the boxplot (boxplot option only).</p><h2 id="3">Example: Sea ice interannual variability</h2><p>For our example, we'll use the sea ice extent timeseries as our ensemble data.  We'll start by reshaping the two timeseries to year x time-of-year matrices using <a href="reshapetimeseries_documentation.html"><tt>reshapetimeseries</tt></a>, and concatenating these.  The early data uses a two-day interval, while the later is daily; we'll bin data weekly to avoid any artifacts from this change:</p><pre class="codeinput">load <span class="string">seaice_extent.mat</span>
+
+iceN = reshapetimeseries(t, extent_N, <span class="string">'bin'</span>, 52);
+iceS = reshapetimeseries(t, extent_S, <span class="string">'bin'</span>, 52);
+
+ice = cat(3, iceN, iceS);
+</pre><p>By default, the function calculates the mean and upper/lower bounds of the data at each x-location in the data.  We can plot either <a href="boundedline_documentation.html">bounded lines</a>:</p><pre class="codeinput">[A, h] = ensemble2bnd(1:52,ice, <span class="string">'dims'</span>, <span class="string">'xey'</span>, <span class="string">'plot'</span>, <span class="string">'boundedline'</span>)
+set(gca,<span class="string">'xlim'</span>, [1 52]);
+xlabel(<span class="string">'Week of year'</span>);
+ylabel(<span class="string">'Ice extent'</span>);
+</pre><pre class="codeoutput">
+A = 
+
+  struct with fields:
+
+     cent: [52&times;2 double]
+    bndlo: [52&times;2 double]
+    bndhi: [52&times;2 double]
+    errlo: [52&times;2 double]
+    errhi: [52&times;2 double]
+
+
+h = 
+
+  struct with fields:
+
+       ln: [1&times;2 Line]
+    patch: [1&times;2 Patch]
+
+</pre><img vspace="5" hspace="5" src="ensemble2bnd_documentation_01.png" alt=""> <p>line plots with error bars:</p><pre class="codeinput">cla
+[A, h] = ensemble2bnd(1:52,ice, <span class="string">'dims'</span>, <span class="string">'xey'</span>, <span class="string">'plot'</span>, <span class="string">'errorbar'</span>)
+</pre><pre class="codeoutput">
+A = 
+
+  struct with fields:
+
+     cent: [52&times;2 double]
+    bndlo: [52&times;2 double]
+    bndhi: [52&times;2 double]
+    errlo: [52&times;2 double]
+    errhi: [52&times;2 double]
+
+
+h = 
+
+  struct with fields:
+
+        ln: [2&times;1 Line]
+    errbar: [1&times;2 ErrorBar]
+
+</pre><img vspace="5" hspace="5" src="ensemble2bnd_documentation_02.png" alt=""> <p>or bar plots with errorbars:</p><pre class="codeinput">cla
+[A,h] = ensemble2bnd(1:52, ice, <span class="string">'dims'</span>, <span class="string">'xey'</span>, <span class="string">'plot'</span>, <span class="string">'bar'</span>)
+set(h.bar, <span class="string">'edgecolor'</span>, <span class="string">'none'</span>);
+</pre><pre class="codeoutput">
+A = 
+
+  struct with fields:
+
+     cent: [52&times;2 double]
+    bndlo: [52&times;2 double]
+    bndhi: [52&times;2 double]
+    errlo: [52&times;2 double]
+    errhi: [52&times;2 double]
+
+
+h = 
+
+  struct with fields:
+
+       bar: [1&times;2 Bar]
+    errbar: [1&times;2 ErrorBar]
+
+</pre><img vspace="5" hspace="5" src="ensemble2bnd_documentation_03.png" alt=""> <p>Note that the field names in the handle output structures vary based upon the plotting option you choose.</p><p>We can also increase the number of intervals shown.  For example, perhaps you'd like to see interquartile ranges as well as the minimum and maximum.  In this case, it may make more sense to use the median as the center line rather than the mean:</p><pre class="codeinput">cla
+ensemble2bnd(1:52,ice, <span class="string">'dims'</span>, <span class="string">'xey'</span>, <span class="string">'plot'</span>, <span class="string">'boundedline'</span>, <span class="keyword">...</span>
+    <span class="string">'cent'</span>, <span class="string">'median'</span>, <span class="string">'prc'</span>, [0 25 75 100]);
+</pre><img vspace="5" hspace="5" src="ensemble2bnd_documentation_04.png" alt=""> <p>If you add a large number of evenly-spaced percentiles, you can mimic a shaded distribution plot.</p><pre class="codeinput">cla
+[~,h] = ensemble2bnd(1:52,ice, <span class="string">'dims'</span>, <span class="string">'xey'</span>, <span class="string">'plot'</span>, <span class="string">'boundedline'</span>, <span class="keyword">...</span>
+    <span class="string">'cent'</span>, <span class="string">'median'</span>, <span class="string">'prc'</span>, [0:2:48 52:2:100], <span class="string">'tlim'</span>, [0.1 0.9]);
+</pre><img vspace="5" hspace="5" src="ensemble2bnd_documentation_05.png" alt=""> <p>The plotting order of the patch objects moves from outer bounds to inner bounds, which is what leads to the interleaved appearance where the lines overlap, but you can fix that with a bit of restacking:</p><pre class="codeinput">uistack(h.patch(end:-1:1,2), <span class="string">'top'</span>);
+</pre><img vspace="5" hspace="5" src="ensemble2bnd_documentation_06.png" alt=""> <p>As an alternative to the opaque bounds with varying colors, you can plot the bounds using transparent patches.  When using transparent patches, it often makes sense to set the transparency limits to a single value, since overlapping patches will automatically show an additive color:</p><pre class="codeinput">cla
+[~,h] = ensemble2bnd(1:52,ice, <span class="string">'dims'</span>, <span class="string">'xey'</span>, <span class="string">'plot'</span>, <span class="string">'boundedline'</span>, <span class="keyword">...</span>
+    <span class="string">'cent'</span>, <span class="string">'median'</span>, <span class="string">'prc'</span>, [0 25 75 100], <span class="string">'tlim'</span>, [0.2 0.2], <span class="keyword">...</span>
+    <span class="string">'alpha'</span>, true);
+</pre><img vspace="5" hspace="5" src="ensemble2bnd_documentation_07.png" alt=""> <p>The boxplot plotting option works a little differently than the other options, in that you can't specify the exact percentile bounds to plot. Instead, this option uses the usual boxplot statistics (note that this option requires the Statistics Toolbox, since it uses the boxplot function from that toolbox).  Like the bar plot option, this version places datasets side-by-side to avoid too much overlap.</p><p>The graphics handles returned by the boxplot function are... unintuitive, to say the least.  If you want to change or edit properties, I recommend using tags:</p><pre class="codeinput">cla
+[A,h] = ensemble2bnd(1:52,ice, <span class="string">'dims'</span>, <span class="string">'xey'</span>, <span class="string">'plot'</span>, <span class="string">'boxplot'</span>)
+
+set(findall(h.box, <span class="string">'tag'</span>, <span class="string">'Upper Whisker'</span>), <span class="string">'linestyle'</span>, <span class="string">'-'</span>);
+set(findall(h.box, <span class="string">'tag'</span>, <span class="string">'Lower Whisker'</span>), <span class="string">'linestyle'</span>, <span class="string">'-'</span>);
+</pre><pre class="codeoutput">
+A = 
+
+  struct with fields:
+
+     cent: [52&times;2 double]
+    bndlo: [52&times;2&times;2 double]
+    bndhi: [52&times;2&times;2 double]
+    errlo: [52&times;2&times;2 double]
+    errhi: [52&times;2&times;2 double]
+
+
+h = 
+
+  struct with fields:
+
+    box: [7&times;2&times;52 double]
+
+</pre><img vspace="5" hspace="5" src="ensemble2bnd_documentation_08.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |ensemble2bnd| documentation 
+% The |ensemble2bnd| function calculates statistics across an ensemble of
+% datasets, and provides several options to plot these ensemble statistics.
+% 
+% In this context, we use "ensemble" to refer to any set of vector
+% datasets using the same independent-variable coordinates.
+% Ensemble data is common in climate science; model studies 
+% often use intra-model ensembles to encompass uncertainty in initial
+% conditions or parameters, and intermodel ensembles to further encompass
+% structural uncertainties in model processes.  Timeseries data is also a
+% prime candidate for this type of analysis, since we often want to look at
+% interannual variability.
+%
+% The ensemble2bnd function was originally created to feed ensemble data 
+% into the <boundedline_documentation |boundedline|> function, and has 
+% expanded to allow several options to plot the mean, median, quartiles,
+% upper/lower bounds, etc. of these types of datasets.
+%
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%
+%% Syntax
+%
+%  A = ensemble2bnd(x,y)
+%  [A, h] = ensemble2bnd(x,y, 'plot', plottype)
+%  [...] = ensemble2bnd(..., 'dims', dims)
+%  [...] = ensemble2bnd(..., 'center', center)
+%  [...] = ensemble2bnd(..., 'prc', prc)
+%  [...] = ensemble2bnd(..., 'alpha', alphaval)
+%  [...] = ensemble2bnd(..., 'tlim', tlim)
+%  [...] = ensemble2bnd(..., 'cmap', colors)
+%  [...] = ensemble2bnd(..., 'axis', hax)
+%  [...] = ensemble2bnd(..., 'whisker', w)
+%
+%% Description
+%
+% |[A, h] = ensemble2bnd(x,y)| calculates the mean and upper/lower bounds
+% of y at each x-coordinate.  The x data should be a vector array, and y is
+% a nx x ny x nens array, where nx corresponds to the number of x-dimension
+% points (i.e. length of x input), ny corresponds to the number of
+% different datasets, and nens is the number of ensemble members in each
+% dataset. (See 'dims' parameter to permute these dimensions)  
+%
+% |[A, h] = ensemble2bnd(x,y, 'plot', plottype)| plots the datasets as
+% either lines with shaded patches indicating percentiles ('boundedline'),
+% lines with errorbars ('errorbar'), unstacked bar plots with errorbars
+% ('bar'), or boxplots ('boxplot').  The default, 'none', indicates no
+% plots will be created.
+%
+% |ensemble2bnd(..., 'dims', dims)| allows for permutation of the input
+% matrix y via a 3-letter string consisting of the letters x, y, and e that
+% indicate which dimensions in the input matrix correspond to the
+% independent coordinate, the different datasets, and the ensembles per
+% dataset, respectively.  The default is 'xye'.
+%
+% |ensemble2bnd(..., 'center', center)| switches the center-line statistic
+% between the 'mean' (default) and 'median' of each dataset.
+%
+% |ensemble2bnd(..., 'prc', prc)| specifies the percentile values
+% corresponding to lower and upper bounds.  These should come in pairs,
+% from lowest to highest percentile.  The default is [0 100].
+%
+% |ensemble2bnd(..., 'alpha', true)| indicates that boundedline patches
+% should be plotted using tranparent patches rather than opaque patches.
+%
+% |ensemble2bnd(..., 'tlim', tlim)| changes the color limits associated
+% with the patches or errorbars associated with percentiles. By default,
+% the center lines/bars/points are drawn with the indicated color
+% (saturation = 1), and colors of bounds objects (patch, errorbars, etc)
+% use lighter versions of the color, getting lighter as bounds expand
+% (default limits are [0.1 0.5]).
+%
+% |ensemble2bnd(..., 'cmap', colors)| provides an alternative color order
+% for the datasets plotted.  
+%
+% |ensemble2bnd(..., 'axis', hax)| adds any plots to the indicated axis
+% rather than the current axis.
+%
+% |ensemble2bnd(..., 'whisker', w)| changes te whisker length factor used
+% to calculated outliers for the boxplot (boxplot option only).
+
+%% Example: Sea ice interannual variability
+%
+% For our example, we'll use the sea ice extent timeseries as our ensemble
+% data.  We'll start by reshaping the two timeseries to year x time-of-year
+% matrices using <reshapetimeseries_documentation.html
+% |reshapetimeseries|>, and concatenating these.  The early data uses
+% a two-day interval, while the later is daily; we'll bin data weekly to
+% avoid any artifacts from this change:
+
+load seaice_extent.mat
+
+iceN = reshapetimeseries(t, extent_N, 'bin', 52);
+iceS = reshapetimeseries(t, extent_S, 'bin', 52);
+
+ice = cat(3, iceN, iceS);
+
+%% 
+% By default, the function calculates the mean and upper/lower bounds of
+% the data at each x-location in the data.  We can plot either
+% <boundedline_documentation.html bounded lines>:
+
+[A, h] = ensemble2bnd(1:52,ice, 'dims', 'xey', 'plot', 'boundedline')
+set(gca,'xlim', [1 52]);
+xlabel('Week of year');
+ylabel('Ice extent');
+
+%%
+% line plots with error bars:
+
+cla
+[A, h] = ensemble2bnd(1:52,ice, 'dims', 'xey', 'plot', 'errorbar')
+
+%%
+% or bar plots with errorbars:
+
+cla
+[A,h] = ensemble2bnd(1:52, ice, 'dims', 'xey', 'plot', 'bar')
+set(h.bar, 'edgecolor', 'none');
+
+%%
+% Note that the field names in the handle output structures vary
+% based upon the plotting option you choose.
+
+%%
+% We can also increase the number of intervals shown.  For example, perhaps
+% you'd like to see interquartile ranges as well as the minimum and
+% maximum.  In this case, it may make more sense to use the median as the
+% center line rather than the mean:
+
+cla
+ensemble2bnd(1:52,ice, 'dims', 'xey', 'plot', 'boundedline', ...
+    'cent', 'median', 'prc', [0 25 75 100]);
+
+%%
+% If you add a large number of evenly-spaced percentiles, you can mimic a
+% shaded distribution plot.
+
+cla
+[~,h] = ensemble2bnd(1:52,ice, 'dims', 'xey', 'plot', 'boundedline', ...
+    'cent', 'median', 'prc', [0:2:48 52:2:100], 'tlim', [0.1 0.9]);
+
+%%
+% The plotting order of the patch objects moves from outer bounds to inner
+% bounds, which is what leads to the interleaved appearance where the lines
+% overlap, but you can fix that with a bit of restacking:
+
+uistack(h.patch(end:-1:1,2), 'top');
+
+%%
+% As an alternative to the opaque bounds with varying colors, you can plot
+% the bounds using transparent patches.  When using transparent patches, it
+% often makes sense to set the transparency limits to a single value, since
+% overlapping patches will automatically show an additive color:
+
+cla
+[~,h] = ensemble2bnd(1:52,ice, 'dims', 'xey', 'plot', 'boundedline', ...
+    'cent', 'median', 'prc', [0 25 75 100], 'tlim', [0.2 0.2], ...
+    'alpha', true);
+
+%%
+% The boxplot plotting option works a little differently than the other
+% options, in that you can't specify the exact percentile bounds to plot.
+% Instead, this option uses the usual boxplot statistics (note that this
+% option requires the Statistics Toolbox, since it uses the boxplot
+% function from that toolbox).  Like the bar plot option, this version
+% places datasets side-by-side to avoid too much overlap.
+%
+% The graphics handles returned by the boxplot function are... unintuitive,
+% to say the least.  If you want to change or edit properties, I recommend
+% using tags:
+
+cla
+[A,h] = ensemble2bnd(1:52,ice, 'dims', 'xey', 'plot', 'boxplot')
+
+set(findall(h.box, 'tag', 'Upper Whisker'), 'linestyle', '-');
+set(findall(h.box, 'tag', 'Lower Whisker'), 'linestyle', '-');
+
+
+
+
+
+##### SOURCE END #####
+--></body></html>
