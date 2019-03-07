@@ -52,7 +52,8 @@ function [A, h] = ensemble2bnd(x,y,varargin)
 %                          whisker-ends, and center values will be medians.
 %                          Datasets will be staggered around the
 %                          x-coordinates in the same manner as an unstacked
-%                          bar plot.  
+%                          bar plot.  This option requires the Statistics
+%                          Toolbox.
 %           ['none']
 %
 %   alpha:  logical scalar, plot = boundedline only, true to use
@@ -147,6 +148,9 @@ x = x(:);
 % Adapt for boxplot
 
 if strcmp(Opt.plot, 'boxplot')
+    if isempty(ver('stats'))
+        error('The boxplot options requires the Statistics Toolbox');
+    end
     Opt.center = 'median';
 end
 
@@ -267,6 +271,9 @@ if ~strcmp(Opt.plot, 'none')
             end
             
             % Calculate actual bounds used for quartile boxes and whiskers
+            
+            A.bndhi = nan(nx,ny,2);
+            A.bndlo = nan(nx,ny,2);
             
             for iy = 1:ny
                 for ix = 1:nx
