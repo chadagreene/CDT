@@ -1,4 +1,5 @@
-# CDT
+[![DOI](https://zenodo.org/badge/171331090.svg)](https://zenodo.org/badge/latestdoi/171331090)
+
 
 ![Climate Data Toolbox for Matlab](CDT_reduced.jpg)
 
