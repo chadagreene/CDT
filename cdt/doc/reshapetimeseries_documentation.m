@@ -1,6 +1,6 @@
 %% |reshapetimeseries| documentation 
 %
-% The |rehspaetimeseries| function reshapes a vector of timeseries data
+% The |reshapetimeseries| function reshapes a vector of timeseries data
 % onto a time-of-year x year grid, accounting for messiness associated with
 % leap days or unevenly-spaced data. 
 %
@@ -9,12 +9,57 @@
 %% Syntax
 %
 %  [xg, yr] = reshapetimeseries(t, x)
-%  [xg, yr] = reshapetimeseries(t, x, 'bin', bin)
-%  [xg, yr] = reshapetimeseries(t, x, 'func', func)
+%  [xg, yr] = reshapetimeseries(t, x, 'bin', nbin)
+%  [xg, yr] = reshapetimeseries(t, x, 'bin', 'date')
+%  [xg, yr] = reshapetimeseries(t, x, 'bin', 'month')
+%  [xg, yr] = reshapetimeseries(t, x, 'func', @func)
 %  [xg, yr] = reshapetimeseries(t, x, 'yrlim', yrlim)
 %  [xg, yr] = reshapetimeseries(t, x, 'pivotdate, [mon day])
-
+%
 %% Description
+%
+% |[xg, yr] = reshapetimeseries(t, x)| reshapes a timeseries |x| defined by
+% time |t| onto a date-of-year by year grid.  If the original timeseries is
+% has higher than daily resolution, values are averaged for each date; for
+% dates where the original timeseries included no data, NaNs are used.  The
+% resulting grid |xg| will be a 365 x n grid, where n is the number of
+% unique years spanned by the the original timeseries; |yr| is a vector
+% holding these year values. 
+%
+% |[xg, yr] = reshapetimeseries(t, x, 'bin', nbin)| reshapes the timeseries
+% using |nbin| even time bins per year.  Each bin will hold 365/nbin days
+% worth of data in non-leap years and 366/nbin days worth of data in leap
+% years.
+%
+% |[xg, yr] = reshapetimeseries(t, x, 'bin', 'date')| 
+% |[xg, yr] = reshapetimeseries(t, x, 'bin', 'month')| 
+% These two special options for the 'bin' property allow for bins that
+% align with calendar dates rather than evenly dividing each year.  The
+% 'date' option (the default option when no 'bin' value is specified) bins
+% data from Feb 28-29 together, resulting in 365 bins per year that align
+% with calendar dates, even in leap years.  'month' bins data by calendar
+% month, resulting in 12 bins per year.
+%
+% |[xg, yr] = reshapetimeseries(t, x, 'func', @func)| applies the function
+% handle |@func| to data in a bin.  @func should accept a vector of values
+% and return a scalar.  The default is to average data (i.e. @nanmean).
+%
+% |[xg, yr] = reshapetimeseries(t, x, 'yrlim', yrlim)| returns a reshaped
+% grid of data spanning the year limits in the 1 x 2 vector |yrlim|.  This
+% can be used to create an output dataset that spans more or fewer years
+% than the input.
+%
+% |[xg, yr] = reshapetimeseries(t, x, 'pivotdate, [mon day])| set the pivot
+% date where the dataset wraps from one year to the next.  By default this
+% is [1 1], indicating that each new column of the output |xg| starts on
+% Jan 1 of the corresponding year in vector |yr|.
+%
+% |[xg, yr, tmid] = ...| returns the additional output, |tmid| holding
+% datetimes corresponding to the rows of |xg|.  The year in this vector is
+% set to the first non-leap year in the input dataset; this choice of year
+% is relatively arbitrary.  This output is intended primarily for plotting
+% purposes, and the specific year can be adjusted by the user as needed.
+
 
 %% Example
 %

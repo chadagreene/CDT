@@ -3,6 +3,7 @@ function [xg, yr, tmid] = reshapetimeseries(t, x, varargin)
 %
 % [xg, yr] = reshapetimeseries(t, x)
 % [xg, yr] = reshapetimeseries(t, x, p1, v1, ...)
+% [xg, yr, tmid] = reshapetimeseries(t, x, p1, v1, ...)
 %
 % This function reshapes timeseries data onto a grid, taking care of any
 % concatenation issues that would result from leap days or uneven data
@@ -48,7 +49,7 @@ function [xg, yr, tmid] = reshapetimeseries(t, x, varargin)
 %               correspond to the dates in the first row of the matrix, but
 %               a calendar year change will occur within each column.
 %
-%   tmid:       datetime from arbitrary non-leap year (2001) corresponding
+%   tmid:       datetime from first non-leap year in dataset corresponding
 %               to rows of output matrix.
 
 % Copyright 2019 Kelly Kearney
