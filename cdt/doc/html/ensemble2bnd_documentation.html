@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ensemble2bnd documentation</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-06"><meta name="DC.source" content="ensemble2bnd_documentation.m"><style type="text/css">
+      --><title>ensemble2bnd documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-11"><meta name="DC.source" content="ensemble2bnd_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>ensemble2bnd</tt> documentation</h1><!--introduction--><p>The <tt>ensemble2bnd</tt> function calculates statistics across an ensemble of datasets, and provides several options to plot these ensemble statistics.</p><p>In this context, we use "ensemble" to refer to any set of vector datasets using the same independent-variable coordinates. Ensemble data is common in climate science; model studies often use intra-model ensembles to encompass uncertainty in initial conditions or parameters, and intermodel ensembles to further encompass structural uncertainties in model processes.  Timeseries data is also a prime candidate for this type of analysis, since we often want to look at interannual variability.</p><p>The ensemble2bnd function was originally created to feed ensemble data into the <a href="boundedline_documentation"><tt>boundedline</tt></a> function, and has expanded to allow several options to plot the mean, median, quartiles, upper/lower bounds, etc. of these types of datasets.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example: Sea ice interannual variability</a></li></ul></div><h2 id="1">Syntax</h2><pre>A = ensemble2bnd(x,y)
+  </style></head><body><div class="content"><h1><tt>ensemble2bnd</tt> documentation</h1><!--introduction--><p>The <tt>ensemble2bnd</tt> function calculates statistics across an ensemble of datasets, and provides several options to plot these ensemble statistics.</p><p>In this context, we use "ensemble" to refer to any set of vector datasets using the same independent-variable coordinates. Ensemble data is common in climate science; model studies often use intra-model ensembles to encompass uncertainty in initial conditions or parameters, and intermodel ensembles to further encompass structural uncertainties in model processes.  Timeseries data is also a prime candidate for this type of analysis, since we often want to look at interannual variability.</p><p>The ensemble2bnd function was originally created to feed ensemble data into the <a href="boundedline_documentation"><tt>boundedline</tt></a> function, and has expanded to allow several options to plot the mean, median, quartiles, upper/lower bounds, etc. of these types of datasets.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example: Sea ice interannual variability</a></li><li><a href="#13">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>A = ensemble2bnd(x,y)
 [A, h] = ensemble2bnd(x,y, 'plot', plottype)
 [...] = ensemble2bnd(..., 'dims', dims)
 [...] = ensemble2bnd(..., 'center', center)
@@ -85,9 +85,7 @@ ice = cat(3, iceN, iceS);
 set(gca,<span class="string">'xlim'</span>, [1 52]);
 xlabel(<span class="string">'Week of year'</span>);
 ylabel(<span class="string">'Ice extent'</span>);
-</pre><pre class="codeoutput">
-A = 
-
+</pre><pre class="codeoutput">A = 
   struct with fields:
 
      cent: [52&times;2 double]
@@ -95,20 +93,14 @@ A =
     bndhi: [52&times;2 double]
     errlo: [52&times;2 double]
     errhi: [52&times;2 double]
-
-
 h = 
-
   struct with fields:
 
        ln: [1&times;2 Line]
     patch: [1&times;2 Patch]
-
 </pre><img vspace="5" hspace="5" src="ensemble2bnd_documentation_01.png" alt=""> <p>line plots with error bars:</p><pre class="codeinput">cla
 [A, h] = ensemble2bnd(1:52,ice, <span class="string">'dims'</span>, <span class="string">'xey'</span>, <span class="string">'plot'</span>, <span class="string">'errorbar'</span>)
-</pre><pre class="codeoutput">
-A = 
-
+</pre><pre class="codeoutput">A = 
   struct with fields:
 
      cent: [52&times;2 double]
@@ -116,21 +108,15 @@ A =
     bndhi: [52&times;2 double]
     errlo: [52&times;2 double]
     errhi: [52&times;2 double]
-
-
 h = 
-
   struct with fields:
 
         ln: [2&times;1 Line]
     errbar: [1&times;2 ErrorBar]
-
 </pre><img vspace="5" hspace="5" src="ensemble2bnd_documentation_02.png" alt=""> <p>or bar plots with errorbars:</p><pre class="codeinput">cla
 [A,h] = ensemble2bnd(1:52, ice, <span class="string">'dims'</span>, <span class="string">'xey'</span>, <span class="string">'plot'</span>, <span class="string">'bar'</span>)
 set(h.bar, <span class="string">'edgecolor'</span>, <span class="string">'none'</span>);
-</pre><pre class="codeoutput">
-A = 
-
+</pre><pre class="codeoutput">A = 
   struct with fields:
 
      cent: [52&times;2 double]
@@ -138,15 +124,11 @@ A =
     bndhi: [52&times;2 double]
     errlo: [52&times;2 double]
     errhi: [52&times;2 double]
-
-
 h = 
-
   struct with fields:
 
        bar: [1&times;2 Bar]
     errbar: [1&times;2 ErrorBar]
-
 </pre><img vspace="5" hspace="5" src="ensemble2bnd_documentation_03.png" alt=""> <p>Note that the field names in the handle output structures vary based upon the plotting option you choose.</p><p>We can also increase the number of intervals shown.  For example, perhaps you'd like to see interquartile ranges as well as the minimum and maximum.  In this case, it may make more sense to use the median as the center line rather than the mean:</p><pre class="codeinput">cla
 ensemble2bnd(1:52,ice, <span class="string">'dims'</span>, <span class="string">'xey'</span>, <span class="string">'plot'</span>, <span class="string">'boundedline'</span>, <span class="keyword">...</span>
     <span class="string">'cent'</span>, <span class="string">'median'</span>, <span class="string">'prc'</span>, [0 25 75 100]);
@@ -163,9 +145,7 @@ ensemble2bnd(1:52,ice, <span class="string">'dims'</span>, <span class="string">
 
 set(findall(h.box, <span class="string">'tag'</span>, <span class="string">'Upper Whisker'</span>), <span class="string">'linestyle'</span>, <span class="string">'-'</span>);
 set(findall(h.box, <span class="string">'tag'</span>, <span class="string">'Lower Whisker'</span>), <span class="string">'linestyle'</span>, <span class="string">'-'</span>);
-</pre><pre class="codeoutput">
-A = 
-
+</pre><pre class="codeoutput">A = 
   struct with fields:
 
      cent: [52&times;2 double]
@@ -173,15 +153,11 @@ A =
     bndhi: [52&times;2&times;2 double]
     errlo: [52&times;2&times;2 double]
     errhi: [52&times;2&times;2 double]
-
-
 h = 
-
   struct with fields:
 
     box: [7&times;2&times;52 double]
-
-</pre><img vspace="5" hspace="5" src="ensemble2bnd_documentation_08.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="ensemble2bnd_documentation_08.png" alt=""> <h2 id="13">Author Info</h2><p>The <tt>ensemble2bnd</tt> function and its supporting documenation were written by <a href="http://kellyakearney.net">Kelly A. Kearney</a> of the University of Washington. The <tt>ensemble2bnd</tt> function is part of the Climate Data Toolbox for Matlab.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |ensemble2bnd| documentation 
 % The |ensemble2bnd| function calculates statistics across an ensemble of
@@ -360,9 +336,10 @@ cla
 set(findall(h.box, 'tag', 'Upper Whisker'), 'linestyle', '-');
 set(findall(h.box, 'tag', 'Lower Whisker'), 'linestyle', '-');
 
-
-
-
-
+%% Author Info
+% The |ensemble2bnd| function and its supporting documenation were written 
+% by <http://kellyakearney.net Kelly A. Kearney> of the University of 
+% Washington. The |ensemble2bnd| function is part of the Climate 
+% Data Toolbox for Matlab. 
 ##### SOURCE END #####
 --></body></html>

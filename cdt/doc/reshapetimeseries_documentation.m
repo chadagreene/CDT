@@ -167,5 +167,8 @@ cmocean('ice');
 xlabel('Year');
 ylabel('Year fraction');
 
-
-
+%% Author Info
+% The |reshapetimeseries| function and its supporting documenation were written 
+% by <http://kellyakearney.net Kelly A. Kearney> of the University of 
+% Washington. The |reshapetimeseries| function is part of the Climate 
+% Data Toolbox for Matlab. 

@@ -175,6 +175,8 @@ cla
 set(findall(h.box, 'tag', 'Upper Whisker'), 'linestyle', '-');
 set(findall(h.box, 'tag', 'Lower Whisker'), 'linestyle', '-');
 
-
-
-
+%% Author Info
+% The |ensemble2bnd| function and its supporting documenation were written 
+% by <http://kellyakearney.net Kelly A. Kearney> of the University of 
+% Washington. The |ensemble2bnd| function is part of the Climate 
+% Data Toolbox for Matlab. 

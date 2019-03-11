@@ -6,6 +6,7 @@ function Ad = detrend3(A,varargin)
 % 
 %  Ad = detrend3(A) 
 %  Ad = detrend3(A,t)
+%  Ad = detrend3(...,'omitnan')
 % 
 %% Description
 % 
@@ -14,6 +15,10 @@ function Ad = detrend3(A,varargin)
 % 
 % Ad = detrend3(A,t) specifies times t associated with each slice of A. Times
 % t do not need to occur at regular intervals in time. 
+% 
+% Ad = detrend3(...,'omitnan') applies detrending even in grid cells that contain
+% NaN values. If many grid cells contains spurious NaNs, you may find that this
+% option is slower than the default. 
 % 
 %% Examples
 % For examples, type 
@@ -44,17 +49,55 @@ if nargin>1
    end
 end
 
+% Does the user want to detrend grid cells that contain spurious NaNs?
+tmp = strncmpi(varargin,'omitnan',4); 
+if any(tmp)
+   omitnan = true; 
+   varargin = varargin(~tmp); 
+else
+   omitnan = false;
+end
+
 %% Perform mathematics: 
 
 % Center and scale t to improve fit: 
-t = (t(:)-mean(t))/std(t); 
+if omitnan
+   t = (t(:)-mean(t,'omitnan'))/std(t,'omitnan'); % although times really shouldn't be NaNs, but maybe they are, and that's okay. 
+else
+   t = (t(:)-mean(t))/std(t); 
+end
 
 % Reshape, but only deal with the finite values: 
-mask = all(isfinite(A),3); 
+if omitnan
+   mask = sum(isfinite(A),3)>1; 
+else
+   mask = all(isfinite(A),3); 
+end
 A = cube2rect(A,mask); 
 
 % Detrend A: 
 Ad = A - [t ones(N,1)]*([t ones(N,1)]\A); 
+
+
+% Deal with spurious NaNs: 
+if omitnan
+   % Determine which elements of the y data are finite: 
+   isf = isfinite(A); 
+   
+   % Which columns of data (or grid cells) contain some NaNs, but not all NaNs?   
+   col = find(sum(isf)>1 & sum(isf)<length(t)); 
+   
+   % Loop through the columns (each a grid cell) that we have any hope of solving: 
+   for k = 1:length(col)
+      
+      % For this grid cell, which indices are finite? 
+      ind = isf(:,col(k)); 
+      N = sum(ind); 
+      
+      Ad(ind,col(k)) = A(ind,col(k)) - [t(ind) ones(N,1)]*([t(ind) ones(N,1)]\A(ind,col(k))); 
+
+   end
+end
 
 % Unreshape: 
 Ad = rect2cube(Ad,mask); 

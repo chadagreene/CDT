@@ -18,6 +18,8 @@ If that's not correct, find the CDT folder by typing this into the Matlab Comman
 
 ```which cdt -all```
 
+If the which hunt still turns up nothing, that suggests the toolbox hasn't been properly installed. 
+
 ### ...or as individual files and folders:
 The files in this GitHub repository may be slightly more up to date than the prepackaged .mltbx toolbox. So if you want to be on the bleeding edge of innovation, get the cdt folder, put it somewhere Matlab can find it, and then right-click on it from within Matlab and select "Add to Path--Selected folder and subfolders."
 

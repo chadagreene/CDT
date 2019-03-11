@@ -9,6 +9,7 @@
 % 
 %  Ad = detrend3(A) 
 %  Ad = detrend3(A,t)
+%  Ad = detrend3(...,'omitnan')
 % 
 %% Description
 % 
@@ -17,6 +18,10 @@
 % 
 % |Ad = detrend3(A,t)| specifies times |t| associated with each slice of A. 
 % Times |t| do not need to occur at regular intervals in time. 
+% 
+% |Ad = detrend3(...,'omitnan')| applies detrending even in grid cells that contain
+% |NaN| values. If many grid cells contains spurious NaNs, you may find that this
+% option is slower than the default. 
 % 
 %% Example 1: A 3D gridded dataset 
 % This sample dataset has a trend of 3.2 units/timestep everywhere: 
@@ -102,7 +107,74 @@ ntitle('DETRENDED sea surface temperature anomaly')
 hold on
 polyplot(t,sst_dt_1-mean(sst_dt_1),1,'k','linewidth',3)
 
+%% Example 3: The 'omitnan' option
+% In some cases, your gridded dataset may have spurious NaNs in them. That is the case
+% for the sst dataset we analyzed in the example above. See, for the 802 months
+% of SST data, look at how many values are finite: 
+
+figure
+imagescn(lon,lat,sum(isfinite(sst),3))
+cb = colorbar; 
+ylabel(cb,'number of finite data values')
+caxis([700 802]) % sets color axis limits 
+
+%% 
+% In the figure above, take a look at Hudson Bay in Canada. You'll notice 
+% that not all of the 802 months have valid data there. As many as 100 months
+% of data are missing because it can be hard to get a good SST reading in the 
+% winter months when ice screws up the measurement. Still, you may need to
+% remove the long term trend from the available data. 
+% 
+% Here's a comparison of detrending the sst dataset without versus with
+% the |'omitnan'| option. Start by using the <trend_documentation.html |trend|> 
+% function, simply to assess the magnitude of the trend: 
+
+figure 
+subplot(1,2,1) 
+imagescn(lon,lat,trend(sst,12))
+cb = colorbar('location','southoutside'); 
+xlabel(cb,'SST trend \circC/yr')
+title 'trend without omitnan'
+caxis([-0.04 0.04])
+cmocean('balance') 
+
+subplot(1,2,2) 
+imagescn(lon,lat,trend(sst,12,'omitnan'))
+cb = colorbar('location','southoutside'); 
+xlabel(cb,'SST trend \circC/yr')
+title 'trend with omitnan'
+caxis([-0.04 0.04])
+cmocean('balance') 
+
+%% 
+% In the figure above, note the difference in Hudson Bay, Canada. 
+% 
+% Now detrending works the same way. We'll detrend each dataset, and 
+% then plot the trends of the detrended datasets just as above: 
+
+sst_dt = detrend3(sst); 
+sst_dt_o = detrend3(sst,'omitnan'); 
+
+figure
+subplot(1,2,1) 
+imagescn(lon,lat,trend(sst_dt,12))
+cb = colorbar('location','southoutside'); 
+xlabel(cb,'SST trend \circC/yr')
+caxis([-0.04 0.04])
+cmocean('balance') 
+title 'detrended trend without omitnan'
+
+subplot(1,2,2) 
+imagescn(lon,lat,trend(sst_dt_o,12,'omitnan'))
+cb = colorbar('location','southoutside'); 
+xlabel(cb,'SST trend \circC/yr')
+caxis([-0.04 0.04])
+cmocean('balance') 
+title 'detrended trend with omitnan'
+
+%% 
+% A little bit of signal remains in Hudson Bay, likely due to numerical noise. 
+
 %% Author Info
 % This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
-% The function and supporting documentation were written by Chad A. Greene
-% of the University of Texas at Austin. 
+% The function and supporting documentation were written by Chad A. Greene. 

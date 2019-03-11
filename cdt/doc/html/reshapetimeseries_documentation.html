@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>reshapetimeseries documentation</title><meta name="generator" content="MATLAB 9.4"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-11"><meta name="DC.source" content="reshapetimeseries_documentation.m"><style type="text/css">
+      --><title>reshapetimeseries documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-11"><meta name="DC.source" content="reshapetimeseries_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>reshapetimeseries</tt> documentation</h1><!--introduction--><p>The <tt>reshapetimeseries</tt> function reshapes a vector of timeseries data onto a time-of-year x year grid, accounting for messiness associated with leap days or unevenly-spaced data.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li></ul></div><h2 id="1">Syntax</h2><pre>[xg, yr] = reshapetimeseries(t, x)
+  </style></head><body><div class="content"><h1><tt>reshapetimeseries</tt> documentation</h1><!--introduction--><p>The <tt>reshapetimeseries</tt> function reshapes a vector of timeseries data onto a time-of-year x year grid, accounting for messiness associated with leap days or unevenly-spaced data.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#11">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[xg, yr] = reshapetimeseries(t, x)
 [xg, yr] = reshapetimeseries(t, x, 'bin', nbin)
 [xg, yr] = reshapetimeseries(t, x, 'bin', 'date')
 [xg, yr] = reshapetimeseries(t, x, 'bin', 'month')
@@ -116,7 +116,7 @@ shading <span class="string">flat</span>;
 cmocean(<span class="string">'ice'</span>);
 xlabel(<span class="string">'Year'</span>);
 ylabel(<span class="string">'Year fraction'</span>);
-</pre><img vspace="5" hspace="5" src="reshapetimeseries_documentation_08.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="reshapetimeseries_documentation_08.png" alt=""> <h2 id="11">Author Info</h2><p>The <tt>reshapetimeseries</tt> function and its supporting documenation were written by <a href="http://kellyakearney.net">Kelly A. Kearney</a> of the University of Washington. The <tt>reshapetimeseries</tt> function is part of the Climate Data Toolbox for Matlab.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |reshapetimeseries| documentation 
 %
@@ -287,8 +287,10 @@ cmocean('ice');
 xlabel('Year');
 ylabel('Year fraction');
 
-
-
-
+%% Author Info
+% The |reshapetimeseries| function and its supporting documenation were written 
+% by <http://kellyakearney.net Kelly A. Kearney> of the University of 
+% Washington. The |reshapetimeseries| function is part of the Climate 
+% Data Toolbox for Matlab. 
 ##### SOURCE END #####
 --></body></html>
