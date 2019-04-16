@@ -148,10 +148,11 @@ if omitnan
       ind = isf(:,col(k)); 
       
       % Solve least squares for this grid cell: 
-      tmp = [t(ind) ones(size(t(ind)))]\y(ind); 
+      tmp = [t(ind) ones(size(t(ind)))]\y(ind,col(k)); 
       
       % Fill in the missing value in the coefficients matrix: 
       coefficients(1,col(k)) = tmp(1); 
+      
    end
 end
 
