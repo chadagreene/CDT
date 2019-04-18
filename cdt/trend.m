@@ -132,6 +132,7 @@ end
 
 assert(isequal(size(y,1),length(t)),'Dimension mismatch: length of t must match the size of y along which the trend is being calculated. Specify a different dimension?')
  
+
 coefficients = [t ones(size(t))]\y; 
 
 % Deal with spurious NaNs: 
@@ -182,7 +183,7 @@ if nargout>1
          ind = isf(:,col(k)); 
 
          % Solve p for this grid cell: 
-         [~,tmp] = corr(y(ind),t(ind),varargin{:}); 
+         [~,tmp] = corr(y(ind,col(k)),t(ind),varargin{:}); 
 
          % Fill in the missing value in the p array: 
          p(col(k)) = tmp; 

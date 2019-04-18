@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>detrend3 documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-03-11"><meta name="DC.source" content="detrend3_documentation.m"><style type="text/css">
+      --><title>detrend3 documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-04-18"><meta name="DC.source" content="detrend3_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -75,20 +75,20 @@ y = 3.2*t + 0.1*randn(size(t)); <span class="comment">% the trend is 3.2*t (plus
 Z = expand3(ones(5),y);
 </pre><p>Here's proof via the <a href="trend_documentation.html"><tt>trend</tt></a> trend function:</p><pre class="codeinput">trend(Z,t)
 </pre><pre class="codeoutput">ans =
-    3.1999    3.1999    3.1999    3.1999    3.1999
-    3.1999    3.1999    3.1999    3.1999    3.1999
-    3.1999    3.1999    3.1999    3.1999    3.1999
-    3.1999    3.1999    3.1999    3.1999    3.1999
-    3.1999    3.1999    3.1999    3.1999    3.1999
+    3.2000    3.2000    3.2000    3.2000    3.2000
+    3.2000    3.2000    3.2000    3.2000    3.2000
+    3.2000    3.2000    3.2000    3.2000    3.2000
+    3.2000    3.2000    3.2000    3.2000    3.2000
+    3.2000    3.2000    3.2000    3.2000    3.2000
 </pre><p>Now let's detrend:</p><pre class="codeinput">Z_detrend = detrend3(Z,t);
 </pre><p>And now what's the trend?</p><pre class="codeinput">trend(Z_detrend,t)
 </pre><pre class="codeoutput">ans =
    1.0e-14 *
-   -0.1900   -0.1900   -0.1900   -0.1900   -0.1900
-   -0.1900   -0.1900   -0.1900   -0.1900   -0.1900
-   -0.1900   -0.1900   -0.1900   -0.1900   -0.1900
-   -0.1900   -0.1900   -0.1900   -0.1900   -0.1900
-   -0.1900   -0.1900   -0.1900   -0.1900   -0.1900
+   -0.2212   -0.2212   -0.2212   -0.2212   -0.2212
+   -0.2212   -0.2212   -0.2212   -0.2212   -0.2212
+   -0.2212   -0.2212   -0.2212   -0.2212   -0.2212
+   -0.2212   -0.2212   -0.2212   -0.2212   -0.2212
+   -0.2212   -0.2212   -0.2212   -0.2212   -0.2212
 </pre><p>Just numerical noise (note that it is zero to the level of 1.0e-14).</p><h2 id="8">Example 2: Sea Surface Temperatures</h2><p>This example calculates an area-averaged sea surface temperature anomaly from a gridded time series, then <i>detrends</i> the gridded sst time series and plots the detrended anomaly time series.</p><p>Begin by loading the sample pacific_sst.mat dataset of monthly SSTs. Use <a href="cdtarea_documentation.html"><tt>cdtarea</tt></a> to get the area of each grid cell, and then use <a href="local_documentation.html"><tt>local</tt></a> to get the 1D time series of area-weighted ssts for all ocean grid cells.</p><pre class="codeinput"><span class="comment">% Load example data:</span>
 load <span class="string">pacific_sst</span>
 
@@ -154,7 +154,7 @@ subplot(1,2,1)
 imagescn(lon,lat,trend(sst_dt,12))
 cb = colorbar(<span class="string">'location'</span>,<span class="string">'southoutside'</span>);
 xlabel(cb,<span class="string">'SST trend \circC/yr'</span>)
-caxis([-0.04 0.04])
+caxis([-0.000000000000001 0.000000000000001])
 cmocean(<span class="string">'balance'</span>)
 title <span class="string">'detrended trend without omitnan'</span>
 
@@ -162,10 +162,10 @@ subplot(1,2,2)
 imagescn(lon,lat,trend(sst_dt_o,12,<span class="string">'omitnan'</span>))
 cb = colorbar(<span class="string">'location'</span>,<span class="string">'southoutside'</span>);
 xlabel(cb,<span class="string">'SST trend \circC/yr'</span>)
-caxis([-0.04 0.04])
+caxis([-0.000000000000001 0.000000000000001])
 cmocean(<span class="string">'balance'</span>)
 title <span class="string">'detrended trend with omitnan'</span>
-</pre><img vspace="5" hspace="5" src="detrend3_documentation_05.png" alt=""> <p>A little bit of signal remains in Hudson Bay, likely due to numerical noise.</p><h2 id="15">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="detrend3_documentation_05.png" alt=""> <p>Now the only "trend" that remains in the detrended dataset is numerical noise (Note the 1x10^-15 limits of the color scale.)</p><h2 id="15">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |detrend3| documentation
 % |detrend3| performs linear least squares detrending along the third dimension
@@ -329,7 +329,7 @@ subplot(1,2,1)
 imagescn(lon,lat,trend(sst_dt,12))
 cb = colorbar('location','southoutside'); 
 xlabel(cb,'SST trend \circC/yr')
-caxis([-0.04 0.04])
+caxis([-0.000000000000001 0.000000000000001])
 cmocean('balance') 
 title 'detrended trend without omitnan'
 
@@ -337,12 +337,13 @@ subplot(1,2,2)
 imagescn(lon,lat,trend(sst_dt_o,12,'omitnan'))
 cb = colorbar('location','southoutside'); 
 xlabel(cb,'SST trend \circC/yr')
-caxis([-0.04 0.04])
+caxis([-0.000000000000001 0.000000000000001])
 cmocean('balance') 
 title 'detrended trend with omitnan'
 
 %% 
-% A little bit of signal remains in Hudson Bay, likely due to numerical noise. 
+% Now the only "trend" that remains in the detrended dataset is numerical noise
+% (Note the 1x10^-15 limits of the color scale.)
 
 %% Author Info
 % This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.

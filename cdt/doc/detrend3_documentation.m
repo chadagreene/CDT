@@ -160,7 +160,7 @@ subplot(1,2,1)
 imagescn(lon,lat,trend(sst_dt,12))
 cb = colorbar('location','southoutside'); 
 xlabel(cb,'SST trend \circC/yr')
-caxis([-0.04 0.04])
+caxis([-0.000000000000001 0.000000000000001])
 cmocean('balance') 
 title 'detrended trend without omitnan'
 
@@ -168,12 +168,13 @@ subplot(1,2,2)
 imagescn(lon,lat,trend(sst_dt_o,12,'omitnan'))
 cb = colorbar('location','southoutside'); 
 xlabel(cb,'SST trend \circC/yr')
-caxis([-0.04 0.04])
+caxis([-0.000000000000001 0.000000000000001])
 cmocean('balance') 
 title 'detrended trend with omitnan'
 
 %% 
-% A little bit of signal remains in Hudson Bay, likely due to numerical noise. 
+% Now the only "trend" that remains in the detrended dataset is numerical noise
+% (Note the 1x10^-15 limits of the color scale.)
 
 %% Author Info
 % This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
