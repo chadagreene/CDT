@@ -46,6 +46,13 @@ else
    assert(isa(fun,'function_handle')==1,'Input error: The fourth input must be a function handle beginning with @.')
 end
 
+if isequal(fun,@wmean)
+   w = varargin{1}; 
+   tmp = true(size(varargin)); 
+   tmp(1) = false; 
+   varargin = varargin(tmp); 
+end
+
 %% Perform mathematics: 
 
 % Preallocate output: 
@@ -57,8 +64,12 @@ for k = 1:length(x)
    % Indicies of all points within specified radius: 
    ind = abs(x-x(k))<=radius; 
    
-   % Mean of y values within radius:  
-   ybar(k) = fun(y(ind),varargin{:}); 
+   if isequal(fun,@wmean)
+      ybar(k) = wmean(y(ind),w(ind),varargin{:}); 
+   else
+      % Mean of y values within radius:  
+      ybar(k) = fun(y(ind),varargin{:}); 
+   end
 end
 
 end

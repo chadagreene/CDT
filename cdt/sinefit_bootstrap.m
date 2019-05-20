@@ -8,6 +8,7 @@ function [ft,rmse,Nsamp] = sinefit_bootstrap(t,y,varargin)
 %% Syntax
 % 
 %  ft = sinefit_bootstrap(t,y)
+%  ft = sinefit_bootstrap(...,'weight',weights) 
 %  ft = sinefit_bootstrap(...,'terms',TermOption) 
 %  ft = sinefit_bootstrap(...,'nboot',nboot)
 %  [ft,rmse,Nsamp] = sinefit_bootstrap(...)
@@ -18,6 +19,10 @@ function [ft,rmse,Nsamp] = sinefit_bootstrap(t,y,varargin)
 % to 1000 random subsamples of the time series t,y. The output ft is a 1000x2
 % matrix containinng all 1000 solutions for the amplitude and phase, respectively. 
 % See sinefit for a complete description of inputs and outputs. 
+% 
+% ft = sinefit_bootstrap(...,'weight',w) applies weighting to each of the observations
+% y. For example, if formal errors err are associated with y, you might 
+% let w = 1./err.^2. By default, w = ones(size(y)). 
 %
 % ft = sinefit_bootstrap(...,'terms',TermOption) specifies which terms are calculated
 % in the sinusoid fit. Default is 2 because more terms can be computationally slow! 
@@ -58,7 +63,7 @@ function [ft,rmse,Nsamp] = sinefit_bootstrap(t,y,varargin)
 
 %% Error checks: 
 % 
-narginchk(2,6) 
+narginchk(2,8) 
 if (max(t)-min(t))<365
    warning('Fitting a sinusoid to less than one year of data. This might not be what you want.') 
 end
@@ -72,6 +77,7 @@ assert(numel(t)==numel(y),'Error: Dimensions of t and y must match.')
 % Set defaults:
 Nterms = 2;
 Nboot = 1000; 
+w = ones(size(y)); % equal weighting by default. 
 
 if nargin>2
    tmp = strncmpi(varargin,'terms',3); 
@@ -85,6 +91,12 @@ if nargin>2
       Nboot = varargin{find(tmp)+1}; 
       assert(isscalar(Nboot)==1,'Error: nboot must be a scalar value greater than zero.') 
       assert(Nboot>0,'Error: nboot must be a scalar value greater than zero.') 
+   end
+   
+   tmp = strncmpi(varargin,'weights',3); 
+   if any(tmp)
+      w = varargin{find(tmp)+1}; 
+      assert(isequal(size(w),size(y)),'Error; Dimensions of weights must match the dimensions of y.') 
    end
 end
 
@@ -105,7 +117,7 @@ for k = 1:Nboot
    Nsamp(k) = length(unique(ind)); 
    
    % Fit a sinusoid to the subsample of data: 
-   [ft(k,:),rmse(k)] = sinefit(t(ind),y(ind),'terms',Nterms);
+   [ft(k,:),rmse(k)] = sinefit(t(ind),y(ind),'terms',Nterms,'weight',w);
    
 end
 

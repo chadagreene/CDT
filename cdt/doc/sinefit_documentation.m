@@ -9,7 +9,8 @@
 %% Syntax
 % 
 %  ft = sinefit(t,y) 
-%  ft = sinefit(t,y,'terms',TermOption) 
+%  ft = sinefit(...,'weight',weights) 
+%  ft = sinefit(...,'terms',TermOption) 
 %  [ft,rmse] = sinefit(...)
 % 
 %% Description 
@@ -19,7 +20,11 @@
 % datestr format, and do not need to be sampled at regular intervals. The output
 % |ft| contains the coefficients of the terms in the calculation described below.
 % 
-% |ft = sinefit(t,y,'terms',TermOption)| specifies which terms are calculated
+% |ft = sinefit(...,'weight',w)| applies weighting to each of the observations
+% |y|. For example, if formal errors |err| are associated with |y|, you might 
+% let |w = 1./err.^2|. By default, |w = ones(size(y))|. 
+% 
+% |ft = sinefit(...,'terms',TermOption)| specifies which terms are calculated
 % in the sinusoid fit. |TermOption| can be 2, 3, 4, or 5:
 % 
 % * |2|: |ft = [A doy_max]| where |A| is the amplitude of the sinusoid, and |doy_max| 
@@ -43,7 +48,7 @@
 % sinusoid fits the data, but for a more in-depth understanding of the uncertainties, 
 % including uncertainties in the timing, see <sinefit_bootstrap_documentation.html |sinefit_bootstrap|>. 
 %
-%% Example 1: Fit a sinusoid to toy data
+%% Example 1a: Fit a sinusoid to toy data
 % In this example we'll make up some data with known parameters, then use |sinefit|
 % to fit a sinusoid to the data. Let's assume you have 100 measurements taken
 % between Jan 1, 2005 and today. Use <sineval_documentation.html |sineval|> to generate
@@ -61,7 +66,8 @@ t = datenum('jan 1, 2005') + (now-datenum('jan 1, 2005'))*rand(100,1);
 
 % Sinusoid of amplitude 75; max on day 123 (July 5); trend -2.2 units/year: 
 sine_parameters = [75 123 5e3 -2.2]; 
-y = sineval([75 123 5e3 -2.2],t) + 36*randn(size(t)); % sinusoid + noise
+err = 36*randn(size(t)); % random error
+y = sineval([75 123 5e3 -2.2],t) + err;  % sinusoid + noise
 
 % Plot the 100 data points:
 figure(1)
@@ -71,15 +77,12 @@ box off    % removes frame
 datetick('x','keeplimits') % formats x date labels
 
 %% 
-% Believe it or not, that dataset is sinusoidal. If you have Matlab version R2014b
-% or later, you can see for yourself by plotting the data as a function of 
-% day of year: 
-
-% get the day of year corresponding to each measurement t: 
-doy = day(datetime(t,'convertfrom','datenum'),'dayofyear'); 
+% Believe it or not, that dataset is sinusoidal. It's easier to see the sinusoidal
+% nature if we use <doy_documentation.html |doy|> to plot all the data as a function 
+% of day of year: 
 
 figure(2)
-plot(doy,y,'o') 
+plot(doy(t),y,'o') 
 
 axis tight
 box off
@@ -95,12 +98,12 @@ xlabel 'day of year'
 
 %% 
 % The numbers above tell us that |sinefit| has determined our 100 noisy 
-% datapoints are characterized by a sinusoid with an amplitude of 77.81 
-% units (quite close to the prescribed value of 75), a maximum on day 123.4 (within
-% a half day of the presecribed) and a linear trend of -2.26 units per year (-2.2 presecribed). 
+% datapoints are characterized by a sinusoid with an amplitude of |ft(1)| 
+% units, which we see is close to the prescribed value of 75, a maximum value
+% near the 123rd day of the year, and a linear trend of about -2.2 units per year. 
 % The optional second output of the |sinefit| function tells us the sinusoid
-% matches the "measurements" to a 1-sigma uncertainty of 36.37, which matches our prescribed value
-% of gaussian noise. 
+% matches the "measurements" to a 1-sigma uncertainty given by |ft_error|, which
+% is in line with the prescribed value of gaussian noise. 
 %
 % Here is the sinusoid fit to the data: 
 
@@ -114,7 +117,34 @@ figure(1) % goes back to the first figure
 hold on
 plot(t_daily,y_daily) 
 
+%% Example 1b: Specifying weights 
+% Suppose you know the formal errors associated with each observation |y|. 
+% Some measurements have higher uncertainties associated with them than others. 
+% From the |err| vector we used above to prescribe noise, we'll weight each
+% observation |y| like this: 
+
+w = 1./err.^2; 
+
+figure
+scatter(doy(t),y,25,w,'filled')
+axis tight
+xlabel 'day of year'
+cb = colorbar; 
+ylabel(cb,'weight')
+cmocean('amp') 
+caxis([0 0.01])
+
 %% 
+% The plot above shows that we give more weight to the values with lower 
+% errors associated with them. Now use |sinefit| with the specified weights: 
+
+ft = sinefit(t,y,'weight',w,'terms',4)
+
+%% 
+% Comparing to the unweighted solution, you'll see that this version produces
+% a slightly more accurate coefficients. 
+
+%% Example 1c: More uncertainty quantification 
 % For a more in-depth analysis of uncertainty in the sinusoid fit, check out 
 % <sinefit_bootstrap_documentation.html |sinefit_bootstrap|>, which can provide 
 % 1-sigma levels of uncertainty for each parameter like this (give it a few seconds): 
@@ -125,11 +155,9 @@ ftb = sinefit_bootstrap(t,y,'terms',4);
 std(ftb)
 
 %%
-% That tells us |sinefit| should be accurate to 1-sigma levels of 4.87 for the 
-% amplitude (77.81 versus the prescribed value of 75--yep); timing should be 
-% accurate within 4.14 days (day of maximum is 123.4 versus prescribed 123--yep); 
-% and the trend should be accurate within 0.93 units per year (-2.26 versus prescribed
-% value of -2.2--yep.)
+% That tells us |sinefit| should be accurate to 1-sigma levels of about 5 for the 
+% amplitude (compare |ft(1)| to the prescribed amplitude to prove this to yourself); timing should be 
+% accurate within about 4 days; and the trend should be accurate within about 1 unit per year.
 
 %% Example 2: Fit a sinusoid to real sea ice data
 % Let's take a look at some real sea ice data from the <https://nsidc.org/data/seaice_index/archives NSIDC>.
