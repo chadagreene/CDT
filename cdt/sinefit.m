@@ -89,10 +89,16 @@ end
 
 %% Ready the data 
 
-% Columnate: 
+% Columnate:
 t = t(:); 
 y = y(:); 
 w = w(:); 
+
+% Trim to finite values: 
+ind = isfinite(t) & isfinite(y) & isfinite(w); 
+t = t(ind); 
+y = y(ind); 
+w = w(ind); 
 
 % Convert time vector to decimal year: 
 yr = doy(t,'decimalyear'); 
