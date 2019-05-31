@@ -204,7 +204,7 @@ switch res
       end
       
    case 'monthly' 
-      
+      ts = (1:12)'; 
       
       if fullout
          As = nan(size(Ar)); 
