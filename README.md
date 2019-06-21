@@ -39,4 +39,6 @@ into the command line to check out the documentation.
 # Citing CDT: 
 Please cite our paper! 
 
-Chad A. Greene, Kaustubh Thirumalai, Kelly A. Kearney, Jos`{e} Miguel Delgado, Wolfgang Schwanghart, Natalie S. Wolfenbarger, Kristen M. Thyng, David E. Gwyther, Alex S. Gardner, and Donald D. Blankenship. The Climate Data Toolbox for MATLAB. _Geochemistry, Geophysics, Geosystems_ 2019. [doi: 10.1029/2019GC008392](https://doi.org/10.1029/2019GC008392)
+Chad A. Greene, Kaustubh Thirumalai, Kelly A. Kearney, José Miguel Delgado, Wolfgang Schwanghart, Natalie S. Wolfenbarger, Kristen M. Thyng, David E. Gwyther, Alex S. Gardner, and Donald D. Blankenship. The Climate Data Toolbox for MATLAB. _Geochemistry, Geophysics, Geosystems_ 2019. [doi: 10.1029/2019GC008392](https://doi.org/10.1029/2019GC008392)
+
+The Climate Data Toolbox is also mirrored on the MathWorks File Exchange site [here](https://www.mathworks.com/matlabcentral/fileexchange/70338)
