@@ -18,6 +18,7 @@
 % standard deviation is 1.
 % * <ensemble2bnd_documentation.html *|ensemble2bnd|*> calculates and plots percentile bounds for ensemble data.
 % * <trend_documentation.html *|trend|*> calculates the linear trend of a data series by least squares. 
+% * <polyfitw_documentation.html *|polyfitw|*> computes weighted polynomial fits.
 % * <detrend3_documentation.html *|detrend3|*> performs linear least squares detrending along the third dimension
 % of a matrix.
 % * <monthly_documentation.html *|monthly|*> calculates statistics of a variable for specified months of the year. 
@@ -287,7 +288,9 @@
 % impressively thorough survey> conducted by XKCD's Randall Munroe and is called
 % by the CDT function <rgb_documentation.html |rgb|>.
 % 
-%% Author Info
-% The Climate Data Toolbox for Matlab is a collaboration led by Chad A.
-% Greene, Kaustubh Thirumalai, and Kelly A. Kearney. A mansucript describing CDT is currently in preparation, 
-% so please check the internet for complete citation information. 
+%% Citing CDT 
+% Please cite our paper! 
+% 
+% Chad A. Greene, Kaustubh Thirumalai, Kelly A. Kearney, Jose Miguel Delgado, Wolfgang Schwanghart, Natalie S. Wolfenbarger,
+% Kristen M. Thyng, David E. Gwyther, Alex S. Gardner, and Donald D. Blankenship. The Climate Data Toolbox for MATLAB. 
+% _Geochemistry, Geophysics, Geosystems_ 2019. <https://doi.org/10.1029/2019GC008392 doi:10.1029/2019GC008392>

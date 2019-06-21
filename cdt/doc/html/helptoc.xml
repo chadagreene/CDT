@@ -12,6 +12,7 @@
          <tocitem target="standardize_documentation.html">standardize</tocitem>
          <tocitem target="ensemble2bnd_documentation.html">ensemble2bnd</tocitem>
          <tocitem target="trend_documentation.html">trend</tocitem>
+         <tocitem target="polyfitw_documentation.html">polyfitw</tocitem>
          <tocitem target="detrend3_documentation.html">detrend3</tocitem>
          <tocitem target="monthly_documentation.html">monthly</tocitem>
          <tocitem target="season_documentation.html">season</tocitem>

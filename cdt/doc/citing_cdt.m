@@ -8,18 +8,20 @@
 % CDT is provided free of charge under the Apache 2.0 license under the 
 % condition that any resulting publications cite our article as follows:
 % 
-% * Greene and friends, 2019? _Prestigious Journal,_ Vol (Issue) pages.
+% Chad A. Greene, Kaustubh Thirumalai, Kelly A. Kearney, Jose Miguel Delgado, Wolfgang Schwanghart, Natalie S. Wolfenbarger,
+% Kristen M. Thyng, David E. Gwyther, Alex S. Gardner, and Donald D. Blankenship. The Climate Data Toolbox for MATLAB. 
+% _Geochemistry, Geophysics, Geosystems_ 2019. <https://doi.org/10.1029/2019GC008392 doi:10.1029/2019GC008392>
 % 
 % ...Or in BibTeX format: 
 % 
 %  @article{cdt,
 %    title={{The Climate Data Toolbox for \textsc{Matlab}}},
 %    author={Greene, Chad A et al.},
-%    journal={},
-%    year={},
+%    journal={Geochemistry, Geophysics, Geosystems},
+%    year={2019},
 %    volume={},
 %    pages={},
 %    publisher={}, 
-%    doi={}, 
-%    url={}
+%    doi={10.1029/2019GC008392}, 
+%    url={https://doi.org/10.1029/2019GC008392}
 %  }

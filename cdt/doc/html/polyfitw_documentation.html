@@ -1,0 +1,188 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>polyfitw documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-06-20"><meta name="DC.source" content="polyfitw_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>polyfitw</tt> documentation</h1><!--introduction--><p>The <tt>polyfitw</tt> function computes weighted polyfits.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>. polyfitw computes weighted polyfits.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example: 1st order:</a></li><li><a href="#8">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>p = polyfitw(x,y,n)
+p = polyfitw(x,y,n,w)
+[p,S,mu] = polyfitw(...)</pre><h2 id="2">Description</h2><p><tt>p = polyfitw(x,y,n)</tt> calculates the <b>unweighted</b> polynomial fit of <tt>x</tt> vs <tt>y</tt> to the nth order, exactly like the standard Matlab <tt>polyfit</tt> function.</p><p><tt>p = polyfitw(x,y,n,w)</tt> specifies weights to apply to each <tt>y</tt> value. For measurements whose formal error estimates are given by err, try using weights <tt>w = 1/err.^2</tt>.</p><p><tt>[p,S,mu] = polyfitw(...)</tt> returns the <tt>S</tt> structure and centering/scaling values <tt>mu</tt> for use in polyval. Don't forget, if you return more than one output (meaning <tt>[p,S,mu]</tt> instead of just <tt>p</tt>), the values in <tt>p</tt> will be scaled according to the values in <tt>mu</tt>.</p><h2 id="3">Example: 1st order:</h2><p>Here's some scattered data with a known slope of -12, and some prescribed errors associated with each measurement:</p><pre class="codeinput">x = [1 1.5 2.1 3 4 6 6.6 7.3 7.5 8 8.6 9 9.5];
+err = [1 2 -1 3 6 1 3 -7 4 15 30 25 1];
+
+y = 654 - 12*x + err;
+
+<span class="comment">% Weights from errors:</span>
+w = 1./err.^2;
+
+figure
+scatter(x,y,50,w,<span class="string">'filled'</span>)
+hold <span class="string">on</span>
+axis <span class="string">tight</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'weight'</span>)
+cmocean <span class="string">amp</span>
+</pre><img vspace="5" hspace="5" src="polyfitw_documentation_01.png" alt=""> <p>Here's how to use the standard Matlab function <tt>polyfit</tt> to find the unweighted slope of the line</p><pre class="codeinput">p = polyfit(x,y,1)
+</pre><pre class="codeoutput">p =
+        -10.35        650.99
+</pre><p>That tells us the <i>unweighted</i> slope is -10.35, although we imposed a slope of -12. The difference is due to the error in the measurements. Notably, you can use the CDT <a href="trend_documentation.html"><tt>trend</tt></a> function to get the same answer:</p><pre class="codeinput">trend(y,x)
+</pre><pre class="codeoutput">ans =
+        -10.35
+</pre><p>The mismatch between the -10.35 slope value and the imposed -12 slope is due to measurement error. Fortunately, we know how much weight to give to each measurement, and we can weight accordingly with <tt>polyfitw</tt>:</p><pre class="codeinput">pw = polyfitw(x,y,1,w)
+</pre><pre class="codeoutput">pw =
+        -11.90        654.34
+</pre><p>Now -11.9 is not exactly the -12 slope we imposed, but this is much closer than the estimate from the unweighted trend. Here's the difference:</p><pre class="codeinput">xi = 1:10;
+
+hold <span class="string">on</span>
+plot(xi,polyval(p,xi))
+plot(xi,polyval(pw,xi))
+
+legend(<span class="string">'data points'</span>,<span class="string">'unweighted'</span>,<span class="string">'weighted'</span>)
+</pre><img vspace="5" hspace="5" src="polyfitw_documentation_02.png" alt=""> <h2 id="8">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of NASA Jet Propulsion Laboratory.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |polyfitw| documentation 
+% The |polyfitw| function computes weighted polyfits. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+% polyfitw computes weighted polyfits. 
+% 
+%% Syntax
+% 
+%  p = polyfitw(x,y,n) 
+%  p = polyfitw(x,y,n,w) 
+%  [p,S,mu] = polyfitw(...)
+%
+%% Description  
+% 
+% |p = polyfitw(x,y,n)| calculates the *unweighted* polynomial fit of 
+% |x| vs |y| to the nth order, exactly like the standard Matlab |polyfit| function. 
+% 
+% |p = polyfitw(x,y,n,w)| specifies weights to apply to each |y| value. For 
+% measurements whose formal error estimates are given by err, try using 
+% weights |w = 1/err.^2|.  
+% 
+% |[p,S,mu] = polyfitw(...)| returns the |S| structure and centering/scaling 
+% values |mu| for use in polyval. Don't forget, if you return more than one
+% output (meaning |[p,S,mu]| instead of just |p|), the values in |p| will be 
+% scaled according to the values in |mu|. 
+%
+%% Example: 1st order: 
+% Here's some scattered data with a known slope of -12, and some
+% prescribed errors associated with each measurement: 
+
+x = [1 1.5 2.1 3 4 6 6.6 7.3 7.5 8 8.6 9 9.5]; 
+err = [1 2 -1 3 6 1 3 -7 4 15 30 25 1]; 
+
+y = 654 - 12*x + err; 
+
+% Weights from errors: 
+w = 1./err.^2; 
+
+figure
+scatter(x,y,50,w,'filled') 
+hold on
+axis tight
+cb = colorbar; 
+ylabel(cb,'weight')
+cmocean amp
+
+%% 
+% Here's how to use the standard Matlab function |polyfit| to find the unweighted slope 
+% of the line 
+
+p = polyfit(x,y,1)
+
+%% 
+% That tells us the _unweighted_ slope is -10.35, although we imposed a slope
+% of -12. The difference is due to the error in the measurements. Notably, 
+% you can use the CDT <trend_documentation.html |trend|> function to get 
+% the same answer: 
+
+trend(y,x) 
+
+%% 
+% The mismatch between the -10.35 slope value and the imposed -12 slope is 
+% due to measurement error. Fortunately, we know how much weight to give 
+% to each measurement, and we can weight accordingly with |polyfitw|: 
+
+pw = polyfitw(x,y,1,w) 
+
+%% 
+% Now -11.9 is not exactly the -12 slope we imposed, but this is much closer
+% than the estimate from the unweighted trend. Here's the difference: 
+
+xi = 1:10; 
+
+hold on
+plot(xi,polyval(p,xi))
+plot(xi,polyval(pw,xi))
+
+legend('data points','unweighted','weighted') 
+ 
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of NASA Jet Propulsion Laboratory. 
+##### SOURCE END #####
+--></body></html>

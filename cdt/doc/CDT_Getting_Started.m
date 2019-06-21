@@ -63,14 +63,9 @@
 % please describe the issue you're experiencing, describe what you're _trying_ to accomplish, 
 % include any error messages, and *provide a minimal working example* if applicable. 
 % 
-
-%% Citing this toolbox
-% A manuscript describing the Climate Data Toolbox for Matlab
-% is in preparation. The citation will probably be something like
+%% Citing CDT 
+% Please cite our paper! 
 % 
-% * Greene & friends, 2019? The Climate Data Toolbox for Matlab. _Prestigious 
-% Journal,_ Vol (Issue) pages.
-% 
-% By the time you read this, a proper citation may be available. Please
-% check the internet before publishing, and cite our paper accordingly.
-% The CDT team thanks you! 
+% Chad A. Greene, Kaustubh Thirumalai, Kelly A. Kearney, Jose Miguel Delgado, Wolfgang Schwanghart, Natalie S. Wolfenbarger,
+% Kristen M. Thyng, David E. Gwyther, Alex S. Gardner, and Donald D. Blankenship. The Climate Data Toolbox for MATLAB. 
+% _Geochemistry, Geophysics, Geosystems_ 2019. <https://doi.org/10.1029/2019GC008392 doi:10.1029/2019GC008392>
