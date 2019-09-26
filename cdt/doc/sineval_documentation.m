@@ -20,15 +20,9 @@
 % * |2|: |ft = [A doy_max]| where |A| is the amplitude of the sinusoid, and |doy_max| 
 %      is the day of year corresponding to the maximum value of the sinusoid. 
 %      The default |TermOption| is |2|.
-% * |3|: |ft = [A doy_max C]| also estimates |C|, a constant offset. Solving for  
-%      adds processing time, so you may prefer to estimate |C| on your own simply
-%      as the mean of the input |y|. However, if you can't assume C=mean(y), you
-%      may prefer this three-term solution. 
+% * |3|: |ft = [A doy_max C]| also estimates |C|, a constant offset. 
 % * |4|: |ft = [A doy_max C trend]| also estimates a linear trend over the entire
-%      time series in units of y per year. Again, simultaneously solving for 
-%      four terms will be much more computationally expensive than solving for
-%      two yerms, so you may prefer to estimate the trend on your own with 
-%      polyfit, then calculate the two-term sine fit on your detrended data. 
+%      time series in units of y per year. 
 % * |5|: |ft = [A doy_max C trend quadratic_term]| also includes a quadratic term
 %      in the solution, but this is experimental for now, because fitting a 
 %      polynomial to dates referenced to year zero tends to be scaled poorly.

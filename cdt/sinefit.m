@@ -31,10 +31,7 @@ function [ft,rmse] = sinefit(t,y,varargin)
 %      as the mean of the input y. However, if you can't assume C=mean(y), you
 %      may prefer this three-term solution. 
 %   4: ft = [A doy_max C trend] also estimates a linear trend over the entire
-%      time series in units of y per year. Again, simultaneously solving for 
-%      four terms will be much more computationally expensive than solving for
-%      two yerms, so you may prefer to estimate the trend on your own with 
-%      polyfit, then calculate the two-term sine fit on your detrended data. 
+%      time series in units of y per year. 
 %   5: ft = [A doy_max C trend quadratic_term] also includes a quadratic term
 %      in the solution, but this is experimental for now, because fitting a 
 %      polynomial to dates referenced to year zero tends to be scaled poorly.
@@ -65,13 +62,14 @@ if (max(t)-min(t))<365
 end
 
 assert(isvector(t)==1,'Error: t must be a vector.') 
-assert(isvector(y)==1,'Error: y must be a vector.')
-assert(numel(t)==numel(y),'Error: Dimensions of t and y must match.') 
+%assert(isvector(y)==1,'Error: y must be a vector.')
+%assert(numel(t)==numel(y),'Error: Dimensions of t and y must match.') 
 
 %% input parsing
 
 Nterms = 2; % 2 term equation by default
 w = ones(size(y)); % equal weighting by default. 
+omitnan = false; 
 
 if nargin>2
    tmp = strncmpi(varargin,'terms',3); 
@@ -84,6 +82,13 @@ if nargin>2
    if any(tmp)
       w = varargin{find(tmp)+1}; 
       assert(isequal(size(w),size(y)),'Error; Dimensions of weights must match the dimensions of y.') 
+      assert(isvector(y)==1,'Error: weights cannot be specified for input cubes.') 
+   end
+   
+   tmp = strncmpi(varargin,'omitnan',4); 
+   if any(tmp)
+      omitnan = true; 
+      warning('the omitnan option is not yet supported.')
    end
 end
 
@@ -91,17 +96,35 @@ end
 
 % Columnate:
 t = t(:); 
-y = y(:); 
-w = w(:); 
 
-% Trim to finite values: 
-ind = isfinite(t) & isfinite(y) & isfinite(w); 
-t = t(ind); 
-y = y(ind); 
-w = w(ind); 
+if isvector(y)
+   y = y(:); 
+   w = w(:); 
+   
+   % Trim to finite values: 
+   ind = isfinite(t) & isfinite(y) & isfinite(w); 
+   t = t(ind); 
+   y = y(ind); 
+   w = w(ind); 
+end
+
+if ndims(y)==3
+   InputCube = true; 
+   if omitnan
+      mask = sum(isfinite(y),3)>1; 
+   else
+      mask = all(isfinite(y),3); 
+   end
+   y = cube2rect(y,mask); 
+   w = 1; 
+else
+   InputCube = false; 
+end
 
 % Convert time vector to decimal year: 
 yr = doy(t,'decimalyear'); 
+
+%% Least squares fit: 
 
 % Define the N-term equation we want to solve:        
 switch Nterms 
@@ -121,18 +144,38 @@ end
 
 p = (sqrt(w).*V) \ (sqrt(w).*y);
 
-% Preallocate the fit: 
-ft = NaN(size(p))'; 
+if InputCube
+   ft = NaN(size(mask,1),size(mask,2),Nterms); 
+   ft(:,:,1) = rect2cube(hypot(p(1,:),p(2,:)),mask); 
+   ft(:,:,2) = rect2cube(atan2(p(2,:),p(1,:)),mask); 
+   ft(:,:,2) = 365.24*(mod(0.25 - ft(:,:,2)/(2*pi),1)); % converts phase to day of ear corresponding to max of sine wave.
+   
+   if Nterms>2
+      ft(:,:,3) = rect2cube(p(3,:),mask); 
+   end
+   
+   if Nterms>3
+      ft(:,:,4) = rect2cube(p(4,:),mask); 
+   end
+   
+   if Nterms>4
+      ft(:,:,5) = rect2cube(p(5,:),mask); 
+   end
+else
+   
+   % Preallocate the fit: 
+   ft = NaN(size(p))'; 
 
-% Populate the fit: 
-ft(1) = hypot(p(1),p(2));
+   % Populate the fit: 
+   ft(1) = hypot(p(1),p(2));
 
-ft(2) = atan2(p(2),p(1));
+   ft(2) = atan2(p(2),p(1));
 
-% Convert the phase term (decimal years) into something meaningful (day of year corresponding to max of sine wave):
-ft(2) = 365.24*(mod(0.25 - ft(2)/(2*pi),1)); 
+   % Convert the phase term (decimal years) into something meaningful (day of year corresponding to max of sine wave):
+   ft(2) = 365.24*(mod(0.25 - ft(2)/(2*pi),1)); 
 
-ft(3:end) = p(3:end);  
+   ft(3:end) = p(3:end);  
+end
 
 %% Package up the outputs
 

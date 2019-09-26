@@ -35,10 +35,7 @@
 %      as the mean of the input |y|. However, if you can't assume C=mean(y), you
 %      may prefer this three-term solution. 
 % * |4|: |ft = [A doy_max C trend]| also estimates a linear trend over the entire
-%      time series in units of y per year. Again, simultaneously solving for 
-%      four terms will be much more computationally expensive than solving for
-%      two yerms, so you may prefer to estimate the trend on your own with 
-%      polyfit, then calculate the two-term sine fit on your detrended data. 
+%      time series in units of y per year.
 % * |5|: |ft = [A doy_max C trend quadratic_term]| also includes a quadratic term
 %      in the solution, but this is experimental for now, because fitting a 
 %      polynomial to dates referenced to year zero tends to be scaled poorly.
@@ -210,6 +207,48 @@ xlim([datetime(1995,1,1) datetime(2000,1,1)])
 % because the true behavior of sea ice extent is more complex than a simple sinusoid. In your work, be sure
 % to consider the difference between true behavior and the 1/yr frequency component of the true behavior.
 
+%% Example 3: Data cube 
+% This functionality is still in beta, but here's the code I'm using to test it: 
+
+load pacific_sst 
+
+ft = sinefit(t,sst,'terms',3); 
+
+figure
+subplot(1,3,1) 
+imagescn(lon,lat,ft(:,:,1))
+title 'sinusoid amplitude' 
+cmocean amp
+cb = colorbar; 
+ylabel(cb,'seasonal magnitude \circC')
+axis image
+
+subplot(1,3,2) 
+imagescn(lon,lat,ft(:,:,2))
+title 'sinusoid phase' 
+cmocean phase
+caxis([1 365])
+cb = colorbar; 
+ylabel(cb,'month of max temperature')
+cbdate(cb,'mmm') 
+axis image
+
+subplot(1,3,3) 
+imagescn(lon,lat,ft(:,:,3))
+title 'mean temperature' 
+cmocean thermal
+cb = colorbar; 
+ylabel(cb,'mean temperature')
+axis image
+
+%% 
+% Nothing too surprising above: Shallow waters have more temperature variability
+% throughout the year than deep waters, and everything near the equator is has
+% almost no seasonality. The middle panel shows us that the warmest waters occur
+% in August or September in the northern hemisphere, or in February or March in 
+% the southern hemisphere. The third panel is just that constant offset which 
+% is effectively the mean sea surface temperature. 
+% 
 %% Author Info
 % This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
 % The |sinefit|, |sineval|, and |sinefit_bootstrap| functions as well as the 

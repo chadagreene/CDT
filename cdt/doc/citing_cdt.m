@@ -2,7 +2,7 @@
 % <<CDT_reduced.jpg>>
 % 
 % The Climate Data Toolbox for Matlab was developed by <http://www.chadagreene.com Chad A. Greene>
-% with help from LIST EVERYONE, who contributed code, wrote documentation, 
+% with help from several colleagues, who contributed code, wrote documentation, 
 % and helped define the scope of this toolbox. 
 % 
 % CDT is provided free of charge under the Apache 2.0 license under the 
@@ -15,12 +15,12 @@
 % ...Or in BibTeX format: 
 % 
 %  @article{cdt,
-%    title={{The Climate Data Toolbox for \textsc{Matlab}}},
-%    author={Greene, Chad A et al.},
+%    title={{The Climate Data Toolbox for MATLAB}},
+%    author={Greene, Chad A and Thirumalai, Kaustubh and Kearney, Kelly A and Delgado, Jos{\'e} Miguel and Schwanghart, Wolfgang and Wolfenbarger, Natalie S and Thyng, Kristen M and Gwyther, David E and Gardner, Alex S and Blankenship, Donald D},
 %    journal={Geochemistry, Geophysics, Geosystems},
 %    year={2019},
-%    volume={},
-%    pages={},
+%    volume={20},
+%    pages={3774-3781},
 %    publisher={}, 
 %    doi={10.1029/2019GC008392}, 
 %    url={https://doi.org/10.1029/2019GC008392}
