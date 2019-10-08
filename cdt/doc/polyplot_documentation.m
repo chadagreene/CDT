@@ -8,6 +8,7 @@
 %
 %  polyplot(x,y)
 %  polyplot(x,y,n)
+%  polyplot(...,'weight',w)
 %  polyplot(...,'Name',Value,...)
 %  polyplot(...,'error')
 %  [h,p,delta] = polyplot(...)
@@ -19,6 +20,9 @@
 %
 % |polyplot(x,y,n)| specifies the degree |n| of the polynomial fit to 
 % the _x,y_ data. Default |n| is |1|. 
+%
+% |polyplot(...,'weight',w)| uses the |polyfitw| function to allow for 
+% weighted least squares fits. 
 %
 % |polyplot(...,'Name',Value,...)| formats linestyle using |LineSpec|
 % property name-value pairs (e.g., |'linewidth',3|). If 'error' bounds are 

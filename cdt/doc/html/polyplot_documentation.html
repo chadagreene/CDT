@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>polyplot documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-04"><meta name="DC.source" content="polyplot_documentation.m"><style type="text/css">
+      --><title>polyplot documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-10-08"><meta name="DC.source" content="polyplot_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -68,9 +68,10 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
   </style></head><body><div class="content"><h1><tt>polyplot</tt> documentation</h1><!--introduction--><p>This function plots a polynomial fit to scattered <i>x,y</i> data. This function can be used to easily add a linear trend line or other polynomial fit to a data plot.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Examples</a></li><li><a href="#8">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>polyplot(x,y)
 polyplot(x,y,n)
+polyplot(...,'weight',w)
 polyplot(...,'Name',Value,...)
 polyplot(...,'error')
-[h,p,delta] = polyplot(...)</pre><h2 id="2">Description</h2><p><tt>polyplot(x,y)</tt> places a least-squares linear trend line through scattered <i>x,y</i> data.</p><p><tt>polyplot(x,y,n)</tt> specifies the degree <tt>n</tt> of the polynomial fit to the <i>x,y</i> data. Default <tt>n</tt> is <tt>1</tt>.</p><p><tt>polyplot(...,'Name',Value,...)</tt> formats linestyle using <tt>LineSpec</tt> property name-value pairs (e.g., <tt>'linewidth',3</tt>). If 'error' bounds are plotted, only <a href="boundedline_documentation.html"><tt>boundedline</tt></a> properties are accepted.</p><p><tt>polyplot(...,'error')</tt> includes lines corresponding to approximately +/- 1 standard deviation of errors <tt>delta</tt>. At least 50% of data should lie within the bounds of error lines. Error bounds are plotted with <a href="boundedline_documentation.html"><tt>boundedline</tt></a>.</p><p><tt>h = polyplot(...)</tt> returns handle(s) <tt>h</tt> of plotted objects.</p><h2 id="3">Examples</h2><p>Given some data:</p><pre class="codeinput">x = 1:100;
+[h,p,delta] = polyplot(...)</pre><h2 id="2">Description</h2><p><tt>polyplot(x,y)</tt> places a least-squares linear trend line through scattered <i>x,y</i> data.</p><p><tt>polyplot(x,y,n)</tt> specifies the degree <tt>n</tt> of the polynomial fit to the <i>x,y</i> data. Default <tt>n</tt> is <tt>1</tt>.</p><p><tt>polyplot(...,'weight',w)</tt> uses the <tt>polyfitw</tt> function to allow for weighted least squares fits.</p><p><tt>polyplot(...,'Name',Value,...)</tt> formats linestyle using <tt>LineSpec</tt> property name-value pairs (e.g., <tt>'linewidth',3</tt>). If 'error' bounds are plotted, only <a href="boundedline_documentation.html"><tt>boundedline</tt></a> properties are accepted.</p><p><tt>polyplot(...,'error')</tt> includes lines corresponding to approximately +/- 1 standard deviation of errors <tt>delta</tt>. At least 50% of data should lie within the bounds of error lines. Error bounds are plotted with <a href="boundedline_documentation.html"><tt>boundedline</tt></a>.</p><p><tt>h = polyplot(...)</tt> returns handle(s) <tt>h</tt> of plotted objects.</p><h2 id="3">Examples</h2><p>Given some data:</p><pre class="codeinput">x = 1:100;
 y = 12 - 0.01*x.^2 + 3*x + sind(x) + 30*rand(size(x));
 </pre><p>Plot the data and add a simple linear trend line:</p><pre class="codeinput">plot(x,y,<span class="string">'bo'</span>)
 hold <span class="string">on</span>
@@ -99,6 +100,7 @@ legend(h,<span class="string">'data'</span>,<span class="string">'7^{th} order f
 %
 %  polyplot(x,y)
 %  polyplot(x,y,n)
+%  polyplot(...,'weight',w)
 %  polyplot(...,'Name',Value,...)
 %  polyplot(...,'error')
 %  [h,p,delta] = polyplot(...)
@@ -110,6 +112,9 @@ legend(h,<span class="string">'data'</span>,<span class="string">'7^{th} order f
 %
 % |polyplot(x,y,n)| specifies the degree |n| of the polynomial fit to 
 % the _x,y_ data. Default |n| is |1|. 
+%
+% |polyplot(...,'weight',w)| uses the |polyfitw| function to allow for 
+% weighted least squares fits. 
 %
 % |polyplot(...,'Name',Value,...)| formats linestyle using |LineSpec|
 % property name-value pairs (e.g., |'linewidth',3|). If 'error' bounds are 
