@@ -1,5 +1,6 @@
 [![DOI](https://zenodo.org/badge/171331090.svg)](https://zenodo.org/badge/latestdoi/171331090)
 
+[![View Climate Data Toolbox for MATLAB on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/70338-climate-data-toolbox-for-matlab)
 
 ![Climate Data Toolbox for Matlab](CDT_reduced.jpg)
 
