@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>trend documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-27"><meta name="DC.source" content="trend_documentation.m"><style type="text/css">
+      --><title>trend documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-04-18"><meta name="DC.source" content="trend_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -83,13 +83,13 @@ ylabel <span class="string">'some variable'</span>
 polyplot(t,y,1)
 </pre><img vspace="5" hspace="5" src="trend_documentation_02.png" alt=""> <p>...but what's the numerical value of that trend? In other words, how steep is the slope? When we defined <tt>y</tt>, we specified that it should be 40*t (plus some random noise and an offset), so the trend should be about 40:</p><pre class="codeinput">trend(y)
 </pre><pre class="codeoutput">ans =
-    3.1634
+    3.2710
 </pre><p>That trend isn't even close to 40! That's because if we don't specify a sampling frequency or a time vector, the <tt>trend</tt> function gives the trend in <tt>y</tt> per sample. Specify the sampling rate of 12 samples per year like this:</p><pre class="codeinput">trend(y,Fs)
 </pre><pre class="codeoutput">ans =
-   37.9609
+   39.2522
 </pre><p>...and that's the value close to 40 that we were expecting. It's not exactly 40 because we intentionally added noise, but it's about 40, as expected.</p><p>You may have noticed by now that the trend can be calculated any of three ways, and each will give the same answer. You can multiply the trend by the sampling rate, or you can specify the sampling rate in the <tt>trend</tt> function, or you can specify the corresponding time vector <tt>t</tt>, and they'll all give the same answer:</p><pre class="codeinput">[trend(y)*Fs trend(y,Fs) trend(y,t)]
 </pre><pre class="codeoutput">ans =
-   37.9609   37.9609   37.9609
+   39.2522   39.2522   39.2522
 </pre><h2 id="8">Example 2: 2D data</h2><p>If you have a bunch of measurements that all line up to the same times, the <tt>trend</tt> function can calculate all the trends at once, in a computationally efficient manner. Consider these four time series built from the <tt>y</tt> array we defined in example 1:</p><pre class="codeinput"><span class="comment">%   [y    y+400        very noisy y           only noise     ];</span>
 A = [y    y+400     y+200*randn(size(y))    100*rand(size(y))];
 
@@ -104,23 +104,23 @@ box <span class="string">off</span>       <span class="comment">% removes ugly f
 legend <span class="string">boxoff</span> <span class="comment">% removes ugly frame from legend</span>
 </pre><img vspace="5" hspace="5" src="trend_documentation_03.png" alt=""> <p>The trends of each column can be computed like this:</p><pre class="codeinput">trend(A,t)
 </pre><pre class="codeoutput">ans =
-   37.9609   37.9609   34.4816   -0.2823
+   39.2522   39.2522   56.5252    2.6557
 </pre><p>That's what we expected: About 40 units/year for columns 1 and 2, which are the same data aside from the offset; somewhat of a trend for column 3, and not much of a trend for the noise-only column 4.</p><p><b>Are any of these trends statistically significant?</b> Use the optional second function output to see:</p><pre class="codeinput">[tr,p] = trend(A,t)
 </pre><pre class="codeoutput">tr =
-   37.9609   37.9609   34.4816   -0.2823
+   39.2522   39.2522   56.5252    2.6557
 p =
-    0.0000    0.0000    0.0046    0.8380
+    0.0000    0.0000    0.0000    0.0732
 </pre><p>The p values for the first three columns indicate statistical significance, but the fourth column tells us that any trend measured there is probably junk.</p><p>What if your data go across columns through time instead of down rows? Just specify the dimension:</p><pre class="codeinput">[tr,p] = trend(A',t,<span class="string">'dim'</span>,2)
 </pre><pre class="codeoutput">tr =
-   37.9609
-   37.9609
-   34.4816
-   -0.2823
+   39.2522
+   39.2522
+   56.5252
+    2.6557
 p =
     0.0000
     0.0000
-    0.0046
-    0.8380
+    0.0000
+    0.0732
 </pre><h2 id="13">Example 3: A 3D dataset</h2><p>Here's a sample dataset that goes down at a rate of -pi per time slice. Use <a href="expand3_documentation.html"><tt>expand3</tt></a> to create the sample dataset, and then add a bunch of noise to keep things interesting:</p><pre class="codeinput"><span class="comment">% 60x80 grid that goes down -pi in each frame:</span>
 Y = expand3(ones(60,80),-pi*(1:100));
 

@@ -12,6 +12,7 @@
 %% Syntax
 % 
 %  ft = sinefit_bootstrap(t,y)
+%  ft = sinefit_bootstrap(...,'weight',weights) 
 %  ft = sinefit_bootstrap(...,'terms',TermOption) 
 %  ft = sinefit_bootstrap(...,'nboot',nboot)
 %  [ft,rmse,Nsamp] = sinefit_bootstrap(...)
@@ -22,7 +23,11 @@
 % to 1000 random subsamples of the time series |t,y|. The output |ft| is a 1000x2
 % matrix containinng all 1000 solutions for the amplitude and phase, respectively. 
 % See <sinefit_documentation.html |sinefit|> for a complete description of inputs and outputs. 
-%
+% 
+% |ft = sinefit_bootstrap(...,'weight',w)| applies weighting to each of the observations
+% |y|. For example, if formal errors |err| are associated with |y|, you might 
+% let |w = 1./err.^2|. By default, |w = ones(size(y))|. 
+% 
 % |ft = sinefit_bootstrap(...,'terms',TermOption)| specifies which terms are calculated
 % in the sinusoid fit. Default is |2| because more terms can be computationally slow! 
 % |TermOption| can be 2, 3, 4, or 5:

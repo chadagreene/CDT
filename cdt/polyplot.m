@@ -7,6 +7,7 @@ function [h,p,delta] = polyplot(x,y,varargin)
 %
 %  polyplot(x,y)
 %  polyplot(x,y,n)
+%  polyplot(...,'weight',w)
 %  polyplot(...,'Name',Value,...)
 %  polyplot(...,'error')
 %  h = polyplot(...)
@@ -19,6 +20,9 @@ function [h,p,delta] = polyplot(x,y,varargin)
 % polyplot(x,y,n) specifies the degree n of the polynomial fit to 
 % the x,y data. Default n is 1. 
 %
+% polyplot(...,'weight',w) uses the polyfitw function to allow for 
+% weighted least squares fits. 
+% 
 % polyplot(...,'Name',Value,...) formats linestyle using LineSpec 
 % property name-value pairs ('e.g., 'linewidth',3). If 'error' bounds are 
 % plotted, only boundedline properties are accepted. 
@@ -59,6 +63,7 @@ end
 n = 1;                        % degree of the polynomial
 xfit = [min(x(:)) max(x(:))]; % x values for fit (only two points necessary for default linear case) 
 ploterror = false;            % do not plot shaded error region
+weighted = false;             % Not a weighted polyfit by default. 
 
 %% Parse optional inputs: 
 
@@ -77,6 +82,14 @@ if nargin>2
       ploterror = true; 
       varargin = varargin(~tmp); 
    end
+
+   tmp = strncmpi(varargin,'weight',3); 
+   if any(tmp)
+      weighted = true; 
+      w = varargin{find(tmp)+1}; 
+      tmp(find(tmp)+1) = true; 
+      varargin = varargin(~tmp); 
+   end
 end
 
 %% Do mathematics:
@@ -89,7 +102,12 @@ x = x(ind);
 y = y(ind); 
 
 % Get the least-squares polynomial fit: 
-[p,S,mu] = polyfit(x,y,n);
+if weighted
+   w = w(ind); 
+   [p,S,mu] = polyfitw(x,y,n,w);
+else 
+   [p,S,mu] = polyfit(x,y,n);
+end
 [yfit,delta] = polyval(p,xfit,S,mu);
 
 %% Plot: 

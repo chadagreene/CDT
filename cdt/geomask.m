@@ -136,9 +136,17 @@ switch masktype
    case '2Drange'
 
       if inclusive
-         mask = lat>=min(latv) & lat<=max(latv) & lon>=min(lonv) & lon<=max(lonv); 
+         if diff(lonv)<0 % this is the case where we cross the meridian 
+            mask = lat>=min(latv) & lat<=max(latv) & (lon>=lonv(1) | lon<=lonv(2)); 
+         else           
+            mask = lat>=min(latv) & lat<=max(latv) & lon>=min(lonv) & lon<=max(lonv); 
+         end
       else
-         mask = lat>min(latv) & lat<max(latv) & lon>min(lonv) & lon<max(lonv); 
+         if diff(lonv)<0 % this is the case where we cross the meridian 
+            mask = lat>min(latv) & lat<max(latv) & (lon>lonv(1) | lon<lonv(2)); 
+         else           
+            mask = lat>min(latv) & lat<max(latv) & lon>min(lonv) & lon<max(lonv); 
+         end
       end
          
    case 'polygon'

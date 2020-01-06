@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>sinefit documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2018-12-21"><meta name="DC.source" content="sinefit_documentation.m"><style type="text/css">
+      --><title>sinefit documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-26"><meta name="DC.source" content="sinefit_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,14 +66,16 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>sinefit</tt> documentation</h1><!--introduction--><p><tt>sinefit</tt> fits a least-squares estimate of a sinusoid to time series data that have a periodicity of 1 year.</p><p>For related functions, see <a href="sineval_documentation.html"><tt>sineval</tt></a> and <a href="sinefit_bootstrap_documentation.html"><tt>sinefit_bootstrap</tt></a> documentation.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Fit a sinusoid to toy data</a></li><li><a href="#9">Example 2: Fit a sinusoid to real sea ice data</a></li><li><a href="#13">Note to users</a></li><li><a href="#14">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>ft = sinefit(t,y)
-ft = sinefit(t,y,'terms',TermOption)
-[ft,rmse] = sinefit(...)</pre><h2 id="2">Description</h2><p><tt>ft = sinefit(t,y)</tt> fits a sinusoid with a periodicity of 1 year to input data <tt>y</tt> collected at times <tt>t</tt>. Input times can be in datenum, datetime, or datestr format, and do not need to be sampled at regular intervals. The output <tt>ft</tt> contains the coefficients of the terms in the calculation described below.</p><p><tt>ft = sinefit(t,y,'terms',TermOption)</tt> specifies which terms are calculated in the sinusoid fit. <tt>TermOption</tt> can be 2, 3, 4, or 5:</p><div><ul><li><tt>2</tt>: <tt>ft = [A doy_max]</tt> where <tt>A</tt> is the amplitude of the sinusoid, and <tt>doy_max</tt>      is the day of year corresponding to the maximum value of the sinusoid.      The default <tt>TermOption</tt> is <tt>2</tt>.</li><li><tt>3</tt>: <tt>ft = [A doy_max C]</tt> also estimates <tt>C</tt>, a constant offset. Solving for      adds processing time, so you may prefer to estimate <tt>C</tt> on your own simply      as the mean of the input <tt>y</tt>. However, if you can't assume C=mean(y), you      may prefer this three-term solution.</li><li><tt>4</tt>: <tt>ft = [A doy_max C trend]</tt> also estimates a linear trend over the entire      time series in units of y per year. Again, simultaneously solving for      four terms will be much more computationally expensive than solving for      two yerms, so you may prefer to estimate the trend on your own with      polyfit, then calculate the two-term sine fit on your detrended data.</li><li><tt>5</tt>: <tt>ft = [A doy_max C trend quadratic_term]</tt> also includes a quadratic term      in the solution, but this is experimental for now, because fitting a      polynomial to dates referenced to year zero tends to be scaled poorly.</li></ul></div><p><tt>[ft,rmse] = sinefit(...)</tt> returns the root-mean-square error of the residuals of <tt>y</tt> after removing the sinusoidal fit. This is one measure of how well the sinusoid fits the data, but for a more in-depth understanding of the uncertainties, including uncertainties in the timing, see <a href="sinefit_bootstrap_documentation.html"><tt>sinefit_bootstrap</tt></a>.</p><h2 id="3">Example 1: Fit a sinusoid to toy data</h2><p>In this example we'll make up some data with known parameters, then use <tt>sinefit</tt> to fit a sinusoid to the data. Let's assume you have 100 measurements taken between Jan 1, 2005 and today. Use <a href="sineval_documentation.html"><tt>sineval</tt></a> to generate a sinudoid of 75 unit amplitude, having a maximum value on day 123 of each year (July 5), and a long-term linear trend of -2.2 units per year. Note that in <tt>sineval</tt> we'll also have to enter a somewhat strange value of <tt>5e3</tt>, which is just the y-intercept at year zero, but is not very meaningful to us in the 21st century.</p><p>To make it more of a challenge for <tt>sinefit</tt>, we'll also add gaussian noise that has a standard deviation of 36 units. (This is an appreciable amount of noise relative to the 75 unit amplitude of the sinusoid.)</p><pre class="codeinput"><span class="comment">% 100 random dates between January 1, 2005 and today:</span>
+  </style></head><body><div class="content"><h1><tt>sinefit</tt> documentation</h1><!--introduction--><p><tt>sinefit</tt> fits a least-squares estimate of a sinusoid to time series data that have a periodicity of 1 year.</p><p>For related functions, see <a href="sineval_documentation.html"><tt>sineval</tt></a> and <a href="sinefit_bootstrap_documentation.html"><tt>sinefit_bootstrap</tt></a> documentation.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1a: Fit a sinusoid to toy data</a></li><li><a href="#7">Example 1b: Specifying weights</a></li><li><a href="#10">Example 1c: More uncertainty quantification</a></li><li><a href="#12">Example 2: Fit a sinusoid to real sea ice data</a></li><li><a href="#16">Note to users</a></li><li><a href="#17">Example 3: Data cube</a></li><li><a href="#19">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>ft = sinefit(t,y)
+ft = sinefit(...,'weight',weights)
+ft = sinefit(...,'terms',TermOption)
+[ft,rmse] = sinefit(...)</pre><h2 id="2">Description</h2><p><tt>ft = sinefit(t,y)</tt> fits a sinusoid with a periodicity of 1 year to input data <tt>y</tt> collected at times <tt>t</tt>. Input times can be in datenum, datetime, or datestr format, and do not need to be sampled at regular intervals. The output <tt>ft</tt> contains the coefficients of the terms in the calculation described below.</p><p><tt>ft = sinefit(...,'weight',w)</tt> applies weighting to each of the observations <tt>y</tt>. For example, if formal errors <tt>err</tt> are associated with <tt>y</tt>, you might let <tt>w = 1./err.^2</tt>. By default, <tt>w = ones(size(y))</tt>.</p><p><tt>ft = sinefit(...,'terms',TermOption)</tt> specifies which terms are calculated in the sinusoid fit. <tt>TermOption</tt> can be 2, 3, 4, or 5:</p><div><ul><li><tt>2</tt>: <tt>ft = [A doy_max]</tt> where <tt>A</tt> is the amplitude of the sinusoid, and <tt>doy_max</tt>      is the day of year corresponding to the maximum value of the sinusoid.      The default <tt>TermOption</tt> is <tt>2</tt>.</li><li><tt>3</tt>: <tt>ft = [A doy_max C]</tt> also estimates <tt>C</tt>, a constant offset. Solving for      adds processing time, so you may prefer to estimate <tt>C</tt> on your own simply      as the mean of the input <tt>y</tt>. However, if you can't assume C=mean(y), you      may prefer this three-term solution.</li><li><tt>4</tt>: <tt>ft = [A doy_max C trend]</tt> also estimates a linear trend over the entire      time series in units of y per year.</li><li><tt>5</tt>: <tt>ft = [A doy_max C trend quadratic_term]</tt> also includes a quadratic term      in the solution, but this is experimental for now, because fitting a      polynomial to dates referenced to year zero tends to be scaled poorly.</li></ul></div><p><tt>[ft,rmse] = sinefit(...)</tt> returns the root-mean-square error of the residuals of <tt>y</tt> after removing the sinusoidal fit. This is one measure of how well the sinusoid fits the data, but for a more in-depth understanding of the uncertainties, including uncertainties in the timing, see <a href="sinefit_bootstrap_documentation.html"><tt>sinefit_bootstrap</tt></a>.</p><h2 id="3">Example 1a: Fit a sinusoid to toy data</h2><p>In this example we'll make up some data with known parameters, then use <tt>sinefit</tt> to fit a sinusoid to the data. Let's assume you have 100 measurements taken between Jan 1, 2005 and today. Use <a href="sineval_documentation.html"><tt>sineval</tt></a> to generate a sinudoid of 75 unit amplitude, having a maximum value on day 123 of each year (July 5), and a long-term linear trend of -2.2 units per year. Note that in <tt>sineval</tt> we'll also have to enter a somewhat strange value of <tt>5e3</tt>, which is just the y-intercept at year zero, but is not very meaningful to us in the 21st century.</p><p>To make it more of a challenge for <tt>sinefit</tt>, we'll also add gaussian noise that has a standard deviation of 36 units. (This is an appreciable amount of noise relative to the 75 unit amplitude of the sinusoid.)</p><pre class="codeinput"><span class="comment">% 100 random dates between January 1, 2005 and today:</span>
 t = datenum(<span class="string">'jan 1, 2005'</span>) + (now-datenum(<span class="string">'jan 1, 2005'</span>))*rand(100,1);
 
 <span class="comment">% Sinusoid of amplitude 75; max on day 123 (July 5); trend -2.2 units/year:</span>
 sine_parameters = [75 123 5e3 -2.2];
-y = sineval([75 123 5e3 -2.2],t) + 36*randn(size(t)); <span class="comment">% sinusoid + noise</span>
+err = 36*randn(size(t)); <span class="comment">% random error</span>
+y = sineval([75 123 5e3 -2.2],t) + err;  <span class="comment">% sinusoid + noise</span>
 
 <span class="comment">% Plot the 100 data points:</span>
 figure(1)
@@ -81,11 +83,8 @@ plot(t,y,<span class="string">'o'</span>)
 axis <span class="string">tight</span> <span class="comment">% removes white space</span>
 box <span class="string">off</span>    <span class="comment">% removes frame</span>
 datetick(<span class="string">'x'</span>,<span class="string">'keeplimits'</span>) <span class="comment">% formats x date labels</span>
-</pre><img vspace="5" hspace="5" src="sinefit_documentation_01.png" alt=""> <p>Believe it or not, that dataset is sinusoidal. If you have Matlab version R2014b or later, you can see for yourself by plotting the data as a function of day of year:</p><pre class="codeinput"><span class="comment">% get the day of year corresponding to each measurement t:</span>
-doy = day(datetime(t,<span class="string">'convertfrom'</span>,<span class="string">'datenum'</span>),<span class="string">'dayofyear'</span>);
-
-figure(2)
-plot(doy,y,<span class="string">'o'</span>)
+</pre><img vspace="5" hspace="5" src="sinefit_documentation_01.png" alt=""> <p>Believe it or not, that dataset is sinusoidal. It's easier to see the sinusoidal nature if we use <a href="doy_documentation.html"><tt>doy</tt></a> to plot all the data as a function of day of year:</p><pre class="codeinput">figure(2)
+plot(doy(t),y,<span class="string">'o'</span>)
 
 axis <span class="string">tight</span>
 box <span class="string">off</span>
@@ -93,10 +92,10 @@ xlabel <span class="string">'day of year'</span>
 </pre><img vspace="5" hspace="5" src="sinefit_documentation_02.png" alt=""> <p>In this toy dataset, we know we should have a sinusoid with an amplitude of 75 units, a maximum value on day 123, and a long term trend of -2.2 units per year. And since we intentionally added 36 units of gaussian noise, we know the sinusoid should match the "measurements" to about an rms error of 36 units.</p><pre class="codeinput">[ft,ft_error] = sinefit(t,y,<span class="string">'terms'</span>,4)
 </pre><pre class="codeoutput">ft =
    1.0e+03 *
-    0.0763    0.1145    4.7391   -0.0021
+    0.0864    0.1186    7.6751   -0.0035
 ft_error =
-   33.2387
-</pre><p>The numbers above tell us that <tt>sinefit</tt> has determined our 100 noisy datapoints are characterized by a sinusoid with an amplitude of 77.81 units (quite close to the prescribed value of 75), a maximum on day 123.4 (within a half day of the presecribed) and a linear trend of -2.26 units per year (-2.2 presecribed). The optional second output of the <tt>sinefit</tt> function tells us the sinusoid matches the "measurements" to a 1-sigma uncertainty of 36.37, which matches our prescribed value of gaussian noise.</p><p>Here is the sinusoid fit to the data:</p><pre class="codeinput"><span class="comment">% A daily array of times from the first datapoint to the last:</span>
+   33.9327
+</pre><p>The numbers above tell us that <tt>sinefit</tt> has determined our 100 noisy datapoints are characterized by a sinusoid with an amplitude of <tt>ft(1)</tt> units, which we see is close to the prescribed value of 75, a maximum value near the 123rd day of the year, and a linear trend of about -2.2 units per year. The optional second output of the <tt>sinefit</tt> function tells us the sinusoid matches the "measurements" to a 1-sigma uncertainty given by <tt>ft_error</tt>, which is in line with the prescribed value of gaussian noise.</p><p>Here is the sinusoid fit to the data:</p><pre class="codeinput"><span class="comment">% A daily array of times from the first datapoint to the last:</span>
 t_daily = min(t):max(t);
 
 <span class="comment">% The fit sinusoid at daily resolution:</span>
@@ -105,14 +104,28 @@ y_daily = sineval(ft,t_daily);
 figure(1) <span class="comment">% goes back to the first figure</span>
 hold <span class="string">on</span>
 plot(t_daily,y_daily)
-</pre><img vspace="5" hspace="5" src="sinefit_documentation_03.png" alt=""> <p>For a more in-depth analysis of uncertainty in the sinusoid fit, check out <a href="sinefit_bootstrap_documentation.html"><tt>sinefit_bootstrap</tt></a>, which can provide 1-sigma levels of uncertainty for each parameter like this (give it a few seconds):</p><pre class="codeinput">ftb = sinefit_bootstrap(t,y,<span class="string">'terms'</span>,4);
+</pre><img vspace="5" hspace="5" src="sinefit_documentation_03.png" alt=""> <h2 id="7">Example 1b: Specifying weights</h2><p>Suppose you know the formal errors associated with each observation <tt>y</tt>. Some measurements have higher uncertainties associated with them than others. From the <tt>err</tt> vector we used above to prescribe noise, we'll weight each observation <tt>y</tt> like this:</p><pre class="codeinput">w = 1./err.^2;
+
+figure
+scatter(doy(t),y,25,w,<span class="string">'filled'</span>)
+axis <span class="string">tight</span>
+xlabel <span class="string">'day of year'</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'weight'</span>)
+cmocean(<span class="string">'amp'</span>)
+caxis([0 0.01])
+</pre><img vspace="5" hspace="5" src="sinefit_documentation_04.png" alt=""> <p>The plot above shows that we give more weight to the values with lower errors associated with them. Now use <tt>sinefit</tt> with the specified weights:</p><pre class="codeinput">ft = sinefit(t,y,<span class="string">'weight'</span>,w,<span class="string">'terms'</span>,4)
+</pre><pre class="codeoutput">ft =
+   1.0e+03 *
+    0.0764    0.1233    5.1464   -0.0023
+</pre><p>Comparing to the unweighted solution, you'll see that this version produces a slightly more accurate coefficients.</p><h2 id="10">Example 1c: More uncertainty quantification</h2><p>For a more in-depth analysis of uncertainty in the sinusoid fit, check out <a href="sinefit_bootstrap_documentation.html"><tt>sinefit_bootstrap</tt></a>, which can provide 1-sigma levels of uncertainty for each parameter like this (give it a few seconds):</p><pre class="codeinput">ftb = sinefit_bootstrap(t,y,<span class="string">'terms'</span>,4);
 
 <span class="comment">% 1 sigma uncertainty for each parameter:</span>
 std(ftb)
 </pre><pre class="codeoutput">ans =
    1.0e+03 *
-    0.0049    0.0040    1.9926    0.0010
-</pre><p>That tells us <tt>sinefit</tt> should be accurate to 1-sigma levels of 4.87 for the amplitude (77.81 versus the prescribed value of 75--yep); timing should be accurate within 4.14 days (day of maximum is 123.4 versus prescribed 123--yep); and the trend should be accurate within 0.93 units per year (-2.26 versus prescribed value of -2.2--yep.)</p><h2 id="9">Example 2: Fit a sinusoid to real sea ice data</h2><p>Let's take a look at some real sea ice data from the <a href="https://nsidc.org/data/seaice_index/archives">NSIDC</a>. I've packaged up a time series of sea ice extent in .mat format, and included in this File Exchange upload so you can follow along:</p><pre class="codeinput"><span class="comment">% Load sample data:</span>
+    0.0055    0.0029    1.6112    0.0008
+</pre><p>That tells us <tt>sinefit</tt> should be accurate to 1-sigma levels of about 5 for the amplitude (compare <tt>ft(1)</tt> to the prescribed amplitude to prove this to yourself); timing should be accurate within about 4 days; and the trend should be accurate within about 1 unit per year.</p><h2 id="12">Example 2: Fit a sinusoid to real sea ice data</h2><p>Let's take a look at some real sea ice data from the <a href="https://nsidc.org/data/seaice_index/archives">NSIDC</a>. I've packaged up a time series of sea ice extent in .mat format, and included in this File Exchange upload so you can follow along:</p><pre class="codeinput"><span class="comment">% Load sample data:</span>
 load <span class="string">seaice_extent</span>
 
 <span class="comment">% Plot raw data:</span>
@@ -122,15 +135,45 @@ hold <span class="string">on</span>
 axis <span class="string">tight</span>
 box <span class="string">off</span>
 ylabel <span class="string">'NH sea ice extent (10^6 km^2)'</span>
-</pre><img vspace="5" hspace="5" src="sinefit_documentation_04.png" alt=""> <p>Quite clearly that data has some periodicity to it at the 1/yr frequency. How much does Northern Hemisphere sea ice extent vary at subannual timescales, when does it typically reach a maximum value, and how much is sea ice changing in terms of long-term trend?</p><pre class="codeinput"><span class="comment">% Fit a sinusoid:</span>
+</pre><img vspace="5" hspace="5" src="sinefit_documentation_05.png" alt=""> <p>Quite clearly that data has some periodicity to it at the 1/yr frequency. How much does Northern Hemisphere sea ice extent vary at subannual timescales, when does it typically reach a maximum value, and how much is sea ice changing in terms of long-term trend?</p><pre class="codeinput"><span class="comment">% Fit a sinusoid:</span>
 ft = sinefit(t,extent_N,<span class="string">'terms'</span>,4)
 </pre><pre class="codeoutput">ft =
     4.4079   66.8394  125.2987   -0.0569
 </pre><p>Similar to Example 1, the output of <tt>sinefit</tt> tells us Arctic sea ice tends to vary by about 4.41 million square kilometers each year, it reaches a maximum around day 66 (March 7) (see note below), and northern hemisphere sea ice has decreased by 60,000 square kilometers per year since 1978.</p><p>Here's the sinusoid fit plotted on top of the raw data:</p><pre class="codeinput">hold <span class="string">on</span>
 plot(t,sineval(ft,t))
 legend(<span class="string">'raw data'</span>,<span class="string">'fit by sinefit'</span>)
-</pre><img vspace="5" hspace="5" src="sinefit_documentation_05.png" alt=""> <p>And zoom in a bit to see the structure:</p><pre class="codeinput">xlim([datetime(1995,1,1) datetime(2000,1,1)])
-</pre><img vspace="5" hspace="5" src="sinefit_documentation_06.png" alt=""> <h2 id="13">Note to users</h2><p>One brief note related to the all the parameters estimated by <tt>sinefit</tt>: These parameters describe the best-fit sinusoid, but that does not necessarily mean they fully describe the behavior of the underlying data itself. For example, in terms of climatological average, Northern Hemisphere sea ice extent actually typically reaches a maximum around day 71 (March 12), whereas <tt>sinefit</tt> says the maximum value of the best-fit sinusoid occurs on day 66 (March 7). That's because the true behavior of sea ice extent is more complex than a simple sinusoid. In your work, be sure to consider the difference between true behavior and the 1/yr frequency component of the true behavior.</p><h2 id="14">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The <tt>sinefit</tt>, <tt>sineval</tt>, and <tt>sinefit_bootstrap</tt> functions as well as the supporting documentation were written by Chad A. Greene of the University of Texas Institute for Geophysics.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="sinefit_documentation_06.png" alt=""> <p>And zoom in a bit to see the structure:</p><pre class="codeinput">xlim([datetime(1995,1,1) datetime(2000,1,1)])
+</pre><img vspace="5" hspace="5" src="sinefit_documentation_07.png" alt=""> <h2 id="16">Note to users</h2><p>One brief note related to the all the parameters estimated by <tt>sinefit</tt>: These parameters describe the best-fit sinusoid, but that does not necessarily mean they fully describe the behavior of the underlying data itself. For example, in terms of climatological average, Northern Hemisphere sea ice extent actually typically reaches a maximum around day 71 (March 12), whereas <tt>sinefit</tt> says the maximum value of the best-fit sinusoid occurs on day 66 (March 7). That's because the true behavior of sea ice extent is more complex than a simple sinusoid. In your work, be sure to consider the difference between true behavior and the 1/yr frequency component of the true behavior.</p><h2 id="17">Example 3: Data cube</h2><p>This functionality is still in beta, but here's the code I'm using to test it:</p><pre class="codeinput">load <span class="string">pacific_sst</span>
+
+ft = sinefit(t,sst,<span class="string">'terms'</span>,3);
+
+figure
+subplot(1,3,1)
+imagescn(lon,lat,ft(:,:,1))
+title <span class="string">'sinusoid amplitude'</span>
+cmocean <span class="string">amp</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'seasonal magnitude \circC'</span>)
+axis <span class="string">image</span>
+
+subplot(1,3,2)
+imagescn(lon,lat,ft(:,:,2))
+title <span class="string">'sinusoid phase'</span>
+cmocean <span class="string">phase</span>
+caxis([1 365])
+cb = colorbar;
+ylabel(cb,<span class="string">'month of max temperature'</span>)
+cbdate(cb,<span class="string">'mmm'</span>)
+axis <span class="string">image</span>
+
+subplot(1,3,3)
+imagescn(lon,lat,ft(:,:,3))
+title <span class="string">'mean temperature'</span>
+cmocean <span class="string">thermal</span>
+cb = colorbar;
+ylabel(cb,<span class="string">'mean temperature'</span>)
+axis <span class="string">image</span>
+</pre><img vspace="5" hspace="5" src="sinefit_documentation_08.png" alt=""> <p>Nothing too surprising above: Shallow waters have more temperature variability throughout the year than deep waters, and everything near the equator is has almost no seasonality. The middle panel shows us that the warmest waters occur in August or September in the northern hemisphere, or in February or March in the southern hemisphere. The third panel is just that constant offset which is effectively the mean sea surface temperature.</p><h2 id="19">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The <tt>sinefit</tt>, <tt>sineval</tt>, and <tt>sinefit_bootstrap</tt> functions as well as the supporting documentation were written by Chad A. Greene of the University of Texas Institute for Geophysics.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |sinefit| documentation
 % |sinefit| fits a least-squares estimate of a sinusoid to time series data
@@ -143,7 +186,8 @@ legend(<span class="string">'raw data'</span>,<span class="string">'fit by sinef
 %% Syntax
 % 
 %  ft = sinefit(t,y) 
-%  ft = sinefit(t,y,'terms',TermOption) 
+%  ft = sinefit(...,'weight',weights) 
+%  ft = sinefit(...,'terms',TermOption) 
 %  [ft,rmse] = sinefit(...)
 % 
 %% Description 
@@ -153,7 +197,11 @@ legend(<span class="string">'raw data'</span>,<span class="string">'fit by sinef
 % datestr format, and do not need to be sampled at regular intervals. The output
 % |ft| contains the coefficients of the terms in the calculation described below.
 % 
-% |ft = sinefit(t,y,'terms',TermOption)| specifies which terms are calculated
+% |ft = sinefit(...,'weight',w)| applies weighting to each of the observations
+% |y|. For example, if formal errors |err| are associated with |y|, you might 
+% let |w = 1./err.^2|. By default, |w = ones(size(y))|. 
+% 
+% |ft = sinefit(...,'terms',TermOption)| specifies which terms are calculated
 % in the sinusoid fit. |TermOption| can be 2, 3, 4, or 5:
 % 
 % * |2|: |ft = [A doy_max]| where |A| is the amplitude of the sinusoid, and |doy_max| 
@@ -164,10 +212,7 @@ legend(<span class="string">'raw data'</span>,<span class="string">'fit by sinef
 %      as the mean of the input |y|. However, if you can't assume C=mean(y), you
 %      may prefer this three-term solution. 
 % * |4|: |ft = [A doy_max C trend]| also estimates a linear trend over the entire
-%      time series in units of y per year. Again, simultaneously solving for 
-%      four terms will be much more computationally expensive than solving for
-%      two yerms, so you may prefer to estimate the trend on your own with 
-%      polyfit, then calculate the two-term sine fit on your detrended data. 
+%      time series in units of y per year.
 % * |5|: |ft = [A doy_max C trend quadratic_term]| also includes a quadratic term
 %      in the solution, but this is experimental for now, because fitting a 
 %      polynomial to dates referenced to year zero tends to be scaled poorly.
@@ -177,7 +222,7 @@ legend(<span class="string">'raw data'</span>,<span class="string">'fit by sinef
 % sinusoid fits the data, but for a more in-depth understanding of the uncertainties, 
 % including uncertainties in the timing, see <sinefit_bootstrap_documentation.html |sinefit_bootstrap|>. 
 %
-%% Example 1: Fit a sinusoid to toy data
+%% Example 1a: Fit a sinusoid to toy data
 % In this example we'll make up some data with known parameters, then use |sinefit|
 % to fit a sinusoid to the data. Let's assume you have 100 measurements taken
 % between Jan 1, 2005 and today. Use <sineval_documentation.html |sineval|> to generate
@@ -195,7 +240,8 @@ t = datenum('jan 1, 2005') + (now-datenum('jan 1, 2005'))*rand(100,1);
 
 % Sinusoid of amplitude 75; max on day 123 (July 5); trend -2.2 units/year: 
 sine_parameters = [75 123 5e3 -2.2]; 
-y = sineval([75 123 5e3 -2.2],t) + 36*randn(size(t)); % sinusoid + noise
+err = 36*randn(size(t)); % random error
+y = sineval([75 123 5e3 -2.2],t) + err;  % sinusoid + noise
 
 % Plot the 100 data points:
 figure(1)
@@ -205,15 +251,12 @@ box off    % removes frame
 datetick('x','keeplimits') % formats x date labels
 
 %% 
-% Believe it or not, that dataset is sinusoidal. If you have Matlab version R2014b
-% or later, you can see for yourself by plotting the data as a function of 
-% day of year: 
-
-% get the day of year corresponding to each measurement t: 
-doy = day(datetime(t,'convertfrom','datenum'),'dayofyear'); 
+% Believe it or not, that dataset is sinusoidal. It's easier to see the sinusoidal
+% nature if we use <doy_documentation.html |doy|> to plot all the data as a function 
+% of day of year: 
 
 figure(2)
-plot(doy,y,'o') 
+plot(doy(t),y,'o') 
 
 axis tight
 box off
@@ -229,12 +272,12 @@ xlabel 'day of year'
 
 %% 
 % The numbers above tell us that |sinefit| has determined our 100 noisy 
-% datapoints are characterized by a sinusoid with an amplitude of 77.81 
-% units (quite close to the prescribed value of 75), a maximum on day 123.4 (within
-% a half day of the presecribed) and a linear trend of -2.26 units per year (-2.2 presecribed). 
+% datapoints are characterized by a sinusoid with an amplitude of |ft(1)| 
+% units, which we see is close to the prescribed value of 75, a maximum value
+% near the 123rd day of the year, and a linear trend of about -2.2 units per year. 
 % The optional second output of the |sinefit| function tells us the sinusoid
-% matches the "measurements" to a 1-sigma uncertainty of 36.37, which matches our prescribed value
-% of gaussian noise. 
+% matches the "measurements" to a 1-sigma uncertainty given by |ft_error|, which
+% is in line with the prescribed value of gaussian noise. 
 %
 % Here is the sinusoid fit to the data: 
 
@@ -248,7 +291,34 @@ figure(1) % goes back to the first figure
 hold on
 plot(t_daily,y_daily) 
 
+%% Example 1b: Specifying weights 
+% Suppose you know the formal errors associated with each observation |y|. 
+% Some measurements have higher uncertainties associated with them than others. 
+% From the |err| vector we used above to prescribe noise, we'll weight each
+% observation |y| like this: 
+
+w = 1./err.^2; 
+
+figure
+scatter(doy(t),y,25,w,'filled')
+axis tight
+xlabel 'day of year'
+cb = colorbar; 
+ylabel(cb,'weight')
+cmocean('amp') 
+caxis([0 0.01])
+
 %% 
+% The plot above shows that we give more weight to the values with lower 
+% errors associated with them. Now use |sinefit| with the specified weights: 
+
+ft = sinefit(t,y,'weight',w,'terms',4)
+
+%% 
+% Comparing to the unweighted solution, you'll see that this version produces
+% a slightly more accurate coefficients. 
+
+%% Example 1c: More uncertainty quantification 
 % For a more in-depth analysis of uncertainty in the sinusoid fit, check out 
 % <sinefit_bootstrap_documentation.html |sinefit_bootstrap|>, which can provide 
 % 1-sigma levels of uncertainty for each parameter like this (give it a few seconds): 
@@ -259,11 +329,9 @@ ftb = sinefit_bootstrap(t,y,'terms',4);
 std(ftb)
 
 %%
-% That tells us |sinefit| should be accurate to 1-sigma levels of 4.87 for the 
-% amplitude (77.81 versus the prescribed value of 75REPLACE_WITH_DASH_DASHyep); timing should be 
-% accurate within 4.14 days (day of maximum is 123.4 versus prescribed 123REPLACE_WITH_DASH_DASHyep); 
-% and the trend should be accurate within 0.93 units per year (-2.26 versus prescribed
-% value of -2.2REPLACE_WITH_DASH_DASHyep.)
+% That tells us |sinefit| should be accurate to 1-sigma levels of about 5 for the 
+% amplitude (compare |ft(1)| to the prescribed amplitude to prove this to yourself); timing should be 
+% accurate within about 4 days; and the trend should be accurate within about 1 unit per year.
 
 %% Example 2: Fit a sinusoid to real sea ice data
 % Let's take a look at some real sea ice data from the <https://nsidc.org/data/seaice_index/archives NSIDC>.
@@ -316,6 +384,48 @@ xlim([datetime(1995,1,1) datetime(2000,1,1)])
 % because the true behavior of sea ice extent is more complex than a simple sinusoid. In your work, be sure
 % to consider the difference between true behavior and the 1/yr frequency component of the true behavior.
 
+%% Example 3: Data cube 
+% This functionality is still in beta, but here's the code I'm using to test it: 
+
+load pacific_sst 
+
+ft = sinefit(t,sst,'terms',3); 
+
+figure
+subplot(1,3,1) 
+imagescn(lon,lat,ft(:,:,1))
+title 'sinusoid amplitude' 
+cmocean amp
+cb = colorbar; 
+ylabel(cb,'seasonal magnitude \circC')
+axis image
+
+subplot(1,3,2) 
+imagescn(lon,lat,ft(:,:,2))
+title 'sinusoid phase' 
+cmocean phase
+caxis([1 365])
+cb = colorbar; 
+ylabel(cb,'month of max temperature')
+cbdate(cb,'mmm') 
+axis image
+
+subplot(1,3,3) 
+imagescn(lon,lat,ft(:,:,3))
+title 'mean temperature' 
+cmocean thermal
+cb = colorbar; 
+ylabel(cb,'mean temperature')
+axis image
+
+%% 
+% Nothing too surprising above: Shallow waters have more temperature variability
+% throughout the year than deep waters, and everything near the equator is has
+% almost no seasonality. The middle panel shows us that the warmest waters occur
+% in August or September in the northern hemisphere, or in February or March in 
+% the southern hemisphere. The third panel is just that constant offset which 
+% is effectively the mean sea surface temperature. 
+% 
 %% Author Info
 % This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
 % The |sinefit|, |sineval|, and |sinefit_bootstrap| functions as well as the 
