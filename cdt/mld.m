@@ -282,6 +282,11 @@ else
     runalg = ismember(aopt, Opt.metric);
 end
 
+% Default plotting placeholders (used for alg. 5 only)
+
+pmaxtgrad = NaN;
+pminsgrad = NaN;
+
 %-----------------------
 % Temperature-based 
 % algorithms
@@ -621,6 +626,11 @@ if all(runalg)
     end
 else
     pmld = mldval(:,runalg);
+    
+    if nargout > 2
+        pth = NaN;
+    end
+    
 end
 
 if tonly
@@ -636,6 +646,7 @@ if nargout > 1 && strcmp(Opt.tblformat, 'table')
 else
     mldtbl = mldval;
 end
+
 
 %-----------------------
 % Plot
@@ -726,8 +737,13 @@ if Opt.plot
 
             % The fit algorithm best-fit lines
             
-            xtop = polyval(ptop(ii,:), yref);
-            xslp = polyval(pslp(ii,:), yref);
+            if all(runalg)
+                xtop = polyval(ptop(ii,:), yref);
+                xslp = polyval(pslp(ii,:), yref);
+            else
+                xtop = nan(1,3);
+                xslp = nan(1,3);
+            end
             
             h.lntop(ii) = plot(h.ax(ii), xtop, yref, '--k');
             h.lnslp(ii) = plot(h.ax(ii), xslp, yref, '--k');
