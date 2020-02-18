@@ -44,6 +44,8 @@ function [eof_maps,pc,expvar] = eof(A,varargin)
 % mostly from the PCAtool functions by Guillame MAZE. If you'd like more options you can get Guillame's  
 % PCAtool functions here: https://www.mathworks.com/matlabcentral/fileexchange/17915
 % 
+% Edit Feb 2020: Changed expvar = 100*(diag(D)./trace(D))';  to expvar = 100*(diag(D)./trace(R))'; on a suggestion from Scott M. Robeson. Thanks Scott! 
+% 
 % See also: reof, detrend3, and deseason.
 
 %% Error checks 
@@ -164,6 +166,6 @@ EOFs = V';
 
 %% Percent of variance explained by each principal component: 
 
-expvar = 100*(diag(D)./trace(D))'; 
+expvar = 100*(diag(D)./trace(R))'; 
 
 end

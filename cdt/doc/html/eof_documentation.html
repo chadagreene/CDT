@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>eof documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-18"><meta name="DC.source" content="eof_documentation.m"><style type="text/css">
+      --><title>eof documentation</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-02-18"><meta name="DC.source" content="eof_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>eof</tt> documentation</h1><!--introduction--><p>The <tt>eof</tt> function gives eigenmode maps of variability and corresponding principal component time series for spatiotemporal data analysis. This function is designed specifically for 3D matricies of data such as sea surface temperatures where dimensions 1 and 2 are spatial dimensions (e.g., lat and lon; lon and lat; x and y, etc.), and the third dimension represents different slices or snapshots of data in time.</p><p>See also: <a href="reof_documentation.html"><tt>reof</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">A simple example</a></li><li><a href="#6">TUTORIAL: From raw climate reanalysis data to ENSO, PDO, etc.</a></li><li><a href="#8">Average sea surface temperature</a></li><li><a href="#9">Global warming</a></li><li><a href="#10">Remove the global warming signal</a></li><li><a href="#11">Remove seasonal cycles</a></li><li><a href="#14">Calculate EOFs</a></li><li><a href="#16">Optional scaling of Principal Components and EOF maps</a></li><li><a href="#17">El Ni&ntilde;o Southern Oscillation (ENSO) time series</a></li><li><a href="#19">ENSO in the frequency domain</a></li><li><a href="#21">Maps of variability</a></li><li><a href="#23">Make a movie of SST variability from EOFs</a></li><li><a href="#28">A note on interpreting the explained variance.</a></li><li><a href="#37">How I got the sample data</a></li><li><a href="#38">References</a></li><li><a href="#39">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>eof_maps = eof(A)
+  </style></head><body><div class="content"><h1><tt>eof</tt> documentation</h1><!--introduction--><p>The <tt>eof</tt> function gives eigenmode maps of variability and corresponding principal component time series for spatiotemporal data analysis. This function is designed specifically for 3D matricies of data such as sea surface temperatures where dimensions 1 and 2 are spatial dimensions (e.g., lat and lon; lon and lat; x and y, etc.), and the third dimension represents different slices or snapshots of data in time.</p><p>See also: <a href="reof_documentation.html"><tt>reof</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">A simple example</a></li><li><a href="#6">TUTORIAL: From raw climate reanalysis data to ENSO, PDO, etc.</a></li><li><a href="#8">Average sea surface temperature</a></li><li><a href="#9">Global warming</a></li><li><a href="#10">Remove the global warming signal</a></li><li><a href="#11">Remove seasonal cycles</a></li><li><a href="#14">Calculate EOFs</a></li><li><a href="#16">Optional scaling of Principal Components and EOF maps</a></li><li><a href="#17">El Ni&ntilde;o Southern Oscillation (ENSO) time series</a></li><li><a href="#19">ENSO in the frequency domain</a></li><li><a href="#21">Maps of variability</a></li><li><a href="#23">Make a movie of SST variability from EOFs</a></li><li><a href="#28">How I got the sample data</a></li><li><a href="#29">References</a></li><li><a href="#30">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>eof_maps = eof(A)
 eof_maps = eof(A,n)
 eof_maps = eof(...,'mask',mask)
 [eof_maps,pc,expvar] = eof(...)</pre><h2 id="2">Description</h2><p><tt>eof_maps = eof(A)</tt> calculates all modes of variability in <tt>A</tt>, where <tt>A</tt> is a 3D matrix whose first two dimensions are spatial, the third dimension is temporal, and data are assumed to be equally spaced in time. Output <tt>eof_maps</tt> have the same dimensions as <tt>A</tt>, where each map along the third dimension represents a mode of variability order of importance.</p><p><tt>eof_maps = eof(A,n)</tt> only calculates the first <tt>n</tt> modes of variability. For large datasets, it's computationally faster to only calculate the number of modes you'll need. If <tt>n</tt> is not specified, all EOFs are calculated (one for each time slice).</p><p><tt>eof_maps = eof(...,'mask',mask)</tt> only performs EOF analysis on the grid cells represented by ones in a logical <tt>mask</tt> whose dimensions correspond to dimensions 1 and 2 of <tt>A</tt>. This option is provided to prevent solving for things that don't need to be solved, or to let you do analysis on one region separately from another. By default, any grid cells in <tt>A</tt> which contain <i>any</i> NaNs are masked out.</p><p><tt>[eof_maps,pc,expvar] = eof(...)</tt> returns the principal component time series <tt>pc</tt> whose rows each represent a different mode from 1 to <tt>n</tt> and columns correspond to time steps. For example, <tt>pc(1,:)</tt> is the time series of the first (dominant) mode of varibility.  The third output <tt>expvar</tt> is the percent of variance explained by each mode. See the note below on interpreting <tt>expvar</tt>.</p><h2 id="3">A simple example</h2><p>Here's a quick example of how to use the <tt>eof</tt> function. Proper EOF analysis requires detrending and deseasoning the data before calculating EOFs, and those steps are described in the tutorial below, but for now let's just pretend this sample dataset is ready to be analyzed.  Load the sample data, then calculate the first EOF.</p><p>Here I'm plotting the first EOF map using the <a href="cmocean_documentation.html"><tt>cmocean</tt></a> <i>delta</i> colormap (Thyng et al., 2016) with the <tt>'pivot'</tt> argument to ensure it's centered about zero.</p><pre class="codeinput"><span class="comment">% Load sample data:</span>
@@ -105,7 +105,7 @@ mean(diff(t))
     '15-Jan-1950 12:00:00'
     '15-Oct-2016 12:00:00'
 ans =
-   30.4370
+         30.44
 </pre><h2 id="8">Average sea surface temperature</h2><p>Okay, so this is monthly data, centered on about the 15th of each month, from 1950 to 2016. To get a sense of what the dataset looks like, display the mean temperature over that time.  I'm using <a href="imagescn_documentation.html"><tt>imagescn</tt></a>, which automatically makes NaN values transparent, but you can use <tt>imagesc</tt>, <tt>pcolor</tt>, or any equivalent mapping toolbox functions if you prefer. I'm also using the <a href="cmocean_documentation.html"><tt>cmocean</tt></a> <i>thermal</i> colormap (Thyng et al., 2016):</p><pre class="codeinput">figure
 imagescn(lon,lat,mean(sst,3));
 axis <span class="string">xy</span> <span class="string">off</span>
@@ -208,57 +208,8 @@ title(datestr(t(ind_1990s(1)),'yyyy'))</pre><pre>gif('SSTs_1990s.gif','frame',gc
    gif % adds this frame to the gif
 end</pre><p><img vspace="5" hspace="5" src="SSTs_1990s.gif" alt=""> </p><p>The first thing you probably notice is that the 1990s SST anomaly time series is dominated by ENSO, and check out that 1997-1998 signal!  No wonder it was such a hot topic in the <a href="https://www.nbc.com/saturday-night-live/video/el-nino/2861308">news</a> that year. Nonetheless, it's important to remember that the movie above is not a complete reconstruction of the SST anomalies, but rather only the first three modes, which together account for</p><pre class="codeinput">sum(expv(1:3))
 </pre><pre class="codeoutput">ans =
-   51.8850
-</pre><p>...just over half of the total variance of the SST dataset. To reconstruct the absolute temperature field rather than just anomalies from the first three modes, you'd need to include all the EOF maps, and you'd also have to add back in the mean SST map, the trend, and the seasonal cycle.</p><h2 id="28">A note on interpreting the explained variance.</h2><p>Above, we solved all 802 modes of a time series containing 802 time steps. Together, those modes explain 100% of the total variance in the <tt>sst</tt> dataset. That means we could add all those 802 modes together, multiplied by their principal components, and fully reconstruct the time series without any lost information. See, the sum of the explained variance...</p><pre class="codeinput">sum(expv)
-</pre><pre class="codeoutput">ans =
-  100.0000
-</pre><p>...is 100 percent. For this dataset and most other real-world datasets with natural modes of variability, the first few modes will carry most of the information and everything else should probably be ignored. Sometimes it is insightful to look at the explained variance as a function of mode number, or as is also common, the cumulative explained variance. Let's plot both:</p><pre class="codeinput">figure
-subplot(2,1,1)
-plot(expv)
-axis([0 802 0 37])
-box <span class="string">off</span>
-ylabel <span class="string">'variance explained per mode'</span>
-
-subplot(2,1,2)
-plot(cumsum(expv))
-axis([0 802 0 100])
-ylabel <span class="string">'cumulative variance explained'</span>
-xlabel <span class="string">'mode number'</span>
-box <span class="string">off</span>
-</pre><img vspace="5" hspace="5" src="eof_documentation_12.png" alt=""> <p>The plots above indicate that the first three modes account for more than half the variance in the detrended, deseasoned SST dataset, and everything else just adds tiny incremental improvements that get us just a little bit closer to reconstructing the full original dataset.</p><p>As a general rule of thumb, I tend to think of anything past about the third or fifth mode to be somewhat of a <a href="https://en.wikipedia.org/wiki/Rorschach_test">Rorschach test</a> that might trick you into believing there's meaningful signal, but be careful with trying to interpret those <i>Nth</i> order modes--Even in this simple dataset, there are 802 modes, meaning there's probably at least one mode in there that can seem to explain just about any crazy theory you might have. In other words, be mindful of the potential for <a href="https://en.wikipedia.org/wiki/Data_dredging">p-hacking</a> when interpreting EOFs.</p><p>Most of the 802 modes we solved for in the example above, each contribute a very small amount to the overall SST variability and are probably physically meaningless, so there's no sense in using so much computer power to solve for all those modes. If your dataset is very large, it will be much faster and will use less memory to solve for just the modes you need. There's only one small catch...</p><pre class="codeinput"><span class="comment">% Solve all modes:</span>
-[eof_maps_all,pc_all,expv_all] = eof(sst);
-
-<span class="comment">% Solve for just the first 10 modes:</span>
-[eof_maps_10,pc_10,expv_10] = eof(sst,10);
-</pre><p>We've just solved for the first 10 modes, and we see that the EOF maps and the principal component time series are on agreement with the solutions obtained by solving all 802 modes:</p><pre class="codeinput">figure
-subplot(1,2,1)
-imagescn(eof_maps_all(:,:,1)-eof_maps_10(:,:,1))
-colorbar
-cmocean(<span class="string">'balance'</span>,<span class="string">'pivot'</span>)
-
-subplot(1,2,2)
-plot(pc_all(1,:)-pc_10(1,:))
-axis <span class="string">tight</span>
-</pre><img vspace="5" hspace="5" src="eof_documentation_13.png" alt=""> <p>Both plots above show purely numerical noise. There is some apparent structure to them, but check out the cale of the color axis on the left (10^-17) and the y axis on the right (10^-14). That's rounding error which results from the fact that Matlab digitizes the numbers it works on, and it's common for the magnitude of rounding errors to track the magnitudes of the numbers that are being rounded.</p><p>So although there's a little bit of numerical noise, the solutions when solving for all 802 modes are the same as the solutions when solving for just 10 modes. Great. Until we look into the explained variance:</p><pre class="codeinput">figure
-plot(expv_all(1:10),expv_10,<span class="string">'o'</span>)
-hold <span class="string">on</span>
-plot([0 50],[0 50]) <span class="comment">% straight line (both values equal)</span>
-axis <span class="string">equal</span>
-xlabel <span class="string">'explained variance (all 802 solutions')</span>
-ylabel <span class="string">'explained variance (10 solutions')</span>
-</pre><img vspace="5" hspace="5" src="eof_documentation_14.png" alt=""> <p>The explained variances do not match, because <tt>expv</tt> provides a measure of percentage of variance <i>of the modes that were solved in a given run</i>. That is, if we solve for all 802 modes, the sum of the variance explained by the first 10 modes will not equal 100%:</p><pre class="codeinput">sum(expv_all(1:10))
-</pre><pre class="codeoutput">ans =
-   73.4559
-</pre><p>However, since we only solved the first 10 modes to get <tt>expv_10</tt>, their sums will equal 100%</p><pre class="codeinput">sum(expv_10(1:10))
-</pre><pre class="codeoutput">ans =
-  100.0000
-</pre><p>because those 10 modes explain 100% of the variance related to those 10 modes. That's somewhat circular logic, I know, so what good are the values of explained variance if you're only solving for a few modes? Maybe they aren't that good at all. The best thing you can do is use a long time series, solve for all the modes, and then look at the explained variances to see where they asymptote.</p><p>If you can only solve for a few modes due to computational limitations, you can still get some sense of whether you've gotten the full picture by plotting the cumulative sum of the explained variance from whatever modes you did solve for:</p><pre class="codeinput">figure
-plot(cumsum(expv_10),<span class="string">'o-'</span>)
-xlabel <span class="string">'mode number'</span>
-ylabel <span class="string">'cumulative sum of explained variance (%)'</span>
-ntitle({<span class="string">'Only solving for a few modes might trick you'</span>;<span class="keyword">...</span>
-   <span class="string">'into believing you''ve captured all the variance...'</span>})
-</pre><img vspace="5" hspace="5" src="eof_documentation_15.png" alt=""> <p>Of course the final value on that plot is 100% (which we know really means 100% of about 73.5% for this dataset), so the 100% value doesn't tell us much on its own, although we can see that it clearly doesn't reach much of an asymptote before getting to 100%, indicating that there's more to the story...</p><p>Sorry I don't have a tidier solution to that issue right now, but hopefully this little explainer gives a better understanding of what the <tt>eof</tt> function can and can't tell you.</p><h2 id="37">How I got the sample data</h2><p>The example dataset shown above comes from the Hadley Center HadISST, found <a href="http://www.metoffice.gov.uk/hadobs/hadisst/data/download.html">here</a> (Rayner et al., 2003) which in full exceeds 200 MB.  If you'd like to perform the the same kind of analysis on a different region of the world, you can download the HadISST_sst.nc dataset and import it into Matlab like this.  Downsampling or subsetting the dataset are up to you:</p><pre>% Load the full SST dataset:
+         51.88
+</pre><p>...just over half of the total variance of the SST dataset. To reconstruct the absolute temperature field rather than just anomalies from the first three modes, you'd need to include all the EOF maps, and you'd also have to add back in the mean SST map, the trend, and the seasonal cycle.</p><h2 id="28">How I got the sample data</h2><p>The example dataset shown above comes from the Hadley Center HadISST, found <a href="http://www.metoffice.gov.uk/hadobs/hadisst/data/download.html">here</a> (Rayner et al., 2003) which in full exceeds 200 MB.  If you'd like to perform the the same kind of analysis on a different region of the world, you can download the HadISST_sst.nc dataset and import it into Matlab like this.  Downsampling or subsetting the dataset are up to you:</p><pre>% Load the full SST dataset:
 lat = double(ncread('HadISST_sst.nc','latitude'));
 lon = double(ncread('HadISST_sst.nc','longitude'));
 t = double(ncread('HadISST_sst.nc','time')+datenum(1870,1,0));
@@ -275,7 +226,7 @@ t = t(times);
 sst = sst(rows,cols,times);
 sst(sst&lt;-50) = NaN;</pre><pre>% I find it easier to rearrange as lat x lon x time:
 sst = permute(sst,[2 1 3]);</pre><pre>% Save the sample data:
-save('PacOcean.mat','lat','lon','t','sst')</pre><h2 id="38">References</h2><p>Messi&eacute;, Monique, and Francisco Chavez. "Global modes of sea surface temperature variability in relation to regional climate indices." Journal of Climate 24.16 (2011): 4314-4331. <a href="http://dx.doi.org/10.1175/2011JCLI3941.1">doi:10.1175/2011JCLI3941.1</a>.</p><p>Rayner, N. A., Parker, D. E., Horton, E. B., Folland, C. K., Alexander, L. V., Rowell, D. P., Kent, E. C., Kaplan, A. (2003). Global analyses of sea surface temperature, sea ice, and night marine air temperature since the late nineteenth century. J. Geophys. Res.Vol. 108, No. D14, 4407 <a href="http://dx.doi.org/10.1029/2002JD002670">doi:10.1029/2002JD002670</a>.</p><p>Thyng, K.M., C.A. Greene, R.D. Hetland, H.M. Zimmerle, and S.F. DiMarco. 2016. True colors of oceanography: Guidelines for effective and accurate colormap selection. Oceanography 29(3):9-13, <a href="http://dx.doi.org/10.5670/oceanog.2016.66">doi:10.5670/oceanog.2016.66</a>.</p><h2 id="39">Author Info</h2><p>The <tt>eof</tt> function was written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas Institute for Geophysics (UTIG) in January 2017, but leans heavily on Guillame MAZE's <tt>caleof</tt> function from his <a href="https://www.mathworks.com/matlabcentral/fileexchange/17915">PCATool</a> contribution. This tutorial was written by Chad Greene with help from <a href="https://www.kaustubh.info/">Kaustubh Thirumalai</a>.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+save('PacOcean.mat','lat','lon','t','sst')</pre><h2 id="29">References</h2><p>Messi&eacute;, Monique, and Francisco Chavez. "Global modes of sea surface temperature variability in relation to regional climate indices." Journal of Climate 24.16 (2011): 4314-4331. <a href="http://dx.doi.org/10.1175/2011JCLI3941.1">doi:10.1175/2011JCLI3941.1</a>.</p><p>Rayner, N. A., Parker, D. E., Horton, E. B., Folland, C. K., Alexander, L. V., Rowell, D. P., Kent, E. C., Kaplan, A. (2003). Global analyses of sea surface temperature, sea ice, and night marine air temperature since the late nineteenth century. J. Geophys. Res.Vol. 108, No. D14, 4407 <a href="http://dx.doi.org/10.1029/2002JD002670">doi:10.1029/2002JD002670</a>.</p><p>Thyng, K.M., C.A. Greene, R.D. Hetland, H.M. Zimmerle, and S.F. DiMarco. 2016. True colors of oceanography: Guidelines for effective and accurate colormap selection. Oceanography 29(3):9-13, <a href="http://dx.doi.org/10.5670/oceanog.2016.66">doi:10.5670/oceanog.2016.66</a>.</p><h2 id="30">Author Info</h2><p>The <tt>eof</tt> function was written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas Institute for Geophysics (UTIG) in January 2017, but leans heavily on Guillame MAZE's <tt>caleof</tt> function from his <a href="https://www.mathworks.com/matlabcentral/fileexchange/17915">PCATool</a> contribution. This tutorial was written by Chad Greene with help from <a href="https://www.kaustubh.info/">Kaustubh Thirumalai</a>.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |eof| documentation
 % The |eof| function gives eigenmode maps of variability and corresponding principal component
@@ -649,142 +600,6 @@ sum(expv(1:3))
 % ...just over half of the total variance of the SST dataset. To reconstruct the absolute temperature field rather than 
 % just anomalies from the first three modes, you'd need to include all the EOF maps, and you'd also 
 % have to add back in the mean SST map, the trend, and the seasonal cycle.  
-
-%% A note on interpreting the explained variance. 
-% Above, we solved all 802 modes of a time series containing 802 time steps. 
-% Together, those modes explain 100% of the total variance in the |sst| dataset. 
-% That means we could add all those 802 modes together, multiplied by their
-% principal components, and fully reconstruct the time series without any lost
-% information. See, the sum of the explained variance...
-
-sum(expv) 
-
-%% 
-% ...is 100 percent. For this dataset and most other real-world datasets
-% with natural modes of variability, the first few modes will carry most of the
-% information and everything else should probably be ignored. Sometimes it is 
-% insightful to look at the explained variance as a function of mode number, or as is also 
-% common, the cumulative explained variance. Let's plot both: 
-
-figure
-subplot(2,1,1) 
-plot(expv)
-axis([0 802 0 37]) 
-box off
-ylabel 'variance explained per mode'
-
-subplot(2,1,2) 
-plot(cumsum(expv))
-axis([0 802 0 100]) 
-ylabel 'cumulative variance explained'
-xlabel 'mode number'
-box off 
-
-%% 
-% The plots above indicate that the first three modes account for more than
-% half the variance in the detrended, deseasoned SST dataset, and everything else
-% just adds tiny incremental improvements that get us just a little bit closer 
-% to reconstructing the full original dataset. 
-% 
-% As a general rule of thumb, I tend to think of anything past about the third or 
-% fifth mode to be somewhat of a <https://en.wikipedia.org/wiki/Rorschach_test Rorschach test> 
-% that might trick you into believing there's meaningful signal, but be careful
-% with trying to interpret those _Nth_ order modesREPLACE_WITH_DASH_DASHEven in this simple dataset, 
-% there are 802 modes, meaning there's probably at least one mode in there that can
-% seem to explain just about any crazy theory you might have. In other words, 
-% be mindful of the potential for <https://en.wikipedia.org/wiki/Data_dredging p-hacking> 
-% when interpreting EOFs. 
-% 
-% Most of the 802 modes we solved for in the example above, each contribute a very small amount
-% to the overall SST variability and are probably physically meaningless, so there's no sense
-% in using so much computer power to solve for all those modes. If your dataset
-% is very large, it will be much faster and will use less memory to solve 
-% for just the modes you need. There's only one small catch... 
-
-% Solve all modes: 
-[eof_maps_all,pc_all,expv_all] = eof(sst); 
-
-% Solve for just the first 10 modes: 
-[eof_maps_10,pc_10,expv_10] = eof(sst,10); 
-
-%% 
-% We've just solved for the first 10 modes, and we see that the 
-% EOF maps and the principal component time series are on agreement 
-% with the solutions obtained by solving all 802 modes: 
-
-figure
-subplot(1,2,1) 
-imagescn(eof_maps_all(:,:,1)-eof_maps_10(:,:,1))
-colorbar
-cmocean('balance','pivot')
-
-subplot(1,2,2) 
-plot(pc_all(1,:)-pc_10(1,:))
-axis tight
-
-%% 
-% Both plots above show purely numerical noise. There is some apparent structure 
-% to them, but check out the cale of the color axis on the left (10^-17) and the y 
-% axis on the right (10^-14). That's rounding error which results from the fact
-% that Matlab digitizes the numbers it works on, and it's common for the magnitude 
-% of rounding errors to track the magnitudes of the numbers that are being rounded. 
-% 
-% So although there's a little bit of numerical noise, the solutions when solving
-% for all 802 modes are the same as the solutions when solving for just 10 modes. 
-% Great. Until we look into the explained variance: 
-
-figure
-plot(expv_all(1:10),expv_10,'o')
-hold on
-plot([0 50],[0 50]) % straight line (both values equal)
-axis equal
-xlabel 'explained variance (all 802 solutions') 
-ylabel 'explained variance (10 solutions')
-
-%% 
-% The explained variances do not match, because |expv| provides 
-% a measure of percentage of variance _of the modes that were 
-% solved in a given run_. That is, if we solve for all 802 modes, 
-% the sum of the variance explained by the first 10 modes will 
-% not equal 100%: 
-
-sum(expv_all(1:10))
-
-%% 
-% However, since we only solved the first 10 modes to get |expv_10|, 
-% their sums will equal 100%
-
-sum(expv_10(1:10))
-
-%% 
-% because those 10 modes explain 100% of the variance related to 
-% those 10 modes. That's somewhat circular logic, I know, so what 
-% good are the values of explained variance if you're only solving 
-% for a few modes? Maybe they aren't that good at all. The best thing
-% you can do is use a long time series, solve for all the modes, and 
-% then look at the explained variances to see where they asymptote. 
-% 
-% If you can only solve for a few modes due to computational limitations, 
-% you can still get some sense of whether you've gotten the full picture 
-% by plotting the cumulative sum of the explained variance from whatever
-% modes you did solve for: 
-
-figure
-plot(cumsum(expv_10),'o-')
-xlabel 'mode number'
-ylabel 'cumulative sum of explained variance (%)'
-ntitle({'Only solving for a few modes might trick you';...
-   'into believing you''ve captured all the variance...'})
-
-%% 
-% Of course the final value on that plot is 100% (which we know really means 100% 
-% of about 73.5% for this dataset), so the 100% value doesn't tell us much on 
-% its own, although we can see that it clearly doesn't reach much of an asymptote
-% before getting to 100%, indicating that there's more to the story... 
-% 
-% Sorry I don't have a tidier solution to that issue right now, but hopefully
-% this little explainer gives a better understanding of what the |eof| function
-% can and can't tell you. 
 
 %% How I got the sample data
 % The example dataset shown above comes from the Hadley Center HadISST, found <http://www.metoffice.gov.uk/hadobs/hadisst/data/download.html here>
