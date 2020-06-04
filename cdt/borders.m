@@ -60,18 +60,10 @@ plotborder = false;
 faceplot = false; 
 plotWhat = 'singleplace'; 
 
-% Unless the user has the mapping toolbox and the current axes are already map axes: 
-if license('test','map_toolbox')
-   assert(ismap(gca)==0,'The current axes use Matlab''s Mapping Toolbox, so you will need to use the bordersm function instead of borders.') 
-end
-
-ax = axis; % make a note of the axis limits. 
-
 %% Parse inputs: 
 
 if nargout<2
-    plotborder = true; 
-    
+    plotborder = true;    
     if any(strncmpi(varargin,'face',4))
         faceplot = true; 
     end
@@ -106,10 +98,20 @@ else
    centerLon = 0; 
 end
 
+%% Check license
+
+% Unless the user has the mapping toolbox and the current axes are already map axes: 
+if plotborder
+   if license('test','map_toolbox')
+      assert(ismap(gca)==0,'The current axes use Matlab''s Mapping Toolbox, so you will need to use the bordersm function instead of borders.') 
+   end
+   ax = axis; % make a note of the axis limits. 
+end
+
+
 %% Load outline data and select which data to include: 
 
 bd = load('borderdata.mat'); 
-
 
 switch plotWhat
     case 'singleplace'

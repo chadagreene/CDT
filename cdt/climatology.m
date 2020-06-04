@@ -109,8 +109,8 @@ if nargin>2
       dim = varargin{find(tmp)+1}; 
       assert(isscalar(dim)==1,'Input error: dimension must be 1 through 2.') 
       assert(dim>0,'Input error: dimension must be 1 or 2.') 
-      assert(dim<3,'Input error: dimension must be 1 or 2.') 
-      assert(ND==2,'You can only specify a dimension if A is a 2D matrix.') 
+%       assert(dim<3,'Input error: dimension must be 1 or 2.') 
+%       assert(ND==2,'You can only specify a dimension if A is a 2D matrix.') 
    end
 end
 

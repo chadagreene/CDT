@@ -25,6 +25,11 @@ function n = doy(t,option)
 % 
 %  cdt doy
 %           
+%% History & Changes
+% On June 4, 2020, Kelly Kearney identified a problem out counting was slightly
+% off due to dates of year starting with 1 instead of 0. She came up with a 
+% nice fix, which has been implemented now. 
+% 
 %% Author Info: 
 % This function was written by Chad A. Greene of the University of Texas Institute for 
 % Geophysics (UTIG), June 2017. 
@@ -61,15 +66,15 @@ t = datenum(t);
 [yr,~,~] = datevec(t); 
 
 % Datenum corresponding to the strike of midnight at New Years: 
-tnye = datenum(yr,0,0,0,0,0); 
+tnye = datenum(yr,1,1,0,0,0); 
 
 % The day of the year is the date minus the datenum of the New Year: 
-n = t - tnye; 
+n = t - tnye;
 
 if remdec 
    
    % Datenum of the ceiling new years: 
-   tmax = datenum(yr+1,0,0,0,0,0); 
+   tmax = datenum(yr+1,1,1,0,0,0); 
      
    % The year fraction is the day of year out of the total number of days in the year: 
    n = n./(tmax-tnye); 
@@ -78,6 +83,8 @@ if remdec
       n = n+yr; 
    end
    
+else
+    n = n + 1; % 1-based rather than 0-based counting
 end
 
 end
