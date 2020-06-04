@@ -194,11 +194,13 @@ if plotborder
     end
 end
 
-if ~isequal(ax,[0 1 0 1])
-   axis(ax) 
-else
-   if centerLon~=0
-      axis([centerLon-180 centerLon+180 -90 90])
+if plotborder
+   if ~isequal(ax,[0 1 0 1])
+      axis(ax) 
+   else
+      if centerLon~=0
+         axis([centerLon-180 centerLon+180 -90 90])
+      end
    end
 end
 
