@@ -35,7 +35,7 @@ function h = vline(x,varargin)
 %% Error checks: 
 
 narginchk(1,Inf) 
-assert(isnumeric(x),'Input x must be numeric.')
+assert(isnumeric(x)|isdatetime(x),'Input x must be numeric.')
 
 %% Special adjustments: 
 % For the case where x is two elements, the plot function will interpret as "draw a diagonal 

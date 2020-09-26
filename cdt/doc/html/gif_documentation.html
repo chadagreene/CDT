@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>gif documentation</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-01-02"><meta name="DC.source" content="gif_documentation.m"><style type="text/css">
+      --><title>gif documentation</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-25"><meta name="DC.source" content="gif_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -73,8 +73,9 @@ gif(...,'DelayTime',DelayTimeValue,...)
 gif(...,'LoopCount',LoopCountValue,...)
 gif(...,'frame',handle,...)
 gif(...,'nodither')
+gif(...,'overwrite',true)
 gif
-gif('clear')</pre><h2 id="2">Description</h2><p><tt>gif('filename.gif')</tt> writes the first frame of a new gif file by the name <tt>filename.gif</tt>.</p><p><tt>gif(...,'DelayTime',DelayTimeValue,...)</tt> specifies a the delay time in seconds between frames. Default delay time is <tt>1/15</tt>.</p><p><tt>gif(...,'LoopCount',LoopCountValue,...)</tt> specifies the number of times the gif animation will play. Default loop count is <tt>Inf</tt>.</p><p><tt>gif(...,'frame',handle,...)</tt> uses the frame of the given figure or set of axes. The default frame handle is <tt>gca</tt>, meaning the current axes. To turn an entire figure window into a gif, use <tt>'frame',gcf</tt> to use the current figure.</p><p><tt>gif(...,'nodither')</tt> maps each color in the original image to the closest color in the new without dithering. Dithering is performed by default to achieve better color resolution, albeit at the expense of spatial resolution.</p><p><tt>gif</tt> adds a frame to the current gif file.</p><p><tt>gif('clear')</tt> clears the persistent variables associated with the most recent gif.</p><h2 id="3">Example</h2><p>Consider this sample surface that changes over time:</p><pre class="codeinput"><span class="comment">% Some sample data:</span>
+gif('clear')</pre><h2 id="2">Description</h2><p><tt>gif('filename.gif')</tt> writes the first frame of a new gif file by the name <tt>filename.gif</tt>.</p><p><tt>gif(...,'DelayTime',DelayTimeValue,...)</tt> specifies a the delay time in seconds between frames. Default delay time is <tt>1/15</tt>.</p><p><tt>gif(...,'LoopCount',LoopCountValue,...)</tt> specifies the number of times the gif animation will play. Default loop count is <tt>Inf</tt>.</p><p><tt>gif(...,'frame',handle,...)</tt> uses the frame of the given figure or set of axes. The default frame handle is <tt>gca</tt>, meaning the current axes. To turn an entire figure window into a gif, use <tt>'frame',gcf</tt> to use the current figure.</p><p><tt>gif(...,'nodither')</tt> maps each color in the original image to the closest color in the new without dithering. Dithering is performed by default to achieve better color resolution, albeit at the expense of spatial resolution.</p><p><tt>gif(...,'overwrite',true)</tt> bypasses a dialoge box that would otherwise verify that you want to overwrite an existing file by the specified name.</p><p><tt>gif</tt> adds a frame to the current gif file.</p><p><tt>gif('clear')</tt> clears the persistent variables associated with the most recent gif.</p><h2 id="3">Example</h2><p>Consider this sample surface that changes over time:</p><pre class="codeinput"><span class="comment">% Some sample data:</span>
 t = sin(linspace(0,2*pi,30));
 [X,Y,Z] = peaks(500);
 
@@ -88,10 +89,10 @@ camlight
 set(gca,<span class="string">'color'</span>,<span class="string">'k'</span>)
 set(gcf,<span class="string">'color'</span>,<span class="string">'k'</span>)
 caxis([min(Z(:)) max(Z(:))])
-</pre><img vspace="5" hspace="5" src="gif_documentation_01.png" alt=""> <h2 id="4">Write the first frame:</h2><p>When your plot looks the way you want the first frame of the gif to look, create a new gif file and write the first frame like this:</p><pre>gif('myfile.gif')</pre><p>If you want to specify certain options, include them the first time you call <tt>gif</tt>. For example, if you want a 0.2 second delay between each frame, you want the loop to run five times, and you want to use the entire figure window rather than the current axes, specifying all those options would look like this:</p><pre>gif('myfile.gif','DelayTime',0.2,'LoopCount',5,'frame',gcf)</pre><h2 id="5">Write the rest of the frames</h2><p>After the first frame has been written, write each subsequent frame simply by calling <tt>gif</tt> without any options. Here we loop through the remaining 29 frames:</p><pre>for k = 2:30
+</pre><img vspace="5" hspace="5" src="gif_documentation_01.png" alt=""> <h2 id="4">Write the first frame:</h2><p>When your plot looks the way you want the first frame of the gif to look, create a new gif file and write the first frame like this:</p><pre>gif('myfile.gif')</pre><p>If you want to specify certain options, include them the first time you call <tt>gif</tt>. For example, if you want a 0.2 second delay between each frame, you want the loop to run five times, and you want to use the entire figure window rather than the current axes, specifying all those options would look like this:</p><pre>gif('myfile.gif','DelayTime',0.2,'LoopCount',5,'frame',gcf)</pre><h2 id="5">Write the rest of the frames</h2><p>After the first frame has been written, write each subsequent frame simply by calling <tt>gif</tt> without any options. Here we loop through the remaining 29 frames:</p><pre>for k = 2:29
    set(h,'Zdata',Z*t(k))
    gif
-end</pre><p>And that's it. Here's what the final product looks like:</p><p><img vspace="5" hspace="5" src="myfile.gif" alt=""> </p><h2 id="7">View the gif in Matlab</h2><p>Did you know you can view gifs in Matlab? Here's how:</p><pre>web('myfile.gif')</pre><h2 id="8">Speeding up animation creation</h2><p>You'll notice that in the loop above, we only changed the bare minimum number of things in the plot. We did not clear the plot and regenerate the plot each time through the loop, because the more things you do, and the more things you plot, the longer it takes for each iteration. As with any loop, try to minimize the number of operations inside the loop.</p><h2 id="9">Author Info</h2><p>This function and supporting documentation were written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas Institute for Geophysics (UTIG), June 2017.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+end</pre><p>And that's it. Here's what the final product looks like:</p><p><img vspace="5" hspace="5" src="myfile.gif" alt=""> </p><h2 id="7">View the gif in Matlab</h2><p>Did you know you can view gifs in Matlab? Here's how:</p><pre>web('myfile.gif')</pre><h2 id="8">Speeding up animation creation</h2><p>You'll notice that in the loop above, we only changed the bare minimum number of things in the plot. We did not clear the plot and regenerate the plot each time through the loop, because the more things you do, and the more things you plot, the longer it takes for each iteration. As with any loop, try to minimize the number of operations inside the loop.</p><h2 id="9">Author Info</h2><p>This function and supporting documentation were written by <a href="http://www.chadagreene.com">Chad A. Greene</a> of the University of Texas Institute for Geophysics (UTIG), June 2017.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |gif| documentation
 % The |gif| function is the simplest way to make gifs. Simply call
@@ -112,6 +113,7 @@ end</pre><p>And that's it. Here's what the final product looks like:</p><p><img 
 %  gif(...,'LoopCount',LoopCountValue,...) 
 %  gif(...,'frame',handle,...) 
 %  gif(...,'nodither') 
+%  gif(...,'overwrite',true)
 %  gif 
 %  gif('clear') 
 % 
@@ -133,6 +135,9 @@ end</pre><p>And that's it. Here's what the final product looks like:</p><p><img 
 % without dithering. Dithering is performed by default to achieve better color resolution, 
 % albeit at the expense of spatial resolution.
 % 
+% |gif(...,'overwrite',true)| bypasses a dialoge box that would otherwise verify 
+% that you want to overwrite an existing file by the specified name. 
+%
 % |gif| adds a frame to the current gif file. 
 % 
 % |gif('clear')| clears the persistent variables associated with the most recent gif. 
@@ -172,11 +177,11 @@ caxis([min(Z(:)) max(Z(:))])
 % After the first frame has been written, write each subsequent frame simply by calling |gif| without
 % any options. Here we loop through the remaining 29 frames:
 % 
-%  for k = 2:30
+%  for k = 2:29
 %     set(h,'Zdata',Z*t(k))
 %     gif
 %  end
-
+% 
 %% 
 % And that's it. Here's what the final product looks like: 
 % 

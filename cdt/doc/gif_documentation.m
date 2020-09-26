@@ -17,6 +17,7 @@
 %  gif(...,'LoopCount',LoopCountValue,...) 
 %  gif(...,'frame',handle,...) 
 %  gif(...,'nodither') 
+%  gif(...,'overwrite',true)
 %  gif 
 %  gif('clear') 
 % 
@@ -38,6 +39,9 @@
 % without dithering. Dithering is performed by default to achieve better color resolution, 
 % albeit at the expense of spatial resolution.
 % 
+% |gif(...,'overwrite',true)| bypasses a dialoge box that would otherwise verify 
+% that you want to overwrite an existing file by the specified name. 
+%
 % |gif| adds a frame to the current gif file. 
 % 
 % |gif('clear')| clears the persistent variables associated with the most recent gif. 
@@ -77,11 +81,11 @@ caxis([min(Z(:)) max(Z(:))])
 % After the first frame has been written, write each subsequent frame simply by calling |gif| without
 % any options. Here we loop through the remaining 29 frames:
 % 
-%  for k = 2:30
+%  for k = 2:29
 %     set(h,'Zdata',Z*t(k))
 %     gif
 %  end
-
+% 
 %% 
 % And that's it. Here's what the final product looks like: 
 % 

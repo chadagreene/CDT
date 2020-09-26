@@ -57,6 +57,7 @@ persistent gif_filename firstframe DelayTime DitherOption LoopCount frame
 
 %% Parse Inputs
 
+
 if nargin>0 
    
    % The user may want to clear things and start over: 
@@ -74,13 +75,28 @@ if nargin>0
       
       % Check for an existing .gif file by the same name: 
       if exist(gif_filename,'file')==2
+
+         OverWrite = false; % By default, do NOT overwrite an existing file by the input name. 
+         if nargin>1
+            tmp = strncmpi(varargin,'overwrite',4); 
+            if any(tmp)
+               OverWrite = varargin{find(tmp)+1}; 
+               assert(islogical(OverWrite),'Error: Overwrite input must be either true or false.')
+            end
+         end
          
-         % Ask the user if (s)he wants to overwrite the existing file: 
-         choice = questdlg(['The file  ',gif_filename,' already exists. Overwrite it?'], ...
-            'The file already exists.','Overwrite','Cancel','Cancel');
+         if ~OverWrite
+         
+            % Ask the user if (s)he wants to overwrite the existing file: 
+            choice = questdlg(['The file  ',gif_filename,' already exists. Overwrite it?'], ...
+               'The file already exists.','Overwrite','Cancel','Cancel');
+            if strcmp(choice,'Overwrite')
+               OverWrite = true; 
+            end
+         end
          
          % Overwriting basically means deleting and starting from scratch: 
-         if strcmp(choice,'Overwrite')
+         if OverWrite
             delete(gif_filename) 
          else 
             clear gif_filename firstframe DelayTime DitherOption LoopCount frame
