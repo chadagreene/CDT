@@ -12,7 +12,7 @@ There are a few different ways to install this toolbox. Pick your favorite among
 In the Home menu of MATLAB, click Add-Ons, and search for Climate Data Toolbox. Click "Add from GitHub" and that's all you need to do. Installing this way is easy and will provide the most up-to-date version available. 
 
 
-### ...as a .mltbx toolbox:
+### ...as a .mltbx toolbox: (will almost always be outdated)
 First, download the ~100 MB .mltbx file [here](https://chadagreene.com/ClimateDataToolbox.mltbx). After downloading the .mltbx file, installation should be as easy as double clicking on the zip file and clicking "install". Or you can navigate to it in the Matlab file explorer, right click on the .mltbx, and click "Install." 
 
 The installation process puts the files in a folder called something like:

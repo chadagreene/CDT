@@ -16,6 +16,7 @@ function gif(varargin)
 %  gif(...,'LoopCount',LoopCountValue,...) 
 %  gif(...,'frame',handle,...) 
 %  gif(...,'nodither') 
+%  gif(...,'overwrite',true)
 %  gif 
 %  gif('clear') 
 % 
@@ -37,6 +38,9 @@ function gif(varargin)
 % without dithering. Dithering is performed by default to achieve better color resolution, 
 % albeit at the expense of spatial resolution.
 % 
+% gif(...,'overwrite',true) bypasses a dialoge box that would otherwise verify 
+% that you want to overwrite an existing file by the specified name. 
+%
 % gif adds a frame to the current gif file. 
 % 
 % gif('clear') clears the persistent variables associated with the most recent gif. 

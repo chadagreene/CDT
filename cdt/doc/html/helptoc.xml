@@ -32,12 +32,14 @@
          <tocitem target="near1_documentation.html">near1</tocitem>
          <tocitem target="near2_documentation.html">near2</tocitem>
          <tocitem target="cell2nancat_documentation.html">cell2nancat</tocitem>
+         <tocitem target="mask2outline_documentation.html">mask2outline</tocitem>
          <tocitem target="C2xyz_documentation.html">C2xyz</tocitem>
          <tocitem target="xyz2grid_documentation.html">xyz2grid</tocitem>
          <tocitem target="xyzread_documentation.html">xyzread</tocitem>
       </tocitem>
       
       <tocitem target="CDT_Contents.html#3"> Georeferenced Grids
+         <tocitem target="demresize_documentation.html">demresize</tocitem>
          <tocitem target="recenter_documentation.html">recenter</tocitem>
          <tocitem target="cdtgrid_documentation.html">cdtgrid</tocitem>
          <tocitem target="cdtdim_documentation.html">cdtdim</tocitem>
