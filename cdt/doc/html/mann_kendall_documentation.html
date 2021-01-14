@@ -6,8 +6,8 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>mann_kendall documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-02-14"><meta name="DC.source" content="mann_kendall_documentation.m"><style type="text/css">
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+      --><title>mann_kendall documentation</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-01-14"><meta name="DC.source" content="mann_kendall_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
 html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
@@ -23,7 +23,7 @@ a:visited { color:#004aa0; text-decoration:none; }
 
 p { padding:0px; margin:0px 0px 20px; }
 img { padding:0px; margin:0px 0px 20px; border:none; }
-p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
 
 ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
 ul li { padding:0px; margin:0px 0px 7px 0px; }
@@ -52,6 +52,7 @@ span.comment { color:#228B22 }
 span.string { color:#A020F0 }
 span.untermstring { color:#B20000 }
 span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
 
 .footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
 .footer p { margin:0px; }
@@ -66,7 +67,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>mann_kendall</tt> documentation</h1><!--introduction--><p><tt>mann_kendall</tt> performs a standard simple Mann-Kendall test on the time series y to determine the presence of a significant trend. (Requires Statistics Toolbox)</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: 1D array</a></li><li><a href="#11">Example 2: Multiple time series</a></li><li><a href="#16">Example 3: 3D data</a></li><li><a href="#20">References</a></li><li><a href="#21">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>h = mann_kendall(y)
+  </style></head><body><div class="content"><h1><tt>mann_kendall</tt> documentation</h1><!--introduction--><p><tt>mann_kendall</tt> performs a standard simple Mann-Kendall test to determine the presence of a significant trend. (Requires the Statistics Toolbox)</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: 1D array</a></li><li><a href="#11">Example 2: Multiple time series</a></li><li><a href="#16">Example 3: 3D data</a></li><li><a href="#20">References</a></li><li><a href="#21">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>h = mann_kendall(y)
 h = mann_kendall(y,alpha)
 h = mann_kendall(...,'dim',dim)
 [h,p] = mann_kendall(...)</pre><h2 id="2">Description</h2><p><tt>h = mann_kendall(y)</tt> performs a standard simple Mann-Kendall test on the time series <tt>y</tt> to determine the presence of a significant trend. If <tt>h</tt> is <tt>true</tt>, the trend is present; if <tt>h</tt> is <tt>false</tt>, you can reject the hypothesis of a trend. This function assumes <tt>y</tt> is equally sampled in time.</p><p><tt>h = mann_kendall(y,alpha)</tt> specifies the alpha significance level in the range 0 to 1. Default <tt>alpha is 0.05</tt>, which corresponds to the 5% significance level.</p><p><tt>h = mann_kendall(...,'dim',dim)</tt> specifies the dimension along which the trend is calculated. By default, if <tt>y</tt> is a 1D array, the trend is calculated along the first nonsingleton dimension of <tt>y</tt>; if <tt>y</tt> is a 2D matrix, the trend is calcaulated down the rows (dimension 1) of <tt>y</tt>; if <tt>y</tt> is a 3D matrix, the trend is calculated down dimension 3.</p><p><tt>[h,p] = mann_kendall(...)</tt> also returns the p-value of the trend.</p><h2 id="3">Example 1: 1D array</h2><p>Consider these two arrays, one with a trend and one without:</p><pre class="codeinput">x = (1:1000)';
@@ -76,14 +77,14 @@ y1 = randn(size(x)) + 1000 + x/500; <span class="comment">% random data with tre
 plot(x,y0,<span class="string">'b'</span>);
 hold <span class="string">on</span>
 plot(x,y1,<span class="string">'r'</span>);
-</pre><img vspace="5" hspace="5" src="mann_kendall_documentation_01.png" alt=""> <p>To help show the trends, use <a href="polyplot_documentation.html"><tt>polyplot</tt></a>, which will plot the first-degree polynomial trend lines for <tt>y0</tt> and <tt>y1</tt>.</p><pre class="codeinput">polyplot(x,y0,1,<span class="string">'linewidth'</span>,2)
-polyplot(x,y1,1,<span class="string">'linewidth'</span>,2)
+</pre><img vspace="5" hspace="5" src="mann_kendall_documentation_01.png" alt=""> <p>To help show the trends, use <a href="polyplot_documentation.html"><tt>polyplot</tt></a>, which will plot the first-degree polynomial trend lines for <tt>y0</tt> and <tt>y1</tt>.</p><pre class="codeinput">polyplot(x,y0,1,<span class="string">'b'</span>,<span class="string">'linewidth'</span>,2)
+polyplot(x,y1,1,<span class="string">'r'</span>,<span class="string">'linewidth'</span>,2)
 </pre><img vspace="5" hspace="5" src="mann_kendall_documentation_02.png" alt=""> <p>And just to verify the magnitudes of the trends in <tt>y0</tt> and <tt>y1</tt>, use the <a href="trend_documentation.html"><tt>trend</tt></a> function:</p><pre class="codeinput">trend(y0)
 </pre><pre class="codeoutput">ans =
-  -7.7958e-05
+   7.8691e-05
 </pre><p>...as expected, the trend in <tt>y0</tt> is about zero. Now check <tt>y1</tt>:</p><pre class="codeinput">trend(y1)
 </pre><pre class="codeoutput">ans =
-    0.0019
+    0.0020
 </pre><p>...and as expected, the trend in <tt>y1</tt> is 1/500 as we intentionally imposed. Both of these trend magnitudes may seem like small numbers that are close to zero, while not being exactly zero. So are either of these trends significant? Use <tt>mann_kendall</tt> to find out, starting with <tt>y0</tt>:</p><pre class="codeinput">mann_kendall(y0)
 </pre><pre class="codeoutput">ans =
   logical
@@ -127,12 +128,11 @@ cmocean(<span class="string">'balance'</span>,<span class="string">'pivot'</span
 
 hold <span class="string">on</span>
 stipple(lon,lat,significant)
-</pre><img vspace="5" hspace="5" src="mann_kendall_documentation_04.png" alt=""> <p>The map above shows that the SST trend is significant most places, at the alpha = 5% level. Feel free to try it with stricter standards.</p><p>Curious about what effects the seasons might have on the calculation? Try using <a href="deseason_documentation.html"><tt>deseason</tt></a> to remove seasonal cycles from the sst dataset and re-calculate the trends and significance.</p><h2 id="20">References</h2><p>Mann, H. B. (1945), Nonparametric tests against trend, Econometrica, 13, 245-259.</p><p>Kendall, M. G. (1975), Rank Correlation Methods, Griffin, London.</p><h2 id="21">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene, adapted from the <a href="https://www.mathworks.com/matlabcentral/fileexchange/25531"><tt>Mann_Kendall</tt></a> function by Simone Fatichi.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+</pre><img vspace="5" hspace="5" src="mann_kendall_documentation_04.png" alt=""> <p>The map above shows that the SST trend is significant most places, at the alpha = 5% level. Feel free to try it with stricter standards.</p><p>Curious about what effects the seasons might have on the calculation? Try using <a href="deseason_documentation.html"><tt>deseason</tt></a> to remove seasonal cycles from the sst dataset and re-calculate the trends and significance.</p><h2 id="20">References</h2><p>Mann, H. B. (1945), Nonparametric tests against trend, Econometrica, 13, 245-259.</p><p>Kendall, M. G. (1975), Rank Correlation Methods, Griffin, London.</p><h2 id="21">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene, adapted from the <a href="https://www.mathworks.com/matlabcentral/fileexchange/25531"><tt>Mann_Kendall</tt></a> function by Simone Fatichi.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% |mann_kendall| documentation
-% |mann_kendall| performs a standard simple Mann-Kendall test on the
-% time series y to determine the presence of a significant trend. (Requires
-% Statistics Toolbox)
+% |mann_kendall| performs a standard simple Mann-Kendall test to determine the 
+% presence of a significant trend. (Requires the Statistics Toolbox)
 % 
 % <CDT_Contents.html Back to Climate Data Tools Contents>. 
 %% Syntax
@@ -176,8 +176,8 @@ plot(x,y1,'r');
 % To help show the trends, use <polyplot_documentation.html |polyplot|>, which
 % will plot the first-degree polynomial trend lines for |y0| and |y1|. 
 
-polyplot(x,y0,1,'linewidth',2)
-polyplot(x,y1,1,'linewidth',2)
+polyplot(x,y0,1,'b','linewidth',2)
+polyplot(x,y1,1,'r','linewidth',2)
 
 %% 
 % And just to verify the magnitudes of the trends in |y0| and |y1|, use the

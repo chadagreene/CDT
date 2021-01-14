@@ -5,6 +5,7 @@
 % 
 %  [xb,yb] = mask2outline(x,y,mask)
 %  [xb,yb] = mask2outline(x,y,mask,'buffer',buf)
+%  [xb,yb] = mask2outline(...,'region',N)
 % 
 %% Description 
 % 
@@ -16,6 +17,9 @@
 % of |x,y| to place around the |mask|. For example, if the units of |x| and |y| are 
 % meters and |buf=10e3|, then that places a 10 km buffer around the mask. The 
 % buffer can be negative to buffer into the mask. 
+% 
+% |[xb,yb] = mask2outline(...,'region',N)| only returns the outline of the 
+% Nth largest region by area. 
 % 
 %% Example 
 % Consider this mask: 

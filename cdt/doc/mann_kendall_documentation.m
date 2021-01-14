@@ -44,8 +44,8 @@ plot(x,y1,'r');
 % To help show the trends, use <polyplot_documentation.html |polyplot|>, which
 % will plot the first-degree polynomial trend lines for |y0| and |y1|. 
 
-polyplot(x,y0,1,'linewidth',2)
-polyplot(x,y1,1,'linewidth',2)
+polyplot(x,y0,1,'b','linewidth',2)
+polyplot(x,y1,1,'r','linewidth',2)
 
 %% 
 % And just to verify the magnitudes of the trends in |y0| and |y1|, use the
