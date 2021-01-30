@@ -33,8 +33,9 @@
 % will play. Default loop count is |Inf|. 
 % 
 % |gif(...,'frame',handle,...)| uses the frame of the given figure or set of axes. The default 
-% frame handle is |gca|, meaning the current axes. To turn an entire figure window into a gif, 
-% use |'frame',gcf| to use the current figure. 
+% frame handle is |gcf|, meaning the current figure. To turn just one set of axes into a gif, 
+% use |'frame',gca|. This behavior changed in Jan 2021, as the default option changed from
+% gca to gcf.
 % 
 % |gif(...,'resolution',res)| specifies the resolution (in dpi) of each frame. This option
 % requires <https://www.mathworks.com/matlabcentral/fileexchange/23629 |export_fig|>.
@@ -79,13 +80,13 @@ caxis([min(Z(:)) max(Z(:))])
 % want to use the entire figure window rather than the current axes, specifying all those options
 % would look like this: 
 % 
-%  gif('myfile.gif','DelayTime',1/24,'LoopCount',5,'frame',gcf)
+%  gif('myfile.gif','DelayTime',1/24,'LoopCount',5)
 %  
 % Or, if you want a high-resolution gif that uses |export_fig|, specify a resolution
 % in units of dpi. This option is slower and creates larger files, but in some cases
 % the difference in image quality may be significant. Here's how you might specify 400 dpi: 
 % 
-% gif('myfile.gif','DelayTime',1/24,'frame',gcf,'resolution',400)
+% gif('myfile.gif','DelayTime',1/24,'resolution',400)
 %
 %% Write the rest of the frames 
 % After the first frame has been written, write each subsequent frame simply by calling |gif| without

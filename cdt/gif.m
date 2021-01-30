@@ -32,8 +32,9 @@ function gif(varargin)
 % will play. Default loop count is Inf. 
 % 
 % gif(...,'frame',handle,...) uses the frame of the given figure or set of axes. The default 
-% frame handle is gca, meaning the current axes. To turn an entire figure window into a gif, 
-% use 'frame',gcf to use the current figure. 
+% frame handle is gcf, meaning the current figure. To turn just one set of axes into a gif, 
+% use 'frame',gca. This behavior changed in Jan 2021, as the default option changed from
+% gca to gcf.
 % 
 % gif(...,'resolution',res) specifies the resolution (in dpi) of each frame. This option
 % requires export_fig (https://www.mathworks.com/matlabcentral/fileexchange/23629).
@@ -118,7 +119,7 @@ if nargin>0
       DelayTime = 1/15; 
       DitherOption = 'dither'; 
       LoopCount = Inf; 
-      frame = gca; 
+      frame = gcf; 
       resolution = 0; % When 0, it's used as a boolean to say "don't use export_fig". If greater than zero, the boolean says "use export_fig and use the specified resolution."  
    end
    
