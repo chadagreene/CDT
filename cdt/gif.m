@@ -15,6 +15,7 @@ function gif(varargin)
 %  gif(...,'DelayTime',DelayTimeValue,...) 
 %  gif(...,'LoopCount',LoopCountValue,...) 
 %  gif(...,'frame',handle,...) 
+%  gif(...,'resolution',res)
 %  gif(...,'nodither') 
 %  gif(...,'overwrite',true)
 %  gif 
@@ -34,6 +35,9 @@ function gif(varargin)
 % frame handle is gca, meaning the current axes. To turn an entire figure window into a gif, 
 % use 'frame',gcf to use the current figure. 
 % 
+% gif(...,'resolution',res) specifies the resolution (in dpi) of each frame. This option
+% requires export_fig (https://www.mathworks.com/matlabcentral/fileexchange/23629).
+%
 % gif(...,'nodither') maps each color in the original image to the closest color in the new 
 % without dithering. Dithering is performed by default to achieve better color resolution, 
 % albeit at the expense of spatial resolution.
@@ -57,10 +61,9 @@ function gif(varargin)
 % See also: imwrite, getframe, and rgb2ind. 
 
 % Define persistent variables: 
-persistent gif_filename firstframe DelayTime DitherOption LoopCount frame
+persistent gif_filename firstframe DelayTime DitherOption LoopCount frame resolution
 
 %% Parse Inputs
-
 
 if nargin>0 
    
@@ -68,7 +71,7 @@ if nargin>0
    if any(strcmpi(varargin,'clear'))
             
       % Clear persistent variables associated with this function: 
-      clear gif_filename firstframe DelayTime DitherOption LoopCount frame
+      clear gif_filename firstframe DelayTime DitherOption LoopCount frame resolution
    end
    
    % If the first input ends in .gif, assume this is the first frame:
@@ -116,12 +119,13 @@ if nargin>0
       DitherOption = 'dither'; 
       LoopCount = Inf; 
       frame = gca; 
+      resolution = 0; % When 0, it's used as a boolean to say "don't use export_fig". If greater than zero, the boolean says "use export_fig and use the specified resolution."  
    end
    
    tmp = strcmpi(varargin,'DelayTime'); 
    if any(tmp) 
       DelayTime = varargin{find(tmp)+1}; 
-      assert(isscalar(DelayTime)==1,'Error: DelayTime must be a scalar value.') 
+      assert(isscalar(DelayTime),'Error: DelayTime must be a scalar value.') 
    end
    
    if any(strcmpi(varargin,'nodither'))
@@ -131,7 +135,15 @@ if nargin>0
    tmp = strcmpi(varargin,'LoopCount'); 
    if any(tmp) 
       LoopCount = varargin{find(tmp)+1}; 
-      assert(isscalar(LoopCount)==1,'Error: LoopCount must be a scalar value.') 
+      assert(isscalar(LoopCount),'Error: LoopCount must be a scalar value.') 
+   end
+   
+   tmp = strncmpi(varargin,'resolution',3); 
+   if any(tmp) 
+      resolution = varargin{find(tmp)+1}; 
+      assert(isscalar(resolution),'Error: resolution must be a scalar value.') 
+      assert(exist('export_fig.m','file')==2,'export_fig not found. If you wish to specify the image resolution, get export_fig here :https://www.mathworks.com/matlabcentral/fileexchange/23629. Otherwise remove the resolution from the gif inputs to use the default (lower quality) built-in getframe functionality.')  
+      warning off export_fig:exportgraphics
    end
    
    tmp = strcmpi(varargin,'frame'); 
@@ -146,11 +158,23 @@ end
 
 %% Perform work: 
 
-% Get frame: 
-f = getframe(frame); 
+if resolution % If resolution is >0, it means use export_fig
+   
+   if isgraphics(frame,'figure')
+      f = export_fig('-nocrop',['-r',num2str(resolution)]);
+   else
+      % If the frame is a set of axes instead of a figure, use default cropping: 
+      f = export_fig(['-r',num2str(resolution)]);
+   end
+      
+else
+   % Get frame: 
+   fr = getframe(frame); 
+   f =  fr.cdata; 
+end
 
 % Convert the frame to a colormap and corresponding indices: 
-[imind,cmap] = rgb2ind(f.cdata,256,DitherOption);    
+[imind,cmap] = rgb2ind(f,256,DitherOption);    
 
 % Write the file:     
 if firstframe

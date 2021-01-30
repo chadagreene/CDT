@@ -16,6 +16,7 @@
 %  gif(...,'DelayTime',DelayTimeValue,...) 
 %  gif(...,'LoopCount',LoopCountValue,...) 
 %  gif(...,'frame',handle,...) 
+%  gif(...,'resolution',res)
 %  gif(...,'nodither') 
 %  gif(...,'overwrite',true)
 %  gif 
@@ -34,6 +35,9 @@
 % |gif(...,'frame',handle,...)| uses the frame of the given figure or set of axes. The default 
 % frame handle is |gca|, meaning the current axes. To turn an entire figure window into a gif, 
 % use |'frame',gcf| to use the current figure. 
+% 
+% |gif(...,'resolution',res)| specifies the resolution (in dpi) of each frame. This option
+% requires <https://www.mathworks.com/matlabcentral/fileexchange/23629 |export_fig|>.
 % 
 % |gif(...,'nodither')| maps each color in the original image to the closest color in the new 
 % without dithering. Dithering is performed by default to achieve better color resolution, 
@@ -71,12 +75,18 @@ caxis([min(Z(:)) max(Z(:))])
 %  gif('myfile.gif') 
 % 
 % If you want to specify certain options, include them the first time you call |gif|. For example, 
-% if you want a 0.2 second delay between each frame, you want the loop to run five times, and you 
+% if you want a 1/24 second delay between each frame, you want the loop to run five times, and you 
 % want to use the entire figure window rather than the current axes, specifying all those options
 % would look like this: 
 % 
-%  gif('myfile.gif','DelayTime',0.2,'LoopCount',5,'frame',gcf)
+%  gif('myfile.gif','DelayTime',1/24,'LoopCount',5,'frame',gcf)
+%  
+% Or, if you want a high-resolution gif that uses |export_fig|, specify a resolution
+% in units of dpi. This option is slower and creates larger files, but in some cases
+% the difference in image quality may be significant. Here's how you might specify 400 dpi: 
 % 
+% gif('myfile.gif','DelayTime',1/24,'frame',gcf,'resolution',400)
+%
 %% Write the rest of the frames 
 % After the first frame has been written, write each subsequent frame simply by calling |gif| without
 % any options. Here we loop through the remaining 29 frames:
@@ -87,7 +97,8 @@ caxis([min(Z(:)) max(Z(:))])
 %  end
 % 
 %% 
-% And that's it. Here's what the final product looks like: 
+% And that's it. Here's what the final product looks like using the default
+% resolution: 
 % 
 % <<myfile.gif>>
 
