@@ -6,7 +6,7 @@
 [**Click here**](https://www.chadagreene.com/CDT/CDT_Contents.html) to view the CDT documentation online.
 
 # Video Tutorials
-[![How to analyze trends in sea surface temperature using CDT](https://img.youtube.com/vi/t46dTVp7NHY/0.jpg)](https://www.youtube.com/watch?v=t46dTVp7NHY)
+### Analyzing Trends and Global Warming:[![How to analyze trends in sea surface temperature using CDT](https://img.youtube.com/vi/t46dTVp7NHY/0.jpg)](https://www.youtube.com/watch?v=t46dTVp7NHY)
 
 # Installing the toolbox:
 There are a few different ways to install this toolbox. Pick your favorite among the following:
