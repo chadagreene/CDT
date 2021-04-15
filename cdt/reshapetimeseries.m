@@ -158,8 +158,17 @@ nt = length(tedge) - 1;
 
 [g, binunq] = findgroups(bins);
 
-xg = nan(nt,1);
-xg(binunq) = splitapply(Opt.func, x, g);
+try
+    xg = nan(nt,1);
+    xg(binunq) = splitapply(Opt.func, x, g);
+catch ME
+    if strcmp(ME.identifier, 'MATLAB:invalidConversion')
+        xg = cell(nt,1);
+        xg(binunq) = splitapply(Opt.func, x, g);
+    else
+        rethrow(ME);
+    end
+end
 
 xg = reshape(xg, nperyear, nyr);
 
