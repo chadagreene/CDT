@@ -37,15 +37,15 @@ function [pmld, mldtbl, pth, h] = mld(varargin)
 % Input arguments:
 %
 %   pres:           vector of pressure values (db).  Values should be
-%                   strictly increasing positive values.  
+%                   strictly increasing positive values.
 %
-%   temp:           vector of temperature values (deg C) at the given
-%                   pressure values.
+%   temp:           vector of in-situ temperature values (deg C) at the
+%                   given pressure values.
 %
-%   salt:           vector of salinity values; if not included, only
-%                   temperature-based MLD will be calculated.  If included,
-%                   salinity and potential density-based MLDs will be
-%                   added as applicable to the chosen metric.
+%   salt:           vector of (practical) salinity values; if not included,
+%                   only temperature-based MLD will be calculated.  If
+%                   included, salinity and potential density-based MLDs
+%                   will be added as applicable to the chosen metric.
 %
 % Optional input arguments, passed as parameter/value pairs [default]:
 %
@@ -259,7 +259,8 @@ end
 % Calculate the potential density anomaly, with a reference pressure of 0 
 
 if ~tonly
-    pden = gsw_rho(sal,temp,pres)-1000;
+    pden = sw_pden(sal,temp,pres,0) - 1000;
+%     pden = gsw_rho(sal,temp,pres)-1000;
 end
 
 % Set up mld output array
