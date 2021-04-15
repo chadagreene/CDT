@@ -1,0 +1,207 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>mask2outline documentation</title><meta name="generator" content="MATLAB 9.7"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2020-09-30"><meta name="DC.source" content="mask2outline_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>mask2outline</tt> documentation</h1><!--introduction--><p><tt>mask2outline</tt> converts a logical mask into an outline or border.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#5">Buffer the border</a></li><li><a href="#6">Multipe sections</a></li><li><a href="#9">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[xb,yb] = mask2outline(x,y,mask)
+[xb,yb] = mask2outline(x,y,mask,'buffer',buf)
+[xb,yb] = mask2outline(...,'region',N)</pre><h2 id="2">Description</h2><p><tt>[xb,yb] = mask2outline(x,y,mask)</tt> returns the coordinates <tt>xb,yb</tt> of the outline of a 2D mask whose input coordinates pixel centers are given by <tt>x,y</tt>.</p><p><tt>[xb,yb] = mask2outline(x,y,mask,'buffer',buf)</tt> specifies a buffer in units of <tt>x,y</tt> to place around the <tt>mask</tt>. For example, if the units of <tt>x</tt> and <tt>y</tt> are meters and <tt>buf=10e3</tt>, then that places a 10 km buffer around the mask. The buffer can be negative to buffer into the mask.</p><p><tt>[xb,yb] = mask2outline(...,'region',N)</tt> only returns the outline of the Nth largest region by area.</p><h2 id="3">Example</h2><p>Consider this mask:</p><pre class="codeinput"><span class="comment">% Load the default peaks dataset:</span>
+[X,Y,Z] = peaks(500);
+
+<span class="comment">% Convert x,y coordinates to something like meters to make it intuitive:</span>
+X = X*1000;
+Y = (Y+5)*1000;
+
+<span class="comment">% Define a mask as anything where Z&gt;5:</span>
+mask = Z&gt;5;
+
+<span class="comment">% Plot the mask:</span>
+figure
+imagescn(X,Y,mask)
+xlabel <span class="string">'eastings (m)'</span>
+ylabel <span class="string">'northings (m)'</span>
+</pre><img vspace="5" hspace="5" src="mask2outline_documentation_01.png" alt=""> <p>Let's say you want to find the coordinates that mark the boundary of the mask:</p><pre class="codeinput">[xb,yb] = mask2outline(X,Y,mask);
+
+<span class="comment">% Plot the border with a red outline:</span>
+hold <span class="string">on</span>
+plot(xb,yb,<span class="string">'r'</span>,<span class="string">'linewidth'</span>,2)
+</pre><img vspace="5" hspace="5" src="mask2outline_documentation_02.png" alt=""> <h2 id="5">Buffer the border</h2><p>Suppose you want to buffer the border by 600 meters:</p><pre class="codeinput">[xb,yb] = mask2outline(X,Y,mask,<span class="string">'buffer'</span>,600);
+
+<span class="comment">% Plot the border with a red dotted outline:</span>
+plot(xb,yb,<span class="string">'r:'</span>,<span class="string">'linewidth'</span>,2)
+</pre><img vspace="5" hspace="5" src="mask2outline_documentation_03.png" alt=""> <h2 id="6">Multipe sections</h2><p>Suppose your mask has multiple sections:</p><pre class="codeinput">mask = Z&gt;3;
+
+<span class="comment">% Plot the mask:</span>
+figure
+imagescn(X,Y,mask)
+xlabel <span class="string">'eastings (m)'</span>
+ylabel <span class="string">'northings (m)'</span>
+</pre><img vspace="5" hspace="5" src="mask2outline_documentation_04.png" alt=""> <p>The same method as above works. (This is really just an exercise in the documentation to ensure consistent behavior in case of future changes to the function).</p><pre class="codeinput">[xb,yb] = mask2outline(X,Y,mask);
+
+<span class="comment">% Plot the border with a red outline:</span>
+hold <span class="string">on</span>
+plot(xb,yb,<span class="string">'r'</span>,<span class="string">'linewidth'</span>,2)
+</pre><img vspace="5" hspace="5" src="mask2outline_documentation_05.png" alt=""> <p>Buffer in: This time we'll buffer <i>into</i> each mask by 200 m:</p><pre class="codeinput">[xb,yb] = mask2outline(X,Y,mask,<span class="string">'buffer'</span>,-200);
+
+<span class="comment">% Plot the border with a red dotted outline:</span>
+plot(xb,yb,<span class="string">'r:'</span>,<span class="string">'linewidth'</span>,2)
+</pre><img vspace="5" hspace="5" src="mask2outline_documentation_06.png" alt=""> <h2 id="9">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of the NASA's Jet Propulsion Laboratory, September 2020.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |mask2outline| documentation
+% |mask2outline| converts a logical mask into an outline or border. 
+% 
+%% Syntax 
+% 
+%  [xb,yb] = mask2outline(x,y,mask)
+%  [xb,yb] = mask2outline(x,y,mask,'buffer',buf)
+%  [xb,yb] = mask2outline(...,'region',N)
+% 
+%% Description 
+% 
+% |[xb,yb] = mask2outline(x,y,mask)| returns the coordinates |xb,yb| of the 
+% outline of a 2D mask whose input coordinates pixel centers are given by 
+% |x,y|. 
+% 
+% |[xb,yb] = mask2outline(x,y,mask,'buffer',buf)| specifies a buffer in units
+% of |x,y| to place around the |mask|. For example, if the units of |x| and |y| are 
+% meters and |buf=10e3|, then that places a 10 km buffer around the mask. The 
+% buffer can be negative to buffer into the mask. 
+% 
+% |[xb,yb] = mask2outline(...,'region',N)| only returns the outline of the 
+% Nth largest region by area. 
+% 
+%% Example 
+% Consider this mask: 
+
+% Load the default peaks dataset: 
+[X,Y,Z] = peaks(500); 
+
+% Convert x,y coordinates to something like meters to make it intuitive:
+X = X*1000;  
+Y = (Y+5)*1000; 
+
+% Define a mask as anything where Z>5: 
+mask = Z>5; 
+
+% Plot the mask: 
+figure
+imagescn(X,Y,mask)
+xlabel 'eastings (m)' 
+ylabel 'northings (m)'
+
+%% 
+% Let's say you want to find the coordinates that mark the boundary of the 
+% mask: 
+
+[xb,yb] = mask2outline(X,Y,mask); 
+
+% Plot the border with a red outline: 
+hold on
+plot(xb,yb,'r','linewidth',2)
+
+%% Buffer the border 
+% Suppose you want to buffer the border by 600 meters: 
+
+[xb,yb] = mask2outline(X,Y,mask,'buffer',600); 
+
+% Plot the border with a red dotted outline: 
+plot(xb,yb,'r:','linewidth',2)
+
+%% Multipe sections
+% Suppose your mask has multiple sections: 
+mask = Z>3; 
+
+% Plot the mask: 
+figure
+imagescn(X,Y,mask)
+xlabel 'eastings (m)' 
+ylabel 'northings (m)'
+
+%% 
+% The same method as above works. (This is really just an exercise in the 
+% documentation to ensure consistent behavior in case of future changes 
+% to the function). 
+
+[xb,yb] = mask2outline(X,Y,mask); 
+
+% Plot the border with a red outline: 
+hold on
+plot(xb,yb,'r','linewidth',2)
+
+%% 
+% Buffer in: This time we'll buffer _into_ each mask by 200 m: 
+
+[xb,yb] = mask2outline(X,Y,mask,'buffer',-200); 
+
+% Plot the border with a red dotted outline: 
+plot(xb,yb,'r:','linewidth',2)
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of the NASA's Jet Propulsion Laboratory, September 2020. 
+##### SOURCE END #####
+--></body></html>

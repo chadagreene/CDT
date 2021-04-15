@@ -48,6 +48,7 @@
 % specified coordinate. 
 % * <near2_documentation.html *|near2|*> finds the subscript indices of the point in a grid closest to a 
 % specified location. 
+% * <mask2outline_documentation.html *|mask2outline|*> converts a logical mask into an outline or border. 
 % * <cell2nancat_documentation.html *|cell2nancat|*> concatenates elements of a cell into a NaN-separated vector. 
 % * <xyz2grid_documentation.html *|xyz2grid|*> converts regularly-spaced columnated x,y,z data into gridded data. 
 % * <C2xyz_documentation.html *|C2xyz|*> converts a contour matrix (as returned by the |contour| function) into
@@ -56,6 +57,7 @@
 
 %% Georeferenced Grids
 %
+% * <demresize_documentation.html *|demresize|*> works like |imresize|, but also resizes corresponding map coordinates.
 % * <recenter_documentation.html *|recenter|*> rewraps a gridded dataset to 
 % be centered on a specified longitude.
 % * <cdtgrid_documentation.html *|cdtgrid|*> uses |meshgrid| to easily create 
@@ -242,7 +244,7 @@
 % or create examples. They are as follows: 
 % 
 % * *|altimetry_example.h5|*: Surface elevations from NASA's Airborne Topographic Mapper, used as 
-% an example dataset in the documentation for <h5struct_documentation.html |h5struct|. 
+% an example dataset in the documentation for <h5struct_documentation.html |h5struct|>. 
 % * *|bluemarble.png|*: True-color image of Earth from <https://svs.gsfc.nasa.gov/2915 NASA>. This 
 % image is plotted by <earthimage_documentation.html |earthimage|>. 
 % * *|borderdata.mat|*: National and US state boundaries plotted by <borders_documentation.html |borders|>, 

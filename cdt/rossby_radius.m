@@ -49,7 +49,7 @@ if isnumeric(varargin{1})
    D(D<0) = NaN; % Make Land undefined
    
 else % if the first varargin input isn't longitude, ensure D is specified: 
-   tmp = strcmpi(varargin,'d'); 
+   tmp = strncmpi(varargin,'depth',1); 
    if any(tmp)
       D = varargin{find(tmp)+1}; 
       assert(isnumeric(D),'Error: Depth D must be numeric.') 

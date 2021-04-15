@@ -30,7 +30,7 @@ nv = nargin;
 vars = varargin;
 
 sz = cellfun(@size, vars{1}(:), 'uni', 0);
-sz = cat(1, sz{:});
+sz = cat(1, sz{:}); 
 
 if all(sz(:,1) == 1)
     for ii = 1:nv

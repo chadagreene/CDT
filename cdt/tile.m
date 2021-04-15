@@ -145,7 +145,7 @@ if show
 
       % Label this rectangle: 
       h_txt(k) = text(rect(1)+rect(3)/2,rect(2)+rect(4)/2,num2str(k),...
-         'color',color,'horiz','center','vert','middle');
+         'color',color,'horiz','center','vert','middle','clipping','on');
    end
    
    axis ij % because these are row and colummn indices

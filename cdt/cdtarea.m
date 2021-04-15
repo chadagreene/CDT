@@ -40,7 +40,7 @@ R = earth_radius(lat,lon); % Earth radius in meters
 %% Input parsing: 
 
 % If the user wants km^2 outputs: 
-if any(strncmpi(varargin,'km2',2)); 
+if any(strncmpi(varargin,'km2',2))
    R = R/1000; 
 end
 

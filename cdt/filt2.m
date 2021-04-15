@@ -32,8 +32,8 @@ function Zf = filt2(Z,res,lambda,filtertype)
 
 narginchk(4,4) 
 assert(license('test','image_toolbox')==1,'Error: I''m sorry, the filt2 function requires the Image Processing Toolbox.') 
-assert(ismatrix(Z)==1,'Input error: Z must be a 2d matrix.')
-assert(isscalar(res)==1,'Input error: res must be a scalar value.') 
+assert(ismatrix(Z),'Input error: Z must be a 2d matrix.')
+assert(isscalar(res),'Input error: res must be a scalar value.') 
 assert(ismember(lower(filtertype),{'lp','hp','bp','bs'}),'Input error: filtertype must be ''hp'', ''lp'', ''bp'', or ''bs''.') 
 if lambda<=(2*res) 
    warning('Nyquist says the wavelength should exceed two times the resolution of the dataset, which is an unmet condition based on these inputs. I''ll give you some numbers, but I would''t trust ''em if I were you.') 
@@ -42,7 +42,7 @@ end
 if ismember(lower(filtertype),{'bp','bs'})
    assert(numel(lambda)==2,'Input error: Wavelength lambda must be a two-element array for a bandpass filter.') 
 else
-   assert(isscalar(lambda)==1,'Input error: Wavelength lambda must be a scalar for lowpass or bandpass filters.') 
+   assert(isscalar(lambda),'Input error: Wavelength lambda must be a scalar for lowpass or bandpass filters.') 
 end
 
 %% Design filter: 

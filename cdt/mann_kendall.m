@@ -112,14 +112,10 @@ end
 VarS=(n*(n-1)*(2*n+5))/18;
 StdS=sqrt(VarS); 
 
-% Preallocate Z: ( ties are not considered )
-Z = NaN(size(S)); 
-
-% Get indices where S is greater than or equal to zero: 
-ind = S>=0; 
-
-Z(ind) = ((S(ind)-1)/StdS).*(S(ind)); 
-Z(~ind) = (S(~ind)+1)/StdS; 
+% Define Z: 
+Z = zeros(size(S)); % zero wherever S=0
+Z(S>0) = (S(S>0)-1)./StdS;
+Z(S<0) = (S(S<0)+1)./StdS; 
 
 p = 2*(1-normcdf(abs(Z),0,1)); %% two-tailed test 
 
