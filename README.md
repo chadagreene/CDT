@@ -9,6 +9,9 @@
 ### Analyzing Trends and Global Warming:
 [![How to analyze trends in sea surface temperature using CDT](https://img.youtube.com/vi/t46dTVp7NHY/0.jpg)](https://www.youtube.com/watch?v=t46dTVp7NHY)
 
+### El Niño and Empirical Orthogonal Functions:
+[![How to apply EOFs to identify ENSO](https://img.youtube.com/vi/A5UjLO-67GQ/0.jpg)](https://www.youtube.com/watch?v=A5UjLO-67GQ)
+
 # Installing the toolbox:
 There are a few different ways to install this toolbox. Pick your favorite among the following:
 
