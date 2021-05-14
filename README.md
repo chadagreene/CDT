@@ -7,7 +7,7 @@
 
 # Video Tutorials
 ### Analyzing Trends and Global Warming:
-[![How to analyze trends in sea surface temperature using CDT](https://img.youtube.com/vi/t46dTVp7NHY/0.jpg)](https://www.youtube.com/watch?v=t46dTVp7NHY)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/t46dTVp7NHY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ### El Niño and Empirical Orthogonal Functions:
 [![How to apply EOFs to identify ENSO](https://img.youtube.com/vi/A5UjLO-67GQ/0.jpg)](https://www.youtube.com/watch?v=A5UjLO-67GQ)
