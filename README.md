@@ -10,7 +10,7 @@
 [![How to analyze trends in sea surface temperature using CDT](https://img.youtube.com/vi/t46dTVp7NHY/0.jpg)](https://www.youtube.com/watch?v=t46dTVp7NHY "The Climate Data Toolbox for MATLAB - Analyzing Trends & Global Warming")
 
 ### El Niño and Empirical Orthogonal Functions:
-[![How to apply EOFs to identify ENSO](https://img.youtube.com/vi/A5UjLO-67GQ/0.jpg)](https://www.youtube.com/watch?v=A5UjLO-67GQ)
+[![How to apply EOFs to identify ENSO](https://img.youtube.com/vi/A5UjLO-67GQ/0.jpg)](https://www.youtube.com/watch?v=A5UjLO-67GQ "The Climate Data Toolbox for MATLAB - El Niño and Empirical Orthogonal Functions")
 
 # Installing the toolbox:
 There are a few different ways to install this toolbox. Pick your favorite among the following:
