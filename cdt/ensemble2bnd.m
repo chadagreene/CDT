@@ -237,7 +237,7 @@ if ~strcmp(Opt.plot, 'none')
                 col = interp1([0 1], [1 1 1;Opt.cmap(iy,:)], trans);
                 set(h.errbar(:,iy), {'color'}, num2cell(col,2));
             end
-            set(h.ln, {'color'}, num2cell(Opt.cmap,2));
+            set(h.ln, {'color'}, num2cell(Opt.cmap(1:length(h.ln),:),2));
 
         case 'boxplot'
 
