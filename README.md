@@ -5,6 +5,8 @@
 # CDT Contents and Documentation
 [**Click here**](https://www.chadagreene.com/CDT/CDT_Contents.html) to view the CDT documentation online.
 
+A version of the documentation in Chinese can be found [here](https://github.com/chadagreene/CDT/files/6985814/CDT.pdf), translated by Shi Weiheng. 中文文档由Shi Weiheng翻译。[CDT 中文翻译.pdf](https://github.com/chadagreene/CDT/files/6985814/CDT.pdf)
+
 # Video Tutorials
 ### Analyzing Trends and Global Warming:
 [![How to analyze trends in sea surface temperature using CDT](https://img.youtube.com/vi/t46dTVp7NHY/0.jpg)](https://www.youtube.com/watch?v=t46dTVp7NHY "The Climate Data Toolbox for MATLAB - Analyzing Trends & Global Warming")
