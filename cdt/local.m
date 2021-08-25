@@ -93,9 +93,9 @@ varargin = varargin(tmp); % deletes this input so the rest can be dumped into fn
 tmp = strncmpi(varargin,'weight',3); 
 if any(tmp) 
    weighting = true; 
-   assert(isequal(fn,@mean)==1,'Input error: weighted averaging can only be performed with the default @mean function.') 
+   assert(isequal(fn,@mean),'Input error: weighted averaging can only be performed with the default @mean function.') 
    weight = varargin{find(tmp)+1}; 
-   assert(isequal([size(A,1) size(A,2)],size(weight))==1,'Error: Size of weights must match the first two dimensions of A.') 
+   assert(isequal([size(A,1) size(A,2)],size(weight)),'Error: Size of weights must match the first two dimensions of A.') 
    tmp(find(tmp)+1) = true; 
    varargin = varargin(~tmp); 
 else
