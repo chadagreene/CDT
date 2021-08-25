@@ -49,8 +49,8 @@ else
    [x,y,z] = xyzread(varargin{:}); 
 end
 
-assert(isequal(size(x),size(y),size(z))==1,'Dimensions of x,y, and z must match.') 
-assert(isvector(x)==1,'Inputs x,y, and z must be vectors.') 
+assert(isequal(size(x),size(y),size(z)),'Dimensions of x,y, and z must match.') 
+assert(isvector(x),'Inputs x,y, and z must be vectors.') 
 
 %% Grid xyz: 
 
