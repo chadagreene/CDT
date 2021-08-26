@@ -32,11 +32,22 @@ narginchk(1,Inf)
 
 %% Perform mathematics and whatnot: 
 
+tmp = varargin{1}; 
+if isvector(tmp{1})
+   oneColumn = true; 
+else
+   oneColumn = false; 
+end
+
 for k = 1:length(varargin)
    assert(iscell(varargin{k}),'Input error: All inputs must be cell arrays.')
 
    % Append a NaN to each array inside A: 
-   Anan = cellfun(@(x) [x(:);NaN],varargin{k},'un',0);
+   if oneColumn
+      Anan = cellfun(@(x) [x(:); NaN],varargin{k},'un',0);
+   else
+      Anan = cellfun(@(x) [x(:,:); [NaN NaN]],varargin{k},'un',0);
+   end
 
    % Columnate: 
    varargout{k} = cell2mat(Anan(:));
