@@ -1,0 +1,380 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>ncbuild documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-03"><meta name="DC.source" content="ncbuild_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>ncbuild</tt> documentation</h1><!--introduction--><p>The <tt>ncbuild</tt> function simplifies the process of building netCDF output files based on Matlab data variables.</p><p>This function writes Matlab data to a new or existing file while also defining netCDF file properties, such as variable names, dimension names and sizes, and file and variable attributes as appropriate for the data being written.  It provides a wrapper around the tasks typically performed by <tt>nccreate</tt> and <tt>ncwrite</tt>, while also reducing the amount of extra code required to repeat common tasks.</p><p>See also <a href="https://www.mathworks.com/help/matlab/ref/nccreate.html"><tt>nccreate</tt></a>, <a href="https://www.mathworks.com/help/matlab/ref/ncwrite.html"><tt>ncwrite</tt></a>, <a href="https://www.mathworks.com/help/matlab/ref/ncwriteatt.html"><tt>ncwriteatt</tt></a></p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Save variable data to file with minimal metadata</a></li><li><a href="#9">Example 2: Building a netCDF file with explicit metadata</a></li><li><a href="#11">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre class="language-matlab">ncbuild(file, var)
+ncbuild(file, var, param1, val1, <span class="keyword">...</span><span class="comment">)</span>
+</pre><h2 id="2">Description</h2><p><tt>ncbuild(file, var)</tt> writes the  text or numeric data data in <tt>var</tt> to a new variable in the netCDF file <tt>file</tt>.  If <tt>file</tt> does not yet exist, it will be created using the classic format.</p><p><tt>ncbuild(..., 'name', name)</tt> uses the specified character array <tt>name</tt> as the variable name. If not included, the name of the input variable will be used; if the variable input data does not have a variable name, 'variableX' will be used, where X is the counter number of variables in the file once variableX is added.</p><p><tt>ncbuild(..., 'dimnames', dimnames)</tt> assigns the dimension names in the string array or cell array of strings/char <tt>dimnames</tt> to the newly-created netCDF variable.  These dimensions will be created in the file if needed.  If not included, dimensions of unique length will be labeled 'i', 'j', 'k', etc.</p><p><tt>ncbuild(..., 'format', format)</tt> specifies the file format.  See <a href="https://www.mathworks.com/help/matlab/ref/nccreate.html"><tt>nccreate</tt></a> 'Format' option for options and details.  Default: 'classic'</p><p><tt>ncbuild(..., 'fileatts', fileatts)</tt> adds global file attributes to the file.  <tt>fileatts</tt> should be a cell array of name/value attribute pairs (see <tt>attribstruct</tt> input description for details)</p><p><tt>ncbuild(..., 'unlimited', unlim)</tt> indicates the dimensions (passed by name in the string array or cell array of strings/char <tt>unlim</tt>) that should be unlimited in length.  Note that for classic files, and many netCDF conventions, only one dimension can be unlimited. Default: {} (i.e., no unlimited dimensions)</p><p><tt>ncbuild(..., 'varatts', varatts)</tt> supplies variable attributes for the newly-created file variable.  <tt>varatts</tt> should be a cell array of name/value attribute pairs (see <tt>attribstruct</tt> input description for details)</p><p><tt>ncbuild(..., 'type', type)</tt> specifies the variable data type.  See <a href="https://www.mathworks.com/help/matlab/ref/nccreate.html"><tt>nccreate</tt></a> 'Datatype' option for options and details.  If not included, type will be inferred from the input variable data.  Note that if a type <i>is</i> specified and does not match that of <tt>var</tt>, the input data will be automatically recast to this type on writing.</p><h2 id="3">Example 1: Save variable data to file with minimal metadata</h2><p>For this example, we start with 3 variables:</p><pre class="codeinput">x = 1:10;
+y = 1:8;
+Z1 = rand(8,10);
+</pre><p>We can now use ncbuild to save the <tt>Z1</tt> data to a netCDF file.</p><pre class="codeinput">ncbuild(<span class="string">'test1.nc'</span>, Z1);
+</pre><p>When using this minimal syntax, the ncbuild function first recognizes that it needs to create a new file, and creates it using the default classic format. It assumes that the name of the stored variable should match its Matlab variable name, and assigns names to the variable dimensions using it's own default scheme, rather than requiring the user to supply any of these details.</p><pre class="codeinput">ncdisp(<span class="string">'test1.nc'</span>)
+</pre><pre class="codeoutput">Source:
+           /Users/kakearney/Documents/MatlabCodeKAK/External/CDT/cdt/doc/test1.nc
+Format:
+           netcdf4_classic
+Dimensions:
+           i = 8
+           j = 10
+Variables:
+    Z1
+           Size:       8x10
+           Dimensions: i,j
+           Datatype:   double
+</pre><p>We can continue to use ncbuild to add new variables to the file as well. If we continue to provide minimal details, ncbuild will continue trying to match up the variable sizes to existing dimensions in the file:</p><pre class="codeinput">ncbuild(<span class="string">'test1.nc'</span>, x);
+ncbuild(<span class="string">'test1.nc'</span>, y);
+ncbuild(<span class="string">'test1.nc'</span>, Z1+pi);
+ncdisp(<span class="string">'test1.nc'</span>)
+</pre><pre class="codeoutput">Source:
+           /Users/kakearney/Documents/MatlabCodeKAK/External/CDT/cdt/doc/test1.nc
+Format:
+           netcdf4_classic
+Dimensions:
+           i = 8
+           j = 10
+Variables:
+    Z1       
+           Size:       8x10
+           Dimensions: i,j
+           Datatype:   double
+    x        
+           Size:       10x1
+           Dimensions: j
+           Datatype:   double
+    y        
+           Size:       8x1
+           Dimensions: i
+           Datatype:   double
+    variable4
+           Size:       8x10
+           Dimensions: i,j
+           Datatype:   double
+</pre><p>Notice that for that last addition, the variable data wasn't passed as a single variable, but rather as an expression.  Because <tt>ncbuild</tt> didn't have a Matlab variable name to steal for its use, it instead fell back on its default variable naming scheme, which simply numbers variables based on the order they were added to the file.</p><p>The minimal input options do have their limits; if you attempt pass a variable to <tt>ncbuild</tt> where the dimensions are ambiguous, it will throw an error message.</p><pre class="codeinput">Z3 = rand(10,10);
+<span class="keyword">try</span>
+    ncbuild(<span class="string">'test1.nc'</span>, Z3);
+<span class="keyword">catch</span> ME
+    disp(ME.message);
+<span class="keyword">end</span>
+</pre><pre class="codeoutput">Ambiguous dimension match; explicit dimension name list must be included for this variable
+</pre><p>In this example, <tt>ncbuild</tt> doesn't know whether the first or second dimension of Z3 should match up with the existing dimension <tt>j</tt>.  The same sort of error will occur if the file already contains multiple dimensions with the same length; in this case, <tt>ncbuild</tt> needs some clarification from the user in order to figure out which dimensions to use.  To be more explicit, we can use the optional <tt>ncbuild</tt> inputs, as in the next example.</p><h2 id="9">Example 2: Building a netCDF file with explicit metadata</h2><p>While the minimal syntax option demonstrated above saves a lot of time and hassle, often you will want to exert a bit more control over the metadata within your new netCDF files.</p><p>This example writes the same data to file as in the above example. However, this time around, we provide some explicit detail:</p><div><ul><li>We provide meaningful names for the dimensions.  Note that because the x and y variables have the same name and size as the x and y dimensions, they can now be considered "coordinate variables"; many software programs designed to work with netCDF can intelligently recognize and use coordinate variables for tasks such as plotting.</li><li>We assign a meaningful variable name to Z2</li><li>We provide longer, descriptive names for each variable by giving each of them a 'long_name' attribute. The <a href="http://cfconventions.org/cf-conventions/cf-conventions.html#long-name">'long_name'</a> attribute is an optional but highly-recommended part of the <a href="http://cfconventions.org/">Climate and Forecast (CF) conventions</a>.</li><li>We provide units for all variables by giving each of them a 'units' attribute.  The <a href="http://cfconventions.org/cf-conventions/cf-conventions.html#units">'units'</a> attribute is a CF requirement for variables representing dimensional qualities.</li><li>We add file attributes listing the author and history of the file. These <a href="http://cfconventions.org/cf-conventions/cf-conventions.html#description-of-file-contents">file content</a> global attributes are very helpful for providing a description of where the file data comes from.</li><li>We specify dimension names for Z3, allowing it to be successfully added to the file this time.</li></ul></div><pre class="codeinput">ncbuild(<span class="string">'test2.nc'</span>, x, <span class="keyword">...</span>
+    <span class="string">'dimnames'</span>, {<span class="string">'x'</span>}, <span class="keyword">...</span>
+    <span class="string">'varatts'</span>, {<span class="string">'long_name'</span>, <span class="string">'x data'</span>, <span class="string">'units'</span>, <span class="string">'x-units'</span>}, <span class="keyword">...</span>
+    <span class="string">'fileatts'</span>, {<span class="string">'author'</span>, <span class="string">'Jane Doe'</span>, <span class="keyword">...</span>
+                 <span class="string">'history'</span>, sprintf(<span class="string">'%s: created in Matlab via ncbuild'</span>, datetime(<span class="string">'today'</span>))});
+ncbuild(<span class="string">'test2.nc'</span>, y, <span class="keyword">...</span>
+    <span class="string">'dimnames'</span>, {<span class="string">'y'</span>}, <span class="keyword">...</span>
+    <span class="string">'varatts'</span>, {<span class="string">'long_name'</span>, <span class="string">'y data'</span>, <span class="string">'units'</span>, <span class="string">'y-units'</span>});
+ncbuild(<span class="string">'test2.nc'</span>, Z1, <span class="keyword">...</span>
+    <span class="string">'varatts'</span>, {<span class="string">'long_name'</span>, <span class="string">'Z1 data'</span>, <span class="string">'units'</span>, <span class="string">'z-units'</span>});
+ncbuild(<span class="string">'test2.nc'</span>, Z1+pi, <span class="keyword">...</span>
+    <span class="string">'name'</span>, <span class="string">'Z2'</span>, <span class="keyword">...</span>
+    <span class="string">'varatts'</span>, {<span class="string">'long_name'</span>, <span class="string">'Z1+pi'</span>, <span class="string">'units'</span>, <span class="string">'z-units'</span>});
+ncbuild(<span class="string">'test2.nc'</span>, Z3, <span class="keyword">...</span>
+    <span class="string">'dimnames'</span>, {<span class="string">'x'</span>,<span class="string">'x2'</span>}, <span class="keyword">...</span>
+    <span class="string">'varatts'</span>, {<span class="string">'long_name'</span>, <span class="string">'random numbers'</span>, <span class="string">'units'</span>, <span class="string">'z-units'</span>});
+ncdisp(<span class="string">'test2.nc'</span>)
+</pre><pre class="codeoutput">Source:
+           /Users/kakearney/Documents/MatlabCodeKAK/External/CDT/cdt/doc/test2.nc
+Format:
+           netcdf4_classic
+Dimensions:
+           x  = 10
+           y  = 8
+           x2 = 10
+Variables:
+    x 
+           Size:       10x1
+           Dimensions: x
+           Datatype:   double
+           Attributes:
+                       long_name = 'x data'
+                       units     = 'x-units'
+    y 
+           Size:       8x1
+           Dimensions: y
+           Datatype:   double
+           Attributes:
+                       long_name = 'y data'
+                       units     = 'y-units'
+    Z1
+           Size:       8x10
+           Dimensions: y,x
+           Datatype:   double
+           Attributes:
+                       long_name = 'Z1 data'
+                       units     = 'z-units'
+    Z2
+           Size:       8x10
+           Dimensions: y,x
+           Datatype:   double
+           Attributes:
+                       long_name = 'Z1+pi'
+                       units     = 'z-units'
+    Z3
+           Size:       10x10
+           Dimensions: x,x2
+           Datatype:   double
+           Attributes:
+                       long_name = 'random numbers'
+                       units     = 'z-units'
+</pre><p>This option still allows for less user input than would be needed with the <tt>nccreate</tt> function.  For example, we were able to let <tt>ncbuild</tt> intuit the correct pre-existing dimensions to use for the Z1 and Z2 variables.</p><h2 id="11">Author Info</h2><p>This function and supporting documentation were written by Kelly Kearney for the Climate Data Toolbox for Matlab.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |ncbuild| documentation 
+%
+% The |ncbuild| function simplifies the process of building netCDF output
+% files based on Matlab data variables.
+%
+% This function writes Matlab data to a new or existing file while also
+% defining netCDF file properties, such as variable names, dimension names
+% and sizes, and file and variable attributes as appropriate for the data
+% being written.  It provides a wrapper around the tasks typically
+% performed by |nccreate| and |ncwrite|, while also reducing the amount of
+% extra code required to repeat common tasks.
+%
+% See also <https://www.mathworks.com/help/matlab/ref/nccreate.html |nccreate|>,
+% <https://www.mathworks.com/help/matlab/ref/ncwrite.html |ncwrite|>,
+% <https://www.mathworks.com/help/matlab/ref/ncwriteatt.html |ncwriteatt|>  
+%
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%
+%% Syntax
+%
+%   ncbuild(file, var)
+%   ncbuild(file, var, param1, val1, ...)
+%
+%% Description
+%
+% |ncbuild(file, var)| writes the  text or numeric data data in |var| to
+% a new variable in the netCDF file |file|.  If |file| does not yet exist,
+% it will be created using the classic format.
+%
+% |ncbuild(..., 'name', name)| uses the specified character array
+% |name| as the variable name. If not included, the name of the input
+% variable will be used; if the variable input data does not have a
+% variable name, 'variableX' will be used, where X is the counter number of
+% variables in the file once variableX is added. 
+%
+% |ncbuild(..., 'dimnames', dimnames)| assigns the dimension names in the
+% string array or cell array of strings/char |dimnames| to the
+% newly-created netCDF variable.  These dimensions will be created in the
+% file if needed.  If not included, dimensions of unique length will be
+% labeled 'i', 'j', 'k', etc. 
+%
+% |ncbuild(..., 'format', format)| specifies the file format.  See
+% <https://www.mathworks.com/help/matlab/ref/nccreate.html |nccreate|>
+% 'Format' option for options and details.  Default: 'classic'
+%
+% |ncbuild(..., 'fileatts', fileatts)| adds global file attributes to the
+% file.  |fileatts| should be a cell array of name/value attribute pairs
+% (see |attribstruct| input description for details)  
+%
+% |ncbuild(..., 'unlimited', unlim)| indicates the dimensions (passed by
+% name in the string array or cell array of strings/char |unlim|) that
+% should be unlimited in length.  Note that for classic files, and many
+% netCDF conventions, only one dimension can be unlimited. Default: {}
+% (i.e., no unlimited dimensions)  
+%
+% |ncbuild(..., 'varatts', varatts)| supplies variable attributes for the
+% newly-created file variable.  |varatts| should be a cell array of
+% name/value attribute pairs (see |attribstruct| input description for
+% details)  
+%
+% |ncbuild(..., 'type', type)| specifies the variable data type.  See
+% <https://www.mathworks.com/help/matlab/ref/nccreate.html |nccreate|>
+% 'Datatype' option for options and details.  If not included, type will be
+% inferred from the input variable data.  Note that if a type _is_
+% specified and does not match that of |var|, the input data will be
+% automatically recast to this type on writing.
+
+
+%% Example 1: Save variable data to file with minimal metadata
+%
+% For this example, we start with 3 variables:
+
+x = 1:10;
+y = 1:8;
+Z1 = rand(8,10);
+
+%%
+% We can now use ncbuild to save the |Z1| data to a netCDF file.
+
+ncbuild('test1.nc', Z1);
+
+%%
+% When using this minimal syntax, the ncbuild function first recognizes
+% that it needs to create a new file, and creates it using the default
+% classic format. It assumes that the name of the stored variable should
+% match its Matlab variable name, and assigns names to the variable
+% dimensions using it's own default scheme, rather than requiring the user
+% to supply any of these details.
+
+ncdisp('test1.nc')
+
+%%
+% We can continue to use ncbuild to add new variables to the file as well.
+% If we continue to provide minimal details, ncbuild will continue trying
+% to match up the variable sizes to existing dimensions in the file:  
+
+ncbuild('test1.nc', x);
+ncbuild('test1.nc', y);
+ncbuild('test1.nc', Z1+pi);
+ncdisp('test1.nc')
+
+%%
+% Notice that for that last addition, the variable data wasn't passed as a
+% single variable, but rather as an expression.  Because |ncbuild| didn't
+% have a Matlab variable name to steal for its use, it instead
+% fell back on its default variable naming scheme, which simply numbers
+% variables based on the order they were added to the file.
+%
+% The minimal input options do have their limits; if you attempt pass a
+% variable to |ncbuild| where the dimensions are ambiguous, it will throw
+% an error message.
+
+Z3 = rand(10,10);
+try
+    ncbuild('test1.nc', Z3);
+catch ME
+    disp(ME.message);
+end
+
+%%
+% In this example, |ncbuild| doesn't know whether the first or second
+% dimension of Z3 should match up with the existing dimension |j|.  The
+% same sort of error will occur if the file already contains multiple
+% dimensions with the same length; in this case, |ncbuild| needs some
+% clarification from the user in order to figure out which dimensions to
+% use.  To be more explicit, we can use the optional |ncbuild| inputs, as
+% in the next example.
+
+%% Example 2: Building a netCDF file with explicit metadata
+%
+% While the minimal syntax option demonstrated above saves a lot of time and
+% hassle, often you will want to exert a bit more control over the metadata
+% within your new netCDF files.  
+%
+% This example writes the same data to file as in the above example.
+% However, this time around, we provide some explicit detail: 
+%
+% * We provide meaningful names for the dimensions.  Note that because the
+% x and y variables have the same name and size as the x and y dimensions,
+% they can now be considered "coordinate variables"; many software programs
+% designed to work with netCDF can intelligently recognize and use
+% coordinate variables for tasks such as plotting.
+% * We assign a meaningful variable name to Z2
+% * We provide longer, descriptive names for each variable by giving each
+% of them a 'long_name' attribute. The
+% <http://cfconventions.org/cf-conventions/cf-conventions.html#long-name
+% 'long_name'> attribute is an optional but highly-recommended part of the
+% <http://cfconventions.org/ Climate and Forecast (CF) conventions>.
+% * We provide units for all variables by giving each of them a 'units'
+% attribute.  The
+% <http://cfconventions.org/cf-conventions/cf-conventions.html#units
+% 'units'> attribute is a CF requirement for variables representing
+% dimensional qualities.  
+% * We add file attributes listing the author and history of the file.
+% These
+% <http://cfconventions.org/cf-conventions/cf-conventions.html#description-of-file-contents
+% file content> global attributes are very helpful for providing a
+% description of where the file data comes from.
+% * We specify dimension names for Z3, allowing it to be successfully added
+% to the file this time.
+
+ncbuild('test2.nc', x, ...
+    'dimnames', {'x'}, ...
+    'varatts', {'long_name', 'x data', 'units', 'x-units'}, ...
+    'fileatts', {'author', 'Jane Doe', ...
+                 'history', sprintf('%s: created in Matlab via ncbuild', datetime('today'))});
+ncbuild('test2.nc', y, ...
+    'dimnames', {'y'}, ...
+    'varatts', {'long_name', 'y data', 'units', 'y-units'});
+ncbuild('test2.nc', Z1, ...
+    'varatts', {'long_name', 'Z1 data', 'units', 'z-units'});
+ncbuild('test2.nc', Z1+pi, ...
+    'name', 'Z2', ...
+    'varatts', {'long_name', 'Z1+pi', 'units', 'z-units'});
+ncbuild('test2.nc', Z3, ...
+    'dimnames', {'x','x2'}, ...
+    'varatts', {'long_name', 'random numbers', 'units', 'z-units'});
+ncdisp('test2.nc')
+
+%%
+% This option still allows for less user input than would be needed with
+% the |nccreate| function.  For example, we were able to let |ncbuild|
+% intuit the correct pre-existing dimensions to use for the Z1 and Z2
+% variables.
+
+%% Author Info
+%
+% This function and supporting documentation were written by Kelly Kearney
+% for the Climate Data Toolbox for Matlab.  
+
+
+
+
+##### SOURCE END #####
+--></body></html>

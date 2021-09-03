@@ -4,6 +4,8 @@
 % array, assuming that the variable conforms to CF standards with a ' _time
 % units_ since _reference time_' units attribute. 
 %
+% See also <cftime_documentation.html |cftime|>
+%
 % <CDT_Contents.html Back to Climate Data Tools Contents>
 %
 %% Syntax
@@ -59,11 +61,11 @@ ncdisp('ERA_Interim_2017.nc', 'time');
 %
 % If the time variables were already in our workspace (for example, if the
 % data had been read in using some of the more flexible hyperslab
-% subsetting options available in |<ncreads_documentation.html ncreads>|,
+% subsetting options available in |<ncstruct_documentation.html ncstruct>|,
 % we can convert the values after the fact by pointing to a file with the
 % necessary conversion units data:
 
-A = ncreads('ERA_Interim_2017.nc', struct('time', [1 5 2]));
+A = ncstruct('ERA_Interim_2017.nc', struct('time', [1 5 2]));
 A.time
 
 %%
@@ -73,7 +75,10 @@ A.time
 %% Author Info
 %
 % This function and supporting documentation was written by Kelly Kearney
-% for the Climate Data Toolbox for Matlab, 2019.  It is available as part
-% of this toolbox, and can also be downloaded individually from
-% <https://github.com/kakearney/ncreads-pkg GitHub>.
+% for the Climate Data Toolbox for Matlab, 2019.  The |ncstruct| function
+% merges the capabilities of the older |ncreads| and |ncreadsseries|
+% functions, which can still be found on
+% <https://github.com/kakearney/ncreads-pkg GitHub>; however, this earlier
+% package is no longer being updated.
+
 
