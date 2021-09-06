@@ -14,8 +14,9 @@
 % |ncwriteschema|> to create new files or to extend the properties of
 % existing files.
 %
-% See also <https://www.mathworks.com/help/matlab/ref/ncwriteschema.html |ncwriteschema|>,
-% <https://www.mathworks.com/help/matlab/ref/ncinfo.html |ncinfo|>.  
+% See also <https://www.mathworks.com/help/matlab/ref/ncwriteschema.html
+% |ncwriteschema|>, <https://www.mathworks.com/help/matlab/ref/ncinfo.html
+% |ncinfo|>.
 %
 % <CDT_Contents.html Back to Climate Data Tools Contents>
 %
@@ -155,4 +156,9 @@ end
 % This flexibility, as well as the ability to contruct the full file spec
 % before writing anything to a file, is the primary advantage to using this
 % method instead of <ncbuild_documentation.html |ncbuild|>.
+
+%% Author Info
+%
+% This function and supporting documentation were written by Kelly Kearney
+% for the Climate Data Toolbox for Matlab. 
 
