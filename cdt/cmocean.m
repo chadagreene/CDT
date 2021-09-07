@@ -163,11 +163,6 @@ if negativeColormap
    cmap = colorspace('LAB->RGB',LAB); 
 end
 
-% Interpolate if necessary: 
-if NLevels~=size(cmap,1)
-   cmap = interp1(1:size(cmap,1), cmap, linspace(1,size(cmap,1),NLevels),'linear');
-end
-
 %% Invert the colormap if requested by user: 
 
 if InvertedColormap
@@ -183,14 +178,18 @@ if autopivot
    cmap = interp1(linspace(-maxval,maxval,size(cmap,1))+PivotValue, cmap, linspace(clim(1),clim(2),size(cmap,1)),'linear');
 end
 
+%% Interpolate if necessary: 
+
+if NLevels~=size(cmap,1)
+   cmap = interp1(1:size(cmap,1), cmap, linspace(1,size(cmap,1),NLevels),'linear');
+end
+
 %% Clean up 
 
 if nargout==0
    colormap(gca,cmap) 
    clear cmap  
 end
-
-
 
 %%  S U B F U N C T I O N S 
 
