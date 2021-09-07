@@ -28,8 +28,8 @@
 %
 % For this example, we'll start with the ERA_Interim_2017.nc sample dataset
 % that comes with CDT.  Like many climate datasets, this file already
-% includes a history attribute that gives us some information aboutthe data
-% came from:
+% includes a history attribute that gives us some information about where
+% the data came from:
 
 ncreadatt('ERA_Interim_2017.nc', '/', 'history')
 

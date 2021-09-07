@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>The ncschema_ family of functions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-06"><meta name="DC.source" content="ncschema_documentation.m"><style type="text/css">
+      --><title>The ncschema_ family of functions</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-07"><meta name="DC.source" content="ncschema_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>The <tt>ncschema_</tt> family of functions</h1><!--introduction--><p>These functions assist in the process of building a netCDF file schema structure that can be used to create new netCDF files.</p><p>File schemas can be particularly useful when building large and complex netCDF files where you want to fully define the characteristics of the new file prior to adding any data to it.  These functions help to either build the schema from scratch or to append new data to an existing schema (for example, one returned by <a href="https://www.mathworks.com/help/matlab/ref/ncinfo.html"><tt>ncinfo</tt></a>). Schemas can be used by <a href="https://www.mathworks.com/help/matlab/ref/ncwriteschema.html"><tt>ncwriteschema</tt></a> to create new files or to extend the properties of existing files.</p><p>See also <a href="https://www.mathworks.com/help/matlab/ref/ncwriteschema.html"><tt>ncwriteschema</tt></a>, <a href="https://www.mathworks.com/help/matlab/ref/ncinfo.html"><tt>ncinfo</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Library</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li></ul></div><h2 id="1">Library</h2><p>The primary functions included in this family of functions are:</p><div><ul><li><tt>ncschema_init</tt>: Create netCDF file schema structure</li><li><tt>ncschema_addatts</tt>: Add global attribute info to a netCDF file schema</li><li><tt>ncschema_adddims</tt>: Add dimension info to a netCDF file schema</li><li><tt>ncschema_addvars</tt>: Add variable info to a netCDF file schema</li></ul></div><p>These functions also call some lower-level helper functions that can be also be accessed by users:</p><div><ul><li><tt>attribstruct</tt>: Create Attributes structure for netCDF file schema</li><li><tt>dimstruct</tt>: Create Dimensions structure for netCDF file schema</li><li><tt>varstruct</tt>: Create Variable structure for netCDF file schema</li><li><tt>updatencschema</tt>: Checks (and updates) netCDF schema for consistency</li></ul></div><h2 id="2">Description</h2><p><tt>Nc = ncschema_init(format)</tt> initializes a netCDF file schema <tt>Nc</tt> with the file format <tt>format</tt> (see <a href="https://www.mathworks.com/help/matlab/ref/nccreate.html"><tt>nccreate</tt></a> 'Format' property for options and details).  Default is 'classic'.</p><p><tt>Nc = ncschema_addatts(Nc, name, value, ...)</tt> adds global file attribute information to a netCDF file schema <tt>Nc</tt>.  Attributes are passed as name/value pairs, where each <tt>name</tt> input is a character array or scalar string that will be used as the name of the attribute and <tt>value</tt> is a character array, scalar string, or numeric vector.  Note that this function is only for adding file attributes; for variable attributes, see <tt>ncschema_addvars</tt> below.</p><p><tt>Nc = ncschema_adddims(Nc, name, length, unlim, ...)</tt> adds dimension information to a netCDF file schema <tt>Nc</tt>.  Dimensions are passed as name/length/unlim triplets, where <tt>name</tt> is a character array or scalar string indicating the dimension name, <tt>length</tt> is a numeric scalar indicating the dimension length, and <tt>unlim</tt> is a logical scalar indicating whether the dimension is unlimited.</p><p><tt>Nc = ncschema_addvars(Nc, vname, dimnames, atts, type, len)</tt> adds the variable information for a single variable to a netCDF file schema <tt>Nc</tt>. Along with the name, <tt>vname</tt>, which should be a character array or scalar string, the user provides a list of dimension names corresponding to the variable's dimensions as a cell array of strings, <tt>dimnames</tt>; attributes as a list name/value pairs in a cell array, <tt>atts</tt>; and variable type <tt>type</tt> (see nccreate Datatype input for options and details).  Occasionally, a user may need to pass a variable length option, <tt>len</tt>; this is typically only needed for scalar variables without dimensions, where the length will be 1.  In almost all other cases, the appropriate dimension length values will be automatically inherited based on the assigned dimension names.</p><h2 id="3">Example</h2><p>In this example, we build a similar file as in the <a href="nbcuild_documentation.html"><tt>ncbuild</tt></a> documentation, starting with the same sample data:</p><pre class="codeinput">x = 1:10;
+  </style></head><body><div class="content"><h1>The <tt>ncschema_</tt> family of functions</h1><!--introduction--><p>These functions assist in the process of building a netCDF file schema structure that can be used to create new netCDF files.</p><p>File schemas can be particularly useful when building large and complex netCDF files where you want to fully define the characteristics of the new file prior to adding any data to it.  These functions help to either build the schema from scratch or to append new data to an existing schema (for example, one returned by <a href="https://www.mathworks.com/help/matlab/ref/ncinfo.html"><tt>ncinfo</tt></a>). Schemas can be used by <a href="https://www.mathworks.com/help/matlab/ref/ncwriteschema.html"><tt>ncwriteschema</tt></a> to create new files or to extend the properties of existing files.</p><p>See also <a href="https://www.mathworks.com/help/matlab/ref/ncwriteschema.html"><tt>ncwriteschema</tt></a>, <a href="https://www.mathworks.com/help/matlab/ref/ncinfo.html"><tt>ncinfo</tt></a>.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Library</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#12">Author Info</a></li></ul></div><h2 id="1">Library</h2><p>The primary functions included in this family of functions are:</p><div><ul><li><tt>ncschema_init</tt>: Create netCDF file schema structure</li><li><tt>ncschema_addatts</tt>: Add global attribute info to a netCDF file schema</li><li><tt>ncschema_adddims</tt>: Add dimension info to a netCDF file schema</li><li><tt>ncschema_addvars</tt>: Add variable info to a netCDF file schema</li></ul></div><p>These functions also call some lower-level helper functions that can be also be accessed by users:</p><div><ul><li><tt>attribstruct</tt>: Create Attributes structure for netCDF file schema</li><li><tt>dimstruct</tt>: Create Dimensions structure for netCDF file schema</li><li><tt>varstruct</tt>: Create Variable structure for netCDF file schema</li><li><tt>updatencschema</tt>: Checks (and updates) netCDF schema for consistency</li></ul></div><h2 id="2">Description</h2><p><tt>Nc = ncschema_init(format)</tt> initializes a netCDF file schema <tt>Nc</tt> with the file format <tt>format</tt> (see <a href="https://www.mathworks.com/help/matlab/ref/nccreate.html"><tt>nccreate</tt></a> 'Format' property for options and details).  Default is 'classic'.</p><p><tt>Nc = ncschema_addatts(Nc, name, value, ...)</tt> adds global file attribute information to a netCDF file schema <tt>Nc</tt>.  Attributes are passed as name/value pairs, where each <tt>name</tt> input is a character array or scalar string that will be used as the name of the attribute and <tt>value</tt> is a character array, scalar string, or numeric vector.  Note that this function is only for adding file attributes; for variable attributes, see <tt>ncschema_addvars</tt> below.</p><p><tt>Nc = ncschema_adddims(Nc, name, length, unlim, ...)</tt> adds dimension information to a netCDF file schema <tt>Nc</tt>.  Dimensions are passed as name/length/unlim triplets, where <tt>name</tt> is a character array or scalar string indicating the dimension name, <tt>length</tt> is a numeric scalar indicating the dimension length, and <tt>unlim</tt> is a logical scalar indicating whether the dimension is unlimited.</p><p><tt>Nc = ncschema_addvars(Nc, vname, dimnames, atts, type, len)</tt> adds the variable information for a single variable to a netCDF file schema <tt>Nc</tt>. Along with the name, <tt>vname</tt>, which should be a character array or scalar string, the user provides a list of dimension names corresponding to the variable's dimensions as a cell array of strings, <tt>dimnames</tt>; attributes as a list name/value pairs in a cell array, <tt>atts</tt>; and variable type <tt>type</tt> (see nccreate Datatype input for options and details).  Occasionally, a user may need to pass a variable length option, <tt>len</tt>; this is typically only needed for scalar variables without dimensions, where the length will be 1.  In almost all other cases, the appropriate dimension length values will be automatically inherited based on the assigned dimension names.</p><h2 id="3">Example</h2><p>In this example, we build a similar file as in the <a href="nbcuild_documentation.html"><tt>ncbuild</tt></a> documentation, starting with the same sample data:</p><pre class="codeinput">x = 1:10;
 y = 1:8;
 Z1 = rand(8,10);
 </pre><p>We can then incrementally build the file schema by setting the format, then adding desired file attributes, dimensions, and variables.</p><pre class="codeinput">Nc = ncschema_init(<span class="string">'classic'</span>);
@@ -83,7 +83,7 @@ Nc
 disp(<span class="string">'File Attributes:'</span>)
 struct2table(Nc.Attributes)
 disp(<span class="string">'Dimensions:'</span>)
-struct2table(Nc.Variables)
+struct2table(Nc.Dimensions)
 disp(<span class="string">'Variables:'</span>)
 struct2table(Nc.Variables)
 </pre><pre class="codeoutput">The top level structure:
@@ -108,21 +108,19 @@ ans =
     _________    ____________________________________________________________
 
     'author'     'Jane Doe'                                                  
-    'history'    '06-Sep-2021: created in Matlab as part of ncbuild_tutorial'
+    'history'    '07-Sep-2021: created in Matlab as part of ncbuild_tutorial'
 
 Dimensions:
 
 ans =
 
-  4&times;5 table
+  2&times;3 table
 
-    Name     Dimensions     Size     Attributes     Datatype
-    ____    ____________    ____    ____________    ________
+    Name    Length    Unlimited
+    ____    ______    _________
 
-    'x'     [1&times;1 struct]     []     [1x2 struct]    'double'
-    'y'     [1&times;1 struct]     []     [1x2 struct]    'double'
-    'Z1'    [1&times;2 struct]     []     [1x2 struct]    'double'
-    'Z2'    [1&times;2 struct]     []     [1x2 struct]    'single'
+    'x'       10        false  
+    'y'        8        false  
 
 Variables:
 
@@ -146,7 +144,7 @@ Format:
            classic
 Global Attributes:
            author  = 'Jane Doe'
-           history = '06-Sep-2021: created in Matlab as part of ncbuild_tutorial'
+           history = '07-Sep-2021: created in Matlab as part of ncbuild_tutorial'
 Dimensions:
            x = 10
            y = 8
@@ -200,7 +198,7 @@ variables:
 
 // global attributes:
 		:author = "Jane Doe" ;
-		:history = "06-Sep-2021: created in Matlab as part of ncbuild_tutorial" ;
+		:history = "07-Sep-2021: created in Matlab as part of ncbuild_tutorial" ;
 data:
 
  Z1 =
@@ -247,7 +245,7 @@ ncwrite(<span class="string">'test4.nc'</span>, <span class="string">'Z1'</span>
 </pre><p>Depending on the size of your data, it may make sense to add this data incrementally.  For example, here we add the Z2 variable data by iterating over the y dimension:</p><pre class="codeinput"><span class="keyword">for</span> iy = 1:length(y)
     ncwrite(<span class="string">'test4.nc'</span>, <span class="string">'Z2'</span>, Z1(iy,:)+pi, [iy 1]);
 <span class="keyword">end</span>
-</pre><p>This flexibility, as well as the ability to contruct the full file spec before writing anything to a file, is the primary advantage to using this method instead of <a href="ncbuild_documentation.html"><tt>ncbuild</tt></a>.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+</pre><p>This flexibility, as well as the ability to contruct the full file spec before writing anything to a file, is the primary advantage to using this method instead of <a href="ncbuild_documentation.html"><tt>ncbuild</tt></a>.</p><h2 id="12">Author Info</h2><p>This function and supporting documentation were written by Kelly Kearney for the Climate Data Toolbox for Matlab.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% The |ncschema_| family of functions 
 %
@@ -265,8 +263,9 @@ ncwrite(<span class="string">'test4.nc'</span>, <span class="string">'Z1'</span>
 % |ncwriteschema|> to create new files or to extend the properties of
 % existing files.
 %
-% See also <https://www.mathworks.com/help/matlab/ref/ncwriteschema.html |ncwriteschema|>,
-% <https://www.mathworks.com/help/matlab/ref/ncinfo.html |ncinfo|>.  
+% See also <https://www.mathworks.com/help/matlab/ref/ncwriteschema.html
+% |ncwriteschema|>, <https://www.mathworks.com/help/matlab/ref/ncinfo.html
+% |ncinfo|>.
 %
 % <CDT_Contents.html Back to Climate Data Tools Contents>
 %
@@ -361,7 +360,7 @@ Nc
 disp('File Attributes:')
 struct2table(Nc.Attributes)
 disp('Dimensions:')
-struct2table(Nc.Variables)
+struct2table(Nc.Dimensions)
 disp('Variables:')
 struct2table(Nc.Variables)
 
@@ -406,6 +405,11 @@ end
 % This flexibility, as well as the ability to contruct the full file spec
 % before writing anything to a file, is the primary advantage to using this
 % method instead of <ncbuild_documentation.html |ncbuild|>.
+
+%% Author Info
+%
+% This function and supporting documentation were written by Kelly Kearney
+% for the Climate Data Toolbox for Matlab. 
 
 
 ##### SOURCE END #####

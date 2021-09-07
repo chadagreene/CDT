@@ -111,7 +111,7 @@ Nc
 disp('File Attributes:')
 struct2table(Nc.Attributes)
 disp('Dimensions:')
-struct2table(Nc.Variables)
+struct2table(Nc.Dimensions)
 disp('Variables:')
 struct2table(Nc.Variables)
 

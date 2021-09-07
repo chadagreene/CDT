@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>ncaddhis documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-06"><meta name="DC.source" content="ncaddhis_documentation.m"><style type="text/css">
+      --><title>ncaddhis documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-07"><meta name="DC.source" content="ncaddhis_documentation.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -66,7 +66,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1><tt>ncaddhis</tt> documentation</h1><!--introduction--><p>This function prepends a dated string to a netCDF file's history attribute.</p><p>NetCDF best practices recommend that all netCDF files contain a history attribute that is updated whenever the file contents are modified.  Some netCDF software packages perform this task automatically, but Matlab's netCDF-writing and modifying utilities do not.  This function simplifies the task of adding a new history attribute if one does not yet exist in a file, or preprending a new line to it (rather than overwriting existing content) if the attribute already exists.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#9">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>ncaddhis(file, hisstr)</pre><h2 id="2">Description</h2><p><tt>ncaddhis(file, hisstr)</tt> prepends the character array or scalar string <tt>hisstr</tt> to the global history attribute within the existing netCDF file <tt>file</tt>.  The string will be preceded by the date and time at which this function is called.</p><h2 id="3">Example</h2><p>For this example, we'll start with the ERA_Interim_2017.nc sample dataset that comes with CDT.  Like many climate datasets, this file already includes a history attribute that gives us some information aboutthe data came from:</p><pre class="codeinput">ncreadatt(<span class="string">'ERA_Interim_2017.nc'</span>, <span class="string">'/'</span>, <span class="string">'history'</span>)
+  </style></head><body><div class="content"><h1><tt>ncaddhis</tt> documentation</h1><!--introduction--><p>This function prepends a dated string to a netCDF file's history attribute.</p><p>NetCDF best practices recommend that all netCDF files contain a history attribute that is updated whenever the file contents are modified.  Some netCDF software packages perform this task automatically, but Matlab's netCDF-writing and modifying utilities do not.  This function simplifies the task of adding a new history attribute if one does not yet exist in a file, or preprending a new line to it (rather than overwriting existing content) if the attribute already exists.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example</a></li><li><a href="#9">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>ncaddhis(file, hisstr)</pre><h2 id="2">Description</h2><p><tt>ncaddhis(file, hisstr)</tt> prepends the character array or scalar string <tt>hisstr</tt> to the global history attribute within the existing netCDF file <tt>file</tt>.  The string will be preceded by the date and time at which this function is called.</p><h2 id="3">Example</h2><p>For this example, we'll start with the ERA_Interim_2017.nc sample dataset that comes with CDT.  Like many climate datasets, this file already includes a history attribute that gives us some information about where the data came from:</p><pre class="codeinput">ncreadatt(<span class="string">'ERA_Interim_2017.nc'</span>, <span class="string">'/'</span>, <span class="string">'history'</span>)
 </pre><pre class="codeoutput">
 ans =
 
@@ -77,7 +77,7 @@ ans =
 </pre><pre class="codeoutput">
 ans =
 
-    'Mon Sep  6 15:45:22 2021: ncks -d latitude,0.0 -d longitude,0.0 ../cdt_data/ERA_Interim_2017.nc ERA_Interim_2017_00.nc
+    'Tue Sep  7 10:35:12 2021: ncks -d latitude,0.0 -d longitude,0.0 ../cdt_data/ERA_Interim_2017.nc ERA_Interim_2017_00.nc
      2018-12-06 18:53:30 GMT by grib_to_netcdf-2.9.2: grib_to_netcdf /data/data01/scratch/78/bb/_mars-atls17-98f536083ae965b31b0d04811be6f4c6-L3jQQq.grib -o /data/data03/scratch/77/57/_grib2netcdf-atls19-98f536083ae965b31b0d04811be6f4c6-5zbphu.nc -utime'
 
 </pre><p>However, if we make changes using Matlab's utilities, those are not automatically documented.</p><pre class="codeinput">oldtemp = ncread(<span class="string">'ERA_Interim_2017_00.nc'</span>, <span class="string">'t2m'</span>);
@@ -88,8 +88,8 @@ ncreadatt(<span class="string">'ERA_Interim_2017_00.nc'</span>, <span class="str
 </pre><pre class="codeoutput">
 ans =
 
-    'Mon Sep 06 15:45:22 2021: Added 1 degK to all t2m values (ncaddhis_documentation.m script)
-     Mon Sep  6 15:45:22 2021: ncks -d latitude,0.0 -d longitude,0.0 ../cdt_data/ERA_Interim_2017.nc ERA_Interim_2017_00.nc
+    'Tue Sep 07 10:35:13 2021: Added 1 degK to all t2m values (ncaddhis_documentation.m script)
+     Tue Sep  7 10:35:12 2021: ncks -d latitude,0.0 -d longitude,0.0 ../cdt_data/ERA_Interim_2017.nc ERA_Interim_2017_00.nc
      2018-12-06 18:53:30 GMT by grib_to_netcdf-2.9.2: grib_to_netcdf /data/data01/scratch/78/bb/_mars-atls17-98f536083ae965b31b0d04811be6f4c6-L3jQQq.grib -o /data/data03/scratch/77/57/_grib2netcdf-atls19-98f536083ae965b31b0d04811be6f4c6-5zbphu.nc -utime'
 
 </pre><p>There are no strict rules about what information to include in a history statement.  The <a href="https://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/build/ch02s06.html">Climate and Forecast (CF) standards</a> suggest that "Well-behaved generic netCDF filters will automatically append their name and the parameters with which they were invoked to the global history attribute of an input netCDF file"; given that Matlab-based manipulations may be a little more involved than a simple filter, I like to add a quick description and point end users to the script where my calculations were performed.</p><h2 id="9">Author Info</h2><p>This function and supporting documentation were written by Kelly Kearney for the Climate Data Toolbox for Matlab.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
@@ -124,8 +124,8 @@ ans =
 %
 % For this example, we'll start with the ERA_Interim_2017.nc sample dataset
 % that comes with CDT.  Like many climate datasets, this file already
-% includes a history attribute that gives us some information aboutthe data
-% came from:
+% includes a history attribute that gives us some information about where
+% the data came from:
 
 ncreadatt('ERA_Interim_2017.nc', '/', 'history')
 
