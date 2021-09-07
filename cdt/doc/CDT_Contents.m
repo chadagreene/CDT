@@ -100,6 +100,8 @@
 % * <doy_documentation.html *|doy|*> returns the day of year. 
 % * <reshapetimeseries_documentation.html *|reshapetimeseries|*> reshapes timeseries data
 % to year by time-of-year grid.
+% * <cftime_documentation.html *|cftime|*> converts between Matlab datetimes and Climate and Forecast-formatted times
+
 %% Uncertainty Quantification
 %
 % * <mann_kendall_documentation.html *|mann_kendall|*> performs a standard simple Mann-Kendall test to 
@@ -225,6 +227,9 @@
 % * <ncstruct_documentation.html *|ncstruct|*> reads several variables from netcdf file(s).
 % * <ncdateread_documentation.html *|ncdateread|*> reads datetimes from a netcdf time variable.
 % * <ncdatelim_documentation.html *|ncdatelim|*> reads first and last date from a netcdf file.
+% * <ncbuild_documentation.html *|ncbuild|*> builds and writes variable data to a netcdf file.
+% * <ncschema_documentation.html *|ncschema_|*> collection assists in building a netcdf file schema structure.
+% * <ncaddhis_documentation.html *|ncaddhis|*> prepends a dated string to the global history attribute of a netcdf file
 % * <h5struct_documentation.html *|h5struct|*> loads HDF5 data into a Matlab stucture with the same
 % hierarchy as the original file.
 

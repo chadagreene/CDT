@@ -67,6 +67,7 @@
          <tocitem target="scatstat1_documentation.html">scatstat1</tocitem>
          <tocitem target="doy_documentation.html">doy</tocitem>
          <tocitem target="reshapetimeseries_documentation.html">reshapetimeseries</tocitem>
+         <tocitem target="cftime_documentation.html">cftime</tocitem>
       </tocitem>
       
       <tocitem target="CDT_Contents.html#6"> Uncertainty Quantification
@@ -164,6 +165,9 @@
          <tocitem target="ncstruct_documentation.html">ncstruct</tocitem>
          <tocitem target="ncdateread_documentation.html">ncdateread</tocitem>
          <tocitem target="ncdatelim_documentation.html">ncdatelim</tocitem>
+         <tocitem target="ncbuild_documentation.html">ncbuild</tocitem>
+         <tocitem target="ncschema_documentation.html">ncschema_</tocitem>
+         <tocitem target="ncaddhis_documentation.html">ncaddhis</tocitem>
          <tocitem target="h5struct_documentation.html">h5struct</tocitem>
       </tocitem>
    </tocitem>

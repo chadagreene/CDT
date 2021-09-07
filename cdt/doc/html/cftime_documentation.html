@@ -1,0 +1,256 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>cftime documentation</title><meta name="generator" content="MATLAB 9.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-09-03"><meta name="DC.source" content="cftime_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>cftime</tt> documentation</h1><!--introduction--><p>The <tt>cftime</tt> function converts between Climate Forecast (CF) convention times and Matlab datetimes.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1: Converting from CF time to datetime</a></li><li><a href="#6">Example 2: Converting from datetime to CF time</a></li><li><a href="#9">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[dt, unit, refdate] = cftime(t, tunit)
+[dt, unit, refdate] = cftime(t, tunit, fmt)
+[dt, unit, refdate] = cftime(t, tunit, fmt, mode)</pre><h2 id="2">Description</h2><p><tt>[dt, unit, refdate] = cftime(t, tunit)</tt> converts a matrix of numeric CF times <tt>t</tt> with units described by the reference string or character array <tt>tunit</tt> to a matrix of datetimes, <tt>dt</tt>, with the same dimensions as <tt>t</tt>. <tt>tunit</tt> should be specified as "time-unit since timestamp"; see the <a href="https://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/build/ch04s04.html">CF Conventions time coordinate documentation</a> for more information.  The <tt>unit</tt> and <tt>refdate</tt> output variables are optional, and will parse the <tt>tunit</tt> string into a character array with the time unit and a scalar datetime holding the reference date, respectively.</p><p><tt>[dt, unit, refdate] = cftime(t, tunit, fmt)</tt> allows the user to specify the format of the reference date portion of the <tt>tunit</tt> string.  This string should follow the same format as the <tt>'InputFormat'</tt> option for <a href="https://www.mathworks.com/help/matlab/ref/datetime.html"><tt>datetime</tt></a>. If not included, <tt>cftime</tt> will attempt to parse the string automatically using the same rules as <tt>datetime</tt>.</p><p><tt>t = cftime(dt, tunit, fmt, 'reverse')</tt> converts a matrix of datetimes to numeric CF times <tt>t</tt>.  The optional <tt>fmt</tt> specifier can be an empty array to allow for default reference date parsing within the <tt>tunit</tt> string.</p><h2 id="3">Example 1: Converting from CF time to datetime</h2><p>Most data files used in climate science try to abide by the Climate Forecast standards for metadata; for time variables, these standards specify dates as a time duration since a reference date.  We can see this in the example ERA Interim data:</p><pre class="codeinput">ncdisp(<span class="string">'ERA_Interim_2017.nc'</span>, <span class="string">'time'</span>);
+t = ncread(<span class="string">'ERA_Interim_2017.nc'</span>, <span class="string">'time'</span>)
+</pre><pre class="codeoutput">Source:
+           /Users/kakearney/Documents/MatlabCodeKAK/External/CDT/cdt/cdt_data/ERA_Interim_2017.nc
+Format:
+           64bit
+Dimensions:
+           time = 12    (UNLIMITED)
+Variables:
+    time
+           Size:       12x1
+           Dimensions: time
+           Datatype:   int32
+           Attributes:
+                       units     = 'hours since 1900-01-01 00:00:00.0'
+                       long_name = 'time'
+                       calendar  = 'gregorian'
+
+t =
+
+  12&times;1 int32 column vector
+
+   1025628
+   1026372
+   1027044
+   1027788
+   1028508
+   1029252
+   1029972
+   1030716
+   1031460
+   1032180
+   1032924
+   1033644
+
+</pre><p>We can convert this data to a more user-friendly datetime via <tt>cftime</tt>:</p><pre class="codeinput">tunit = <span class="string">'hours since 1900-01-01 00:00:00.0'</span>;
+dt = cftime(t, tunit)
+</pre><pre class="codeoutput">
+dt = 
+
+  12&times;1 datetime array
+
+   2017-01-01
+   2017-02-01
+   2017-03-01
+   2017-04-01
+   2017-05-01
+   2017-06-01
+   2017-07-01
+   2017-08-01
+   2017-09-01
+   2017-10-01
+   2017-11-01
+   2017-12-01
+
+</pre><p>(In this case, we could also simply read directly from the file with the <a href="ncdateread_documentation.html"><tt>ncdateread</tt></a> function, which also reads the time data and time unit string directly from the file and then calls <tt>cftime</tt> internally.)</p><h2 id="6">Example 2: Converting from datetime to CF time</h2><p>The reverse calculation will often be useful if you want to write new data to your own netCDF file and follow the recommended CF standards. First, we calculate the conversion:</p><pre class="codeinput">tnew = datetime(2018,1:12,1)';
+tcf = cftime(tnew, tunit, [], <span class="string">'reverse'</span>)
+</pre><pre class="codeoutput">
+tcf =
+
+     1034376
+     1035120
+     1035792
+     1036536
+     1037256
+     1038000
+     1038720
+     1039464
+     1040208
+     1040928
+     1041672
+     1042392
+
+</pre><p>Next, write to a file (see <a href="ncbuild_documentation.html"><tt>ncbuild</tt></a> for details of this process):</p><pre class="codeinput">ncbuild(<span class="string">'testcffile.nc'</span>, tcf, <span class="keyword">...</span>
+    <span class="string">'name'</span>, <span class="string">'time'</span>, <span class="keyword">...</span>
+    <span class="string">'dimname'</span>, {<span class="string">'time'</span>}, <span class="keyword">...</span>
+    <span class="string">'varatts'</span>, {<span class="string">'units'</span>, tunit});
+</pre><p>We can now check and see that these units are properly interpreted by standard netCDF utilities like the command-line ncdump function:</p><pre class="codeinput">system(<span class="string">'ncdump -v time -t testcffile.nc'</span>)
+</pre><pre class="codeoutput">netcdf testcffile {
+dimensions:
+	time = 12 ;
+variables:
+	double time(time) ;
+		time:units = "hours since 1900-01-01 00:00:00.0" ;
+data:
+
+ time = "2018-01-01", "2018-02-01", "2018-03-01", "2018-04-01", "2018-05-01", 
+    "2018-06-01", "2018-07-01", "2018-08-01", "2018-09-01", "2018-10-01", 
+    "2018-11-01", "2018-12-01" ;
+}
+
+ans =
+
+     0
+
+</pre><h2 id="9">Author Info</h2><p>This function and supporting documentation was written by Kelly Kearney for the Climate Data Toolbox for Matlab.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2019a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |cftime| documentation 
+%
+% The |cftime| function converts between Climate Forecast (CF) convention
+% times and Matlab datetimes.
+%
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%
+%% Syntax
+%
+%  [dt, unit, refdate] = cftime(t, tunit)
+%  [dt, unit, refdate] = cftime(t, tunit, fmt)
+%  [dt, unit, refdate] = cftime(t, tunit, fmt, mode)
+%
+%% Description
+%
+% |[dt, unit, refdate] = cftime(t, tunit)| converts a matrix of numeric CF
+% times |t| with units described by the reference string or character array
+% |tunit| to a matrix of datetimes, |dt|, with the same dimensions as |t|.
+% |tunit| should be specified as "time-unit since timestamp"; see 
+% the <https://cfconventions.org/Data/cf-conventions/cf-conventions-1.7/build/ch04s04.html
+% CF Conventions time coordinate documentation> for more information.  The
+% |unit| and |refdate| output variables are optional, and will parse the
+% |tunit| string into a character array with the time unit and a scalar
+% datetime holding the reference date, respectively.
+%
+% |[dt, unit, refdate] = cftime(t, tunit, fmt)| allows the user to specify
+% the format of the reference date portion of the |tunit| string.  This
+% string should follow the same format as the |'InputFormat'| option for
+% <https://www.mathworks.com/help/matlab/ref/datetime.html |datetime|>. 
+% If not included, |cftime| will attempt to parse the string automatically
+% using the same rules as |datetime|.
+%
+% |t = cftime(dt, tunit, fmt, 'reverse')| converts a matrix of datetimes to
+% numeric CF times |t|.  The optional |fmt| specifier can be an empty array
+% to allow for default reference date parsing within the |tunit| string.
+%
+%% Example 1: Converting from CF time to datetime
+%
+% Most data files used in climate science try to abide by the Climate
+% Forecast standards for metadata; for time variables, these standards
+% specify dates as a time duration since a reference date.  We can see this
+% in the example ERA Interim data:
+
+ncdisp('ERA_Interim_2017.nc', 'time');
+t = ncread('ERA_Interim_2017.nc', 'time')
+
+%%
+% We can convert this data to a more user-friendly datetime via |cftime|:
+
+tunit = 'hours since 1900-01-01 00:00:00.0';
+dt = cftime(t, tunit)
+
+%%
+% (In this case, we could also simply read directly from the file with the
+% <ncdateread_documentation.html |ncdateread|> function, which also reads
+% the time data and time unit string directly from the file and then calls
+% |cftime| internally.) 
+
+%% Example 2: Converting from datetime to CF time
+%
+% The reverse calculation will often be useful if you want to write new
+% data to your own netCDF file and follow the recommended CF standards.
+% First, we calculate the conversion:
+
+tnew = datetime(2018,1:12,1)';
+tcf = cftime(tnew, tunit, [], 'reverse')
+
+%%
+% Next, write to a file (see <ncbuild_documentation.html |ncbuild|> for
+% details of this process):
+
+ncbuild('testcffile.nc', tcf, ...
+    'name', 'time', ...
+    'dimname', {'time'}, ...
+    'varatts', {'units', tunit});
+
+%%
+% We can now check and see that these units are properly interpreted by
+% standard netCDF utilities like the command-line ncdump function:
+
+system('ncdump -v time -t testcffile.nc')
+
+%% Author Info
+%
+% This function and supporting documentation was written by Kelly Kearney
+% for the Climate Data Toolbox for Matlab.  
+
+##### SOURCE END #####
+--></body></html>
