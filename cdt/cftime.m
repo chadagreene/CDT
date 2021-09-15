@@ -66,6 +66,8 @@ switch mode
                 dt = tparts{2} + hours(t);
             case {'days', 'day'}
                 dt = tparts{2} + days(t);
+            case {'month', 'months'}
+                dt = tparts{2} + days(t.*365.242198781/12);
             otherwise
                 warning('Could not parse reference time');
                 dt = [];
@@ -84,6 +86,8 @@ switch mode
                 dt = hours(t - tparts{2});
             case {'days', 'day'}
                 dt = days(t - tparts{2});
+            case {'month', 'months'}
+                dt = days(t - tparts{2})./(365.242198781/12);
             otherwise
                 warning('Could not parse reference time');
                 dt = [];
