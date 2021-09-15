@@ -36,7 +36,7 @@ NewVar = varstruct(varargin{:});
 if isempty(Nc.Variables)
     Nc.Variables = NewVar;
 else
-    Nc.Variables = cat(1, Nc.Variables, NewVar);
+    Nc.Variables = catstruct(2, Nc.Variables, NewVar);
 end
 
 Nc = updatencschema(Nc);

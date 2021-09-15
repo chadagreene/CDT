@@ -26,5 +26,5 @@ NewAtt = attribstruct(varargin{:});
 if isempty(Nc.Attributes)
     Nc.Attributes = NewAtt;
 else
-    Nc.Attributes = cat(1, Nc.Attributes, NewAtt);
+    Nc.Attributes = cat(2, Nc.Attributes, NewAtt);
 end

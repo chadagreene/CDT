@@ -27,7 +27,7 @@ NewDim = dimstruct(varargin{:});
 if isempty(Nc.Dimensions)
     Nc.Dimensions = NewDim;
 else
-    Nc.Dimensions = cat(1, Nc.Dimensions, NewDim);
+    Nc.Dimensions = cat(2, Nc.Dimensions, NewDim);
 end
 
 
