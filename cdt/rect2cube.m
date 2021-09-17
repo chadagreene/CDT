@@ -54,7 +54,11 @@ end
 if maskMethod
    
    % Create a full-size 2D NaN array: 
-   A2full = NaN(size(A2,1),numel(mask)); 
+   if islogical(A2)
+      A2full = false(size(A2,1),numel(mask)); 
+   else
+      A2full = NaN(size(A2,1),numel(mask)); 
+   end
    
    % Fill in the "true" elements from the mask with A2: 
    A2full(:,mask) = A2; 
