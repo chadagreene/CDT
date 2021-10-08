@@ -1,0 +1,178 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>polycenter documentation</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-10-08"><meta name="DC.source" content="polycenter_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>polycenter</tt> documentation</h1><!--introduction--><p>The <tt>polycenter</tt> function finds coordinates at the center of the largest section of a polygon. This is similar to the centroid, but ensures the coordinates are in the interior of the polygon (centroids may be outside of a cresecent shape, for example).</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Example 1</a></li><li><a href="#6">Example 2</a></li><li><a href="#7">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>[xc,yc] = polycenter(P)
+[xc,yc] = polycenter(S)
+[lonc,latc] = polycenter(S)
+[xc,yc] = polycenter(x,y)</pre><h2 id="2">Description</h2><p><tt>[xc,yc] = polycenter(P)</tt> returns the "center" coordinate(s) <tt>xc,yc</tt> of any polyshape(s) <tt>P</tt>.</p><p><tt>[xc,yc] = polycenter(S)</tt> returns the "center" coordinate(s) <tt>xc,yc of</tt> each row in the shapefile structure <tt>S</tt>. This syntax assumes the shapefile structure S contains the fields <tt>S.X</tt> and <tt>S.Y</tt>.</p><p><tt>[lonc,latc] = polycenter(S)</tt> returns the "center" longitude and latitude if the shapefile structure S does not contain <tt>S.X</tt> or <tt>S.Y</tt>, but does contain <tt>S.Lat</tt> and <tt>S.Lon</tt>.</p><p><tt>[xc,yc] = polycenter(x,y)</tt> returns the "center" coordinate(s) <tt>xc,yc</tt> for the inputs coordinates <tt>x,y</tt>. If <tt>x,y</tt> are 1d arrays, the outputs <tt>xc,yc</tt> are scalars. If input <tt>x,y</tt> are cell arrays, outputs <tt>xc,yc</tt> will contain a center coordinate for the polygons bound by the arrays in each cell.</p><h2 id="3">Example 1</h2><p>Start by loading the state outlines (requires Matab's Mapping Toolbox):</p><pre class="codeinput">S = shaperead(<span class="string">'usastatehi'</span>,<span class="string">'UseGeoCoords'</span>,true);
+</pre><p>What's wrong with labelling centroids of weird-shaped polygons? Well, the centroid isn't always inside the polygon it describes. Consider the case of Hawaii:</p><pre class="codeinput"><span class="comment">% Convert the outline of Hawaii to a polyshape object:</span>
+P = polyshape(S(11).Lon,S(11).Lat);
+
+<span class="comment">% Find the centroid:</span>
+[xcent,ycent] = centroid(P);
+
+figure
+plot(P,<span class="string">'facecolor'</span>,rgb(<span class="string">'tan'</span>))
+hold <span class="string">on</span>
+plot(xcent,ycent,<span class="string">'ro'</span>)
+text(xcent,ycent,<span class="string">'centroid'</span>,<span class="string">'horiz'</span>,<span class="string">'center'</span>,<span class="string">'vert'</span>,<span class="string">'top'</span>)
+axis([-160 -154   18.5   22.5])
+</pre><img vspace="5" hspace="5" src="polycenter_documentation_01.png" alt=""> <p>The <tt>polycenter</tt> function finds a better center coordinate than the centroid:</p><pre class="codeinput">[xc,yc] = polycenter(P);
+
+plot(xc,yc,<span class="string">'kx'</span>)
+text(xc,yc,<span class="string">'polycenter'</span>,<span class="string">'horiz'</span>,<span class="string">'center'</span>,<span class="string">'vert'</span>,<span class="string">'top'</span>)
+</pre><img vspace="5" hspace="5" src="polycenter_documentation_02.png" alt=""> <h2 id="6">Example 2</h2><p>Now find the "center" coordinates of all the states, directly from the shapefile structure S:</p><pre class="codeinput">[lonc,latc] = polycenter(S);
+
+figure
+plot([S.Lon],[S.Lat])
+hold <span class="string">on</span>
+plot(lonc,latc,<span class="string">'x'</span>)
+</pre><img vspace="5" hspace="5" src="polycenter_documentation_03.png" alt=""> <h2 id="7">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene of NASA's Jet Propulsion Laboratory.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |polycenter| documentation 
+% The |polycenter| function finds coordinates at the center of the largest section of a
+% polygon. This is similar to the centroid, but ensures the coordinates are
+% in the interior of the polygon (centroids may be outside of a cresecent
+% shape, for example). 
+%
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax
+% 
+%  [xc,yc] = polycenter(P)
+%  [xc,yc] = polycenter(S)
+%  [lonc,latc] = polycenter(S)
+%  [xc,yc] = polycenter(x,y)
+%
+%% Description
+% 
+% |[xc,yc] = polycenter(P)| returns the "center" coordinate(s) |xc,yc| of any
+% polyshape(s) |P|. 
+%
+% |[xc,yc] = polycenter(S)| returns the "center" coordinate(s) |xc,yc of| each
+% row in the shapefile structure |S|. This syntax assumes the shapefile
+% structure S contains the fields |S.X| and |S.Y|. 
+%
+% |[lonc,latc] = polycenter(S)| returns the "center" longitude and latitude 
+% if the shapefile structure S does not contain |S.X| or |S.Y|, but does contain
+% |S.Lat| and |S.Lon|.
+%
+% |[xc,yc] = polycenter(x,y)| returns the "center" coordinate(s) |xc,yc|
+% for the inputs coordinates |x,y|. If |x,y| are 1d arrays, the outputs
+% |xc,yc| are scalars. If input |x,y| are cell arrays, outputs |xc,yc| will contain a center
+% coordinate for the polygons bound by the arrays in each cell. 
+% 
+%% Example 1
+% Start by loading the state outlines (requires Matab's Mapping Toolbox): 
+
+S = shaperead('usastatehi','UseGeoCoords',true); 
+
+%%
+% What's wrong with labelling centroids of weird-shaped polygons? Well, the
+% centroid isn't always inside the polygon it describes. Consider the case
+% of Hawaii: 
+
+% Convert the outline of Hawaii to a polyshape object: 
+P = polyshape(S(11).Lon,S(11).Lat); 
+
+% Find the centroid: 
+[xcent,ycent] = centroid(P); 
+
+figure
+plot(P,'facecolor',rgb('tan'))
+hold on
+plot(xcent,ycent,'ro')
+text(xcent,ycent,'centroid','horiz','center','vert','top')
+axis([-160 -154   18.5   22.5])
+
+%% 
+% The |polycenter| function finds a better center coordinate than the
+% centroid: 
+
+[xc,yc] = polycenter(P); 
+
+plot(xc,yc,'kx') 
+text(xc,yc,'polycenter','horiz','center','vert','top')
+
+%% Example 2
+% Now find the "center" coordinates of all the states, directly from the
+% shapefile structure S: 
+
+[lonc,latc] = polycenter(S);
+
+figure
+plot([S.Lon],[S.Lat])
+hold on
+plot(lonc,latc,'x') 
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% of NASA's Jet Propulsion Laboratory. 
+##### SOURCE END #####
+--></body></html>

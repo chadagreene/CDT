@@ -6,8 +6,8 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Climate Data Toolbox for Matlab</title><meta name="generator" content="MATLAB 9.5"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-06-20"><meta name="DC.source" content="CDT_Getting_Started.m"><style type="text/css">
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+      --><title>Climate Data Toolbox for Matlab</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-10-08"><meta name="DC.source" content="CDT_Getting_Started.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
 html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
@@ -23,7 +23,7 @@ a:visited { color:#004aa0; text-decoration:none; }
 
 p { padding:0px; margin:0px 0px 20px; }
 img { padding:0px; margin:0px 0px 20px; border:none; }
-p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
 
 ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
 ul li { padding:0px; margin:0px 0px 7px 0px; }
@@ -52,6 +52,7 @@ span.comment { color:#228B22 }
 span.string { color:#A020F0 }
 span.untermstring { color:#B20000 }
 span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
 
 .footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
 .footer p { margin:0px; }
@@ -66,7 +67,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Climate Data Toolbox for Matlab</h1><!--introduction--><p><img vspace="5" hspace="5" src="CDT_reduced.jpg" alt=""> </p><p>Welcome to the Climate Data Toolbox for Matlab! Here are some tips on getting started with CDT:</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">CDT Contents</a></li><li><a href="#2">Downloading CDT</a></li><li><a href="#3">Installing CDT in Matlab</a></li><li><a href="#4">Accessing Help</a></li><li><a href="#5">Citing CDT</a></li></ul></div><h2 id="1">CDT Contents</h2><p>For a complete list of CDT functions, datasets, and tutorials, check out the <a href="CDT_Contents.html"><b>CDT Contents</b></a> page.</p><h2 id="2">Downloading CDT</h2><p>You have a few options for downloading CDT. You can get the most recent release of the toolbox <a href="http://chadagreene.com/ClimateDataToolbox.mltbx">here</a> (about 100 MB) and just double-click on the file to install it (described below) or you can find all the latest individual files through the Add-Ons menu (Method 2 described below), on the <a href="https://www.mathworks.com/matlabcentral/fileexchange/">Mathworks File Exhange</a> or on <a href="https://github.com/chadagreene/CDT">GitHub</a>.</p><h2 id="3">Installing CDT in Matlab</h2><p>You have two options for how to install CDT:</p><p>1. If you have already downloaded the .mltbx file, navigate to it in your file system and it might look something like this:</p><p><img vspace="5" hspace="5" src="cdt_install_screenshot_1.png" alt=""> </p><p>Just double-click on that file and when the menu pops up, click <b>Install</b>. Installation should take less than a second.</p><p>2. Alternatively, if you haven't already downloaded the mltbx file, you can get it via the Add-On button from directly within Matlab. That looks like this in the HOME menu:</p><p><img vspace="5" hspace="5" src="cdt_install_screenshot_2.png" alt=""> </p><p>Click <b>Get Add-Ons</b>, look up <i>Climate Data Toolbox</i>, and follow the prompts to download and install CDT automatically.</p><h2 id="4">Accessing Help</h2><p>Need help? Just type</p><pre>cdt</pre><p>to access TMD documentation. For help with specific functions, type <tt>cdt</tt> followed by the function name. For example,</p><pre>cdt eof</pre><p>to access help for the <tt>eof</tt> function.</p><p>Still need help?</p><div><ul><li>The fastest way to get help is to ask a question on the <a href="https://www.mathworks.com/matlabcentral/answers/index">Matlab Answers forum.</a></li><li>If you find a bug or experience some other technical issue that the Answers forum cannot solve, please report it via the <a href="https://github.com/chadagreene/CDT/issues">CDT Issues page</a>.</li><li>You can also try emailing me directly at <a href="mailto:chad@chadagreene.com">chad@chadagreene.com</a>. I can't promise a response, but I do read all the messages I receive. To maximize your chances of receiving a response, please describe the issue you're experiencing, describe what you're <i>trying</i> to accomplish, include any error messages, and <b>provide a minimal working example</b> if applicable.</li></ul></div><h2 id="5">Citing CDT</h2><p>Please cite our paper!</p><p>Chad A. Greene, Kaustubh Thirumalai, Kelly A. Kearney, Jose Miguel Delgado, Wolfgang Schwanghart, Natalie S. Wolfenbarger, Kristen M. Thyng, David E. Gwyther, Alex S. Gardner, and Donald D. Blankenship. The Climate Data Toolbox for MATLAB. <i>Geochemistry, Geophysics, Geosystems</i> 2019. <a href="https://doi.org/10.1029/2019GC008392">doi:10.1029/2019GC008392</a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2018b</a><br></p></div><!--
+  </style></head><body><div class="content"><h1>Climate Data Toolbox for Matlab</h1><!--introduction--><p><img vspace="5" hspace="5" src="CDT_reduced.jpg" alt=""> </p><p>Welcome to the Climate Data Toolbox for Matlab! Here are some tips on getting started with CDT:</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">CDT Contents</a></li><li><a href="#2">Downloading CDT</a></li><li><a href="#3">Accessing Help</a></li><li><a href="#4">Tutorial videos</a></li><li><a href="#5">Citing CDT</a></li></ul></div><h2 id="1">CDT Contents</h2><p>For a complete list of CDT functions, datasets, and tutorials, check out the <a href="CDT_Contents.html"><b>CDT Contents</b></a> page.</p><h2 id="2">Downloading CDT</h2><p><b>The best and most up-to-date version of CDT</b> can always be found on <a href="https://github.com/chadagreene/CDT">GitHub</a> or you can install it directly through the Add-Ons menu. That looks like this in the HOME menu:</p><p><img vspace="5" hspace="5" src="cdt_install_screenshot_2.png" alt=""> </p><p>Click <b>Get Add-Ons</b>, look up <i>Climate Data Toolbox</i>, and follow the prompts to download and install CDT automatically.</p><p><b>Other options</b> You can get a usually-out-of-date latest "Release" of CDT <a href="http://chadagreene.com/ClimateDataToolbox.mltbx">here</a> (about 100 MB) and just double-click on the file to install it:</p><p><img vspace="5" hspace="5" src="cdt_install_screenshot_1.png" alt=""> </p><p>Just double-click on that file and when the menu pops up, click <b>Install</b>. Installation should take less than a second.</p><p>2. Alternatively, if you haven't already downloaded the mltbx file, you can get it via the Add-On button from directly within Matlab.</p><h2 id="3">Accessing Help</h2><p>Need help? Just type</p><pre>cdt</pre><p>to access TMD documentation. For help with specific functions, type <tt>cdt</tt> followed by the function name. For example,</p><pre>cdt eof</pre><p>to access help for the <tt>eof</tt> function.</p><p>Still need help?</p><div><ul><li>The fastest way to get help is to ask a question on the <a href="https://www.mathworks.com/matlabcentral/answers/index">Matlab Answers forum.</a></li><li>If you find a bug or experience some other technical issue that the Answers forum cannot solve, please report it via the <a href="https://github.com/chadagreene/CDT/issues">CDT Issues page</a>.</li><li>You can also try emailing me directly at <a href="mailto:chad@chadagreene.com">chad@chadagreene.com</a>. I can't promise a response, but I do read all the messages I receive. To maximize your chances of receiving a response, please describe the issue you're experiencing, describe what you're <i>trying</i> to accomplish, include any error messages, and <b>provide a minimal working example</b> if applicable.</li></ul></div><h2 id="4">Tutorial videos</h2><p>I've posted a few <a href="https://www.youtube.com/user/chadagreene/videos">tutorial videos on my youtube channel</a>. Check 'em out if you want to, and let me know if you'd like me to cover anything in particular in future videos.</p><h2 id="5">Citing CDT</h2><p>Please cite our paper!</p><p>Chad A. Greene, Kaustubh Thirumalai, Kelly A. Kearney, Jose Miguel Delgado, Wolfgang Schwanghart, Natalie S. Wolfenbarger, Kristen M. Thyng, David E. Gwyther, Alex S. Gardner, and Donald D. Blankenship. The Climate Data Toolbox for MATLAB. <i>Geochemistry, Geophysics, Geosystems</i> 2019. <a href="https://doi.org/10.1029/2019GC008392">doi:10.1029/2019GC008392</a></p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Climate Data Toolbox for Matlab
 % 
@@ -80,20 +81,16 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 % <CDT_Contents.html *CDT Contents*> page. 
 
 %% Downloading CDT 
-% You have a few options for downloading CDT. You can get the most recent
-% release of the toolbox <http://chadagreene.com/ClimateDataToolbox.mltbx
-% here> (about 100 MB) and just double-click on the file to install it (described 
-% below) or you can find all the latest individual files through the
-% Add-Ons menu (Method 2 described below), on the
-% <https://www.mathworks.com/matlabcentral/fileexchange/ Mathworks File
-% Exhange> or on <https://github.com/chadagreene/CDT GitHub>.
-
-%% Installing CDT in Matlab
-% You have two options for how to install CDT:
+% *The best and most up-to-date version of CDT* can always be found on <https://github.com/chadagreene/CDT GitHub>
+% or you can install it directly through the Add-Ons menu. That looks like this in the HOME menu: 
 % 
-% 1. If you have already downloaded
-% the .mltbx file, navigate to it in your file system and it might look something
-% like this: 
+% <<cdt_install_screenshot_2.png>>
+% 
+% Click *Get Add-Ons*, look up _Climate Data Toolbox_, and follow the prompts to download
+% and install CDT automatically. 
+% 
+% *Other options* You can get a usually-out-of-date latest "Release" of CDT 
+% <http://chadagreene.com/ClimateDataToolbox.mltbx here> (about 100 MB) and just double-click on the file to install it:
 % 
 % <<cdt_install_screenshot_1.png>>
 % 
@@ -101,13 +98,7 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 % Installation should take less than a second. 
 % 
 % 2. Alternatively, if you haven't already downloaded the mltbx file, you can get 
-% it via the Add-On button from directly within Matlab. That looks
-% like this in the HOME menu: 
-% 
-% <<cdt_install_screenshot_2.png>>
-% 
-% Click *Get Add-Ons*, look up _Climate Data Toolbox_, and follow the prompts to download
-% and install CDT automatically. 
+% it via the Add-On button from directly within Matlab. 
 %
 %% Accessing Help 
 % Need help? Just type 
@@ -132,6 +123,11 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 % but I do read all the messages I receive. To maximize your chances of receiving a response, 
 % please describe the issue you're experiencing, describe what you're _trying_ to accomplish, 
 % include any error messages, and *provide a minimal working example* if applicable. 
+% 
+%% Tutorial videos 
+% I've posted a few <https://www.youtube.com/user/chadagreene/videos tutorial videos on my youtube channel>. 
+% Check 'em out if you want to, and let me know if you'd like me to cover
+% anything in particular in future videos. 
 % 
 %% Citing CDT 
 % Please cite our paper! 

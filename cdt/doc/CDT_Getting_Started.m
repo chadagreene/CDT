@@ -10,20 +10,16 @@
 % <CDT_Contents.html *CDT Contents*> page. 
 
 %% Downloading CDT 
-% You have a few options for downloading CDT. You can get the most recent
-% release of the toolbox <http://chadagreene.com/ClimateDataToolbox.mltbx
-% here> (about 100 MB) and just double-click on the file to install it (described 
-% below) or you can find all the latest individual files through the
-% Add-Ons menu (Method 2 described below), on the
-% <https://www.mathworks.com/matlabcentral/fileexchange/ Mathworks File
-% Exhange> or on <https://github.com/chadagreene/CDT GitHub>.
-
-%% Installing CDT in Matlab
-% You have two options for how to install CDT:
+% *The best and most up-to-date version of CDT* can always be found on <https://github.com/chadagreene/CDT GitHub>
+% or you can install it directly through the Add-Ons menu. That looks like this in the HOME menu: 
 % 
-% 1. If you have already downloaded
-% the .mltbx file, navigate to it in your file system and it might look something
-% like this: 
+% <<cdt_install_screenshot_2.png>>
+% 
+% Click *Get Add-Ons*, look up _Climate Data Toolbox_, and follow the prompts to download
+% and install CDT automatically. 
+% 
+% *Other options* You can get a usually-out-of-date latest "Release" of CDT 
+% <http://chadagreene.com/ClimateDataToolbox.mltbx here> (about 100 MB) and just double-click on the file to install it:
 % 
 % <<cdt_install_screenshot_1.png>>
 % 
@@ -31,13 +27,7 @@
 % Installation should take less than a second. 
 % 
 % 2. Alternatively, if you haven't already downloaded the mltbx file, you can get 
-% it via the Add-On button from directly within Matlab. That looks
-% like this in the HOME menu: 
-% 
-% <<cdt_install_screenshot_2.png>>
-% 
-% Click *Get Add-Ons*, look up _Climate Data Toolbox_, and follow the prompts to download
-% and install CDT automatically. 
+% it via the Add-On button from directly within Matlab. 
 %
 %% Accessing Help 
 % Need help? Just type 
@@ -62,6 +52,11 @@
 % but I do read all the messages I receive. To maximize your chances of receiving a response, 
 % please describe the issue you're experiencing, describe what you're _trying_ to accomplish, 
 % include any error messages, and *provide a minimal working example* if applicable. 
+% 
+%% Tutorial videos 
+% I've posted a few <https://www.youtube.com/user/chadagreene/videos tutorial videos on my youtube channel>. 
+% Check 'em out if you want to, and let me know if you'd like me to cover
+% anything in particular in future videos. 
 % 
 %% Citing CDT 
 % Please cite our paper! 
