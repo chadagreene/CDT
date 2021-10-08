@@ -24,11 +24,15 @@ function [xc,yc] = polycenter(varargin)
 % if the shapefile structure S does not contain S.X or S.Y, but does contain
 % S.Lat and S.Lon.
 %
-% [xc,yc] = polycenter(x,y) returns the "center" coordinate(s) xc,yc
+% [xc,yc] = polycenter(x,y) returns the "center" coordinate(s) xc,yc for the 
+% inputs coordinates x,y. If x,y are 1d arrays, the outputs xc,yc
+% are scalars. If input x,y are cells, outputs xc,yc will contain a center
+% coordinate for the polygons bound by the arrays in each cell. 
 % 
-%% Example 
+%% Examples 
+% For examples, type 
 % 
-% S = shaperead('usastatehi','UseGeoCoords',true);
+%  cdt polycenter
 % 
 %% Author Info 
 % This function was written by Chad A. Greene of NASA Jet Propulsion
@@ -51,7 +55,7 @@ switch nargin
          % There's no ispolyshape function, so assume it's a structure. 
          polyshapeIn = true; 
          Pin = varargin{1}; 
-         shapeIn = size(P);
+         shapeIn = size(Pin);
       end
    case 2 
       if iscell(varargin{1})

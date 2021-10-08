@@ -203,6 +203,7 @@
 % before plotting them.
 % * <patchsc_documentation.html *|patchsc|*> plots patch objects with face colors scaled by numeric values. 
 % * <polycenter_documentation.html *|polycenter|*> gives an approximate center location of polygons for map labelling (usually better than centroid).  
+% * <isoverlapping_documentation.html *|isoverlapping|*> determines whether geographic boundingboxes overlap.
 
 %% Globes
 %
