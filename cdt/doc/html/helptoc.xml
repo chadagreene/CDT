@@ -114,6 +114,7 @@
       <tocitem target="CDT_Contents.html#10"> Graphics
          <tocitem target="rgb_documentation.html">rgb</tocitem>
          <tocitem target="cmocean_documentation.html">cmocean</tocitem>
+         <tocitem target="textcolorbar_documentation.html">textcolorbar</tocitem>
          <tocitem target="newcolorbar_documentation.html">newcolorbar</tocitem>
          <tocitem target="cbarrow_documentation.html">cbarrow</tocitem>
          <tocitem target="cbdate_documentation.html">cbdate</tocitem>

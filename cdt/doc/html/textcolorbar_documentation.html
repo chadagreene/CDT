@@ -1,0 +1,231 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>textcolorbar documentation</title><meta name="generator" content="MATLAB 9.10"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-10-13"><meta name="DC.source" content="textcolorbar_documentation.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1><tt>textcolorbar</tt> documentation</h1><!--introduction--><p>The <tt>textcolorbar</tt> function creates a color-scaled text that is something between a colorbar and a text legend. It does <b>not</b> hijack the current colormap.</p><p><a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>.</p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Syntax</a></li><li><a href="#2">Description</a></li><li><a href="#3">Examples</a></li><li><a href="#10">Author Info</a></li></ul></div><h2 id="1">Syntax</h2><pre>textcolorbar(labels)
+textcolorbar(...,'colormap',col,...)
+textcolorbar(...,'location',loc,...)
+textcolorbar(...,'TextProperty',TextValue,...)
+h = textcolorbar</pre><h2 id="2">Description</h2><p><tt>textcolorbar(labels)</tt> places a color-scaled text label legend in the upper left hand corner of the current axes. If <tt>labels</tt> is a numeric array, then the color of each label is scaled according to the range of values in <tt>labels</tt>. If <tt>labels</tt> is a cell array of strings, each cell becomes a row in the color-scaled legend.</p><p><tt>textcolorbar(...,'colormap',col,...)</tt> specifies an Mx3 colormap. If input labels are numeric, the colors of each row in the text legend are interpolated from the specified colormap. If input labels are cell strings, the colormap must have the same number of rows as the number of cells in labels. The default colormap is parula.</p><p><tt>textcolorbar(...,'location',loc,...)</tt> specifies a location as:</p><div><ul><li>'north'</li><li>'northwest' or 'nw' upper left (default)</li><li>'northeast' or 'ne' upper right</li><li>'east' or 'e' left</li><li>'center' or 'c' middle</li><li>'west' or 'w' right</li><li>'southwest' or 'sw' lower left</li><li>'south' or 's' bottom center</li><li>'southeast' or 'sw' lower right</li><li>'northoutside' or 'no'</li><li>'northwestoutside' or 'nwo'</li><li>'northeastoutside' or 'neo'</li><li>'eastoutside' or 'eo'</li><li>'westoutside' or 'wo'</li><li>'southwestoutside' or 'swo'</li><li>'southoutside' or 'so'</li><li>'southeastoutside' or 'swo'</li></ul></div><p><tt>textcolorbar(...,'TextProperty',TextValue,...)</tt> sets any text properties as name-value pairs.</p><p><tt>h = textcolorbar(...)</tt> returns a handle h of the color-scaled text object.</p><h2 id="3">Examples</h2><p>Start with this example plot:</p><pre class="codeinput"><span class="comment">% Load some example data:</span>
+[X,Y,Z] = peaks(500);
+
+figure
+pcolor(X,Y,abs(Z))
+shading <span class="string">interp</span>
+caxis([-1 15])
+cmocean <span class="string">amp</span>
+colorbar(<span class="string">'location'</span>,<span class="string">'southoutside'</span>)
+</pre><img vspace="5" hspace="5" src="textcolorbar_documentation_01.png" alt=""> <p>Place two text colorbars in the top corners of the figure:</p><pre class="codeinput"><span class="comment">% 1 to 5 in the upper left-hand corner:</span>
+textcolorbar(1:5)
+
+<span class="comment">% Discontinuous number range in the upper right:</span>
+textcolorbar([1:4 50],<span class="string">'loc'</span>,<span class="string">'ne'</span>)
+</pre><img vspace="5" hspace="5" src="textcolorbar_documentation_02.png" alt=""> <p>In the figure above, both text colorbars contain five numbers, but the color mapping is different. That's because the numbers in the first colorbar are equally spaced, whereas the numbers in the second colorbar span a large range of numbers that are not printed in the colorbar.</p><p>In this example, use the thermal colormap (instead of the default parula) and format the text as large, bold numbers. Place it in the</p><pre class="codeinput">textcolorbar(10:18,<span class="string">'colormap'</span>,cmocean(<span class="string">'thermal'</span>),<span class="keyword">...</span>
+   <span class="string">'fontsize'</span>,20,<span class="string">'fontweight'</span>,<span class="string">'bold'</span>,<span class="keyword">...</span>
+   <span class="string">'loc'</span>,<span class="string">'eo'</span>) <span class="comment">% location is eo, or "east outside"</span>
+</pre><img vspace="5" hspace="5" src="textcolorbar_documentation_03.png" alt=""> <p>Now print five text labels, equally spaced along the default parula colormap:</p><pre class="codeinput">lifestages = {<span class="string">'newborn'</span>,<span class="string">'infant'</span>,<span class="string">'toddler'</span>,<span class="string">'teen'</span>,<span class="string">'adult'</span>};
+
+textcolorbar(lifestages,<span class="string">'loc'</span>,<span class="string">'w'</span>)
+</pre><img vspace="5" hspace="5" src="textcolorbar_documentation_04.png" alt=""> <p>Map five text labels to the 'algae' colormap by specifying a 5x3 matrix of the RGB values:</p><pre class="codeinput">textcolorbar(lifestages,<span class="keyword">...</span>
+   <span class="string">'colormap'</span>,cmocean(<span class="string">'algae'</span>,5),<span class="keyword">...</span>
+   <span class="string">'fontweight'</span>,<span class="string">'bold'</span>,<span class="keyword">...</span>
+   <span class="string">'fontname'</span>,<span class="string">'baskerville'</span>,<span class="keyword">...</span>
+   <span class="string">'fontangle'</span>,<span class="string">'italic'</span>,<span class="keyword">...</span>
+   <span class="string">'loc'</span>,<span class="string">'sw'</span>)
+</pre><img vspace="5" hspace="5" src="textcolorbar_documentation_05.png" alt=""> <p>Here's another set of text labels and their corresponding values:</p><pre class="codeinput">strings = {<span class="string">'red'</span>,<span class="string">'orange'</span>,<span class="string">'yellow'</span>,<span class="string">'green'</span>,<span class="string">'blue'</span>,<span class="string">'indigo'</span>,<span class="string">'violet'</span>};
+
+col = rgb(strings);
+
+textcolorbar(strings,<span class="string">'colormap'</span>,col,<span class="string">'location'</span>,<span class="string">'se'</span>)
+</pre><img vspace="5" hspace="5" src="textcolorbar_documentation_06.png" alt=""> <h2 id="10">Author Info</h2><p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by <a href="https://www.chadagreene.com">Chad A. Greene</a> of NASA Jet Propulsion Laboratory.</p><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2021a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% |textcolorbar| documentation 
+% The |textcolorbar| function creates a color-scaled text that is something
+% between a colorbar and a text legend. It does *not* hijack the current
+% colormap. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>.
+%% Syntax 
+% 
+%  textcolorbar(labels)
+%  textcolorbar(...,'colormap',col,...) 
+%  textcolorbar(...,'location',loc,...) 
+%  textcolorbar(...,'TextProperty',TextValue,...) 
+%  h = textcolorbar 
+% 
+%% Description
+% 
+% |textcolorbar(labels)| places a color-scaled text label legend in the upper
+% left hand corner of the current axes. If |labels| is a numeric array, then
+% the color of each label is scaled according to the range of values in
+% |labels|. If |labels| is a cell array of strings, each cell becomes a row in
+% the color-scaled legend.
+%
+% |textcolorbar(...,'colormap',col,...)| specifies an Mx3 colormap. If input
+% labels are numeric, the colors of each row in the text legend are
+% interpolated from the specified colormap. If input labels are cell
+% strings, the colormap must have the same number of rows as the number of
+% cells in labels. The default colormap is parula. 
+%
+% |textcolorbar(...,'location',loc,...)| specifies a location as: 
+% 
+% * 'north' 
+% * 'northwest' or 'nw' upper left (default) 
+% * 'northeast' or 'ne' upper right
+% * 'east' or 'e' left
+% * 'center' or 'c' middle
+% * 'west' or 'w' right
+% * 'southwest' or 'sw' lower left
+% * 'south' or 's' bottom center
+% * 'southeast' or 'sw' lower right
+% * 'northoutside' or 'no'
+% * 'northwestoutside' or 'nwo' 
+% * 'northeastoutside' or 'neo' 
+% * 'eastoutside' or 'eo' 
+% * 'westoutside' or 'wo' 
+% * 'southwestoutside' or 'swo' 
+% * 'southoutside' or 'so' 
+% * 'southeastoutside' or 'swo' 
+%
+% |textcolorbar(...,'TextProperty',TextValue,...)| sets any text properties
+% as name-value pairs. 
+%
+% |h = textcolorbar(...)| returns a handle h of the color-scaled text object. 
+%
+%% Examples
+% Start with this example plot: 
+
+% Load some example data: 
+[X,Y,Z] = peaks(500); 
+
+figure
+pcolor(X,Y,abs(Z))
+shading interp
+caxis([-1 15]) 
+cmocean amp 
+colorbar('location','southoutside')
+
+%% 
+% Place two text colorbars in the top corners of the figure:
+
+% 1 to 5 in the upper left-hand corner:
+textcolorbar(1:5)
+
+% Discontinuous number range in the upper right: 
+textcolorbar([1:4 50],'loc','ne')
+
+%%
+% In the figure above, both text colorbars contain five numbers, but the
+% color mapping is different. That's because the numbers in the first
+% colorbar are equally spaced, whereas the numbers in the second colorbar
+% span a large range of numbers that are not printed in the colorbar. 
+% 
+%%
+% In this example, use the thermal colormap (instead of the default parula)
+% and format the text as large, bold numbers. Place it in the 
+
+textcolorbar(10:18,'colormap',cmocean('thermal'),...
+   'fontsize',20,'fontweight','bold',...
+   'loc','eo') % location is eo, or "east outside"
+
+%%
+% Now print five text labels, equally spaced along the default parula
+% colormap: 
+
+lifestages = {'newborn','infant','toddler','teen','adult'}; 
+
+textcolorbar(lifestages,'loc','w') 
+
+%%
+% Map five text labels to the 'algae' colormap by specifying a 5x3 matrix
+% of the RGB values:
+
+textcolorbar(lifestages,...
+   'colormap',cmocean('algae',5),...
+   'fontweight','bold',...
+   'fontname','baskerville',...
+   'fontangle','italic',...
+   'loc','sw') 
+
+%% 
+% Here's another set of text labels and their corresponding values: 
+
+strings = {'red','orange','yellow','green','blue','indigo','violet'}; 
+
+col = rgb(strings); 
+
+textcolorbar(strings,'colormap',col,'location','se')
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by
+% <https://www.chadagreene.com Chad A. Greene>
+% of NASA Jet Propulsion Laboratory. 
+
+##### SOURCE END #####
+--></body></html>

@@ -1,6 +1,6 @@
 function h = textcolorbar(labels,varargin) 
-% textcolorbar creates a color-scaled text legend that does *not* hijack the 
-% current colormap.
+% textcolorbar creates a color-scaled text that is something between
+% a colorbar and a text legend. It does *not* hijack the current colormap. 
 % 
 %% Syntax 
 % 

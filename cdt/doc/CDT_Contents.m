@@ -159,6 +159,7 @@
 % * <rgb_documentation.html *|rgb|*> provides RGB values of common and uncommon colors by name.
 % * <cmocean_documentation.html *|cmocean|*> provides perceptually-uniform colormaps by
 % <http://dx.doi.org/10.5670/oceanog.2016.66 Thyng et al., 2016>.
+% * <textcolorbar_documentation.html *|textcolorbar|*> creates a color-scaled text that is something between a colorbar and a text legend. It does *not* hijack the current colormap. 
 % * <newcolorbar_documentation.html *|newcolorbar|*> allows multiple colormaps and colorbars in the same axes. 
 % * <cbarrow_documentation.html *|cbarrow|*> places triangle-shaped endmembers on colorbars to
 % indicate that data values exist beyond the extents of the values shown in the colorbar.

@@ -1,6 +1,7 @@
 %% |textcolorbar| documentation 
-% The |textcolorbar| function creates a color-scaled text legend that does *not* hijack the 
-% current colormap.
+% The |textcolorbar| function creates a color-scaled text that is something
+% between a colorbar and a text legend. It does *not* hijack the current
+% colormap. 
 % 
 % <CDT_Contents.html Back to Climate Data Tools Contents>.
 %% Syntax 
@@ -61,32 +62,58 @@ pcolor(X,Y,abs(Z))
 shading interp
 caxis([-1 15]) 
 cmocean amp 
-colorbar
+colorbar('location','southoutside')
 
 %% 
+% Place two text colorbars in the top corners of the figure:
 
-
-
-%% 
-
+% 1 to 5 in the upper left-hand corner:
 textcolorbar(1:5)
 
+% Discontinuous number range in the upper right: 
 textcolorbar([1:4 50],'loc','ne')
 
-textcolorbar(10:20,'colormap',cmocean('thermal'),...
+%%
+% In the figure above, both text colorbars contain five numbers, but the
+% color mapping is different. That's because the numbers in the first
+% colorbar are equally spaced, whereas the numbers in the second colorbar
+% span a large range of numbers that are not printed in the colorbar. 
+% 
+%%
+% In this example, use the thermal colormap (instead of the default parula)
+% and format the text as large, bold numbers. Place it in the 
+
+textcolorbar(10:18,'colormap',cmocean('thermal'),...
    'fontsize',20,'fontweight','bold',...
-   'loc','se')
+   'loc','eo') % location is eo, or "east outside"
+
+%%
+% Now print five text labels, equally spaced along the default parula
+% colormap: 
 
 lifestages = {'newborn','infant','toddler','teen','adult'}; 
+
 textcolorbar(lifestages,'loc','w') 
 
+%%
+% Map five text labels to the 'algae' colormap by specifying a 5x3 matrix
+% of the RGB values:
 
-t=textcolorbar(lifestages,...
+textcolorbar(lifestages,...
    'colormap',cmocean('algae',5),...
    'fontweight','bold',...
    'fontname','baskerville',...
    'fontangle','italic',...
    'loc','sw') 
+
+%% 
+% Here's another set of text labels and their corresponding values: 
+
+strings = {'red','orange','yellow','green','blue','indigo','violet'}; 
+
+col = rgb(strings); 
+
+textcolorbar(strings,'colormap',col,'location','se')
 
 %% Author Info
 % This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
