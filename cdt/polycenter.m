@@ -34,15 +34,20 @@ function [xc,yc] = polycenter(varargin)
 % 
 %  cdt polycenter
 % 
+%% References 
+% The inner workings of this function were inspired by:
+% 
+% Kang & Elhami, 2001, "Using Shape Analyses for Placement of Polygon Labels",
+% ESRI 2001 Int. User Conf.
+% https://proceedings.esri.com/library/userconf/proc01/professional/papers/pap388/p388.htm 
+% 
 %% Author Info 
-% This function was written by Chad A. Greene of NASA Jet Propulsion
-% Laboratory, October 2021. 
+% This function was written by Kelly Kearney and Chad A. Greene, October 2021. 
 % 
 % See also centroid and text. 
 
 structIn = false; 
 polyshapeIn = false; 
-arrayIn = false; 
 cellIn = false; 
 
 switch nargin
@@ -64,7 +69,6 @@ switch nargin
          ys = varargin{2}; 
          shapeIn = size(xs); 
       else
-         arrayIn = true; 
          x = varargin{1}; 
          y = varargin{2}; 
          shapeIn = [1,1]; 
@@ -91,6 +95,11 @@ for k = 1:N
       end
    end
    
+   if cellIn
+      x = xs{k};
+      y = ys{k}; 
+   end
+   
    if ~polyshapeIn
       % Convert the outline to a polyshape:
       P = polyshape(x,y);
@@ -98,21 +107,60 @@ for k = 1:N
       P = Pin(k); 
    end
     
-   % And get the delaunay triangulation of the polygon:
-   T = triangulation(P);
-    
-   % Now find the center points of all the triangles:
-   [C,r] = circumcenter(T);
-    
-   % If it's not inside the polygon, make sure it doesn't have the maximum radius: 
-   r(~isinterior(P,C(:,1),C(:,2))) = -1;
-    
-   % Get the index of the centerpoint that has the largest radius from the boundary:
-   [~,ind] = max(r);
-    
-   % These center coordinates are in the center of the fattest part of the polygon:
-   xc(k) = C(ind,1);
-   yc(k) = C(ind,2);
+   % Take only the largest region of P: 
+   P = sortregions(P,'area','descend'); 
+   P = regions(P);
+   P = P(1);
+
+   % Approximate P as a polygon with about 100 vertices because buffering complex polygons is too slow. 
+   % For a more exact solution, delete the next two lines: 
+   skip = max([floor(size(P.Vertices,1)/100) 1]); 
+   P.Vertices = P.Vertices(1:skip:end,:);
+
+   % Define a buffering step size: 
+   step = sqrt(P.area/pi/10);
+   init=0;
+
+   while 1
+
+       % Test the initial buffer size.  If too big (buffer erases the entire
+       % polygon), cut buffer size in half and try again.
+
+      istoobig = true;
+      while istoobig
+
+         bwidth = init + step;
+
+         Pb = polybuffer(P, -bwidth);
+
+         if ~Pb.NumRegions
+            step = step/2;
+         else
+            
+            Pb = sortregions(Pb,'area','descend'); 
+            Pr = regions(Pb);
+            Pr = Pr(1); 
+            istoobig = false;
+         end
+
+      end
+
+       Phull = convhull(Pr);
+       sub = subtract(Phull, P);
+
+       % If we found an enclosed hull, break out of loop.  Otherwise, repeat
+       % the process with a larger buffer.
+
+       if ~sub.NumRegions
+           break
+       else
+           init = init + step;
+       end
+
+   end
+
+   % Calculate centroid of enclosed polygon
+   [xc(k),yc(k)] = centroid(Pr);
     
 end
 warning(warnStruct) 

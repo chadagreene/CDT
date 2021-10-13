@@ -75,5 +75,5 @@ plot(lonc,latc,'x')
 
 %% Author Info
 % This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
-% The function and supporting documentation were written by Chad A. Greene
-% of NASA's Jet Propulsion Laboratory. 
+% The function and supporting documentation were written by Kelly Kearney
+% and Chad Greene.
