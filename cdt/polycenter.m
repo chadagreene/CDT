@@ -1,4 +1,4 @@
-function [xc,yc] = polycenter(varargin)
+function [xc,yc,Pout] = polycenter(varargin)
 % polycenter finds coordinates at the center of the largest section of a
 % polygon. This is similar to the centroid, but ensures the coordinates are
 % in the interior of the polygon (centroids may be outside of a cresecent
@@ -28,6 +28,22 @@ function [xc,yc] = polycenter(varargin)
 % inputs coordinates x,y. If x,y are 1d arrays, the outputs xc,yc
 % are scalars. If input x,y are cells, outputs xc,yc will contain a center
 % coordinate for the polygons bound by the arrays in each cell. 
+%
+% [xc,yc,Pout] = polycenter(..., 'reduce', method) simplifies the input
+% polygon(s) using the selected method prior to applying the primary
+% algorithm; this can significantly reduce the computation time for
+% polygons with a high density of vertices.  The simplified polygon can be
+% returned as a polyshape object Pout.  Methods are:
+%  'none':      no simplification applied.  Usually fastest for simple
+%               polygons with a few hundred or so vertices or fewer.
+%  'subsample': vertices are reduced to approximately 100 by keeping every
+%               nth vertex.  This is typically faster than line
+%               simplification but is only appropriate if the polygon has
+%               relatively uniform vertex density and only a single region.
+%  'dp':        vertices are reduced using the Douglas-Peucker line
+%               simplification algorithm.  This is more robust than simple
+%               subsampling but also a bit slower. [default]
+%
 % 
 %% Examples 
 % For examples, type 
@@ -50,32 +66,39 @@ structIn = false;
 polyshapeIn = false; 
 cellIn = false; 
 
-switch nargin
-   case 1 
-      if isstruct(varargin{1})
-         structIn = true;
-         S = varargin{1}; 
-         shapeIn = size(S);
-      else
-         % There's no ispolyshape function, so assume it's a structure. 
-         polyshapeIn = true; 
-         Pin = varargin{1}; 
-         shapeIn = size(Pin);
-      end
-   case 2 
-      if iscell(varargin{1})
-         cellIn = true; 
-         xs = varargin{1}; 
-         ys = varargin{2}; 
-         shapeIn = size(xs); 
-      else
-         x = varargin{1}; 
-         y = varargin{2}; 
-         shapeIn = [1,1]; 
-      end
-   otherwise
-      error('polycenter must have one or two inputs.') 
+
+p = inputParser;
+p.addRequired('one', @(x) validateattributes(x, {'struct','polyshape','numeric','cell'}, {}));
+p.addOptional('two', [], @(x) isnumeric(x) || iscell(x));
+p.addParameter('reduce', 'dp', @(x) validateattributes(x, {'char','string'}, {}));
+p.parse(varargin{:});
+
+if isempty(p.Results.two)
+   if isstruct(p.Results.one)
+      structIn = true;
+      S = varargin{1}; 
+      shapeIn = size(S);
+   elseif isa(p.Results.one, 'polyshape')
+      polyshapeIn = true; 
+      Pin = p.Results.one; 
+      shapeIn = size(Pin);
+   else
+      error('Single input should be structure or polyshape');
+   end
+else
+   if iscell(p.Results.one)
+      cellIn = true; 
+      xs = p.Results.one; 
+      ys = p.Results.two; 
+      shapeIn = size(xs); 
+   else
+      x = p.Results.one; 
+      y = p.Results.two; 
+      shapeIn = [1,1]; 
+   end 
 end
+reducemethod = validatestring(p.Results.reduce, {'dp','subsample','none'}, 'polycenter', 'reduce');
+
 
 xc = NaN(shapeIn); 
 yc = xc; 
@@ -84,9 +107,9 @@ N = numel(xc);
 warnStruct = warning; 
 warning off % because the polyshape function complains like heck.
 
-for k = 1:N
+for k = N:-1:1
    if structIn
-      if isfield(S,'X') & isfield(S,'Y')
+      if isfield(S,'X') && isfield(S,'Y')
          x = S(k).X;
          y = S(k).Y;
       else 
@@ -114,8 +137,19 @@ for k = 1:N
 
    % Approximate P as a polygon with about 100 vertices because buffering complex polygons is too slow. 
    % For a more exact solution, delete the next two lines: 
-   skip = max([floor(size(P.Vertices,1)/100) 1]); 
-   P.Vertices = P.Vertices(1:skip:end,:);
+   
+   switch reducemethod
+      case 'none'
+         % Do nothing
+      case 'subsample'
+         skip = max([floor(size(P.Vertices,1)/100) 1]); 
+         P.Vertices = P.Vertices(1:skip:end,:);
+      case 'dp'
+         tol = sqrt(area(P))/100;
+         pnew = dpsimplify(P.Vertices, tol);
+         P.Vertices = pnew;
+   end
+   Pout(k) = P;
 
    % Define a buffering step size: 
    step = sqrt(P.area/pi/10);
