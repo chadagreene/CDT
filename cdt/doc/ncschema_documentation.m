@@ -75,7 +75,7 @@
 %% Example
 %
 % In this example, we build a similar file as in the
-% <nbcuild_documentation.html |ncbuild|> documentation, starting with the
+% <ncbuild_documentation.html |ncbuild|> documentation, starting with the
 % same sample data:
 
 x = 1:10;
@@ -158,7 +158,6 @@ end
 % method instead of <ncbuild_documentation.html |ncbuild|>.
 
 %% Author Info
-%
 % This function and supporting documentation were written by Kelly Kearney
 % for the Climate Data Toolbox for Matlab. 
 

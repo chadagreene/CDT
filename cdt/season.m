@@ -24,7 +24,7 @@ function [As,ts] = season(A,t,varargin)
 % [As,ts] = season(...,'monthly') as above, but forces monthly solution. 
 %
 % [As,ts] = season(...,'detrend',DetrendOption) specifies a baseline relative to which seasonal anomalies are 
-% determined. Options are 'linear', 'quadratic', or 'none'. By default, anomalies are calculated after 
+% determined. Options are 'linear', 'quadratic', 'mean', or 'none'. By default, anomalies are calculated after 
 % removing the linear least squares trend, but if, for example, warming is strongly nonlinear, you may prefer
 % the 'quadratic' option. Default is 'linear'. 
 %
@@ -51,7 +51,7 @@ function [As,ts] = season(A,t,varargin)
 
 assert(nargin>=2,'Input error: the season function reqires at least to inputs.') 
 assert(ismember(length(t),size(A))==1,'Error: length of t must match dimensions of A.') 
-assert(isvector(t)==1,'Error: time vector t must be a vector.') 
+assert(isvector(t),'Error: time vector t must be a vector.') 
 
 %% Set defaults: 
 
@@ -154,7 +154,10 @@ tsc = (t(:)-mean(t))/std(t);
       
 switch DetrendOption(1:3)
    case 'non'
-      % do nothing. 
+      % do nothing.
+      
+   case 'mea'
+      Ar = Ar - meanAr;
    
    case 'lin'
       Ar = Ar - [tsc ones(N,1)]*([tsc ones(N,1)]\Ar); 

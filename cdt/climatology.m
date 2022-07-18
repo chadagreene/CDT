@@ -26,7 +26,7 @@ function [Ac,tc] = climatology(A,t,varargin)
 % [Ac,tc] = climatology(...,'monthly') as above, but forces monthly solution. 
 %
 % [Ac,tc] = climatology(...,'detrend',DetrendOption) specifies a baseline relative to which seasonal anomalies are 
-% determined. Options are 'linear', 'quadratic', or 'none'. By default, anomalies are calculated after 
+% determined. Options are 'linear', 'quadratic', 'mean', or 'none'. By default, anomalies are calculated after 
 % removing the linear least squares trend, but if, for example, warming is strongly nonlinear, you may prefer
 % the 'quadratic' option. Default is 'linear'. 
 %
@@ -47,13 +47,13 @@ function [Ac,tc] = climatology(A,t,varargin)
 % Institute for Geophysics (UTIG), July 2017. 
 % http://www.chadagreene.com
 % 
-% See also: deseason, sinefit, and climatology. 
+% See also: deseason, sinefit, and season. 
 
 %% Initial error checks: 
 
 assert(nargin>=2,'Input error: the climatology function reqires at least to inputs.') 
 assert(ismember(length(t),size(A))==1,'Error: length of t must match dimensions of A.') 
-assert(isvector(t)==1,'Error: time vector t must be a vector.') 
+assert(isvector(t),'Error: time vector t must be a vector.') 
 
 %% Set defaults: 
 
@@ -101,16 +101,14 @@ if nargin>2
    
    tmp = strncmpi(varargin,'detrend',4); 
    if any(tmp)
-      DetrendOption = varargin{find(tmp)+1}; 
+      DetrendOption = lower(varargin{find(tmp)+1}); 
    end
    
    tmp = strncmpi(varargin,'dimension',3); 
    if any(tmp)
       dim = varargin{find(tmp)+1}; 
-      assert(isscalar(dim)==1,'Input error: dimension must be 1 through 2.') 
+      assert(isscalar(dim),'Input error: dimension must be 1 through 2.') 
       assert(dim>0,'Input error: dimension must be 1 or 2.') 
-%       assert(dim<3,'Input error: dimension must be 1 or 2.') 
-%       assert(ND==2,'You can only specify a dimension if A is a 2D matrix.') 
    end
 end
 
@@ -158,7 +156,10 @@ meanAr = mean(Ar,'omitnan');
       
 switch DetrendOption(1:3)
    case 'non'
-      % do nothing. 
+      % do nothing
+      
+   case 'mea'
+      Ar = Ar - meanAr;
    
    case 'lin'
       Ar = Ar - [tsc ones(N,1)]*([tsc ones(N,1)]\Ar); 
@@ -234,7 +235,9 @@ end
 %% Build climatology: 
 % It's just the seasonal component plus the mean: 
 
-Ac = Ac + meanAr; 
+if ~strncmpi(DetrendOption,'mean',3)
+   Ac = Ac + meanAr; 
+end
 
 %% Reshape to match input 
 

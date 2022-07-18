@@ -23,7 +23,7 @@ function Ads = deseason(A,t,varargin)
 % Ads = deseason(...,'monthly') as above, but forces monthly solution. 
 %
 % Ads = deseason(...,'detrend',DetrendOption) specifies a baseline relative to which seasonal anomalies are 
-% determined. Options are 'linear', 'quadratic', or 'none'. By default, anomalies are calculated after 
+% determined. Options are 'linear', 'quadratic', 'mean', or 'none'. By default, anomalies are calculated after 
 % removing the linear least squares trend, but if, for example, warming is strongly nonlinear, you may prefer
 % the 'quadratic' option. NOTE: The deseason function does NOT return detrended data. Rather, detrending is 
 % only performed to determine the seasonal cycle. Default is 'linear'. 

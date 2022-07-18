@@ -75,14 +75,14 @@ if nargin>2
    tmp = strncmpi(varargin,'terms',3); 
    if any(tmp)
       Nterms = varargin{find(tmp)+1}; 
-      assert(isscalar(Nterms)==1,'Error: numvals must be 2, 3, 4, or maybe 5.') 
+      assert(isscalar(Nterms),'Error: numvals must be 2, 3, 4, or maybe 5.') 
    end
    
    tmp = strncmpi(varargin,'weights',3); 
    if any(tmp)
       w = varargin{find(tmp)+1}; 
       assert(isequal(size(w),size(y)),'Error; Dimensions of weights must match the dimensions of y.') 
-      assert(isvector(y)==1,'Error: weights cannot be specified for input cubes.') 
+      assert(isvector(y),'Error: weights cannot be specified for input cubes.') 
    end
    
    tmp = strncmpi(varargin,'omitnan',4); 

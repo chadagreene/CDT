@@ -18,27 +18,27 @@
 % 
 %% Description 
 % 
-% [Ac,tc] = climatology(A,t) gives the typical values of variable A as it changes throughout the year.
-% Times times t are in datenum or datetime format. If t is daily, output tc is 1 to 366 and Ac will contain average values
-% for each of the 366 days of the year. If inputs are monthly, tc is 1:12 and Ac will contain average values
+% |[Ac,tc] = climatology(A,t)| gives the typical values of variable |A| as it changes throughout the year.
+% Times times |t| are in datenum or datetime format. If |t| is daily, output |tc| is 1 to 366 and |Ac| will contain average values
+% for each of the 366 days of the year. If inputs are monthly, |tc| is |1:12| and |Ac| will contain average values
 % for each of the 12 months of the year. 
 %
-% [Ac,tc] = climatology(...,'daily') specifies directly that inputs are daily resolution. The climatology function
+% |[Ac,tc] = climatology(...,'daily')| specifies directly that inputs are daily resolution. The climatology function
 % will typically figure this out automatically, but if you have large missing gaps in your data you may wish
 % to ensure correct results by specifying daily. 
 % 
-% [Ac,tc] = climatology(...,'monthly') as above, but forces monthly solution. 
+% |[Ac,tc] = climatology(...,'monthly')| as above, but forces monthly solution. 
 %
-% [Ac,tc] = climatology(...,'detrend',DetrendOption) specifies a baseline relative to which seasonal anomalies are 
-% determined. Options are 'linear', 'quadratic', or 'none'. By default, anomalies are calculated after 
+% |[Ac,tc] = climatology(...,'detrend',DetrendOption) specifies a baseline relative to which seasonal anomalies are 
+% determined. Options are |'linear'|, |'quadratic'|, |'mean'|, or |'none'|. By default, anomalies are calculated after 
 % removing the linear least squares trend, but if, for example, warming is strongly nonlinear, you may prefer
-% the 'quadratic' option. Default is 'linear'. 
+% the |'quadratic'| option. Default is |'linear'|. 
 %
-% [Ac,tc] = climatology(...,'dim',dimension) specifies a dimension along which to assess seasons. By default, 
-% if A is 1D, seasonal cycle is returned along the nonsingleton dimension; if A is 2D, climatology is performed
-% along dimension 1 (time marches down the rows); if A is 3D, climatology is performed along dimension 3. 
+% |[Ac,tc] = climatology(...,'dim',dimension)| specifies a dimension along which to assess seasons. By default, 
+% if |A| is 1D, seasonal cycle is returned along the nonsingleton dimension; if |A| is 2D, climatology is performed
+% along dimension 1 (time marches down the rows); if |A| is 3D, climatology is performed along dimension 3. 
 % 
-% Ac = climatology(...,'full') returns Ac for the entire time series A. This is a convenient option for looking
+% |Ac = climatology(...,'full')| returns |Ac| for the entire time series |A|. This is a convenient option for looking
 % at the components of a long time series separately. 
 %
 %% Example 1: Daily sea ice extent

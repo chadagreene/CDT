@@ -28,7 +28,7 @@
 % |[As,ts] = season(...,'monthly')| as above, but forces monthly solution. 
 %
 % |[As,ts] = season(...,'detrend',DetrendOption)| specifies a baseline relative to which seasonal anomalies are 
-% determined. Options are |'linear'|, |'quadratic'|, or |'none'|. By default, anomalies are calculated after 
+% determined. Options are |'linear'|, |'quadratic'|, |'mean'}, or |'none'|. By default, anomalies are calculated after 
 % removing the linear least squares trend, but if, for example, warming is strongly nonlinear, you may prefer
 % the |'quadratic'| option. Default is |'linear'|. 
 %
