@@ -75,7 +75,7 @@ end
 
 % Set weights to zero where they correspond to NaN
 if any(strcmpi(varargin,'omitnan'))
-   weights(isnan(A)) = NaN; 
+   weights(isnan(A)) = 0; 
 end
 
 M = sum(weights.*A,dim,varargin{:})./sum(weights,dim,varargin{:});
