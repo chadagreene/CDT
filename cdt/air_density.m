@@ -19,6 +19,7 @@ function rho = air_density(h)
 % The barometric formula uses a 7 layer formula (8 layers if you include
 % invalid heights above 86 km) for the 1976 US Standard Atmosphere. 
 % https://ntrs.nasa.gov/archive/nasa/casi.ntrs.nasa.gov/19770009539_1977009539.pdf
+% updated link: https://www.ngdc.noaa.gov/stp/space-weather/online-publications/miscellaneous/us-standard-atmosphere-1976/us-standard-atmosphere_st76-1562_noaa.pdf 
 % 
 %% Author Info 
 % This function was written by Chad A. Greene of the University of Texas at
