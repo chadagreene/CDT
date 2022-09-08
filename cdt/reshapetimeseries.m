@@ -118,7 +118,7 @@ if flag % Special cases
            
             nperyear = 365;
             
-            tmid = datetime(yr(nonleapidx),Opt.pivotdate(1),Opt.pivotdate(2)) + days((1:365)+0.5);
+            tmid = datetime(yr(nonleapidx),Opt.pivotdate(1),Opt.pivotdate(2)) + days((0:364)+0.5);
             
         case 'month'
             
