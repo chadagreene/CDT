@@ -77,6 +77,9 @@ function [A, h] = ensemble2bnd(x,y,varargin)
 %           documentation for more details)  
 %           [1.5]
 %
+%   std:    logical scalar, if true, use standard deviation across ensemble
+%           members rather than percentiles to determine bounds.
+%
 % Output variables:
 %
 %   A:      structure with the following fields:
@@ -115,6 +118,7 @@ p.addParameter('cmap', get(0, 'defaultaxescolororder'), ...
 p.addParameter('axis', NaN, @(x) validateattributes(x, {'numeric','matlab.graphics.axis.Axes'}, {'scalar'}));
 p.addParameter('tlim', [0.1 0.5], @(x) validateattributes(x, {'numeric'}, {'vector', 'numel', 2, '>=', 0, '<=' ,1}));
 p.addParameter('whisker', 1.5, @(x) validateattributes(x, {'numeric'}, {'scalar'}));
+p.addParameter('std', false, @(x) validateattributes(x, {'logical'}, {'scalar'}));
 
 p.parse(varargin{:});
 Opt = p.Results;
@@ -166,20 +170,33 @@ switch Opt.center
         A.cent = nanmedian(y,3);
 end
 
-prc = sort(Opt.prc);
-nprc = length(prc);
-if mod(nprc,2)
-    error('Must include even number of percentiles');
+if Opt.std
+    sigma = nanstd(y, [], 3);
+    A.bndlo = A.cent - sigma;
+    A.bndhi = A.cent + sigma;
+    
+    A.errlo = sigma;
+    A.errhi = sigma;
+    
+    nprc = 2;
+    
+else
+
+    prc = sort(Opt.prc);
+    nprc = length(prc);
+    if mod(nprc,2)
+        error('Must include even number of percentiles');
+    end
+
+    prclo = prc(1:(nprc/2));
+    prchi = prc(end:-1:(nprc/2)+1);
+
+    A.bndlo = prctile(y, prclo, 3);
+    A.bndhi = prctile(y, prchi, 3);
+
+    A.errlo = bsxfun(@minus, A.cent, A.bndlo);
+    A.errhi = bsxfun(@minus, A.bndhi, A.cent);
 end
-
-prclo = prc(1:(nprc/2));
-prchi = prc(end:-1:(nprc/2)+1);
-
-A.bndlo = prctile(y, prclo, 3);
-A.bndhi = prctile(y, prchi, 3);
-
-A.errlo = bsxfun(@minus, A.cent, A.bndlo);
-A.errhi = bsxfun(@minus, A.bndhi, A.cent);
 
 %--------------------
 % Plots
