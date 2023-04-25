@@ -122,7 +122,7 @@ end
 
 % Axis
 
-isax = cellfun(@(x) isscalar(x) && ishandle(x) && strcmp('axes', get(x,'type')), varargin);
+isax = cellfun(@(x) isscalar(x) && ishandle(x) && strcmpi('axes', get(x,'type')), varargin);
 if any(isax)
     hax = varargin{isax};
     varargin = varargin(~isax);
