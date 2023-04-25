@@ -47,6 +47,10 @@ else
     tparts = textscan(tunit, '%s since %D', 1);
 end
 
+if isempty(tparts{1}) || isempty(tparts{2})
+    error('Unit string does not match expected format (time-unit since timestamp)');
+end
+
 if nargin < 4
     mode = 'forward';
 end
