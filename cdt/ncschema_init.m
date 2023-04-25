@@ -23,7 +23,7 @@ function Nc = ncschema_init(varargin)
 p = inputParser;
 p.addOptional('format', 'classic', @(x) validateattributes(x, {'char', 'string'}, {'scalartext'}));
 
-p.parse();
+p.parse(varargin{:});
 Opt = p.Results;
 
 validatestring(Opt.format, {'classic', '64bit', 'netcdf4_classic', 'netcdf4'});
