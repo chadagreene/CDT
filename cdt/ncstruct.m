@@ -80,7 +80,10 @@ scsfld = fieldnames(Scs);
 [tf,loc] = ismember(scsfld, {Info.Dimensions.Name});
 if ~all(tf)
     str = sprintf('%s,', scsfld{~tf});
-    error('Field in Scs input (%s) did not match file dimension names', str(1:end-1));
+    warning('Field in Scs input (%s) did not match file dimension names', str(1:end-1));
+    Scs = rmfield(Scs, scsfld(~tf));
+    scsfld = scsfld(tf);
+    loc = loc(tf);
 end
 
 % Set up start-stride-count for all dimensions
