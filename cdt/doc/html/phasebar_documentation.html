@@ -1,0 +1,209 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      -->
+<title>phasebar documentation</title>
+<meta name="generator" content="MATLAB 24.1">
+<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+<meta name="DC.date" content="2024-05-03">
+<meta name="DC.source" content="phasebar_documentation.m">
+<style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; }
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+span.typesection { color:#A0522D }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style>
+</head>
+<body>
+<div class="content">
+<h1>
+<tt>phasebar</tt> documentation</h1>
+<!--introduction-->
+<p>The <tt>phasebar</tt> function places a circular donunt-shaped colorbar for phase from -pi to pi or -180 degrees to 180 degrees.</p>
+<p>
+<a href="CDT_Contents.html">Back to Climate Data Tools Contents</a>
+</p>
+<!--/introduction-->
+<h2>Contents</h2>
+<div>
+<ul>
+<li>
+<a href="#1">Syntax</a>
+</li>
+<li>
+<a href="#2">Description</a>
+</li>
+<li>
+<a href="#3">Example</a>
+</li>
+<li>
+<a href="#5">Author Info</a>
+</li>
+</ul>
+</div>
+<h2 id="1">Syntax</h2>
+<pre>phasebar
+phasebar(...,'location',Location)
+phasebar(...,'size',Size)
+phasebar('deg')
+phasebar('rad')
+ax = phasebar(...)</pre>
+<h2 id="2">Description</h2>
+<p>
+<tt>phasebar</tt> places a donut-shaped colorbar on the current axes.</p>
+<p>
+<tt>phasebar(...,'location',Location)</tt> specifies the corner (e.g., <tt>'northeast'</tt> or <tt>'ne'</tt>) of the current axes in which to place the phasebar. Default location is the upper-right or <tt>'ne'</tt> corner.</p>
+<p>
+<tt>phasebar(...,'size',Size)</tt> specifies a size fraction of the current axes. Default is 0.3.</p>
+<p>
+<tt>phasebar('deg')</tt> plots labels at every 90 degrees.</p>
+<p>
+<tt>phasebar('rad')</tt> plots labels at every pi/2 radians.</p>
+<p>
+<tt>ax = phasebar(...)</tt> returns a handle <tt>ax</tt> of the axes in which the new axes are plotted.</p>
+<h2 id="3">Example</h2>
+<pre class="codeinput">
+<span class="comment">% Create some example phase data:</span>
+Z = 200*peaks(900);
+Z_wrapped = mod(Z,360); <span class="comment">% phase wrapped to 360 degrees.</span>
+
+<span class="comment">% Plot the phase data as imagesc:</span>
+imagesc(Z_wrapped)
+
+<span class="comment">% Set the colormap to cmocean phase:</span>
+cmocean(<span class="string">'phase'</span>,12)
+
+<span class="comment">% Create a phasebar in the lower right hand corner:</span>
+phasebar(<span class="string">'location'</span>,<span class="string">'se'</span>)
+</pre>
+<img vspace="5" hspace="5" src="phasebar_documentation_01.png" alt=""> <p>Do you prefer a large phasebar with units of radians in the upper right-hand corner?</p>
+<pre class="codeinput">phasebar(<span class="string">'location'</span>,<span class="string">'nw'</span>,<span class="string">'size'</span>,0.5,<span class="string">'rad'</span>)
+</pre>
+<img vspace="5" hspace="5" src="phasebar_documentation_02.png" alt=""> <h2 id="5">Author Info</h2>
+<p>This function is part of the <a href="http://www.github.com/chadagreene/CDT">Climate Data Toolbox for Matlab</a>. The function and supporting documentation were written by Chad A. Greene and Kelly Kearney.</p>
+<p class="footer">
+<br>
+<a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2024a</a>
+<br>
+</p>
+</div>
+<!--
+##### SOURCE BEGIN #####
+%% |phasebar| documentation
+% The |phasebar| function places a circular donunt-shaped colorbar for phase 
+% from -pi to pi or -180 degrees to 180 degrees. 
+% 
+% <CDT_Contents.html Back to Climate Data Tools Contents>
+%% Syntax
+% 
+%  phasebar
+%  phasebar(...,'location',Location) 
+%  phasebar(...,'size',Size) 
+%  phasebar('deg') 
+%  phasebar('rad') 
+%  ax = phasebar(...) 
+% 
+%% Description 
+% 
+% |phasebar| places a donut-shaped colorbar on the current axes. 
+%
+% |phasebar(...,'location',Location)| specifies the corner (e.g., |'northeast'| or |'ne'|) 
+% of the current axes in which to place the phasebar. Default location is the upper-right or |'ne'| 
+% corner. 
+%
+% |phasebar(...,'size',Size)| specifies a size fraction of the current axes.  Default is 0.3. 
+%
+% |phasebar('deg')| plots labels at every 90 degrees. 
+%
+% |phasebar('rad')| plots labels at every pi/2 radians. 
+%
+% |ax = phasebar(...)| returns a handle |ax| of the axes in which the new axes are plotted. 
+% 
+%% Example
+
+% Create some example phase data: 
+Z = 200*peaks(900); 
+Z_wrapped = mod(Z,360); % phase wrapped to 360 degrees.
+
+% Plot the phase data as imagesc:
+imagesc(Z_wrapped) 
+
+% Set the colormap to cmocean phase: 
+cmocean('phase',12)
+
+% Create a phasebar in the lower right hand corner: 
+phasebar('location','se')
+
+%% 
+% Do you prefer a large phasebar with units of radians in the upper right-hand corner?  
+
+phasebar('location','nw','size',0.5,'rad') 
+
+%% Author Info
+% This function is part of the <http://www.github.com/chadagreene/CDT Climate Data Toolbox for Matlab>.
+% The function and supporting documentation were written by Chad A. Greene
+% and Kelly Kearney.
+##### SOURCE END #####
+-->
+</body>
+</html>
