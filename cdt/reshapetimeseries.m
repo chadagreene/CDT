@@ -130,8 +130,8 @@ if flag % Special cases
             t1 = datetime(Opt.yrlim(1),Opt.pivotdate(1),Opt.pivotdate(2));
             t2 = datetime(Opt.yrlim(2),Opt.pivotdate(1),Opt.pivotdate(2));
             
-            [yr,mn] = ndgrid(Opt.yrlim(1):Opt.yrlim(2), 1:12);
-            tedge = unique(datetime(yr(:), mn(:), ones(numel(yr),1)));
+            [yy,mn] = ndgrid(Opt.yrlim(1):Opt.yrlim(2), 1:12);
+            tedge = unique(datetime(yy(:), mn(:), ones(numel(yy),1)));
             tedge = tedge(tedge >= t1 & tedge <= t2);
             
             nperyear = 12;
