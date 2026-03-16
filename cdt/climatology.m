@@ -234,8 +234,9 @@ end
 
 %% Build climatology: 
 % It's just the seasonal component plus the mean: 
+   
+if ~strncmpi(DetrendOption,'mean',3) && ~strncmpi(DetrendOption,'none',3)
 
-if ~strncmpi(DetrendOption,'mean',3)
    Ac = Ac + meanAr; 
 end
 
